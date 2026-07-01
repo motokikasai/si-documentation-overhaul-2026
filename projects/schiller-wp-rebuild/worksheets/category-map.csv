@@ -1,0 +1,9 @@
+legacy_term,legacy_taxonomy,post_count,fate,target,action_detail,reviewer,status,notes
+Webcasts,category,0,CPT-signal,si_video,"Posts here → reclassify to Video (rule R3); extract YouTube ID",,todo,"EXAMPLE row — replace. Fill post_count from the census."
+In the News,category,0,CPT-signal,si_coverage,"Posts here → Coverage (rule R5.1); retire this category after transform",,todo,"EXAMPLE row — replace"
+Eurasia,category,0,taxonomy-remap,si_region: Eurasia,"Post stays a Post; add Region term Eurasia",,todo,"EXAMPLE row — replace. Most categories are this fate."
+Physical Economy,post_tag,0,taxonomy-remap,si_topic: Physical Economy,"Post stays a Post; add Topic term",,todo,"EXAMPLE row — replace"
+Oasis Plan,category,0,taxonomy-remap,si_campaign: Oasis Plan,"Add Campaign term; a hand-built landing Page aggregates it",,todo,"EXAMPLE row — replace"
+2012 Conference,category,0,taxonomy-remap,si_series/Conference-link,"Portfolio conference-identifier → map to the parent Conference relationship (ruleset R7/Q23)",,todo,"EXAMPLE row — replace. Portfolio categories identify the conference."
+Uncategorized,category,0,retire,,"Move stray posts to their correct topic; leave WP default in place",,todo,"EXAMPLE row — replace"
+Old newsletter 2009,category,0,retire,,"Delete after transform; 301-redirect /category/old-newsletter-2009/ only if it has traffic",,todo,"EXAMPLE row — replace. Execute retires LAST."
