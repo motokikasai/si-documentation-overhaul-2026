@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Schiller Institute — A New Paradigm for Humanity</title>
+    <meta
+      name="description"
+      content="The Schiller Institute works to build a worldwide movement for a New Paradigm of sovereign nations, classical culture, and physical economy — replacing the drive toward war with mutual development."
+    />
+    <!-- Draft: keep out of search engines while shared for review -->
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Fonts: classical-humanist system — serif display + serif body + sans labels -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- ============================================================= -->
+    <!-- NOW / THIS WEEK STRIP  (weekly-webcast cadence, funnel top)    -->
+    <!-- ============================================================= -->
+    <div class="nowbar" id="nowbar">
+      <div class="container nowbar__inner">
+        <p class="nowbar__text">
+          <span class="nowbar__pulse" aria-hidden="true"></span>
+          <span class="nowbar__label">This week</span>
+          Schiller Institute Weekly Dialogue with Helga Zepp-LaRouche
+          <span class="nowbar__when">· Thu Jun 18 · 16:00&nbsp;ET</span>
+        </p>
+        <div class="nowbar__actions">
+          <button class="link-cta" data-open-video data-video="VIDEO_ID_HERE">
+            Watch live ▸
+          </button>
+          <div class="langtoggle" role="group" aria-label="Language">
+            <button class="langtoggle__btn is-active" data-lang="en">EN</button>
+            <button class="langtoggle__btn" data-lang="de">DE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- HEADER / NAV                                                  -->
+    <!-- ============================================================= -->
+    <header class="site-header" id="siteHeader">
+      <div class="container site-header__inner">
+        <a
+          class="brand"
+          href="#top"
+          aria-label="The International Schiller Institute — home"
+        >
+          <img
+            class="brand__logo"
+            src="assets/si_logo_official.jpg"
+            alt="The International Schiller Institute"
+          />
+        </a>
+
+        <nav class="mainnav" id="mainnav" aria-label="Primary">
+          <a href="#ideas">Ideas</a>
+          <a href="#events">Events</a>
+          <a href="#involved">Get Involved</a>
+          <a href="#donate">Donate</a>
+          <a href="#about">About</a>
+        </nav>
+
+        <div class="site-header__tools">
+          <button class="iconbtn" id="searchOpen" aria-label="Search">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <circle
+                cx="11"
+                cy="11"
+                r="7"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <line
+                x1="16.5"
+                y1="16.5"
+                x2="21"
+                y2="21"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+          <a class="btn btn--primary btn--sm" href="#join">Join the movement</a>
+          <button
+            class="hamburger"
+            id="hamburger"
+            aria-label="Menu"
+            aria-expanded="false"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- ============================================================= -->
+      <!-- HERO  (crisis → alternative thesis; no carousel)              -->
+      <!-- ============================================================= -->
+      <section class="hero">
+        <div class="hero__art" aria-hidden="true">
+          <!-- World Land-Bridge line-art motif -->
+          <svg
+            class="hero__map"
+            viewBox="0 0 1200 600"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <defs>
+              <radialGradient id="glow" cx="50%" cy="40%" r="70%">
+                <stop offset="0%" stop-color="#3aa0d8" stop-opacity="0.35" />
+                <stop offset="100%" stop-color="#0b3552" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <rect width="1200" height="600" fill="url(#glow)" />
+            <g fill="none" stroke="#7cc6ea" stroke-width="1" opacity="0.35">
+              <path d="M120,300 C300,180 500,420 720,260 S1050,200 1140,340" />
+              <path d="M80,420 C320,360 480,500 760,400 S1020,440 1160,380" />
+              <path d="M160,200 C340,120 560,260 800,160 S1040,120 1180,220" />
+            </g>
+            <g fill="#bfe2f4">
+              <circle cx="120" cy="300" r="3" />
+              <circle cx="720" cy="260" r="3" />
+              <circle cx="1140" cy="340" r="3" />
+              <circle cx="800" cy="160" r="3" />
+              <circle cx="480" cy="500" r="3" />
+              <circle cx="340" cy="120" r="3" />
+            </g>
+          </svg>
+        </div>
+
+        <div class="container hero__inner">
+          <p class="eyebrow eyebrow--light reveal">
+            Founded 1984 · A movement on six continents
+          </p>
+          <h1 class="hero__title reveal">
+            The world is being driven toward war and economic collapse.
+            <em>There is another path.</em>
+          </h1>
+          <p class="hero__lede reveal">
+            The Schiller Institute works for a <strong>New Paradigm</strong> — a
+            community of sovereign nations united by mutual development,
+            classical culture, and the true dignity of the human being. Begin
+            with one idea. It changes everything.
+          </p>
+          <div class="hero__cta reveal">
+            <button
+              class="btn btn--primary btn--lg"
+              data-open-video
+              data-video="VIDEO_ID_HERE"
+            >
+              <span class="btn__play" aria-hidden="true">▶</span> Watch &amp;
+              subscribe
+            </button>
+            <a class="btn btn--ghost btn--lg" href="#start"
+              >New here? Start here →</a
+            >
+          </div>
+        </div>
+        <div class="hero__scrollcue" aria-hidden="true"><span></span></div>
+      </section>
+
+      <!-- ============================================================= -->
+      <!-- THREE HERO FORMATS  (Video · Forecast · Conference)           -->
+      <!-- ============================================================= -->
+      <section class="section formats" id="events">
+        <div class="container">
+          <header class="section__head">
+            <p class="eyebrow">Start with the ideas</p>
+            <h2 class="section__title">Watch. Read. Gather.</h2>
+          </header>
+
+          <div class="formats__grid">
+            <!-- Video / Webcast -->
+            <article class="fcard fcard--video reveal">
+              <div class="fcard__media">
+                <div class="ph ph--video" aria-hidden="true">
+                  <span class="ph__label">Webcast still</span>
+                </div>
+                <button
+                  class="fcard__play"
+                  data-open-video
+                  data-video="VIDEO_ID_HERE"
+                  aria-label="Play video"
+                >
+                  ▶
+                </button>
+                <span class="fcard__badge">Weekly Dialogue</span>
+              </div>
+              <div class="fcard__body">
+                <p class="fcard__kicker">Video · Webcast</p>
+                <h3 class="fcard__title">The Promise of the New Paradigm</h3>
+                <p class="fcard__meta">Helga Zepp-LaRouche · 48 min</p>
+                <p class="fcard__excerpt">
+                  The founder answers this week's questions on the war danger,
+                  the BRICS, and the cultural roots of a just world order.
+                </p>
+                <button
+                  class="link-cta"
+                  data-open-video
+                  data-video="VIDEO_ID_HERE"
+                >
+                  Watch now ▸
+                </button>
+              </div>
+            </article>
+
+            <!-- Economic Forecast -->
+            <article class="fcard fcard--forecast reveal">
+              <div class="fcard__media">
+                <div class="ph ph--forecast" aria-hidden="true">
+                  <span class="ph__label">Forecast chart</span>
+                </div>
+                <span class="fcard__badge fcard__badge--gold"
+                  >Economic Forecast</span
+                >
+              </div>
+              <div class="fcard__body">
+                <p class="fcard__kicker">Forecast · Physical Economy</p>
+                <h3 class="fcard__title">
+                  2026: Hyperinflation, or Hamiltonian Credit?
+                </h3>
+                <p class="fcard__meta">Forecast horizon 2026–2030</p>
+                <p class="fcard__excerpt">
+                  Why the monetarist system is reaching its limit — and the
+                  physical-economic alternative that builds real wealth.
+                </p>
+                <a class="link-cta" href="#ideas">Read the forecast ▸</a>
+              </div>
+            </article>
+
+            <!-- Conference -->
+            <article class="fcard fcard--conf reveal">
+              <div class="fcard__media">
+                <div class="ph ph--conf" aria-hidden="true">
+                  <span class="ph__label">Conference photo</span>
+                </div>
+                <span class="fcard__badge">Conference</span>
+              </div>
+              <div class="fcard__body">
+                <p class="fcard__kicker">Conference · International</p>
+                <h3 class="fcard__title">For the Coincidence of Opposites</h3>
+                <p class="fcard__meta">
+                  Sat–Sun · Sep 27–28 · Berlin &amp; online
+                </p>
+                <p class="fcard__excerpt">
+                  A new security and development architecture for all nations.
+                  Two days of dialogue with thinkers from every continent.
+                </p>
+                <a class="link-cta" href="#join">Reserve your place ▸</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================= -->
+      <!-- EMAIL CAPTURE BAND  (the funnel core — video as bait)         -->
+      <!-- ============================================================= -->
+      <section class="section capture" id="join">
+        <div class="container capture__inner">
+          <div class="capture__copy">
+            <p class="eyebrow eyebrow--light">Join the movement</p>
+            <h2 class="capture__title">
+              Get the weekly webcast &amp; the economic forecast — free.
+            </h2>
+            <p class="capture__lede">
+              One email a week: the latest dialogue with Helga Zepp-LaRouche,
+              the newest forecast, and how to act. No noise. Unsubscribe
+              anytime.
+            </p>
+            <ul class="capture__benefits">
+              <li>The full weekly webcast, in your inbox</li>
+              <li>Early access to conference invitations</li>
+              <li>Find and join your local chapter</li>
+            </ul>
+          </div>
+          <form class="capture__form" id="emailForm" novalidate>
+            <label class="field">
+              <span class="field__label">First name</span>
+              <input
+                type="text"
+                name="firstname"
+                autocomplete="given-name"
+                placeholder="Friedrich"
+              />
+            </label>
+            <label class="field">
+              <span class="field__label">Email address</span>
+              <input
+                type="email"
+                name="email"
+                autocomplete="email"
+                required
+                placeholder="you@example.org"
+              />
+            </label>
+            <button class="btn btn--primary btn--block btn--lg" type="submit">
+              Subscribe &amp; watch
+            </button>
+            <p class="capture__fineprint">
+              Double opt-in — we'll send a confirmation link. We never share
+              your address. <a href="#">Privacy</a>.
+            </p>
+            <p class="capture__success" id="emailSuccess" hidden>
+              ✓ Almost there — check your inbox to confirm your subscription.
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============================================================= -->
+      <!-- NEW HERE? START HERE  (persona on-ramp)                       -->
+      <!-- ============================================================= -->
+      <section class="section start" id="start">
+        <div class="container">
+          <header class="section__head section__head--center">
+            <p class="eyebrow">New here?</p>
+            <h2 class="section__title">Start with what moves you.</h2>
+            <p class="section__sub">
+              Four doors into the same idea. Pick the one that speaks to you.
+            </p>
+          </header>
+
+          <div class="start__grid">
+            <a
+              class="door reveal"
+              href="#ideas"
+              data-topic="Peace &amp; Strategy"
+            >
+              <span class="door__icon" aria-hidden="true">☮</span>
+              <h3 class="door__title">Stop the drive to war</h3>
+              <p class="door__text">
+                The strategy for peace through development, not deterrence.
+              </p>
+              <span class="door__go">Peace &amp; Strategy →</span>
+            </a>
+            <a class="door reveal" href="#ideas" data-topic="Physical Economy">
+              <span class="door__icon" aria-hidden="true">⚙</span>
+              <h3 class="door__title">Understand the crisis</h3>
+              <p class="door__text">
+                Physical economy: why real wealth is creativity, not money.
+              </p>
+              <span class="door__go">Physical Economy →</span>
+            </a>
+            <a class="door reveal" href="#ideas" data-topic="Classical Culture">
+              <span class="door__icon" aria-hidden="true">♪</span>
+              <h3 class="door__title">Love classical culture</h3>
+              <p class="door__text">
+                Schiller, Bach, Beethoven — beauty as a force in history.
+              </p>
+              <span class="door__go">Classical Culture →</span>
+            </a>
+            <a class="door reveal" href="#ideas" data-topic="Education">
+              <span class="door__icon" aria-hidden="true">✎</span>
+              <h3 class="door__title">Teach &amp; learn</h3>
+              <p class="door__text">
+                A classical education for the next generation of thinkers.
+              </p>
+              <span class="door__go">Education →</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================= -->
+      <!-- EXPLORE THE IDEAS  (faceted-search teaser, interactive)       -->
+      <!-- ============================================================= -->
+      <section class="section ideas" id="ideas">
+        <div class="container">
+          <header class="section__head">
+            <p class="eyebrow">The library</p>
+            <h2 class="section__title">Explore the ideas</h2>
+            <p class="section__sub">
+              Forty years of articles, talks, forecasts and documents — filter
+              by topic.
+            </p>
+          </header>
+
+          <div
+            class="ideas__filters"
+            id="ideaFilters"
+            role="group"
+            aria-label="Filter by topic"
+          >
+            <button class="chip is-active" data-filter="all">All</button>
+            <button class="chip" data-filter="New Paradigm">
+              New Paradigm
+            </button>
+            <button class="chip" data-filter="Physical Economy">
+              Physical Economy
+            </button>
+            <button class="chip" data-filter="World Land-Bridge">
+              World Land-Bridge
+            </button>
+            <button class="chip" data-filter="Peace &amp; Strategy">
+              Peace &amp; Strategy
+            </button>
+            <button class="chip" data-filter="Classical Culture">
+              Classical Culture
+            </button>
+            <button class="chip" data-filter="Science &amp; Discovery">
+              Science &amp; Discovery
+            </button>
+            <button class="chip" data-filter="Education">Education</button>
+          </div>
+
+          <div class="ideas__grid" id="ideaGrid">
+            <!-- cards injected by app.js -->
+          </div>
+          <p class="ideas__empty" id="ideaEmpty" hidden>
+            No items in this topic yet — try another.
+          </p>
+
+          <div class="ideas__more">
+            <a class="btn btn--ghost" href="#">Open full search →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================= -->
+      <!-- GET INVOLVED / FIND A CHAPTER                                 -->
+      <!-- ============================================================= -->
+      <section class="section involved" id="involved">
+        <div class="container involved__inner">
+          <div class="involved__art" aria-hidden="true">
+            <svg viewBox="0 0 400 400" class="globe">
+              <circle
+                cx="200"
+                cy="200"
+                r="150"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.2"
+                opacity="0.5"
+              />
+              <ellipse
+                cx="200"
+                cy="200"
+                rx="150"
+                ry="60"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1"
+                opacity="0.4"
+              />
+              <ellipse
+                cx="200"
+                cy="200"
+                rx="150"
+                ry="110"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1"
+                opacity="0.4"
+              />
+              <ellipse
+                cx="200"
+                cy="200"
+                rx="60"
+                ry="150"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1"
+                opacity="0.4"
+              />
+              <ellipse
+                cx="200"
+                cy="200"
+                rx="110"
+                ry="150"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1"
+                opacity="0.4"
+              />
+              <line
+                x1="50"
+                y1="200"
+                x2="350"
+                y2="200"
+                stroke="currentColor"
+                stroke-width="1"
+                opacity="0.4"
+              />
+              <g class="globe__pins">
+                <circle cx="150" cy="150" r="5" />
+                <circle cx="250" cy="170" r="5" />
+                <circle cx="210" cy="250" r="5" />
+                <circle cx="120" cy="240" r="5" />
+                <circle cx="290" cy="220" r="5" />
+              </g>
+            </svg>
+          </div>
+          <div class="involved__copy">
+            <p class="eyebrow">Get involved</p>
+            <h2 class="section__title">
+              Find your chapter. Become a participant.
+            </h2>
+            <p class="section__sub">
+              Local chapters meet on six continents — to study, organize, and
+              act. Wherever you are, there's a way in.
+            </p>
+            <form class="chapter__form" id="chapterForm">
+              <label class="field">
+                <span class="field__label">Your city or country</span>
+                <input
+                  type="text"
+                  name="place"
+                  placeholder="e.g. Berlin, or Brazil"
+                />
+              </label>
+              <button class="btn btn--primary" type="submit">
+                Find a chapter near me
+              </button>
+            </form>
+            <p class="involved__note" id="chapterNote" hidden>
+              Chapters are managed in NationBuilder — this form will connect to
+              the live directory.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================= -->
+      <!-- DONATE  (recurring-first, mission-framed)                     -->
+      <!-- ============================================================= -->
+      <section class="section donate" id="donate">
+        <div class="container donate__inner">
+          <div class="donate__copy">
+            <p class="eyebrow eyebrow--light">Support the work</p>
+            <h2 class="donate__title">
+              Ideas change history. Your gift puts them in motion.
+            </h2>
+            <p class="donate__lede">
+              The Schiller Institute takes no government money. The weekly
+              webcast, the forecasts, the conferences — they exist because
+              people like you sustain them. A recurring gift is the strongest
+              thing you can do.
+            </p>
+          </div>
+
+          <form class="donate__panel" id="donateForm">
+            <div class="toggle" role="group" aria-label="Donation frequency">
+              <button
+                type="button"
+                class="toggle__btn is-active"
+                data-freq="monthly"
+              >
+                Monthly
+              </button>
+              <button type="button" class="toggle__btn" data-freq="once">
+                One-time
+              </button>
+            </div>
+
+            <div class="donate__amounts" id="donateAmounts">
+              <button type="button" class="amount" data-amount="10">$10</button>
+              <button type="button" class="amount is-active" data-amount="25">
+                $25
+              </button>
+              <button type="button" class="amount" data-amount="50">$50</button>
+              <button type="button" class="amount" data-amount="100">
+                $100
+              </button>
+              <label class="amount amount--custom">
+                <span>$</span>
+                <input
+                  type="number"
+                  min="1"
+                  inputmode="numeric"
+                  placeholder="Other"
+                  id="customAmount"
+                />
+              </label>
+            </div>
+
+            <button
+              class="btn btn--gold btn--block btn--lg"
+              type="submit"
+              id="donateSubmit"
+            >
+              Give $25 / month
+            </button>
+            <p class="donate__fineprint">
+              Processed securely in NationBuilder. Tax-deductible where
+              applicable.
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============================================================= -->
+      <!-- ABOUT / MISSION + AUTHORITY STATS                             -->
+      <!-- ============================================================= -->
+      <section class="section about" id="about">
+        <div class="container">
+          <div class="about__lead">
+            <p class="eyebrow">Our thesis</p>
+            <h2 class="about__quote">
+              “The dignity of man is given into your hands; protect it. It sinks
+              with you. With you it will rise.”
+            </h2>
+            <p class="about__attr">
+              — Friedrich Schiller, after whom the Institute is named
+            </p>
+            <p class="about__body">
+              Founded in 1984 by Helga Zepp-LaRouche, the Schiller Institute
+              holds that beauty and truth are not decoration but the engine of
+              human progress. Against a culture of pessimism and a system that
+              treats people as costs, we organize for a renaissance — of
+              classical art, of scientific discovery, and of an economics built
+              on the creative powers of every person.
+            </p>
+          </div>
+
+          <div class="stats" id="stats">
+            <div class="stat">
+              <span class="stat__num" data-count="40">0</span
+              ><span class="stat__suffix">+</span>
+              <p class="stat__label">years of work</p>
+            </div>
+            <div class="stat">
+              <span class="stat__num" data-count="6">0</span>
+              <p class="stat__label">continents</p>
+            </div>
+            <div class="stat">
+              <span class="stat__num" data-count="5000">0</span
+              ><span class="stat__suffix">+</span>
+              <p class="stat__label">articles, talks &amp; forecasts</p>
+            </div>
+            <div class="stat">
+              <span class="stat__num" data-count="52">0</span>
+              <p class="stat__label">webcasts a year</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================================================= -->
+    <!-- FOOTER                                                        -->
+    <!-- ============================================================= -->
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div class="site-footer__brand">
+          <img
+            class="site-footer__logo"
+            src="assets/si_logo_official.jpg"
+            alt="The International Schiller Institute"
+          />
+          <p class="site-footer__tag">
+            A community of principle among sovereign nations.
+          </p>
+          <form class="footmail" id="footMail">
+            <input
+              type="email"
+              placeholder="Email for the weekly webcast"
+              aria-label="Email"
+            />
+            <button class="btn btn--primary btn--sm" type="submit">
+              Subscribe
+            </button>
+          </form>
+        </div>
+
+        <nav class="site-footer__cols" aria-label="Footer">
+          <div>
+            <h4>Ideas</h4>
+            <a href="#ideas">New Paradigm</a>
+            <a href="#ideas">Physical Economy</a>
+            <a href="#ideas">World Land-Bridge</a>
+            <a href="#ideas">Classical Culture</a>
+          </div>
+          <div>
+            <h4>Engage</h4>
+            <a href="#events">Events</a>
+            <a href="#involved">Find a chapter</a>
+            <a href="#donate">Donate</a>
+            <a href="#join">Newsletter</a>
+          </div>
+          <div>
+            <h4>About</h4>
+            <a href="#about">Our mission</a>
+            <a href="#about">Helga Zepp-LaRouche</a>
+            <a href="#">Press</a>
+            <a href="#">Contact</a>
+          </div>
+          <div>
+            <h4>Languages</h4>
+            <a href="#">English</a>
+            <a href="#">Deutsch</a>
+            <a href="#">Français ↗</a>
+          </div>
+        </nav>
+      </div>
+      <div class="site-footer__legal">
+        <div class="container site-footer__legal-inner">
+          <p>© 1984–2026 The Schiller Institute. All rights reserved.</p>
+          <p>
+            <a href="#">Impressum</a> · <a href="#">Privacy</a> ·
+            <a href="#">Cookie settings</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============================================================= -->
+    <!-- VIDEO MODAL (email-gated bait)                                -->
+    <!-- ============================================================= -->
+    <div class="modal" id="videoModal" hidden>
+      <div class="modal__backdrop" data-close-modal></div>
+      <div
+        class="modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <button class="modal__close" data-close-modal aria-label="Close">
+          ×
+        </button>
+        <div class="modal__grid">
+          <div class="modal__video">
+            <div class="ph ph--video ph--modal" aria-hidden="true">
+              <span class="ph__play">▶</span>
+              <span class="ph__label">YouTube embed loads here</span>
+            </div>
+          </div>
+          <div class="modal__form">
+            <p class="eyebrow eyebrow--light">Free · weekly</p>
+            <h3 id="modalTitle" class="modal__title">
+              Watch the full webcast — and get next week's by email.
+            </h3>
+            <p class="modal__lede">
+              Enter your email to keep watching and join 30,000+ subscribers
+              worldwide.
+            </p>
+            <form id="modalEmailForm" novalidate>
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="you@example.org"
+              />
+              <button class="btn btn--primary btn--block" type="submit">
+                Watch &amp; subscribe
+              </button>
+              <p class="modal__fineprint">
+                Double opt-in. Unsubscribe anytime.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- SEARCH OVERLAY (faceted teaser)                               -->
+    <!-- ============================================================= -->
+    <div class="search-overlay" id="searchOverlay" hidden>
+      <div class="modal__backdrop" data-close-search></div>
+      <div
+        class="search-overlay__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Search"
+      >
+        <button class="modal__close" data-close-search aria-label="Close">
+          ×
+        </button>
+        <form class="search-overlay__form">
+          <input
+            type="search"
+            placeholder="Search articles, talks, forecasts…"
+            autocomplete="off"
+          />
+        </form>
+        <p class="search-overlay__hint">
+          Filter by Topic · Region · Campaign · Person — powered by faceted
+          search.
+        </p>
+        <div class="search-overlay__facets">
+          <span class="facet">New Paradigm</span>
+          <span class="facet">Physical Economy</span>
+          <span class="facet">Peace &amp; Strategy</span>
+          <span class="facet">Classical Culture</span>
+          <span class="facet">Eurasia</span>
+          <span class="facet">Helga Zepp-LaRouche</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

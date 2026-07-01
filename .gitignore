@@ -1,0 +1,9 @@
+# OS junk
+.DS_Store
+
+# Redundant zip snapshots (the folders they mirror are tracked)
+*.zip
+
+# Python scratch
+__pycache__/
+*.pyc
