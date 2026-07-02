@@ -38,6 +38,34 @@ progress. Chapter dots (right edge) jump between acts.
 **Fallbacks:** `prefers-reduced-motion` → static single frame, no pinning, acts 0+3
 stacked as normal flow; WebGL unavailable → CSS night-earth fallback (`.no-webgl`).
 
+## Hero v2 (`index-v2.html` + `js/hero-v2.js`)
+
+Second draft of the hero — same narrative and page, refined scene. v1 is untouched;
+open `/index-v2.html` to compare side by side.
+
+- **Fixed geography:** v1's lat/lon→sphere projection was mirrored 180° in
+  longitude, floating the city nodes in the oceans. v2 matches
+  `THREE.SphereGeometry`'s UV layout, so nodes sit on real major cities across
+  five continents (NY, São Paulo, Berlin, Moscow, Cairo, Cape Town, Tehran,
+  Beijing, Tokyo, Sydney, …).
+- **One spin direction:** the globe now rotates eastward only (v1 spun backwards
+  and reversed in the final act). Idle drift uses a monotonic accumulator so it
+  can never flip.
+- **Opening frame:** dark Pacific faces the camera, so the headline sits on
+  near-black; daylight is revealed progressively with the scroll.
+- **Stars:** custom glow-point shader — round with a soft halo, ~4,200 of them,
+  power-law sizes (mostly tiny), semi-transparent, in five colors, subtle twinkle.
+- **City nodes & pulses:** same shader — round, shiny, varied sizes, hub cities
+  larger, gentle pulse.
+- **Realism:** night-side civilization lights boosted (warm tungsten, lights
+  linger past dusk), NASA cloud layer lit by the sun, ocean sun-glint, mild
+  day-side contrast lift. Extra texture: `assets/clouds.jpg` (NASA, public domain).
+- **Close-up sharpness:** the 2K night map paints instantly, then a 4K version
+  (`assets/earth-night-4k.jpg`, 657 KB, from NASA Black Marble 3 km) swaps in
+  progressively for the opening zoom. 16× anisotropy + negative texture LOD
+  bias, plus a surface-locked micro-grain and extra moonlit cloud presence that
+  fade out as the camera pulls back. JS bundle unchanged.
+
 ## Page architecture (locked hybrid IA)
 
 Nav: **Ideas · Events · Get Involved · Donate · About**
