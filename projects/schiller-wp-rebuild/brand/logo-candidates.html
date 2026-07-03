@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Schiller Institute — Logo Candidates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0f1f3d;
+    --navy-deep: #0a1428;
+    --blue: #2563b0;
+    --gold: #d4a94c;
+    --gold-light: #e8c87e;
+    --ivory: #faf7f0;
+    --ink: #16202e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Inter", sans-serif;
+    background: #e9e4d8;
+    color: var(--ink);
+    padding: 3rem clamp(1rem, 5vw, 4rem) 5rem;
+  }
+  h1 { font-family: "Playfair Display", serif; font-size: 1.9rem; margin-bottom: 0.4rem; }
+  .note { font-size: 0.85rem; color: #6b7280; max-width: 46rem; margin-bottom: 2.5rem; }
+
+  .candidate { margin-bottom: 3.2rem; }
+  .candidate > h2 {
+    font-size: 0.8rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: #8a6d2f; margin-bottom: 0.2rem;
+  }
+  .candidate > p { font-size: 0.83rem; color: #57616e; margin-bottom: 1rem; max-width: 46rem; }
+  .swatches { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .swatch {
+    flex: 1 1 26rem; min-height: 11rem;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 0.8rem; padding: 2rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  }
+  .swatch.light { background: var(--ivory); }
+  .swatch.dark { background: var(--navy-deep); }
+
+  /* ---------- shared portrait treatments ---------- */
+  .roundel { position: relative; flex: none; border-radius: 50%; overflow: hidden; }
+  .roundel img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); display: block; }
+
+  /* =========== A · Refined Classic =========== */
+  .lockup-a { display: flex; align-items: center; gap: 1.4rem; }
+  .lockup-a .roundel {
+    width: 96px; height: 96px;
+    box-shadow: 0 0 0 2px var(--gold), 0 0 0 6px transparent;
+    outline: 1px solid rgba(212,169,76,0.45); outline-offset: 4px;
+  }
+  .lockup-a .words .eyebrow {
+    font-size: 0.6rem; font-weight: 600; letter-spacing: 0.42em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.35rem;
+  }
+  .lockup-a .words .name {
+    font-family: "Playfair Display", serif; font-weight: 600;
+    font-size: 2.1rem; line-height: 1.05; color: var(--navy);
+  }
+  .swatch.dark .lockup-a .words .name { color: #fff; }
+
+  /* =========== B · Navy Duotone =========== */
+  .lockup-b { display: flex; align-items: center; gap: 1.3rem; }
+  .lockup-b .roundel { width: 92px; height: 92px; background: var(--navy); }
+  .lockup-b .roundel img { filter: grayscale(1) contrast(1.08) brightness(1.12); mix-blend-mode: screen; opacity: 0.95; }
+  .lockup-b .words { display: flex; flex-direction: column; gap: 0.3rem; }
+  .lockup-b .words .l1 { font-weight: 700; font-size: 1.6rem; letter-spacing: 0.12em; color: var(--navy); }
+  .lockup-b .words .l2 { font-weight: 400; font-size: 0.95rem; letter-spacing: 0.52em; color: #57616e; }
+  .lockup-b .rule { width: 3.2rem; height: 2px; background: var(--gold); margin: 0.15rem 0; }
+  .swatch.dark .lockup-b .words .l1 { color: #fff; }
+  .swatch.dark .lockup-b .words .l2 { color: #9aa7bd; }
+
+  /* =========== C · The Seal =========== */
+  .lockup-c { display: flex; align-items: center; gap: 1.6rem; }
+  .seal { position: relative; width: 130px; height: 130px; }
+  .seal svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .seal .roundel { position: absolute; inset: 24px; width: auto; height: auto; }
+  .lockup-c .words .name {
+    font-family: "Playfair Display", serif; font-weight: 600; font-size: 1.9rem;
+    color: var(--navy); line-height: 1.1;
+  }
+  .lockup-c .words .sub { font-size: 0.66rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-top: 0.4rem; font-weight: 600; }
+  .swatch.dark .lockup-c .words .name { color: #fff; }
+
+  /* =========== D · Editorial =========== */
+  .lockup-d { display: flex; align-items: center; gap: 1.3rem; }
+  .lockup-d .roundel { width: 74px; height: 74px; box-shadow: 0 0 0 2px var(--navy); }
+  .swatch.dark .lockup-d .roundel { box-shadow: 0 0 0 2px var(--gold); }
+  .lockup-d .words .eyebrow { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.4em; text-transform: uppercase; color: #57616e; margin-bottom: 0.15rem; }
+  .lockup-d .words .name {
+    font-family: "Playfair Display", serif; font-style: italic; font-weight: 600;
+    font-size: 2.3rem; color: var(--navy); line-height: 1;
+  }
+  .lockup-d .words .name em { font-style: normal; color: var(--gold); }
+  .lockup-d .words .inst { font-family: "Inter", sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.5em; text-transform: uppercase; color: var(--navy); margin-top: 0.3rem; }
+  .swatch.dark .lockup-d .words .eyebrow { color: #9aa7bd; }
+  .swatch.dark .lockup-d .words .name { color: #fff; }
+  .swatch.dark .lockup-d .words .inst { color: #cfe0f5; }
+
+  /* =========== E · Small-size mark =========== */
+  .sizes { display: flex; align-items: flex-end; gap: 2rem; flex-wrap: wrap; }
+  .size-demo { text-align: center; }
+  .size-demo .label { font-size: 0.65rem; color: #8a94a3; margin-top: 0.5rem; }
+  .swatch.dark .size-demo .label { color: #7d889c; }
+  .mark-portrait { border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 1.5px var(--gold); background: var(--navy); display: inline-block; }
+  .mark-portrait img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); display: block; }
+  .mark-s {
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 50%; background: var(--navy);
+    box-shadow: 0 0 0 1.5px var(--gold);
+    color: var(--gold-light); font-family: "Playfair Display", serif; font-weight: 700;
+  }
+</style>
+</head>
+<body>
+  <h1>Schiller Institute — logo candidates</h1>
+  <p class="note">Portrait kept in every direction; the dated gradient swoosh and default-blue wordmark are replaced with the rebuild's navy / gold / Playfair identity. Each candidate shown on ivory and navy. Candidate E is not a replacement — it is the companion small-size mark (favicons, avatars) any of A–D would ship with.</p>
+
+  <!-- A -->
+  <div class="candidate">
+    <h2>A · Refined Classic</h2>
+    <p>Closest in spirit to today's logo: portrait in a fine gold double ring, gold "THE INTERNATIONAL" eyebrow, Playfair wordmark. Dignified, institutional, quietly modern.</p>
+    <div class="swatches">
+      <div class="swatch light">
+        <div class="lockup-a">
+          <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+          <div class="words">
+            <div class="eyebrow">The International</div>
+            <div class="name">Schiller Institute</div>
+          </div>
+        </div>
+      </div>
+      <div class="swatch dark">
+        <div class="lockup-a">
+          <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+          <div class="words">
+            <div class="eyebrow">The International</div>
+            <div class="name">Schiller Institute</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B -->
+  <div class="candidate">
+    <h2>B · Navy Duotone</h2>
+    <p>The portrait re-toned into the brand navy — a single-ink, screen-native treatment that ends the "old painting pasted on a website" clash. Geometric wordmark, gold rule.</p>
+    <div class="swatches">
+      <div class="swatch light">
+        <div class="lockup-b">
+          <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+          <div class="words">
+            <div class="l1">SCHILLER</div>
+            <div class="rule"></div>
+            <div class="l2">INSTITUTE</div>
+          </div>
+        </div>
+      </div>
+      <div class="swatch dark">
+        <div class="lockup-b">
+          <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+          <div class="words">
+            <div class="l1">SCHILLER</div>
+            <div class="rule"></div>
+            <div class="l2">INSTITUTE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C -->
+  <div class="candidate">
+    <h2>C · The Seal</h2>
+    <p>Portrait set in a circular text ring — "· THE INTERNATIONAL SCHILLER INSTITUTE · EST. 1984". Reads as an institution with history; superb as a stamp, avatar, or conference mark.</p>
+    <div class="swatches">
+      <div class="swatch light">
+        <div class="lockup-c">
+          <div class="seal">
+            <svg viewBox="0 0 130 130">
+              <defs><path id="ring1" d="M 65,65 m -54,0 a 54,54 0 1,1 108,0 a 54,54 0 1,1 -108,0" /></defs>
+              <circle cx="65" cy="65" r="64" fill="none" stroke="#d4a94c" stroke-width="1" />
+              <circle cx="65" cy="65" r="42" fill="none" stroke="#d4a94c" stroke-width="1" />
+              <text font-family="Inter, sans-serif" font-size="8.2" font-weight="600" letter-spacing="2.6" fill="#0f1f3d">
+                <textPath href="#ring1">THE INTERNATIONAL SCHILLER INSTITUTE · EST. 1984 ·</textPath>
+              </text>
+            </svg>
+            <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+          </div>
+          <div class="words">
+            <div class="name">Schiller<br />Institute</div>
+            <div class="sub">A New Paradigm for Mankind</div>
+          </div>
+        </div>
+      </div>
+      <div class="swatch dark">
+        <div class="lockup-c">
+          <div class="seal">
+            <svg viewBox="0 0 130 130">
+              <defs><path id="ring2" d="M 65,65 m -54,0 a 54,54 0 1,1 108,0 a 54,54 0 1,1 -108,0" /></defs>
+              <circle cx="65" cy="65" r="64" fill="none" stroke="#d4a94c" stroke-width="1" />
+              <circle cx="65" cy="65" r="42" fill="none" stroke="#d4a94c" stroke-width="1" />
+              <text font-family="Inter, sans-serif" font-size="8.2" font-weight="600" letter-spacing="2.6" fill="#e8c87e">
+                <textPath href="#ring2">THE INTERNATIONAL SCHILLER INSTITUTE · EST. 1984 ·</textPath>
+              </text>
+            </svg>
+            <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+          </div>
+          <div class="words">
+            <div class="name">Schiller<br />Institute</div>
+            <div class="sub">A New Paradigm for Mankind</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D -->
+  <div class="candidate">
+    <h2>D · Editorial</h2>
+    <p>The wordmark leads: italic Playfair "Schiller" with a gold full stop, tracked "INSTITUTE" beneath — like a masthead. Portrait rides along in a slim ring. Most contemporary of the four.</p>
+    <div class="swatches">
+      <div class="swatch light">
+        <div class="lockup-d">
+          <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+          <div class="words">
+            <div class="eyebrow">The International</div>
+            <div class="name">Schiller<em>.</em></div>
+            <div class="inst">Institute</div>
+          </div>
+        </div>
+      </div>
+      <div class="swatch dark">
+        <div class="lockup-d">
+          <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+          <div class="words">
+            <div class="eyebrow">The International</div>
+            <div class="name">Schiller<em>.</em></div>
+            <div class="inst">Institute</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- E -->
+  <div class="candidate">
+    <h2>E · Companion small-size mark (favicon / avatar)</h2>
+    <p>Below 48px a painted portrait loses its face. Two options at real favicon sizes: the portrait (holds up at 32px+, muddy at 16px) vs. a Playfair "S" roundel that stays crisp at every size. Recommended: portrait for ≥64px avatars, "S" roundel for 16–48px favicons.</p>
+    <div class="swatches">
+      <div class="swatch light">
+        <div class="sizes">
+          <div class="size-demo"><span class="mark-portrait" style="width:64px;height:64px"><img src="src/portrait-clean.png" /></span><div class="label">portrait 64</div></div>
+          <div class="size-demo"><span class="mark-portrait" style="width:32px;height:32px"><img src="src/portrait-clean.png" /></span><div class="label">32</div></div>
+          <div class="size-demo"><span class="mark-portrait" style="width:16px;height:16px"><img src="src/portrait-clean.png" /></span><div class="label">16</div></div>
+          <div class="size-demo"><span class="mark-s" style="width:64px;height:64px;font-size:40px">S</span><div class="label">S 64</div></div>
+          <div class="size-demo"><span class="mark-s" style="width:32px;height:32px;font-size:20px">S</span><div class="label">32</div></div>
+          <div class="size-demo"><span class="mark-s" style="width:16px;height:16px;font-size:10px">S</span><div class="label">16</div></div>
+        </div>
+      </div>
+      <div class="swatch dark">
+        <div class="sizes">
+          <div class="size-demo"><span class="mark-portrait" style="width:64px;height:64px"><img src="src/portrait-clean.png" /></span><div class="label">portrait 64</div></div>
+          <div class="size-demo"><span class="mark-portrait" style="width:32px;height:32px"><img src="src/portrait-clean.png" /></span><div class="label">32</div></div>
+          <div class="size-demo"><span class="mark-portrait" style="width:16px;height:16px"><img src="src/portrait-clean.png" /></span><div class="label">16</div></div>
+          <div class="size-demo"><span class="mark-s" style="width:64px;height:64px;font-size:40px">S</span><div class="label">S 64</div></div>
+          <div class="size-demo"><span class="mark-s" style="width:32px;height:32px;font-size:20px">S</span><div class="label">32</div></div>
+          <div class="size-demo"><span class="mark-s" style="width:16px;height:16px;font-size:10px">S</span><div class="label">16</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

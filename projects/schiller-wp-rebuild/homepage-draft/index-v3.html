@@ -9,7 +9,7 @@
   <!-- Draft note: Google Fonts via CDN for the prototype; self-host in the Blocksy build -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
   <style>
     /* v3 parallax handoff: the scene layers are viewport-fixed at z-index -1.
@@ -29,6 +29,31 @@
     .hero-vignette {
       background: linear-gradient(rgba(6, 13, 31, 0.55), transparent 22%, transparent 68%, rgba(6, 13, 31, 0.9));
     }
+
+    /* v3: A2 "Hairline" logo lockup (brand/DECISION.md) replaces the
+       placeholder "S" roundel — portrait in a 1px gold ring, tracked
+       "THE INTERNATIONAL" eyebrow above a Playfair 500 wordmark. */
+    .brand-mark--portrait {
+      background: var(--navy-800);
+      box-shadow: 0 0 0 1px var(--gold-500);
+      overflow: hidden;
+    }
+    .brand-mark--portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.05);
+      display: block;
+    }
+    .brand-name {
+      font-weight: 500;
+      letter-spacing: 0.015em;
+    }
+    .brand-name small {
+      color: #9aa7bd;
+      letter-spacing: 0.4em;
+      margin-bottom: 2px;
+    }
   </style>
 </head>
 <body>
@@ -37,10 +62,8 @@
   <header class="site-header">
     <div class="wrap">
       <a class="brand" href="#">
-        <span class="brand-mark">S</span>
-        <span class="brand-name">Schiller Institute
-          <small>A New Paradigm for Mankind</small>
-        </span>
+        <span class="brand-mark brand-mark--portrait"><img src="assets/logo-portrait.png" alt="" /></span>
+        <span class="brand-name"><small>The International</small>Schiller Institute</span>
       </a>
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
       <nav class="site-nav" aria-label="Primary">

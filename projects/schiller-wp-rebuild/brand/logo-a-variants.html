@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Refined Classic — variant exploration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0f1f3d;
+    --navy-deep: #0a1428;
+    --gold: #d4a94c;
+    --gold-light: #e8c87e;
+    --ivory: #faf7f0;
+    --ink: #16202e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Inter", sans-serif; background: #e9e4d8; color: var(--ink); padding: 3rem clamp(1rem,5vw,4rem) 5rem; }
+  h1 { font-family: "Playfair Display", serif; font-size: 1.8rem; margin-bottom: 0.3rem; }
+  .note { font-size: 0.85rem; color: #6b7280; max-width: 46rem; margin-bottom: 2.5rem; }
+  .variant { margin-bottom: 3rem; }
+  .variant > h2 { font-size: 0.78rem; letter-spacing: 0.24em; text-transform: uppercase; color: #8a6d2f; margin-bottom: 0.2rem; }
+  .variant > p { font-size: 0.83rem; color: #57616e; margin-bottom: 1rem; max-width: 46rem; }
+  .swatches { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .swatch { flex: 1 1 26rem; min-height: 10.5rem; display: flex; align-items: center; justify-content: center; border-radius: 0.8rem; padding: 2rem; box-shadow: 0 1px 4px rgba(0,0,0,0.12); }
+  .swatch.light { background: var(--ivory); }
+  .swatch.dark { background: var(--navy-deep); }
+
+  .roundel { position: relative; flex: none; border-radius: 50%; overflow: hidden; }
+  .roundel img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); display: block; }
+
+  /* ---- A1 · Baseline ---- */
+  .lockup { display: flex; align-items: center; gap: 1.4rem; }
+  .a1 .roundel { width: 96px; height: 96px; box-shadow: 0 0 0 2px var(--gold); outline: 1px solid rgba(212,169,76,0.45); outline-offset: 4px; }
+  .eyebrow { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.35rem; }
+  .name { font-family: "Playfair Display", serif; font-weight: 600; font-size: 2.1rem; line-height: 1.05; color: var(--navy); }
+  .swatch.dark .name { color: #fff; }
+
+  /* ---- A2 · Hairline ---- */
+  .a2 .roundel { width: 92px; height: 92px; box-shadow: 0 0 0 1px var(--gold); outline: none; }
+  .a2 .eyebrow { color: #57616e; letter-spacing: 0.5em; }
+  .swatch.dark .a2 .eyebrow { color: #9aa7bd; }
+  .a2 .name { font-weight: 500; letter-spacing: 0.015em; }
+  .a2 .rule { width: 2.6rem; height: 1px; background: var(--gold); margin: 0.5rem 0 0; }
+
+  /* ---- A3 · Stacked ---- */
+  .a3 { flex-direction: column; text-align: center; gap: 0.9rem; }
+  .a3 .roundel { width: 104px; height: 104px; box-shadow: 0 0 0 2px var(--gold); outline: 1px solid rgba(212,169,76,0.45); outline-offset: 4px; }
+  .a3 .name { font-size: 1.8rem; }
+  .a3 .eyebrow { margin-bottom: 0.2rem; }
+
+  /* ---- A4 · Motto ---- */
+  .a4 .roundel { width: 100px; height: 100px; box-shadow: 0 0 0 2px var(--gold); outline: 1px solid rgba(212,169,76,0.45); outline-offset: 4px; }
+  .motto { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.34em; text-transform: uppercase; color: var(--gold); margin-top: 0.5rem; }
+
+  /* ---- A5 · Tinted bridge ---- */
+  .a5 .roundel { width: 96px; height: 96px; box-shadow: 0 0 0 2px var(--gold); background: var(--navy); }
+  .a5 .roundel img { filter: grayscale(0.75) contrast(1.04) brightness(1.0); }
+  .a5 .roundel::after { content: ""; position: absolute; inset: 0; background: rgba(15,31,61,0.32); mix-blend-mode: multiply; }
+  .a5 .roundel::before { content: ""; position: absolute; inset: 0; background: rgba(37,99,176,0.14); mix-blend-mode: screen; z-index: 1; }
+
+  /* ---- A6 · In situ (header bar) ---- */
+  .headerbar {
+    width: 100%; max-width: 60rem; border-radius: 0.6rem;
+    background: rgba(6, 13, 31, 0.85); backdrop-filter: blur(10px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.7rem 1.4rem; box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  }
+  .headerbar .lockup { gap: 0.8rem; }
+  .headerbar .roundel { width: 44px; height: 44px; box-shadow: 0 0 0 1.5px var(--gold); }
+  .headerbar .name { font-size: 1.1rem; color: #fff; }
+  .headerbar .eyebrow { font-size: 0.42rem; letter-spacing: 0.4em; margin-bottom: 0.15rem; }
+  .headerbar nav { display: flex; gap: 1.3rem; font-size: 0.78rem; color: rgba(255,255,255,0.85); align-items: center; }
+  .headerbar nav .donate { background: var(--gold); color: var(--navy-deep); padding: 0.4rem 1rem; border-radius: 999px; font-weight: 600; }
+</style>
+</head>
+<body>
+  <h1>Refined Classic — exploration</h1>
+  <p class="note">Portrait fully cleaned: the old blue ring and swoosh are gone from the source crop. Six treatments of the chosen direction, on ivory and navy.</p>
+
+  <div class="variant">
+    <h2>A1 · Baseline (as picked, cleaned portrait)</h2>
+    <p>Gold double ring — solid inner, hairline halo — gold eyebrow, Playfair semibold.</p>
+    <div class="swatches">
+      <div class="swatch light"><div class="lockup a1">
+        <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+        <div><div class="eyebrow">The International</div><div class="name">Schiller Institute</div></div>
+      </div></div>
+      <div class="swatch dark"><div class="lockup a1">
+        <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+        <div><div class="eyebrow">The International</div><div class="name">Schiller Institute</div></div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="variant">
+    <h2>A2 · Hairline</h2>
+    <p>Quieter: single 1px gold ring, neutral eyebrow, lighter Playfair, short gold rule under the name. The most understated of the set.</p>
+    <div class="swatches">
+      <div class="swatch light"><div class="lockup a2">
+        <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+        <div><div class="eyebrow">The International</div><div class="name">Schiller Institute</div><div class="rule"></div></div>
+      </div></div>
+      <div class="swatch dark"><div class="lockup a2">
+        <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+        <div><div class="eyebrow">The International</div><div class="name">Schiller Institute</div><div class="rule"></div></div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="variant">
+    <h2>A3 · Stacked (footer / social / print)</h2>
+    <p>Centered vertical lockup — the companion arrangement A1 needs for square and centered contexts.</p>
+    <div class="swatches">
+      <div class="swatch light"><div class="lockup a3">
+        <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+        <div><div class="eyebrow">The International</div><div class="name">Schiller Institute</div></div>
+      </div></div>
+      <div class="swatch dark"><div class="lockup a3">
+        <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+        <div><div class="eyebrow">The International</div><div class="name">Schiller Institute</div></div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="variant">
+    <h2>A4 · With motto</h2>
+    <p>Adds the mission line as a gold underscore — useful on title pages, conference screens, the footer.</p>
+    <div class="swatches">
+      <div class="swatch light"><div class="lockup a4">
+        <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+        <div><div class="eyebrow">The International</div><div class="name">Schiller Institute</div><div class="motto">A New Paradigm for Mankind</div></div>
+      </div></div>
+      <div class="swatch dark"><div class="lockup a4">
+        <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+        <div><div class="eyebrow">The International</div><div class="name">Schiller Institute</div><div class="motto">A New Paradigm for Mankind</div></div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="variant">
+    <h2>A5 · Tinted bridge</h2>
+    <p>A1's layout with the portrait gently unified toward the brand navy — takes the "old reproduction" edge off the painting while keeping it recognizably itself. (Halfway to candidate B's duotone.)</p>
+    <div class="swatches">
+      <div class="swatch light"><div class="lockup a1 a5">
+        <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+        <div><div class="eyebrow">The International</div><div class="name">Schiller Institute</div></div>
+      </div></div>
+      <div class="swatch dark"><div class="lockup a1 a5">
+        <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+        <div><div class="eyebrow">The International</div><div class="name">Schiller Institute</div></div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="variant">
+    <h2>A6 · In situ — site header</h2>
+    <p>A1 at real header scale (44px roundel) inside the rebuilt homepage's nav bar, replacing the placeholder "S".</p>
+    <div class="swatches">
+      <div class="swatch dark" style="flex-basis:100%">
+        <div class="headerbar">
+          <div class="lockup a1">
+            <div class="roundel"><img src="src/portrait-clean.png" alt="" /></div>
+            <div><div class="eyebrow">The International</div><div class="name">Schiller Institute</div></div>
+          </div>
+          <nav><span>Ideas</span><span>Events</span><span>Get Involved</span><span>About</span><span class="donate">Donate</span></nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
