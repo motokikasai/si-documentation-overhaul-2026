@@ -376,22 +376,33 @@ function init(renderer) {
     berlin:     [52.5, 13.4, 1],   rotterdam:  [51.9, 4.5, 0],    madrid:    [40.4, -3.7, 0],
     cairo:      [30.0, 31.2, 1],   khartoum:   [15.6, 32.5, 0],   nairobi:   [-1.3, 36.8, 0],
     capetown:   [-33.9, 18.4, 1],  lagos:      [6.5, 3.4, 0],     dakar:     [14.7, -17.5, 0],
-    tangier:    [35.8, -5.8, 0],
+    tangier:    [35.8, -5.8, 0],   kinshasa:   [-4.3, 15.3, 0],   johannesburg: [-26.2, 28.0, 0],
+    addis:      [9.0, 38.7, 0],    bogota:     [4.7, -74.1, 0],   santiago:  [-33.4, -70.7, 0],
   };
 
+  /* tier 0 = trunk lines (draw first, full brightness);
+   * tier 1 = regional feeders (sprout later, slightly quieter) — the network
+   * visibly grows outward into every continent as you scroll. */
   const CORRIDORS = [
-    ["rotterdam", "berlin", "moscow", "urumqi", "xian", "beijing"],             // northern Silk Road
-    ["istanbul", "tehran", "urumqi"],                                           // middle corridor
-    ["beijing", "vladivostok", "bering", "anchorage", "edmonton", "chicago", "newyork"], // Bering Strait link
-    ["madrid", "tangier", "dakar", "lagos"],                                    // Gibraltar tunnel → W. Africa
-    ["cairo", "khartoum", "nairobi", "capetown"],                               // East Africa spine
-    ["chicago", "mexico", "panama", "lima", "buenosaires"],                     // Pan-American
-    ["saopaulo", "buenosaires"],
-    ["xian", "delhi", "mumbai"],                                                // South Asia branch
-    ["singapore", "sydney"],                                                    // Oceania link
-    ["beijing", "tokyo"],
-    ["cairo", "jerusalem", "riyadh"],                                           // Oasis Plan
-    ["istanbul", "cairo"],
+    { chain: ["rotterdam", "berlin", "moscow", "urumqi", "xian", "beijing"], tier: 0 },             // northern Silk Road
+    { chain: ["istanbul", "tehran", "urumqi"], tier: 0 },                                           // middle corridor
+    { chain: ["beijing", "vladivostok", "bering", "anchorage", "edmonton", "chicago", "newyork"], tier: 0 }, // Bering Strait link
+    { chain: ["madrid", "tangier", "dakar", "lagos"], tier: 0 },                                    // Gibraltar tunnel → W. Africa
+    { chain: ["cairo", "khartoum", "nairobi", "capetown"], tier: 0 },                               // East Africa spine
+    { chain: ["chicago", "mexico", "panama", "lima", "buenosaires"], tier: 0 },                     // Pan-American
+    { chain: ["xian", "delhi", "mumbai"], tier: 0 },                                                // South Asia branch
+    { chain: ["cairo", "jerusalem", "riyadh"], tier: 0 },                                           // Oasis Plan
+    { chain: ["istanbul", "cairo"], tier: 0 },
+    { chain: ["beijing", "tokyo"], tier: 1 },
+    { chain: ["singapore", "sydney"], tier: 1 },                                                    // Oceania link
+    { chain: ["saopaulo", "buenosaires"], tier: 1 },
+    { chain: ["mumbai", "nairobi"], tier: 1 },                                                      // Indian-Ocean link, Asia ↔ Africa
+    { chain: ["dakar", "khartoum"], tier: 1 },                                                      // trans-Sahel railway
+    { chain: ["lagos", "kinshasa", "johannesburg"], tier: 1 },                                      // Central–Southern Africa spine
+    { chain: ["riyadh", "addis", "nairobi"], tier: 1 },                                             // Red Sea crossing → E. Africa
+    { chain: ["lima", "saopaulo"], tier: 1 },                                                       // Twin-Ocean railway
+    { chain: ["buenosaires", "santiago"], tier: 1 },                                                // trans-Andean
+    { chain: ["panama", "bogota"], tier: 1 },                                                       // Darién link
   ];
 
   function greatCirclePoints(a, b, segments) {
@@ -412,25 +423,28 @@ function init(renderer) {
   const arcsGroup = new THREE.Group();
   earthGroup.add(arcsGroup);
 
-  const corridorLines = CORRIDORS.map((chain, ci) => {
+  const corridorLines = CORRIDORS.map(({ chain, tier }, ci) => {
     const pts = [];
     for (let i = 0; i < chain.length - 1; i++) {
       const segPts = greatCirclePoints(CITIES[chain[i]], CITIES[chain[i + 1]], 42);
       if (i > 0) segPts.shift();
       pts.push(...segPts);
     }
+    const baseOpacity = tier === 0 ? 0.9 : 0.62;
     const geo = new THREE.BufferGeometry().setFromPoints(pts);
     const mat = new THREE.LineBasicMaterial({
-      color: 0xe8c87e,
+      color: tier === 0 ? 0xe8c87e : 0xd9c08f,
       transparent: true,
-      opacity: 0.9,
+      opacity: baseOpacity,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     });
     const line = new THREE.Line(geo, mat);
     line.geometry.setDrawRange(0, 0);
     arcsGroup.add(line);
-    return { line, total: pts.length, pts, delay: (ci % 6) * 0.05 };
+    /* trunks draw across the first half of the window, feeders sprout after */
+    const delay = tier === 0 ? (ci % 6) * 0.05 : 0.38 + (ci % 5) * 0.055;
+    return { line, total: pts.length, pts, delay, baseOpacity };
   });
 
   /* City nodes: round, shiny, varied sizes, gentle pulse */
@@ -478,11 +492,13 @@ function init(renderer) {
 
   /* ----- Moon ----- */
 
+  /* Small, distant, slightly dimmed: keeps the eye on Earth and avoids the
+   * wide-angle edge stretching a large off-axis sphere suffers. */
   const moon = new THREE.Mesh(
-    new THREE.SphereGeometry(0.46, 48, 48),
-    new THREE.MeshStandardMaterial({ map: moonTex, roughness: 1, metalness: 0 })
+    new THREE.SphereGeometry(0.38, 64, 64),
+    new THREE.MeshStandardMaterial({ map: moonTex, roughness: 1, metalness: 0, color: 0xbfbfbf })
   );
-  moon.position.set(4.6, 1.7, -4.2);
+  moon.position.set(4.9, 2.3, -7.2);
   scene.add(moon);
 
   const sunLight = new THREE.DirectionalLight(0xfff2dd, 2.6);
@@ -595,10 +611,10 @@ function init(renderer) {
     const ap = arcProgress(p);
     const fade = arcFade(p);
     const arcsIn = smooth(0.18, 0.3, p);
-    corridorLines.forEach(({ line, total, delay }) => {
+    corridorLines.forEach(({ line, total, delay, baseOpacity }) => {
       const local = clamp01((ap - delay) / (1 - delay));
       line.geometry.setDrawRange(0, Math.floor(total * local));
-      line.material.opacity = 0.9 * fade;
+      line.material.opacity = baseOpacity * fade;
     });
     nodeMat.uniforms.uOpacity.value = arcsIn * fade;
     nodeMat.uniforms.uTime.value = t;
