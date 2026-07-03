@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>asset factory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0f1f3d;
+    --navy-deep: #0a1428;
+    --gold: #d4a94c;
+    --gold-light: #e8c87e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: transparent; overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; font-family: "Inter", sans-serif; }
+  .stage { display: none; }
+  body[data-asset="mark"] .stage.mark,
+  body[data-asset="sroundel"] .stage.sroundel,
+  body[data-asset="lockup"] .stage.lockup,
+  body[data-asset="stacked"] .stage.stacked,
+  body[data-asset="appletouch"] .stage.appletouch,
+  body[data-asset="avatar"] .stage.avatar,
+  body[data-asset="og"] .stage.og { display: flex; }
+
+  svg { display: block; }
+
+  /* mark fills viewport */
+  .stage.mark, .stage.mark svg { width: 100vmin; height: 100vmin; }
+  .stage.sroundel, .stage.sroundel svg { width: 100vmin; height: 100vmin; }
+
+  /* lockup: A2 hairline */
+  .lockup-row { display: flex; align-items: center; gap: 24px; }
+  .lockup-row .m { width: 100px; height: 100px; flex: none; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.5em; text-transform: uppercase; margin-bottom: 7px; }
+  .name { font-family: "Playfair Display", serif; font-weight: 500; font-size: 42px; line-height: 1.05; letter-spacing: 0.015em; white-space: nowrap; }
+  .rule { width: 52px; height: 2px; background: var(--gold); margin-top: 10px; }
+  body[data-theme="light"] .eyebrow { color: #57616e; }
+  body[data-theme="light"] .name { color: var(--navy); }
+  body[data-theme="dark"] .eyebrow { color: #9aa7bd; }
+  body[data-theme="dark"] .name { color: #ffffff; }
+
+  /* stacked */
+  .stack-col { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; }
+  .stack-col .m { width: 128px; height: 128px; }
+  .stack-col .name { font-size: 36px; white-space: normal; }
+  .stack-col .eyebrow { margin-bottom: 6px; }
+
+  /* apple touch / avatar: solid navy square */
+  .stage.appletouch, .stage.avatar {
+    width: 100vw; height: 100vh; background: var(--navy-deep);
+    align-items: center; justify-content: center;
+  }
+  .stage.appletouch .m { width: 72%; height: 72%; }
+  .stage.avatar .m { width: 68%; height: 68%; }
+
+  /* OG card */
+  .stage.og { width: 100vw; height: 100vh; background:
+    radial-gradient(ellipse at 50% 130%, rgba(37,99,176,0.35), transparent 60%), var(--navy-deep);
+    align-items: center; justify-content: center; }
+  .stage.og .stack-col .m { width: 168px; height: 168px; }
+  .stage.og .name { font-size: 58px; color: #fff; }
+  .stage.og .eyebrow { color: #9aa7bd; font-size: 16px; }
+  .stage.og .motto { font-size: 15px; font-weight: 600; letter-spacing: 0.34em; text-transform: uppercase; color: var(--gold); margin-top: 6px; }
+</style>
+</head>
+<body data-asset="mark" data-theme="dark">
+
+  <!-- portrait mark: SVG clip + proportional hairline ring -->
+  <div class="stage mark">
+    <svg viewBox="0 0 40 40">
+      <defs><clipPath id="c1"><circle cx="20" cy="20" r="19.2" /></clipPath></defs>
+      <image href="src/portrait-clean.png" x="-2" y="-2" width="44" height="44" clip-path="url(#c1)" preserveAspectRatio="xMidYMid slice" />
+      <circle cx="20" cy="20" r="19.5" fill="none" stroke="#d4a94c" stroke-width="1" />
+    </svg>
+  </div>
+
+  <!-- S roundel: small-size mark -->
+  <div class="stage sroundel">
+    <svg viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="18.9" fill="#0f1f3d" />
+      <circle cx="20" cy="20" r="18.9" fill="none" stroke="#d4a94c" stroke-width="2.2" />
+      <text x="20" y="20" text-anchor="middle" dominant-baseline="central"
+            font-family="Playfair Display, Georgia, serif" font-weight="700" font-size="25"
+            fill="#e8c87e" dy="1">S</text>
+    </svg>
+  </div>
+
+  <!-- horizontal lockup (A2) -->
+  <div class="stage lockup">
+    <div class="lockup-row">
+      <svg class="m" viewBox="0 0 40 40">
+        <defs><clipPath id="c2"><circle cx="20" cy="20" r="19.2" /></clipPath></defs>
+        <image href="src/portrait-clean.png" x="-2" y="-2" width="44" height="44" clip-path="url(#c2)" preserveAspectRatio="xMidYMid slice" />
+        <circle cx="20" cy="20" r="19.5" fill="none" stroke="#d4a94c" stroke-width="1" />
+      </svg>
+      <div>
+        <div class="eyebrow">The International</div>
+        <div class="name">Schiller Institute</div>
+        <div class="rule"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- stacked lockup (A3 geometry, A2 styling) -->
+  <div class="stage stacked">
+    <div class="stack-col">
+      <svg class="m" viewBox="0 0 40 40">
+        <defs><clipPath id="c3"><circle cx="20" cy="20" r="19.2" /></clipPath></defs>
+        <image href="src/portrait-clean.png" x="-2" y="-2" width="44" height="44" clip-path="url(#c3)" preserveAspectRatio="xMidYMid slice" />
+        <circle cx="20" cy="20" r="19.5" fill="none" stroke="#d4a94c" stroke-width="1" />
+      </svg>
+      <div>
+        <div class="eyebrow">The International</div>
+        <div class="name">Schiller Institute</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- apple touch icon (solid bg, generous margin for iOS masking) -->
+  <div class="stage appletouch">
+    <svg class="m" viewBox="0 0 40 40">
+      <defs><clipPath id="c4"><circle cx="20" cy="20" r="19.2" /></clipPath></defs>
+      <image href="src/portrait-clean.png" x="-2" y="-2" width="44" height="44" clip-path="url(#c4)" preserveAspectRatio="xMidYMid slice" />
+      <circle cx="20" cy="20" r="19.5" fill="none" stroke="#d4a94c" stroke-width="1" />
+    </svg>
+  </div>
+
+  <!-- square avatar (social profiles) -->
+  <div class="stage avatar">
+    <svg class="m" viewBox="0 0 40 40">
+      <defs><clipPath id="c5"><circle cx="20" cy="20" r="19.2" /></clipPath></defs>
+      <image href="src/portrait-clean.png" x="-2" y="-2" width="44" height="44" clip-path="url(#c5)" preserveAspectRatio="xMidYMid slice" />
+      <circle cx="20" cy="20" r="19.5" fill="none" stroke="#d4a94c" stroke-width="1" />
+    </svg>
+  </div>
+
+  <!-- OG / social share card -->
+  <div class="stage og">
+    <div class="stack-col">
+      <svg class="m" viewBox="0 0 40 40">
+        <defs><clipPath id="c6"><circle cx="20" cy="20" r="19.2" /></clipPath></defs>
+        <image href="src/portrait-clean.png" x="-2" y="-2" width="44" height="44" clip-path="url(#c6)" preserveAspectRatio="xMidYMid slice" />
+        <circle cx="20" cy="20" r="19.5" fill="none" stroke="#d4a94c" stroke-width="1" />
+      </svg>
+      <div>
+        <div class="eyebrow">The International</div>
+        <div class="name">Schiller Institute</div>
+        <div class="motto">A New Paradigm for Mankind</div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const q = new URLSearchParams(location.search);
+  document.body.dataset.asset = q.get("a") || "mark";
+  document.body.dataset.theme = q.get("theme") || "dark";
+  /* content scaling for @2x exports (headless windows stay at scale 1) */
+  document.body.style.zoom = q.get("z") || "1";
+</script>
+</body>
+</html>
