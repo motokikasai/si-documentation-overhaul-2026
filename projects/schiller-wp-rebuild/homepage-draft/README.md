@@ -66,6 +66,29 @@ open `/index-v2.html` to compare side by side.
   bias, plus a surface-locked micro-grain and extra moonlit cloud presence that
   fade out as the camera pulls back. JS bundle unchanged.
 
+## Hero v3 (`index-v3.html` + `js/hero-v3.js`)
+
+Builds on v2 (which stays frozen for comparison) with the "growth of physical
+economy" layer:
+
+- **The world brightens:** night-side civilization lights gain ~15% intensity
+  as the network completes (`uGrowth` uniform) — development lighting the
+  planet.
+- **City flare on connection:** each node flares (size + brightness) the
+  moment the drawing corridor tip reaches it — cities visibly join the
+  network. Computed in the vertex shader from a per-node `aReach` value, so
+  it costs nothing per frame and scrubs cleanly in both directions.
+- **Corridor maturation:** feeder lines start pale (planned) and warm to full
+  trunk gold with a small opacity lift once the pulses start flowing
+  (operational).
+- **Parallax exit:** the scene layers (canvas/vignette) are viewport-fixed at
+  `z-index: -1` (see the `<style>` block in `index-v3.html`). At pin release
+  the headline/form scroll away normally while Earth, Moon and stars hold
+  their final positions; the next opaque section slides over the frozen
+  scene. Requires no transform on `.hero-pin` and a transparent `.hero`
+  background. Scroll smoothing tightens to ~1:1 near the runway end so the
+  hero's responsiveness matches native scroll at handoff.
+
 ## Page architecture (locked hybrid IA)
 
 Nav: **Ideas · Events · Get Involved · Donate · About**

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Schiller Institute — A New Paradigm for Mankind (hero v3)</title>
+  <meta name="description" content="The Schiller Institute works for a new paradigm of sovereign nations united by development — the World Land-Bridge, the Oasis Plan, fusion and space science, and a renaissance of classical culture." />
+
+  <!-- Draft note: Google Fonts via CDN for the prototype; self-host in the Blocksy build -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* v3 parallax handoff: the scene layers are viewport-fixed at z-index -1.
+       While the hero is pinned this is visually identical, but at pin release
+       the headline/form scroll away with the page while Earth, Moon and stars
+       hold their final positions — the next (opaque) section then slides over
+       the frozen scene. Requires: no transform on .hero-pin, and .hero made
+       transparent so the canvas shows through. */
+    .hero { background: transparent; }
+    .hero-canvas,
+    .hero-fallback,
+    .hero-vignette {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+    }
+    .hero-vignette {
+      background: linear-gradient(rgba(6, 13, 31, 0.55), transparent 22%, transparent 68%, rgba(6, 13, 31, 0.9));
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= Header — locked IA nav: Ideas · Events · Get Involved · Donate · About ================= -->
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="#">
+        <span class="brand-mark">S</span>
+        <span class="brand-name">Schiller Institute
+          <small>A New Paradigm for Mankind</small>
+        </span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#ideas">Ideas</a>
+        <a href="#events">Events</a>
+        <a href="#involved">Get Involved</a>
+        <a href="#about">About</a>
+        <a href="#involved" class="nav-donate">Donate</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= Hero — scroll-driven WebGL journey ================= -->
+  <section class="hero" id="top">
+    <!-- Scene layers live OUTSIDE the sticky pin: sticky creates a stacking
+         context, which would hoist their z-index:-1 above the sections that
+         follow. At root level, -1 sits beneath every section background. -->
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-fallback" aria-hidden="true"></div>
+    <div class="hero-vignette" aria-hidden="true"></div>
+    <div class="hero-pin">
+
+      <!-- Act 0 · Crisis → alternative -->
+      <div class="hero-stage" data-stage="0">
+        <p class="hero-kicker">The Schiller Institute · Since 1984</p>
+        <h1>The old order is collapsing.<br /><em>A new paradigm</em> is ours to build.</h1>
+        <p>Economic breakdown, the danger of war, a culture in decay — none of it is inevitable. Mankind is the only creative species we know of in the universe. That changes everything.</p>
+      </div>
+
+      <!-- Act 1 · World Land-Bridge -->
+      <div class="hero-stage" data-stage="1">
+        <p class="hero-kicker">The New Silk Road · The Oasis Plan</p>
+        <h2>Build the <em>World Land-Bridge</em></h2>
+        <p>Development corridors of rail, water and power connecting every continent — from the Bering Strait to the Gibraltar tunnel to a blooming Southwest Asia. Without the development of all nations, there can be no lasting peace.</p>
+      </div>
+
+      <!-- Act 2 · The extraterrestrial imperative -->
+      <div class="hero-stage" data-stage="2">
+        <p class="hero-kicker">Fusion · Space · The Noösphere</p>
+        <h2>Then upward — the <em>extraterrestrial imperative</em></h2>
+        <p>“Lifting the human species out of its ordinary existence.” — Krafft Ehricke. Fusion power and the joint exploration of space are the common aims of mankind, and the proof that growth has no limits.</p>
+      </div>
+
+      <!-- Act 3 · Invitation (primary conversion: email capture) -->
+      <div class="hero-stage" data-stage="3">
+        <p class="hero-kicker">A Movement of World Citizens</p>
+        <h2>The future needs <em>you</em></h2>
+        <p>Join a worldwide movement for peace through development and a new renaissance of classical culture.</p>
+        <div class="hero-cta-card">
+          <form class="hero-form js-signup" novalidate>
+            <input type="email" name="email" placeholder="Your email address" aria-label="Email address" required />
+            <button type="submit">Join the movement</button>
+          </form>
+          <p class="hero-form-note">Weekly ideas, webcasts &amp; invitations. Double opt-in, unsubscribe anytime.</p>
+        </div>
+      </div>
+
+      <div class="hero-scrollhint">Scroll</div>
+      <div class="hero-chapters" aria-label="Hero chapters">
+        <button aria-label="A new paradigm" class="is-active"></button>
+        <button aria-label="The World Land-Bridge"></button>
+        <button aria-label="The extraterrestrial imperative"></button>
+        <button aria-label="Join the movement"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= "Now" strip — the living pulse ================= -->
+  <section class="now-strip">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="section-kicker">Now · This Week</p>
+        <h2 class="section-title">The movement, live</h2>
+      </div>
+      <div class="now-cards">
+        <a class="now-card reveal" href="#">
+          <span class="now-tag is-live">Every Friday · Online</span>
+          <h3>International Peace Coalition — weekly session</h3>
+          <p>Diplomats, scientists and organizers from 40+ countries confer on ending the danger of war. Session #140.</p>
+          <span class="now-meta">Fridays, 11 AM ET · Zoom</span>
+        </a>
+        <a class="now-card reveal" href="#">
+          <span class="now-tag">Latest Webcast</span>
+          <h3>Helga Zepp-LaRouche: This Week’s Strategic Dialogue</h3>
+          <p>The founder’s weekly assessment of the world strategic situation — and what you can do about it.</p>
+          <span class="now-meta">Watch · 48 min</span>
+        </a>
+        <a class="now-card reveal" href="#">
+          <span class="now-tag">New Statement</span>
+          <h3>Declaration of January 12: Let us create a movement of world citizens!</h3>
+          <p>Signed by statesmen, scholars and citizens of every continent. Read it — and add your name.</p>
+          <span class="now-meta">Read &amp; sign</span>
+        </a>
+        <a class="now-card reveal" href="#events">
+          <span class="now-tag">Next Conference</span>
+          <h3>Emergency conference of the Movement of World Citizens</h3>
+          <p>Registration is open for the next international Schiller Institute conference.</p>
+          <span class="now-meta">Register free</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Start here — on-ramp ================= -->
+  <section class="section section-ivory" id="start">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="section-kicker">New here? Start here</p>
+        <h2 class="section-title">Three steps into the New Paradigm</h2>
+        <p class="section-lede">Forty years of conferences, reports and organizing, distilled to an afternoon.</p>
+      </div>
+      <div class="onramp-steps">
+        <a class="onramp-step reveal" href="#video">
+          <h3>Watch the idea</h3>
+          <p>“A New Paradigm for Mankind” — why human creativity, not money, is the source of wealth, in one film.</p>
+          <span class="step-link">Watch now →</span>
+        </a>
+        <a class="onramp-step reveal" href="#ideas">
+          <h3>Read the program</h3>
+          <p><em>The New Silk Road Becomes the World Land-Bridge</em> — the blueprint for peace through development, and the Ten Principles of a new security architecture.</p>
+          <span class="step-link">Explore the ideas →</span>
+        </a>
+        <a class="onramp-step reveal" href="#involved">
+          <h3>Join the movement</h3>
+          <p>Get the weekly newsletter, find a local chapter, come to a conference. The future is organized — by people like you.</p>
+          <span class="step-link">Get involved →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Ideas — four program areas + campaigns ================= -->
+  <section class="section section-ivory-alt" id="ideas">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="section-kicker">Ideas</p>
+        <h2 class="section-title">One humanity, four frontiers</h2>
+        <p class="section-lede">Statecraft as art: economics, science, culture and history treated as a single creative endeavor.</p>
+      </div>
+      <div class="ideas-grid">
+        <a class="idea-card idea-economics reveal" href="#">
+          <div>
+            <p class="idea-eyebrow">Economics</p>
+            <h3>Physical Economy</h3>
+            <p>Forecasts grounded in the real, physical productivity of nations — and the case for a New Bretton Woods.</p>
+          </div>
+        </a>
+        <a class="idea-card idea-science reveal" href="#">
+          <div>
+            <p class="idea-eyebrow">Science</p>
+            <h3>Fusion &amp; Space</h3>
+            <p>Science drivers — from fusion power to joint Moon–Mars exploration — as the engine of civilization.</p>
+          </div>
+        </a>
+        <a class="idea-card idea-culture reveal" href="#">
+          <div>
+            <p class="idea-eyebrow">Culture</p>
+            <h3>Classical Renaissance</h3>
+            <p>Schiller, Bach, Beethoven — beauty that ennobles the soul, choruses, and the Leonore magazine.</p>
+          </div>
+        </a>
+        <a class="idea-card idea-history reveal" href="#">
+          <div>
+            <p class="idea-eyebrow">History</p>
+            <h3>Statecraft &amp; Strategy</h3>
+            <p>From Cusa’s coincidence of opposites to Hamilton and FDR — the republican tradition against oligarchy.</p>
+          </div>
+        </a>
+      </div>
+      <div class="campaign-links reveal">
+        <a class="campaign-pill" href="#">World Land-Bridge</a>
+        <a class="campaign-pill" href="#">Oasis Plan</a>
+        <a class="campaign-pill" href="#">International Peace Coalition</a>
+        <a class="campaign-pill" href="#">Ten Principles</a>
+        <a class="campaign-pill" href="#">LaRouche Youth Movement</a>
+        <a class="campaign-pill" href="#">Leonore Magazine</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Featured video + email capture (primary conversion) ================= -->
+  <section class="section section-navy video-band" id="video">
+    <div class="wrap">
+      <div class="reveal">
+        <!-- data-video-id: set the real YouTube ID; empty = links to the channel -->
+        <div class="video-frame js-video" data-video-id="" role="button" tabindex="0" aria-label="Play: A New Paradigm for Mankind">
+          <div class="play-badge"><span></span></div>
+        </div>
+        <p class="video-caption">“A New Paradigm for Mankind” — the Schiller Institute in one film. Served via youtube-nocookie.</p>
+      </div>
+      <div class="signup-panel reveal">
+        <p class="section-kicker">The Weekly Dispatch</p>
+        <h2>Ideas move history.<br />Get them weekly.</h2>
+        <p>One email a week: the strategic webcast, new statements and forecasts, and invitations to conferences and local chapters. Sapere aude — dare to be wise.</p>
+        <form class="signup-form js-signup" novalidate>
+          <input type="email" name="email" placeholder="Your email address" aria-label="Email address" required />
+          <button class="btn btn-gold" type="submit">Subscribe</button>
+        </form>
+        <p class="signup-note">Double opt-in. We never share your address. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Events ================= -->
+  <section class="section section-ivory" id="events">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="section-kicker">Events</p>
+        <h2 class="section-title">Where the movement meets</h2>
+        <p class="section-lede">Sixty international conferences and counting — plus weekly online dialogues open to everyone.</p>
+      </div>
+      <div class="event-feature reveal">
+        <div class="event-media" role="img" aria-label="Delegates at an international Schiller Institute conference"></div>
+        <div class="event-body">
+          <p class="event-date">Upcoming · Online &amp; In Person</p>
+          <h3>“All Men Become Brethren” — International Conference of the Movement of World Citizens</h3>
+          <p>Heads of state, scientists, and classical artists from every continent on ending geopolitics and building the World Land-Bridge. Simultaneous interpretation in six languages.</p>
+          <div class="event-actions">
+            <a class="btn btn-blue" href="#">Register free</a>
+            <a class="btn btn-ghost" href="#">All conferences →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Forecast teaser ================= -->
+  <section class="section section-navy forecast-band" id="forecasts">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="section-kicker">Economic Forecasts</p>
+        <h2 class="section-title">The trusted voice of physical economy</h2>
+      </div>
+      <blockquote class="reveal">
+        “Mankind is the only creative species known so far in the universe — and human creativity is the only source of wealth.”
+        <cite>— Ten Principles of a New International Security and Development Architecture, Helga Zepp-LaRouche</cite>
+      </blockquote>
+      <p class="reveal" style="margin-top:2rem;">
+        <a class="btn btn-ghost" href="#">Read the forecasts →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Get involved / Donate ================= -->
+  <section class="section section-ivory-alt" id="involved">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="section-kicker">Get Involved</p>
+        <h2 class="section-title">The future is organized — by people like you</h2>
+      </div>
+      <div class="involve-grid">
+        <div class="involve-card reveal">
+          <h3>Find a local chapter</h3>
+          <p>From Berlin to Lima to Houston: weekly meetings where the ideas become organizing.</p>
+          <a class="btn btn-ghost" href="#">Find a chapter</a>
+        </div>
+        <div class="involve-card reveal">
+          <h3>Send us your work</h3>
+          <p>Papers and ideas from every field — scientific research, engineering, agriculture, classical composition and performance.</p>
+          <a class="btn btn-ghost" href="#">Submit a paper</a>
+        </div>
+        <div class="involve-card reveal">
+          <h3>Become a member</h3>
+          <p>A monthly contribution is the backbone of an independent movement. Join the builders of the New Paradigm.</p>
+          <a class="btn btn-gold" href="#">Donate monthly</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Footer ================= -->
+  <footer class="site-footer" id="about">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h4>Schiller Institute</h4>
+          <p class="footer-mission">“Live with your epoch, but be not its offspring; serve your fellow man — not with what he applauds, but with what he needs.”<br />— Friedrich Schiller</p>
+        </div>
+        <div>
+          <h4>Ideas</h4>
+          <ul>
+            <li><a href="#">World Land-Bridge</a></li>
+            <li><a href="#">Oasis Plan</a></li>
+            <li><a href="#">Economic Forecasts</a></li>
+            <li><a href="#">Classical Culture</a></li>
+            <li><a href="#">Fusion &amp; Space</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Take Part</h4>
+          <ul>
+            <li><a href="#">Conferences</a></li>
+            <li><a href="#">International Peace Coalition</a></li>
+            <li><a href="#">Local chapters</a></li>
+            <li><a href="#">Newsletter</a></li>
+            <li><a href="#">Donate</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>About</h4>
+          <ul>
+            <li><a href="#">Founding principle</a></li>
+            <li><a href="#">Helga Zepp-LaRouche</a></li>
+            <li><a href="#">Press coverage</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Deutsch 🇩🇪</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span class="js-year">2026</span> Schiller Institute. Founded 1984 by Helga Zepp-LaRouche.</span>
+        <span>
+          <a href="#">Privacy</a> · <a href="#">Impressum</a> · Earth &amp; Moon imagery: NASA (public domain)
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/hero-v3.js"></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
