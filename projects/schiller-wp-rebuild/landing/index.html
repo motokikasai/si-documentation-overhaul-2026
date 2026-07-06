@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing-page drafts — Schiller Institute rebuild</title>
+  <link rel="icon" href="../homepage-draft/assets/favicons/favicon.ico" sizes="48x48" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --navy: #0f1f3d; --gold: #d4a94c; --ivory: #faf7f0; --ink: #4a5568; }
+    * { margin: 0; box-sizing: border-box; }
+    body { font-family: Inter, sans-serif; background: var(--ivory); color: var(--navy); padding: 4rem 1.5rem; }
+    .wrap { max-width: 44rem; margin: 0 auto; }
+    .kicker { font-size: .7rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #8a6d2f; }
+    h1 { font-family: "Playfair Display", serif; font-size: 2.2rem; margin: .5rem 0 .6rem; }
+    p.lede { color: var(--ink); font-size: .95rem; max-width: 34rem; }
+    .cards { margin-top: 2.5rem; display: grid; gap: 1rem; }
+    a.card { display: block; padding: 1.5rem 1.7rem; background: #fff; border: 1px solid rgba(15,31,61,.12); text-decoration: none; color: inherit; transition: transform .2s, box-shadow .2s; }
+    a.card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px -20px rgba(15,31,61,.4); }
+    .card small { font-size: .66rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #8a6d2f; }
+    .card h2 { font-family: "Playfair Display", serif; font-size: 1.35rem; margin: .3rem 0 .3rem; }
+    .card p { font-size: .85rem; color: var(--ink); }
+    .note { margin-top: 2.5rem; font-size: .78rem; color: var(--ink); }
+    code { background: rgba(15,31,61,.07); padding: .1em .35em; border-radius: 3px; font-size: .92em; }
+    .swatch { display:inline-block; width:.7em; height:.7em; border-radius:50%; margin-right:.35em; vertical-align:-.05em; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Schiller Institute rebuild · Prototypes</p>
+    <h1>Landing-page drafts</h1>
+    <p class="lede">One base template ("the covenant"), two maximally different pilots. System documentation in <code>README.md</code>.</p>
+    <div class="cards">
+      <a class="card" href="oasis-plan.html">
+        <small><span class="swatch" style="background:#0f5b4e"></span>Campaign · Hero A (media) · Atlas showpiece</small>
+        <h2>The Oasis Plan</h2>
+        <p>Urgent register: NASA hero, scrubbed schematic map of the canals, campaign timeline, sign-and-donate action.</p>
+      </a>
+      <a class="card" href="classical-culture.html">
+        <small><span class="swatch" style="background:#3d2a63"></span>Program · Hero B (typographic) · Score showpiece</small>
+        <h2>Classical Culture</h2>
+        <p>Contemplative register: pure-type hero, playable Ode to Joy, people row, library shelf, chorus action.</p>
+      </a>
+    </div>
+    <p class="note">Serve from <code>projects/schiller-wp-rebuild/</code> (the drafts import the homepage design system): <code>python3 -m http.server 8742</code> → <code>/landing/</code></p>
+  </div>
+</body>
+</html>

@@ -60,14 +60,26 @@ a { color: inherit; }
   inset: 0 0 auto 0;
   z-index: 50;
   padding: 0.9rem 0;
-  transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.3s ease;
+  transition: padding 0.3s ease;
 }
-.site-header.is-scrolled {
+/* The scrolled backdrop lives on ::before, NOT on the header itself:
+   backdrop-filter turns an element into the containing block for fixed
+   descendants, which would shrink the full-screen mobile nav overlay
+   (.site-nav: position fixed, inset 0) down to the header's own box. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(6, 13, 31, 0);
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+.site-header.is-scrolled { padding: 0.6rem 0; }
+.site-header.is-scrolled::before {
   background: rgba(6, 13, 31, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
-  padding: 0.6rem 0;
 }
 .site-header .wrap {
   display: flex;
@@ -164,6 +176,9 @@ a { color: inherit; }
     cursor: pointer;
     position: relative;
   }
+  /* All three bars anchor at top: 50% and offset by transform only —
+     integer-px offsets keep them crisp on the pixel grid, and the X is a
+     rotation through the same shared center, so it can never drift. */
   .nav-toggle span,
   .nav-toggle::before,
   .nav-toggle::after {
@@ -172,16 +187,17 @@ a { color: inherit; }
     left: 0.3rem;
     right: 0.3rem;
     height: 2px;
+    top: 50%;
     background: #fff;
     border-radius: 2px;
     transition: transform 0.3s, opacity 0.3s;
   }
-  .nav-toggle::before { top: 0.65rem; }
-  .nav-toggle span   { top: 1.05rem; }
-  .nav-toggle::after { top: 1.45rem; }
-  .nav-toggle.is-open::before { transform: translateY(0.4rem) rotate(45deg); }
+  .nav-toggle::before { transform: translateY(calc(-50% - 6px)); }
+  .nav-toggle span    { transform: translateY(-50%); }
+  .nav-toggle::after  { transform: translateY(calc(-50% + 6px)); }
+  .nav-toggle.is-open::before { transform: translateY(-50%) rotate(45deg); }
   .nav-toggle.is-open span { opacity: 0; }
-  .nav-toggle.is-open::after { transform: translateY(-0.4rem) rotate(-45deg); }
+  .nav-toggle.is-open::after { transform: translateY(-50%) rotate(-45deg); }
 }
 
 /* --------------------------------------------------------------------------

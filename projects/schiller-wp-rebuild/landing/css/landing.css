@@ -1,0 +1,446 @@
+/* ==========================================================================
+   Schiller Institute — landing-page base template ("the covenant").
+   Imports the homepage design system (tokens, header/nav/footer, buttons,
+   forms, section scaffolding, ornament/plate/timeline/arc patterns) and
+   adds only what landing pages need: hero forms A/B, the ivory credo band,
+   the accent system, and the landing-only patterns (shelf, people row,
+   score player, atlas showpiece, action block).
+   In the WordPress build these sheets merge into one theme stylesheet.
+   ========================================================================== */
+@import url("../../homepage-draft/css/styles.css");
+@import url("../../homepage-draft/css/story-v3.css");
+
+/* --------------------------------------------------------------------------
+   Accent system — ONE dial per page, set by a body class.
+   The accent may touch exactly three things: the hero veil, kickers/
+   eyebrows on light surfaces, and the duotone bias of plates.
+   Gold stays gold everywhere: it is the motif, not a theme color.
+   -------------------------------------------------------------------------- */
+body.lp {
+  --accent-deep: var(--navy-800);   /* kickers/eyebrows on ivory */
+  --accent-soft: var(--blue-100);   /* kicker on the hero (dark) */
+  --accent-veil: rgba(15, 31, 61, 0.25);   /* hero color wash */
+  --accent-tint: var(--navy-800);   /* plate duotone bias */
+}
+body.lp-oasis {      /* campaign · development green */
+  --accent-deep: #0f5b4e;
+  --accent-soft: #9fd0c4;
+  --accent-veil: rgba(15, 91, 78, 0.28);
+  --accent-tint: #12463c;
+}
+body.lp-culture {    /* program · classical violet */
+  --accent-deep: #3d2a63;
+  --accent-soft: #c4b5e0;
+  --accent-veil: rgba(61, 42, 99, 0.24);
+  --accent-tint: #322350;
+}
+.lp .section-ivory .section-kicker,
+.lp .section-ivory-alt .section-kicker { color: var(--accent-deep); }
+.lp .plate-eyebrow { color: var(--accent-deep); }
+.lp .plate-tint { background: var(--accent-tint); }
+
+/* --------------------------------------------------------------------------
+   Hero form A — media (full-bleed image, dark register)
+   -------------------------------------------------------------------------- */
+.lp-hero {
+  position: relative;
+  min-height: 76vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--navy-950);
+  color: #fff;
+  padding: 9rem 0 4.5rem;
+}
+.lp-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.lp-hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(6, 13, 31, 0.74), rgba(6, 13, 31, 0.24) 45%, rgba(6, 13, 31, 0.88)),
+    var(--accent-veil);
+}
+.lp-hero .wrap { position: relative; z-index: 2; }
+.lp-hero-kicker,
+.lp-herotype-kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+.lp-hero-kicker { color: var(--accent-soft); }
+.lp-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  max-width: 15em;
+  text-wrap: balance;
+}
+.lp-hero-dek {
+  margin-top: 1.2rem;
+  max-width: 36rem;
+  font-size: clamp(0.98rem, 1.6vw, 1.12rem);
+  color: rgba(255, 255, 255, 0.85);
+}
+.lp-hero-actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 1.8rem;
+}
+.lp-hero-credit {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.7rem;
+  z-index: 2;
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   Hero form B — typographic (ivory print register, no imagery required)
+   -------------------------------------------------------------------------- */
+.lp-herotype {
+  background: var(--ivory-50);
+  text-align: center;
+  padding: clamp(9rem, 20vh, 13rem) 0 clamp(3.5rem, 8vh, 5.5rem);
+}
+.lp-herotype-kicker { color: var(--accent-deep); }
+.lp-herotype h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7.5vw, 5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--navy-800);
+  text-wrap: balance;
+}
+.lp-herotype-dek {
+  margin: 1.4rem auto 0;
+  max-width: 34rem;
+  font-size: 1.05rem;
+  color: var(--ink-600);
+}
+.lp-herotype .head-ornament { margin-top: 2rem; }
+
+/* --------------------------------------------------------------------------
+   Credo band — the mandatory thesis paragraph, ivory variant.
+   Same form as the homepage credo; only the surface changes.
+   -------------------------------------------------------------------------- */
+.credo-band {
+  background: var(--ivory-100);
+  padding: clamp(4.5rem, 10vh, 7rem) 0;
+}
+.credo-band .wrap { max-width: 50rem; }
+.credo-band .credo-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.22rem, 2.3vw, 1.6rem);
+  line-height: 1.72;
+  color: var(--ink-900);
+}
+.credo-band .credo-text .dropcap {
+  float: left;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 3.3em;
+  line-height: 0.83;
+  padding: 0.06em 0.14em 0 0;
+  color: #a37f35;  /* gold, darkened for ivory contrast */
+}
+.credo-band .credo-sign {
+  margin-top: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.3rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-600);
+  text-align: center;
+}
+.credo-band .credo-sign::before,
+.credo-band .credo-sign::after {
+  content: "";
+  height: 1px;
+  width: clamp(2rem, 8vw, 4.5rem);
+  background: rgba(212, 169, 76, 0.55);
+  flex: none;
+}
+
+/* --------------------------------------------------------------------------
+   Library shelf — the query-loop pattern (auto-populated in WordPress)
+   -------------------------------------------------------------------------- */
+.shelf { margin-top: 3rem; }
+.shelf-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  padding: 1.15rem 0.4rem 1.15rem 0.2rem;
+  border-top: 1px solid rgba(15, 31, 61, 0.12);
+  text-decoration: none;
+  transition: background 0.25s ease;
+}
+.shelf-row:last-of-type { border-bottom: 1px solid rgba(15, 31, 61, 0.12); }
+.shelf-row:hover { background: rgba(15, 31, 61, 0.035); }
+.shelf-type {
+  flex: 0 0 6.4rem;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.shelf-body { min-width: 0; }
+.shelf-body strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: var(--navy-800);
+}
+.shelf-body em {
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--ink-600);
+}
+.shelf-row::after {
+  content: "→";
+  margin-left: auto;
+  align-self: center;
+  color: var(--gold-500);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.shelf-row:hover::after { opacity: 1; transform: none; }
+.shelf-more { text-align: center; margin-top: 2rem; }
+
+/* --------------------------------------------------------------------------
+   People row — Person records as credibility (roundels echo the brand mark)
+   -------------------------------------------------------------------------- */
+.people {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 2.2rem;
+  margin-top: 3.2rem;
+  text-align: center;
+}
+.person { text-decoration: none; }
+.person-mark {
+  width: 7.5rem;
+  height: 7.5rem;
+  margin: 0 auto 1.1rem;
+  border-radius: 50%;
+  border: 1px solid var(--gold-500);
+  padding: 5px;
+  background: #fff;
+}
+.person-mark img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(1) sepia(0.18);
+  transition: filter 0.5s ease;
+}
+.person:hover .person-mark img { filter: none; }
+.person h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.12rem;
+  color: var(--navy-800);
+}
+.person p { font-size: 0.82rem; color: var(--ink-600); margin-top: 0.25rem; }
+
+/* --------------------------------------------------------------------------
+   Score — the audio showpiece (gold hairline is the progress rail)
+   -------------------------------------------------------------------------- */
+.score {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  max-width: 38rem;
+  margin: 3rem auto 0;
+  padding: 1.7rem 1.9rem;
+  border: 1px solid rgba(212, 169, 76, 0.35);
+  background: linear-gradient(160deg, rgba(37, 99, 176, 0.16), rgba(6, 13, 31, 0.45));
+}
+.score-btn {
+  flex: none;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  border: 0;
+  background: var(--gold-500);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.score-btn:hover { background: var(--gold-300); transform: scale(1.05); }
+.score-btn svg { width: 1.1rem; height: 1.1rem; fill: var(--navy-950); }
+.score-btn .i-pause { display: none; }
+.score.is-playing .i-play { display: none; }
+.score.is-playing .i-pause { display: block; }
+.score-body { flex: 1; min-width: 0; }
+.score-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: #fff;
+}
+.score-rail {
+  position: relative;
+  height: 14px;
+  margin: 0.55rem 0 0.35rem;
+  cursor: pointer;
+}
+.score-rail::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 6px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.18);
+}
+.score-progress {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  height: 2px;
+  width: 0%;
+  background: var(--gold-500);
+}
+.score-meta { font-size: 0.75rem; color: rgba(255, 255, 255, 0.55); }
+@media (max-width: 480px) {
+  .score { flex-direction: column; text-align: center; }
+}
+
+/* --------------------------------------------------------------------------
+   Atlas — schematic-map showpiece panel. Generic scrub grammar:
+   [data-draw="a b"] paths (pathLength=1) draw over that progress range;
+   [data-on="t"] elements appear at that threshold. Driven by landing.js.
+   -------------------------------------------------------------------------- */
+.atlas-panel {
+  margin-top: 3rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid rgba(212, 169, 76, 0.28);
+  background:
+    radial-gradient(ellipse at 28% 18%, rgba(37, 99, 176, 0.2), transparent 62%),
+    var(--navy-950);
+}
+.atlas-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.atlas-svg [data-draw] {
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.15s linear;
+}
+.atlas-svg [data-on] { opacity: 0; transition: opacity 0.45s ease; }
+.atlas-svg [data-on].is-on { opacity: 1; }
+.atlas-coast { stroke: rgba(107, 163, 232, 0.5); stroke-width: 1; }
+.atlas-corridor { stroke: var(--gold-500); stroke-width: 1.7; stroke-linecap: round; }
+.atlas-corridor--branch { stroke: var(--gold-300); stroke-width: 1; }
+.atlas-node { fill: var(--gold-300); }
+.atlas-city { fill: #fff; }
+.atlas-label {
+  font-family: var(--font-text);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  fill: rgba(255, 255, 255, 0.66);
+}
+.atlas-label--water { fill: rgba(107, 163, 232, 0.75); }
+.atlas-cap {
+  margin-top: 1.4rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* --------------------------------------------------------------------------
+   Action block — fixed conversion grammar + the signature arc above it
+   -------------------------------------------------------------------------- */
+.lp-action { text-align: center; }
+.lp-action .signup-form {
+  max-width: 26rem;
+  margin: 2rem auto 0;
+}
+.lp-action .signup-form input {
+  background: #fff;
+  border-color: rgba(15, 31, 61, 0.22);
+  color: var(--ink-900);
+}
+.lp-action .signup-form input::placeholder { color: #98a0ad; }
+.lp-action .signup-form input:focus { border-color: var(--gold-500); }
+.lp-action-alt {
+  margin-top: 1.6rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+.lp-action .you-node { margin-bottom: 2.8rem; }
+.lp-action .signup-note { color: var(--ink-600); }
+
+/* Hero A refinements: ghost button and scroll cue on the dark register */
+.lp-hero .btn-ghost { color: var(--blue-100); }
+.lp-hero .lp-scrollcue::after { margin-left: 24px; }  /* under the label, not page-center */
+
+/* Light-hero pages (hero form B): until the header earns its dark backdrop
+   by scrolling, its text must read on ivory. Mobile overlay links stay
+   white — the flyout itself is dark. */
+.lp-lighthero .site-header:not(.is-scrolled) .brand { color: var(--navy-800); }
+.lp-lighthero .site-header:not(.is-scrolled) .brand-name small { color: var(--ink-600); }
+.lp-lighthero .site-header:not(.is-scrolled) .nav-toggle span,
+.lp-lighthero .site-header:not(.is-scrolled) .nav-toggle::before,
+.lp-lighthero .site-header:not(.is-scrolled) .nav-toggle::after { background: var(--navy-800); }
+@media (min-width: 761px) {
+  .lp-lighthero .site-header:not(.is-scrolled) .site-nav a { color: var(--navy-800); }
+  .lp-lighthero .site-header:not(.is-scrolled) .site-nav a:hover { color: #8a6d2f; }
+  .lp-lighthero .site-header:not(.is-scrolled) .nav-donate { color: var(--navy-950) !important; }
+}
+
+/* Scroll cue shared by both hero forms */
+.lp-scrollcue {
+  margin-top: 2.6rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+.lp-scrollcue::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 2.2rem;
+  margin: 0.7rem auto 0;
+  background: linear-gradient(rgba(212, 169, 76, 0.9), rgba(212, 169, 76, 0));
+}
+.lp-hero .lp-scrollcue { margin-top: 3rem; }
+
+/* --------------------------------------------------------------------------
+   Reduced motion: landing-only pieces land in their final state
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .atlas-svg [data-draw] { stroke-dashoffset: 0; transition: none; }
+  .atlas-svg [data-on] { opacity: 1; transition: none; }
+  .person-mark img { transition: none; }
+}
