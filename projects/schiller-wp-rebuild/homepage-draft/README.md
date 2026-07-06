@@ -89,6 +89,63 @@ economy" layer:
   background. Scroll smoothing tightens to ~1:1 near the runway end so the
   hero's responsiveness matches native scroll at handoff.
 
+## v3 story layer (below the hero)
+
+v3 replaces the generic card-grid sections of v1/v2 with a narrative page
+(`css/story-v3.css` + `js/story-v3.js`, loaded by index-v3.html only — v1/v2
+untouched). Two design registers, one motif:
+
+- **Registers:** the hero speaks "space and light"; below the handoff the page
+  shifts to "classical print" — ivory folios, hairline rules, Roman numerals,
+  drop cap, engraved-duotone plates (grayscale + navy `mix-blend-mode: color`
+  tint that warms to full color on hover).
+- **Motif — the gold line as punctuation, never a page-long object** (a
+  continuous scroll-following thread was tried and rejected: it cut through
+  copy and read as an artifact). It appears only where a line means
+  something — and every piece is **scrubbed by the scroll in both
+  directions** (a short linear transition smooths wheel steps): (1) the
+  **bridge ornament** — a printer's fleuron of three piers and two arched
+  spans (the Land-Bridge in miniature) that draws pier-by-pier under each
+  section title as it climbs the viewport; (2) the "Start here" connector,
+  which sweeps across after the head's ornament completes, lighting
+  numerals I → II → III as it reaches them; (3) the **timeline rail** in The
+  Record — the one literal thread, drawn by scroll, lighting each epoch it
+  passes (static left rail < 768px); (4) the **convergence arc** at the end
+  of the ladder — two corridor nodes joined by one great-circle arc with
+  the visitor's unlit ring at its low point, lit only by an action (signup
+  submit or Donate click), never by scrolling. Plates warm from engraved
+  duotone to full color as they reach mid-viewport and settle back on
+  leaving (scroll-driven, with hysteresis — not hover). All of it lands in
+  its final state under `prefers-reduced-motion`.
+
+Section order answers the visitor's questions in sequence:
+
+1. **Credo** (navy, slides over the frozen Earth) — the thesis in plain prose
+   with a drop cap, for everyone who skimmed the hero.
+2. **Stations** — "Start here" as three stops on a horizontal branch of the
+   thread, with honest time-costs (15 minutes / one evening / a lifetime).
+3. **Pulse** — dispatch board: IPC Friday feature with a live pulse dot +
+   three ticker rows. Proof of life.
+4. **Folio** (`#ideas`) — the four program areas as alternating engraved
+   plates (Plate I–IV) with ghost numerals and subtle image parallax.
+5. **Film** (`#video`) — v1 video band with a gold proscenium outline;
+   second email capture.
+6. **Record** (`#forecasts`) — 1984→today timeline on the thread (founding,
+   Productive Triangle, Eurasian Land-Bridge, World Land-Bridge, Ten
+   Principles, IPC) + the creativity pull quote.
+7. **Ladder** (`#involved`) — four rungs of ascending commitment (subscribe →
+   Friday session → chapter → member), then the visitor's node.
+8. **Coda** (`#events`) — "All men become brethren" conference invitation over
+   the page's one photograph (duotone, full-bleed).
+
+**New imagery** (`assets/images/`): `plate-economy-rail.jpg` (A.J. Russell,
+1869, PD), `plate-science-apollo.jpg` (NASA, PD), `plate-culture-schiller.jpg`
+(Simanowiz, PD), `plate-history-cusa.jpg` (PD), `coda-audience.jpg`
+(Wikimedia, **CC BY-SA 2.0 — placeholder**; replace with SI conference
+photography and re-credit). Note: live-site conference images checked
+2026-07 are all text-poster graphics — real audience photography needs to
+come from the org's archive.
+
 ## Page architecture (locked hybrid IA)
 
 Nav: **Ideas · Events · Get Involved · Donate · About**

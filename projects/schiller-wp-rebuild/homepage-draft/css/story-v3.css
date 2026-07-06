@@ -1,0 +1,875 @@
+/* ==========================================================================
+   Schiller Institute — v3 story layer (everything below the hero).
+   Loaded by index-v3.html only; styles.css stays frozen for v1/v2.
+
+   Two registers, one motif — used as punctuation, not as a page-long object:
+   · registers — the hero speaks "space and light"; below, the page shifts
+     to "classical print" (ivory folios, hairline rules, Roman numerals,
+     engraved-duotone plates). Hard edges between sections, like book plates.
+   · motif — the gold line appears only where a line means something: the
+     rules that draw under section titles, the connector joining the three
+     "Start here" stations, the scroll-drawn rail of the timeline, and the
+     visitor's own unlit node in #involved (lit by action, never by scroll).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Scroll entrances — one restrained family (.fx), staggered via data-fxd
+   -------------------------------------------------------------------------- */
+.fx {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.61, 0.2, 1);
+}
+.fx.is-in { opacity: 1; transform: none; }
+.fx[data-fxd="1"] { transition-delay: 0.1s; }
+.fx[data-fxd="2"] { transition-delay: 0.2s; }
+.fx[data-fxd="3"] { transition-delay: 0.3s; }
+
+/* Centered section heads + the bridge ornament: a printer's fleuron made of
+   three piers and two arched spans (the Land-Bridge in miniature), drawn
+   stroke-by-stroke once the heading enters view. */
+.section-head--center {
+  max-width: 46rem;
+  margin: 0 auto;
+  text-align: center;
+}
+.head-ornament {
+  width: 120px;
+  margin: 1.1rem auto 0.2rem;
+}
+.head-ornament svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+/* Scrubbed by scroll (js/story-v3.js sets stroke-dashoffset inline and
+   toggles .is-on on the piers); the short linear transition only smooths
+   discrete mouse-wheel steps. */
+.head-ornament path {
+  fill: none;
+  stroke: var(--gold-500);
+  stroke-width: 1;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.15s linear;
+}
+.head-ornament circle {
+  fill: transparent;
+  stroke: var(--gold-500);
+  stroke-width: 1;
+  transition: fill 0.3s ease;
+}
+.head-ornament circle.is-on { fill: var(--gold-500); }
+
+/* --------------------------------------------------------------------------
+   1 · Credo — the thesis in prose, for everyone who skimmed the hero
+   -------------------------------------------------------------------------- */
+.credo {
+  background: linear-gradient(180deg, var(--navy-950), var(--navy-900));
+  color: #f5f1e6;
+  padding: clamp(6rem, 14vh, 9.5rem) 0 clamp(4.5rem, 9vh, 7rem);
+}
+.credo .wrap { max-width: 50rem; }
+.credo-kicker {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+  margin-bottom: 2.4rem;
+}
+.credo-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.28rem, 2.5vw, 1.72rem);
+  line-height: 1.72;
+  color: #f5f1e6;
+}
+.credo-text .dropcap {
+  float: left;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 3.3em;
+  line-height: 0.83;
+  padding: 0.06em 0.14em 0 0;
+  color: var(--gold-500);
+}
+.credo-sign {
+  margin-top: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.3rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #9aa7bd;
+  text-align: center;
+}
+.credo-sign::before,
+.credo-sign::after {
+  content: "";
+  height: 1px;
+  width: clamp(2rem, 8vw, 4.5rem);
+  background: rgba(212, 169, 76, 0.45);
+  flex: none;
+}
+
+/* --------------------------------------------------------------------------
+   2 · Stations — three steps in, on a horizontal branch of the thread
+   -------------------------------------------------------------------------- */
+.stations {
+  list-style: none;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.6rem, 4vw, 3rem);
+  margin-top: 3.8rem;
+  padding: 0;
+}
+/* The connector sweeps across with the scroll (--line-p from story-v3.js),
+   lighting each numeral as it reaches it. */
+.stations::before {
+  content: "";
+  position: absolute;
+  top: 1.7rem;
+  left: 6%;
+  right: 6%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 169, 76, 0.55) 12%, rgba(212, 169, 76, 0.55) 88%, transparent);
+  transform: scaleX(var(--line-p, 0));
+  transform-origin: left center;
+}
+.station { position: relative; text-align: center; }
+.station-numeral {
+  position: relative;
+  z-index: 1;
+  width: 3.4rem;
+  height: 3.4rem;
+  margin: 0 auto 1.3rem;
+  border-radius: 50%;
+  border: 1px solid var(--gold-500);
+  background: var(--ivory-50);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--navy-800);
+  transition: background 0.45s ease, box-shadow 0.45s ease, color 0.45s ease;
+}
+/* Numerals light as the sweeping connector reaches them (scroll-scrubbed) */
+.station-numeral.is-on {
+  background: var(--gold-500);
+  color: var(--navy-950);
+  box-shadow: 0 0 20px 2px rgba(212, 169, 76, 0.45);
+}
+.station h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--navy-800);
+  margin-bottom: 0.55rem;
+}
+.station p {
+  font-size: 0.89rem;
+  color: var(--ink-600);
+  max-width: 19rem;
+  margin: 0 auto;
+}
+.station-link {
+  display: inline-block;
+  margin-top: 0.9rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--navy-700);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(212, 169, 76, 0.4);
+  padding-bottom: 2px;
+  position: relative;
+}
+.station-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background: var(--gold-500);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.station-link:hover::after { transform: scaleX(1); }
+.station-cost {
+  display: block;
+  margin-top: 1.1rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8a6d2f;
+}
+@media (max-width: 767px) {
+  .stations { grid-template-columns: 1fr; gap: 2.6rem; }
+  .stations::before {
+    top: 1.7rem;
+    bottom: 1.7rem;
+    left: 1.7rem;
+    right: auto;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, rgba(212, 169, 76, 0.55), rgba(212, 169, 76, 0.55));
+    transform: scaleY(var(--line-p, 0));
+    transform-origin: center top;
+  }
+  .station { text-align: left; padding-left: 4.6rem; }
+  .station-numeral { position: absolute; left: 0; top: 0; margin: 0; }
+  .station p { margin: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   3 · Pulse — the movement, live (dispatch board, weekly heartbeat)
+   -------------------------------------------------------------------------- */
+.pulse {
+  background: var(--navy-900);
+  color: #fff;
+  padding: clamp(4.5rem, 9vh, 6.5rem) 0;
+}
+.pulse .section-kicker { color: var(--gold-300); }
+.pulse-grid {
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+  margin-top: 1.9rem;
+}
+.pulse-feature {
+  position: relative;
+  border: 1px solid rgba(212, 169, 76, 0.35);
+  background: linear-gradient(160deg, rgba(37, 99, 176, 0.18), rgba(6, 13, 31, 0.5));
+  padding: 2.1rem 2rem 1.9rem;
+}
+.pulse-dot {
+  position: absolute;
+  top: 2.35rem;
+  right: 2rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold-300);
+}
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 200, 126, 0.75);
+  animation: pulseRing 2.4s ease-out infinite;
+}
+@keyframes pulseRing {
+  0%   { transform: scale(0.35); opacity: 1; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+.pulse-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+  margin-bottom: 0.7rem;
+}
+.pulse-feature h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2.4vw, 1.8rem);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.pulse-feature > p {
+  margin: 0.8rem 0 1.4rem;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+.pulse-meta {
+  display: block;
+  margin-top: 1.1rem;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+.pulse-list-head {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  padding-bottom: 0.9rem;
+}
+.pulse-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  padding: 1.15rem 0.5rem 1.15rem 0.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  text-decoration: none;
+  transition: background 0.25s ease;
+}
+.pulse-row:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+.pulse-row:hover { background: rgba(255, 255, 255, 0.045); }
+.pulse-row-tag {
+  flex: 0 0 6.4rem;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+.pulse-row-body { min-width: 0; }
+.pulse-row-body strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.04rem;
+  line-height: 1.35;
+  color: #fff;
+}
+.pulse-row-body em {
+  font-style: normal;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+.pulse-row::after {
+  content: "→";
+  margin-left: auto;
+  align-self: center;
+  color: var(--gold-300);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.pulse-row:hover::after { opacity: 1; transform: none; }
+@media (max-width: 900px) {
+  .pulse-grid { grid-template-columns: 1fr; }
+}
+
+/* --------------------------------------------------------------------------
+   4 · Folio — four frontiers as engraved plates
+   -------------------------------------------------------------------------- */
+.plates {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 9vw, 6.5rem);
+  margin-top: clamp(3.5rem, 7vw, 5.5rem);
+}
+.plate {
+  display: grid;
+  grid-template-columns: 6fr 5fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+.plate--flip .plate-body { order: 2; }
+.plate--flip .plate-media { order: 1; }
+.plate-body { position: relative; }
+.plate-numeral {
+  position: absolute;
+  top: -3.2rem;
+  left: -1rem;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(5rem, 9vw, 7.5rem);
+  line-height: 1;
+  color: rgba(15, 31, 61, 0.065);
+  user-select: none;
+  pointer-events: none;
+}
+.plate-eyebrow {
+  position: relative;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #8a6d2f;
+}
+.plate-body h3 {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 3vw, 2.15rem);
+  font-weight: 600;
+  color: var(--navy-800);
+  margin: 0.45rem 0 0.9rem;
+}
+.plate-body > p {
+  position: relative;
+  color: var(--ink-600);
+  font-size: 0.95rem;
+  max-width: 30rem;
+}
+.plate-link {
+  position: relative;
+  display: inline-block;
+  margin-top: 1.2rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--navy-700);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(212, 169, 76, 0.4);
+  padding-bottom: 2px;
+}
+.plate-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background: var(--gold-500);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.plate-link:hover::after { transform: scaleX(1); }
+
+/* The plate itself: white mat + hairline frame, duotone that warms on hover */
+.plate-media { margin: 0; }
+.plate-img {
+  position: relative;
+  display: block;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid rgba(15, 31, 61, 0.14);
+  box-shadow: 0 18px 45px -22px rgba(15, 31, 61, 0.4);
+}
+/* Engraving at rest; warms to full color as the plate reaches the middle of
+   the viewport (scroll-driven — .is-color set in js/story-v3.js), and settles
+   back to engraving as it leaves. */
+.plate-img img {
+  width: 100%;
+  height: clamp(15rem, 28vw, 22rem);
+  object-fit: cover;
+  filter: grayscale(1) sepia(0.22) contrast(1.05) brightness(0.98);
+  transition: filter 1.1s ease;
+}
+.plate-tint {
+  position: absolute;
+  inset: 10px;
+  background: var(--navy-800);
+  mix-blend-mode: color;
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 1.1s ease;
+}
+.plate.is-color .plate-img img { filter: none; }
+.plate.is-color .plate-tint { opacity: 0; }
+.plate-media figcaption {
+  margin-top: 0.75rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.84rem;
+  color: #7a8494;
+  text-align: center;
+}
+@media (max-width: 820px) {
+  .plate { grid-template-columns: 1fr; gap: 1.8rem; }
+  .plate--flip .plate-body { order: 1; }
+  .plate--flip .plate-media { order: 2; }
+  .plate-numeral { top: -2.2rem; left: -0.4rem; }
+  .plate-img img { height: 15rem; }
+}
+.folio .campaign-links { margin-top: clamp(3.5rem, 7vw, 5rem); }
+
+/* --------------------------------------------------------------------------
+   5 · Film — proscenium treatment for the existing video band
+   -------------------------------------------------------------------------- */
+.proscenium { padding-top: 6rem; padding-bottom: 6rem; }
+.proscenium .video-frame {
+  outline: 1px solid rgba(212, 169, 76, 0.35);
+  outline-offset: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   6 · Record — forty years, six stations on the thread
+   -------------------------------------------------------------------------- */
+.epochs {
+  position: relative;
+  list-style: none;
+  margin: clamp(3.2rem, 6vw, 4.5rem) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.4rem, 5vw, 3.4rem);
+}
+/* The one literal thread on the page: the timeline's rail, drawn by scroll */
+.epochs::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  width: 2px;
+  margin-left: -1px;
+  background: linear-gradient(
+    180deg,
+    rgba(212, 169, 76, 0.55),
+    rgba(212, 169, 76, 0.55) 94%,
+    rgba(212, 169, 76, 0)
+  );
+  transform: scaleY(var(--rail-p, 0));
+  transform-origin: top center;
+}
+.epoch {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: clamp(3.5rem, 8vw, 6rem);
+}
+.thread-node {
+  display: block;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid var(--gold-500);
+  background: var(--ivory-50);
+  box-shadow: 0 0 0 5px var(--ivory-50);
+  transition: background 0.45s ease, box-shadow 0.45s ease;
+}
+.thread-node.is-lit {
+  background: var(--gold-500);
+  box-shadow: 0 0 0 5px var(--ivory-50), 0 0 18px 3px rgba(212, 169, 76, 0.5);
+}
+.epoch > .thread-node {
+  position: absolute;
+  left: 50%;
+  top: 0.4rem;
+  transform: translateX(-50%);
+}
+.epoch-body {
+  grid-column: 1;
+  justify-self: end;
+  text-align: right;
+  max-width: 26rem;
+}
+.epoch--right .epoch-body {
+  grid-column: 2;
+  justify-self: start;
+  text-align: left;
+}
+.epoch-year {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: #8a6d2f;
+  line-height: 1;
+}
+.epoch-body h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.18rem;
+  color: var(--navy-800);
+  margin: 0.5rem 0 0.4rem;
+}
+.epoch-body p { font-size: 0.88rem; color: var(--ink-600); }
+@media (max-width: 767px) {
+  .epochs {
+    padding-left: 1.9rem;
+    margin-left: 0.4rem;
+  }
+  /* Same scroll-drawn rail as desktop, moved to the left edge; the dots
+     (13px wide) center on it, and their ivory halo makes the rail appear
+     to pass through and fill them. */
+  .epochs::before { left: 0; }
+  .epoch { grid-template-columns: 1fr; }
+  .epoch > .thread-node { left: calc(-1.9rem - 6.5px); transform: none; }
+  .epoch-body,
+  .epoch--right .epoch-body { grid-column: 1; justify-self: start; text-align: left; }
+}
+.record-quote {
+  max-width: 42rem;
+  margin: clamp(4rem, 8vw, 5.5rem) auto 0;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--navy-800);
+}
+.record-quote::before {
+  content: "”";
+  display: block;
+  font-size: 4.2rem;
+  line-height: 0.6;
+  color: var(--gold-500);
+  transform: rotate(180deg);
+  margin: 0 auto 0.7rem;
+  width: max-content;
+}
+.record-quote cite {
+  display: block;
+  margin-top: 1.3rem;
+  font-family: var(--font-text);
+  font-style: normal;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-600);
+}
+.record-cta { text-align: center; margin-top: 2.2rem; }
+
+/* --------------------------------------------------------------------------
+   7 · Ladder — four rungs of ascending commitment + the visitor's node
+   -------------------------------------------------------------------------- */
+.rungs {
+  list-style: none;
+  max-width: 40rem;
+  margin: clamp(3rem, 6vw, 4rem) auto 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.rung {
+  background: var(--ivory-50);
+  border: 1px solid rgba(15, 31, 61, 0.12);
+  padding: 1.7rem 1.9rem;
+  box-shadow: 0 12px 32px -20px rgba(15, 31, 61, 0.3);
+}
+.rung--gold {
+  border-color: rgba(212, 169, 76, 0.7);
+  background: linear-gradient(160deg, #fdf9ee, #f7ecd2);
+}
+.rung-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8a6d2f;
+  margin-bottom: 0.65rem;
+}
+.rung h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.28rem;
+  color: var(--navy-800);
+}
+.rung > p { font-size: 0.89rem; color: var(--ink-600); margin: 0.45rem 0 1.1rem; }
+/* signup-form is styled for navy in styles.css — relight it for ivory */
+.rung .signup-form { margin-top: 0; }
+.rung .signup-form input {
+  background: #fff;
+  border-color: rgba(15, 31, 61, 0.22);
+  color: var(--ink-900);
+}
+.rung .signup-form input::placeholder { color: #98a0ad; }
+.rung .signup-form input:focus { border-color: var(--gold-500); }
+.you-node {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-top: clamp(3rem, 6vw, 4rem);
+}
+/* The voyage: the line leaves the port (left, low), passes through the
+   visitor's empty ring at the nadir, and ascends to the star (right, high).
+   Everything scrubbed by scroll; the ring is filled only by an action. */
+.you-arc {
+  display: block;
+  width: 340px;
+  max-width: 90%;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+.ya-line {
+  fill: none;
+  stroke: rgba(212, 169, 76, 0.55);
+  stroke-width: 1.25;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.15s linear;
+}
+/* Wet-ink tip: a short brighter segment leading the draw (dash window
+   positioned by story-v3.js; hidden before departure and on arrival) */
+.ya-tip {
+  fill: none;
+  stroke: var(--gold-300);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 0.045 0.955;
+  stroke-dashoffset: 0.045;
+  opacity: 0;
+  transition: stroke-dashoffset 0.15s linear, opacity 0.3s ease;
+}
+.ya-port {
+  fill: var(--gold-500);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.ya-port.is-on { opacity: 1; }
+/* The star kindles when the line arrives, then breathes — slowly enough
+   to feel rather than see. Steadied (full, still) once the visitor acts. */
+.ya-star-shape {
+  fill: var(--gold-500);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.ya-star.is-on .ya-star-shape {
+  animation:
+    yaKindle 0.7s ease-out both,
+    yaBreath 7s ease-in-out 0.7s infinite;
+}
+.you-node.is-lit .ya-star.is-on .ya-star-shape {
+  animation: yaKindle 0.7s ease-out both;
+  opacity: 1;
+}
+@keyframes yaKindle {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 0.75; transform: scale(1); }
+}
+@keyframes yaBreath {
+  0%, 100% { opacity: 0.75; }
+  50%      { opacity: 1; }
+}
+/* The visitor's ring at the nadir; the halo masks the line behind it */
+.ya-you-halo { fill: var(--ivory-100); }
+.ya-you-ring {
+  fill: var(--ivory-100);
+  stroke: var(--gold-500);
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: fill 0.5s ease, filter 0.5s ease;
+}
+/* A just-perceptible acknowledgment as the tip passes through the ring */
+.ya-you.is-passed .ya-you-ring { animation: yaSwell 0.8s ease-out; }
+@keyframes yaSwell {
+  0%   { transform: scale(1); stroke: var(--gold-500); }
+  40%  { transform: scale(1.12); stroke: var(--gold-300); }
+  100% { transform: scale(1); stroke: var(--gold-500); }
+}
+.you-node.is-lit .ya-you-ring {
+  fill: var(--gold-500);
+  filter: drop-shadow(0 0 9px rgba(212, 169, 76, 0.65));
+  animation: nodeFlare 0.9s ease-out;
+}
+@keyframes nodeFlare {
+  0%   { transform: scale(0.55); }
+  45%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+.you-label {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  color: var(--ink-900);
+}
+.you-label strong { color: #8a6d2f; }
+.ladder-aside {
+  text-align: center;
+  margin-top: 2.8rem;
+  font-size: 0.86rem;
+  color: var(--ink-600);
+}
+.ladder-aside a { color: var(--navy-700); font-weight: 600; }
+
+/* --------------------------------------------------------------------------
+   8 · Coda — the conference invitation over the page's one photograph
+   -------------------------------------------------------------------------- */
+.coda {
+  position: relative;
+  overflow: hidden;
+  background: var(--navy-950);
+  color: #fff;
+  text-align: center;
+  padding: clamp(6rem, 16vh, 10rem) 0;
+}
+.coda-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+  filter: grayscale(1) contrast(1.05) brightness(0.78);
+}
+.coda-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(6, 13, 31, 0.88), rgba(10, 20, 40, 0.42) 48%, rgba(6, 13, 31, 0.9)),
+    rgba(15, 31, 61, 0.28);
+}
+.coda-content { position: relative; z-index: 2; max-width: 46rem; }
+.coda .section-kicker { color: var(--gold-300); }
+.coda h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.1rem, 5vw, 3.3rem);
+  line-height: 1.15;
+  margin: 1rem 0 0.7rem;
+}
+.coda-sub {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.02rem;
+  color: var(--gold-300);
+}
+.coda-text {
+  margin: 1.5rem auto 2.2rem;
+  max-width: 38rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+.coda-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.coda-credit {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.7rem;
+  z-index: 2;
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion: everything lands in its final state, nothing moves
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .fx {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .section-head--center .section-title::after {
+    transform: scaleX(1);
+    transition: none;
+  }
+  .pulse-dot::after { animation: none; }
+  .head-ornament path,
+  .ya-line { stroke-dashoffset: 0; transition: none; }
+  .head-ornament circle { fill: var(--gold-500); transition: none; }
+  .ya-port { opacity: 1; transition: none; }
+  .ya-star.is-on .ya-star-shape,
+  .you-node.is-lit .ya-star.is-on .ya-star-shape {
+    animation: none;
+    opacity: 0.9;
+    transform: none;
+  }
+  .ya-you.is-passed .ya-you-ring,
+  .you-node.is-lit .ya-you-ring { animation: none; }
+  .epochs::before { transform: scaleY(1); }
+  .station-link::after,
+  .plate-link::after,
+  .thread-node,
+  .station-numeral,
+  .plate-img img,
+  .plate-tint { transition: none; }
+}
