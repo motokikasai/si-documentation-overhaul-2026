@@ -99,10 +99,10 @@ function init(renderer) {
     t.anisotropy = Math.min(16, renderer.capabilities.getMaxAnisotropy());
     return t;
   };
-  const dayTex = loadTex("assets/earth-day.jpg");
-  const nightTex = loadTex("assets/earth-night.jpg");
-  const cloudTex = loadTex("assets/clouds.jpg");
-  const moonTex = loadTex("assets/moon.jpg");
+  const dayTex = loadTex("assets/images/earth-day.jpg");
+  const nightTex = loadTex("assets/images/earth-night.jpg");
+  const cloudTex = loadTex("assets/images/clouds.jpg");
+  const moonTex = loadTex("assets/images/moon.jpg");
 
   /* ----- Earth ----- */
 
@@ -683,7 +683,7 @@ function init(renderer) {
 
   /* Progressive detail: the 2K night map paints instantly; the 4K version
    * swaps in when it arrives (the close-up is entirely night side). */
-  loadTex("assets/earth-night-4k.jpg", (t) => {
+  loadTex("assets/images/earth-night-4k.jpg", (t) => {
     earthUniforms.nightTex.value = t;
     kick();
   });

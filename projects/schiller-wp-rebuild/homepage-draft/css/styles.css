@@ -211,7 +211,7 @@ a { color: inherit; }
   display: none;
   background:
     radial-gradient(ellipse at 50% 120%, rgba(37, 99, 176, 0.45), transparent 60%),
-    url("../assets/earth-night.jpg") center 65% / cover no-repeat,
+    url("../assets/images/earth-night.jpg") center 65% / cover no-repeat,
     var(--navy-950);
 }
 .hero.no-webgl { height: 100vh; }
@@ -659,7 +659,7 @@ a { color: inherit; }
   border-radius: 1rem;
   overflow: hidden;
   aspect-ratio: 16 / 9;
-  background: var(--navy-800) url("../assets/earth-night.jpg") center/cover;
+  background: var(--navy-800) url("../assets/images/earth-night.jpg") center/cover;
   box-shadow: 0 30px 60px -25px rgba(0, 0, 0, 0.7);
   cursor: pointer;
 }
@@ -753,7 +753,7 @@ a { color: inherit; }
 @media (max-width: 820px) { .event-feature { grid-template-columns: 1fr; } }
 .event-media {
   min-height: 16rem;
-  background: url("../assets/earth-day.jpg") center 30% / cover;
+  background: url("../assets/images/earth-day.jpg") center 30% / cover;
   position: relative;
 }
 .event-media::after {

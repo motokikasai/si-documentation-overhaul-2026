@@ -90,9 +90,9 @@ function init(renderer) {
     t.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
     return t;
   };
-  const dayTex = loadTex("assets/earth-day.jpg");
-  const nightTex = loadTex("assets/earth-night.jpg");
-  const moonTex = loadTex("assets/moon.jpg");
+  const dayTex = loadTex("assets/images/earth-day.jpg");
+  const nightTex = loadTex("assets/images/earth-night.jpg");
+  const moonTex = loadTex("assets/images/moon.jpg");
 
   /* ----- Earth (custom day/night shader with dawn terminator + rim) ----- */
 
