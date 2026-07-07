@@ -38,25 +38,6 @@
       background: linear-gradient(rgba(6, 13, 31, 0.55), transparent 22%, transparent 68%, rgba(6, 13, 31, 0.9));
     }
 
-    /* v3: A2 "Hairline" logo lockup (brand/DECISION.md) replaces the
-       placeholder "S" roundel — portrait in a 1px gold ring, tracked
-       "THE INTERNATIONAL" eyebrow above a Playfair 500 wordmark. */
-    .brand-mark--portrait {
-      background: none;
-      box-shadow: none;
-      width: 40px;   /* integer px so the circle edge lands on the pixel grid */
-      height: 40px;
-    }
-    .brand-mark--portrait svg { display: block; width: 100%; height: 100%; }
-    .brand-name {
-      font-weight: 500;
-      letter-spacing: 0.015em;
-    }
-    .brand-name small {
-      color: #9aa7bd;
-      letter-spacing: 0.4em;
-      margin-bottom: 2px;
-    }
   </style>
 </head>
 <body>
@@ -65,14 +46,7 @@
   <header class="site-header">
     <div class="wrap">
       <a class="brand" href="#">
-        <!-- SVG clip + stroke: crisp circle antialiasing on 1x displays,
-             where CSS border-radius clipping of a composited <img> aliases -->
-        <span class="brand-mark brand-mark--portrait"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
-          <defs><clipPath id="brandClip"><circle cx="20" cy="20" r="19" /></clipPath></defs>
-          <image href="assets/logos/logo-portrait.png" x="-2" y="-2" width="44" height="44" clip-path="url(#brandClip)" preserveAspectRatio="xMidYMid slice" />
-          <circle cx="20" cy="20" r="19.5" fill="none" stroke="#d4a94c" stroke-width="1" />
-        </svg></span>
-        <span class="brand-name"><small>The International</small>Schiller Institute</span>
+        <img class="brand-logo" src="assets/logos/header-logo-dark-2x.png" alt="The International Schiller Institute" width="265" height="52" />
       </a>
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
       <nav class="site-nav" aria-label="Primary">
