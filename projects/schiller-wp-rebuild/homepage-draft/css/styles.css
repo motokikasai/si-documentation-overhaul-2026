@@ -93,10 +93,15 @@ a {
 .site-header.is-scrolled {
   padding: 0.6rem 0;
 }
+/* No backdrop-filter anywhere over the hero: activating one forces the
+   compositor to sample everything beneath — including the full-viewport
+   WebGL canvas at z-index -1 — through a different color-management path.
+   On wide-gamut (P3/Retina) displays that path switch reads as a faint
+   warm veil across the ENTIRE viewport the moment the effect toggles on
+   (invisible on sRGB monitors). A slightly deeper solid tint replaces
+   the frosted-glass look. */
 .site-header.is-scrolled::before {
-  background: rgba(6, 13, 31, 0.82);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(6, 13, 31, 0.92);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 .site-header .wrap {
@@ -155,8 +160,8 @@ a {
   .site-nav {
     position: fixed;
     inset: 0;
-    background: rgba(6, 13, 31, 0.96);
-    backdrop-filter: blur(18px);
+    /* no backdrop-filter — see .site-header.is-scrolled::before */
+    background: rgba(6, 13, 31, 0.97);
     flex-direction: column;
     justify-content: center;
     gap: 2rem;
@@ -341,10 +346,9 @@ a {
   gap: 0.5rem;
   padding: 0.4rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
+  /* no backdrop-filter — see .site-header.is-scrolled::before */
+  background: rgba(255, 255, 255, 0.11);
   border: 1px solid rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 .hero-form input {
   flex: 1;

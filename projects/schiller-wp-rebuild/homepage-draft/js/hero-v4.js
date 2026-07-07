@@ -3,8 +3,8 @@
  * Changes vs. hero-v3.js (v3 kept intact):
  *  - Denser, more natural starfield: +3,200 faint filler stars and a
  *    Milky-Way belt — 3,000 tiny clustered stars along a tilted great
- *    circle plus ~480 large ultra-faint nebulosity patches that give it
- *    the diffuse milky glow — on top of the v3 population. A scattered
+ *    circle over a continuous procedural ribbon (fbm cloud, warm spine,
+ *    dark dust lane) on a far shell — on top of the v3 population. A scattered
  *    subset (~1 in 4) breathes — slow, irregular dimming/brightening
  *    driven by two incommensurate sine waves per star, so no two pulse
  *    alike and nothing strobes. Sub-pixel stars rasterize at a stable
@@ -475,46 +475,97 @@ function init(renderer) {
     starMat = stars.mat;
   })();
 
-  /* ----- Milky-Way nebulosity: the diffuse glow that makes the belt read
-   * as a belt. Large, ultra-faint, additively blended patches clumped
-   * along the same great circle — individually invisible, together a
-   * soft milky ribbon with patchy structure (star clouds + gaps). ----- */
+  /* ----- Milky Way: a continuous procedural ribbon on a far shell -----
+   * (Individual glow sprites were tried and read as gray smudges — a
+   * cloud must be continuous.) One BackSide sphere, one draw call: fbm
+   * noise shapes the cloud structure inside a two-scale envelope (wide
+   * cool haze around a thin warm spine), a wandering dark dust lane
+   * splits the spine like the real thing, and warm star-cloud patches
+   * accent the brightest knots. Ordered dither defeats 8-bit banding at
+   * these very low levels. Deliberately quiet: peak ~0.15 alpha. */
 
-  let bandGlowMat;
-  (function makeBandGlow() {
-    const N = 480;
-    const GLOW_TINTS = [
-      [0.6, 0.66, 0.86],   // cool haze (most)
-      [0.72, 0.7, 0.66],   // warm star-cloud core
-      [0.55, 0.6, 0.8],    // deep blue
-    ];
-    const pos = new Float32Array(N * 3);
-    const size = new Float32Array(N);
-    const col = new Float32Array(N * 3);
-    const alp = new Float32Array(N);
-    const pha = new Float32Array(N);
-    /* clump centers give the ribbon its patchy, cloudy structure */
-    const clumps = Array.from({ length: 9 }, () => Math.random() * Math.PI * 2);
-    const v = new THREE.Vector3();
-    for (let i = 0; i < N; i++) {
-      const th = clumps[i % clumps.length] + (Math.random() + Math.random() - 1) * 0.55;
-      const off = (Math.random() + Math.random() + Math.random() - 1.5) * 0.1;
-      v.copy(bandU).multiplyScalar(Math.cos(th))
-        .addScaledVector(bandV, Math.sin(th))
-        .addScaledVector(bandN, off)
-        .normalize().multiplyScalar(70 + Math.random() * 80);
-      pos.set([v.x, v.y, v.z], i * 3);
-      size[i] = 7 + Math.random() * 17;
-      alp[i] = 0.016 + Math.random() * 0.022;
-      col.set(GLOW_TINTS[i % 3 === 0 ? 1 : (i % 7 === 0 ? 2 : 0)], i * 3);
-      pha[i] = 0;
-    }
-    const glow = glowPoints({
-      positions: pos, sizes: size, colors: col, alphas: alp, phases: pha,
-      twinkle: 0,
+  let milkyMat;
+  (function makeMilkyWay() {
+    milkyMat = new THREE.ShaderMaterial({
+      uniforms: {
+        uOpacity: { value: 1 },
+        uN: { value: bandN },
+      },
+      side: THREE.BackSide,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      vertexShader: /* glsl */ `
+        varying vec3 vDir;
+        void main() {
+          vDir = position;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: /* glsl */ `
+        uniform float uOpacity;
+        uniform vec3 uN;
+        varying vec3 vDir;
+
+        float hash21(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+        }
+        /* 3D value noise sampled on the view direction: seamless over the
+         * whole sky by construction — an angular (atan) coordinate has a
+         * ±180° wrap that shows up as a hard cut across the ribbon. */
+        float hash31(vec3 p) {
+          return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453);
+        }
+        float vnoise3(vec3 p) {
+          vec3 i = floor(p), f = fract(p);
+          vec3 u = f * f * (3.0 - 2.0 * f);
+          float c000 = hash31(i);
+          float c100 = hash31(i + vec3(1.0, 0.0, 0.0));
+          float c010 = hash31(i + vec3(0.0, 1.0, 0.0));
+          float c110 = hash31(i + vec3(1.0, 1.0, 0.0));
+          float c001 = hash31(i + vec3(0.0, 0.0, 1.0));
+          float c101 = hash31(i + vec3(1.0, 0.0, 1.0));
+          float c011 = hash31(i + vec3(0.0, 1.0, 1.0));
+          float c111 = hash31(i + vec3(1.0, 1.0, 1.0));
+          return mix(mix(mix(c000, c100, u.x), mix(c010, c110, u.x), u.y),
+                     mix(mix(c001, c101, u.x), mix(c011, c111, u.x), u.y), u.z);
+        }
+        float fbm3(vec3 p) {
+          float v = 0.0, a = 0.5;
+          for (int i = 0; i < 4; i++) { v += a * vnoise3(p); p = p * 2.13 + 17.7; a *= 0.5; }
+          return v;
+        }
+
+        void main() {
+          vec3 d = normalize(vDir);
+          float w = dot(d, uN);                    /* signed dist from band plane */
+          float cloud = 0.75 * fbm3(d * 5.0) + 0.35 * fbm3(d * 13.0 + 31.4);
+
+          /* envelope: wide cool haze around a thin bright spine */
+          float halo = exp(-w * w / 0.030);
+          float core = exp(-w * w / 0.0045);
+          float density = halo * (0.30 + 0.70 * cloud) * 0.55
+                        + core * (0.45 + 0.55 * cloud);
+
+          /* wandering dark dust lane splits the spine */
+          float laneOff = (vnoise3(d * 2.2 + 7.3) - 0.5) * 0.10;
+          float lane = exp(-pow(w - laneOff, 2.0) / 0.0011);
+          density *= 1.0 - 0.6 * lane * smoothstep(0.25, 0.6, cloud);
+
+          /* cool outer haze -> warm milky core; warm star-cloud knots */
+          vec3 col = mix(vec3(0.36, 0.46, 0.72), vec3(0.82, 0.71, 0.55),
+                         clamp(core * 1.3, 0.0, 1.0));
+          col += vec3(0.14, 0.09, 0.03) * smoothstep(0.55, 0.95, cloud) * core;
+
+          float a = density * 0.10 * uOpacity;
+          /* dither: breaks 8-bit banding on these faint gradients */
+          a += (hash21(gl_FragCoord.xy) - 0.5) * (1.0 / 255.0);
+          gl_FragColor = vec4(col, max(a, 0.0));
+        }
+      `,
     });
-    scene.add(glow.points);
-    bandGlowMat = glow.mat;
+    /* radius 180: behind most stars (55–165), inside the far plane */
+    scene.add(new THREE.Mesh(new THREE.SphereGeometry(180, 48, 48), milkyMat));
   })();
 
   /* ----- Shooting stars: rare, faint, short-lived streaks (v4) -----
@@ -1122,7 +1173,7 @@ function init(renderer) {
     const skyOp = starOpacity(p);
     starMat.uniforms.uOpacity.value = skyOp;
     starMat.uniforms.uTime.value = prefersReducedMotion ? 1.3 : t;
-    bandGlowMat.uniforms.uOpacity.value = skyOp;
+    milkyMat.uniforms.uOpacity.value = skyOp;
     if (meteors.length) updateMeteors(t, skyOp);
     moon.rotation.y = 2.4 + t * 0.01;
 

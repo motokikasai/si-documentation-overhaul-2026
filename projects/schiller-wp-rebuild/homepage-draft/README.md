@@ -97,11 +97,15 @@ network" pass. The page/story layers are unchanged and shared with v3
 
 - **Denser, more natural starfield:** +3,200 faint filler stars sky-wide and
   a **Milky-Way belt**: 3,000 densely clustered tiny stars along a tilted
-  great circle (gaussian falloff) plus ~480 large, ultra-faint, clumped
-  nebulosity patches that give the belt its diffuse milky ribbon — like a
-  real dark-site sky. On top of the v3 population (10,400 stars total).
-  The belt plane passes ~16° from the view axis, so the ribbon always
-  crosses the visible sky. A scattered ~24% subset
+  great circle (gaussian falloff) over a **continuous procedural ribbon** —
+  a single BackSide shell whose fragment shader shapes fbm cloud structure
+  inside a two-scale envelope (wide cool-blue haze around a thin warm
+  spine), splits the spine with a wandering dark dust lane, accents the
+  brightest knots with warm star-cloud color, and dithers to defeat 8-bit
+  banding (sprite-based nebulosity was tried and read as gray smudges).
+  On top of the v3 population (10,400 stars total). The belt plane passes
+  ~16° from the view axis, so the ribbon always crosses the visible sky.
+  A scattered ~24% subset
   "breathes": slow, irregular dimming/brightening from two incommensurate
   sine waves per star (per-star speed/amplitude attributes), so no two
   pulse alike and nothing strobes; the rest shimmer only slowly and
