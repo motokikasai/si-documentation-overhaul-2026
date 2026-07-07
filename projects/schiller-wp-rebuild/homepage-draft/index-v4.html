@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Schiller Institute — A New Paradigm for Mankind (hero v4)</title>
+  <meta name="description" content="The Schiller Institute works for a new paradigm of sovereign nations united by development — the World Land-Bridge, the Oasis Plan, fusion and space science, and a renaissance of classical culture." />
+
+  <!-- Favicons — brand/assets/favicon/ (S roundel small, portrait mark large) -->
+  <link rel="icon" href="assets/favicons/favicon.ico" sizes="48x48" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicons/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/favicons/apple-touch-icon.png" />
+
+  <!-- Draft note: Google Fonts via CDN for the prototype; self-host in the Blocksy build -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/story-v3.css" />
+  <style>
+    /* v3 parallax handoff: the scene layers are viewport-fixed at z-index -1.
+       While the hero is pinned this is visually identical, but at pin release
+       the headline/form scroll away with the page while Earth, Moon and stars
+       hold their final positions — the next (opaque) section then slides over
+       the frozen scene. Requires: no transform on .hero-pin, and .hero made
+       transparent so the canvas shows through. */
+    .hero { background: transparent; }
+    .hero-canvas,
+    .hero-fallback,
+    .hero-vignette {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+    }
+    .hero-vignette {
+      background: linear-gradient(rgba(6, 13, 31, 0.55), transparent 22%, transparent 68%, rgba(6, 13, 31, 0.9));
+    }
+
+    /* v3: A2 "Hairline" logo lockup (brand/DECISION.md) replaces the
+       placeholder "S" roundel — portrait in a 1px gold ring, tracked
+       "THE INTERNATIONAL" eyebrow above a Playfair 500 wordmark. */
+    .brand-mark--portrait {
+      background: none;
+      box-shadow: none;
+      width: 40px;   /* integer px so the circle edge lands on the pixel grid */
+      height: 40px;
+    }
+    .brand-mark--portrait svg { display: block; width: 100%; height: 100%; }
+    .brand-name {
+      font-weight: 500;
+      letter-spacing: 0.015em;
+    }
+    .brand-name small {
+      color: #9aa7bd;
+      letter-spacing: 0.4em;
+      margin-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= Header — locked IA nav: Ideas · Events · Get Involved · Donate · About ================= -->
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="#">
+        <!-- SVG clip + stroke: crisp circle antialiasing on 1x displays,
+             where CSS border-radius clipping of a composited <img> aliases -->
+        <span class="brand-mark brand-mark--portrait"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+          <defs><clipPath id="brandClip"><circle cx="20" cy="20" r="19" /></clipPath></defs>
+          <image href="assets/logos/logo-portrait.png" x="-2" y="-2" width="44" height="44" clip-path="url(#brandClip)" preserveAspectRatio="xMidYMid slice" />
+          <circle cx="20" cy="20" r="19.5" fill="none" stroke="#d4a94c" stroke-width="1" />
+        </svg></span>
+        <span class="brand-name"><small>The International</small>Schiller Institute</span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#ideas">Ideas</a>
+        <a href="#events">Events</a>
+        <a href="#involved">Get Involved</a>
+        <a href="#about">About</a>
+        <a href="#involved" class="nav-donate">Donate</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= Hero — scroll-driven WebGL journey ================= -->
+  <section class="hero" id="top">
+    <!-- Scene layers live OUTSIDE the sticky pin: sticky creates a stacking
+         context, which would hoist their z-index:-1 above the sections that
+         follow. At root level, -1 sits beneath every section background. -->
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-fallback" aria-hidden="true"></div>
+    <div class="hero-vignette" aria-hidden="true"></div>
+    <div class="hero-pin">
+
+      <!-- Act 0 · Crisis → alternative -->
+      <div class="hero-stage" data-stage="0">
+        <p class="hero-kicker">The Schiller Institute · Since 1984</p>
+        <h1>The old order is collapsing.<br /><em>A new paradigm</em> is ours to build.</h1>
+        <p>Economic breakdown, the danger of war, a culture in decay — none of it is inevitable. Mankind is the only creative species we know of in the universe. That changes everything.</p>
+      </div>
+
+      <!-- Act 1 · World Land-Bridge -->
+      <div class="hero-stage" data-stage="1">
+        <p class="hero-kicker">The New Silk Road · The Oasis Plan</p>
+        <h2>Build the <em>World Land-Bridge</em></h2>
+        <p>Development corridors of rail, water and power connecting every continent — from the Bering Strait to the Gibraltar tunnel to a blooming Southwest Asia. Without the development of all nations, there can be no lasting peace.</p>
+      </div>
+
+      <!-- Act 2 · The extraterrestrial imperative -->
+      <div class="hero-stage" data-stage="2">
+        <p class="hero-kicker">Fusion · Space · The Noösphere</p>
+        <h2>Then upward — the <em>extraterrestrial imperative</em></h2>
+        <p>“Lifting the human species out of its ordinary existence.” — Krafft Ehricke. Fusion power and the joint exploration of space are the common aims of mankind, and the proof that growth has no limits.</p>
+      </div>
+
+      <!-- Act 3 · Invitation (primary conversion: email capture) -->
+      <div class="hero-stage" data-stage="3">
+        <p class="hero-kicker">A Movement of World Citizens</p>
+        <h2>The future needs <em>you</em></h2>
+        <p>Join a worldwide movement for peace through development and a new renaissance of classical culture.</p>
+        <div class="hero-cta-card">
+          <form class="hero-form js-signup" novalidate>
+            <input type="email" name="email" placeholder="Your email address" aria-label="Email address" required />
+            <button type="submit">Join the movement</button>
+          </form>
+          <p class="hero-form-note">Weekly ideas, webcasts &amp; invitations. Double opt-in, unsubscribe anytime.</p>
+        </div>
+      </div>
+
+      <div class="hero-scrollhint">Scroll</div>
+      <div class="hero-chapters" aria-label="Hero chapters">
+        <button aria-label="A new paradigm" class="is-active"></button>
+        <button aria-label="The World Land-Bridge"></button>
+        <button aria-label="The extraterrestrial imperative"></button>
+        <button aria-label="Join the movement"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================
+       The story — the gold line appears only as punctuation: bridge
+       ornaments under titles, the stations connector, the timeline rail,
+       and the visitor's own node at the end of the ladder.
+       Narrative: what is this? (credo) → where do I start? (stations) →
+       is it alive? (pulse) → what are the ideas? (folio) → show me (film)
+       → can I trust you? (record) → what do I do? (ladder) → coda.
+       ================================================================== -->
+  <main class="story">
+    <!-- 1 · Credo — the thesis in plain prose, for everyone who skimmed the hero -->
+    <section class="credo" id="start">
+      <div class="wrap">
+        <p class="credo-kicker fx">Our founding conviction</p>
+        <p class="credo-text fx"><span class="dropcap">E</span>very human being is capable of genius. The Schiller Institute was founded in 1984 on that conviction: that a world of sovereign nations united by development&nbsp;&mdash; great corridors of rail, water and power across the continents, fusion energy and the shared exploration of space, and a renaissance of the classical culture that ennobles the soul&nbsp;&mdash; is not a utopia. It is a program. We call it the New Paradigm, and we organize for it every week, on five continents.</p>
+        <p class="credo-sign fx">Named for Friedrich Schiller, poet of freedom</p>
+      </div>
+    </section>
+
+    <!-- 2 · Stations — three steps in, with honest time-costs -->
+    <section class="section section-ivory stations-band">
+      <div class="wrap">
+        <div class="section-head section-head--center fx">
+          <p class="section-kicker">New here? Start here</p>
+          <h2 class="section-title">Three steps into the New Paradigm</h2>
+          <div class="head-ornament" aria-hidden="true"><svg viewBox="0 0 120 18">
+            <path d="M10 12 Q 35 1 60 12" pathLength="1" />
+            <path d="M60 12 Q 85 1 110 12" pathLength="1" />
+            <circle cx="10" cy="12" r="2.5" /><circle cx="60" cy="12" r="2.5" /><circle cx="110" cy="12" r="2.5" />
+          </svg></div>
+
+          <p class="section-lede">Forty years of conferences, reports and organizing — the shortest path through them.</p>
+        </div>
+        <ol class="stations">
+          <li class="station fx">
+            <span class="station-numeral">I</span>
+            <h3>Watch the idea</h3>
+            <p>&ldquo;A New Paradigm for Mankind&rdquo; — why human creativity, not money, is the source of wealth. One film.</p>
+            <a class="station-link" href="#video">Watch the film</a>
+            <span class="station-cost">Fifteen minutes</span>
+          </li>
+          <li class="station fx" data-fxd="1">
+            <span class="station-numeral">II</span>
+            <h3>Read the program</h3>
+            <p><em>The World Land-Bridge</em> report and the Ten Principles — the blueprint for peace through development.</p>
+            <a class="station-link" href="#ideas">Explore the ideas</a>
+            <span class="station-cost">One evening</span>
+          </li>
+          <li class="station fx" data-fxd="2">
+            <span class="station-numeral">III</span>
+            <h3>Join the movement</h3>
+            <p>The weekly dispatch, a Friday session of the Peace Coalition, a chapter near you.</p>
+            <a class="station-link" href="#involved">Get involved</a>
+            <span class="station-cost">A lifetime</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 3 · Pulse — proof of life: the movement's weekly heartbeat -->
+    <section class="pulse">
+      <div class="wrap">
+        <p class="section-kicker fx">Now &middot; This Week</p>
+        <div class="pulse-grid">
+          <div class="pulse-feature fx">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <p class="pulse-tag">Live &middot; every Friday</p>
+            <h3>International Peace Coalition</h3>
+            <p>Diplomats, scientists and organizers from 40+ countries confer on ending the danger of war — every week since 2023, open to everyone.</p>
+            <a class="btn btn-gold" href="#">Register for the Zoom link</a>
+            <span class="pulse-meta">Fridays &middot; 11 AM ET / 17:00 CET</span>
+          </div>
+          <div class="pulse-list">
+            <p class="pulse-list-head fx">This week</p>
+            <a class="pulse-row fx" href="#">
+              <span class="pulse-row-tag">Webcast</span>
+              <span class="pulse-row-body"><strong>Helga Zepp-LaRouche: this week&rsquo;s strategic dialogue</strong><em>Watch &middot; 48 min</em></span>
+            </a>
+            <a class="pulse-row fx" data-fxd="1" href="#">
+              <span class="pulse-row-tag">Statement</span>
+              <span class="pulse-row-body"><strong>Let us create a movement of world citizens!</strong><em>Read &amp; add your name</em></span>
+            </a>
+            <a class="pulse-row fx" data-fxd="2" href="#events">
+              <span class="pulse-row-tag">Conference</span>
+              <span class="pulse-row-body"><strong>&ldquo;All Men Become Brethren&rdquo; — registration open</strong><em>Online &amp; in person &middot; free</em></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · Folio — the four frontiers as engraved plates -->
+    <section class="section section-ivory folio" id="ideas">
+      <div class="wrap">
+        <div class="section-head section-head--center fx">
+          <p class="section-kicker">The Ideas</p>
+          <h2 class="section-title">One humanity, four frontiers</h2>
+          <div class="head-ornament" aria-hidden="true"><svg viewBox="0 0 120 18">
+            <path d="M10 12 Q 35 1 60 12" pathLength="1" />
+            <path d="M60 12 Q 85 1 110 12" pathLength="1" />
+            <circle cx="10" cy="12" r="2.5" /><circle cx="60" cy="12" r="2.5" /><circle cx="110" cy="12" r="2.5" />
+          </svg></div>
+
+          <p class="section-lede">Economics, science, culture and history — statecraft treated as a single creative endeavor.</p>
+        </div>
+        <div class="plates">
+          <article class="plate fx">
+            <div class="plate-body">
+              <span class="plate-numeral" aria-hidden="true">I</span>
+              <p class="plate-eyebrow">Economics</p>
+              <h3>Physical economy</h3>
+              <p>Wealth is not money — it is the rising productive power of people and nations. Forecasts grounded in the real, physical economy, the World Land-Bridge program, and the case for a New Bretton Woods.</p>
+              <a class="plate-link" href="#">Enter the economics library</a>
+            </div>
+            <figure class="plate-media">
+              <span class="plate-img"><img src="assets/images/plate-economy-rail.jpg" alt="Crews from east and west shake hands at the joining of the Transcontinental Railroad, 1869" loading="lazy" /><span class="plate-tint" aria-hidden="true"></span></span>
+              <figcaption>Plate I &mdash; The last rail: East meets West, Promontory Summit, 1869.</figcaption>
+            </figure>
+          </article>
+          <article class="plate plate--flip fx">
+            <div class="plate-body">
+              <span class="plate-numeral" aria-hidden="true">II</span>
+              <p class="plate-eyebrow">Science</p>
+              <h3>Fusion &amp; space</h3>
+              <p>&ldquo;Lifting the human species out of its ordinary existence&rdquo; — Krafft Ehricke&rsquo;s extraterrestrial imperative. Crash programs for fusion power and the joint exploration of the Moon and Mars, as the common aims of mankind.</p>
+              <a class="plate-link" href="#">Explore the science driver</a>
+            </div>
+            <figure class="plate-media">
+              <span class="plate-img"><img src="assets/images/plate-science-apollo.jpg" alt="Astronaut Buzz Aldrin on the Sea of Tranquility, Apollo 11" loading="lazy" /><span class="plate-tint" aria-hidden="true"></span></span>
+              <figcaption>Plate II &mdash; The extraterrestrial imperative: Sea of Tranquility, 1969.</figcaption>
+            </figure>
+          </article>
+          <article class="plate fx">
+            <div class="plate-body">
+              <span class="plate-numeral" aria-hidden="true">III</span>
+              <p class="plate-eyebrow">Culture</p>
+              <h3>Classical renaissance</h3>
+              <p>Beauty ennobles: Schiller&rsquo;s aesthetics, Bach and Beethoven in community choruses, poetry and drama — and the <em>Leonore</em> magazine — against a culture of ugliness.</p>
+              <a class="plate-link" href="#">Enter the culture pages</a>
+            </div>
+            <figure class="plate-media">
+              <span class="plate-img"><img src="assets/images/plate-culture-schiller.jpg" alt="Portrait of Friedrich Schiller by Ludovike Simanowiz" loading="lazy" /><span class="plate-tint" aria-hidden="true"></span></span>
+              <figcaption>Plate III &mdash; Friedrich Schiller, by Ludovike Simanowiz, 1794.</figcaption>
+            </figure>
+          </article>
+          <article class="plate plate--flip fx">
+            <div class="plate-body">
+              <span class="plate-numeral" aria-hidden="true">IV</span>
+              <p class="plate-eyebrow">History</p>
+              <h3>Statecraft &amp; strategy</h3>
+              <p>From Nicholas of Cusa&rsquo;s coincidence of opposites to Hamilton&rsquo;s national banking and FDR&rsquo;s reconstruction — the republican tradition against oligarchy, recovered for today.</p>
+              <a class="plate-link" href="#">Read the history</a>
+            </div>
+            <figure class="plate-media">
+              <span class="plate-img"><img src="assets/images/plate-history-cusa.jpg" alt="Portrait of Nicholas of Cusa" loading="lazy" /><span class="plate-tint" aria-hidden="true"></span></span>
+              <figcaption>Plate IV &mdash; Nicholas of Cusa, father of the modern nation-state.</figcaption>
+            </figure>
+          </article>
+        </div>
+        <div class="campaign-links fx">
+          <a class="campaign-pill" href="#">World Land-Bridge</a>
+          <a class="campaign-pill" href="#">Oasis Plan</a>
+          <a class="campaign-pill" href="#">International Peace Coalition</a>
+          <a class="campaign-pill" href="#">Ten Principles</a>
+          <a class="campaign-pill" href="#">LaRouche Youth Movement</a>
+          <a class="campaign-pill" href="#">Leonore Magazine</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · Film — featured video + weekly dispatch (primary conversion) -->
+    <section class="section section-navy video-band proscenium" id="video">
+      <div class="wrap">
+        <div class="fx">
+          <!-- data-video-id: set the real YouTube ID; empty = links to the channel -->
+          <div class="video-frame js-video" data-video-id="" role="button" tabindex="0" aria-label="Play: A New Paradigm for Mankind">
+            <div class="play-badge"><span></span></div>
+          </div>
+          <p class="video-caption">&ldquo;A New Paradigm for Mankind&rdquo; — the Schiller Institute in one film. Served via youtube-nocookie.</p>
+        </div>
+        <div class="signup-panel fx" data-fxd="1">
+          <p class="section-kicker">The Weekly Dispatch</p>
+          <h2>Ideas move history.<br />Get them weekly.</h2>
+          <p>One email a week: the strategic webcast, new statements and forecasts, and invitations to conferences and local chapters. Sapere aude — dare to be wise.</p>
+          <form class="signup-form js-signup" novalidate>
+            <input type="email" name="email" placeholder="Your email address" aria-label="Email address" required />
+            <button class="btn btn-gold" type="submit">Subscribe</button>
+          </form>
+          <p class="signup-note">Double opt-in. We never share your address. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · Record — forty years, six stations on the thread -->
+    <section class="section section-ivory record" id="forecasts">
+      <div class="wrap">
+        <div class="section-head section-head--center fx">
+          <p class="section-kicker">The Record</p>
+          <h2 class="section-title">Forty years on one road</h2>
+          <div class="head-ornament" aria-hidden="true"><svg viewBox="0 0 120 18">
+            <path d="M10 12 Q 35 1 60 12" pathLength="1" />
+            <path d="M60 12 Q 85 1 110 12" pathLength="1" />
+            <circle cx="10" cy="12" r="2.5" /><circle cx="60" cy="12" r="2.5" /><circle cx="110" cy="12" r="2.5" />
+          </svg></div>
+
+          <p class="section-lede">The proposals were called impossible. Then the world began building them.</p>
+        </div>
+        <ol class="epochs">
+          <li class="epoch fx">
+            <span class="thread-node" data-node aria-hidden="true"></span>
+            <div class="epoch-body">
+              <span class="epoch-year">1984</span>
+              <h3>The founding</h3>
+              <p>Helga Zepp-LaRouche founds the Institute in the depths of the Cold War, on Schiller&rsquo;s principle that political freedom requires the moral ennoblement of the individual.</p>
+            </div>
+          </li>
+          <li class="epoch epoch--right fx">
+            <span class="thread-node" data-node aria-hidden="true"></span>
+            <div class="epoch-body">
+              <span class="epoch-year">1989</span>
+              <h3>The Productive Triangle</h3>
+              <p>As the Wall falls, the Institute proposes development corridors to unite Europe — the seed of everything that followed.</p>
+            </div>
+          </li>
+          <li class="epoch fx">
+            <span class="thread-node" data-node aria-hidden="true"></span>
+            <div class="epoch-body">
+              <span class="epoch-year">1997</span>
+              <h3>The Eurasian Land-Bridge</h3>
+              <p>The &ldquo;New Silk Road&rdquo; blueprint: rail, water and power to develop all of Eurasia — published years before it became world policy.</p>
+            </div>
+          </li>
+          <li class="epoch epoch--right fx">
+            <span class="thread-node" data-node aria-hidden="true"></span>
+            <div class="epoch-body">
+              <span class="epoch-year">2014</span>
+              <h3>The World Land-Bridge</h3>
+              <p><em>The New Silk Road Becomes the World Land-Bridge</em> extends the corridors to every continent — the full program for peace through development.</p>
+            </div>
+          </li>
+          <li class="epoch fx">
+            <span class="thread-node" data-node aria-hidden="true"></span>
+            <div class="epoch-body">
+              <span class="epoch-year">2022</span>
+              <h3>The Ten Principles</h3>
+              <p>A new international security and development architecture — principles for peace among sovereign nations, now debated worldwide.</p>
+            </div>
+          </li>
+          <li class="epoch epoch--right fx">
+            <span class="thread-node" data-node aria-hidden="true"></span>
+            <div class="epoch-body">
+              <span class="epoch-year">Today</span>
+              <h3>The organizing continues</h3>
+              <p>The International Peace Coalition convenes every Friday, the Oasis Plan for Southwest Asia is on the table, and the conferences go on — on five continents.</p>
+            </div>
+          </li>
+        </ol>
+        <blockquote class="record-quote fx">
+          Mankind is the only creative species known so far in the universe — and human creativity is the only source of wealth.
+          <cite>Helga Zepp-LaRouche &middot; Ten Principles</cite>
+        </blockquote>
+        <p class="record-cta fx"><a class="btn btn-ghost" href="#">Read the economic forecasts</a></p>
+      </div>
+    </section>
+
+    <!-- 7 · Ladder — four rungs of ascending commitment, then your node -->
+    <section class="section section-ivory-alt ladder" id="involved">
+      <div class="wrap">
+        <div class="section-head section-head--center fx">
+          <p class="section-kicker">Get Involved</p>
+          <h2 class="section-title">The future is organized — by people like you</h2>
+          <div class="head-ornament" aria-hidden="true"><svg viewBox="0 0 120 18">
+            <path d="M10 12 Q 35 1 60 12" pathLength="1" />
+            <path d="M60 12 Q 85 1 110 12" pathLength="1" />
+            <circle cx="10" cy="12" r="2.5" /><circle cx="60" cy="12" r="2.5" /><circle cx="110" cy="12" r="2.5" />
+          </svg></div>
+
+          <p class="section-lede">Four rungs. Each costs a little more, and matters a lot more.</p>
+        </div>
+        <ol class="rungs">
+          <li class="rung fx">
+            <div class="rung-head"><span>Rung 1</span><span>One minute</span></div>
+            <h3>Subscribe to the weekly dispatch</h3>
+            <p>The strategic webcast, new statements and forecasts, invitations — one email a week.</p>
+            <form class="signup-form js-signup" novalidate>
+              <input type="email" name="email" placeholder="Your email address" aria-label="Email address" required />
+              <button class="btn btn-gold" type="submit">Subscribe</button>
+            </form>
+          </li>
+          <li class="rung fx">
+            <div class="rung-head"><span>Rung 2</span><span>One hour</span></div>
+            <h3>Sit in on a Friday session</h3>
+            <p>The International Peace Coalition — 40+ countries on one call, every week. Listen first; speak when you&rsquo;re ready.</p>
+            <a class="btn btn-ghost" href="#">Register for Friday</a>
+          </li>
+          <li class="rung fx">
+            <div class="rung-head"><span>Rung 3</span><span>One evening</span></div>
+            <h3>Visit a local chapter</h3>
+            <p>From Berlin to Lima to Houston: weekly meetings where the ideas become organizing.</p>
+            <a class="btn btn-ghost" href="#">Find a chapter</a>
+          </li>
+          <li class="rung rung--gold fx">
+            <div class="rung-head"><span>Rung 4</span><span>Ongoing</span></div>
+            <h3>Become a member</h3>
+            <p>A monthly contribution is the backbone of an independent movement — and the strongest signal you can send.</p>
+            <a class="btn btn-gold js-donate" href="#">Donate monthly</a>
+          </li>
+        </ol>
+        <!-- The payoff, read left to right: the line leaves the known shore
+             (port), passes through the visitor's empty ring at the nadir,
+             and ascends to the star. Scroll-scrubbed; the ring is lit only
+             by an action (signup/donate), never by the scroll.
+             Ring sits at the curve's true nadir (t≈0.452 → 154.4, 56.4). -->
+        <div class="you-node fx">
+          <svg class="you-arc" viewBox="0 0 340 72" aria-hidden="true">
+            <path class="ya-line" d="M6 22 Q 170 98 334 6" pathLength="1" />
+            <path class="ya-tip" d="M6 22 Q 170 98 334 6" pathLength="1" />
+            <circle class="ya-port" cx="6" cy="22" r="3" />
+            <g class="ya-star" transform="translate(334 6)">
+              <path class="ya-star-shape" d="M0 -7 L1.4 -1.4 L7 0 L1.4 1.4 L0 7 L-1.4 1.4 L-7 0 L-1.4 -1.4 Z" />
+            </g>
+            <g class="ya-you" transform="translate(154.4 56.4)">
+              <circle class="ya-you-halo" r="15" />
+              <circle class="ya-you-ring" r="9" />
+            </g>
+          </svg>
+          <p class="you-label">The map has room for one more node. <strong>It&rsquo;s you.</strong></p>
+        </div>
+        <p class="ladder-aside fx">Scientist, engineer, farmer, musician? <a href="#">Send us your work</a> — papers and performances from every field.</p>
+      </div>
+    </section>
+
+    <!-- 8 · Coda — the conference invitation, over the page's one photograph -->
+    <section class="coda" id="events">
+      <img class="coda-bg" src="assets/images/coda-audience.jpg" alt="" aria-hidden="true" loading="lazy" />
+      <div class="coda-scrim" aria-hidden="true"></div>
+      <div class="wrap coda-content">
+        <p class="section-kicker fx">Next Conference &middot; Online &amp; In Person</p>
+        <h2 class="fx">&ldquo;All men become brethren.&rdquo;</h2>
+        <p class="coda-sub fx" data-fxd="1">&bdquo;Alle Menschen werden Br&uuml;der&ldquo; — Schiller&rsquo;s line, set by Beethoven, sung at Institute conferences since 1984.</p>
+        <p class="coda-text fx" data-fxd="1">The next international conference of the Movement of World Citizens brings statesmen, scientists and classical artists from every continent to one stage. Simultaneous interpretation in six languages. Everyone is welcome.</p>
+        <div class="coda-actions fx" data-fxd="2">
+          <a class="btn btn-gold" href="#">Register free</a>
+          <a class="btn btn-ghost" href="#">All conferences</a>
+        </div>
+      </div>
+      <p class="coda-credit">Photo: orchestra &amp; chorus rehearsal, Wikimedia Commons (CC&nbsp;BY-SA&nbsp;2.0) — placeholder for SI conference photography.</p>
+    </section>
+  </main>
+
+  <!-- ================= Footer ================= -->
+  <footer class="site-footer" id="about">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h4>Schiller Institute</h4>
+          <p class="footer-mission">“Live with your epoch, but be not its offspring; serve your fellow man — not with what he applauds, but with what he needs.”<br />— Friedrich Schiller</p>
+        </div>
+        <div>
+          <h4>Ideas</h4>
+          <ul>
+            <li><a href="#">World Land-Bridge</a></li>
+            <li><a href="#">Oasis Plan</a></li>
+            <li><a href="#">Economic Forecasts</a></li>
+            <li><a href="#">Classical Culture</a></li>
+            <li><a href="#">Fusion &amp; Space</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Take Part</h4>
+          <ul>
+            <li><a href="#">Conferences</a></li>
+            <li><a href="#">International Peace Coalition</a></li>
+            <li><a href="#">Local chapters</a></li>
+            <li><a href="#">Newsletter</a></li>
+            <li><a href="#">Donate</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>About</h4>
+          <ul>
+            <li><a href="#">Founding principle</a></li>
+            <li><a href="#">Helga Zepp-LaRouche</a></li>
+            <li><a href="#">Press coverage</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Deutsch 🇩🇪</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span class="js-year">2026</span> Schiller Institute. Founded 1984 by Helga Zepp-LaRouche.</span>
+        <span>
+          <a href="#">Privacy</a> · <a href="#">Impressum</a> · Earth &amp; Moon imagery: NASA · Portraits &amp; engravings: public domain via Wikimedia Commons
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/hero-v4.js"></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/story-v3.js" defer></script>
+</body>
+</html>

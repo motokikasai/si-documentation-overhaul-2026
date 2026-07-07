@@ -89,6 +89,56 @@ economy" layer:
   background. Scroll smoothing tightens to ~1:1 near the runway end so the
   hero's responsiveness matches native scroll at handoff.
 
+## Hero v4 (`index-v4.html` + `js/hero-v4.js`)
+
+Builds on v3 (which stays frozen for comparison) — a "living sky, densifying
+network" pass. The page/story layers are unchanged and shared with v3
+(`css/story-v3.css`, `js/story-v3.js`).
+
+- **Denser, more natural starfield:** +3,200 faint filler stars sky-wide and
+  a **Milky-Way belt**: 3,000 densely clustered tiny stars along a tilted
+  great circle (gaussian falloff) plus ~480 large, ultra-faint, clumped
+  nebulosity patches that give the belt its diffuse milky ribbon — like a
+  real dark-site sky. On top of the v3 population (10,400 stars total).
+  The belt plane passes ~16° from the view axis, so the ribbon always
+  crosses the visible sky. A scattered ~24% subset
+  "breathes": slow, irregular dimming/brightening from two incommensurate
+  sine waves per star (per-star speed/amplitude attributes), so no two
+  pulse alike and nothing strobes; the rest shimmer only slowly and
+  shallowly (fast shimmer reads as flicker). Filler/band stars are capped
+  small and dim; the sky gets texture and depth, not glare. Sub-pixel
+  stars rasterize at a stable ≥1.6px footprint with linear alpha
+  compensation, so camera motion (scrolling) can't make them pop against
+  the pixel grid.
+- **Occasional shooting stars:** a pool of two faint line streaks, one every
+  ~10–20 s at random upper-sky positions and downward-diagonal angles,
+  ~0.7–1.3 s lifetime, sine fade envelope, peak opacity below the brightest
+  fixed stars. The spawn zone excludes the screen center (Earth + headline).
+  Disabled under `prefers-reduced-motion`.
+- **Second corridor wave (tier 2):** 27 thinner links reaching 27 secondary
+  cities on every continent (Seattle→Melbourne, San Francisco→Rio,
+  Accra→Tashkent…). They start drawing mid-act-2 (`p≈0.68`, during the
+  pull-back) with scattered staggering and complete by the end of act 3
+  (`p≈0.985`) — the network keeps densifying after the trunk story is told.
+  Kept quiet by design: ~1/3 trunk opacity in a desaturated gold, less arc
+  lift (they hug the surface), small dim nodes, **no** pulses. WebGL can't
+  draw sub-pixel line widths, so "thinner" is rendered as dimmer + flatter.
+  Six of the 27 are **T-junction branches** (`BRANCHES2`) that leave an
+  existing corridor mid-span and descend to cities sitting near its route
+  (Warsaw, Tashkent, Accra, Seoul, Quito, Venice) — real networks branch,
+  and no tier-2 line parallels a trunk. Branch starts are explicit and
+  ordered after the host line reaches the junction (Venice branches off
+  the tier-2 Paris–Rome line, which itself draws late).
+- **Light budget:** tier-0/1 lines dim ~15% as the second wave grows — the
+  finale reads as light redistributing across the network, not piling up.
+- **Day-side masking:** corridor lines render through a small
+  `ShaderMaterial` (`corridorMat`) that dims them past the sun terminator
+  (trunks/feeders to 50%, tier-2 to 35%) — additive gold over bright
+  daylight reads as noise; corridors now live mostly in the night, like
+  real city lights.
+- **Night lights:** the tier-2 wave feeds `uGrowth` too (up to +20% total
+  vs. +15% in v3) — the planet visibly keeps brightening through the finale.
+
 ## v3 story layer (below the hero)
 
 v3 replaces the generic card-grid sections of v1/v2 with a narrative page
