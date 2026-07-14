@@ -18,6 +18,29 @@ copy of every token, pattern and behavior.
 
 ## The drafts
 
+### The v4 series — "the five doors" (current generation)
+
+Inherits the v4 homepage's threads (the laurel colophon, the wordmark
+header, the gold punctuation line, the credo/proof/action spine,
+duotone-earns-color) and pushes each theme into its own register. Shared
+additions live in `css/landing-v4.css` + `js/landing-v4.js` (loaded after
+the v3 layer). **Exploration flag:** these drafts deliberately allow up to
+two bespoke showpieces per page (the v3 covenant allowed one).
+
+| File | Character | Accent | Signature interactions |
+|---|---|---|---|
+| `culture-renaissance.html` | "The Rehearsal" — a concert program you can walk into | classical violet | scroll-engraved Ode to Joy notation (shimmers while playing) · WebAudio Verdi-pitch tuning fork · concert-program playlist · persistent "nowbar" player |
+| `world-land-bridge.html` | "The Atlas" — the planet as one transit diagram | corridor cobalt | scrubbed metro-map of the corridors with hover/tap project tooltips · count-up tallies · NASA night-lights hero |
+| `peace-coalition.html` | "Midnight → Morning" — the page itself dawns | garnet | five sky surfaces travel midnight→dawn with the scroll · live countdown to Friday's session · Ten Principles decalogue (`<details>`) |
+| `fusion-space.html` | "The Ascent" — a vertical journey | plasma teal | generated parallax starfield · fixed altimeter riding page scroll (sea level → Mars) · self-assembling tokamak (scrub grammar) |
+| `youth-movement.html` | "The Torch" — a recruitment poster with a conscience | torch vermilion | poster-scale hero + city marquee · cursor-as-torch manifesto (mask spotlight; `hover:none`/reduced-motion get it fully lit) |
+
+Placeholders: every missing asset is a declared `.ph` panel (engraved
+hatch, gold frame) whose label states the intended asset — the vibe reads
+now, the production task is explicit later.
+
+### The v3 pilots
+
 | File | Pilot | Hero form | Accent | Showpiece |
 |---|---|---|---|---|
 | `oasis-plan.html` | Campaign (urgent register) | A — media (NASA ISS photo) | development green | scrubbed schematic atlas (SVG) |

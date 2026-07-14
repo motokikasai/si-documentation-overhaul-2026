@@ -1,0 +1,575 @@
+/* ==========================================================================
+   Schiller Institute — landing pages, v4x series ("the experimental wing").
+   Loaded AFTER landing.css and landing-v4.css. Five more doors, each
+   road-testing one technique the earlier series didn't:
+
+     lp-economy  · The Ledger      (verdigris · physical-economy.html)
+                   → draggable year-slider infographic (the Triple Curve)
+     lp-poet     · The Manuscript  (laurel    · poet-of-freedom.html)
+                   → literary scrollytelling, flip-glosses, quill flourish
+     lp-assembly · The Assembly    (plum      · conferences.html)
+                   → seat-map that fills, language switcher, sticky ribbon
+     lp-memory   · The Long Memory (sepia     · long-memory.html)
+                   → ambient two-thread braid + proof-curve infographic
+     lp-africa   · The Dawn Map    (indigo    · african-century.html)
+                   → map watermark + user-driven 2026→2050 light-up slider
+
+   Same covenants as before: gold stays gold, scrub both ways, everything
+   renders complete under prefers-reduced-motion, one accent per page.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1 · Accent dials
+   -------------------------------------------------------------------------- */
+body.lp-economy {   /* physical economy · verdigris (patina on real money) */
+  --accent-deep: #2f7566;
+  --accent-soft: #a9d6c9;
+  --accent-veil: rgba(47, 117, 102, 0.28);
+  --accent-tint: #235a4d;
+}
+body.lp-poet {      /* the namesake · poet's laurel */
+  --accent-deep: #55702f;
+  --accent-soft: #cddfa9;
+  --accent-veil: rgba(85, 112, 47, 0.22);
+  --accent-tint: #465c22;
+}
+body.lp-assembly {  /* conferences · plum of the stage curtain */
+  --accent-deep: #6b3554;
+  --accent-soft: #e0b8d0;
+  --accent-veil: rgba(107, 53, 84, 0.26);
+  --accent-tint: #532842;
+}
+body.lp-memory {    /* universal history · archive sepia */
+  --accent-deep: #6d4f28;
+  --accent-soft: #e0c9a0;
+  --accent-veil: rgba(109, 79, 40, 0.24);
+  --accent-tint: #553d1d;
+}
+body.lp-africa {    /* the African century · West African indigo */
+  --accent-deep: #3a3f8f;
+  --accent-soft: #b9bde8;
+  --accent-veil: rgba(58, 63, 143, 0.26);
+  --accent-tint: #2c3070;
+}
+
+/* --------------------------------------------------------------------------
+   2 · The gold range slider — shared by the year-scrub and the dawn-scrub.
+   User-driven progress: the hand does what the scroll usually does.
+   -------------------------------------------------------------------------- */
+.scrub-slider { max-width: 46rem; margin: 2.2rem auto 0; }
+.scrub-slider input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  cursor: ew-resize;
+}
+.scrub-slider input[type="range"]::-webkit-slider-runnable-track {
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-500) var(--fill, 0%), rgba(212, 169, 76, 0.25) var(--fill, 0%));
+}
+.scrub-slider input[type="range"]::-moz-range-track {
+  height: 2px;
+  background: rgba(212, 169, 76, 0.25);
+}
+.scrub-slider input[type="range"]::-moz-range-progress {
+  height: 2px;
+  background: var(--gold-500);
+}
+.scrub-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background: var(--navy-950);
+  border: 2px solid var(--gold-500);
+  box-shadow: 0 0 0 4px rgba(212, 169, 76, 0.18);
+}
+.scrub-slider input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--navy-950);
+  border: 2px solid var(--gold-500);
+  box-shadow: 0 0 0 4px rgba(212, 169, 76, 0.18);
+}
+.scrub-slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+.scrub-slider-hint {
+  text-align: center;
+  margin-top: 0.9rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+
+/* --------------------------------------------------------------------------
+   3 · The Triple Curve (physical-economy)
+   -------------------------------------------------------------------------- */
+.chart-panel {
+  margin-top: 3rem;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem);
+  border: 1px solid rgba(212, 169, 76, 0.28);
+  background:
+    radial-gradient(ellipse at 70% 0%, rgba(47, 117, 102, 0.3), transparent 60%),
+    var(--navy-950);
+  overflow-x: auto;
+}
+.chart-svg { min-width: 640px; }
+.chart-svg .ch-axis { stroke: rgba(250, 247, 240, 0.35); stroke-width: 1; }
+.chart-svg .ch-grid { stroke: rgba(250, 247, 240, 0.08); stroke-width: 1; }
+.chart-svg .ch-fin  { stroke: #e8c87e; stroke-width: 2.4; fill: none; }
+.chart-svg .ch-mon  { stroke: #9fd6de; stroke-width: 1.8; fill: none; }
+.chart-svg .ch-phys { stroke: #e2725b; stroke-width: 2.4; fill: none; }
+.chart-svg .ch-label {
+  font-family: var(--font-text);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.chart-svg .ch-label--fin  { fill: #e8c87e; }
+.chart-svg .ch-label--mon  { fill: #9fd6de; }
+.chart-svg .ch-label--phys { fill: #e2725b; }
+.chart-svg .ch-year {
+  font-family: var(--font-text);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  fill: rgba(250, 247, 240, 0.5);
+}
+.chart-cursor line { stroke: var(--gold-500); stroke-width: 1.2; stroke-dasharray: 3 4; }
+.chart-cursor text {
+  font-family: var(--font-display);
+  font-size: 15px;
+  fill: var(--gold-300);
+}
+.chart-note {
+  max-width: 40rem;
+  margin: 1.6rem auto 0;
+  min-height: 5.4rem;
+  padding: 1.1rem 1.4rem;
+  border-left: 3px solid var(--gold-500);
+  background: rgba(250, 247, 240, 0.05);
+}
+.chart-note strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: #fff;
+}
+.chart-note p { margin-top: 0.35rem; font-size: 0.85rem; line-height: 1.55; color: rgba(255, 255, 255, 0.75); }
+.chart-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+.chart-key span::before {
+  content: "";
+  display: inline-block;
+  width: 1.4em;
+  height: 3px;
+  margin-right: 0.5em;
+  vertical-align: 0.22em;
+}
+.chart-key .k-fin::before { background: #e8c87e; }
+.chart-key .k-mon::before { background: #9fd6de; }
+.chart-key .k-phys::before { background: #e2725b; }
+
+/* The bubble bars — one honest bar, one that refuses to fit */
+.bars { max-width: 46rem; margin: 3rem auto 0; }
+.bar-row { margin-top: 1.8rem; }
+.bar-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: 0.78rem;
+  color: var(--ink-600);
+}
+.bar-label strong { font-family: var(--font-display); font-size: 1rem; color: var(--navy-800); }
+.bar-track { position: relative; height: 22px; margin-top: 0.5rem; background: rgba(15, 31, 61, 0.06); overflow: visible; }
+.bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  transition: width 1.6s cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+.bar-fill--phys { background: var(--accent-deep, #2f7566); }
+.bar-fill--fin { background: repeating-linear-gradient(-45deg, #d4a94c 0 8px, #c1943a 8px 16px); }
+.fx.is-in .bar-fill { width: var(--w, 50%); }
+.bar-overflow {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  padding-left: 0.6rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a6d2f;
+  opacity: 0;
+  transition: opacity 0.5s ease 1.4s;
+}
+.fx.is-in .bar-overflow { opacity: 1; }
+.bars-foot { margin-top: 1.6rem; text-align: center; font-size: 0.72rem; color: var(--ink-600); }
+@media (prefers-reduced-motion: reduce) {
+  .bar-fill { transition: none; width: var(--w, 50%); }
+  .bar-overflow { transition: none; opacity: 1; }
+}
+
+/* --------------------------------------------------------------------------
+   4 · The Manuscript (poet-of-freedom)
+   -------------------------------------------------------------------------- */
+.quill-svg { width: min(360px, 70%); height: auto; margin: 1.6rem auto 0; display: block; overflow: visible; }
+.quill-svg path { stroke: var(--gold-500); stroke-width: 2; fill: none; stroke-linecap: round; }
+
+/* flip-gloss: German line ⇄ English on hover / focus / tap */
+.gloss-stanza { max-width: 40rem; margin: 3rem auto 0; text-align: center; }
+.gloss {
+  display: block;
+  width: 100%;
+  position: relative;
+  border: 0;
+  background: none;
+  padding: 0.45rem 0;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.6vw, 1.7rem);
+  line-height: 1.5;
+}
+.gloss .g-de { color: rgba(250, 247, 240, 0.95); transition: opacity 0.35s ease; }
+.gloss .g-en {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0;
+  font-style: italic;
+  color: var(--gold-300);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.gloss:hover .g-de, .gloss:focus-visible .g-de, .gloss.is-flipped .g-de { opacity: 0.12; }
+.gloss:hover .g-en, .gloss:focus-visible .g-en, .gloss.is-flipped .g-en { opacity: 1; }
+.gloss-hint {
+  margin-top: 1.8rem;
+  text-align: center;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(250, 247, 240, 0.45);
+}
+
+/* --------------------------------------------------------------------------
+   5 · The Assembly (conferences)
+   -------------------------------------------------------------------------- */
+.langbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+.langbar button {
+  padding: 0.45rem 0.95rem;
+  border: 1px solid rgba(250, 247, 240, 0.3);
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(250, 247, 240, 0.75);
+  font: 600 0.7rem/1 var(--font-text);
+  letter-spacing: 0.16em;
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+}
+.langbar button:hover { border-color: var(--gold-500); color: var(--gold-300); }
+.langbar button.is-active {
+  border-color: var(--gold-500);
+  background: rgba(212, 169, 76, 0.16);
+  color: var(--gold-300);
+}
+.lang-line { transition: opacity 0.3s ease; }
+.lang-line.is-fading { opacity: 0; }
+.lang-note {
+  margin-top: 0.9rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250, 247, 240, 0.5);
+}
+
+/* the hall: seats generated by landing-v4x.js, lit by scroll */
+.hall-panel {
+  margin-top: 3rem;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem) clamp(1rem, 2.5vw, 2rem);
+  border: 1px solid rgba(212, 169, 76, 0.28);
+  background:
+    radial-gradient(ellipse at 50% 110%, rgba(107, 53, 84, 0.45), transparent 65%),
+    var(--navy-950);
+}
+.hall-svg { display: block; width: 100%; height: auto; }
+.hall-svg .seat { fill: rgba(250, 247, 240, 0.14); transition: fill 0.4s ease; }
+.hall-svg .seat.is-lit { fill: var(--gold-300); }
+.hall-svg .seat-you { fill: none; stroke: var(--gold-500); stroke-width: 1.6; }
+@keyframes seat-pulse { 0%, 100% { stroke-opacity: 1; r: 6; } 50% { stroke-opacity: 0.4; } }
+.hall-svg .seat-you.is-open { animation: seat-pulse 2.2s ease-in-out infinite; }
+.hall-svg .hall-stage { fill: none; stroke: rgba(212, 169, 76, 0.6); stroke-width: 1.2; }
+.hall-svg .hall-label {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13px;
+  fill: rgba(250, 247, 240, 0.55);
+  text-anchor: middle;
+}
+.hall-cap {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+.hall-cap strong { color: var(--gold-300); font-weight: 600; }
+@media (prefers-reduced-motion: reduce) {
+  .hall-svg .seat-you.is-open { animation: none; }
+}
+
+/* the sticky registration ribbon — the assertive-conversion experiment */
+.ribbon {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 85;
+  transform: translateY(110%);
+  transition: transform 0.45s cubic-bezier(0.22, 0.8, 0.3, 1);
+  background: rgba(6, 13, 31, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(212, 169, 76, 0.55);
+}
+.ribbon.is-up { transform: none; }
+.ribbon-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0.65rem 3rem 0.65rem 1.2rem;
+}
+.ribbon-text { font-size: 0.82rem; color: rgba(255, 255, 255, 0.85); }
+.ribbon-text strong { font-family: var(--font-display); color: #fff; }
+.ribbon .btn { padding: 0.5rem 1.3rem; font-size: 0.72rem; }
+.ribbon-close {
+  position: absolute;
+  right: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.ribbon-close:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
+
+/* proscenium curtains for the assembly hero */
+.curtain-hero { position: relative; overflow: hidden; }
+.curtain-hero::before,
+.curtain-hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(40px, 9vw, 130px);
+  pointer-events: none;
+  z-index: 1;
+}
+.curtain-hero::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(83, 40, 66, 0.85), rgba(83, 40, 66, 0.35) 55%, transparent);
+}
+.curtain-hero::after {
+  right: 0;
+  background: linear-gradient(-90deg, rgba(83, 40, 66, 0.85), rgba(83, 40, 66, 0.35) 55%, transparent);
+}
+
+/* --------------------------------------------------------------------------
+   6 · The Long Memory (universal history)
+   -------------------------------------------------------------------------- */
+.braid-section { position: relative; }
+.braid-svg {
+  position: absolute;
+  left: clamp(0.4rem, 2vw, 2rem);
+  top: 0;
+  height: 100%;
+  width: 56px;
+  overflow: visible;
+  pointer-events: none;
+}
+.braid-svg .br-gold { stroke: var(--gold-500); stroke-width: 1.8; fill: none; vector-effect: non-scaling-stroke; }
+.braid-svg .br-grey { stroke: rgba(250, 247, 240, 0.28); stroke-width: 1.4; fill: none; vector-effect: non-scaling-stroke; stroke-dasharray: none; }
+@media (max-width: 980px) { .braid-svg { display: none; } }
+
+.thread-tag {
+  display: inline-block;
+  padding: 0.28rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.thread-tag--gold { border: 1px solid rgba(212, 169, 76, 0.6); color: #8a6d2f; }
+.thread-tag--grey { border: 1px solid rgba(74, 85, 104, 0.45); color: var(--ink-600); }
+.section-navy .thread-tag--gold, .braid-section .thread-tag--gold { color: var(--gold-300); }
+
+/* the proof curve: population as the verdict */
+.popchart-panel {
+  max-width: 44rem;
+  margin: 3rem auto 0;
+  padding: clamp(1.4rem, 3.5vw, 2.4rem);
+  border: 1px solid rgba(15, 31, 61, 0.14);
+  background: #fff;
+}
+.popchart-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.popchart-svg .pc-axis { stroke: rgba(15, 31, 61, 0.3); stroke-width: 1; }
+.popchart-svg .pc-line { stroke: var(--gold-500); stroke-width: 2.4; fill: none; }
+.popchart-svg .pc-mark { fill: var(--accent-deep, #6d4f28); }
+.popchart-svg .pc-label {
+  font-family: var(--font-text);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  fill: var(--ink-600);
+}
+.popchart-svg .pc-big {
+  font-family: var(--font-display);
+  font-size: 17px;
+  fill: var(--navy-800);
+}
+.popchart-cap { margin-top: 1.2rem; text-align: center; font-size: 0.78rem; color: var(--ink-600); }
+
+/* --------------------------------------------------------------------------
+   7 · The Dawn Map (african-century)
+   -------------------------------------------------------------------------- */
+.africa-wm {
+  position: absolute;
+  right: clamp(-60px, 2vw, 6%);
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(280px, 38vw, 560px);
+  height: auto;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.africa-wm path { stroke: rgba(212, 169, 76, 0.55); stroke-width: 1.4; fill: rgba(58, 63, 143, 0.12); }
+
+.map-stage {
+  margin-top: 3rem;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem);
+  border: 1px solid rgba(212, 169, 76, 0.28);
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(58, 63, 143, 0.35), transparent 62%),
+    var(--navy-950);
+}
+.map-svg { display: block; max-width: 560px; margin: 0 auto; width: 100%; height: auto; overflow: visible; }
+.map-svg .mp-coast { stroke: rgba(185, 189, 232, 0.55); stroke-width: 1.3; fill: rgba(58, 63, 143, 0.1); }
+.map-svg .mp-corridor {
+  stroke: var(--gold-500);
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.25s linear;
+}
+.map-svg .mp-city { fill: rgba(250, 247, 240, 0.3); transition: fill 0.4s ease, r 0.4s ease; }
+.map-svg .mp-city.is-on { fill: #fff7d9; }
+.map-svg .mp-node { fill: none; stroke: var(--gold-300); stroke-width: 1.4; opacity: 0; transition: opacity 0.4s ease; }
+.map-svg .mp-node.is-on { opacity: 1; }
+.map-svg .mp-label {
+  font-family: var(--font-text);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: rgba(255, 255, 255, 0.55);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.map-svg .mp-label.is-on { opacity: 1; }
+.map-readout {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  margin-top: 1.8rem;
+  text-align: center;
+}
+.map-readout .mr-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+  color: var(--gold-300);
+  font-variant-numeric: tabular-nums;
+}
+.map-readout .mr-lab {
+  margin-top: 0.35rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+.map-foot { margin-top: 1.4rem; text-align: center; font-size: 0.68rem; color: rgba(255,255,255,0.4); }
+
+/* the demographic bars */
+.demo-bars {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(2rem, 8vw, 5rem);
+  margin-top: 3rem;
+  min-height: 240px;
+}
+.demo-bar { text-align: center; width: clamp(70px, 12vw, 120px); }
+.demo-col {
+  position: relative;
+  width: 100%;
+  height: var(--h, 100px);
+  transform-origin: bottom;
+  transform: scaleY(0);
+  transition: transform 1.2s cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+.fx.is-in .demo-col { transform: none; }
+.demo-col--a { background: var(--accent-deep, #3a3f8f); }
+.demo-col--b { background: rgba(15, 31, 61, 0.22); }
+.demo-num { margin-top: 0.7rem; font-family: var(--font-display); font-size: 1.5rem; color: var(--navy-800); }
+.demo-lab { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-600); margin-top: 0.25rem; }
+@media (prefers-reduced-motion: reduce) { .demo-col { transition: none; transform: none; } }

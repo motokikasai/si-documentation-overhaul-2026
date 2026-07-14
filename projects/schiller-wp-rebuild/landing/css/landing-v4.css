@@ -1,0 +1,928 @@
+/* ==========================================================================
+   Schiller Institute — landing pages, v4 series ("the five doors").
+   Loaded AFTER css/landing.css (which imports the homepage design system).
+   Inherits the v4 homepage's thematic threads — the laurel, the gold
+   punctuation line, the credo/proof/action spine, duotone-earns-color —
+   and pushes each theme into its own register:
+
+     lp-culture  · The Rehearsal      (violet   · culture-renaissance.html)
+     lp-bridge   · The Atlas          (cobalt   · world-land-bridge.html)
+     lp-peace    · Midnight → Morning (garnet   · peace-coalition.html)
+     lp-cosmos   · The Ascent         (plasma   · fusion-space.html)
+     lp-youth    · The Torch          (vermilion· youth-movement.html)
+
+   Exploration flag: these drafts deliberately allow up to TWO bespoke
+   showpieces per page (the v3 covenant allowed one). Everything else —
+   gold stays gold, scrub both ways, reduced-motion renders complete —
+   still holds.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1 · New accent dials (lp-culture and lp-oasis live in landing.css)
+   -------------------------------------------------------------------------- */
+body.lp-bridge {   /* flagship campaign · corridor cobalt */
+  --accent-deep: #155084;
+  --accent-soft: #a9cbec;
+  --accent-veil: rgba(21, 80, 132, 0.30);
+  --accent-tint: #10395e;
+}
+body.lp-peace {    /* urgent coalition · garnet before dawn */
+  --accent-deep: #7c2231;
+  --accent-soft: #e5b7be;
+  --accent-veil: rgba(124, 34, 49, 0.26);
+  --accent-tint: #571823;
+}
+body.lp-cosmos {   /* science driver · plasma teal */
+  --accent-deep: #0d5f6e;
+  --accent-soft: #9fd6de;
+  --accent-veil: rgba(13, 95, 110, 0.28);
+  --accent-tint: #0b4550;
+}
+body.lp-youth {    /* recruitment · torch vermilion */
+  --accent-deep: #a3441f;
+  --accent-soft: #f0c0a5;
+  --accent-veil: rgba(163, 68, 31, 0.24);
+  --accent-tint: #7c3013;
+}
+
+/* --------------------------------------------------------------------------
+   2 · Header logo swap — v4 uses the wordmark image, not the text brand.
+   "ondark" logo for dark backdrops, "onlight" until a light hero scrolls.
+   -------------------------------------------------------------------------- */
+.brand-logo--onlight { display: none; }
+.lp-lighthero .site-header:not(.is-scrolled) .brand-logo--ondark { display: none; }
+.lp-lighthero .site-header:not(.is-scrolled) .brand-logo--onlight { display: block; }
+
+/* --------------------------------------------------------------------------
+   3 · Placeholders — every missing asset is declared, elegantly.
+   An engraved hatch panel with gold corner ticks; the label states the
+   intended asset so the vibe reads and the production task is explicit.
+   -------------------------------------------------------------------------- */
+.ph {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  width: 100%;
+  min-height: 200px;
+  padding: 1.6rem;
+  text-align: center;
+  border: 1px solid rgba(212, 169, 76, 0.45);
+  background:
+    repeating-linear-gradient(45deg,
+      rgba(15, 31, 61, 0.045) 0 1px, transparent 1px 9px),
+    var(--ivory-100);
+  color: var(--ink-600);
+}
+.ph::after {  /* inner hairline: the "double rule" of an engraver's frame */
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(212, 169, 76, 0.35);
+  pointer-events: none;
+}
+.ph--dark {
+  background:
+    repeating-linear-gradient(45deg,
+      rgba(250, 247, 240, 0.05) 0 1px, transparent 1px 9px),
+    rgba(6, 13, 31, 0.55);
+  color: rgba(250, 247, 240, 0.72);
+}
+.ph-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-500);
+}
+.ph-label {
+  max-width: 30rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.ph-play {  /* video placeholders get the play badge */
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-500);
+  display: grid;
+  place-items: center;
+  margin-bottom: 0.3rem;
+}
+.ph-play::before {
+  content: "";
+  border-left: 16px solid var(--gold-500);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  margin-left: 4px;
+}
+.ph--portrait {  /* people-row roundel placeholder */
+  min-height: 0;
+  width: 7.5rem;
+  height: 7.5rem;
+  padding: 0.6rem;
+  border-radius: 50%;
+  margin: 0 auto 1.1rem;
+}
+.ph--portrait::after { border-radius: 50%; inset: 5px; }
+.ph--portrait .ph-label { font-size: 0.62rem; line-height: 1.35; }
+
+/* --------------------------------------------------------------------------
+   4 · Generic scrub SVG surface (the atlas grammar, freed from the atlas)
+   Any [data-scrub] svg: hairlines with [data-draw] draw, [data-on] appears.
+   -------------------------------------------------------------------------- */
+.scrub-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.scrub-svg [data-draw] {
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.15s linear;
+}
+.scrub-svg [data-on] { opacity: 0; transition: opacity 0.45s ease; }
+.scrub-svg [data-on].is-on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .scrub-svg [data-draw] { stroke-dashoffset: 0; transition: none; }
+  .scrub-svg [data-on] { opacity: 1; transition: none; }
+}
+
+/* --------------------------------------------------------------------------
+   5 · The Nowbar — the page keeps singing while you read.
+   A persistent gold-hairline player that rises when any score plays.
+   -------------------------------------------------------------------------- */
+.nowbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  transform: translateY(110%);
+  transition: transform 0.45s cubic-bezier(0.22, 0.8, 0.3, 1);
+  background: rgba(6, 13, 31, 0.94);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(212, 169, 76, 0.55);
+}
+.nowbar.is-up { transform: none; }
+.nowbar-progress {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--gold-500);
+}
+.nowbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0.55rem 1.2rem;
+}
+.nowbar-btn {
+  flex: none;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  border: 1px solid var(--gold-500);
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.nowbar-btn svg { width: 0.8rem; height: 0.8rem; fill: var(--gold-500); }
+.nowbar-btn .i-pause { display: none; }
+.nowbar.is-playing .i-play { display: none; }
+.nowbar.is-playing .i-pause { display: block; }
+.nowbar-title {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nowbar-title em { font-style: normal; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; }
+.nowbar-time {
+  flex: none;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.55);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   6 · The concert program — musical offerings as a printed program.
+   Rows are score players sharing the nowbar; placeholders declare themselves.
+   -------------------------------------------------------------------------- */
+.program { max-width: 46rem; margin: 3rem auto 0; }
+.program-row {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.25rem 0.4rem;
+  border-top: 1px solid rgba(250, 247, 240, 0.14);
+}
+.program-row:last-of-type { border-bottom: 1px solid rgba(250, 247, 240, 0.14); }
+.program-numeral {
+  flex: none;
+  width: 2.4rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--gold-500);
+  text-align: center;
+}
+.program-body { flex: 1; min-width: 0; }
+.program-piece {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.08rem;
+  color: #fff;
+}
+.program-perf { font-size: 0.78rem; color: rgba(255, 255, 255, 0.55); margin-top: 0.15rem; }
+.program-btn {
+  flex: none;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  border: 0;
+  background: var(--gold-500);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.program-btn:hover { background: var(--gold-300); transform: scale(1.06); }
+.program-btn svg { width: 0.85rem; height: 0.85rem; fill: var(--navy-950); }
+.program-btn .i-pause { display: none; }
+.program-row.is-playing .i-play { display: none; }
+.program-row.is-playing .i-pause { display: block; }
+.program-row.is-ph .program-btn {
+  background: transparent;
+  border: 1px dashed rgba(212, 169, 76, 0.55);
+  cursor: default;
+}
+.program-row.is-ph .program-btn svg { fill: rgba(212, 169, 76, 0.55); }
+.program-note {
+  margin-top: 1.6rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* --------------------------------------------------------------------------
+   7 · The engraved score — notation that writes itself as you scroll,
+   and shimmers while the recording plays (.is-singing).
+   -------------------------------------------------------------------------- */
+.notation-panel {
+  margin-top: 3rem;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem);
+  border: 1px solid rgba(212, 169, 76, 0.28);
+  background:
+    radial-gradient(ellipse at 30% 0%, rgba(61, 42, 99, 0.35), transparent 60%),
+    var(--navy-950);
+  overflow-x: auto;
+}
+.notation-svg { min-width: 640px; }
+.notation-svg .nt-staff { stroke: rgba(250, 247, 240, 0.34); stroke-width: 1; }
+.notation-svg .nt-bar { stroke: rgba(250, 247, 240, 0.45); stroke-width: 1; }
+.notation-svg .nt-note ellipse { fill: var(--gold-300); }
+.notation-svg .nt-note line { stroke: var(--gold-300); stroke-width: 1.6; }
+.notation-svg .nt-lyric {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13px;
+  fill: rgba(250, 247, 240, 0.66);
+}
+.notation-svg .nt-clef {
+  font-family: var(--font-display);
+  font-size: 54px;
+  fill: rgba(250, 247, 240, 0.7);
+}
+.notation-cap {
+  margin-top: 1.3rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+@keyframes nt-sing {
+  0%, 100% { fill: var(--gold-300); }
+  50% { fill: #fff7e0; }
+}
+.is-singing .nt-note.is-on ellipse { animation: nt-sing 1.35s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .is-singing .nt-note.is-on ellipse { animation: none; }
+}
+
+/* --------------------------------------------------------------------------
+   8 · The tuning fork — hear the Verdi pitch (WebAudio, no assets)
+   -------------------------------------------------------------------------- */
+.tuning {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 44rem;
+  margin: 3rem auto 0;
+}
+.tuning-card {
+  padding: 2.2rem 1.6rem 2rem;
+  text-align: center;
+  border: 1px solid rgba(15, 31, 61, 0.14);
+  background: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.tuning-card.is-sounding {
+  border-color: var(--gold-500);
+  box-shadow: 0 12px 40px -18px rgba(212, 169, 76, 0.65);
+}
+.tuning-hz {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--navy-800);
+}
+.tuning-hz small { font-size: 1.05rem; color: var(--ink-600); }
+.tuning-name {
+  margin-top: 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.tuning-desc { margin-top: 0.7rem; font-size: 0.82rem; color: var(--ink-600); }
+.tuning-btn {
+  margin-top: 1.3rem;
+  padding: 0.6rem 1.5rem;
+  border: 1px solid var(--gold-500);
+  border-radius: 999px;
+  background: transparent;
+  font: 600 0.72rem/1 var(--font-text);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8a6d2f;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.tuning-btn:hover, .is-sounding .tuning-btn { background: var(--gold-500); color: var(--navy-950); }
+@keyframes fork-ring {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+.tuning-wave {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  margin: 1.1rem auto 0;
+  border-radius: 50%;
+  background: var(--gold-500);
+  opacity: 0.25;
+}
+.is-sounding .tuning-wave { opacity: 1; }
+.is-sounding .tuning-wave::before,
+.is-sounding .tuning-wave::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-500);
+  animation: fork-ring 1.6s ease-out infinite;
+}
+.is-sounding .tuning-wave::after { animation-delay: 0.8s; }
+.tuning-foot {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--ink-600);
+}
+@media (max-width: 620px) { .tuning { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) {
+  .is-sounding .tuning-wave::before, .is-sounding .tuning-wave::after { animation: none; }
+}
+
+/* --------------------------------------------------------------------------
+   9 · Sparks of Joy — the daily Beethoven card
+   -------------------------------------------------------------------------- */
+.spark {
+  display: flex;
+  align-items: stretch;
+  gap: 1.8rem;
+  max-width: 46rem;
+  margin: 3rem auto 0;
+  padding: 1.8rem 2rem;
+  background: #fff;
+  border: 1px solid rgba(15, 31, 61, 0.12);
+  border-left: 3px solid var(--gold-500);
+}
+.spark-date {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding-right: 1.6rem;
+  border-right: 1px solid rgba(212, 169, 76, 0.4);
+}
+.spark-day { font-family: var(--font-display); font-size: 2.1rem; line-height: 1; color: var(--navy-800); }
+.spark-mon {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-top: 0.3rem;
+}
+.spark-body h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; color: var(--navy-800); }
+.spark-body p { margin-top: 0.4rem; font-size: 0.88rem; color: var(--ink-600); }
+.spark-link {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8a6d2f;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(212, 169, 76, 0.6);
+  padding-bottom: 2px;
+}
+.spark-link:hover { color: var(--navy-800); }
+@media (max-width: 560px) {
+  .spark { flex-direction: column; gap: 1.2rem; }
+  .spark-date { flex-direction: row; gap: 0.6rem; align-items: baseline; padding: 0 0 1rem; border-right: 0; border-bottom: 1px solid rgba(212, 169, 76, 0.4); }
+}
+
+/* --------------------------------------------------------------------------
+   10 · Chorus stations pills (cities) — small recruitment row
+   -------------------------------------------------------------------------- */
+.city-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem; margin-top: 2.4rem; }
+.city-pill {
+  padding: 0.55rem 1.15rem;
+  border: 1px solid rgba(15, 31, 61, 0.2);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--navy-800);
+  text-decoration: none;
+  transition: border-color 0.25s, background 0.25s;
+}
+.city-pill:hover { border-color: var(--gold-500); background: rgba(212, 169, 76, 0.1); }
+.city-pill em { font-style: normal; color: var(--ink-600); font-size: 0.68rem; margin-left: 0.4rem; }
+
+/* --------------------------------------------------------------------------
+   11 · The transit atlas (world-land-bridge) — the planet as one system.
+   Metro-diagram grammar: lines draw, stops appear, hover reveals the works.
+   -------------------------------------------------------------------------- */
+.transit-panel {
+  margin-top: 3rem;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(0.8rem, 2.5vw, 2.2rem) clamp(1.2rem, 3vw, 2rem);
+  border: 1px solid rgba(212, 169, 76, 0.28);
+  background:
+    radial-gradient(ellipse at 24% 12%, rgba(37, 99, 176, 0.22), transparent 60%),
+    var(--navy-950);
+  position: relative;
+  overflow-x: auto;
+}
+.transit-svg { min-width: 820px; }
+.transit-svg .tr-line { stroke: var(--gold-500); stroke-width: 2.4; stroke-linecap: round; }
+.transit-svg .tr-branch { stroke: var(--gold-300); stroke-width: 1.3; stroke-dasharray: none; }
+.transit-svg .tr-link { stroke: rgba(207, 224, 245, 0.75); stroke-width: 1.4; stroke-dasharray: 3 5; }
+.transit-svg .tr-stop circle {
+  fill: var(--navy-950);
+  stroke: #fff;
+  stroke-width: 1.6;
+  transition: r 0.2s, stroke 0.2s;
+}
+.transit-svg .tr-hit { fill: transparent !important; stroke: none !important; }
+.transit-svg .tr-stop.tr-hub circle { stroke: var(--gold-300); stroke-width: 2; }
+.transit-svg .tr-stop { cursor: pointer; }
+.transit-svg .tr-stop:hover circle, .transit-svg .tr-stop:focus circle { stroke: var(--gold-500); }
+.transit-svg .tr-name {
+  font-family: var(--font-text);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: rgba(255, 255, 255, 0.72);
+  pointer-events: none;
+}
+.transit-svg .tr-linelabel {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 12px;
+  fill: rgba(232, 200, 126, 0.8);
+}
+.transit-svg .tr-water {
+  font-family: var(--font-text);
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  fill: rgba(107, 163, 232, 0.8);
+}
+.tr-tipbox {
+  position: absolute;
+  z-index: 5;
+  max-width: 15.5rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--ivory-50);
+  border: 1px solid var(--gold-500);
+  box-shadow: 0 14px 34px -14px rgba(0, 0, 0, 0.6);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--ink-900);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.tr-tipbox.is-on { opacity: 1; transform: none; }
+.tr-tipbox strong { display: block; font-family: var(--font-display); font-size: 0.85rem; color: var(--navy-800); }
+.tr-tipbox em { display: block; font-style: normal; margin-top: 0.3rem; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-deep, #155084); }
+.transit-cap {
+  margin-top: 1.4rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Tally — counters that count up when they arrive */
+.tally {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1.5rem;
+  max-width: 52rem;
+  margin: 3.2rem auto 0;
+  text-align: center;
+}
+.tally-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 4.5vw, 3rem);
+  line-height: 1;
+  color: var(--gold-300);
+  font-variant-numeric: tabular-nums;
+}
+.tally-num small { font-size: 0.5em; color: rgba(232, 200, 126, 0.8); }
+.tally-lab {
+  margin-top: 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+.tally-foot { grid-column: 1 / -1; font-size: 0.68rem; color: rgba(255,255,255,0.4); }
+.section-ivory .tally-num, .section-ivory-alt .tally-num { color: #8a6d2f; }
+.section-ivory .tally-lab, .section-ivory-alt .tally-lab { color: var(--ink-600); }
+
+/* --------------------------------------------------------------------------
+   12 · The sky (peace-coalition) — the page travels midnight → morning.
+   Five surfaces, each blending into the next; type flips at the horizon.
+   -------------------------------------------------------------------------- */
+.sky-midnight { background: #05070f; color: rgba(250, 247, 240, 0.92); }
+.sky-nocturne { background: linear-gradient(180deg, #05070f, #0d1730); color: rgba(250, 247, 240, 0.92); }
+.sky-dusk {
+  background: linear-gradient(180deg, #0d1730 0%, #232744 42%, #52405a 76%, #a86f5c 100%);
+  color: rgba(250, 247, 240, 0.94);
+}
+.sky-dawn {
+  background: linear-gradient(180deg, #a86f5c 0%, #dbb491 34%, #f6efe2 72%, var(--ivory-50) 100%);
+  color: var(--ink-900);
+}
+.sky-day { background: var(--ivory-50); color: var(--ink-900); }
+
+/* Dark credo variant — same form, nocturnal surface */
+.credo-band--dark { background: transparent; }
+.credo-band--dark .credo-text { color: rgba(250, 247, 240, 0.94); }
+.credo-band--dark .credo-sign { color: rgba(250, 247, 240, 0.6); }
+
+/* The clock — 23:58, engraved */
+.clockface { width: clamp(120px, 16vw, 168px); height: auto; margin: 0 auto 2.2rem; display: block; }
+.clockface .ck-ring { fill: none; stroke: rgba(250, 247, 240, 0.4); stroke-width: 1.2; }
+.clockface .ck-tick { stroke: rgba(250, 247, 240, 0.4); stroke-width: 1.2; }
+.clockface .ck-tick--main { stroke: rgba(250, 247, 240, 0.75); stroke-width: 1.6; }
+.clockface .ck-hand { stroke: var(--gold-500); stroke-linecap: round; }
+.clockface .ck-pin { fill: var(--gold-500); }
+@keyframes ck-breathe { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+.clockface .ck-glow { animation: ck-breathe 4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .clockface .ck-glow { animation: none; } }
+
+/* Countdown to Friday */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1rem, 4vw, 2.6rem);
+  margin-top: 2.2rem;
+}
+.cd-seg { text-align: center; }
+.cd-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  line-height: 1;
+  color: var(--gold-300);
+  font-variant-numeric: tabular-nums;
+}
+.cd-lab {
+  margin-top: 0.45rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(250, 247, 240, 0.55);
+}
+.cd-title {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent-soft, #e5b7be);
+  margin-top: 2.6rem;
+}
+
+/* The decalogue — Ten Principles as engraved tablets */
+.decalogue {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.4rem;
+  max-width: 56rem;
+  margin: 3rem auto 0;
+}
+.tenet {
+  border: 1px solid rgba(250, 247, 240, 0.22);
+  background: rgba(6, 13, 31, 0.35);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.tenet[open], .tenet:hover { border-color: rgba(212, 169, 76, 0.75); background: rgba(6, 13, 31, 0.55); }
+.tenet summary {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.05rem 1.2rem;
+  cursor: pointer;
+  list-style: none;
+}
+.tenet summary::-webkit-details-marker { display: none; }
+.tenet-numeral {
+  flex: none;
+  width: 2.2rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--gold-300);
+}
+.tenet-title {
+  flex: 1;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.02rem;
+  color: #fff;
+}
+.tenet-mark {
+  flex: none;
+  font-family: var(--font-display);
+  color: var(--gold-500);
+  transition: transform 0.3s ease;
+}
+.tenet[open] .tenet-mark { transform: rotate(45deg); }
+.tenet-body {
+  padding: 0 1.2rem 1.2rem 4.4rem;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: rgba(250, 247, 240, 0.78);
+}
+@media (max-width: 720px) {
+  .decalogue { grid-template-columns: 1fr; }
+  .tenet-body { padding-left: 1.2rem; }
+}
+
+/* --------------------------------------------------------------------------
+   13 · The ascent (fusion-space) — starfield, altimeter, waypoints, tokamak
+   -------------------------------------------------------------------------- */
+.starscape { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.star-layer { position: absolute; inset: -20% 0; will-change: transform; }
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+}
+@keyframes star-twinkle { 0%, 100% { opacity: 0.85; } 50% { opacity: 0.3; } }
+.star--tw { animation: star-twinkle 5s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .star--tw { animation: none; } }
+
+.altimeter {
+  position: fixed;
+  right: clamp(0.8rem, 2.2vw, 2.2rem);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: min(58vh, 460px);
+  pointer-events: none;
+}
+.alt-rail { position: relative; flex: 1; width: 1px; margin: 0 auto; background: rgba(212, 169, 76, 0.35); }
+.alt-dot {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold-500);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 12px rgba(212, 169, 76, 0.8);
+}
+.alt-stop { position: absolute; left: 50%; transform: translateX(-50%); width: 7px; height: 1px; background: rgba(212, 169, 76, 0.6); }
+.alt-label {
+  position: absolute;
+  right: 12px;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(250, 247, 240, 0.4);
+  transition: color 0.3s ease;
+}
+.alt-label.is-passed { color: var(--gold-300); }
+@media (max-width: 1080px) { .altimeter { display: none; } }
+
+/* Tokamak — the sun in a bottle */
+.tokamak-panel {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid rgba(212, 169, 76, 0.28);
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(13, 95, 110, 0.4), transparent 65%),
+    var(--navy-950);
+}
+.tokamak-svg .tk-vessel { stroke: rgba(250, 247, 240, 0.4); stroke-width: 1.2; fill: none; }
+.tokamak-svg .tk-coil { stroke: rgba(159, 214, 222, 0.85); stroke-width: 1.4; fill: none; }
+.tokamak-svg .tk-plasma { stroke: url(#plasmaGrad); stroke-width: 30; fill: none; filter: url(#plasmaGlow); }
+.tokamak-svg .tk-label {
+  font-family: var(--font-text);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  fill: rgba(255, 255, 255, 0.66);
+}
+.tokamak-svg .tk-lead { stroke: rgba(255, 255, 255, 0.35); stroke-width: 0.8; fill: none; }
+.tokamak-aside h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: #fff; }
+.tokamak-aside p { margin-top: 0.9rem; font-size: 0.92rem; line-height: 1.65; color: rgba(255, 255, 255, 0.75); }
+@media (max-width: 860px) { .tokamak-panel { grid-template-columns: 1fr; } }
+
+/* Waypoints — the altitude beats */
+.waypoint-alt {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid rgba(212, 169, 76, 0.5);
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+  margin-bottom: 1rem;
+}
+.section-ivory .waypoint-alt, .section-ivory-alt .waypoint-alt { color: #8a6d2f; }
+
+/* --------------------------------------------------------------------------
+   14 · The torch (youth) — poster hero, marquee, cursor-lit manifesto
+   -------------------------------------------------------------------------- */
+.lp-herotype--poster h1 {
+  font-size: clamp(2.6rem, 8.2vw, 5.6rem);
+  max-width: 13.5em;
+  margin-inline: auto;
+}
+.lp-herotype--poster h1 em { color: #8a6d2f; }
+
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid rgba(212, 169, 76, 0.45);
+  border-bottom: 1px solid rgba(212, 169, 76, 0.45);
+  padding: 0.85rem 0;
+  margin-top: 3.2rem;
+}
+.marquee-track {
+  display: flex;
+  gap: 3.2rem;
+  width: max-content;
+  animation: marquee 46s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-track span {
+  flex: none;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-600);
+}
+.marquee-track span::after { content: "·"; margin-left: 3.2rem; color: var(--gold-500); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; gap: 1.2rem 2rem; }
+  .marquee-track span::after { margin-left: 2rem; }
+  .marquee-track[aria-hidden="true"] { display: none; }
+}
+
+.torchlight {
+  position: relative;
+  background: #070a14;
+  overflow: hidden;
+}
+.torch-stage { position: relative; max-width: 46rem; margin: 0 auto; text-align: center; }
+.torch-copy {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.6vw, 2.5rem);
+  line-height: 1.5;
+  color: rgba(250, 247, 240, 0.98);
+}
+.torch-copy p + p { margin-top: 2.2rem; }
+.torch-copy em { font-style: italic; color: var(--gold-300); }
+.torch-base { opacity: 0.16; transition: opacity 0.6s ease; }
+.torch-lit {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(circle 240px at var(--mx, 50%) var(--my, 40%), #000 25%, transparent 72%);
+  mask-image: radial-gradient(circle 240px at var(--mx, 50%) var(--my, 40%), #000 25%, transparent 72%);
+}
+.torch-halo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle 300px at var(--mx, 50%) var(--my, 40%), rgba(212, 169, 76, 0.13), transparent 70%);
+}
+.torchlight.is-lit .torch-base { opacity: 1; }
+.torchlight.is-lit .torch-lit, .torchlight.is-lit .torch-halo { display: none; }
+.torch-hint {
+  margin-top: 3rem;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(250, 247, 240, 0.45);
+}
+.torch-strike {
+  margin-top: 1.1rem;
+  padding: 0.55rem 1.4rem;
+  border: 1px solid rgba(212, 169, 76, 0.6);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--gold-300);
+  font: 600 0.68rem/1 var(--font-text);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.torch-strike:hover { background: rgba(212, 169, 76, 0.14); }
+/* No fine pointer (touch) or reduced motion → the text is simply lit */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .torch-base { opacity: 1; }
+  .torch-lit, .torch-halo, .torch-hint, .torch-strike { display: none; }
+}
+
+/* --------------------------------------------------------------------------
+   15 · Laurel colophon — the v4 footer divider, shared by the series
+   -------------------------------------------------------------------------- */
+.footer-divider {
+  display: block;
+  width: min(320px, 70%);
+  height: auto;
+  margin: 0 auto 2.75rem;
+  opacity: 0.85;
+}
+.credo { position: relative; overflow: hidden; }
+.credo .wrap { position: relative; }
+.credo-watermark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(700px, 140vw);
+  height: auto;
+  transform: translate(-50%, -50%);
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* Credo band variant used inside sky/dark sections keeps the ivory dropcap gold */
+.credo-band--dark .credo-text .dropcap { color: var(--gold-500); }
