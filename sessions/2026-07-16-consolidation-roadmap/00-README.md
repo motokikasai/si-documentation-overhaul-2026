@@ -15,10 +15,11 @@ Dedicated, self-contained record of the 2026-07-16 working session. Designed for
 | `01-live-site-audit.md` | Full crawl evidence: sitemaps, nav, URL bases, 176-category tree, page anatomy, verbatim timestamp formats (3 WP eras) | ✅ complete |
 | `02-youtube-channel-audit.md` | 74 playlists enumerated, 4 description-timestamp regimes (verbatim), chapters/captions findings, automation estimate | ✅ complete |
 | `03-findings-vs-plan.md` | Point-by-point delta: what the crawl confirms/falsifies in the v2 plan (C1–C14) | ✅ complete |
-| `04-roadmap.md` | The consolidated end-to-end roadmap (conceptual thread + stages + effort/timeline) | pending user answers |
+| `04-roadmap.md` | The consolidated end-to-end roadmap: conceptual thread, stages P0–P8 with dev/team-hour estimates, gates, calendar projection (5–8 months, launch window Dec 2026–Mar 2027) | ✅ complete |
 | `05-category-analysis-and-taxonomy-proposal.md` | Deep analysis of the user's category/post exports + the proposed new taxonomy set (10 topics, regions, campaigns, series) + allgemein verdict | ✅ complete |
-| `06-youtube-pipeline-v2.md` | Revised presentation-generation pipeline (5-case sort, parser matrix, yt-dlp command surface) | pending |
-| `07-wpcli-playbook.md` | WP-CLI facts, techniques, command surface for the whole migration | pending |
+| `06-content-model-v3.md` | The refined content model: 7 CPTs (Forecast dropped) + 5 taxonomies + fields + relationships + URL bases; supersedes v2 schema | ✅ complete |
+| `07-youtube-pipeline-v2.md` | Presentation-generation pipeline v2: 5-source timestamp priority, 5-case sort, parser matrix, yt-dlp command surface | ✅ complete |
+| `08-wpcli-playbook.md` | WP-CLI facts & techniques: IONOS install, Pods API writes, WPML element_type discipline, category ops, command surface | ✅ complete |
 | `data/categories_full.csv` | USER EXPORT (preserved verbatim): all 257 categories with counts/dates/language | ✅ preserved |
 | `data/posts.csv` | USER EXPORT (preserved verbatim): all 4,191 posts with category slugs + tags | ✅ preserved |
 | `data/category-map-draft.csv` | GENERATED: fate/target proposal for every one of the 257 categories | ✅ complete |
@@ -29,8 +30,8 @@ Dedicated, self-contained record of the 2026-07-16 working session. Designed for
 |---|---|---|---|
 | S1 | GSC/GA4 pre-assessment on live site | **REVERSED from v2 plan: none.** GSC at cutover only (DNS domain verification — no code on the old site), submit sitemap, monitor 404s/coverage post-launch. Analytics (GA4 or alternative) only on the NEW site. Screaming Frog crawl = sole redirect source of truth. | 2026-07-16 |
 | S2 | Fresh-start aggressiveness on legacy categories/tags & their archive URLs (~12-term target) | **DECIDED IN SUBSTANCE (user, 2026-07-16):** unify categories across languages (one canonical set, WPML term translation; language-specific categories prohibited going forward); numeric-slug categories all retired; legacy names not sacred — merge/modify/absorb freely; `allgemein` removed (with reclassification pass). Recommended execution: full replacement + pattern 301s for `/blog/category/*` (archives aren't in the sitemap → low risk). See `05-…-proposal.md` §10. Residual: user to ratify the proposed 10-topic set | 2026-07-16 |
-| S3 | 8-CPT v2 model: baseline-to-refine, re-derive, or simplify below 8 | **OPEN — awaiting user** | — |
-| S4 | Timeline pacing (no-deadline pace-based vs soft/hard target) | **OPEN — awaiting user** (v2 assumption: ~20h/wk dev, 5-person team, no deadline) | — |
+| S3 | 8-CPT v2 model: baseline-to-refine, re-derive, or simplify below 8 | **DECIDED (user, 2026-07-16): refine v2 as baseline → 7 CPTs.** Forecast CPT dropped (no distinct forecast corpus exists; economics writing = Articles + Topic, reports = Document, showcase = curated Economics hub Page). Conference = auto-aggregating landing page; Presentation ("act of speech" within a Conference, video optional) and Video ("broadcast episode" in a Series) kept separate for editor clarity. Full ontology explained & accepted in-session; model in `06-content-model-v3.md` | 2026-07-16 |
+| S4 | Timeline pacing (no-deadline pace-based vs soft/hard target) | **DECIDED (user, 2026-07-16): pace-based at ~20 h/week.** Roadmap expresses dev-hours + team-hours per stage with a projected calendar range (5–8 months; launch window Dec 2026–Mar 2027, avoiding conference weeks) | 2026-07-16 |
 | S5 | `allgemein` (1,565 posts) | **Assessed & agreed: retire.** 782 of its published posts carry another category (free); 713 only-allgemein + 377 uncategorized posts → keyword-proposal pass with review; topic-less accepted as floor. Delete LAST; set default category to a housekeeping term first | 2026-07-16 |
 | S6 | Term-ID caveat | On record: category exports lack term_ids; final merges/deletes resolve slug→ID via WP-CLI/REST on the clone; numeric-slug duplicates resolve via term_id join | 2026-07-16 |
 
