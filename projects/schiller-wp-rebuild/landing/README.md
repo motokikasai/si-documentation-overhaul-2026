@@ -18,6 +18,49 @@ copy of every token, pattern and behavior.
 
 ## The drafts
 
+### The v4 series — "the five doors" (current generation)
+
+Inherits the v4 homepage's threads (the laurel colophon, the wordmark
+header, the gold punctuation line, the credo/proof/action spine,
+duotone-earns-color) and pushes each theme into its own register. Shared
+additions live in `css/landing-v4.css` + `js/landing-v4.js` (loaded after
+the v3 layer). **Exploration flag:** these drafts deliberately allow up to
+two bespoke showpieces per page (the v3 covenant allowed one).
+
+| File | Character | Accent | Signature interactions |
+|---|---|---|---|
+| `culture-renaissance.html` | "The Rehearsal" — a concert program you can walk into | classical violet | scroll-engraved Ode to Joy notation (shimmers while playing) · WebAudio Verdi-pitch tuning fork · concert-program playlist · persistent "nowbar" player |
+| `world-land-bridge.html` | "The Atlas" — the planet as one transit diagram | corridor cobalt | scrubbed metro-map of the corridors with hover/tap project tooltips · count-up tallies · NASA night-lights hero |
+| `peace-coalition.html` | "Midnight → Morning" — the page itself dawns | garnet | five sky surfaces travel midnight→dawn with the scroll · live countdown to Friday's session · Ten Principles decalogue (`<details>`) |
+| `fusion-space.html` | "The Ascent" — a vertical journey | plasma teal | generated parallax starfield · fixed altimeter riding page scroll (sea level → Mars) · self-assembling tokamak (scrub grammar) |
+| `youth-movement.html` | "The Torch" — a recruitment poster with a conscience | torch vermilion | poster-scale hero + city marquee · cursor-as-torch manifesto (mask spotlight; `hover:none`/reduced-motion get it fully lit) |
+
+Placeholders: every missing asset is a declared `.ph` panel (engraved
+hatch, gold frame) whose label states the intended asset — the vibe reads
+now, the production task is explicit later.
+
+### The v4x series — "the experimental wing"
+
+Five more doors, chosen from core principles not yet given a page, each
+road-testing one technique beyond the v4 set. Shared additions in
+`css/landing-v4x.css` + `js/landing-v4x.js` (loaded after the v4 layer);
+the laurel colophon moved to `assets/img/laurel-divider.svg` so footers
+stay lean.
+
+| File | Character | Accent | Experiment |
+|---|---|---|---|
+| `physical-economy.html` | "The Ledger" — the other set of books | verdigris | **user-driven infographic**: Triple Curve with a draggable year cursor + narrated events; a bubble bar that overflows the page |
+| `poet-of-freedom.html` | "The Manuscript" — the namesake | poet's laurel | **literary scrollytelling**: self-drawing quill flourish, German ⇄ English flip-glosses on the Ode, life in five acts |
+| `conferences.html` | "The Assembly" — the standing parliament | plum | **spatial counter + micro-proof + assertive conversion**: JS-generated seat-map fills as you scroll (one seat held open), 7-language headline switcher, dismissable sticky register ribbon |
+| `long-memory.html` | "The Long Memory" — 600 years, two ideas | archive sepia | **ambient elaborate animation**: gold/grey braid weaving down the margin; population "verdict curve" infographic |
+| `african-century.html` | "The Dawn Map" — the common aims | indigo | **map as background + user-driven time travel**: engraved Africa watermark; drag 2026→2050 to draw corridors, ignite dams, light cities, lerp the readouts |
+
+Conversion registers deliberately vary across the wing (forecast urgency ·
+salon intimacy · event registration + ribbon pressure · class enrollment ·
+skills recruitment) so the set doubles as an A/B gallery of how hard to push.
+
+### The v3 pilots
+
 | File | Pilot | Hero form | Accent | Showpiece |
 |---|---|---|---|---|
 | `oasis-plan.html` | Campaign (urgent register) | A — media (NASA ISS photo) | development green | scrubbed schematic atlas (SVG) |
