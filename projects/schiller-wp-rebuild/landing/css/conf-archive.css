@@ -1,0 +1,625 @@
+/* ==========================================================================
+   Schiller Institute — the archive wing (/conferences/ index drafts).
+   Loaded AFTER landing.css + landing-v4.css. Three treatments of ONE page —
+   the conference archive — sharing this sheet and one data file:
+
+     · conferences-gallery.html   "The Gallery"    — museum promenade,
+       cursor-lantern, year spine (vanilla, house scroll grammar)
+     · conferences-firmament.html "The Firmament"  — WebGL time-voyage
+       (three.js), HUD card, static index fallback
+     · conferences-playbill.html  "The Programme"  — GSAP/ScrollTrigger
+       playbill deck, cursor tilt, utility index
+
+   The accent for the whole conference family is the Assembly plum: these
+   pages are siblings of conferences.html ("The Assembly"), not new doors.
+   ========================================================================== */
+
+body.lp-conf {
+  --accent-deep: #6b3554;
+  --accent-soft: #e3b8d0;
+  --accent-veil: rgba(107, 53, 84, 0.26);
+  --accent-tint: #54293f;
+}
+
+/* --------------------------------------------------------------------------
+   Treatment strip — draft-review affordance: the three siblings, linked
+   -------------------------------------------------------------------------- */
+.treatment-strip {
+  padding: 0.85rem 0;
+  border-top: 1px solid rgba(212, 169, 76, 0.28);
+  border-bottom: 1px solid rgba(212, 169, 76, 0.28);
+  background: rgba(212, 169, 76, 0.06);
+  text-align: center;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-600);
+}
+.treatment-strip a { color: var(--accent-deep); text-decoration: none; border-bottom: 1px solid rgba(212, 169, 76, 0.55); }
+.treatment-strip a[aria-current] { color: #8a6d2f; border-bottom-width: 2px; }
+.treatment-strip--dark { color: rgba(255, 255, 255, 0.55); background: rgba(212, 169, 76, 0.05); }
+.treatment-strip--dark a { color: var(--gold-300); }
+.treatment-strip--dark a[aria-current] { color: var(--gold-500); }
+
+/* --------------------------------------------------------------------------
+   Vitals — the archive's numbers, counted up on arrival
+   -------------------------------------------------------------------------- */
+.vitals { background: var(--navy-900); padding: 3.2rem 0; }
+.vitals .wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+.vital-num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 2.9rem);
+  font-weight: 600;
+  color: var(--gold-300);
+  line-height: 1;
+}
+.vital-num sup { font-size: 0.45em; color: var(--gold-500); }
+.vital-label {
+  margin-top: 0.5rem;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue-100);
+}
+
+/* ==========================================================================
+   I · THE GALLERY — era rooms, gilt frames, the lantern, the year spine
+   ========================================================================== */
+.gallery { position: relative; }
+.room {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(4.5rem, 9vh, 7rem) 0 clamp(5rem, 10vh, 8rem);
+  background: var(--navy-950);
+}
+.room:nth-child(even) { background: var(--navy-900); }
+.room--print {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(109, 79, 40, 0.28), transparent 60%),
+    #100c06;
+}
+
+/* The lantern — a gilded light that follows the visitor's hand. */
+.room-lantern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  background: radial-gradient(
+    34rem circle at var(--lx, 50%) var(--ly, 50%),
+    rgba(232, 200, 126, 0.11),
+    rgba(232, 200, 126, 0.035) 42%,
+    transparent 68%
+  );
+  mix-blend-mode: screen;
+}
+.room.is-lit .room-lantern { opacity: 1; }
+
+.room-head { max-width: 46rem; }
+.room-era {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+.room-era .room-numeral {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: rgba(232, 200, 126, 0.5);
+}
+.room-name {
+  margin-top: 0.4rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.2vw, 2.8rem);
+  font-weight: 600;
+  color: #fff;
+  text-wrap: balance;
+}
+.room-range {
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+.room-line {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* The frames — each conference hung as an engraving with its placard */
+.frames {
+  margin-top: 3.2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18.5rem, 1fr));
+  gap: 3.4rem 2.2rem;
+}
+.frame { --heat: 0; min-width: 0; }
+.frame-canvas {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  text-decoration: none;
+  background:
+    repeating-linear-gradient(45deg, rgba(232, 200, 126, 0.05) 0 1px, transparent 1px 7px),
+    linear-gradient(165deg, rgba(37, 99, 176, 0.14), rgba(6, 13, 31, 0.4)),
+    var(--navy-800);
+  border: 1px solid rgba(212, 169, 76, calc(0.28 + 0.55 * var(--heat)));
+  box-shadow: 0 26px 60px -34px rgba(232, 200, 126, calc(0.65 * var(--heat)));
+  filter: brightness(calc(0.8 + 0.34 * var(--heat)));
+  transform: translateY(calc(-5px * var(--heat)));
+  transition: border-color 0.25s ease, filter 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.frame-canvas::after {  /* the engraver's double rule */
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(212, 169, 76, calc(0.22 + 0.4 * var(--heat)));
+  pointer-events: none;
+  transition: border-color 0.25s ease;
+}
+.frame-laurel {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: 62%;
+  transform: translate(-50%, -50%);
+  opacity: calc(0.3 + 0.45 * var(--heat));
+  filter: sepia(1) saturate(2.4) hue-rotate(-12deg) brightness(1.1);
+  transition: opacity 0.25s ease;
+}
+.frame-year {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8%;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.2vw, 2.9rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: rgba(232, 200, 126, calc(0.4 + 0.5 * var(--heat)));
+  transition: color 0.25s ease;
+}
+.frame-glint {  /* warm wash the lantern leaves on the varnish */
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% 20%, rgba(232, 200, 126, 0.14), transparent 60%);
+  opacity: var(--heat);
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+/* The reserved frame (the next conference) — an empty canvas, held */
+.frame--next .frame-canvas {
+  background: var(--navy-900);
+  border-style: dashed;
+}
+.frame--next .frame-reserved {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+
+/* The print-era plaque — bronze, no canvas to light yet */
+.frame--print .frame-canvas {
+  background:
+    repeating-linear-gradient(45deg, rgba(109, 79, 40, 0.16) 0 1px, transparent 1px 6px),
+    #17110a;
+  border-color: rgba(109, 79, 40, calc(0.6 + 0.3 * var(--heat)));
+}
+.frame--print .frame-year { color: rgba(200, 158, 96, calc(0.45 + 0.4 * var(--heat))); }
+
+/* The placard — the museum label */
+.placard { margin-top: 1rem; }
+.placard-when {
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+.placard-title {
+  margin-top: 0.35rem;
+  font-family: var(--font-display);
+  font-size: 1.14rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #fff;
+  text-wrap: balance;
+}
+.placard-title a { text-decoration: none; }
+.placard-title a:hover { color: var(--gold-300); }
+.placard-note {
+  margin-top: 0.45rem;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.55);
+}
+.placard-act {
+  margin-top: 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.placard-act a { color: var(--gold-500); text-decoration: none; }
+.placard-act a:hover { color: var(--gold-300); }
+.placard-act .placard-held { color: rgba(255, 255, 255, 0.38); }
+
+/* The year spine — a fixed rail that keeps the visitor's place in time */
+.yearspine {
+  position: fixed;
+  left: clamp(0.8rem, 2.2vw, 2.4rem);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.yearspine.is-live { opacity: 1; }
+.ys-year {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gold-300);
+  writing-mode: horizontal-tb;
+}
+.ys-rail {
+  position: relative;
+  width: 1px;
+  height: 34vh;
+  background: rgba(212, 169, 76, 0.3);
+}
+.ys-node {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--gold-500);
+  box-shadow: 0 0 12px rgba(232, 200, 126, 0.8);
+}
+.ys-cap {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.4);
+}
+@media (min-width: 1180px) { .yearspine { display: flex; } }
+
+/* Touch / no-hover: the lantern can't follow a finger — light the frames
+   as they reach the viewport's center instead (JS adds .is-lit). */
+@media (hover: none) {
+  .room-lantern { display: none; }
+  .frame.is-lit { --heat: 0.9; }
+}
+
+/* ==========================================================================
+   II · THE FIRMAMENT — the WebGL voyage (three.js paints on #fir-canvas)
+   ========================================================================== */
+body.lp-firmament { background: var(--navy-950); }
+#fir-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.lp-firmament .story { position: relative; z-index: 1; }
+.lp-firmament .lp-hero { background: transparent; min-height: 92vh; }
+.lp-firmament .lp-hero-scrim { background: radial-gradient(ellipse at 50% 115%, rgba(107, 53, 84, 0.35), transparent 60%); }
+
+/* The voyage track exists only when WebGL initialized (body.is-3d) */
+.voyage { display: none; position: relative; }
+body.is-3d .voyage { display: block; }
+.voyage-milestone {
+  position: sticky;
+  top: 42vh;
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+}
+
+.fir-hud {
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.fir-hud.is-live { opacity: 1; }
+.fir-year {
+  position: absolute;
+  right: clamp(1.2rem, 5vw, 4.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(3.4rem, 9vw, 6.5rem);
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(232, 200, 126, 0.85);
+  text-shadow: 0 0 34px rgba(232, 200, 126, 0.35);
+}
+.fir-eralabel {
+  position: absolute;
+  right: clamp(1.2rem, 5vw, 4.5rem);
+  top: calc(50% + clamp(2.2rem, 5.5vw, 4rem));
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.5);
+}
+.fir-card {
+  position: absolute;
+  left: clamp(1.2rem, 5vw, 4.5rem);
+  bottom: clamp(4.5rem, 12vh, 7rem);
+  max-width: min(24rem, 78vw);
+  pointer-events: auto;
+  padding: 1.5rem 1.7rem;
+  background: rgba(6, 13, 31, 0.7);
+  border: 1px solid rgba(212, 169, 76, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.fir-card.is-swap { animation: fir-swap 0.55s ease; }
+@keyframes fir-swap {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.fc-when {
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+.fc-title {
+  margin-top: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: #fff;
+  text-wrap: balance;
+}
+.fc-place { margin-top: 0.4rem; font-size: 0.78rem; color: rgba(255, 255, 255, 0.55); }
+.fc-note { margin-top: 0.5rem; font-size: 0.8rem; line-height: 1.55; color: rgba(255, 255, 255, 0.65); }
+.fc-act { margin-top: 0.7rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+.fc-act a { color: var(--gold-500); text-decoration: none; }
+.fc-act a:hover { color: var(--gold-300); }
+.fir-help {
+  position: absolute;
+  left: 50%;
+  bottom: 1.1rem;
+  transform: translateX(-50%);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  .fir-year { top: 18%; }
+  .fir-eralabel { display: none; }
+}
+
+/* Voyage bookends — small dark interludes over the sky */
+.fir-bookend {
+  position: relative;
+  padding: 22vh 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.75);
+}
+.fir-bookend p {
+  max-width: 30rem;
+  margin: 0 auto;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+.fir-bookend .fir-bookend-kicker {
+  font-family: var(--font-text);
+  font-style: normal;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+  margin-bottom: 0.9rem;
+}
+body:not(.is-3d) .fir-bookend { display: none; }
+
+/* ==========================================================================
+   III · THE PROGRAMME — the GSAP playbill deck + cursor tilt
+   ========================================================================== */
+.deck { position: relative; }
+.playbill {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: clamp(4.5rem, 9vh, 6.5rem) var(--pad-x) clamp(3rem, 7vh, 5rem);
+  background: var(--ivory-50);
+}
+.playbill:nth-child(even) { background: var(--ivory-100); }
+.pb-sheet {
+  width: min(62rem, 100%);
+  background: #fdfbf4;
+  border: 1px solid rgba(15, 31, 61, 0.16);
+  box-shadow: 0 40px 90px -50px rgba(15, 31, 61, 0.55);
+  padding: clamp(1.8rem, 4.5vw, 3.4rem) clamp(1.4rem, 4.5vw, 3.6rem);
+  position: relative;
+  will-change: transform;
+}
+.pb-sheet::after {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 1px solid rgba(212, 169, 76, 0.45);
+  pointer-events: none;
+}
+.pb-head { text-align: center; position: relative; z-index: 1; }
+.pb-act {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #8a6d2f;
+}
+.pb-era {
+  margin-top: 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.2vw, 2.7rem);
+  font-weight: 600;
+  color: var(--navy-800);
+  text-wrap: balance;
+}
+.pb-range {
+  margin-top: 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ink-600);
+}
+.pb-line {
+  margin: 0.9rem auto 0;
+  max-width: 34rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--ink-600);
+}
+.pb-rows { margin-top: 2rem; }
+@media (min-width: 900px) {
+  .pb-rows--2col { column-count: 2; column-gap: 3rem; }
+  .pb-rows--2col .pb-row { break-inside: avoid; }
+}
+.pb-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  padding: 0.8rem 0.2rem;
+  border-top: 1px solid rgba(15, 31, 61, 0.12);
+  text-decoration: none;
+  transition: background 0.25s ease;
+}
+.pb-row:hover { background: rgba(212, 169, 76, 0.08); }
+.pb-no {
+  flex: none;
+  width: 1.9rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: #a37f35;
+}
+.pb-body { min-width: 0; }
+.pb-body strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.02rem;
+  line-height: 1.35;
+  color: var(--navy-800);
+}
+.pb-body em { font-style: normal; font-size: 0.74rem; color: var(--ink-600); }
+.pb-row .pb-go {
+  margin-left: auto;
+  align-self: center;
+  color: var(--gold-500);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.pb-row:hover .pb-go { opacity: 1; transform: none; }
+.pb-foot {
+  margin-top: 1.6rem;
+  text-align: center;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-600);
+}
+
+/* The index — era subheads inside the stock shelf pattern */
+.shelf-era {
+  margin-top: 2.6rem;
+  padding-bottom: 0.6rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.shelf-era h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--navy-800);
+}
+.shelf-era span {
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.shelf .shelf-held { color: var(--ink-600); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ==========================================================================
+   Reduced motion — every treatment renders complete and still
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .room-lantern { display: none; }
+  .frame { --heat: 0.9 !important; }
+  .frame-canvas, .frame-canvas::after, .frame-laurel, .frame-year, .frame-glint { transition: none; }
+  .yearspine { display: none !important; }
+  .fir-card.is-swap { animation: none; }
+  .playbill { position: static; min-height: 0; }
+  .pb-sheet { transform: none !important; }
+}

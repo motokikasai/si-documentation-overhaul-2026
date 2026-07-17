@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Conference Archive — The Firmament · Schiller Institute</title>
+  <meta name="description" content="Every Schiller Institute conference since 1984 as a star in one sky. Scroll to fly back through forty years of panels, keynotes and concerts — all free to watch." />
+
+  <link rel="icon" href="../homepage-draft/assets/favicons/favicon.ico" sizes="48x48" />
+  <link rel="icon" type="image/svg+xml" href="../homepage-draft/assets/favicons/favicon.svg" />
+  <link rel="apple-touch-icon" href="../homepage-draft/assets/favicons/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/landing.css" />
+  <link rel="stylesheet" href="css/landing-v4.css" />
+  <link rel="stylesheet" href="css/conf-archive.css" />
+</head>
+<!-- ============================================================================
+     ARCHIVE WING · TREATMENT II — /conferences/ index · "The Firmament"
+     The archive as a night sky. WebGL (three.js, vendored): every conference
+     is a fixed gold star on a winding time-thread; the scroll flies the
+     camera back from tonight to 1984 (scrubbed, eased, never hijacked),
+     while a HUD card names each star and links to its sessions. The cursor
+     breathes parallax into the frame. Print-era stars glow bronze; the next
+     conference is the one white star, still pulsing, not yet lit gold.
+     If WebGL / JS / motion is unavailable, body.is-3d never appears: the
+     voyage collapses and the ivory index below carries the whole archive.
+     Tech register: three.js — the deep-space sibling of the v4 homepage hero.
+     ============================================================================ -->
+<body class="lp lp-conf lp-firmament">
+
+  <canvas id="fir-canvas" aria-hidden="true"></canvas>
+
+  <!-- The HUD: year readout + the star's calling card (fixed, live during the voyage) -->
+  <div class="fir-hud" aria-hidden="false">
+    <p class="fir-year">Next</p>
+    <p class="fir-eralabel">Toward the New Paradigm</p>
+    <article class="fir-card">
+      <p class="fc-when">&nbsp;</p>
+      <h3 class="fc-title">&nbsp;</h3>
+      <p class="fc-place">&nbsp;</p>
+      <p class="fc-note">&nbsp;</p>
+      <p class="fc-act"></p>
+    </article>
+    <p class="fir-help">Scroll to travel &middot; the sky keeps the minutes</p>
+  </div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="../homepage-draft/index-v4.html">
+        <img class="brand-logo brand-logo--ondark" src="../homepage-draft/assets/logos/header-logo-dark-2x.png" alt="The International Schiller Institute" width="265" height="52" />
+        <img class="brand-logo brand-logo--onlight" src="../homepage-draft/assets/logos/header-logo-light-2x.png" alt="The International Schiller Institute" width="265" height="52" />
+      </a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="../homepage-draft/index-v4.html#ideas">Ideas</a>
+        <a href="conferences.html">Conferences</a>
+        <a href="#involved">Get Involved</a>
+        <a href="../homepage-draft/index-v4.html#about">About</a>
+        <a href="#involved" class="nav-donate">Donate</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="story">
+
+    <!-- ============ 1 · Overture — over the open sky ============ -->
+    <section class="lp-hero" style="align-items:center;text-align:center;">
+      <div class="lp-hero-scrim" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="lp-hero-kicker fx">The Conference Archive &middot; 1984 — Tonight</p>
+        <h1 class="fx" style="margin-inline:auto;">Forty years of light, still arriving.</h1>
+        <p class="lp-hero-dek fx" data-fxd="1" style="margin-inline:auto;">A conference, once held, behaves like a star: the event is over, the light keeps travelling. Every session the Institute ever filmed is up there — free, complete, minuted. Scroll, and fly back through all of them to the founding year.</p>
+        <div class="lp-hero-actions fx" data-fxd="2" style="justify-content:center;">
+          <a class="btn btn-gold" href="#voyage">Begin the voyage</a>
+          <a class="btn btn-ghost" href="#index">Prefer a list? The index</a>
+        </div>
+        <p class="lp-scrollcue fx" data-fxd="2">Scroll</p>
+      </div>
+    </section>
+
+    <div class="treatment-strip treatment-strip--dark" role="navigation" aria-label="Archive draft treatments">
+      Archive treatment II of III &nbsp;·&nbsp; <a href="conferences-gallery.html">The Gallery</a> · <a href="conferences-firmament.html" aria-current="page">The Firmament</a> · <a href="conferences-playbill.html">The Programme</a>
+    </div>
+
+    <!-- ============ 2 · Credo ============ -->
+    <section class="credo-band">
+      <div class="wrap">
+        <p class="credo-text fx"><span class="dropcap">A</span>stronomy is the oldest aesthetical education: look up, and the universe teaches you that what is distant is not gone. The Institute&rsquo;s conferences work the same way. A keynote from 2020 about prospering or perishing, a 2017 panel on fulfilling the dream of mankind, a founding resolution from 1984 — none of these have stopped radiating merely because their dates have passed. This page is the observatory. Pick any star; the light will reach you in the time it takes to press play.</p>
+        <p class="credo-sign fx">The sky keeps the minutes</p>
+      </div>
+    </section>
+
+    <!-- ============ 3 · The voyage (exists only when WebGL lit — body.is-3d) ============ -->
+    <section class="fir-bookend" aria-hidden="true">
+      <p class="fir-bookend-kicker">Departure &middot; Tonight</p>
+      <p>Ahead of you, strung on one gold thread: every conference the Institute has held. The white star hasn&rsquo;t happened yet. Everything past it already belongs to you.</p>
+    </section>
+
+    <div class="voyage" id="voyage"></div>
+
+    <section class="fir-bookend" aria-hidden="true">
+      <p class="fir-bookend-kicker">Arrival &middot; 1984</p>
+      <p>The first light. Everything you just flew through was somebody&rsquo;s decision to hold the conference anyway. Keep scrolling for the index — or take the white star home with you.</p>
+    </section>
+
+    <!-- ============ 4 · The index — the whole sky, one line per star ============ -->
+    <section class="section section-ivory" id="index">
+      <div class="wrap">
+        <div class="section-head fx">
+          <p class="section-kicker">The Index</p>
+          <h2 class="section-title">Every star, one line each</h2>
+          <p class="section-lede">The same archive as a chart — for finding, citing, and sharing. In the WordPress build this is the <code style="font-size:.85em;">/conferences/</code> query loop itself.</p>
+        </div>
+        <div class="shelf" data-index>
+          <noscript><p style="padding:1.5rem 0;">This draft renders its index with JavaScript; the records live in <code>js/conferences-data.js</code>.</p></noscript>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5 · Proof ============ -->
+    <section class="section section-ivory-alt">
+      <div class="wrap">
+        <blockquote class="record-quote fx" style="margin-top:0;">
+          Br&uuml;der, &uuml;berm Sternenzelt mu&szlig; ein lieber Vater wohnen. — Brothers, above the canopy of stars there must dwell a loving father.
+          <cite>Friedrich Schiller &middot; An die Freude — the line every conference sings to the sky</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ============ 6 · Action ============ -->
+    <section class="section section-ivory lp-action" id="involved">
+      <div class="wrap">
+        <div class="section-head section-head--center fx">
+          <p class="section-kicker">Take Part</p>
+          <h2 class="section-title">One star up there is still white</h2>
+          <p class="section-lede" style="margin-left:auto;margin-right:auto;">The next conference hasn&rsquo;t been lit yet. Registration is free, takes a minute, and comes with six interpretation channels — then, forever afterward, its light is part of this sky too.</p>
+        </div>
+        <form class="signup-form js-signup fx" novalidate>
+          <input type="email" name="email" placeholder="Your email address" aria-label="Email address" required />
+          <button class="btn btn-gold" type="submit">Register free</button>
+        </form>
+        <p class="signup-note fx">You&rsquo;ll receive the program, the join links and the interpretation channels. Double opt-in, unsubscribe anytime.</p>
+        <div class="lp-action-alt fx">
+          <a class="btn btn-blue" href="https://www.youtube.com/@SchillerInstitute" target="_blank" rel="noopener">Browse the channel</a>
+          <a class="btn btn-ghost js-donate" href="#">Keep the sky free — donate</a>
+        </div>
+        <div class="you-node fx" style="margin-top:3.5rem;">
+          <svg class="you-arc" viewBox="0 0 340 72" aria-hidden="true">
+            <path class="ya-line" d="M6 22 Q 170 98 334 6" pathLength="1" />
+            <path class="ya-tip" d="M6 22 Q 170 98 334 6" pathLength="1" />
+            <circle class="ya-port" cx="6" cy="22" r="3" />
+            <g class="ya-star" transform="translate(334 6)">
+              <path class="ya-star-shape" d="M0 -7 L1.4 -1.4 L7 0 L1.4 1.4 L0 7 L-1.4 1.4 L-7 0 L-1.4 -1.4 Z" />
+            </g>
+            <g class="ya-you" transform="translate(154.4 56.4)">
+              <circle class="ya-you-halo" r="15" />
+              <circle class="ya-you-ring" r="9" />
+            </g>
+          </svg>
+          <p class="you-label">Every star up there was once a date on a calendar. <strong>So is the next one.</strong></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="about">
+    <div class="wrap">
+      <img class="footer-divider" src="assets/img/laurel-divider.svg" alt="" aria-hidden="true" />
+      <div class="footer-grid">
+        <div>
+          <h4>Schiller Institute</h4>
+          <p class="footer-mission">“Live with your epoch, but be not its offspring; serve your fellow man — not with what he applauds, but with what he needs.”<br />— Friedrich Schiller</p>
+        </div>
+        <div>
+          <h4>The Archive Wing</h4>
+          <ul>
+            <li><a href="index.html">All landing drafts</a></li>
+            <li><a href="conferences.html">The Assembly (landing)</a></li>
+            <li><a href="conferences-gallery.html">The Gallery</a></li>
+            <li><a href="conferences-playbill.html">The Programme</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Take Part</h4>
+          <ul>
+            <li><a href="#involved">Register free</a></li>
+            <li><a href="https://www.youtube.com/@SchillerInstitute" target="_blank" rel="noopener">YouTube channel</a></li>
+            <li><a href="peace-coalition.html">Friday sessions</a></li>
+            <li><a href="#">Donate</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>About</h4>
+          <ul>
+            <li><a href="#">Founding principle</a></li>
+            <li><a href="#">Helga Zepp-LaRouche</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Deutsch 🇩🇪</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span class="js-year">2026</span> Schiller Institute.</span>
+        <span><a href="#">Privacy</a> · <a href="#">Impressum</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../homepage-draft/js/main.js" defer></script>
+  <script src="../homepage-draft/js/story-v3.js" defer></script>
+  <script src="js/landing.js" defer></script>
+  <script src="js/conferences-data.js" defer></script>
+  <script src="js/conf-archive.js" defer></script>
+  <script type="module" src="js/conf-firmament.js"></script>
+</body>
+</html>
