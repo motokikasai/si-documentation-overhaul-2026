@@ -1,0 +1,40 @@
+# queueA batch 08 — fable-day1
+115622;series=ipc-meeting
+115644;new-paradigm
+115659;new-paradigm
+115730;peace-strategy
+115755;peace-strategy
+115773;series=ipc-meeting
+115802;classical-culture
+115853;classical-culture
+115882;peace-strategy
+115974;series=ipc-meeting
+116023;peace-strategy;note=possible duplicate of 115405 (same interview)
+116054;series=ipc-meeting
+116104;new-paradigm
+116137;series=ipc-meeting
+116165;type=si_video;series=weekly-webcast-hzl
+116209;new-paradigm
+116314;new-paradigm
+116331;series=ipc-meeting
+116343;peace-strategy
+116466;series=ipc-meeting
+116511;physical-economy
+116524;physical-economy
+116582;type=si_statement;note=EN pair of open letter 116635
+116652;great-projects;campaigns=oasis-plan
+116659;series=ipc-meeting
+116757;series=ipc-meeting
+116781;new-paradigm
+116848;series=ipc-meeting
+116867;peace-strategy
+116891;peace-strategy
+116981;-
+116989;type=si_statement;note=press release
+116999;series=ipc-meeting
+117057;peace-strategy
+117082;type=si_video;series=weekly-webcast-hzl
+117095;peace-strategy
+117124;series=ipc-meeting
+117139;peace-strategy
+117154;peace-strategy

@@ -1,0 +1,334 @@
+# queueB type adjudications — fable-day1, 2026-07-17
+# Principles applied:
+#  - "Statement" = the org (SI/IPC/CCD) or a figure speaking THROUGH the org: appeals, open
+#    letters, petitions, declarations, resolutions, press releases (statement_type covers these).
+#  - NEWS ABOUT third-party appeals/letters stays Article (post), even with keyword in title.
+#  - Conference ANNOUNCEMENT/REPORT posts stay post — conference records come from the
+#    playlist pipeline (C5 'create' path); pre-2019 conference PAGES become si_conference.
+#  - 2014 per-speaker conference posts = per-talk records → si_presentation (Regime-A pattern).
+#  - IPC weekly meeting REPORTS stay post + series=ipc-meeting (recordings become si_video).
+#  - Draft/junk pages retire, except documented keep-candidates (09 §6).
+
+# --- junk/retire confirmations (pages & drafts)
+59;type=retire
+89;type=retire
+91;type=retire
+95;type=retire
+1681;type=retire
+1958;type=retire
+2014;type=retire
+2405;type=retire
+2407;type=retire
+4337;type=retire
+4587;type=retire
+11053;type=retire
+18762;type=retire
+21273;type=retire
+21282;type=retire
+29569;type=retire
+35648;type=retire
+37246;type=retire
+41445;type=retire
+41757;type=retire
+41758;type=retire
+42930;type=retire
+45146;type=retire
+47691;type=retire
+47825;type=retire
+49314;type=retire
+51143;type=retire
+59454;type=retire
+60867;type=retire
+62482;type=retire;note=draft per-talk page; talk reaches /media/ via YT pipeline dedupe
+63832;type=retire
+73948;type=retire
+82066;type=retire
+38457;type=retire
+109155;type=retire;note=coverage content pasted as draft page; exists as post
+109437;type=retire
+109737;type=retire;note=Berlin 2025 conference gets si_conference via pipeline
+112577;type=retire
+112578;type=retire
+117096;type=retire
+# keep-candidates (09 §6 explicitly): stay pages, team decides publish
+78555;type=page;note=KEEP-CANDIDATE: Leonore Summer 2021 draft worth publish decision
+107502;type=page;note=KEEP-CANDIDATE: LaRouche Oasis Plan 2025 draft worth publish decision
+
+# --- portfolio rescue + downloads
+387;type=si_presentation;note=the one real item in Vanguard demo type; conference Nov 2012
+47692;type=ignore;note=empty Download Monitor draft
+
+# --- pre-2019 conference PAGES → si_conference
+3826;type=si_conference
+4785;type=si_conference
+29572;type=si_conference
+34203;type=si_conference
+34646;type=si_conference
+34728;type=si_conference
+40985;type=si_conference;note=Apr 2017 NYC conference page (title matched per-talk pattern but is the conference itself)
+47150;type=si_conference
+47153;type=si_conference
+48579;type=si_conference
+29495;type=retire;note=press-release page duplicating Paris-2015 conference page; verify before unpublish
+
+# --- DE per-talk pages (R4.1) → si_presentation (Sept 2020 conference)
+62361;type=si_presentation
+62370;type=si_presentation
+62375;type=si_presentation
+62382;type=si_presentation
+62390;type=si_presentation
+62398;type=si_presentation
+
+# --- 2014 30th-Anniversary per-speaker POSTS → si_presentation (one talk each)
+5034;type=si_presentation;note=parent: 2014-06-15 NYC 30th Anniversary conference
+5037;type=si_presentation;note=parent: 2014 NYC
+5039;type=si_presentation;note=parent: 2014 NYC
+5042;type=si_presentation;note=parent: 2014 NYC
+5044;type=si_presentation;note=parent: 2014 NYC
+5046;type=si_presentation;note=parent: 2014 NYC
+5048;type=si_presentation;note=parent: 2014 NYC
+5053;type=si_presentation;note=parent: 2014 NYC
+5089;type=si_presentation;note=parent: 2014 NYC
+4777;type=retire;note=private invitation post
+
+# --- conference announcement/report POSTS stay Articles (conference-map links them)
+46812;type=post
+52052;type=post
+52304;type=post
+54861;type=post
+58258;type=post
+58317;type=post
+58788;type=post
+59966;type=post
+60199;type=post
+60226;type=post
+65126;type=post
+65170;type=post
+70864;type=post
+73868;type=post
+75575;type=post
+77697;type=post
+78827;type=post
+81173;type=post
+88486;type=post
+88717;type=post
+95361;type=post
+95456;type=post
+98310;type=post
+102437;type=post
+105713;type=post
+
+# --- R6: confirmed statements (org speaking: appeal/letter/petition/declaration/resolution/PR)
+2380;type=si_statement
+2382;type=si_statement
+2810;type=si_statement
+2831;type=si_statement
+3785;type=si_statement
+4674;type=si_statement
+32204;type=si_statement
+32710;type=si_statement
+32734;type=si_statement
+37316;type=si_statement
+37329;type=si_statement;note=possible duplicate of 37316 (same title+date) — dedupe check
+47821;type=si_statement
+55616;type=si_statement
+55619;type=si_statement
+55935;type=si_statement
+57353;type=si_statement
+57412;type=si_statement
+57502;type=si_statement
+57909;type=si_statement
+57948;type=si_statement
+57961;type=si_statement
+58235;type=si_statement;note=SI's own call re sanctions; verify body is the statement text
+59004;type=si_statement
+59156;type=si_statement
+59228;type=si_statement
+59383;type=si_statement;note=mobilization call; verify
+59471;type=si_statement;note=DE pair of 59383
+59484;type=si_statement
+61757;type=si_statement
+61824;type=si_statement
+62334;type=si_statement;note=press release (statement_type=press-release)
+63615;type=si_statement
+64529;type=si_statement
+64990;type=si_statement
+65566;type=si_statement
+70871;type=si_statement
+70883;type=si_statement
+72126;type=si_statement
+72438;type=si_statement
+72624;type=si_statement
+74335;type=si_statement;note=verify signatory structure
+74367;type=si_statement
+80716;type=si_statement;note=Weckruf appeal; verify
+80771;type=si_statement
+80784;type=si_statement
+81561;type=si_statement;note=campaign appeal; verify
+82307;type=si_statement
+82450;type=si_statement
+83113;type=si_statement;note=press release
+84976;type=si_statement
+85224;type=si_statement
+85261;type=si_statement
+85674;type=si_statement;note=press release
+87287;type=si_statement
+88828;type=si_statement
+89874;type=si_statement
+90578;type=si_statement;note=press release + call
+91392;type=si_statement
+91409;type=si_statement
+91586;type=si_statement;note=external author (Sen. Black), SI-issued
+91867;type=si_statement
+92962;type=si_statement
+92986;type=si_statement
+93708;type=si_statement;note=Christmas truce appeal; verify
+93711;type=si_statement
+93723;type=si_statement
+93760;type=si_statement
+94604;type=si_statement
+95632;type=si_statement;note=verify org authorship
+95663;type=si_statement
+95940;type=si_statement
+97428;type=si_statement;note=press release re Urgent Appeal signers
+97820;type=si_statement;note=press release
+97858;type=si_statement
+97879;type=si_statement
+98000;type=si_statement
+98136;type=si_statement;note=press release
+98252;type=si_statement
+98264;type=si_statement;note=DE pair of 98252
+98552;type=si_statement;note=appeal text; pamphlet PDF likely → link si_document later
+99190;type=si_statement
+99216;type=si_statement
+99454;type=si_statement
+99487;type=si_statement;note=IPC demand; verify
+99553;type=si_statement
+99746;type=si_statement
+100735;type=si_statement
+100773;type=retire;note=draft duplicate of 99746 DE
+103140;type=si_statement
+103152;type=si_statement
+103196;type=si_statement
+103223;type=si_statement
+103322;type=si_statement
+103363;type=si_statement
+103625;type=si_statement
+103637;type=si_statement
+103744;type=si_statement
+103768;type=si_statement
+109024;type=si_statement;note=press release + declaration endorsers
+109010;type=retire;note=draft duplicate of 109024
+109122;type=si_statement
+109494;type=si_statement
+109607;type=si_statement;note=press release
+111501;type=si_statement
+111714;type=si_statement;note=press release
+111943;type=si_statement
+112887;type=si_statement
+112935;type=si_statement
+113930;type=si_statement
+113929;type=retire;note=draft duplicate of 113930
+113942;type=si_statement
+114310;type=si_statement
+114323;type=si_statement
+116635;type=si_statement
+31712;type=retire;note=draft statement
+32735;type=retire;note=FR draft duplicate
+98526;type=retire;note=draft duplicate of 98552
+
+# --- R6 false positives: news/reports ABOUT appeals & letters → stay Articles
+37623;type=post;note=third-party open letter, archived as news
+37638;type=post
+46960;type=post
+48608;type=post
+48795;type=post
+52772;type=post
+54790;type=post
+55739;type=post
+57148;type=post
+57453;type=si_statement;note=press release (Day of Action)
+57843;type=post
+58381;type=post;topics=health-food
+58392;type=post;topics=health-food
+58401;type=post;topics=health-food
+58465;type=post;topics=health-food
+58505;type=post
+58524;type=post;topics=health-food
+58532;type=post;topics=health-food
+58538;type=post
+59771;type=post
+61274;type=post
+62713;type=post
+68504;type=post
+68664;type=post
+71560;type=post
+71935;type=post
+71948;type=post
+72036;type=post
+72364;type=post
+72409;type=post
+74424;type=post
+74442;type=post
+74513;type=post
+74558;type=post
+74598;type=post
+74620;type=post
+74873;type=post
+74922;type=post
+74974;type=post
+75376;type=post
+78657;type=post;note=possible statement; verify body
+79578;type=post
+79667;type=post
+79810;type=post
+81167;type=post
+81414;type=post
+81867;type=post
+83098;type=post
+83214;type=post
+83383;type=post
+83813;type=post;campaigns=operation-ibn-sina
+85319;type=post
+85756;type=post
+86237;type=post
+86671;type=post
+87573;type=post
+87633;type=post
+88229;type=post;note=verify — may be the Nov 2022 statement
+88922;type=post
+89224;type=post
+90942;type=post
+92322;type=post
+93172;type=post
+93203;type=post
+95711;type=post
+95747;type=post
+97978;type=post
+100954;type=post
+100981;type=post
+101172;type=post
+101204;type=post
+103854;type=post
+117110;type=post;note=news about third-party appeal
+
+# --- video posts caught by R6
+75012;type=si_video;note=video post without series
+87124;type=si_video;note=video post without series
+
+# --- IPC weekly meeting REPORTS: Articles in the ipc-meeting series
+100674;type=post;series=ipc-meeting
+100757;type=post;series=ipc-meeting
+100811;type=post;series=ipc-meeting
+100826;type=post;series=ipc-meeting
+100830;type=post;series=ipc-meeting
+100922;type=post;series=ipc-meeting
+100969;type=post;series=ipc-meeting
+100987;type=post;series=ipc-meeting
+101030;type=post;series=ipc-meeting
+101044;type=post;series=ipc-meeting
+101246;type=post;series=ipc-meeting
+102275;type=post;series=ipc-meeting
+102287;type=post;series=ipc-meeting
+102333;type=post;series=ipc-meeting
+102350;type=post;series=ipc-meeting

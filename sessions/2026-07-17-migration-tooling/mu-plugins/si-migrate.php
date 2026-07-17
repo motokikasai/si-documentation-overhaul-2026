@@ -150,11 +150,11 @@ final class SI_Csv {
     public static function read(string $path): array {
         if (!is_readable($path)) { throw new RuntimeException("CSV not readable: $path"); }
         $fh = fopen($path, 'r');
-        $head = fgetcsv($fh);
+        $head = fgetcsv($fh, 0, ',', '"', '');   // escape='' → RFC-4180, no backslash mangling
         if (!$head) { throw new RuntimeException("CSV empty: $path"); }
         $head[0] = preg_replace('/^\xEF\xBB\xBF/', '', $head[0]);   // BOM
         $rows = [];
-        while (($r = fgetcsv($fh)) !== false) {
+        while (($r = fgetcsv($fh, 0, ',', '"', '')) !== false) {
             if (count($r) === 1 && $r[0] === null) { continue; }
             $row = [];
             foreach ($head as $i => $col) { $row[$col] = $r[$i] ?? ''; }
@@ -166,9 +166,9 @@ final class SI_Csv {
 
     public static function write(string $path, array $rows, array $cols): void {
         $fh = fopen($path, 'w');
-        fputcsv($fh, $cols);
+        fputcsv($fh, $cols, ',', '"', '');       // escape='' → RFC-4180 (PHP's backslash default corrupts embedded JSON)
         foreach ($rows as $row) {
-            fputcsv($fh, array_map(static fn($c) => $row[$c] ?? '', $cols));
+            fputcsv($fh, array_map(static fn($c) => $row[$c] ?? '', $cols), ',', '"', '');
         }
         fclose($fh);
     }

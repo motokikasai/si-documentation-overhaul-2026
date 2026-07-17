@@ -19,7 +19,28 @@ the interface between the two is **`01-csv-contracts.md`**; Day-1 outputs land i
 | `tools/test-parsers.php` | 71 unit tests over the parser matrix, fixtures verbatim from the audits. `php tools/test-parsers.php` | ✅ green |
 | `tools/yt-dump.sh` | Standalone dump (same layout `si:yt-*` consumes) for no-WP machines; skip if Day-1 already dumped | ✅ |
 | `fixtures/census/` | census-report.json · **terms-category.csv (all 257 term_ids — S6 closed)** · shortcode-census-posts.csv | ✅ |
-| `incoming/` | Day-1 session drop zone for its CSVs | ⏳ |
+| `incoming/` | **Day-1 deliverables (produced HERE, 2026-07-17, reviewer=fable-day1** — the original Day-1 session stalled with nothing on disk; this session took the work over) | ✅ see below |
+
+## Day-1 deliverables (in `incoming/`)
+
+| File | State |
+|---|---|
+| `classification.csv` | **Decision-complete**: 5,397 rows; 1,622 carry fable-day1 review (303 type adjudications + 1,319 topic assignments). Published effective types: post 2,447 · si_video 1,217 · si_presentation 800 · si_coverage 239 · si_statement 169 · si_conference 10 · retire 63. Topic-less floor: 53 articles (2%, vs the 10–15% accepted floor) |
+| `person-map.csv` | 612 rows: 259 canonical from portfolio+era-B (18 merges applied, walter-jones/william-c-jones ruled distinct) + 335 reconciled from YT segmentation (flagged, affiliations in agenda_json) + 54 non-latin keys (resolve via WPML pairing to EN sibling) |
+| `playlist-classification.csv` | All 74 reviewed: 57 conference · 7 topic · 4 series · 4 duplicate-lang · 2 other(concerts) |
+| `conference-map.csv` | 73 rows (57 playlist-driven + **16 portfolio-only pre-YouTube conferences**). Dates/keys are proposals — reviewer should fix start/end dates |
+| `video-segmentation.csv` | 590 rows over 654 dumped conference videos: case 1×24 (split — era-B 150 segment rows!) · 2×4 · 3×33 · 4×141 · 5×223. **227 videos pending metadata** (`scan-missing-videos.txt`) — rerun below when fetch finishes |
+| `era-b.json` | 99 videos with WP deep-link mark-sets (priority-1 source) |
+| `decisions-*.txt` | The full fable-day1 judgment audit trail (replayable via `tools/day1-apply-review.py`) |
+| `yt-dump/` | 74 playlists + video metadata + captions (gitignored bulk). **YouTube 429-throttled us on 2026-07-17 evening**; `tools/polite-fetch.sh` resumes at 1 req/15s (running detached, `polite-fetch.log`) |
+
+**Resume after the fetch completes** (idempotent):
+```bash
+php tools/day1-scan.php incoming/yt-dump incoming/conference-map.csv incoming/era-b.json incoming/person-map.csv incoming/video-segmentation.csv
+# then re-reconcile persons (see git log for the inline reconcile snippet) — or wp si:persons --reconcile on Local
+```
+
+Offline Day-1 toolchain (all in `tools/`): `day1-extract.py` (dump → items.jsonl signals) · `day1-classify.py` (R-rules + category map + queues) · `day1-apply-review.py` (decision merge) · `day1-persons.py` · `day1-erab.py` · `day1-yt.py` (stages B+C) · `day1-scan.php` (stage D, reuses the unit-tested SI_Parse) · `polite-fetch.sh`.
 
 ## Execution runbook (on Local, sandbox dump imported; replayed verbatim on staging at P6)
 

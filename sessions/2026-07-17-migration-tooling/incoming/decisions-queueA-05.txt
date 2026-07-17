@@ -1,0 +1,161 @@
+# queueA batch 05 — fable-day1
+90623;peace-strategy
+90729;type=si_video;topics=peace-strategy
+90795;peace-strategy
+90843;peace-strategy
+90856;type=si_video;topics=health-food
+90921;physical-economy
+90936;education-youth
+90946;type=si_video;topics=health-food
+90961;type=si_statement;note=SI fact sheet
+90999;type=si_statement;note=DE pair of 90961
+91006;history-method
+91040;type=si_video;topics=peace-strategy
+91052;history-method
+91087;type=si_video;topics=peace-strategy
+91162;peace-strategy
+91201;type=si_video;topics=peace-strategy
+91238;new-paradigm
+91255;type=si_video;topics=history-method
+91269;history-method
+91274;history-method
+91346;history-method
+91352;type=si_video;topics=history-method
+91496;peace-strategy
+91523;type=si_video;topics=peace-strategy
+91572;peace-strategy
+91614;peace-strategy
+91621;peace-strategy
+91747;peace-strategy
+91880;peace-strategy
+91910;peace-strategy
+91912;peace-strategy
+91915;peace-strategy
+91922;peace-strategy
+91925;type=si_video;topics=peace-strategy
+91927;type=si_video;topics=peace-strategy
+91937;type=si_video;topics=peace-strategy
+91951;type=si_video;topics=peace-strategy
+91955;type=si_video;topics=peace-strategy
+91969;type=si_video;topics=peace-strategy
+91988;peace-strategy
+92018;peace-strategy
+92168;energy-environment;campaigns=stop-green-fascism
+92183;energy-environment;campaigns=stop-green-fascism
+92217;peace-strategy
+92270;great-projects
+92282;peace-strategy
+92305;peace-strategy
+92314;peace-strategy
+92344;peace-strategy
+92438;education-youth;campaigns=stop-green-fascism
+92442;peace-strategy
+92463;peace-strategy
+92521;type=si_video;topics=peace-strategy
+92621;peace-strategy
+92642;type=si_video;series=weekly-webcast-hzl
+92663;science-space
+92696;type=si_video;topics=peace-strategy
+92703;science-space
+92798;peace-strategy
+92813;peace-strategy
+92825;type=si_coverage;note=CGTN appearance
+92864;peace-strategy
+92867;science-space
+92888;type=si_statement;note=EN pair of open letter to legislators 92962/92986
+93008;type=si_video;series=weekly-webcast-hzl
+93027;peace-strategy
+93184;type=si_statement;note=Ten Principles — programmatic declaration, core text
+93205;type=si_statement;note=DE pair of 93184
+93213;physical-economy
+93225;type=si_video;series=weekly-webcast-hzl
+93237;science-space
+93244;science-space
+93432;type=si_video;series=weekly-webcast-hzl
+93438;peace-strategy
+93469;-
+93482;-
+93487;peace-strategy
+93553;peace-strategy
+93566;type=si_statement;note=ZH pair of Ten Principles 93184
+93570;type=si_video;topics=peace-strategy
+93589;type=si_video;series=weekly-webcast-hzl
+93593;peace-strategy
+93625;science-space
+93637;science-space
+93651;physical-economy
+93653;physical-economy
+93660;type=si_statement;note=EN pair of Christmas truce appeal 93708
+93875;type=si_video;series=weekly-webcast-hzl
+93877;peace-strategy
+93926;classical-culture
+94010;classical-culture
+94024;new-paradigm
+94065;type=si_video;series=weekly-webcast-hzl
+94074;peace-strategy
+94150;peace-strategy
+94192;type=si_video;topics=peace-strategy
+94284;type=si_video;series=weekly-webcast-hzl
+94302;peace-strategy
+94314;peace-strategy
+94326;peace-strategy
+94352;peace-strategy
+94378;peace-strategy
+94397;peace-strategy
+94429;peace-strategy
+94452;history-method
+94466;peace-strategy
+94533;type=si_video;series=weekly-webcast-hzl
+94537;peace-strategy
+94628;type=si_video;series=weekly-webcast-hzl
+94644;peace-strategy
+94660;peace-strategy
+94683;type=si_video;series=weekly-webcast-hzl
+94686;peace-strategy
+94700;peace-strategy
+94709;peace-strategy
+94771;peace-strategy
+94774;peace-strategy
+94787;peace-strategy
+94808;type=si_statement;note=external author (Col. Black) statement
+94846;peace-strategy
+95232;peace-strategy
+95311;type=si_video;series=weekly-webcast-hzl
+95348;type=si_video;topics=peace-strategy
+95377;peace-strategy
+95422;type=si_statement;note=SI denunciation release
+95453;peace-strategy
+95648;type=si_video;topics=great-projects
+95681;peace-strategy
+95697;peace-strategy
+95709;classical-culture
+95832;peace-strategy
+95936;type=si_statement;note=EN pair of 95940
+96174;type=si_video;series=weekly-webcast-hzl
+96244;type=si_video;series=weekly-webcast-hzl
+96288;peace-strategy
+96337;type=si_video;series=weekly-webcast-hzl
+96513;type=si_video;series=weekly-webcast-hzl
+96558;great-projects
+96594;type=si_video;series=weekly-webcast-hzl
+96675;type=si_video;series=weekly-webcast-hzl
+96765;type=si_video;series=weekly-webcast-hzl
+96816;type=si_video;series=weekly-webcast-hzl
+96828;type=si_statement;note=DE pair of Urgent Appeal to (next) US President
+96964;type=si_video;series=weekly-webcast-hzl
+96998;peace-strategy
+97016;history-method
+97032;peace-strategy
+97055;type=si_statement;campaigns=international-peace-coalition;note=press release
+97114;peace-strategy
+97142;peace-strategy
+97154;type=si_statement;campaigns=international-peace-coalition;note=DE pair of 97055
+97169;peace-strategy
+97208;peace-strategy
+97249;peace-strategy
+97268;great-projects
+97285;type=si_statement;campaigns=international-peace-coalition;note=press release
+97324;type=si_statement;campaigns=international-peace-coalition;note=DE pair of 97285
+97339;type=si_coverage;note=CGTN appearance
+97364;type=si_video;series=weekly-webcast-hzl
+97442;peace-strategy
