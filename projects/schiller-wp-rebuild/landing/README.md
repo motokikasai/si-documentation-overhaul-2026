@@ -18,6 +18,37 @@ copy of every token, pattern and behavior.
 
 ## The drafts
 
+### The archive wing — /conferences/, one page three ways (newest)
+
+Three treatments of a single page: the **conference archive index** (the
+future `si_conference` archive at `/conferences/` — see
+`sessions/2026-07-16-consolidation-roadmap/06-content-model-v3.md` §2.2).
+Unlike the doors, these are not different topics — they are an A/B/C test
+of how to make forty years of conferences browsable, instantly
+recognizable, and seductive, with aesthetic education as the through-line.
+
+All three render from **one shared record set**, `js/conferences-data.js`
+(~34 records: five eras, real titles/dates and REAL YouTube playlist IDs
+from the 2026-07-16 channel audit — the Watch links work; entries whose
+titles/dates still need confirming are flagged `ph:true`, the pre-digital
+era `print:true`). In WordPress this file becomes the query loop, so the
+drafts double as a preview of the archive template. Shared styles in
+`css/conf-archive.css`, shared rendering/behaviors in `js/conf-archive.js`;
+all three share the Assembly's plum accent (`lp-conf`) — they are siblings
+of `conferences.html`, not new doors. A "treatment strip" under each hero
+cross-links the three for review.
+
+| File | Character | Tech register | Signature interactions |
+|---|---|---|---|
+| `conferences-gallery.html` | "The Gallery" — a museum promenade in five era rooms | vanilla (the control) | **cursor-lantern**: a gilded light follows the pointer through the dark rooms and frames warm by proximity · fixed **year spine** rides the scroll 2026→1984 · vitals count-up · touch lights frames at screen center |
+| `conferences-firmament.html` | "The Firmament" — every conference a star, still radiating | WebGL (three.js, vendored) | scroll flies the camera back along a gold time-thread from tonight to 1984 (eased, never hijacked) · HUD year + calling-card per star · cursor parallax · the next conference is the one white star · no WebGL/reduced-motion → the ivory index carries the page |
+| `conferences-playbill.html` | "The Programme" — forty seasons as one concert bill in five acts | GSAP + ScrollTrigger (vendored 3.12.5) | sticky **playbill deck**: each act's sheet stacks over the last, the covered sheet recedes (scrubbed) · `gsap.quickTo` cursor tilt on the sheet in hand · staggered row arrivals · closes with the utility index |
+
+Both index-bearing treatments end in the same `.shelf` index (one line per
+conference) — the "instantly findable" utility view behind the spectacle.
+GSAP note: `gsap.min.js` + `ScrollTrigger.min.js` now live in
+`homepage-draft/vendor/` beside three.js (GreenSock standard license).
+
 ### The v4 series — "the five doors" (current generation)
 
 Inherits the v4 homepage's threads (the laurel colophon, the wordmark
