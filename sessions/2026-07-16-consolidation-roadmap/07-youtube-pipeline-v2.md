@@ -24,7 +24,8 @@ Per-talk segmentation data exists in FIVE places of varying quality. For each pa
 | 1 | **WP conference-page deep links (Era B)**: `<a href="watch?v=ID&t=NNNs"><strong>Name</strong> (Country)</a>, affiliation: "Title"` | ~2021–2023 | Best: exact seconds + name + affiliation + talk title, human-curated |
 | 2 | **YT description timestamps**: leading `0:00 ·` mid-dot format (2023, Berlin 2025) or trailing `… 1:04:23` format (2022) | 2022–2023, some 2025 | Good; two regex dialects; Berlin 2025 times partly out-of-order |
 | 3 | **YT `chapters` field** (yt-dlp) | where desc-derived | Cross-check/repair only. TRUST GATE: accept chapters ONLY if the timestamp regex also hits the description — otherwise they're ASR "key moments" (2020/21) segmenting by topic, not speaker |
-| 4 | **WP prose timestamps (Era A)**: `<strong>Name</strong> (H:MM:SS)` inline in pre-2019 conference Pages | 2016–2019 | Fiddly (NBSP, ts inside/outside bold) but real; only needed where Regime-A per-talk videos don't already cover the talk |
+| 4 | **WP prose timestamps (Era A)**: `<strong>Name</strong> (H:MM:SS)` inline in pre-2019 conference Pages | 2016–2019 | **DOWNGRADED (pages export, `09` §4): exactly 2 published pages carry this format (Bad Soden 2018 EN/DE)** — handle that one conference manually/semi-manually; don't build a hardened parser |
+| 4b | **DE per-talk Pages (NEW source, `09` §4)**: root Pages titled `Speaker: "Title"` with one deep-linked video (June 2021 conference) | 2021 (DE) | Classified R4.1 → become `si_presentation` directly (transform, not generation); dedupe against pri-1/2 output by video ID + start |
 | 5 | **Caption alignment (upgrade path)**: fuzzy-find each agenda speaker name/intro in the auto-caption VTT | 2020–21, Dec 2024, May 2025 | Post-launch enhancement; never blocks migration |
 
 Parallel structural fact (Regime A, 2017–2019): conferences were uploaded as **one video per talk** — no timestamps needed; playlist membership gives the Conference parent, video title gives speaker+talk (parse `"Name: Title"` patterns).
@@ -49,7 +50,7 @@ Normalize first: NBSP ( )→space; mid-dots U+00B7 and U+2219 → `·`; curly q
 1. **Era-B anchors (WP HTML):** `watch\?v=([\w-]{11})[&?](?:amp;)?t=(\d+)s` scoped to anchors; name from inner `<strong>`, country from `\(([^)]+)\)` after it, affiliation+title from the anchor tail (`, affiliation: “Title”`). Panel = nearest preceding `h2/h3` heading. Guard: anchors whose text lacks a capitalized name (e.g. book titles containing times) → topic label, not split point.
 2. **Desc leading:** `^\s*(\d{1,2}:)?\d{1,2}:\d{2}\s*(?:·\s*)?(.+)$` per line (after normalize).
 3. **Desc trailing:** `^(.+?)\s+((?:\d{1,2}:)?\d{1,2}:\d{2})\s*$`.
-4. **Era-A prose (WP HTML):** `(?:<strong>|<b>)([^<]+?)(?:\s*\((\d{1,2}:\d{2}(?::\d{2})?)\))?</(?:strong|b)>\s*(?:\((\d{1,2}:\d{2}(?::\d{2})?)\))?` — ts may sit inside or after the bold; ts is relative to the nearest preceding panel iframe.
+4. **Era-A prose (WP HTML):** `(?:<strong>|<b>)([^<]+?)(?:\s*\((\d{1,2}:\d{2}(?::\d{2})?)\))?</(?:strong|b)>\s*(?:\((\d{1,2}:\d{2}(?::\d{2})?)\))?` — ts may sit inside or after the bold; ts is relative to the nearest preceding panel iframe. *(Scope check `09` §4: only the Bad Soden 2018 EN/DE pair needs this — run it loosely + hand-review rather than hardening.)*
 
 Name-vs-topic scoring (unchanged from v1): honorifics (Dr./Prof./Sen./Amb./H.E.), 2–4 capitalized tokens, personIndex match (last-name+first-initial, Levenshtein ≤2) vs topic stoplist + sentence-likeness. Borderline (0.35–0.65 nameRatio) → mandatory review row.
 

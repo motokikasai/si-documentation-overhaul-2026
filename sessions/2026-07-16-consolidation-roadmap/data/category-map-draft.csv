@@ -1,52 +1,52 @@
 Slug,Category Name,Language,Full Path,Total Posts,Posts Last 24 Months,Last Post Date,fate,target
 green-fr,“Green” Means No Humanity,French,“Green” Means No Humanity,2,0,2015-11-03,topic-remap,si_topic: Energy & Environment
-180,180,English (default),180,3,0,2022-07-10,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-316,316,English (default),316,1,0,2022-12-14,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-33,33,English (default),33,1,0,2021-07-11,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-37,37,English (default),37,251,10,2024-11-27,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
+180,180,English (default),180,3,0,2022-07-10,merge-duplicate,CONFIRMED original: 'brics-de' (BRICS). Inherit: topic-remap → si_topic: New Silk Road & Great Projects
+316,316,English (default),316,1,0,2022-12-14,merge-duplicate,CONFIRMED original: 'allgemein-zh-hans' (Allgemein @zh-hans). Inherit: retire → default dump — reclassify member posts
+33,33,English (default),33,1,0,2021-07-11,merge-duplicate,CONFIRMED original: 'updates-war' (World war danger updates). Inherit: topic-remap → si_topic: Peace & Strategy
+37,37,English (default),37,251,10,2024-11-27,merge-duplicate,CONFIRMED original: 'allgemein-de' (Allgemein). Inherit: original not in dropdown export — check on clone
 ,40,unknown,40,0,0,,retire,empty/unresolvable term
-436,436,English (default),436,13,5,2024-09-25,merge-duplicate,person:HZL
-438,438,English (default),438,47,3,2024-11-27,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-448,448,English (default),448,12,0,2022-03-09,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-465,465,English (default),465,15,5,2024-09-25,merge-duplicate,video
-471,471,English (default),471,17,2,2024-11-27,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-480,480,English (default),480,1,0,2022-05-05,merge-duplicate,coverage
-481,481,English (default),481,2,0,2024-01-15,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-483,483,English (default),483,16,5,2024-09-25,merge-duplicate,video
-508,508,English (default),508,1,0,2021-07-11,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-520,520,English (default),520,1,0,2021-07-11,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-524,524,English (default),524,206,0,2024-03-27,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-526,526,English (default),526,47,0,2024-05-11,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-527,527,English (default),527,1,0,2021-04-27,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-528,528,English (default),528,12,0,2024-05-29,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-529,529,English (default),529,1,0,2021-04-27,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-530,530,English (default),530,107,0,2024-03-27,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-531,531,English (default),531,13,0,2022-05-29,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-537,537,English (default),537,12,2,2024-11-27,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-539,539,English (default),539,16,0,2022-12-09,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-540,540,English (default),540,16,0,2022-12-09,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
+436,436,English (default),436,13,5,2024-09-25,merge-duplicate,CONFIRMED original: 'hzl' (Helga Zepp-LaRouche). Inherit: person-signal → Person: Helga Zepp-LaRouche
+438,438,English (default),438,47,3,2024-11-27,merge-duplicate,CONFIRMED original: 'helga-zepp-larouche-de' (Helga Zepp-LaRouche). Inherit: person-signal → Person: Helga Zepp-LaRouche
+448,448,English (default),448,12,0,2022-03-09,merge-duplicate,CONFIRMED original: 'bri-de' (BRI). Inherit: topic-remap → si_topic: New Silk Road & Great Projects
+465,465,English (default),465,15,5,2024-09-25,merge-duplicate,CONFIRMED original: 'hzl-webcast' (Helga Webcast). Inherit: cpt-signal → si_video
+471,471,English (default),471,17,2,2024-11-27,merge-duplicate,CONFIRMED original: 'webcast-de' (Webcast). Inherit: cpt-signal → si_video
+480,480,English (default),480,1,0,2022-05-05,merge-duplicate,CONFIRMED original: 'hzl-coverage' (Helga media coverage or interview). Inherit: cpt-signal → si_coverage
+481,481,English (default),481,2,0,2024-01-15,merge-duplicate,"CONFIRMED original: 'hzl-text' (Helga statement, article, transcript). Inherit: cpt-signal → Article+Person:HZL"
+483,483,English (default),483,16,5,2024-09-25,merge-duplicate,CONFIRMED original: 'hzl-video' (Helga Video). Inherit: cpt-signal → si_video
+508,508,English (default),508,1,0,2021-07-11,merge-duplicate,CONFIRMED original: 'updates-geopolitics' (Geopolitics updates). Inherit: topic-remap → si_topic: Peace & Strategy
+520,520,English (default),520,1,0,2021-07-11,merge-duplicate,CONFIRMED original: 'updates-development' (Economic development updates). Inherit: topic-remap → si_topic: Physical Economy & Development
+524,524,English (default),524,206,0,2024-03-27,merge-duplicate,CONFIRMED original: 'updates-de' (General updates). Inherit: topic-remap → si_topic: (General news — retire; topic from co-cats)
+526,526,English (default),526,47,0,2024-05-11,merge-duplicate,CONFIRMED original: 'activity-de' (Activity of the Schiller Institute). Inherit: retire → umbrella — children carry the signal
+527,527,English (default),527,1,0,2021-04-27,merge-duplicate,CONFIRMED original: 'location-nyc-de' (New York City SI activity). Inherit: region-remap → si_region (continent; country child only if high-volume)
+528,528,English (default),528,12,0,2024-05-29,merge-duplicate,CONFIRMED original: 'activity-conference-de' (Our conferences). Inherit: cpt-signal → si_conference
+529,529,English (default),529,1,0,2021-04-27,merge-duplicate,CONFIRMED original: 'location-usa-de' (United States SI activity). Inherit: region-remap → si_region (continent; country child only if high-volume)
+530,530,English (default),530,107,0,2024-03-27,merge-duplicate,CONFIRMED original: 'updates-geopolitics-de' (Geopolitics updates). Inherit: topic-remap → si_topic: Peace & Strategy
+531,531,English (default),531,13,0,2022-05-29,merge-duplicate,CONFIRMED original: 'updates-wlb-de' (World Land-Bridge updates). Inherit: topic-remap → si_topic: New Silk Road & Great Projects
+537,537,English (default),537,12,2,2024-11-27,merge-duplicate,CONFIRMED original: 'hzl-video-de' (Helga Video). Inherit: cpt-signal → si_video
+539,539,English (default),539,16,0,2022-12-09,merge-duplicate,CONFIRMED original: 'hzl-coverage-de' (Helga media coverage or interview). Inherit: cpt-signal → si_coverage
+540,540,English (default),540,16,0,2022-12-09,merge-duplicate,CONFIRMED original: 'activity-coverage-de' (Media coverage of our activity). Inherit: cpt-signal → si_coverage
 ,541,unknown,541,0,0,,retire,empty/unresolvable term
-542,542,English (default),542,9,1,2024-07-25,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-544,544,English (default),544,19,0,2022-08-30,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-550,550,English (default),550,6,0,2022-05-29,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-551,551,English (default),551,134,0,2023-08-22,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-563,563,English (default),563,25,0,2024-05-11,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-564,564,English (default),564,1,0,2021-10-20,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-565,565,English (default),565,1,0,2021-07-06,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-628,628,English (default),628,15,0,2022-01-20,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-633,633,English (default),633,1,0,2021-07-11,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-635,635,English (default),635,26,0,2022-08-03,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-636,636,English (default),636,20,0,2022-08-04,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-637,637,English (default),637,36,0,2022-11-30,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-639,639,English (default),639,1,0,2021-07-11,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-645,645,English (default),645,1,0,2021-04-27,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-648,648,English (default),648,5,0,2022-09-23,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-65,65,English (default),65,1,0,2021-02-18,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-658,658,English (default),658,47,0,2022-12-09,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-659,659,English (default),659,105,0,2024-05-29,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-94,94,English (default),94,11,0,2024-03-02,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-95,95,English (default),95,21,0,2022-08-08,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
-96,96,English (default),96,79,0,2024-03-27,merge-duplicate,resolve original term via term_id on clone (DE topic tree)
+542,542,English (default),542,9,1,2024-07-25,merge-duplicate,"CONFIRMED original: 'hzl-text-de' (Helga statement, article, transcript). Inherit: cpt-signal → Article+Person:HZL"
+544,544,English (default),544,19,0,2022-08-30,merge-duplicate,CONFIRMED original: 'updates-space-de' (Space updates). Inherit: topic-remap → si_topic: Science & Space
+550,550,English (default),550,6,0,2022-05-29,merge-duplicate,CONFIRMED original: 'updates-finance-de' (New financial order updates). Inherit: topic-remap → si_topic: Physical Economy & Development
+551,551,English (default),551,134,0,2023-08-22,merge-duplicate,CONFIRMED original: 'updates-development-de' (Economic development updates). Inherit: topic-remap → si_topic: Physical Economy & Development
+563,563,English (default),563,25,0,2024-05-11,merge-duplicate,"CONFIRMED original: 'activity-initiatives-de' (Our initiatives (petitions, etc)). Inherit: cpt-signal → si_statement/campaign"
+564,564,English (default),564,1,0,2021-10-20,merge-duplicate,CONFIRMED original: 'studies-economic-de' (Economic development studies). Inherit: topic-remap → si_topic: Physical Economy & Development
+565,565,English (default),565,1,0,2021-07-06,merge-duplicate,CONFIRMED original: 'studies-science-de' (Scientific research studies). Inherit: topic-remap → si_topic: Science & Space
+628,628,English (default),628,15,0,2022-01-20,merge-duplicate,CONFIRMED original: 'committee-for-the-coincidence-of-opposites-de' (The Committee for the Coincidence of Opposites). Inherit: campaign-remap → si_campaign: Coincidence of Opposites
+633,633,English (default),633,1,0,2021-07-11,merge-duplicate,CONFIRMED original: 'color-revolutions' (Color Revolutions). Inherit: topic-remap → si_topic: Peace & Strategy
+635,635,English (default),635,26,0,2022-08-03,merge-duplicate,CONFIRMED original: 'green-new-deal-de' (Green New Deal). Inherit: topic-remap → si_topic: Energy & Environment
+636,636,English (default),636,20,0,2022-08-04,merge-duplicate,CONFIRMED original: 'color-revolutions-de' (Color Revolutions). Inherit: topic-remap → si_topic: Peace & Strategy
+637,637,English (default),637,36,0,2022-11-30,merge-duplicate,CONFIRMED original: 'healthcare-de' (Healthcare). Inherit: topic-remap → si_topic: Health & Food Security
+639,639,English (default),639,1,0,2021-07-11,merge-duplicate,CONFIRMED original: 'global-diplomacy' (Global Diplomacy). Inherit: topic-remap → si_topic: Peace & Strategy
+645,645,English (default),645,1,0,2021-04-27,merge-duplicate,CONFIRMED original: 'updates-music-de' (Music updates). Inherit: topic-remap → si_topic: Classical Culture
+648,648,English (default),648,5,0,2022-09-23,merge-duplicate,CONFIRMED original: 'counterintelligence-de' (Counterintelligence). Inherit: topic-remap → si_topic: Peace & Strategy
+65,65,English (default),65,1,0,2021-02-18,merge-duplicate,CONFIRMED original: 'allgemein-ru' (Allgemein). Inherit: retire → default dump — reclassify member posts
+658,658,English (default),658,47,0,2022-12-09,merge-duplicate,CONFIRMED original: 'china-de' (China). Inherit: region-remap → si_region (continent; country child only if high-volume)
+659,659,English (default),659,105,0,2024-05-29,merge-duplicate,CONFIRMED original: 'global-diplomacy-de' (Global Diplomacy). Inherit: topic-remap → si_topic: Peace & Strategy
+94,94,English (default),94,11,0,2024-03-02,merge-duplicate,CONFIRMED original: 'eine-neue-renaissance' (Eine neue Renaissance). Inherit: topic-remap → si_topic: New Paradigm
+95,95,English (default),95,21,0,2022-08-08,merge-duplicate,"CONFIRMED original: 'grun-bedeutet-tod' (""Grün"" bedeutet Tod). Inherit: topic-remap → si_topic: Energy & Environment"
+96,96,English (default),96,79,0,2024-03-27,merge-duplicate,CONFIRMED original: 'weltkrieg-stoppen' (Weltkrieg stoppen). Inherit: topic-remap → si_topic: Peace & Strategy
 a-new-renaissance-ru,A New Renaissance,Russian,A New Renaissance,2,0,2017-01-03,topic-remap,si_topic: New Paradigm
 activity,Activity of the Schiller Institute,English (default),Activity of the Schiller Institute,137,3,2025-03-24,retire,umbrella — children carry the signal
 activity-coverage,Media coverage of our activity,English (default),Activity of the Schiller Institute > Media coverage of our activity,67,2,2026-01-17,cpt-signal,si_coverage

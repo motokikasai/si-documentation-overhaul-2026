@@ -3,7 +3,7 @@ The technical facts, techniques, and command surface for executing the whole mig
 
 ## 1. Environment facts
 - **Local:** Local by Flywheel ships WP-CLI in its site shell ("Open Site Shell") — zero setup. Build/tune everything here.
-- **IONOS (staging replay + cutover delta):** shared hosting usually has SSH but no `wp`. Install the phar once:
+- **Staging/production VPS (S7, 2026-07-17: replaces IONOS as the replay + cutover host):** install `wp` normally (panel images often include it; else the phar below). The phar route is still needed on **IONOS for the one-time export** (`wp db export`, term/user list dumps) if its SSH lacks WP-CLI:
   ```bash
   curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
   php wp-cli.phar --info && mkdir -p ~/bin && mv wp-cli.phar ~/bin/wp && chmod +x ~/bin/wp
@@ -93,7 +93,8 @@ The user's `posts.csv`/`categories_full.csv` exports already cover most of this;
 wp si:classify       --dry-run                 → classification.csv        (rules R1–R9 minus R5-Forecast; R5.1 keys on coverage categories)
 wp si:persons        --dry-run                 → person-map.csv
 wp si:transform      --batch=200 --dry-run     → type reassignment + WPML element_type + field extraction + term-map
-wp si:shortcodes     --apply=census.csv        → Vanguard shortcode → HTML conversion
+wp si:shortcodes     --apply=census.csv        → Vanguard shortcode → HTML conversion (scope per 09 §3: ~180 classic PAGES;
+                                                  posts are clean Gutenberg; [portfolio]/[ajax_load_more] pages → template rebuild, not regex)
 wp si:media          --batch=200               → Folders assignment via post_parent + PDF→Document promotion
 wp si:yt-dump / yt-playlists / yt-conferences / yt-scan / presentations --source=yt   (see 07 §4)
 wp si:persons        --reconcile

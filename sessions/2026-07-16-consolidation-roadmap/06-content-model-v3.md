@@ -6,7 +6,8 @@ Supersedes `projects/schiller-wp-rebuild/01-data-model-schema.md` (v2) and the 8
 2. **Native categories/tags fully replaced** (fresh start, S2): one canonical language-independent term set via WPML term translation; legacy category tree retired per `data/category-map-draft.csv`; tags killed.
 3. `si_topic` seeded with the data-derived 10 terms (`05` §5), not the v2 guess list.
 4. `si_coverage` base `/coverage/` confirmed **net-new** (the current `/coverage/` is a page, not an archive — it gets replaced).
-5. Presentation base **`/media/` kept** (zero redirects for ~330 legacy URLs; the name even fits). Noted alternative: `/presentations/` + 301s — only if leadership dislikes `/media/`; cost is small (C6: the items aren't in the sitemap).
+5. Presentation base **`/media/` kept** (zero redirects for the legacy URLs; the name even fits). Noted alternative: `/presentations/` + 301s — only if leadership dislikes `/media/`; cost is small (C6: the items aren't in the sitemap).
+6. **(2026-07-17, DB census `11`)** Legacy presentations = **817 published portfolio items in 6 languages** (EN 333 · DE 182 · FR 155 · RU 83 · ZH 33 · ES 31), not ~330; YouTube URL lives in `_portfolio_video_youtube` meta; conference+panel+language via 320 `portfolio_category` terms. Non-EN fate **DECIDED (S10): keep all 6 languages** — all 817 transform to `si_presentation`, WPML pairings preserved. Posts additionally carry a Vanguard video meta (`_blog_post_video`, 4,138 posts) — an R3 classification signal.
 
 ---
 
@@ -60,7 +61,7 @@ Profile page = reverse-query aggregation (articles bylined, talks, videos hosted
 
 Reverse: child Presentations (grouped by panel title), derived speaker roster, related Documents/Statements. Reports *about* a conference remain Articles.
 
-### 2.3 Presentation — `si_presentation` · **`/media/`** (preserves ~330 legacy URLs)
+### 2.3 Presentation — `si_presentation` · **`/media/`** (preserves the 333 public EN legacy URLs; translations pair via WPML)
 *An act of speech: one talk (or one unsegmented session) within a Conference. Video optional — transcript-only is valid.*
 
 | Field | Type |
