@@ -1,0 +1,260 @@
+{
+  "statements_parsed": 413,
+  "post_type_status": {
+    "attachment/inherit": 66646,
+    "revision/inherit": 16936,
+    "post/publish": 4081,
+    "portfolio_cpt/publish": 784,
+    "page/publish": 264,
+    "post/draft": 100,
+    "nav_menu_item/publish": 94,
+    "optionsframework/draft": 54,
+    "page/draft": 35,
+    "portfolio/publish": 33,
+    "portfolio_cpt/draft": 32,
+    "wp_navigation/publish": 31,
+    "slider/publish": 14,
+    "client/publish": 12,
+    "post/private": 10,
+    "slider/draft": 8,
+    "oembed_cache/publish": 7,
+    "tablepress_table/publish": 6,
+    "cookielawinfo/publish": 6,
+    "page/private": 3,
+    "rmp_menu/publish": 2,
+    "wp_block/publish": 2,
+    "wpcode/draft": 2,
+    "slider/pending": 1,
+    "portfolio_cpt/pending": 1,
+    "dlm_download/draft": 1,
+    "sp_easy_accordion/publish": 1,
+    "elementor_library/publish": 1,
+    "custom_css/publish": 1,
+    "post/auto-draft": 1
+  },
+  "options": {
+    "siteurl": "https://schillermeet.de",
+    "blogname": "Schiller Institute",
+    "default_category": "1",
+    "posts_per_page": "10",
+    "permalink_structure": "/blog/%year%/%monthnum%/%day%/%postname%/",
+    "home": "https://schillermeet.de",
+    "category_base": "",
+    "template": "blocksy",
+    "stylesheet": "blocksy",
+    "show_on_front": "posts",
+    "tag_base": "",
+    "page_on_front": "0",
+    "WPLANG": ""
+  },
+  "blog_post_meta_keys": {
+    "_blog_post_media": {
+      "count": 4138,
+      "samples": [
+        "image",
+        "image",
+        "image",
+        "image",
+        "image"
+      ]
+    },
+    "_blog_post_video": {
+      "count": 4138,
+      "samples": [
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    "_blog_post_media_overlay_off": {
+      "count": 1433,
+      "samples": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    },
+    "_blog_post_video_youtube": {
+      "count": 8,
+      "samples": [
+        "https://www.youtube.com/watch?v=zRz40SGhmaw",
+        "<iframe width=\"560\" height=\"315\" src=\"//www.youtube.com/embed/M0inLlRjAj8?list=UUVNxjVDDq9ALxFuCKMx8HQg\" frameborder=\"0\" allowfullscreen></iframe>",
+        "https://www.youtube.com/watch?v=7ndpMhUmQIs",
+        "https://www.youtube.com/watch?v=N2GiDNECywg",
+        "https://www.youtube.com/watch?v=N2GiDNECywg"
+      ]
+    },
+    "_blog_post_autoplay": {
+      "count": 6,
+      "samples": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    }
+  },
+  "portfolio_meta_keys": {
+    "_portfolio_detail_big_images": {
+      "count": 886,
+      "samples": [
+        "none",
+        "none",
+        "none",
+        "none",
+        "none"
+      ]
+    },
+    "_portfolio_video": {
+      "count": 886,
+      "samples": [
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube",
+        "youtube"
+      ]
+    },
+    "_portfolio_video_youtube": {
+      "count": 588,
+      "samples": [
+        "http://www.youtube.com/watch?v=1XM7VIH3J9w&width=640&height=360",
+        "http://www.youtube.com/watch?v=SGtUuproUWU&width=640&height=360",
+        "http://www.youtube.com/watch?v=-BY-d16dnK8&width=640&height=360",
+        "http://www.youtube.com/watch?v=n-4nEx-kuDk&width=640&height=360",
+        "http://www.youtube.com/watch?v=aQFUxdC5-zc&width=640&height=360"
+      ]
+    },
+    "_portfolio_autoplay": {
+      "count": 580,
+      "samples": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    },
+    "_portfolio_no_lightbox": {
+      "count": 448,
+      "samples": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    },
+    "_swerve_link_type": {
+      "count": 278,
+      "samples": []
+    },
+    "_swerve_related_internal_type": {
+      "count": 278,
+      "samples": []
+    },
+    "_swerve_related_internal": {
+      "count": 278,
+      "samples": []
+    },
+    "_swerve_related_external": {
+      "count": 278,
+      "samples": []
+    },
+    "_portfolio_link_newwindow": {
+      "count": 71,
+      "samples": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    },
+    "_portfolio_link": {
+      "count": 1,
+      "samples": [
+        "Aufruf für Glass-Steagall und Verfassungsrecht"
+      ]
+    },
+    "_swerve_aliases": {
+      "count": 1,
+      "samples": [
+        "a:1:{i:0;s:20:\"/brics-resolution-de\";}"
+      ]
+    }
+  },
+  "shortcodes_in_published_posts_total": 1788,
+  "shortcodes_in_published_posts_distinct_posts": {
+    "button": 191,
+    "hr": 96,
+    "info_box": 95,
+    "call_to_action_big": 57,
+    "caption": 51,
+    "call_to_action_bar": 40,
+    "toggle": 34,
+    "one_half_last": 32,
+    "one_half": 32,
+    "blockquote": 24,
+    "title_small": 21,
+    "title_big": 18,
+    "one_third_last": 12,
+    "two_third": 10,
+    "audio": 9,
+    "one_third": 8,
+    "testimonial": 8,
+    "two_third_last": 7,
+    "applause": 7,
+    "tab": 6,
+    "tabs": 6,
+    "embed": 5,
+    "icon": 4,
+    "image": 4,
+    "video": 4,
+    "wide_bar": 4,
+    "dropcap": 1,
+    "list": 1,
+    "one_fourth_last": 1,
+    "one_fourth": 1
+  },
+  "icl_element_types": {
+    "post_attachment": 66646,
+    "post_post": 4264,
+    "package_gutenberg": 2017,
+    "post_portfolio_cpt": 817,
+    "tax_portfolio_category": 320,
+    "post_page": 311,
+    "tax_category": 257,
+    "post_nav_menu_item": 97,
+    "tax_post_tag": 75,
+    "post_optionsframework": 54,
+    "post_portfolio": 33,
+    "post_wp_navigation": 31,
+    "tax_translation_priority": 30,
+    "post_slider": 23,
+    "comment": 14,
+    "post_client": 12,
+    "tax_slider_category": 10,
+    "tax_cookielawinfo-category": 6,
+    "post_cookielawinfo": 6,
+    "post_tablepress_table": 4,
+    "post_wp_block": 2,
+    "post_dlm_download": 1,
+    "package_block": 1
+  },
+  "portfolio_cpt_languages": {
+    "en": 333,
+    "de": 182,
+    "fr": 155,
+    "ru": 83,
+    "zh-hans": 33,
+    "es": 31
+  },
+  "category_terms": 257,
+  "portfolio_category_terms": 320
+}

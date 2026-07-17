@@ -1,0 +1,653 @@
+term_id,slug,name,taxonomy,parent_term_id,count
+1,allgemein,General,category,0,1495
+505,updates,General updates,category,0,664
+438,helga-zepp-larouche-de,Helga Zepp-LaRouche,category,0,355
+462,webcast-mit-helga-zepp-larouche,Webcast mit Helga Zepp-LaRouche,category,0,341
+520,updates-development,Economic development updates,category,505,330
+471,webcast-de,Webcast,category,0,289
+465,hzl-webcast,Helga Webcast,category,483,263
+651,37,37,category,0,250
+639,global-diplomacy,Global Diplomacy,category,0,243
+508,updates-geopolitics,Geopolitics updates,category,505,240
+537,hzl-video-de,Helga Video,category,0,234
+629,harley_schlanger_daily_update,Harley Schlanger Daily Update,category,0,217
+652,524,524,category,0,206
+33,updates-war,World war danger updates,category,508,200
+436,hzl,Helga Zepp-LaRouche,category,0,185
+446,updates-bri,New Silk Road / BRI updates,category,520,150
+484,activity,Activity of the Schiller Institute,category,0,137
+649,551,551,category,0,134
+483,hzl-video,Helga Video,category,436,132
+439,neue-seidenstrasse,Neue Seidenstrasse,category,0,131
+542,hzl-text-de,"Helga statement, article, transcript",category,0,125
+798,international-peace-coalition,International Peace Coalition,category,0,124
+96,weltkrieg-stoppen,Weltkrieg stoppen,category,93,122
+448,bri-de,BRI,category,0,118
+659,global-diplomacy-de,Global Diplomacy,category,0,114
+640,china,China,category,639,113
+801,internationale-friedenskoalition,internationale Friedenskoalition,category,526,110
+653,530,530,category,0,107
+671,659,659,category,0,105
+702,healthcare-updates-development,Healthcare,category,520,101
+660,russia,Russia,category,639,100
+634,healthcare,Healthcare,category,626,89
+180,brics-de,BRICS,category,0,88
+526,activity-de,Activity of the Schiller Institute,category,0,88
+480,hzl-coverage,Helga media coverage or interview,category,436,85
+506,updates-wlb,World Land-Bridge updates,category,520,85
+643,covid-19,COVID-19,category,634,85
+530,updates-geopolitics-de,Geopolitics updates,category,0,84
+481,hzl-text,"Helga statement, article, transcript",category,436,83
+524,updates-de,General updates,category,0,82
+625,daily-beethoven-sparks-of-joy,Daily Beethoven — Sparks of Joy,category,0,81
+97,die-weltlandbrucke-bauen,Die Weltlandbrücke bauen,category,93,80
+657,96,96,category,0,79
+467,coverage-de,Coverage,category,0,78
+509,updates-music,Music updates,category,34,76
+510,activity-conference,Our conferences,category,484,74
+551,updates-development-de,Economic development updates,category,0,74
+34,updates-culture,Cultural renaissance updates,category,505,71
+519,activity-initiatives,"Our initiatives (petitions, etc)",category,484,69
+485,activity-coverage,Media coverage of our activity,category,484,67
+667,agriculture,Agriculture,category,520,67
+738,afghanistan,Afghanistan,category,639,65
+95,grun-bedeutet-tod,"""Grün"" bedeutet Tod",category,93,61
+539,hzl-coverage-de,Helga media coverage or interview,category,0,61
+31,updates-environmentalism,Environmentalism updates,category,508,60
+637,healthcare-de,Healthcare,category,0,60
+757,afghanistan-allgemein-de,Afghanistan,category,0,60
+641,united-states,United States,category,639,58
+98,updates-space,Space updates,category,520,54
+742,sanctions,Sanctions,category,508,53
+658,china-de,China,category,0,52
+632,green-new-deal,Green New Deal,category,31,51
+472,coverage-de-2,Coverage,category,0,49
+670,658,658,category,0,47
+678,526,526,category,0,47
+680,438,438,category,0,47
+521,updates-finance,New financial order updates,category,520,46
+642,finance,Finance,category,505,46
+700,power-energy,Power &amp; Energy,category,520,44
+626,committee-for-the-coincidence-of-opposites,The Committee for the Coincidence of Opposites,category,0,41
+633,color-revolutions,Color Revolutions,category,33,40
+563,activity-initiatives-de,"Our initiatives (petitions, etc)",category,0,39
+367,brics-de-2,BRICS,category,0,36
+668,637,637,category,0,36
+65,allgemein-ru,Allgemein,category,0,35
+94,eine-neue-renaissance,Eine neue Renaissance,category,93,33
+501,location-nyc,New York City SI activity,category,497,33
+540,activity-coverage-de,Media coverage of our activity,category,0,31
+487,activity-musical,Our musical events,category,484,30
+635,green-new-deal-de,Green New Deal,category,0,30
+486,activity-cultural,Our cultural events,category,484,26
+654,635,635,category,0,26
+716,stoppt-die-sanktionen,Stoppt die Sanktionen,category,93,26
+474,brics-de-4,BRICS,category,93,25
+488,activity-economic,Our economic development events,category,484,25
+636,color-revolutions-de,Color Revolutions,category,0,25
+683,563,563,category,0,25
+550,updates-finance-de,New financial order updates,category,0,24
+368,updates-brics,BRICS updates,category,520,23
+555,location-germany-de,Germany SI activity,category,0,23
+740,germany,Germany,category,639,22
+650,95,95,category,0,21
+656,636,636,category,0,20
+739,pakistan-global-diplomacy,Pakistan,category,639,20
+766,ukraine,Ukraine,category,639,20
+628,committee-for-the-coincidence-of-opposites-de,The Committee for the Coincidence of Opposites,category,0,19
+672,544,544,category,0,19
+528,activity-conference-de,Our conferences,category,0,18
+544,updates-space-de,Space updates,category,0,18
+648,counterintelligence-de,Counterintelligence,category,0,17
+679,471,471,category,0,17
+756,haiti-allgemein-de,Haiti,category,0,17
+787,ccd-hitlist,CCD Hitlist,category,0,17
+623,komitee-coincidenica-oppositorum-zusammenfall-der-gegensatze-de,Komitee Coincidenica Oppositorum (Zusammenfall der Gegensätze),category,0,16
+647,counterintelligence,Counterintelligence,category,0,16
+676,540,540,category,0,16
+682,539,539,category,0,16
+692,india,India,category,639,16
+704,world-food-program,World Food Program,category,639,16
+732,483,483,category,0,16
+531,updates-wlb-de,World Land-Bridge updates,category,0,15
+669,628,628,category,0,15
+796,465,465,category,0,15
+753,haiti,Haiti,category,639,14
+675,531,531,category,0,13
+733,436,436,category,0,13
+767,bri-belt-road,BRI - Belt &amp; Road,category,520,13
+517,studies-economic,Economic development studies,category,516,12
+518,studies-science,Scientific research studies,category,516,12
+522,location-china,China SI activity,category,513,12
+674,448,448,category,0,12
+677,528,528,category,0,12
+684,537,537,category,0,12
+565,studies-science-de,Scientific research studies,category,0,11
+705,94,94,category,0,11
+770,ibn-sina,Ibn Sina,category,0,11
+541,location-china-de,China SI activity,category,0,10
+493,location-germany,Germany SI activity,category,490,9
+497,location-usa,United States SI activity,category,489,9
+701,542,542,category,0,9
+717,stop-the-sanctions,Stop the Sanctions,category,0,9
+646,mexico,Mexico,category,639,8
+724,history,History,category,0,8
+746,uzbekistan,Uzbekistan,category,639,8
+775,railway-projects,Railway projects,category,520,8
+93,unsere-kampagne,Unsere Kampagne,category,0,7
+490,location-europe,Europe SI activity,category,489,7
+492,location-france,France SI activity,category,490,7
+498,location-boston,Boston SI activity,category,497,7
+500,location-houston,Houston SI activity,category,497,7
+685,argentina,Argentina,category,639,7
+750,france,France,category,639,7
+779,africa,Africa,category,639,7
+468,old-coverage,old coverage,category,0,6
+504,location-va,Northern Virginia SI activity,category,497,6
+523,location-russia,Russia SI activity,category,515,6
+655,550,550,category,0,6
+723,so-africa,So. Africa,category,639,6
+769,food-agriculture,Food/agriculture,category,0,6
+529,location-usa-de,United States SI activity,category,0,5
+564,studies-economic-de,Economic development studies,category,0,5
+699,648,648,category,0,5
+715,syria-global-diplomacy,Syria,category,639,5
+726,lyndon-larouche-legacy,Lyndon LaRouche legacy,category,0,5
+749,italy,Italy,category,639,5
+751,kazakhstan,Kazakhstan,category,639,5
+755,kyrgyzstan,Kyrgyzstan,category,639,5
+316,allgemein-zh-hans,Allgemein @zh-hans,category,0,4
+512,location-asia-sw-africa-n,Asia (Southwest) &amp; Africa (Northern) SI activity,category,489,4
+516,studies,Studies &amp; contributions,category,0,4
+527,location-nyc-de,New York City SI activity,category,0,4
+630,youth-movement,Youth Movement,category,484,4
+631,youth-movement-de,Youth Movement,category,0,4
+673,brazil,Brazil,category,639,4
+693,cuba,Cuba,category,639,4
+712,denmark,Denmark,category,0,4
+718,greece,Greece,category,639,4
+720,el-salvador,El Salvador,category,639,4
+748,belrus,Belrus,category,639,4
+759,yemen,Yemen,category,639,4
+763,britain,Britain,category,639,4
+432,stop-world-war-ru,Stop World War,category,0,3
+491,location-denmark,Denmark SI activity,category,490,3
+494,location-sweden,Sweden SI activity,category,490,3
+511,location-ibero,Ibero-America SI activity,category,489,3
+645,updates-music-de,Music updates,category,0,3
+713,180,180,category,0,3
+722,bolivia,Bolivia,category,639,3
+752,turkmenistan,Turkmenistan,category,639,3
+754,iran,Iran,category,639,3
+761,dominican-republic,Dominican Republic,category,639,3
+768,wfp,WFP,category,0,3
+788,education,Education,category,520,3
+793,freedom-of-press-speech,Freedom of Press &amp; Speech,category,0,3
+799,culture,Culture,category,0,3
+433,brics-de-ru,BRICS,category,0,2
+435,a-new-renaissance-ru,A New Renaissance,category,0,2
+515,location-asia-c-n,Asia (Central &amp; Northern) SI activity,category,489,2
+703,venezuela,Venezuela,category,639,2
+709,pakistan,Pakistan,category,0,2
+721,honduras,Honduras,category,639,2
+731,481,481,category,0,2
+765,nigeria-global-diplomacy,Nigeria,category,639,2
+773,peru,Peru,category,639,2
+782,turkey,Turkey,category,639,2
+783,un,UN,category,639,2
+784,tajikistan,Tajikistan,category,639,2
+38,allgemein-it,Allgemein,category,0,1
+40,allgemein-el,Allgemein,category,0,1
+434,world-land-bridge-ru,The World Land-Bridge,category,0,1
+470,helga-zepp-larouche-ru,Helga Zepp-LaRouche,category,0,1
+499,location-detroit,Detroit SI activity,category,497,1
+502,location-sf,San Francisco Bay Area SI activity,category,497,1
+513,location-asia-s-e-se,"Asia (Southern, Eastern, &amp; Southeastern) &amp; Oceania SI activity",category,489,1
+514,location-africa-subsaharan,Africa (Subsaharan) SI activity,category,489,1
+538,updates-ru,General updates,category,0,1
+543,los-angeles-si-activity,Los Angeles SI activity,category,497,1
+644,daily-beethoven-sparks-of-joy-de,Daily Beethoven — Sparks of Joy,category,0,1
+706,645,645,category,0,1
+707,527,527,category,0,1
+708,529,529,category,0,1
+710,sweden,Sweden,category,0,1
+711,norway,Norway,category,0,1
+714,syria,Syria,category,0,1
+725,565,565,category,0,1
+727,633,633,category,0,1
+728,520,520,category,0,1
+729,508,508,category,0,1
+730,639,639,category,0,1
+734,33,33,category,0,1
+741,egypt,Egypt,category,639,1
+743,ecuador,Ecuador,category,639,1
+744,paraguay,Paraguay,category,639,1
+745,costa-rica,Costa Rica,category,639,1
+747,south-korea,South Korea,category,639,1
+758,libya,Libya,category,639,1
+760,nicaragua,Nicaragua,category,639,1
+762,564,564,category,0,1
+764,nigeria,Nigeria,category,0,1
+771,mozambique,Mozambique,category,639,1
+774,railway-developments,Railway developments,category,0,1
+776,hungry,Hungry,category,639,1
+777,italy-si-activity,Italy SI activity,category,490,1
+778,480,480,category,0,1
+780,philipines,Philipines,category,639,1
+781,netherlands,Netherlands,category,639,1
+785,new-zealand,New Zealand,category,639,1
+786,sare-for-senate-news,Sare for Senate news,category,0,1
+789,vatican,Vatican,category,639,1
+790,norway-global-diplomacy,Norway,category,639,1
+791,thailand,Thailand,category,639,1
+792,saudi-arabia,Saudi Arabia,category,639,1
+794,316,316,category,0,1
+795,syria-allgemein-de,Syria,category,0,1
+800,palestine,Palestine,category,639,1
+802,malaysia,Malaysia,category,639,1
+36,allgemein-fr,Allgemein,category,0,0
+39,allgemein-es,Allgemein,category,0,0
+66,allgemein-fa,Allgemein,category,0,0
+69,allgemein-ar,Allgemein,category,0,0
+259,green-fr,&#8220;Green&#8221; Means No Humanity,category,0,0
+477,uncategorized-da,Uncategorized @da,category,0,0
+489,location,Locations of our activity,category,0,0
+503,location-seattle,Seattle SI activity,category,497,0
+638,65,65,category,0,0
+681,541,541,category,0,0
+772,40,40,category,0,0
+409,musical-dialogue,Musical Dialogue,portfolio_category,0,49
+103,frankfurt-april-2013,Frankfurt April 2013,portfolio_category,0,46
+262,paris-2015,Paris 2015,portfolio_category,0,38
+275,paris-conference-2015-en,Paris Conference 2015 (EN),portfolio_category,0,36
+283,paris-konferenz-2015-de,Paris Konferenz 2015 (DE),portfolio_category,0,33
+118,frankfurt,Frankfurt April 2013,portfolio_category,0,32
+317,panel-0-zh-hans,席勒学院国际会议 (巴黎) 2015年6月,portfolio_category,0,32
+23,conference201211,Flörsheim 2012,portfolio_category,0,31
+127,%d1%84%d1%80%d0%b0%d0%bd%d0%ba%d1%84%d1%83%d1%80%d1%82-%d0%b0%d0%bf%d1%80%d0%b5%d0%bb%d1%8f-2013-%d0%b3,ФРАНКФУРТ АПРЕЛЯ 2013 г.,portfolio_category,0,31
+327,paris-2015-zh-hans,Paris 2015,portfolio_category,0,29
+184,frankfurt-october-2014,Frankfurt October 2014 (DE),portfolio_category,0,28
+185,frankfurt-silk-road-china-lunar-conference-2014,Frankfurt October 2014 (EN) - silk road china lunar,portfolio_category,0,28
+282,paris-2015-2,Paris 2015,portfolio_category,0,28
+137,francfort-avril2013,Francfort Avril 2013,portfolio_category,0,27
+198,francfort-octobre-2014-fr,Francfort Octobre 2014 (FR),portfolio_category,0,26
+290,paris-2015-de,Paris 2015,portfolio_category,0,26
+413,2013,2013,portfolio_category,409,25
+41,konferenz2012,Flörsheim 2012,portfolio_category,0,24
+70,conference2012-3,Flörsheim 2012 (RU),portfolio_category,0,24
+52,conference2012-2,Flörsheim 2012,portfolio_category,0,23
+427,frankfurt-april-2013-fr,Frankfurt April 2013,portfolio_category,0,23
+369,berlin-june-2016-en,Berlin June 2016 (EN),portfolio_category,0,22
+375,berlin-june-2016-de,Berlin June 2016 (DE),portfolio_category,0,22
+385,berlin-june-2016-fr,Berlin June 2016 (FR),portfolio_category,0,22
+99,sterling-sdi2013,"Sterling, 2013-03-23",portfolio_category,0,21
+148,san-francisco-2013,San Francisco 2013,portfolio_category,275,21
+256,new-england-conference-dec-7-2014,New England Conference December 7 2014,portfolio_category,0,21
+156,los-angeles,"Los Angeles, Nov. 2nd, 2013",portfolio_category,0,20
+168,30th-anniversary-new-york-2014,30th Anniversary New York 2014,portfolio_category,0,20
+418,musical-dialogue-de,Musical Dialogue,portfolio_category,0,20
+79,nyc20130126,"New York, 2013-01-26",portfolio_category,0,18
+449,bad-soden-november-2017-en,Bad Soden November 2017 (EN),portfolio_category,0,18
+131,sterling-conferencia-ee-uu-marzo-2013,"STERLING CONFERENCIA (EE.UU, MARZO 2013)",portfolio_category,0,17
+234,frankfurt-2014-ru-october,Frankfurt 2014 (RU) October,portfolio_category,0,16
+416,musical-dialogue-ru,Musical Dialogue,portfolio_category,0,15
+417,2013-de,2013,portfolio_category,0,15
+112,qa-part-1,Q&amp;A Part 1,portfolio_category,103,13
+170,panel-2-30th-anniversary-new-york-2014,Panel 2,portfolio_category,168,11
+258,panel-2-new-england-conference-dec-7-2014,panel 2,portfolio_category,256,11
+454,bad-soden-november-2017-de,Bad Soden November 2017 (DE),portfolio_category,0,11
+85,music-nyc20130126,The Role of Classical Music,portfolio_category,79,10
+100,panel1-sdi2013,Panel 1,portfolio_category,99,10
+182,helga-zepp-larouche-artikel,Helga Zepp-LaRouche,portfolio_category,181,10
+187,transcript,Transcript,portfolio_category,185,10
+257,panel-1-new-england-conference-dec-7-2014,panel 1,portfolio_category,256,10
+422,2013-ru,2013,portfolio_category,0,10
+425,2013-fr,2013,portfolio_category,0,10
+133,panel-uno,Panel uno,portfolio_category,131,9
+277,panel-2-2,Panel 2,portfolio_category,275,9
+279,panel-4-2,Panel 4,portfolio_category,275,9
+287,panel-4-de-3,Panel 4,portfolio_category,283,9
+372,panel-3-berlin-june-2016-en,Panel 3,portfolio_category,369,9
+378,panel-3-berlin-june-2016-de,Panel 3,portfolio_category,375,9
+388,panel-3-berlin-june-2016-fr,Panel 3,portfolio_category,385,9
+80,panel-1-nyc2013,Panel 1,portfolio_category,79,8
+87,ny20130126,"New York, 26.01.2013",portfolio_category,0,8
+101,panel2-sdi2013,Panel 2,portfolio_category,99,8
+106,panel-3-frankfurt-april-2013,Panel 3,portfolio_category,103,8
+107,classical-concert,Classical Concert,portfolio_category,103,8
+122,panel-3-de,Panel 3,portfolio_category,118,8
+126,klassisches-konzert,Klassisches Konzert,portfolio_category,118,8
+129,%d0%ba%d0%be%d0%bd%d1%86%d0%b5%d1%80%d1%82,КОНЦЕРТ,portfolio_category,127,8
+134,panel-dos,Panel dos,portfolio_category,131,8
+135,panel-3-ru_201304,ЗАСЕДАНИЕ 3,portfolio_category,127,8
+150,panel-2-sf2013,Panel 2,portfolio_category,148,8
+208,frankfurt-silk-road-china-lunar-conference-2014-de,Frankfurt-Silk Road &amp;China Lunar Conference 2014,portfolio_category,0,8
+271,panel-4-fr-3,Panel 4,portfolio_category,262,8
+285,panel-2-de-3,Panel 2,portfolio_category,283,8
+412,2014,2014,portfolio_category,409,8
+428,musical-dialogue-fr,Musical Dialogue,portfolio_category,0,8
+441,paris-24-octobre-2017-fr,Paris 24 octobre 2017 (FR),portfolio_category,0,8
+331,written-contributions,Written Contributions,portfolio_category,23,7
+136,francfort-abril-de-2013,Fráncfort abril de 2013,portfolio_category,0,7
+140,panel-3-fr,Panel 3,portfolio_category,137,7
+149,panel-1-sf2013,Panel 1,portfolio_category,148,7
+169,panel-1-30th-anniversary-new-york-2014,Panel 1,portfolio_category,168,7
+177,helga-zepp-larouche,Helga Zepp-LaRouche,portfolio_category,178,7
+189,panel-3-frankfurt-silk-road-china-lunar-conference-2014,panel 3,portfolio_category,185,7
+199,panel-1-fr,Panel 1,portfolio_category,198,7
+201,panel-3-fr-2,Panel 3,portfolio_category,198,7
+206,panel-3-de-2,Panel 3,portfolio_category,184,7
+207,panel-4-de-2,Panel 4,portfolio_category,184,7
+237,panel-3-ru-frankfurt-2014-ru-october,ЗАСЕДАНИЕ 3,portfolio_category,234,7
+270,panel-5-fr-2,Panel 5,portfolio_category,262,7
+273,panel-2-fr-3,Panel 2,portfolio_category,262,7
+276,panel-1-2,Panel 1,portfolio_category,275,7
+293,panel-4-fr-3-2,Panel 4,portfolio_category,0,7
+318,panel-1-zh-hans,会议一,portfolio_category,317,7
+321,panel-4-zh-hans,会议四,portfolio_category,317,7
+326,panel-4-fr-3-zh-hans,Panel 4,portfolio_category,0,7
+328,panel-5-fr-2-zh-hans,Panel 5,portfolio_category,0,7
+27,panel-4,Panel 4,portfolio_category,23,6
+46,thema-4,Thema 4,portfolio_category,41,6
+57,panel-4-conference2012-2,Panel 4,portfolio_category,52,6
+75,panel-4-ru,ЗАСЕДАНИЕ 4,portfolio_category,70,6
+104,panel-1-frankfurt-april-2013,Panel 1,portfolio_category,103,6
+120,panel-1-de,Panel 1,portfolio_category,118,6
+128,panel-1-ru_201304,ЗАСЕДАНИЕ 1,portfolio_category,127,6
+138,francfort-avril2013-panel1,Panel 1,portfolio_category,137,6
+151,panel-3-sf2013,Panel 3,portfolio_category,148,6
+159,panel-1-the-future-of-mankind,Panel 1 - The Future of Mankind,portfolio_category,156,6
+162,panel-4-the-legacy-and-future-of-jfk,Panel 4 - The Legacy and Future of JFK,portfolio_category,156,6
+186,panel-1-frankfurt-silk-road-china-lunar-conference-2014,panel 1,portfolio_category,185,6
+188,panel-2-frankfurt-silk-road-china-lunar-conference-2014,panel 2,portfolio_category,185,6
+190,panel-4-frankfurt-silk-road-china-lunar-conference-2014,panel 4,portfolio_category,185,6
+200,panel-2-fr-2,Panel 2,portfolio_category,198,6
+202,panel-4-fr-2,Panel 4,portfolio_category,198,6
+204,panel-1-de-2,Panel 1,portfolio_category,184,6
+205,panel-2-de-2,Panel 2,portfolio_category,184,6
+236,panel-2-ru-frankfurt-2014-ru-october,ЗАСЕДАНИЕ 2,portfolio_category,234,6
+274,panel-1-fr-2,Panel 1,portfolio_category,262,6
+280,panel-5-2,Panel 5,portfolio_category,275,6
+284,panel-1-de-3,Panel 1,portfolio_category,283,6
+288,panel-5-de-2,Panel 5,portfolio_category,283,6
+291,panel-2-fr-3-2,Panel 2,portfolio_category,0,6
+294,panel-5-fr-2-2,Panel 5,portfolio_category,0,6
+295,panel-5-fr-2-de,Panel 5,portfolio_category,0,6
+296,panel-2-fr-3-de,Panel 2,portfolio_category,0,6
+299,paris-conference-2015-en-de,Paris Conference 2015 (EN),portfolio_category,0,6
+308,panel-4-fr-3-de,Panel 4,portfolio_category,0,6
+310,paris-conference-2015-en-fr,Paris Conference 2015 (EN),portfolio_category,0,6
+319,panel-2-zh-hans,会议二,portfolio_category,317,6
+322,panel-5-zh-hans,会议五,portfolio_category,317,6
+330,panel-1-fr-2-zh-hans,Panel 1,portfolio_category,0,6
+410,2016,2016,portfolio_category,409,6
+450,panel-1-3,Panel 1,portfolio_category,449,6
+24,panel-1,Panel 1,portfolio_category,23,5
+26,panel-3,Panel 3,portfolio_category,23,5
+28,concert,Classical Concert,portfolio_category,23,5
+42,konzert,Musikabend,portfolio_category,41,5
+43,thema-1,Thema 1,portfolio_category,41,5
+45,thema-3,Thema 3,portfolio_category,41,5
+53,concert-conference2012-2,Concert classique,portfolio_category,52,5
+54,panel-1-conference2012-2,Panel 1,portfolio_category,52,5
+56,panel-3-conference2012-2,Panel 3,portfolio_category,52,5
+71,classical-concert-ru,КОНЦЕРТ КЛАССИЧЕСКОЙ МУЗЫКИ,portfolio_category,70,5
+72,panel-1-ru,ЗАСЕДАНИЕ 1,portfolio_category,70,5
+74,panel-3-ru,ЗАСЕДАНИЕ 3,portfolio_category,70,5
+86,francfort-2012,Fráncfort 2012,portfolio_category,0,5
+88,vormittag-ny20130126,Vormittag,portfolio_category,87,5
+143,concert-classique,Concert classique,portfolio_category,137,5
+160,panel-2-pacific-development,Panel 2 - Pacific Development,portfolio_category,156,5
+211,transcript-de,Transcript,portfolio_category,0,5
+272,panel-3-fr-3,Panel 3,portfolio_category,262,5
+278,panel-3-2,Panel 3,portfolio_category,275,5
+281,panel-1-fr-2-2,Panel 1,portfolio_category,0,5
+289,panel-1-fr-2-de,Panel 1,portfolio_category,0,5
+314,messages-fr,Messages,portfolio_category,262,5
+320,panel-3-zh-hans,会议三,portfolio_category,317,5
+414,2012-2,2012,portfolio_category,409,5
+415,2012-2-ru,2012,portfolio_category,0,5
+445,table-ronde-n2,Table ronde n°2,portfolio_category,441,5
+451,panel-2-3,Panel 2,portfolio_category,449,5
+452,panel-3-3,Panel 3,portfolio_category,449,5
+102,concert-sdi2013,Classical Concert,portfolio_category,99,4
+111,greetings,Greetings,portfolio_category,103,4
+163,vienna-jfk-remembrance,Vienna JFK Remembrance,portfolio_category,0,4
+172,music-30th-anniversary-new-york-2014,Music,portfolio_category,168,4
+173,messages,Messages,portfolio_category,168,4
+235,panel-1-ru-frankfurt-2014-ru-october,ЗАСЕДАНИЕ 1,portfolio_category,234,4
+286,panel-3-de-3,Panel 3,portfolio_category,283,4
+329,panel-3-fr-3-zh-hans,Panel 3,portfolio_category,0,4
+370,panel-1-berlin-june-2016-en,Panel 1,portfolio_category,369,4
+371,panel-2-berlin-june-2016-en,Panel 2,portfolio_category,369,4
+376,panel-1-berlin-june-2016-de,Panel 1,portfolio_category,375,4
+377,panel-2-berlin-june-2016-de,Panel 2,portfolio_category,375,4
+383,berlin-june-2016-en-fr,Berlin June 2016 (EN),portfolio_category,0,4
+386,panel-1-berlin-june-2016-fr,Panel 1,portfolio_category,385,4
+387,panel-2-berlin-june-2016-fr,Panel 2,portfolio_category,385,4
+411,2015,2015,portfolio_category,409,4
+455,panel-1-de-4,Panel 1,portfolio_category,454,4
+457,panel-3-de-4,Panel 3,portfolio_category,454,4
+92,musik,Musik,portfolio_category,87,3
+105,panel-2-frankfurt-april-2013,Panel 2,portfolio_category,103,3
+121,panel-2-de,Panel 2,portfolio_category,118,3
+139,panel-2-fr-francfort-avril2013,Panel 2,portfolio_category,137,3
+146,panel-2-ru_201304,ЗАСЕДАНИЕ 2,portfolio_category,127,3
+152,music-sf2013,Musical Performances,portfolio_category,148,3
+161,panel-3-the-science-of-human-culture,Panel 3 - The Science of Human Culture,portfolio_category,156,3
+178,article,Article,portfolio_category,0,3
+210,panel-1-frankfurt-silk-road-china-lunar-conference-2014-de,panel 1,portfolio_category,0,3
+212,frankfurt-silk-road-china-lunar-conference-2014-fr,Frankfurt-Silk Road &amp;China Lunar Conference 2014,portfolio_category,0,3
+215,transcript-fr,Transcript,portfolio_category,0,3
+227,francfort-octobre-2014-fr-en,Francfort Octobre 2014,portfolio_category,0,3
+238,panel-4-ru-frankfurt-2014-ru-october,ЗАСЕДАНИЕ 4,portfolio_category,234,3
+292,panel-3-fr-3-2,Panel 3,portfolio_category,0,3
+373,panel-4-berlin-june-2016-en,Panel 4,portfolio_category,369,3
+379,panel-4-berlin-june-2016-de,Panel 4,portfolio_category,375,3
+389,panel-4-berlin-june-2016-fr,Panel 4,portfolio_category,385,3
+405,panel-4-berlin-june-2016-en-fr,Panel 4,portfolio_category,0,3
+419,concert-sdi2013-de,Classical Concert,portfolio_category,0,3
+420,sterling-sdi2013-de,"Sterling, 2013-03-23",portfolio_category,0,3
+426,classical-concert-fr,Classical Concert,portfolio_category,0,3
+456,panel-2-de-4,Panel 2,portfolio_category,454,3
+25,panel-2,Panel 2,portfolio_category,23,2
+44,thema-2,Thema 2,portfolio_category,41,2
+55,panel-2-fr,Panel 2,portfolio_category,52,2
+73,panel-2-ru,ЗАСЕДАНИЕ 2,portfolio_category,70,2
+108,panel-4-frankfurt-april-2013,Panel 4,portfolio_category,103,2
+109,panel-5,Panel 5,portfolio_category,103,2
+123,panel-4-de,Panel 4,portfolio_category,118,2
+124,panel-5-de,Panel 5,portfolio_category,118,2
+130,opening-concerts,Opening Concerts,portfolio_category,103,2
+141,panel-4-fr,Panel 4,portfolio_category,137,2
+142,panel-5-fr,Panel 5,portfolio_category,137,2
+144,ouvertures-musicales,Ouvertures musicales,portfolio_category,137,2
+145,panel-5-ru_201304,ЗАСЕДАНИЕ 5,portfolio_category,127,2
+147,panel-4-ru_201304,ЗАСЕДАНИЕ 4,portfolio_category,127,2
+171,panel-3-30th-anniversary-new-york-2014,Panel 3 (Concert),portfolio_category,168,2
+181,artikel,Artikel,portfolio_category,0,2
+214,panel-1-frankfurt-silk-road-china-lunar-conference-2014-fr,panel 1,portfolio_category,0,2
+220,francfort-octobre-2014-fr-de,Francfort Octobre 2014,portfolio_category,0,2
+228,panel-2-fr-2-en,Panel 2,portfolio_category,0,2
+230,panel-4-frankfurt-silk-road-china-lunar-conference-2014-de,panel 4,portfolio_category,0,2
+239,panel-2-fr-2-de,Panel 2,portfolio_category,0,2
+298,panel-2-2-de,Panel 2,portfolio_category,0,2
+307,panel-3-2-de,Panel 3,portfolio_category,0,2
+315,panel-3-fr-3-de,Panel 3,portfolio_category,0,2
+374,panel-5-berlin-june-2016-en,Panel 5,portfolio_category,369,2
+380,panel-5-berlin-june-2016-de,Panel 5,portfolio_category,375,2
+390,panel-5-berlin-june-2016-fr,Panel 5,portfolio_category,385,2
+403,panel-5-berlin-june-2016-en-de,Panel 5,portfolio_category,0,2
+423,opening-concerts-ru,Opening Concerts,portfolio_category,0,2
+424,opening-concerts-de,Opening Concerts,portfolio_category,0,2
+442,table-ronde-n1,Table ronde n°1,portfolio_category,441,2
+453,panel-4-3,Panel 4,portfolio_category,449,2
+29,panel-culture,Panel Discussion,portfolio_category,23,1
+47,thema-kultur,Podiumsdiskussion,portfolio_category,41,1
+76,panel-renaissance-ru,СЕКЦИОННОЕ ОСУЖДЕНИЕ,portfolio_category,70,1
+113,qa-part-2,Q&amp;A Part 2,portfolio_category,103,1
+125,botschaften,Grußbotschaften,portfolio_category,118,1
+153,san-francisco-juni-2013,"San Francisco, Juni 2013",portfolio_category,0,1
+154,panel-1-sf2013-de,Panel 1,portfolio_category,153,1
+209,helga-zepp-larouche-de,Helga Zepp-LaRouche,portfolio_category,0,1
+217,helga-zepp-larouche-ru,Helga Zepp-LaRouche,portfolio_category,0,1
+229,panel-3-fr-2-en,Panel 3,portfolio_category,0,1
+232,panel-3-frankfurt-silk-road-china-lunar-conference-2014-de,panel 3,portfolio_category,0,1
+243,panel-2-frankfurt-silk-road-china-lunar-conference-2014-de,panel 2,portfolio_category,0,1
+244,panel-4-frankfurt-silk-road-china-lunar-conference-2014-fr,panel 4,portfolio_category,0,1
+300,panel-1-2-de,Panel 1,portfolio_category,0,1
+303,panel-1-de-3-2,Panel 1,portfolio_category,0,1
+304,paris-konferenz-2015-de-2,Paris Konferenz 2015 (DE),portfolio_category,0,1
+309,panel-3-2-fr,Panel 3,portfolio_category,0,1
+311,panel-4-2-de,Panel 4,portfolio_category,0,1
+323,panel-6-zh-hans,闭幕词,portfolio_category,317,1
+381,berlin-june-2016-en-de,Berlin June 2016 (EN),portfolio_category,0,1
+382,panel-1-berlin-june-2016-en-de,Panel 1,portfolio_category,0,1
+384,panel-1-berlin-june-2016-en-fr,Panel 1,portfolio_category,0,1
+391,panel-2-berlin-june-2016-en-fr,Panel 2,portfolio_category,0,1
+392,panel-2-berlin-june-2016-en-de,Panel 2,portfolio_category,0,1
+393,panel-3-berlin-june-2016-en-fr,Panel 3,portfolio_category,0,1
+396,panel-5-berlin-june-2016-en-fr,Panel 5,portfolio_category,0,1
+400,berlin-june-2016-de-fr,Berlin June 2016 (DE),portfolio_category,0,1
+407,panel-4-berlin-june-2016-de-fr,Panel 4,portfolio_category,0,1
+421,panel1-sdi2013-de,Panel 1,portfolio_category,0,1
+429,2013-es,2013,portfolio_category,0,1
+430,classical-concert-es,Classical Concert,portfolio_category,0,1
+431,musical-dialogue-es,Musical Dialogue,portfolio_category,0,1
+437,2017,2017,portfolio_category,409,1
+443,propos-introductif,Propos introductif,portfolio_category,441,1
+444,table-ronde-n3,Table ronde n°3,portfolio_category,441,1
+460,panel-1-3-de,Panel 1,portfolio_category,0,1
+463,panel-2-3-de,Panel 2,portfolio_category,0,1
+58,table-ronde,Table ronde,portfolio_category,52,0
+114,qa-part-3,Q&amp;A Part 3,portfolio_category,103,0
+115,new-york-2013-01-26-es,"New York, 2013-01-26",portfolio_category,0,0
+116,panel-1-nyc2013-es,Panel 1,portfolio_category,115,0
+117,la-musica,La Musica,portfolio_category,115,0
+132,concierto-clasico,Concierto clásico,portfolio_category,131,0
+155,interviews,Interviews,portfolio_category,0,0
+157,november-2nd,November 2nd,portfolio_category,0,0
+158,2012,2012,portfolio_category,0,0
+179,conferences,Conferences,portfolio_category,0,0
+192,francfort-octobre-2014,Francfort Octobre 2014,portfolio_category,0,0
+193,panel-1-francfort-octobre-2014,Panel 1,portfolio_category,192,0
+194,panel-2-francfort-octobre-2014,Panel 2,portfolio_category,192,0
+195,panel-3-francfort-octobre-2014,Panel 3,portfolio_category,192,0
+196,panel-4-francfort-octobre-2014,Panel 4,portfolio_category,192,0
+197,transcript-francfort-octobre-2014,transcript,portfolio_category,192,0
+203,panel-1-frankfurt-october-2014,Panel 1,portfolio_category,184,0
+213,helga-zepp-larouche-fr,Helga Zepp-LaRouche,portfolio_category,0,0
+216,frankfurt-silk-road-china-lunar-conference-2014-ru,Frankfurt-Silk Road &amp;China Lunar Conference 2014,portfolio_category,0,0
+218,panel-1-frankfurt-silk-road-china-lunar-conference-2014-ru,panel 1,portfolio_category,0,0
+219,transcript-ru,Transcript,portfolio_category,0,0
+221,panel-1-fr-de,Panel 1,portfolio_category,0,0
+231,panel-3-frankfurt-silk-road-china-lunar-conference-2014-fr,panel 3,portfolio_category,0,0
+233,panel-3-frankfurt-silk-road-china-lunar-conference-2014-ru,panel 3,portfolio_category,0,0
+240,francfort-octobre-2014-fr-ru,Francfort Octobre 2014 (FR),portfolio_category,0,0
+241,panel-3-fr-2-ru,Panel 3,portfolio_category,0,0
+242,panel-3-fr-2-de,Panel 3,portfolio_category,0,0
+245,panel-2-fr-2-ru,Panel 2,portfolio_category,0,0
+246,panel-2-frankfurt-silk-road-china-lunar-conference-2014-fr,panel 2,portfolio_category,0,0
+247,panel-2-frankfurt-silk-road-china-lunar-conference-2014-ru,panel 2,portfolio_category,0,0
+248,panel-4-frankfurt-silk-road-china-lunar-conference-2014-ru,panel 4,portfolio_category,0,0
+249,frankfurt-october-2014-fr,Frankfurt October 2014 (DE),portfolio_category,0,0
+250,panel-4-de-2-fr,Panel 4,portfolio_category,0,0
+251,frankfurt-october-2014-en,Frankfurt October 2014 (DE),portfolio_category,0,0
+252,panel-2-de-2-en,Panel 2,portfolio_category,0,0
+253,panel-2-de-2-fr,Panel 2,portfolio_category,0,0
+254,frankfurt-october-2014-ru,Frankfurt October 2014 (DE),portfolio_category,0,0
+255,panel-2-de-2-ru,Panel 2,portfolio_category,0,0
+269,concert-fr,Concert,portfolio_category,262,0
+297,conclusion,Panel Conclusion,portfolio_category,275,0
+302,special-greetings-paris,Special Greetings,portfolio_category,275,0
+306,special-greetings,Special Greetings,portfolio_category,275,0
+312,music,Music,portfolio_category,262,0
+313,music-fr,Music,portfolio_category,262,0
+394,berlin-june-2016-en-zh-hans,Berlin June 2016 (EN),portfolio_category,0,0
+395,panel-5-berlin-june-2016-en-zh-hans,Panel 5,portfolio_category,0,0
+397,berlin-june-2016-fr-de,Berlin June 2016 (FR),portfolio_category,0,0
+398,panel-5-berlin-june-2016-fr-de,Panel 5,portfolio_category,0,0
+399,panel-3-berlin-june-2016-en-de,Panel 3,portfolio_category,0,0
+401,panel-2-berlin-june-2016-de-fr,Panel 2,portfolio_category,0,0
+402,panel-3-berlin-june-2016-de-fr,Panel 3,portfolio_category,0,0
+404,panel-5-berlin-june-2016-de-fr,Panel 5,portfolio_category,0,0
+406,panel-4-berlin-june-2016-en-de,Panel 4,portfolio_category,0,0
+408,panel-3-berlin-june-2016-fr-de,Panel 3,portfolio_category,0,0
+458,panel-4-de-4,Panel 4,portfolio_category,454,0
+459,bad-soden-november-2017-en-de,Bad Soden November 2017 (EN),portfolio_category,0,0
+464,panel-3-3-de,Panel 3,portfolio_category,0,0
+618,music,music,post_tag,0,19
+616,beethoven,Beethoven,post_tag,0,15
+617,culture,Culture,post_tag,0,14
+332,helga-zepp-larouche,Helga Zepp-LaRouche,post_tag,0,13
+797,ipc,IPC,post_tag,0,13
+545,helga-zepp-larouche-de,Helga Zepp-LaRouche,post_tag,0,6
+535,classical-music,Classical music,post_tag,0,3
+546,webcast,webcast,post_tag,0,3
+547,space,space,post_tag,0,3
+176,silk-road,silk road,post_tag,0,2
+533,boston-schiller-chorus,Boston Schiller Chorus,post_tag,0,2
+534,spirituals,Spirituals,post_tag,0,2
+549,webcast-de,webcast,post_tag,0,2
+552,conference,conference,post_tag,0,2
+556,war,war,post_tag,0,2
+557,peace,peace,post_tag,0,2
+558,peace-de,peace,post_tag,0,2
+559,war-de,war,post_tag,0,2
+569,covid-19,COVID-19,post_tag,0,2
+577,exoneration,exoneration,post_tag,0,2
+579,exoneration-de,exoneration,post_tag,0,2
+612,healthcare,healthcare,post_tag,0,2
+613,famine,famine,post_tag,0,2
+620,famine-de,famine,post_tag,0,2
+621,healthcare-de,healthcare,post_tag,0,2
+686,harley-schlanger,Harley Schlanger,post_tag,0,2
+687,ukraine,Ukraine,post_tag,0,2
+164,mozart,mozart,post_tag,0,1
+165,jfk,jfk,post_tag,0,1
+166,kennedy,kennedy,post_tag,0,1
+167,verdi,verdi,post_tag,0,1
+475,felix-yemen,Felix Yemen,post_tag,0,1
+476,fokus,Fokus,post_tag,0,1
+532,sylvia-olden-lee,Sylvia Olden Lee,post_tag,0,1
+536,opera,Opera,post_tag,0,1
+548,space-de,space,post_tag,0,1
+553,moon,Moon,post_tag,0,1
+554,nyc,NYC,post_tag,0,1
+560,berlin,Berlin,post_tag,0,1
+561,berlin-de,Berlin,post_tag,0,1
+562,silk-road-de,silk road,post_tag,0,1
+566,farm,farm,post_tag,0,1
+567,food,food,post_tag,0,1
+568,coronavirus,coronavirus,post_tag,0,1
+570,jason-ross,Jason Ross,post_tag,0,1
+572,covid-19-de,COVID-19,post_tag,0,1
+574,economics,economics,post_tag,0,1
+575,economics-de,economics,post_tag,0,1
+576,exonerate-larouche,exonerate larouche,post_tag,0,1
+578,exonerate-larouche-de,exonerate larouche,post_tag,0,1
+580,space-ccc,space ccc,post_tag,0,1
+581,space-ccc-de,space ccc,post_tag,0,1
+614,coincidence-of-opposites,Coincidence of Opposites,post_tag,0,1
+615,committee-for-the-coincidence-of-opposites,Committee for the Coincidence of Opposites,post_tag,0,1
+619,coincidence-of-opposites-de,Coincidence of Opposites,post_tag,0,1
+622,committee-for-the-coincidence-of-opposites-de,Committee for the Coincidence of Opposites,post_tag,0,1
+624,beetnoven,Beetnoven,post_tag,0,1
+688,maidan-coup,Maidan coup,post_tag,0,1
+689,michael-carpenter,Michael Carpenter,post_tag,0,1
+690,parubiy,Parubiy,post_tag,0,1
+691,biden,Biden,post_tag,0,1
+694,iran,Iran,post_tag,0,1
+695,china,China,post_tag,0,1
+697,marijuana,marijuana,post_tag,0,1
+698,glass-steagall,Glass-Steagall,post_tag,0,1
+719,harley,harley,post_tag,0,1
+735,afghanistan,afghanistan,post_tag,0,1
+736,british-empire,british empire,post_tag,0,1
+737,geopolitics,geopolitics,post_tag,0,1
+811,interview,interview,post_tag,0,1
+479,focus,Focus,post_tag,0,0
+571,coronavirus-de,coronavirus,post_tag,0,0
+573,jason-ross-de,Jason Ross,post_tag,0,0
+627,music-culture,Music Culture,post_tag,0,0
+696,marihuana,Marihuana,post_tag,0,0

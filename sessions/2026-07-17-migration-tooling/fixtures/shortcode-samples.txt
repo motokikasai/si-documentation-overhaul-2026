@@ -1,0 +1,112 @@
+== [title_big]  total=310 distinct=259
+      4x  [title_big title="<strong>30th Anniversary Conference</strong> of the Schiller Institute" /]
+      4x  [title_big title="" subTitle="Panel 1" /]
+      4x  [title_big title="" subTitle="ЗАСЕДАНИЕ 1" /]
+      4x  [title_big title="" subTitle="ЗАСЕДАНИЕ 2" /]
+== [title_small]  total=247 distinct=227
+      3x  [title_small title="Надежда на будущее. Стратегическая оборона Земли в качестве отправной точки к общим целям цивилизации" /]
+      3x  [title_small title="Энергетическая безопасность в XXI веке" /]
+      3x  [title_small title="в настройке Верди Ля=432 Гц" /]
+      3x  [title_small title="Будущее сотрудничество в Евразии" /]
+== [button]  total=267 distinct=229
+      4x  [button text="program (PDF)" size="large" url="http://newparadigm.schillerinstitute.com/wp-content/uploads/2014/10/20141018_conf_program_revised_01.pdf" /]
+      4x  [button text="СВЯЗЫВАЙТЕСЬ С НАМИ!" size="large" url="ru/контакты/" /]
+      4x  [button text="Download" url="http://newparadigm.schillerinstitute.com/wp-content/uploads/2013/11/20131122_jfk_mozart_requiem_mp3_redux.zip"]
+      4x  [button text="Download" url="http://newparadigm.schillerinstitute.com/wp-content/uploads/2013/11/20131122_jfk_mozart_requiem_full_hd.mp4"]
+== [toggle]  total=253 distinct=153
+     29x  [toggle title="Die Rede lesen"]
+     24x  [toggle title="Hier die Rede lesen"]
+     12x  [toggle title="hier die Rede lesen"]
+      6x  [toggle title="Hier ist der Text der deutschen Übersetzung"]
+== [one_half]  total=212 distinct=1
+    212x  [one_half]
+== [one_half_last]  total=210 distinct=1
+    210x  [one_half_last]
+== [one_third]  total=65 distinct=1
+     65x  [one_third]
+== [one_third_last]  total=199 distinct=1
+    199x  [one_third_last]
+== [two_third]  total=184 distinct=1
+    184x  [two_third]
+== [two_third_last]  total=31 distinct=1
+     31x  [two_third_last]
+== [one_fourth]  total=7 distinct=1
+      7x  [one_fourth]
+== [one_fourth_last]  total=5 distinct=1
+      5x  [one_fourth_last]
+== [wide_bar]  total=106 distinct=23
+     37x  [wide_bar paddingTop="20" paddingBottom="20" marginBottom="0"  bgcolor="#f4f4f4"]
+     33x  [wide_bar paddingTop="20" paddingBottom="20" marginBottom="0"]
+     11x  [wide_bar paddingTop="20" paddingBottom="20" marginBottom="0" whiteText="true" bgcolor="#333"]
+      3x  [wide_bar paddingTop="20" paddingBottom="20" marginBottom="0" bgImage="/wp-content/uploads/2017/02/BG-Helga-image005.jpg" bgRepeat="repeat" bgPosition="center center" ]
+== [tab]  total=82 distinct=1
+     82x  [tab]
+== [tabs]  total=25 distinct=23
+      2x  [tabs titles="Risoluzione per la Russia e la Siria, Risoluzione per lo Yemen"]
+      2x  [tabs titles="Panel I, Panel II, Panel III, Panel IV,Interviews "]
+      1x  [tabs titles="Recent Developments, Focus"]
+      1x  [tabs titles="using locations, using activities "]
+== [call_to_action_big]  total=31 distinct=22
+      4x  [call_to_action_big title="Organize and Take Action" excerpt="To implement LaRouche's Oasis Plan" buttonText="Join Here →" buttonUrl="https://schillermeet.de/organize-and-take-action/" buttonNewWindow="true" /]
+      4x  [call_to_action_big title="Return to Main Page" excerpt="" buttonText="The Oasis Plan – The LaRouche Solution for Southwest Asia →" buttonUrl="https://schillermeet.de/the-oasis-plan-the-larouche-solution-for-southwest-asia/" buttonNewWindow="true" /]
+      2x  [call_to_action_big title="<strong>Our History in Brief</strong>" excerpt="<strong>A partial timeline of the historical interventions and contributions by <em>The Schiller Institute</em></strong>" buttonText="Find Out" buttonUrl="http://newparadigm.schillerins
+      2x  [call_to_action_big title="Werden Sie Mitglied im Schiller-Institut" buttonText="Mitgliedschaft/Spende →" buttonUrl="https://schillermeet.de/de/mitglied-werden/" buttonNewWindow="true" /]
+== [call_to_action_bar]  total=34 distinct=19
+      2x  [call_to_action_bar  title="<strong>António Guterres</strong> United Nations Secretary-General" excerpt="'The Belt and Road Initiative and the 2030 Agenda... aim to deepen 'connectivity' across countries and regions: connectivity in infrastructure, trade, fina
+      2x  [call_to_action_bar  title="<strong>Hailemariam Desalegn</strong> Ethiopian Prime Minister" excerpt="'The Belt and Road Initiative is the largest and non-conflicting economic cooperation of the 21st century.'" /]
+      2x  [call_to_action_bar  title="<strong>Jim Yong Kim</strong> World Bank President" excerpt="'For those in the less developed community, our greatest task is to raise our aspirations to meet those of the people living in the countries that are still in need of man
+      2x  [call_to_action_bar  title="<strong>Milos Zeman </strong> Czech President" excerpt="'The One Belt, One Road Initiative is the most significant project in all our modern history. I salute China for this courageous, long-term project.'" /]
+== [info_box]  total=29 distinct=27
+      2x  [info_box title="¡Nos gustaría saber que piensa!"]
+      2x  [info_box title="We'd Like To Hear From You!"]
+      1x  [info_box title="Our Mission"]
+      1x  [info_box title="Who is Schiller?"]
+== [FN]  total=23 distinct=23
+      1x  [FN 1]
+      1x  [FN 2]
+      1x  [FN 3]
+      1x  [FN 4]
+== [testimonial]  total=27 distinct=24
+      3x  [testimonial person="Helga Zepp-LaRouche, President of the Schiller Institute, November 24, 2012"]
+      2x  [testimonial person="ХЕЛЬГА ЦЕПП-ЛАРУШ, ПРЕЗИДЕНТ ШИЛЛЕРОВСКОГО ИНСТИТУТА, 24 НОЯБРЯ 2012 Г."]
+      1x  [testimonial person="Helga Zepp-LaRouche, Vorsitzende des Schiller-Instituts, 24. November 2012"]
+      1x  [testimonial person="Lyndon LaRouche, Economist and Statesman, Essay: 'That Which Could Not Be Sustained', May 3, 2011"]
+== [applause]  total=22 distinct=1
+     22x  [applause]
+== [image]  total=42 distinct=32
+      4x  [image align="right" img="http://newparadigm.schillerinstitute.com/wp-content/uploads/2013/11/JFK-requiem-poster-235x300.jpg" url="http://newparadigm.schillerinstitute.com/wp-content/uploads/2013/11/JFK-requiem-poster.jpg" alt="Click to view full size"/]
+      4x  [image]
+      2x  [image img="http://newparadigm.schillerinstitute.com/wp-content/uploads/2012/12/Renaissance-Robinson-1.jpg" /]
+      2x  [image img="http://newparadigm.schillerinstitute.com/wp-content/uploads/2012/12/Renaissance-Lee-1.jpg" /]
+== [blockquote]  total=24 distinct=2
+     23x  [blockquote]
+      1x  [blockquote align="right"]
+== [hr]  total=341 distinct=4
+    289x  [hr toTop="false" /]
+     50x  [hr /]
+      1x  [hr]
+      1x  [hr toTop="false"/]
+== [portfolio]  total=60 distinct=41
+      4x  [portfolio columns="2" numberPosts="6" cats="24" /]
+      4x  [portfolio columns="2" numberPosts="6" cats="25" /]
+      4x  [portfolio columns="2" numberPosts="6" cats="26" /]
+      4x  [portfolio columns="2" numberPosts="6" cats="27" /]
+== [ajax_load_more]  total=39 distinct=31
+      3x  [ajax_load_more post_type="post" tag="felix-yemen" scroll="false"]
+      3x  [ajax_load_more post_type="post" repeater="default" posts_per_page="3" transition="fade" destroy_after="1" css_classes="news-updates-frontpage" ]
+      3x  [ajax_load_more post_type="post, page" category="activity-cultural,activity-musical"]
+      2x  [ajax_load_more post_type="post, page" category="updates-development"]
+== [embed]  total=27 distinct=1
+     27x  [embed]
+== [frame]  total=0 distinct=0
+== [dropcap]  total=3 distinct=1
+      3x  [dropcap]
+== [list]  total=0 distinct=0
+== [icon]  total=11 distinct=5
+      4x  [icon id="179" floatLeft="true" /]
+      2x  [icon id="368" floatLeft="true" /]
+      2x  [icon id="366" floatLeft="true" /]
+      2x  [icon id="220" floatLeft="true" /]
+== [space]  total=0 distinct=0
+== [clear]  total=0 distinct=0
+== [divider]  total=0 distinct=0

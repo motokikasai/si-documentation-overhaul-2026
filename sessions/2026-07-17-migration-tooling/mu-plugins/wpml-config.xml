@@ -1,0 +1,66 @@
+<wpml-config>
+  <!-- Content-model v3 WPML declaration (06 §6). INSTALL: copy into the Blocksy CHILD THEME
+       root (wp-content/themes/blocksy-child/wpml-config.xml) — WPML does not read mu-plugin
+       directories reliably. Person is display-as-translated (same canonical people on /de/). -->
+  <custom-types>
+    <custom-type translate="2">si_person</custom-type>
+    <custom-type translate="1">si_conference</custom-type>
+    <custom-type translate="1">si_presentation</custom-type>
+    <custom-type translate="1">si_video</custom-type>
+    <custom-type translate="1">si_document</custom-type>
+    <custom-type translate="1">si_statement</custom-type>
+    <custom-type translate="1">si_coverage</custom-type>
+  </custom-types>
+  <taxonomies>
+    <taxonomy translate="1">si_topic</taxonomy>
+    <taxonomy translate="1">si_region</taxonomy>
+    <taxonomy translate="1">si_campaign</taxonomy>
+    <taxonomy translate="1">si_series</taxonomy>
+    <taxonomy translate="0">si_format</taxonomy>
+  </taxonomies>
+  <custom-fields>
+    <!-- copy = identical across translations; translate = per-language -->
+    <custom-field action="copy">yt_video_id</custom-field>
+    <custom-field action="copy">start_seconds</custom-field>
+    <custom-field action="copy">end_seconds</custom-field>
+    <custom-field action="copy">kind</custom-field>
+    <custom-field action="copy">parent_conference</custom-field>
+    <custom-field action="copy">presenters</custom-field>
+    <custom-field action="copy">hosts</custom-field>
+    <custom-field action="copy">authors</custom-field>
+    <custom-field action="copy">signatories_internal</custom-field>
+    <custom-field action="copy">featured_people</custom-field>
+    <custom-field action="copy">start_date</custom-field>
+    <custom-field action="copy">end_date</custom-field>
+    <custom-field action="copy">featured_video</custom-field>
+    <custom-field action="copy">registration_url</custom-field>
+    <custom-field action="copy">external_url</custom-field>
+    <custom-field action="copy">outlet</custom-field>
+    <custom-field action="copy">file</custom-field>
+    <custom-field action="copy">doc_type</custom-field>
+    <custom-field action="copy">signatory_count</custom-field>
+    <custom-field action="copy">sign_url</custom-field>
+    <custom-field action="copy">attached_document</custom-field>
+    <custom-field action="copy">slides_document</custom-field>
+    <custom-field action="copy">program_document</custom-field>
+    <custom-field action="translate">panel_title</custom-field>
+    <custom-field action="translate">abstract</custom-field>
+    <custom-field action="translate">transcript</custom-field>
+    <custom-field action="translate">chapters</custom-field>
+    <custom-field action="translate">agenda</custom-field>
+    <custom-field action="translate">lede</custom-field>
+    <custom-field action="translate">pull_quote</custom-field>
+    <custom-field action="translate">location</custom-field>
+    <custom-field action="translate">short_bio</custom-field>
+    <custom-field action="translate">affiliation</custom-field>
+    <custom-field action="translate">role</custom-field>
+    <custom-field action="copy">honorific</custom-field>
+    <custom-field action="copy">links</custom-field>
+    <custom-field action="copy">person_type</custom-field>
+    <custom-field action="copy">transcript_auto</custom-field>
+    <custom-field action="copy">coverage_type</custom-field>
+    <custom-field action="copy">statement_type</custom-field>
+    <custom-field action="translate">external_author</custom-field>
+    <custom-field action="translate">signatories_external</custom-field>
+  </custom-fields>
+</wpml-config>
