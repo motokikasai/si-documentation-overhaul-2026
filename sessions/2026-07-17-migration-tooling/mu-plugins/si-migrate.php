@@ -1648,7 +1648,11 @@ final class SI_Migrate_Command {
                     $source = 'yt-chapters';
                 }
                 $agenda = SI_Parse::agenda_lines($desc);
-                $single = (bool) preg_match('/^[^:]{3,60}:\s+\S/', SI_Text::normalize($vtitle)) && $duration > 0 && $duration < 3600;
+                // per-talk detection: "Name: Title" or "Name — Title" with name-scoring prefix, <55 min
+                $ntitle = SI_Text::normalize($vtitle);
+                $single = $duration > 0 && $duration < 3300
+                    && preg_match('/^([^:—–\-]{3,60}?)\s*[:—–]\s+\S/u', $ntitle, $nm)
+                    && SI_Parse::name_score($nm[1], $person_index) >= 0.5;
                 $sort = SI_Parse::case_sort($marks, $agenda, $duration, $person_index, $single);
                 $case = $sort['case'];
 
@@ -1671,10 +1675,10 @@ final class SI_Migrate_Command {
                     $rows[] = $this->seg_row($vid, 0, $plid, $conf['conference_key'], 2, 'chaptered', '', '',
                         $vtitle, '', '', '', $vtitle, $source, '0', $sort['reason'], '', $chap_json);
                 } elseif ($case === 3) {
-                    // per-talk video (Regime A): "Name: Title" in the video title
-                    [$name, $talk] = array_pad(explode(':', SI_Text::normalize($vtitle), 2), 2, '');
+                    // per-talk video (Regime A): "Name: Title" / "Name — Title" in the video title
+                    [$name, $talk] = array_pad(preg_split('/\s*[:—–]\s*/u', $ntitle, 2), 2, '');
                     $rows[] = $this->seg_row($vid, 0, $plid, $conf['conference_key'], 3, 'talk', '', '',
-                        $vtitle, trim($name), '', '', trim($talk), 'per-talk-video', '0', $sort['reason']);
+                        $vtitle, trim((string) $name), '', '', trim((string) $talk), 'per-talk-video', '0', $sort['reason']);
                 } else {   // 4 & 5
                     $agenda_json = $agenda ? wp_json_encode(array_map(static function ($line) {
                         $name = trim(explode(',', preg_replace('/\([^)]*\)|["“”].*/u', '', $line))[0]);

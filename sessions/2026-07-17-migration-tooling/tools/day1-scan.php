@@ -74,7 +74,16 @@ foreach ($confs as $conf) {
             $source = 'yt-chapters';
         }
         $agenda = SI_Parse::agenda_lines($desc);
-        $single = (bool) preg_match('/^[^:]{3,60}:\s+\S/', SI_Text::normalize($vtitle)) && $duration > 0 && $duration < 3600;
+        // per-talk detection (duration + name-pattern heuristics, adopted from work/seg-auto presort):
+        // "Name: Title" OR "Name — Title" with a name-scoring prefix, under 55 min; <5 min = excerpt clip
+        $ntitle = SI_Text::normalize($vtitle);
+        $single = false;
+        if ($duration > 0 && $duration < 3300
+            && preg_match('/^([^:—–\-]{3,60}?)\s*[:—–]\s+\S/u', $ntitle, $nm)
+            && SI_Parse::name_score($nm[1], $person_index) >= 0.5) {
+            $single = true;
+        }
+        $is_excerpt = $duration > 0 && $duration < 300 && !$marks;
         $sort = SI_Parse::case_sort($marks, $agenda, $duration, $person_index, $single);
         $case = $sort['case'];
         $case_hist[$case] = ($case_hist[$case] ?? 0) + 1;
@@ -98,9 +107,11 @@ foreach ($confs as $conf) {
             $rows[] = seg_row($vid, 0, $plid, $conf['conference_key'], 2, 'chaptered', '', '',
                 $vtitle, '', '', '', $vtitle, $source, '0', $sort['reason'], '', $chap_json);
         } elseif ($case === 3) {
-            [$name, $talk] = array_pad(explode(':', SI_Text::normalize($vtitle), 2), 2, '');
+            [$name, $talk] = array_pad(preg_split('/\s*[:—–]\s*/u', SI_Text::normalize($vtitle), 2), 2, '');
+            $note = $is_excerpt ? 'excerpt clip — attach to parent presentation (07 §4)' : $sort['reason'];
             $rows[] = seg_row($vid, 0, $plid, $conf['conference_key'], 3, 'talk', '', '',
-                $vtitle, trim($name), '', '', trim($talk), 'per-talk-video', '0', $sort['reason']);
+                $vtitle, trim((string) $name), '', '', trim((string) $talk), 'per-talk-video',
+                '0', $note);
         } else {
             $agenda_json = $agenda ? json_encode(array_map(static function ($line) {
                 $name = trim(explode(',', preg_replace('/\([^)]*\)|["“”].*/u', '', $line))[0]);
