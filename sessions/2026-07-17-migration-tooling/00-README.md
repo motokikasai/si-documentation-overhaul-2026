@@ -32,7 +32,7 @@ the interface between the two is **`01-csv-contracts.md`**; Day-1 outputs land i
 | `video-segmentation.csv` | **COMPLETE (2026-07-18)**: 816 rows over 654 conference videos (fetch finished overnight; 14 videos unavailable = private/deleted, listed in `scan-missing-videos.txt`). Cases: 1×27 (split; era-B gives 162 exact segments) · 2×4 · 3×59 per-talk · 4×217 (no signal — many are 2025 excerpt clips; attach per 07 §4) · 5×328 (agenda captured, upgrade candidates). 145 rows auto-approved (era-B/per-talk sources), 671 for team confirm |
 | `era-b.json` | 99 videos with WP deep-link mark-sets (priority-1 source) |
 | `decisions-*.txt` | The full fable-day1 judgment audit trail (replayable via `tools/day1-apply-review.py`) |
-| `yt-dump/` | **COMPLETE**: 74 playlists, 1,153+ video metadata JSONs, 568+ caption files (gitignored bulk). The 2026-07-17 429-throttling was ridden out overnight by `tools/polite-fetch.sh` (1 req/15s + backoff) |
+| `yt-dump/` | **COMPLETE**: 74 playlists, 1,145 video metadata JSONs, 568+ caption files (gitignored bulk). The 2026-07-17 429-throttling was ridden out overnight by `tools/polite-fetch.sh` (1 req/15s + backoff). **Backed up 2026-07-18** as `schiller-yt-dump-2026-07-18.tar.gz` (56 MB, 1,793 files verified; created in the user's Documents, destined for the backup drive) — restore by extracting as `incoming/yt-dump/`; never refetch |
 
 Offline Day-1 toolchain (all in `tools/`): `day1-extract.py` (dump → items.jsonl signals) · `day1-classify.py` (R-rules + category map + queues) · `day1-apply-review.py` (decision merge) · `day1-persons.py` · `day1-erab.py` · `day1-yt.py` (stages B+C) · `day1-scan.php` (stage D, reuses the unit-tested SI_Parse) · `polite-fetch.sh`.
 
