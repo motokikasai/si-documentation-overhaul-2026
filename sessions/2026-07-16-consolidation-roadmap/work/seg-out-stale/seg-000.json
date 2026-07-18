@@ -1,0 +1,154 @@
+{
+  "playlist_id": "PLoHwt4KyUk5AQSojSSwzrmY0iiKsy-9SU",
+  "batch_index": 0,
+  "wp_match": null,
+  "create_new": {
+    "title": "Berlin Conference: \"Man Is Not a Wolf to Man\" For a New Paradigm in International Relations",
+    "start_date": "2025-07-12",
+    "location_hint": "Berlin, Germany"
+  },
+  "videos": [
+    {
+      "id": "hhdocM6T7cg",
+      "case": 3,
+      "presentations": [
+        {
+          "title": "Invoke the Noah Principle",
+          "presenter": "Ray McGovern",
+          "presenter_affiliation": "Former CIA analyst, co-founder Veteran Intelligence Professionals for Sanity (VIPS)",
+          "start_seconds": 0,
+          "end_seconds": 730,
+          "kind": "Talk"
+        }
+      ],
+      "notes": "Single-speaker talk, no timestamps; speaker/title from video title."
+    },
+    {
+      "id": "53PJFyf4ovw",
+      "case": 2,
+      "presentations": [
+        {
+          "title": "Unite and Prosper NOT Divide and Ruin",
+          "presenter": "Prof. Zhang Weiwei",
+          "presenter_affiliation": "Professor of International Relations, Fudan University, China",
+          "start_seconds": 0,
+          "end_seconds": 934,
+          "kind": "Chaptered talk",
+          "chapters": [
+            {"label": "Cooperation between China and Europe", "start_seconds": 0},
+            {"label": "Can do spirit", "start_seconds": 458},
+            {"label": "Green deal", "start_seconds": 501},
+            {"label": "CO2 emissions", "start_seconds": 571}
+          ]
+        }
+      ],
+      "notes": "One speaker; chapters are topic labels, not names."
+    },
+    {
+      "id": "eth7wIYEBb4",
+      "case": 5,
+      "presentations": [
+        {
+          "title": "The Beauty of the Diversity of Cultures & Role of Young People in Shaping the Earth's Next 50 Years",
+          "presenter": null,
+          "presenter_affiliation": null,
+          "start_seconds": 0,
+          "end_seconds": 10813,
+          "kind": "Full session",
+          "agenda": [
+            {"presenter": "Harley Schlanger", "affiliation": "Vice President of the Schiller Institute, USA", "talk_title": null},
+            {"presenter": "Maurizio Abbate", "affiliation": "President of the National Institute for Cultural Activities (ENAC), Italy", "talk_title": null},
+            {"presenter": "Helena Chang", "affiliation": "Columnist, China/Austria", "talk_title": null},
+            {"presenter": "Anastasia Battle", "affiliation": "Co-Initiator, International Peace Coalition, Editor-in-Chief, Leonore Magazine", "talk_title": null},
+            {"presenter": "Carolina Dominguez", "affiliation": "Schiller Institute, Mexico", "talk_title": null},
+            {"presenter": "Kynan Thistlethwaite", "affiliation": "Schiller Institute, USA", "talk_title": null},
+            {"presenter": "Ashley Tran", "affiliation": "Schiller Institute, USA", "talk_title": null},
+            {"presenter": "Chérine Sultan", "affiliation": "Institut Schiller, France", "talk_title": null},
+            {"presenter": "Daniel Burke", "affiliation": "Schiller Institute, USA", "talk_title": null}
+          ],
+          "upgrade_candidate": true
+        }
+      ],
+      "notes": "Panel with ordered speaker list (no timestamps); long duration (~3h) session."
+    },
+    {
+      "id": "THWTp_W75c0",
+      "case": 1,
+      "presentations": [
+        {
+          "title": "Introduction",
+          "presenter": null,
+          "presenter_affiliation": null,
+          "start_seconds": 0,
+          "end_seconds": 294,
+          "kind": "Talk"
+        },
+        {
+          "title": "World War III or a New Global Security and Development Architecture?",
+          "presenter": "Helga Zepp-LaRouche",
+          "presenter_affiliation": "Founder and Chair of the Schiller Institute, Germany",
+          "start_seconds": 294,
+          "end_seconds": 3270,
+          "kind": "Talk"
+        },
+        {
+          "title": "The Voice of the Global Majority",
+          "presenter": "Dr. Naledi Pandor",
+          "presenter_affiliation": "Former Minister of International Relations and Cooperation, Republic of South Africa",
+          "start_seconds": 3270,
+          "end_seconds": 4106,
+          "kind": "Talk"
+        },
+        {
+          "title": "The Strategic Challenges and the Emerging New Order",
+          "presenter": "Hans-Christof von Sponeck",
+          "presenter_affiliation": "Former UN Humanitarian Coordinator in Iraq, Germany",
+          "start_seconds": 4106,
+          "end_seconds": 4908,
+          "kind": "Talk"
+        },
+        {
+          "title": "Prof. Dmitri Trenin — Cooperation between the BRICS and Europe to Implement the Oasis Plan and the Agenda 2063 for Africa",
+          "presenter": "Prof. Dmitri Trenin",
+          "presenter_affiliation": "Academic Director, Institute for Military World Economy and Strategy, Higher School of Economics University, Moscow, Russia",
+          "start_seconds": 4908,
+          "end_seconds": 5824,
+          "kind": "Talk"
+        },
+        {
+          "title": "Daqi Fan — Cooperation between the BRICS and Europe to Implement the Oasis Plan and the Agenda 2063 for Africa",
+          "presenter": "Daqi Fan",
+          "presenter_affiliation": "Vice President, Academy of Contemporary China and World Studies (ACCWS), China",
+          "start_seconds": 5824,
+          "end_seconds": 6254,
+          "kind": "Talk"
+        },
+        {
+          "title": "Ray McGovern — Cooperation between the BRICS and Europe to Implement the Oasis Plan and the Agenda 2063 for Africa",
+          "presenter": "Ray McGovern",
+          "presenter_affiliation": "Former senior CIA analyst, co-founder Veteran Intelligence Professionals for Sanity (VIPS), USA",
+          "start_seconds": 6254,
+          "end_seconds": 7077,
+          "kind": "Talk"
+        },
+        {
+          "title": "Prof. PLO Lumumba — Cooperation between the BRICS and Europe to Implement the Oasis Plan and the Agenda 2063 for Africa",
+          "presenter": "Prof. PLO Lumumba",
+          "presenter_affiliation": "Former Director and Executive Director, Kenya School of Law, Kenya",
+          "start_seconds": 7077,
+          "end_seconds": 9531,
+          "kind": "Talk"
+        },
+        {
+          "title": "Abbey Makoe — Cooperation between the BRICS and Europe to Implement the Agenda 2063 for Africa",
+          "presenter": "Abbey Makoe",
+          "presenter_affiliation": "Founder & Editor, Global South Media Network, South Africa",
+          "start_seconds": 9531,
+          "end_seconds": 11363,
+          "kind": "Talk"
+        }
+      ],
+      "notes": "Chapters ascending and consistent (0,294,3270,4106,4908,5824,6254,7077,9531); used chapters over description agenda (which had a 37:26 Zhang Weiwei entry out of order and no matching chapter). Video title used as panel topic for per-speaker talk titles."
+    }
+  ]
+}

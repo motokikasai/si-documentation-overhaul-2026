@@ -1,5 +1,7 @@
 # Session 2026-07-16 — Consolidation & Roadmap (schillerinstitute.com rebuild)
 
+> **⚡ CONTINUING THIS WORK? Read `HANDOFF.md` first** — it carries the complete execution state of the Fable-5 sprint (classification.csv DONE; segmentation/persons in flight), the operational lessons, and the exact remaining queue. This README is the doc index + decision log.
+
 Dedicated, self-contained record of the 2026-07-16 working session. Designed for cold handoff to another environment: read this file first, then the numbered documents in order. Prior planning corpus lives in `projects/schiller-wp-rebuild/` (see `PORTABLE-HANDOFF.md` there); THIS directory supersedes it wherever they conflict.
 
 ## Purpose of this session

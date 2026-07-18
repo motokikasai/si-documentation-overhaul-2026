@@ -1,0 +1,9 @@
+{"playlist_id":"PLoHwt4KyUk5DHRySGYxUgYPDBeSf4zhd0","batch_index":1,"wp_match":null,"create_new":null,
+"videos":[
+{"id":"pVkBHzKGOVI","case":3,"presentations":[{"title":"Developments in Asia","presenter":"Mike Billington","presenter_affiliation":null,"start_seconds":0,"end_seconds":786,"kind":"Talk"}],"notes":"single speaker, title pattern"},
+{"id":"cOCOzoYzpik","case":3,"presentations":[{"title":"Träumerei","presenter":"Robert Schumann (performed)","presenter_affiliation":null,"start_seconds":0,"end_seconds":182,"kind":"Talk"}],"notes":"musical performance, treated as single item"},
+{"id":"Wbtj29ERG-Y","case":2,"presentations":[{"title":"The Thermonuclear Future","presenter":"Ben Deniston","presenter_affiliation":null,"start_seconds":0,"end_seconds":2074,"kind":"Chaptered talk","chapters":[{"label":"<Untitled Chapter 1>","start_seconds":0},{"label":"The Human Species","start_seconds":418},{"label":"History of the United States","start_seconds":827},{"label":"History of the United States","start_seconds":929},{"label":"Uranium as a Fission Fuel in the Oceans","start_seconds":1545},{"label":"Fusion Economy","start_seconds":1814}]}],"notes":"chapters are topics, one speaker"},
+{"id":"CJnEDJutnnU","case":3,"presentations":[{"title":"Contribution from Thailand","presenter":"Pakdee Tanapura","presenter_affiliation":null,"start_seconds":0,"end_seconds":832,"kind":"Talk"}],"notes":"single speaker, title pattern"},
+{"id":"qjngsMsS9cY","case":3,"presentations":[{"title":"Trilateral Agreements","presenter":"Ramtanu Maitra","presenter_affiliation":null,"start_seconds":0,"end_seconds":1163,"kind":"Talk"}],"notes":"single speaker, title pattern"},
+{"id":"MiPYu9w58WY","case":4,"presentations":[{"title":"Questions to Panel 4","presenter":null,"presenter_affiliation":null,"start_seconds":0,"end_seconds":3278,"kind":"Full session"}],"notes":"Q&A session, multiple speakers, chapters are topics not names"}
+]}

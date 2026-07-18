@@ -1,0 +1,78 @@
+{
+  "playlist_id": "PLoHwt4KyUk5DWhMYHEidLO0zeIhq4uzfw",
+  "batch_index": 0,
+  "wp_match": null,
+  "create_new": {
+    "title": "Will Humanity Prosper, or Perish? The Future Demands a 'Four-Power' Summit Now",
+    "start_date": "2020-06-27",
+    "location_hint": "Internet Conference (online)"
+  },
+  "videos": [
+    {
+      "id": "Y6aDzmwJb7s",
+      "case": 5,
+      "presentations": [
+        {
+          "title": "Panel 1 — Will Humanity Prosper, or Perish? The Future Demands a 'Four-Power' Summit Now",
+          "kind": "Full session",
+          "agenda": [
+            {"presenter": "Helga Zepp-LaRouche", "affiliation": "Schiller Institute", "talk_title": "The Alternative to a Dark Age and a Third World War"},
+            {"presenter": "Dr. Jin Zhongxia", "affiliation": "Executive Director for China, IMF", "talk_title": "The Fundamentals of East-West Philosophic Relations"},
+            {"presenter": "Boris Meshchanov", "affiliation": "Counselor, Russian Federation Mission to the UN", "talk_title": "Russia's Global Economic Perspective, Post COVID-19"},
+            {"presenter": "Dr. Joycelyn Elders", "affiliation": "former Surgeon-General of the United States", "talk_title": null},
+            {"presenter": "Ding Yifan", "affiliation": "Deputy Director, Research Institute of World Development, China Development Research Center", "talk_title": "A Chinese Perspective on a Post-COVID Paradigm"},
+            {"presenter": "Daisuke Kotegawa", "affiliation": "former Executive Director for Japan at the IMF; Research Director, The Canon Institute", "talk_title": null},
+            {"presenter": "Mayor DeWayne Hopkins (fmr)", "affiliation": "Former Mayor, Muscatine, Iowa", "talk_title": "A View from the Iowa Farm Belt: the Muscatine-China Cultural Connection"}
+          ],
+          "upgrade_candidate": true
+        }
+      ],
+      "notes": "Agenda lists speakers/topics in order but no usable per-speaker timestamps; chapters exist but only partially map to agenda entries, so times were not used."
+    },
+    {
+      "id": "gmvQftqGuqM",
+      "case": 5,
+      "presentations": [
+        {
+          "title": "Panel 2 — The World Needs 1.5 Billion New Productive Jobs to End War, Famine, Poverty and Disease",
+          "kind": "Full session",
+          "agenda": [
+            {"presenter": "Jacques Cheminade", "affiliation": "President Solidarité & Progrès, France", "talk_title": "How Food Production Can Unite the World"},
+            {"presenter": "Diogène Senny", "affiliation": "Founder of the Pan-African League UMOJA", "talk_title": "Thrive or perish: An Introduction to the Geopolitics of Hunger and Poverty"},
+            {"presenter": "Walter Formento", "affiliation": "Director, Center for Political and Economic Research, Argentina", "talk_title": "South America on the New Multipolar Road"},
+            {"presenter": "Dr. Kirk Meighoo", "affiliation": "political economist, broadcaster, former Senator, Trinidad & Tobago", "talk_title": "The Caribbean's True Importance in the Making and Re-Making of the Modern Global Economy"},
+            {"presenter": "Mark Sweazy", "affiliation": "former UAW trade union leader, United States", "talk_title": "Returning the U.S. Work Force to a Culture of Scientific Progress"},
+            {"presenter": "Robert L. Baker", "affiliation": "Schiller Institute, United States", "talk_title": null},
+            {"presenter": "Mike Callicrate", "affiliation": "Board of Directors, Organization for Competitive Markets, Owner Ranch Foods Direct", "talk_title": "Food Unites People Around the Planet"},
+            {"presenter": "Alicia Díaz Brown", "affiliation": "Citizens Movement for Water, Sonora, Mexico", "talk_title": "Let Us Return to the Best Moments of the U.S.–Mexico Relationship"}
+          ],
+          "upgrade_candidate": true
+        }
+      ],
+      "notes": "Agenda ordered list without usable timestamps (chapter marks are just recurring time-window labels, not speaker marks)."
+    },
+    {
+      "id": "TEgNPGzmuQ8",
+      "case": 5,
+      "presentations": [
+        {
+          "title": "Panel 3 — The Job of Youth",
+          "kind": "Full session",
+          "agenda": [
+            {"presenter": "Helga Zepp-LaRouche", "affiliation": "Schiller Institute, Germany", "talk_title": "Opening Remarks"},
+            {"presenter": "Daniel Burke", "affiliation": "Schiller Institute, United States", "talk_title": "If You Sat Where They Sit, What Would You Do?"},
+            {"presenter": "Carolina Domínguez Cisneros, Sebastián Debernardi, Andrés Carpintero, Daniel Dufreine Arévalo", "affiliation": "Mexico/Peru/Colombia/Mexico", "talk_title": "Getting Back the Great Ideas That Were Stolen From Us"},
+            {"presenter": "Franklin Mireri", "affiliation": "YouLead Partnerships Coordinator, Tanzania", "talk_title": "The Greatest Want of the World is for True Leaders."},
+            {"presenter": "Sarah Fahim", "affiliation": "Student from Morocco Studying in Paris, France", "talk_title": null},
+            {"presenter": "Chérine Sultan", "affiliation": "Institut Schiller, Paris, France", "talk_title": null},
+            {"presenter": "Lissie Brobjerg", "affiliation": "Schiller Institute, United States", "talk_title": "Are You a Large-Scale Geological Force?"},
+            {"presenter": "Areej Atef", "affiliation": "Education Committee Vice President of BRICS Youth Parliament, Sana'a, Yemen", "talk_title": "Youth of the World Face Two World Systems: The Old and the New"},
+            {"presenter": "Jose Vega", "affiliation": "Bronx, NY", "talk_title": "A New Space CCC"}
+          ],
+          "upgrade_candidate": true
+        }
+      ],
+      "notes": "Agenda without times; chapters partially align (Daniel Burke, Jose Vega) but not cleanly enough to derive reliable start/end times for all speakers."
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "playlist_id": "PLoHwt4KyUk5BJEpEMcQhl4UitRFQW36nR",
+  "batch_index": 0,
+  "wp_match": {"wp_id": 2086, "confidence": "high"},
+  "create_new": null,
+  "videos": [
+    {
+      "id": "a2K3arlOhRo",
+      "case": 3,
+      "presentations": [
+        {"title": "Helga Zepp LaRouche: Keynote Address to New York Conference", "presenter": "Helga Zepp LaRouche", "presenter_affiliation": "Schiller Institute", "start_seconds": 0, "end_seconds": 3826, "kind": "Talk"}
+      ],
+      "notes": "No agenda times, single speaker keynote."
+    },
+    {
+      "id": "qPJ1KAn-Hvs",
+      "case": 2,
+      "presentations": [
+        {"title": "Mankind On The Stage of History — How Will We Be Remembered?", "presenter": "Bruce Fein", "presenter_affiliation": "Constitutional lawyer, former DOJ official", "start_seconds": 0, "end_seconds": 2206, "kind": "Chaptered talk",
+         "chapters": [{"label":"Intro","start_seconds":0},{"label":"What is Mankind","start_seconds":59},{"label":"The Critical Question","start_seconds":176},{"label":"Paul Reveres Ride","start_seconds":293},{"label":"Due Process","start_seconds":660},{"label":"Equality","start_seconds":1045},{"label":"Culture","start_seconds":1310},{"label":"Misery Index","start_seconds":1534},{"label":"The Founding Fathers","start_seconds":1746}]}
+      ],
+      "notes": "Topic chapters around one speaker."
+    },
+    {
+      "id": "yNhmujrgdLE",
+      "case": 3,
+      "presentations": [
+        {"title": "Address to Schiller Conference", "presenter": "Rep. Walter Jones", "presenter_affiliation": "U.S. Congress (R-NC)", "start_seconds": 0, "end_seconds": 200, "kind": "Talk"}
+      ],
+      "notes": "Single speaker, no timestamps."
+    },
+    {
+      "id": "hROU5sJUyG4",
+      "case": 2,
+      "presentations": [
+        {"title": "Dr. Clifford A. Kiracofe, Jr. - Schiller Institute Conference", "presenter": "Dr. Clifford A. Kiracofe, Jr.", "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 1529, "kind": "Chaptered talk",
+         "chapters": [{"label":"John Quincy Adams Believed in a Foreign Policy of Peace","start_seconds":195},{"label":"Three American Success in the War of 1812","start_seconds":403},{"label":"John Quincy Adams","start_seconds":512},{"label":"Monroe Doctrine","start_seconds":774},{"label":"1898 Spanish-American War","start_seconds":1059},{"label":"The Rise of India and China","start_seconds":1473}]}
+      ],
+      "notes": "Topic chapters, single speaker."
+    },
+    {
+      "id": "Kewq-CmEgKI",
+      "case": 2,
+      "presentations": [
+        {"title": "Sean Stone - Schiller Institute Conference", "presenter": "Sean Stone", "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 1023, "kind": "Chaptered talk",
+         "chapters": [{"label":"Shawn Stone","start_seconds":3},{"label":"The American Revolution Began with Ideas","start_seconds":248},{"label":"The New Dark Age","start_seconds":758}]}
+      ],
+      "notes": "Topic chapters, single speaker."
+    },
+    {
+      "id": "qkkf08w2Gcw",
+      "case": 3,
+      "presentations": [
+        {"title": "Dr. Mark Shelly - Schiller Institute Conference", "presenter": "Dr. Mark Shelly", "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 1766, "kind": "Talk"}
+      ],
+      "notes": "No chapters/agenda."
+    },
+    {
+      "id": "RJe8zD1PEHI",
+      "case": 3,
+      "presentations": [
+        {"title": "Norton Mezvinsky - Schiller Institute Conference", "presenter": "Norton Mezvinsky", "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 1758, "kind": "Talk"}
+      ],
+      "notes": "No chapters/agenda."
+    },
+    {
+      "id": "9qWMPSLaf4Q",
+      "case": 3,
+      "presentations": [
+        {"title": "National Banking", "presenter": "Michael Kirsch", "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 1617, "kind": "Talk"}
+      ],
+      "notes": "Speaker from title, no chapters."
+    },
+    {
+      "id": "k1KF8kMs1H4",
+      "case": 3,
+      "presentations": [
+        {"title": "J.S. Bach: Magnificat (BWV 243)", "presenter": null, "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 2139, "kind": "Performance"}
+      ],
+      "notes": "Musical performance, no named performers given."
+    },
+    {
+      "id": "oOIqEgXhZ4A",
+      "case": 3,
+      "presentations": [
+        {"title": "Elvira O. Green - Schiller Institute Conference", "presenter": "Elvira O. Green", "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 564, "kind": "Talk"}
+      ],
+      "notes": "No chapters/agenda."
+    },
+    {
+      "id": "KRRZxrIHBOk",
+      "case": 3,
+      "presentations": [
+        {"title": "Sonata for Cello and Piano No. 4 in C Major, Op. 102, No. 1", "presenter": "MyHoa Steger (piano) & Jean-Sébastien Tremblay (cello)", "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 1062, "kind": "Performance"}
+      ],
+      "notes": "Beethoven performance, performers named in description."
+    },
+    {
+      "id": "3uHo--Yv27g",
+      "case": 2,
+      "presentations": [
+        {"title": "The Work of the Foundation for the Revival of Classical Culture", "presenter": "Lynn Yen", "presenter_affiliation": "Executive Director, Foundation for the Revival of Classical Culture", "start_seconds": 0, "end_seconds": 1284, "kind": "Chaptered talk",
+         "chapters": [{"label":"Financial Crash of 2008","start_seconds":104},{"label":"Music Training and Brain Development","start_seconds":857},{"label":"Value of Musical Education","start_seconds":1077},{"label":"The Transformative Power of Classical Music","start_seconds":1250}]}
+      ],
+      "notes": "Topic chapters, single speaker."
+    },
+    {
+      "id": "4GDUO6bmnCA",
+      "case": 4,
+      "presentations": [
+        {"title": "Q&A Part 1 • How Can Beauty Be Restored in Society?", "presenter": null, "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 1326, "kind": "Full session"}
+      ],
+      "notes": "Panel Q&A, no per-speaker breakdown."
+    },
+    {
+      "id": "o3-le0kW4tk",
+      "case": 4,
+      "presentations": [
+        {"title": "Q&A Part 2 • Only Man Bounds Man's Development", "presenter": null, "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 198, "kind": "Full session"}
+      ],
+      "notes": "Panel Q&A, no per-speaker breakdown."
+    },
+    {
+      "id": "Zh5-8jbn_10",
+      "case": 4,
+      "presentations": [
+        {"title": "Q&A Part 3 • Leadership, in a Crisis Like This?", "presenter": null, "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 773, "kind": "Full session"}
+      ],
+      "notes": "Panel Q&A, no per-speaker breakdown."
+    }
+  ]
+}

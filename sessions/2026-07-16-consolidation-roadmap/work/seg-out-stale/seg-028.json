@@ -1,0 +1,38 @@
+{"playlist_id":"PLoHwt4KyUk5C3NYhozFTLmO4xjBhbr8SU","batch_index":0,"wp_match":null,"create_new":{"title":"World at a Crossroad: Two Months into the New Administration","start_date":"2021-03-20","location_hint":"online conference"},
+"videos":[
+{"id":"KcduPjapbRc","case":1,"presentations":[
+{"title":"Why Poetry and Music Must Supersede Partisanship","presenter":"Helga Zepp-LaRouche","presenter_affiliation":"President, The Schiller Institute","start_seconds":750,"end_seconds":3072,"kind":"Talk"},
+{"title":"The Poetic Principle in the Dialogue of Civilizations","presenter":"Dennis Speed","presenter_affiliation":"Schiller Institute (USA)","start_seconds":3072,"end_seconds":5209,"kind":"Talk"},
+{"title":"Dante's Commedia: The Way from Hell to Science and Space Exploration","presenter":"Liliana Gorini","presenter_affiliation":"Chairwoman, MoviSol (LaRouche Movement - Italy)","start_seconds":5209,"end_seconds":6263,"kind":"Talk"},
+{"title":"Beethoven in the Garden of Gethsemane","presenter":"Diane Sare","presenter_affiliation":"Schiller Institute (USA)","start_seconds":6263,"end_seconds":7538,"kind":"Talk"},
+{"title":"How to Address the Crisis in Education","presenter":"Carolina Dominguez","presenter_affiliation":"Schiller Institute (Mexico)","start_seconds":7538,"end_seconds":8160,"kind":"Talk"},
+{"title":"Abendlied unter'm gestirnten Himmel (Beethoven) — performance","presenter":"John Sigerson (tenor); Margaret Greenspan (piano)","presenter_affiliation":null,"start_seconds":8160,"end_seconds":8544,"kind":"Talk"},
+{"title":"Three Mars Missions and the Galactic Species","presenter":"Megan Dobrodt","presenter_affiliation":"President (USA), Schiller Institute","start_seconds":8544,"end_seconds":9300,"kind":"Talk"},
+{"title":"The Launching of Leonora!","presenter":"Anastasia Battle","presenter_affiliation":"The LaRouche Organization (TLO), USA","start_seconds":9300,"end_seconds":9499,"kind":"Talk"}
+],"notes":"Panel 1; trailing Q&A segment (9499-12442) not extracted as a presentation."},
+{"id":"83Kzsg20gAo","case":1,"presentations":[
+{"title":"Keynote Address","presenter":"Helga Zepp-LaRouche","presenter_affiliation":"President, The Schiller Institute","start_seconds":160,"end_seconds":700,"kind":"Talk"},
+{"title":"Remarks","presenter":"Ambassador Ping Huang","presenter_affiliation":"Consul General, People's Republic of China, New York","start_seconds":700,"end_seconds":1693,"kind":"Talk"},
+{"title":"Remarks","presenter":"Alexey Boguslavskiy","presenter_affiliation":"First Secretary, Russian Federation Mission to the United Nations","start_seconds":1693,"end_seconds":2214,"kind":"Talk"},
+{"title":"Remarks","presenter":"Dr. Bouthaina Shaaban","presenter_affiliation":"Political and Media Advisor to the Syrian Presidency, Syria","start_seconds":2214,"end_seconds":3013,"kind":"Talk"},
+{"title":"Remarks","presenter":"Dr. William Happer","presenter_affiliation":"Professor Emeritus, Princeton University; former Member, US NSC","start_seconds":3013,"end_seconds":4525,"kind":"Talk"},
+{"title":"Remarks introduced by Harley Schlanger","presenter":"Lyndon LaRouche","presenter_affiliation":null,"start_seconds":6319,"end_seconds":7459,"kind":"Talk"},
+{"title":"Make Space for the Belt and Road in the Americas","presenter":"Dennis Small","presenter_affiliation":"Executive Intelligence Review, Ibero-American Editor (US)","start_seconds":7459,"end_seconds":8035,"kind":"Talk"},
+{"title":"Remarks","presenter":"Simon Levy","presenter_affiliation":"Founder, China-Mexico Lecture and Fellowship, UNAM; former Undersecretary for Planning and Tourism Policy of Mexico","start_seconds":8035,"end_seconds":8358,"kind":"Talk"},
+{"title":"Youth and Space","presenter":"Alejandro Yaya","presenter_affiliation":"Vice President, Civil Institute of Space Technology, Argentina","start_seconds":8358,"end_seconds":8950,"kind":"Talk"},
+{"title":"Remarks","presenter":"Daniel Marmolejo","presenter_affiliation":"Investigative journalist, Mexico","start_seconds":8950,"end_seconds":9497,"kind":"Talk"},
+{"title":"Remarks","presenter":"Denys Pluvinage","presenter_affiliation":"Vice President, Franco-Russian Alliance, France","start_seconds":9497,"end_seconds":10617,"kind":"Talk"},
+{"title":"The New Silk Road and Pakistan","presenter":"Sultan M. Hali","presenter_affiliation":"Retired Colonel, Pakistani Air Force; journalist","start_seconds":10617,"end_seconds":11623,"kind":"Talk"},
+{"title":"The Global Reset: The Great Leap Backward","presenter":"Richard Freeman","presenter_affiliation":"Executive Intelligence Review, USA","start_seconds":11623,"end_seconds":15123,"kind":"Talk"}
+],"notes":"Panel 2; intro (0-160) and Q&A session (4525-6319) not extracted as presentations."},
+{"id":"B1eaC6Iljas","case":1,"presentations":[
+{"title":"Justice for The Nations of Southwest Asia","presenter":"Hussein Askary","presenter_affiliation":"Southwest Asia Director, Schiller Institute (Sweden/Iraq)","start_seconds":227,"end_seconds":1710,"kind":"Talk"},
+{"title":"Remarks","presenter":"Hisham Sharaf","presenter_affiliation":"Minister of Foreign Affairs, Yemen","start_seconds":1710,"end_seconds":2152,"kind":"Talk"},
+{"title":"Remarks","presenter":"Haidar Al-Fuadi Al-Atabe","presenter_affiliation":"Member, Council of Representatives, Iraq","start_seconds":2152,"end_seconds":2665,"kind":"Talk"},
+{"title":"Remarks","presenter":"Shakeel Ahmad Ramay","presenter_affiliation":"Director, China Center, Sustainable Development Policy Institute, Pakistan","start_seconds":2665,"end_seconds":3446,"kind":"Talk"},
+{"title":"The Truth about the Syrian Crisis","presenter":"Richard H. Black","presenter_affiliation":"Former State Senator, USA","start_seconds":3446,"end_seconds":4588,"kind":"Talk"},
+{"title":"Remarks","presenter":"Zaid Ayoub Arbache","presenter_affiliation":"Assistant Professor, Faculty of Economics, Damascus University","start_seconds":4588,"end_seconds":5204,"kind":"Talk"},
+{"title":"Remarks","presenter":"Michel Raimbaud","presenter_affiliation":"Former French Ambassador to Arab, African, and Latin American Countries","start_seconds":5204,"end_seconds":6218,"kind":"Talk"},
+{"title":"A Call to Action","presenter":"Jacques Cheminade","presenter_affiliation":"Président, Solidarité et Progrès, France","start_seconds":6218,"end_seconds":12618,"kind":"Talk"}
+],"notes":"Southwest Asia panel; moderator Diane Sare; intro segment (0-227) not extracted."}
+]}

@@ -1,0 +1,76 @@
+{
+  "playlist_id": "PLoHwt4KyUk5BLyjo-lYI1akY_m95R12QD",
+  "batch_index": 0,
+  "wp_match": {"wp_id": 60867, "confidence": "high"},
+  "create_new": null,
+  "videos": [
+    {
+      "id": "_OCAxLIpAMY",
+      "case": 1,
+      "presentations": [
+        {"title": "Keynote Address", "presenter": null, "presenter_affiliation": null, "start_seconds": 957, "end_seconds": 3163, "kind": "Talk"},
+        {"title": "Dmitriy Polyanskiy — Panel 1: \"The Urgent Need to Replace Geopolitics with a New Paradigm in International Relations\"", "presenter": "Dmitriy Polyanskiy", "presenter_affiliation": "1st Deputy Permanent Representative (Russia to UN)", "start_seconds": 3163, "end_seconds": 4015, "kind": "Talk"},
+        {"title": "H.E. Ambassador Huang Ping — Panel 1: \"The Urgent Need to Replace Geopolitics with a New Paradigm in International Relations\"", "presenter": "Huang Ping", "presenter_affiliation": "Ambassador", "start_seconds": 4015, "end_seconds": 5035, "kind": "Talk"},
+        {"title": "Q&A with Zepp-LaRouche and representatives of Russia and China", "presenter": "Helga Zepp-LaRouche, Dmitriy Polyanskiy, Huang Ping", "presenter_affiliation": null, "start_seconds": 5035, "end_seconds": 6316, "kind": "Talk"},
+        {"title": "Jacques Cheminade — Panel 1: \"The Urgent Need to Replace Geopolitics with a New Paradigm in International Relations\"", "presenter": "Jacques Cheminade", "presenter_affiliation": null, "start_seconds": 6316, "end_seconds": 8215, "kind": "Talk"},
+        {"title": "Michele Geraci — Panel 1: \"The Urgent Need to Replace Geopolitics with a New Paradigm in International Relations\"", "presenter": "Michele Geraci", "presenter_affiliation": null, "start_seconds": 8215, "end_seconds": 9262, "kind": "Talk"},
+        {"title": "Q&A with Zepp-LaRouche, Cheminade, and Geraci", "presenter": "Helga Zepp-LaRouche, Jacques Cheminade, Michele Geraci", "presenter_affiliation": null, "start_seconds": 9262, "end_seconds": 12095, "kind": "Talk"},
+        {"title": "Helga Zepp-LaRouche — Panel 1: \"The Urgent Need to Replace Geopolitics with a New Paradigm in International Relations\"", "presenter": "Helga Zepp-LaRouche", "presenter_affiliation": null, "start_seconds": 12095, "end_seconds": 12915, "kind": "Talk"},
+        {"title": "Q&A continued", "presenter": null, "presenter_affiliation": null, "start_seconds": 12915, "end_seconds": 15057, "kind": "Talk"}
+      ],
+      "notes": "Per-speaker agenda times match chapters closely; validated ascending and within duration."
+    },
+    {
+      "id": "xQlZ-2CcXiY",
+      "case": 5,
+      "presentations": [
+        {
+          "title": "Panel 2: \"For a Better Understanding of How Our Universe Functions\"",
+          "kind": "Full session",
+          "start_seconds": 0,
+          "end_seconds": 12620,
+          "agenda": [
+            {"presenter": "Megan Beets, Benjamin Deniston, Jason Ross", "affiliation": "Schiller Institute Science Researchers", "talk_title": "In Defense of the Human Species"},
+            {"presenter": "Jean-Pierre Luminet, PhD", "affiliation": "Astrophysicist; emeritus researcher, National Center of Scientific Research", "talk_title": "The Role of ‘Free Invention’ in Creative Discovery"},
+            {"presenter": "Michel Tognini", "affiliation": "Astronaut; Association of Space Explorers founding member", "talk_title": "Friendship Between Astronauts: An Exemplary Precedent for International Cooperation"},
+            {"presenter": "Walt Cunningham", "affiliation": "Apollo Astronaut", "talk_title": "Apollo 7: An Astronaut’s Reflections"},
+            {"presenter": "Marie Korsaga, PhD", "affiliation": "Astrophysicist, Burkina Faso", "talk_title": "The Necessity of Science Education for African Youth"},
+            {"presenter": "Sen. Joe Pennacchio", "affiliation": "New Jersey State Senator", "talk_title": "Making Nuclear Fusion a Reality"},
+            {"presenter": "Will Happer, PhD", "affiliation": "Professor Emeritus of Physics, Princeton University", "talk_title": "The Inside Story of Contemporary Science"},
+            {"presenter": "Kildare Clarke, MD", "affiliation": "Physician, New York", "talk_title": "Health Care as a Social Necessity"},
+            {"presenter": "Guangxi Li, MD, PhD", "affiliation": "Chinese Academy of Medical Sciences, Beijing", "talk_title": "Chinese Medicine Treatment of COVID-19"},
+            {"presenter": null, "affiliation": null, "talk_title": "Q&A"}
+          ],
+          "upgrade_candidate": true
+        }
+      ],
+      "notes": "Agenda lists speakers/topics in order but no timestamps; chapter labels are mostly topics rather than matching speaker names, not reliable enough for split."
+    },
+    {
+      "id": "cy0uh-BYs7s",
+      "case": 5,
+      "presentations": [
+        {
+          "title": "Panel 3: \"Creativity as the Distinctive Characteristic of Human Culture\"",
+          "kind": "Full session",
+          "start_seconds": 0,
+          "end_seconds": 12606,
+          "agenda": [
+            {"presenter": null, "affiliation": null, "talk_title": "Beethoven, “An die ferne Geliebte,” op. 98 (performance)"},
+            {"presenter": "Lyndon LaRouche", "affiliation": null, "talk_title": null},
+            {"presenter": "Helga Zepp-LaRouche", "affiliation": null, "talk_title": null},
+            {"presenter": "William Warfield", "affiliation": null, "talk_title": null},
+            {"presenter": "Willis Patterson", "affiliation": null, "talk_title": null},
+            {"presenter": "John Sigerson", "affiliation": null, "talk_title": null},
+            {"presenter": "Eugene Simpson", "affiliation": null, "talk_title": null},
+            {"presenter": "Diane Sare", "affiliation": null, "talk_title": null},
+            {"presenter": "Gregory Hopkins", "affiliation": null, "talk_title": "Conference Greetings"},
+            {"presenter": null, "affiliation": null, "talk_title": "Discussion and Q&A"}
+          ],
+          "upgrade_candidate": true
+        }
+      ],
+      "notes": "Agenda gives real-world clock times (U.S. EDT), not reliable video offsets; chapters cover only musical performances, not full speaker list. Treated as ordered agenda without usable start times."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{"playlist_id":"PLoHwt4KyUk5C3NYhozFTLmO4xjBhbr8SU","batch_index":1,"wp_match":null,"create_new":null,
+ "videos":[
+  {"id":"MRMsLajli84","case":1,"presentations":[
+    {"title":"A Global Health Mission for the Youth","presenter":"Dr. Joycelyn Elders","presenter_affiliation":"former Surgeon General of the United States","start_seconds":122,"end_seconds":725,"kind":"Talk"},
+    {"title":"The World Famine and the Need to Double Agricultural Production","presenter":"Marcia Merry Baker","presenter_affiliation":"Co-Editor, Executive Intelligence Review","start_seconds":725,"end_seconds":1994,"kind":"Talk"},
+    {"title":"Panel 4 — The Challenge of Famine and Pandemics","presenter":"Dr. Khadijah Lang","presenter_affiliation":"Chairman, National Medical Association (NMA) Council on International Affairs; President, Golden State Medical Association","start_seconds":1994,"end_seconds":2516,"kind":"Talk"},
+    {"title":"Panel 4 — The Challenge of Famine and Pandemics","presenter":"Mike Callicrate","presenter_affiliation":"Cattleman, Founder of Ranch Foods Direct (Colorado)","start_seconds":2516,"end_seconds":3092,"kind":"Talk"},
+    {"title":"Panel 4 — The Challenge of Famine and Pandemics","presenter":"Dr. Shirley Evers-Manley","presenter_affiliation":"Interim Dean, Alcorn University School of Nursing; Chairman, Global Health Committee, National Black Nurses Association","start_seconds":3092,"end_seconds":4212,"kind":"Talk"},
+    {"title":"Stand Together for Food, Health and the Future","presenter":"Bob Baker","presenter_affiliation":"Schiller Institute Agricultural Liaison (USA)","start_seconds":4212,"end_seconds":4522,"kind":"Talk"},
+    {"title":"Panel 4 — The Challenge of Famine and Pandemics","presenter":"Bill Bullard","presenter_affiliation":"CEO of R-CALF USA (Montana)","start_seconds":4522,"end_seconds":4850,"kind":"Talk"},
+    {"title":"D.C. Project: Community Healthcare Workers' Indispensable Role in Defeating the Pandemic","presenter":"Dr. Walter Faggett","presenter_affiliation":"Former Chief Medical Officer, Washington D.C. Dept of Health; co-chair DC Ward 8 Health Council","start_seconds":4850,"end_seconds":5406,"kind":"Talk"},
+    {"title":"Panel 4 — The Challenge of Famine and Pandemics","presenter":"Nicole Phrang","presenter_affiliation":"Kansas Cattle Rancher, Secretary-Treasurer, Kansas Cattlemen's Association","start_seconds":5406,"end_seconds":5782,"kind":"Talk"},
+    {"title":"Panel 4 — The Challenge of Famine and Pandemics","presenter":"James Benham","presenter_affiliation":"Indiana Farmer, President of the Indiana Farmers Union","start_seconds":5782,"end_seconds":6347,"kind":"Talk"},
+    {"title":"Panel 4 — The Challenge of Famine and Pandemics","presenter":"Fred Wills","presenter_affiliation":null,"start_seconds":6347,"end_seconds":12792,"kind":"Talk"}
+  ],"notes":"Panel 4 full session, 11 speaker segments from agenda timestamps, ascending and within duration."},
+  {"id":"zRf_PmExPJM","case":3,"presentations":[
+    {"title":"The Truth about the Syrian Crisis","presenter":"State Senator (former) Richard H. Black","presenter_affiliation":"U.S.","start_seconds":0,"end_seconds":1110,"kind":"Talk"}
+  ],"notes":"Single speaker per description, no timestamps."},
+  {"id":"2qhxj6GkWpE","case":4,"presentations":[
+    {"title":"CO₂ is not a Pollutant — Exposing the Fraud Behind the Global Reset/Green New Deal","presenter":"Dr. William Happer; Richard Freeman","presenter_affiliation":"Professor Emeritus, Princeton University; EIR","start_seconds":0,"end_seconds":2367,"kind":"Excerpt"}
+  ],"notes":"Excerpts video combining two presenters (Happer on CO2 science, Freeman on Great Reset/Green New Deal); chapters are topical and don't cleanly map speaker boundaries, kept as one Excerpt session."},
+  {"id":"dPOw0KIbHaY","case":2,"presentations":[
+    {"title":"Will Human History End in Tragedy, Or Continue With a New Paradigm?","presenter":"Helga Zepp-LaRouche","presenter_affiliation":"President, Schiller Institute","start_seconds":0,"end_seconds":2370,"kind":"Chaptered talk","chapters":[{"label":"Helga Seplaroosh","start_seconds":10},{"label":"The Longer Telegram","start_seconds":528},{"label":"Animals Have Souls","start_seconds":2195}]}
+  ],"notes":"Single speaker, topical chapters."}
+ ]}

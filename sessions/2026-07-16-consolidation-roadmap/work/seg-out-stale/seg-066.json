@@ -1,0 +1,227 @@
+{
+  "playlist_id": "PLoHwt4KyUk5AlUKhGlU7z1dqj9XBCPtHa",
+  "batch_index": 0,
+  "wp_match": null,
+  "create_new": {
+    "title": "Rebuilding the World in the BRICS Era • Paris, France • June 13-14, 2015",
+    "start_date": "2015-06-13",
+    "location_hint": "Paris, France"
+  },
+  "videos": [
+    {
+      "id": "A2S39r0PG7c",
+      "case": 3,
+      "presentations": [
+        {
+          "title": "J.S. Bach - Toccata BWV 914 in e minor",
+          "presenter": "Georges Bériachvili",
+          "presenter_affiliation": null,
+          "start_seconds": 0,
+          "end_seconds": 476,
+          "kind": "Talk"
+        }
+      ],
+      "notes": "Musical intro to Panel 1, performed piece"
+    },
+    {
+      "id": "5mnW1gdGSbM",
+      "case": 2,
+      "presentations": [
+        {
+          "title": "Discours d'ouverture : Rebâtir le monde à l'ère des BRICS",
+          "presenter": "Helga Zepp-LaRouche",
+          "presenter_affiliation": "Présidente de l'Institut Schiller",
+          "start_seconds": 0,
+          "end_seconds": 3691,
+          "kind": "Chaptered talk",
+          "chapters": [
+            {"label": "Introduction", "start_seconds": 0},
+            {"label": "Préface", "start_seconds": 12},
+            {"label": "Le pont terrestre eurasiatique", "start_seconds": 353},
+            {"label": "La réduction de la population mondiale", "start_seconds": 581},
+            {"label": "L'hégémonie anglo-américaine", "start_seconds": 783},
+            {"label": "L'hégémonie russe", "start_seconds": 898},
+            {"label": "Exercices militaires", "start_seconds": 1073},
+            {"label": "Ukraine", "start_seconds": 1138},
+            {"label": "Exportations allemandes", "start_seconds": 1273},
+            {"label": "Décarbonation de l'économie", "start_seconds": 1373},
+            {"label": "Nouveau système financier mondial", "start_seconds": 1863},
+            {"label": "Nouveau partenariat stratégique", "start_seconds": 2053},
+            {"label": "Nouvelle route de la soie", "start_seconds": 2188},
+            {"label": "L'union soviétique s'effondre", "start_seconds": 2263},
+            {"label": "La nouvelle route de la soie", "start_seconds": 2448}
+          ]
+        }
+      ],
+      "notes": "Chapters are topics around single speaker"
+    },
+    {
+      "id": "Mqn6lN4XwCQ",
+      "case": 3,
+      "presentations": [
+        {
+          "title": "La vocation des BRICS",
+          "presenter": "Leonid Kadyshev",
+          "presenter_affiliation": "Ministre-conseiller de l'Ambassade de Russie en France",
+          "start_seconds": 0,
+          "end_seconds": 954,
+          "kind": "Talk"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "ZUfHGjn5UKU",
+      "case": 3,
+      "presentations": [
+        {
+          "title": "Les BRICS, un nouveau paradigme pour un monde mondialisé",
+          "presenter": "H.H.S. Viswanathan",
+          "presenter_affiliation": "Observer Research Foundation, coordinateur BRICS/IBSA, New Delhi",
+          "start_seconds": 0,
+          "end_seconds": 1250,
+          "kind": "Talk"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "hYWvYUGycdI",
+      "case": 2,
+      "presentations": [
+        {
+          "title": "Regard sur le concept nouveau d'« Une ceinture, une route »",
+          "presenter": "Pr Shi Ze",
+          "presenter_affiliation": "Directeur des études stratégiques internationales, énergie, CIIS, Beijing",
+          "start_seconds": 0,
+          "end_seconds": 1607,
+          "kind": "Chaptered talk",
+          "chapters": [
+            {"label": "Le développement des Brics", "start_seconds": 0},
+            {"label": "Quel effet aura-t-il sur l'économie mondiale ?", "start_seconds": 730},
+            {"label": "Quels sont les effets positifs de ce projet ?", "start_seconds": 890},
+            {"label": "Quels sont les aspects concrets de ce projet ?", "start_seconds": 1080},
+            {"label": "Quelles sont les leçons à tirer de ce projet ?", "start_seconds": 1220}
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "a9CxgDhU1vc",
+      "case": 3,
+      "presentations": [
+        {
+          "title": "Message de S.E.M. Ali Ahani - L'Iran est prête à coopérer avec les BRICS",
+          "presenter": "Majid Javanmard (message from Ali Ahani)",
+          "presenter_affiliation": "Conseiller de l'Ambassade d'Iran en France",
+          "start_seconds": 0,
+          "end_seconds": 338,
+          "kind": "Talk"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "nhiWF7Ajugw",
+      "case": 4,
+      "presentations": [
+        {
+          "title": "Première séance - Séance de questions / réponses",
+          "presenter": null,
+          "presenter_affiliation": null,
+          "start_seconds": 0,
+          "end_seconds": 2381,
+          "kind": "Full session"
+        }
+      ],
+      "notes": "Q&A session, no clear single speaker; chapters are question topics not speakers"
+    },
+    {
+      "id": "7LjBCZd1wf4",
+      "case": 3,
+      "presentations": [
+        {
+          "title": "Johannes Brahms - Intermezzo for piano op. 118 No. 2",
+          "presenter": "Benjamin Lylloff",
+          "presenter_affiliation": "Schiller Institute member",
+          "start_seconds": 0,
+          "end_seconds": 364,
+          "kind": "Talk"
+        }
+      ],
+      "notes": "Musical performance"
+    },
+    {
+      "id": "vmEPXCH6OSY",
+      "case": 2,
+      "presentations": [
+        {
+          "title": "Construire un monde multipolaire, une approche culturelle",
+          "presenter": "Denys Pluvinage",
+          "presenter_affiliation": "Conseiller au Dialogue franco-russe, Paris",
+          "start_seconds": 0,
+          "end_seconds": 1628,
+          "kind": "Chaptered talk",
+          "chapters": [
+            {"label": "Début", "start_seconds": 0},
+            {"label": "Confidence personnelle", "start_seconds": 46},
+            {"label": "Un monde unipolaire", "start_seconds": 407},
+            {"label": "Chaque pays a sa culture", "start_seconds": 643},
+            {"label": "La culture est un mécanisme invisible qui agit dans nos pensées", "start_seconds": 750},
+            {"label": "La culture est quelque chose dont nous nous imprégnons", "start_seconds": 868},
+            {"label": "La programmation de l'esprit", "start_seconds": 913},
+            {"label": "Les constructions juridiques", "start_seconds": 968},
+            {"label": "Le formalisme juridique", "start_seconds": 1010},
+            {"label": "Le système", "start_seconds": 1103},
+            {"label": "Le choc culturel", "start_seconds": 1143},
+            {"label": "La loi", "start_seconds": 1180},
+            {"label": "Le non-respect des normes culturelles", "start_seconds": 1417},
+            {"label": "Conclusion", "start_seconds": 1478}
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "4dlhj3amjgs",
+      "case": 3,
+      "presentations": [
+        {
+          "title": "Internationalisation du yuan, perspectives et réalités",
+          "presenter": "Jean-François Di Meglio",
+          "presenter_affiliation": "Président d'ASIA Centre",
+          "start_seconds": 0,
+          "end_seconds": 887,
+          "kind": "Talk"
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "y6ZY8mAMhac",
+      "case": 2,
+      "presentations": [
+        {
+          "title": "Travailler ensemble pour le siècle asiatique",
+          "presenter": "Jayshree Sengupta",
+          "presenter_affiliation": "Économiste, Observer Research Foundation, New Delhi",
+          "start_seconds": 0,
+          "end_seconds": 1160,
+          "kind": "Chaptered talk",
+          "chapters": [
+            {"label": "Début", "start_seconds": 0},
+            {"label": "Travailler ensemble pour le siècle asiatique", "start_seconds": 48},
+            {"label": "L'Inde et la Chine", "start_seconds": 214},
+            {"label": "L'Inde et le Népal", "start_seconds": 346},
+            {"label": "Croissance entre le Népal et l'Inde", "start_seconds": 422},
+            {"label": "Croissance entre la Chine et le Pakistan", "start_seconds": 486},
+            {"label": "Développement du Pakistan", "start_seconds": 575},
+            {"label": "Conclusion", "start_seconds": 915}
+          ]
+        }
+      ],
+      "notes": ""
+    }
+  ]
+}

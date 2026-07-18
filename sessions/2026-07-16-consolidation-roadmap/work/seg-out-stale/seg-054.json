@@ -1,0 +1,99 @@
+{
+  "playlist_id": "PLoHwt4KyUk5B9vdWLhwX2Xhvz6EzpdUti",
+  "batch_index": 0,
+  "wp_match": null,
+  "create_new": {
+    "title": "Lyon Seminar: New Silk Road Opportunities for France and Europe",
+    "start_date": "2016-10-19",
+    "location_hint": "Lyon, France (EMLyon Business School, Club Chine EMLyon Forever)"
+  },
+  "videos": [
+    {
+      "id": "GsUD50QHvWk",
+      "case": 3,
+      "presentations": [
+        {"title": "Helga Zepp-LaRouche — Lyon conference", "presenter": "Helga Zepp-LaRouche", "presenter_affiliation": "President, Schiller Institute", "start_seconds": 0, "end_seconds": 1783, "kind": "Talk"}
+      ],
+      "notes": "Duplicate/alt-title upload of m0ymiYAcums (same duration, no description)."
+    },
+    {
+      "id": "m0ymiYAcums",
+      "case": 3,
+      "presentations": [
+        {"title": "Les opportunités ouvertes par les nouvelles routes de la soie", "presenter": "Helga Zepp-LaRouche", "presenter_affiliation": "President, Schiller Institute", "start_seconds": 0, "end_seconds": 1783, "kind": "Talk"}
+      ],
+      "notes": "Single speaker, title in description."
+    },
+    {
+      "id": "8zp6OcJouR0",
+      "case": 3,
+      "presentations": [
+        {"title": "Présentation des activités du Club Chine EMLyon Forever", "presenter": "Jean-Christophe Vautrin", "presenter_affiliation": "Président, Club Chine EMLyon Forever", "start_seconds": 0, "end_seconds": 1063, "kind": "Talk"}
+      ],
+      "notes": ""
+    },
+    {
+      "id": "Td3qdzMefyw",
+      "case": 3,
+      "presentations": [
+        {"title": "Une participation de la France aux nouvelles routes de la soie, dans la tradition de Leibniz et des missions de jésuites en Chine au XVIIe siècle", "presenter": "Christine Bierre", "presenter_affiliation": "Rédactrice en chef, Nouvelle Solidarité", "start_seconds": 0, "end_seconds": 1389, "kind": "Talk"}
+      ],
+      "notes": ""
+    },
+    {
+      "id": "RbtvMvjdA50",
+      "case": 3,
+      "presentations": [
+        {"title": "Christine Bierre — Lyon conference", "presenter": "Christine Bierre", "presenter_affiliation": "Rédactrice en chef, Nouvelle Solidarité", "start_seconds": 0, "end_seconds": 1389, "kind": "Talk"}
+      ],
+      "notes": "Duplicate/alt-title upload of Td3qdzMefyw (same duration)."
+    },
+    {
+      "id": "MAUhhVOT1Tc",
+      "case": 3,
+      "presentations": [
+        {"title": "Jean-Christophe Vautrin — Lyon conference", "presenter": "Jean-Christophe Vautrin", "presenter_affiliation": "Président, Club Chine EMLyon Forever", "start_seconds": 0, "end_seconds": 1063, "kind": "Talk"}
+      ],
+      "notes": "Duplicate/alt-title upload of 8zp6OcJouR0 (same duration)."
+    },
+    {
+      "id": "HIu6EBNJOpc",
+      "case": 2,
+      "presentations": [
+        {"title": "Questions & Answers — Lyon conference", "presenter": "Panel Q&A", "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 2881, "kind": "Chaptered talk", "chapters": [
+          {"label": "Introduction", "start_seconds": 0},
+          {"label": "France-China cooperation", "start_seconds": 120},
+          {"label": "China-Africa cooperation", "start_seconds": 195},
+          {"label": "China in Africa", "start_seconds": 398},
+          {"label": "Importance of China in Africa", "start_seconds": 477},
+          {"label": "Chinese investments in Europe", "start_seconds": 869},
+          {"label": "President Duterte", "start_seconds": 1873},
+          {"label": "Russian military", "start_seconds": 1941},
+          {"label": "Geopolitics", "start_seconds": 2058},
+          {"label": "America", "start_seconds": 2141},
+          {"label": "American election", "start_seconds": 2200},
+          {"label": "US infrastructure", "start_seconds": 2328},
+          {"label": "China and Africa", "start_seconds": 2487},
+          {"label": "Conclusion", "start_seconds": 2751}
+        ]}
+      ],
+      "notes": "Chapters are topics, not speaker names; panel Q&A session."
+    },
+    {
+      "id": "phl-2sPpWe4",
+      "case": 4,
+      "presentations": [
+        {"title": "Questions / Réponses — Séminaire à Lyon", "presenter": "Panel Q&A", "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 2881, "kind": "Full session"}
+      ],
+      "notes": "French-language duplicate upload of HIu6EBNJOpc, no chapters present here."
+    },
+    {
+      "id": "mUhLBvv7h4Y",
+      "case": 3,
+      "presentations": [
+        {"title": "Les opportunités stratégiques ouvertes par les nouvelles routes de la soie", "presenter": "Prof. Shi Ze", "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 2458, "kind": "Talk"}
+      ],
+      "notes": "Title indicates dubbed/voice-over (VO) version."
+    }
+  ]
+}

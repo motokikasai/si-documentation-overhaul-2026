@@ -1,0 +1,7 @@
+{"playlist_id": "PLoHwt4KyUk5AEE8jRv1D5RymHH7pe1NLz", "batch_index": 1, "wp_match": null, "create_new": null,
+ "videos": [
+  {"id": "Tdx6iYfkpno", "case": 3, "presentations": [{"title": "Mozart's K. 465 (\"The Dissonance Quartet\")", "presenter": "Schiller Institute Orchestra", "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 2069, "kind": "Talk"}], "notes": "Musical performance, single piece, no timestamps."},
+  {"id": "jH6g7OYNAUw", "case": 3, "presentations": [{"title": "Magnificat", "presenter": "Schiller Institute Chorus", "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 1973, "kind": "Talk"}], "notes": "Musical performance, single piece."},
+  {"id": "_RlwhgvfrOE", "case": 3, "presentations": [{"title": "Bach - Jesu, meine Freude", "presenter": "Schiller Institute Chorus", "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 1318, "kind": "Talk"}], "notes": "Musical performance, single piece."},
+  {"id": "HkuN0pjH368", "case": 3, "presentations": [{"title": "The Hamiltonian Credit System", "presenter": "Michael Kirsch", "presenter_affiliation": null, "start_seconds": 0, "end_seconds": 1248, "kind": "Talk"}], "notes": "Single speaker from title, no timestamps."}
+ ]}

@@ -1,0 +1,62 @@
+{
+  "playlist_id": "PLoHwt4KyUk5AQSojSSwzrmY0iiKsy-9SU",
+  "batch_index": 1,
+  "wp_match": null,
+  "create_new": null,
+  "videos": [
+    {
+      "id": "Gep6VAh4H9o",
+      "case": 1,
+      "notes": "Description AGENDA block lines out of order/duplicated (durations mixed with times); chapters are internally ascending and consistent with the times used in description, so chapters used as authoritative. Musical Offering (0-741) omitted as non-presentation. Rastbeen, Murray, Ruggeri appear in description agenda but have no matching chapter — omitted from split; note for possible manual follow-up.",
+      "presentations": [
+        {"title": "Jacques Cheminade — Strategic Challenges and the Emerging New Order from an International Perspective", "presenter": "Jacques Cheminade", "presenter_affiliation": "President of Solidarité et Progrès, France", "start_seconds": 741, "end_seconds": 4426, "kind": "Talk"},
+        {"title": "Donald Ramotar — Strategic Challenges and the Emerging New Order from an International Perspective", "presenter": "Donald Ramotar", "presenter_affiliation": "former President of Guyana, Guyana", "start_seconds": 4426, "end_seconds": 5512, "kind": "Talk"},
+        {"title": "Diane Sare — Strategic Challenges and the Emerging New Order from an International Perspective", "presenter": "Diane Sare", "presenter_affiliation": "President of The LaRouche Organization, former Independent Senate Candidate, USA", "start_seconds": 5512, "end_seconds": 6240, "kind": "Talk"},
+        {"title": "Dr. Jérôme Ravenet — Strategic Challenges and the Emerging New Order from an International Perspective", "presenter": "Dr. Jérôme Ravenet", "presenter_affiliation": "Philosophy Professor and Sinologist, France", "start_seconds": 6240, "end_seconds": 7131, "kind": "Talk"},
+        {"title": "5% of GDP for the Defense Industry: A Redistribution of National Wealth – An Over-Demand on Society", "presenter": "Achim Bonatz", "presenter_affiliation": "Vice President, East German Board of Trustees of Associations (Ostdeutsches Kuratorium von Verbänden e.V.), Germany", "start_seconds": 7131, "end_seconds": 8217, "kind": "Talk"},
+        {"title": "Cornelia Pretorius — Strategic Challenges and the Emerging New Order from an International Perspective", "presenter": "Cornelia Pretorius", "presenter_affiliation": "Mothers against War, Germany", "start_seconds": 8217, "end_seconds": 8939, "kind": "Talk"},
+        {"title": "The Foundations of International Law", "presenter": "Wolfgang Effenberger", "presenter_affiliation": "Officer of the Bundeswehr (ret.) and Author, Germany", "start_seconds": 8939, "end_seconds": 9821, "kind": "Talk"},
+        {"title": "Peace and Security – Why We Need a Different Policy", "presenter": "Major Florian D. Pfaff (ret.)", "presenter_affiliation": "Speaker of the Working Group \"Darmstädter Signal\", Germany", "start_seconds": 9821, "end_seconds": 10492, "kind": "Talk"},
+        {"title": "Words from a Concerned Soldier", "presenter": "Colonel (ret.) Jacques Hogard", "presenter_affiliation": "former Officer of the Foreign Legion and Special Forces, France", "start_seconds": 10492, "end_seconds": 13455, "kind": "Talk"}
+      ]
+    },
+    {
+      "id": "zs9bsTyYMxo",
+      "case": 5,
+      "notes": "Description lists ordered speakers/titles under implicit agenda but no usable timestamps or chapters.",
+      "presentations": [
+        {
+          "title": "The Scientific Challenges in the New Paradigm",
+          "presenter": null,
+          "presenter_affiliation": null,
+          "start_seconds": 0,
+          "end_seconds": 8573,
+          "kind": "Full session",
+          "upgrade_candidate": true,
+          "agenda": [
+            {"presenter": "Jason Ross", "affiliation": "Scientific Advisor of the Schiller Institute, USA", "talk_title": null},
+            {"presenter": "Prof. Franco Battaglia", "affiliation": "Professor of Physical Chemistry, Modena University, Italy", "talk_title": null},
+            {"presenter": "Prof. Dr. Carl-Otto Weiss", "affiliation": "Professor and Director, German Federal Institute of Metrology, Braunschweig, Germany", "talk_title": "The Cyclical Climate and the False Concepts behind the Presentation of Climate Change"},
+            {"presenter": "Robert Lechner-Schobel", "affiliation": "Business Consultant, Germany", "talk_title": "From Thermonuclear Fusion to Transmutation"},
+            {"presenter": "Dennis Small", "affiliation": "Director of the Latin American Desk of EIR, USA", "talk_title": "Why Lyndon LaRouche's Economic Forecasts Are Correct"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "EyhLk_2i82I",
+      "case": 3,
+      "notes": "Short (13.7 min) single-speaker clip explicitly described as excerpt from a speech given at the Berlin conference; likely duplicates a segment within a fuller panel video. Marked as Excerpt.",
+      "presentations": [
+        {
+          "title": "A New Global Security System",
+          "presenter": "Prof. Dmitri Trenin",
+          "presenter_affiliation": "Academic Supervisor of the Institute of World Military Economy and Strategy at the Higher School of Economics University (HSE), Russia",
+          "start_seconds": 0,
+          "end_seconds": 822,
+          "kind": "Excerpt"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "playlist_id": "PLoHwt4KyUk5DIAI7N5K8YvBmoEdKcvmSG",
+  "batch_index": 0,
+  "wp_match": null,
+  "create_new": {
+    "title": "Without the Development of All Nations, There Can Be No Lasting Peace for the Planet",
+    "start_date": "2023-04-15",
+    "location_hint": null
+  },
+  "videos": [
+    {
+      "id": "nlcCYQqAELY",
+      "case": 4,
+      "presentations": [
+        {
+          "title": "The Necessary Philosophical Foundations for the New Paradigm — Panel 4",
+          "presenter": null,
+          "presenter_affiliation": null,
+          "start_seconds": 0,
+          "end_seconds": 9290,
+          "kind": "Full session"
+        }
+      ],
+      "notes": "Panel session, no agenda/timestamps, multiple unnamed speakers."
+    },
+    {
+      "id": "kVoEOZuwunk",
+      "case": 4,
+      "presentations": [
+        {
+          "title": "End the Casino Economy Before It’s Too Late — Panel 3",
+          "presenter": null,
+          "presenter_affiliation": null,
+          "start_seconds": 0,
+          "end_seconds": 12955,
+          "kind": "Full session"
+        }
+      ],
+      "notes": "Panel session, no agenda/timestamps, multiple unnamed speakers."
+    },
+    {
+      "id": "I0NZoy6jmT4",
+      "case": 4,
+      "presentations": [
+        {
+          "title": "The “Global Majority” and the International Peace Movement Are Fighting for the Same Goal — Panel 2",
+          "presenter": null,
+          "presenter_affiliation": null,
+          "start_seconds": 0,
+          "end_seconds": 11490,
+          "kind": "Full session"
+        }
+      ],
+      "notes": "Panel session, no agenda/timestamps, multiple unnamed speakers."
+    },
+    {
+      "id": "4HDUvJEbpgo",
+      "case": 4,
+      "presentations": [
+        {
+          "title": "The Growing Danger of World War III Underlines the Necessity for a New Security Architecture—Panel 1",
+          "presenter": "Helga Zepp-LaRouche",
+          "presenter_affiliation": "Schiller Institute",
+          "start_seconds": 0,
+          "end_seconds": 13374,
+          "kind": "Full session"
+        }
+      ],
+      "notes": "Single chapter marker '1:15 Helga' insufficient for split/chapter case; treated as full session opened by Helga Zepp-LaRouche."
+    }
+  ]
+}

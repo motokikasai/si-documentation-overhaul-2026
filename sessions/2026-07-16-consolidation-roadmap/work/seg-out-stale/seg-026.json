@@ -1,0 +1,68 @@
+{
+  "playlist_id": "PLoHwt4KyUk5AGynJ1XR-cp5ZMydgLtyZX",
+  "batch_index": 0,
+  "wp_match": null,
+  "create_new": {
+    "title": "The World after the U.S. Election: Creating A World Based on Reason",
+    "start_date": "2020-12-12",
+    "location_hint": "Internet Conference"
+  },
+  "videos": [
+    {
+      "id": "JRLrakxMO8U",
+      "case": 4,
+      "presentations": [
+        {
+          "title": "Panel 1 — \"Hang Together, or Hang Separately\": Free and Sovereign Republics, or Digital Dictatorship?",
+          "presenter": null,
+          "presenter_affiliation": null,
+          "start_seconds": 0,
+          "end_seconds": 12612,
+          "kind": "Full session"
+        }
+      ],
+      "notes": "Panel with multiple experts on US Constitution/law/intelligence; chapters are historical/philosophical reference topics, not speaker markers; no usable per-speaker times."
+    },
+    {
+      "id": "tCCDBK4cgKE",
+      "case": 5,
+      "presentations": [
+        {
+          "title": "Panel 2 — Escaping the Danger of World War III: A Strategic Order Based on the Common Aims of Mankind",
+          "presenter": null,
+          "presenter_affiliation": null,
+          "start_seconds": 0,
+          "end_seconds": 14564,
+          "kind": "Full session",
+          "agenda": [
+            {"presenter": "Helga Zepp-LaRouche", "affiliation": "Schiller Institute President", "talk_title": null},
+            {"presenter": "Yan Wang, PhD", "affiliation": null, "talk_title": "The Chinese Economic Model"},
+            {"presenter": "Marcelo Muñoz", "affiliation": "Founder and President Emeritus, Cátedra China (Spain)", "talk_title": "China and the US: Rivalry, Confrontation, or Cooperation"},
+            {"presenter": "Ole Doering, PhD", "affiliation": "Sinologist and Philosopher (Germany)", "talk_title": "A Salutogenic Symphony with Ancient Chinese Philosophy: Harmony as Polyphonic Accord and Peace as Expressive Equilibrium. Can We Make It Work?"},
+            {"presenter": "Prof. Emmanuel Dupuy", "affiliation": "Founder and President, Institute of European Prospective and Security (IPSE), France", "talk_title": "What is at Stake in the on-going Renovation of Nuclear Doctrines and Ballistic Treaties: What Agenda for the European Countries in the Context of a Strategic Autonomy of Europe"},
+            {"presenter": "Col. Richard H. Black (USA Ret.)", "affiliation": "former head of the Army's Criminal Law Division of The Pentagon, former State Senator (Va.)", "talk_title": "NATO Must Be Dissolved"},
+            {"presenter": "Paul Gallagher", "affiliation": "Executive Intelligence Review, Editorial Board (US)", "talk_title": "LaRouche's New Bretton Woods and the Central Banks — There's Not Enough Room in this World for Both of Them"},
+            {"presenter": "Marc-Gabriel Draghi", "affiliation": "Economist (France)", "talk_title": "Orderly Debt Cancellation: Historical Precedents and Present Relevance"}
+          ],
+          "upgrade_candidate": true
+        }
+      ],
+      "notes": "Description gives ordered speaker agenda with titles but no timestamps/chapters."
+    },
+    {
+      "id": "ts3pLWoledE",
+      "case": 4,
+      "presentations": [
+        {
+          "title": "Panel 3 — Overcoming the World Health Crisis & Hunger Pandemic",
+          "presenter": null,
+          "presenter_affiliation": null,
+          "start_seconds": 0,
+          "end_seconds": 12772,
+          "kind": "Full session"
+        }
+      ],
+      "notes": "Multi-speaker panel (Dr Don Jones, Dr David Smith mentioned in chapters); chapters are topical, not clean per-speaker segmentation; no full agenda list in description."
+    }
+  ]
+}

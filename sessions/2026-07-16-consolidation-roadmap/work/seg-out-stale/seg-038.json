@@ -1,0 +1,73 @@
+{
+  "playlist_id": "PLoHwt4KyUk5BkTXvZW6BQzXUop4HiJyrA",
+  "batch_index": 0,
+  "wp_match": null,
+  "create_new": {
+    "title": "Presidents' Day National Conference",
+    "start_date": "2019-02-16",
+    "location_hint": null
+  },
+  "videos": [
+    {
+      "id": "qDxilIhSJbw",
+      "case": 5,
+      "presentations": [
+        {
+          "title": "The Frontiers of Science: Mankind's Future with Fusion and Space Exploration — Panel Three",
+          "presenter": null,
+          "presenter_affiliation": null,
+          "start_seconds": 0,
+          "end_seconds": 9703,
+          "kind": "Full session",
+          "agenda": [
+            {"presenter": "Kesha Rogers", "affiliation": "LaRouchePAC Policy Committee, Former candidate for U.S. Congress", "talk_title": "The Frontier of Space: Fulfilling Mankind's Destiny as Man in the Universe"},
+            {"presenter": "Thomas Wysmuller", "affiliation": "Founding member of NASA, The Right Climate Stuff", "talk_title": "What NASA Has Done and Where NASA Is Going"},
+            {"presenter": "Larry Bell", "affiliation": "Founder, Sasakawa International Center for Space Architecture, College of Engineering, University of Houston", "talk_title": "What Makes People Exceptional"},
+            {"presenter": "Benjamin Deniston", "affiliation": "LaRouchePAC Scientific Research Team", "talk_title": "LaRouche's Strategic Defense of Earth"}
+          ],
+          "upgrade_candidate": true
+        }
+      ],
+      "notes": "Chapters (Aeronautics, Chemistry, etc.) are Q&A topic labels, not speaker markers; description lists ordered speakers/affiliations/talk titles with no times."
+    },
+    {
+      "id": "KQcQTMHG1KM",
+      "case": 1,
+      "presentations": [
+        {"title": "The Coming World of Lyndon LaRouche", "presenter": "Jacques Cheminade", "presenter_affiliation": "President of the French party, Solidarité & Progrès", "start_seconds": 1626, "end_seconds": 4563, "kind": "Talk"},
+        {"title": "Chinese Investment and American Infrastructure under the new Sino-US relations", "presenter": "John Gong", "presenter_affiliation": "Professor of Economics, University of International Business and Economics, Beijing", "start_seconds": 4563, "end_seconds": 6126, "kind": "Talk"},
+        {"title": "Prospects for East-West Collaboration: The Russian Federation's View", "presenter": "H.E. Ambassador Vassily A. Nebenzia (presented by Counsellor Theodore Strzhizhovskiy)", "presenter_affiliation": "Permanent Representative of The Russian Federation to the United Nations", "start_seconds": 6126, "end_seconds": 6633, "kind": "Talk"},
+        {"title": "William Binney — Panel One", "presenter": "William Binney", "presenter_affiliation": "Former Technical Director, National Security Agency (NSA), USA", "start_seconds": 6633, "end_seconds": 8210, "kind": "Talk"},
+        {"title": "The Urgent Need for a New Paradigm in Africa", "presenter": "Jason Ross", "presenter_affiliation": "Schiller Institute, co-author \"Extending the New Silk Road to West Asia and Africa\"", "start_seconds": 8210, "end_seconds": 9161, "kind": "Talk"},
+        {"title": "Justice for the World: Why Donald Trump Must Exonerate Lyndon LaRouche Now", "presenter": "Dennis Small", "presenter_affiliation": "Executive Intelligence Review Ibero-America Editor", "start_seconds": 9161, "end_seconds": 13203, "kind": "Talk"}
+      ],
+      "notes": "Opening segment (0-1626, Dennis Speed) not part of AGENDA block; agenda times ascending and within duration, chapters mirror them."
+    },
+    {
+      "id": "RqtZS8odIpA",
+      "case": 5,
+      "presentations": [
+        {
+          "title": "The Aesthetic Education of Man for the Beauty of the Mind and the Soul – Panel Two",
+          "presenter": null,
+          "presenter_affiliation": null,
+          "start_seconds": 0,
+          "end_seconds": 9506,
+          "kind": "Full session",
+          "agenda": [
+            {"presenter": "Schiller Institute Combined Chorus (Benjamin Lylloff, director)", "affiliation": null, "talk_title": "Mo Li Hua (Jasmine Flower)"},
+            {"presenter": "Schiller Institute Chorus (Diane Sare, director)", "affiliation": null, "talk_title": "Deep River / Ev'ry Time I Feel the Spirit"},
+            {"presenter": "Megan Beets", "affiliation": "LaRouchePAC Scientific Research Team", "talk_title": "Artistic and Moral Beauty"},
+            {"presenter": "Bruce Director", "affiliation": "Secretary-Treasurer, US Schiller Institute", "talk_title": "On LaRouche's concept of significance of Art for Science and Science for Art"},
+            {"presenter": "Diane Sare", "affiliation": "Managing Director, Schiller Institute NYC Chorus", "talk_title": "The Choral Principle"},
+            {"presenter": "Schiller Institute Chorus (John Sigerson, director)", "affiliation": null, "talk_title": "Dem dunkeln Schoß der Heil'gen Erde (Brahms)"},
+            {"presenter": "Schiller Institute Orchestra (John Sigerson, director)", "affiliation": null, "talk_title": "Brandenburg Concerto No. 5 in D Major, BWV 1050 - I. Allegro"},
+            {"presenter": "Schiller Institute Orchestra, Chorus, and Soloists (John Sigerson, director)", "affiliation": null, "talk_title": "Choral Fantasia, Op. 80 (Beethoven)"}
+          ],
+          "upgrade_candidate": true
+        }
+      ],
+      "notes": "No chapters, no timed agenda; description lists ordered mix of musical performances and talks with no timestamps."
+    }
+  ]
+}

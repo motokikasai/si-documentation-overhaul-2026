@@ -1,0 +1,9 @@
+{"playlist_id": "PLoHwt4KyUk5AM0515zChBYV0dUgTKbyZQ", "batch_index": 2, "wp_match": null, "create_new": null,
+ "videos": [
+   {"id": "ai6e7e81p08", "case": 1,
+    "presentations": [
+      {"title": "Col. (ret.) Richard H. Black — Time to End the \"Rules\" Based Order — Restore the Common Good", "presenter": "Col. (ret.) Richard H. Black", "presenter_affiliation": "Former State Senator (VA), former head of US Army Criminal Law Division", "start_seconds": 202, "end_seconds": 1365, "kind": "Talk"},
+      {"title": "Prof. Augustinus Berkhout — Where is the climate crisis?", "presenter": "Prof. Augustinus Berkhout", "presenter_affiliation": null, "start_seconds": 1365, "end_seconds": 1864, "kind": "Talk"}
+    ],
+    "notes": "Split via chapters mirroring per-speaker timestamps; intro (0-202) and Q&A marker (1026) excluded from presentation list."}
+ ]}

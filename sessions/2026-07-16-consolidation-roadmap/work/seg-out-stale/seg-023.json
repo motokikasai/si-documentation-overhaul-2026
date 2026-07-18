@@ -1,0 +1,70 @@
+{
+  "playlist_id": "PLoHwt4KyUk5AM0515zChBYV0dUgTKbyZQ",
+  "batch_index": 1,
+  "wp_match": null,
+  "create_new": null,
+  "videos": [
+    {
+      "id": "ZLvX9r4D0xk",
+      "case": 1,
+      "presentations": [
+        {"title": "Why the Challenge of Public Health, Education and Food Policy Are a One", "presenter": "Jacques Cheminade", "presenter_affiliation": "President, Solidarite et Progres (France)", "start_seconds": 208, "end_seconds": 1152, "kind": "Talk"},
+        {"title": "The Central Banks' Regime Change and the Great Reset", "presenter": "Paul Gallagher", "presenter_affiliation": "Editorial Board, EIR (U.S.)", "start_seconds": 1152, "end_seconds": 2582, "kind": "Talk"},
+        {"title": "Double or Nothing: The LaRouche Program for Mankind's Durable Survival", "presenter": "Dennis Small", "presenter_affiliation": "Ibero-American Editor, EIR (U.S.)", "start_seconds": 2582, "end_seconds": 3951, "kind": "Talk"},
+        {"title": "How Americans Are Herded Into 'Green' Energy, by Weaponized, Politicized, Monetized Science", "presenter": "State Senator Mike Thompson", "presenter_affiliation": "Chairman, Senate Utilities Committee (U.S.-Kansas)", "start_seconds": 3951, "end_seconds": 4632, "kind": "Talk"},
+        {"title": "The State of U.S. Ag and Solutions", "presenter": "Mike Callicrate", "presenter_affiliation": "Cattleman, Founder of Ranch Foods Direct (U.S.-Kansas)", "start_seconds": 4632, "end_seconds": 5526, "kind": "Talk"},
+        {"title": "Valuable Lessons on the Financial Crisis from Experiences in Japan", "presenter": "Daisuke Kotegawa", "presenter_affiliation": "Former Official, Ministry of Finance, Japan; former Director for Japan at IMF", "start_seconds": 5526, "end_seconds": 6488, "kind": "Talk"},
+        {"title": "Hyperinflation: A Step of the Great Reset to Destroy Our Freedoms", "presenter": "Marc Gabriel Draghi", "presenter_affiliation": "Economist, Jurist and Author (France)", "start_seconds": 6488, "end_seconds": 7516, "kind": "Talk"},
+        {"title": "COVID and Economic Austerity Are Devastating Colombia", "presenter": "Pedro Rubio", "presenter_affiliation": "President, Association of Officials of the General Accounting Office of the Republic (Colombia)", "start_seconds": 7516, "end_seconds": 8165, "kind": "Talk"}
+      ],
+      "notes": "Q&A session at 8165 (end of duration) omitted as non-speaker segment; moderator Harley Schlanger not included as presentation."
+    },
+    {
+      "id": "6n5KERjjwVY",
+      "case": 1,
+      "presentations": [
+        {"title": "The Common Good Of All People Requires a Global Modern Health Care System", "presenter": "Dr. Joycelyn Elders, Dr. David Satcher", "presenter_affiliation": "Former U.S. Surgeon General; 16th U.S. Surgeon General, former CDC Director", "start_seconds": 332, "end_seconds": 1500, "kind": "Talk"},
+        {"title": "Remarks", "presenter": "Helga Zepp-LaRouche", "presenter_affiliation": "President, The Schiller Institute", "start_seconds": 1500, "end_seconds": 2395, "kind": "Talk"},
+        {"title": "The Russian Perspective on a Global Sustainable and Sustained Recovery", "presenter": "Boris Meshchanov", "presenter_affiliation": "Counselor, Russian Federation Mission to the United Nations (NY)", "start_seconds": 2395, "end_seconds": 3180, "kind": "Talk"},
+        {"title": "National Defense Against Germ Warfare – The Military and Healthcare", "presenter": "Maj. Gen. (ret.) Peter Clegg, RAdm. (ret.) Marc Y.E. Pelaez", "presenter_affiliation": "U.S. Army / U.S. Navy (ret.)", "start_seconds": 3180, "end_seconds": 4290, "kind": "Talk"},
+        {"title": "Mozambique Pilot Aid Shipment — Action Diplomacy for World Health Security", "presenter": "Dr. Khadijah Lang, Marcia Merry Baker", "presenter_affiliation": "Chairman, NMA Council on Int'l Affairs / Editorial Board, EIR", "start_seconds": 6938, "end_seconds": 8935, "kind": "Talk"},
+        {"title": "Greetings to the Conference", "presenter": "Mayor David Castro", "presenter_affiliation": "President, Mayors Without Borders Coalition (Honduras)", "start_seconds": 8935, "end_seconds": 9230, "kind": "Talk"},
+        {"title": "E Pluribus Unum: What We Can Learn from Beethoven", "presenter": "Diane Sare", "presenter_affiliation": "Candidate for U.S. Senate (NY); founder, Schiller Institute NYC Chorus", "start_seconds": 9230, "end_seconds": 12262, "kind": "Talk"}
+      ],
+      "notes": "Q&A Session #1 (4290-6938) omitted as non-speaker segment; closing 'Declaration of Independence and Rütli Oath' (12262-13462) omitted."
+    },
+    {
+      "id": "Fz61xzEQyik",
+      "case": 3,
+      "presentations": [
+        {"title": "U.S.-China Relations: A Pathway for War Avoidance and Cooperation", "presenter": "Col. (ret.) Richard H. Black", "presenter_affiliation": "Former State Senator (Virginia), former head of the U.S. Army's Criminal Law Division, Pentagon", "start_seconds": 0, "end_seconds": 1196, "kind": "Talk"}
+      ],
+      "notes": "Single speaker per title/description, no chapters. Presented at June 26-27 conference."
+    },
+    {
+      "id": "QERKSNMmwmU",
+      "case": 3,
+      "presentations": [
+        {"title": "Why the Universe Needs MORE People", "presenter": "Megan Dobrodt", "presenter_affiliation": "President, Schiller Institute (U.S.A.)", "start_seconds": 0, "end_seconds": 1418, "kind": "Talk"}
+      ],
+      "notes": "Single speaker, no chapters. Near-duplicate content of c5qpBxkq49U (same talk, different upload)."
+    },
+    {
+      "id": "c5qpBxkq49U",
+      "case": 2,
+      "presentations": [
+        {"title": "Why the Universe Needs MORE People", "presenter": "Megan Dobrodt", "presenter_affiliation": "President, Schiller Institute (U.S.A.)", "start_seconds": 0, "end_seconds": 1440, "kind": "Chaptered talk", "chapters": [
+          {"label": "Introduction", "start_seconds": 0},
+          {"label": "The Universe Needs More People", "start_seconds": 23},
+          {"label": "The Good News", "start_seconds": 114},
+          {"label": "What is a Living Species", "start_seconds": 202},
+          {"label": "Great Oxygenation Event", "start_seconds": 360},
+          {"label": "Cognitive Life", "start_seconds": 710},
+          {"label": "Overcoming Limits", "start_seconds": 874},
+          {"label": "Economic Discovery", "start_seconds": 967}
+        ]}
+      ],
+      "notes": "Same talk as QERKSNMmwmU but this upload has topic-based chapters (single speaker) -> Case 2."
+    }
+  ]
+}

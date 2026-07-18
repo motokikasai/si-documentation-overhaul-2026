@@ -1,0 +1,38 @@
+{"playlist_id":"PLoHwt4KyUk5CoOZjiQx8ZzJUx9crewBuB","batch_index":1,"wp_match":null,"create_new":null,
+"videos":[
+{"id":"gUk_uBdziJI","case":5,"presentations":[{"title":"The Beauty of the Diversity of Cultures — Panel 2","presenter":null,"presenter_affiliation":null,"start_seconds":0,"end_seconds":9786,"kind":"Full session","chapters":null,"agenda":[
+  {"presenter":"Megan Dobrodt","affiliation":"President, Schiller Institute U.S.A.","talk_title":null},
+  {"presenter":"Elvira Green","affiliation":"Mezzosoprano, formerly with the New York Metropolitan Opera","talk_title":null},
+  {"presenter":"Helga Zepp-LaRouche","affiliation":"Founder, The Schiller Institute","talk_title":null},
+  {"presenter":"Feride Istogu","affiliation":"Soprano, Schiller Institute; Founder of Lola Gjoka Project","talk_title":"Little Halit / Sara (Albanian folk songs)"},
+  {"presenter":"Nader Majd and Alireza Analouei","affiliation":"Founder of SAMA music ensemble / Director, Center for Persian Classical Music (Iran)","talk_title":null},
+  {"presenter":"Ruijia Dong","affiliation":"mezzo-soprano, with Louis Arques (clarinet), Dura Jun (piano)","talk_title":"Parto, ma tu ben mio (Mozart, La Clemenza di Tito)"},
+  {"presenter":"Yulin Wang","affiliation":"tenor, with Dura Jun (piano)","talk_title":"On the Other Side of the River / O wie ängstlich, o wie feurig (Mozart)"},
+  {"presenter":"Everett Suttle","affiliation":"Opera and Concert Tenor, with Dura Jun (piano)","talk_title":"Vai, azulão (Aragón y Ovalle) / Не пой, красавица (Rachmaninoff)"},
+  {"presenter":"Michelle Erin, Everett Suttle","affiliation":"soprano/tenor, with Dura Jun (piano)","talk_title":"Schwesterlied (Brahms) [description truncated]"}
+],"upgrade_candidate":true}],"notes":"Musical/cultural panel, moderator Jen Pearl; agenda lists performers/pieces in order, no timestamps."},
+
+{"id":"Wkc97KwskC0","case":5,"presentations":[{"title":"Strategic Challenges and the Emerging New Order — Panel 1","presenter":null,"presenter_affiliation":null,"start_seconds":0,"end_seconds":11746,"kind":"Full session","chapters":null,"agenda":[
+  {"presenter":"Helga Zepp-LaRouche","affiliation":"Founder, The Schiller Institute (Germany)","talk_title":null},
+  {"presenter":"Naledi Pandor","affiliation":"former Minister of International Relations and Cooperation, South Africa","talk_title":null},
+  {"presenter":"Dmitri Trenin","affiliation":"Academic Supervisor, Institute of World Military Economy and Strategy, HSE Moscow (Russia)","talk_title":null},
+  {"presenter":"Zhang Weiwei","affiliation":"Professor of International Relations, Fudan University, China","talk_title":null},
+  {"presenter":"Donald Ramotar","affiliation":"Former President of Guyana","talk_title":null},
+  {"presenter":"Jack Matlock","affiliation":"former U.S. Ambassador to the Soviet Union, 1987-1991","talk_title":null},
+  {"presenter":"Chas Freeman","affiliation":"former U.S. Assistant Secretary of Defense for International Security Affairs, 1993-1994","talk_title":null},
+  {"presenter":"Ray McGovern","affiliation":"former Senior Analyst, CIA; Founding Member, VIPS","talk_title":null},
+  {"presenter":"Scott Ritter","affiliation":"former USMC Intel. and former UN Weapons Inspector","talk_title":null}
+],"upgrade_candidate":true}],"notes":"Moderator Dennis Speed; ordered speaker agenda, no timestamps. Likely duplicate upload of tV3u_L8XHbA (same title/speakers, different upload_date)."},
+
+{"id":"tV3u_L8XHbA","case":5,"presentations":[{"title":"Strategic Challenges and the Emerging New Order — Panel 1","presenter":null,"presenter_affiliation":null,"start_seconds":0,"end_seconds":11795,"kind":"Full session","chapters":null,"agenda":[
+  {"presenter":"Helga Zepp-LaRouche","affiliation":"Founder, The Schiller Institute (Germany)","talk_title":null},
+  {"presenter":"Naledi Pandor","affiliation":"former Minister of International Relations and Cooperation, South Africa","talk_title":null},
+  {"presenter":"Dmitri Trenin","affiliation":"Academic Supervisor, Institute of World Military Economy and Strategy, HSE Moscow (Russia)","talk_title":null},
+  {"presenter":"Zhang Weiwei","affiliation":"Professor of International Relations, Fudan University, China","talk_title":null},
+  {"presenter":"Donald Ramotar","affiliation":"Former President of Guyana","talk_title":null},
+  {"presenter":"Jack Matlock","affiliation":"former U.S. Ambassador to the Soviet Union, 1987-1991","talk_title":null},
+  {"presenter":"Chas Freeman","affiliation":"former U.S. Assistant Secretary of Defense for International Security Affairs, 1993-1994","talk_title":null},
+  {"presenter":"Ray McGovern","affiliation":"former Senior Analyst, CIA; Founding Member, VIPS","talk_title":null},
+  {"presenter":"Scott Ritter","affiliation":"former USMC Intel. and former UN Weapons Inspector","talk_title":null}
+],"upgrade_candidate":true}],"notes":"Duplicate content of Wkc97KwskC0 (same title/agenda), different upload_date (earlier, likely livestream re-upload vs edited version). Flag as likely duplicate for dedup during ingestion."}
+]}

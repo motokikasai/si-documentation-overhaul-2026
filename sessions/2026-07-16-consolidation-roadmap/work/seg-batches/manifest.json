@@ -1,0 +1,653 @@
+[
+ {
+  "playlist_id": "PLoHwt4KyUk5AQSojSSwzrmY0iiKsy-9SU",
+  "batch_index": 0,
+  "n_batches": 4,
+  "is_first_batch": true,
+  "n_videos": 4
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AQSojSSwzrmY0iiKsy-9SU",
+  "batch_index": 1,
+  "n_batches": 4,
+  "is_first_batch": false,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AQSojSSwzrmY0iiKsy-9SU",
+  "batch_index": 2,
+  "n_batches": 4,
+  "is_first_batch": false,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AQSojSSwzrmY0iiKsy-9SU",
+  "batch_index": 3,
+  "n_batches": 4,
+  "is_first_batch": false,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5CoOZjiQx8ZzJUx9crewBuB",
+  "batch_index": 0,
+  "n_batches": 2,
+  "is_first_batch": true,
+  "n_videos": 4
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5CoOZjiQx8ZzJUx9crewBuB",
+  "batch_index": 1,
+  "n_batches": 2,
+  "is_first_batch": false,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5ChmKI_mz2IhgGLpKvQrovy",
+  "batch_index": 0,
+  "n_batches": 2,
+  "is_first_batch": true,
+  "n_videos": 7
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5ChmKI_mz2IhgGLpKvQrovy",
+  "batch_index": 1,
+  "n_batches": 2,
+  "is_first_batch": false,
+  "n_videos": 2
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Cw0AyJkn5PjjWLC9_akeMK",
+  "batch_index": 0,
+  "n_batches": 3,
+  "is_first_batch": true,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Cw0AyJkn5PjjWLC9_akeMK",
+  "batch_index": 1,
+  "n_batches": 3,
+  "is_first_batch": false,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Cw0AyJkn5PjjWLC9_akeMK",
+  "batch_index": 2,
+  "n_batches": 3,
+  "is_first_batch": false,
+  "n_videos": 1
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5DIAI7N5K8YvBmoEdKcvmSG",
+  "batch_index": 0,
+  "n_batches": 1,
+  "is_first_batch": true,
+  "n_videos": 4
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Dffz7jVAihCnoXT2RCUBRs",
+  "batch_index": 0,
+  "n_batches": 4,
+  "is_first_batch": true,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Dffz7jVAihCnoXT2RCUBRs",
+  "batch_index": 1,
+  "n_batches": 4,
+  "is_first_batch": false,
+  "n_videos": 2
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Dffz7jVAihCnoXT2RCUBRs",
+  "batch_index": 2,
+  "n_batches": 4,
+  "is_first_batch": false,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Dffz7jVAihCnoXT2RCUBRs",
+  "batch_index": 3,
+  "n_batches": 4,
+  "is_first_batch": false,
+  "n_videos": 1
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5D1_Z7Zi02Q9kn0Jf7HxdBO",
+  "batch_index": 0,
+  "n_batches": 1,
+  "is_first_batch": true,
+  "n_videos": 1
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5ATvAWizEGiwjFxfmuPUOB1",
+  "batch_index": 0,
+  "n_batches": 3,
+  "is_first_batch": true,
+  "n_videos": 2
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5ATvAWizEGiwjFxfmuPUOB1",
+  "batch_index": 1,
+  "n_batches": 3,
+  "is_first_batch": false,
+  "n_videos": 6
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5ATvAWizEGiwjFxfmuPUOB1",
+  "batch_index": 2,
+  "n_batches": 3,
+  "is_first_batch": false,
+  "n_videos": 2
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AOO0AlzyiRtLNaJrWIvQjw",
+  "batch_index": 0,
+  "n_batches": 2,
+  "is_first_batch": true,
+  "n_videos": 6
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AOO0AlzyiRtLNaJrWIvQjw",
+  "batch_index": 1,
+  "n_batches": 2,
+  "is_first_batch": false,
+  "n_videos": 2
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AM0515zChBYV0dUgTKbyZQ",
+  "batch_index": 0,
+  "n_batches": 3,
+  "is_first_batch": true,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AM0515zChBYV0dUgTKbyZQ",
+  "batch_index": 1,
+  "n_batches": 3,
+  "is_first_batch": false,
+  "n_videos": 5
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AM0515zChBYV0dUgTKbyZQ",
+  "batch_index": 2,
+  "n_batches": 3,
+  "is_first_batch": false,
+  "n_videos": 1
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Bs6Bvy1BfO4fDVTqdcccI2",
+  "batch_index": 0,
+  "n_batches": 1,
+  "is_first_batch": true,
+  "n_videos": 2
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AGynJ1XR-cp5ZMydgLtyZX",
+  "batch_index": 0,
+  "n_batches": 2,
+  "is_first_batch": true,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AGynJ1XR-cp5ZMydgLtyZX",
+  "batch_index": 1,
+  "n_batches": 2,
+  "is_first_batch": false,
+  "n_videos": 1
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5C3NYhozFTLmO4xjBhbr8SU",
+  "batch_index": 0,
+  "n_batches": 3,
+  "is_first_batch": true,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5C3NYhozFTLmO4xjBhbr8SU",
+  "batch_index": 1,
+  "n_batches": 3,
+  "is_first_batch": false,
+  "n_videos": 4
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5C3NYhozFTLmO4xjBhbr8SU",
+  "batch_index": 2,
+  "n_batches": 3,
+  "is_first_batch": false,
+  "n_videos": 4
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5DWhMYHEidLO0zeIhq4uzfw",
+  "batch_index": 0,
+  "n_batches": 1,
+  "is_first_batch": true,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BLyjo-lYI1akY_m95R12QD",
+  "batch_index": 0,
+  "n_batches": 4,
+  "is_first_batch": true,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BLyjo-lYI1akY_m95R12QD",
+  "batch_index": 1,
+  "n_batches": 4,
+  "is_first_batch": false,
+  "n_videos": 5
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BLyjo-lYI1akY_m95R12QD",
+  "batch_index": 2,
+  "n_batches": 4,
+  "is_first_batch": false,
+  "n_videos": 8
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BLyjo-lYI1akY_m95R12QD",
+  "batch_index": 3,
+  "n_batches": 4,
+  "is_first_batch": false,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5DwvYfiV1GzQRoWSdQcxcg8",
+  "batch_index": 0,
+  "n_batches": 2,
+  "is_first_batch": true,
+  "n_videos": 7
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5DwvYfiV1GzQRoWSdQcxcg8",
+  "batch_index": 1,
+  "n_batches": 2,
+  "is_first_batch": false,
+  "n_videos": 1
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BkTXvZW6BQzXUop4HiJyrA",
+  "batch_index": 0,
+  "n_batches": 1,
+  "is_first_batch": true,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5B2iUesv6EBeBrj6aDYdtbN",
+  "batch_index": 0,
+  "n_batches": 1,
+  "is_first_batch": true,
+  "n_videos": 8
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AqCLdZY4emKBztbJdUfZvj",
+  "batch_index": 0,
+  "n_batches": 2,
+  "is_first_batch": true,
+  "n_videos": 11
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AqCLdZY4emKBztbJdUfZvj",
+  "batch_index": 1,
+  "n_batches": 2,
+  "is_first_batch": false,
+  "n_videos": 1
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Azhj6f0_f7M1o3W2o-et59",
+  "batch_index": 0,
+  "n_batches": 1,
+  "is_first_batch": true,
+  "n_videos": 2
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Diy9gwbA5IL5J4q6SRtEhC",
+  "batch_index": 0,
+  "n_batches": 2,
+  "is_first_batch": true,
+  "n_videos": 6
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Diy9gwbA5IL5J4q6SRtEhC",
+  "batch_index": 1,
+  "n_batches": 2,
+  "is_first_batch": false,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Bo6n8EQg2RwP0vBHfLJnS-",
+  "batch_index": 0,
+  "n_batches": 2,
+  "is_first_batch": true,
+  "n_videos": 6
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Bo6n8EQg2RwP0vBHfLJnS-",
+  "batch_index": 1,
+  "n_batches": 2,
+  "is_first_batch": false,
+  "n_videos": 6
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Ai3BFCvdyEX__n7Ir0qrQF",
+  "batch_index": 0,
+  "n_batches": 6,
+  "is_first_batch": true,
+  "n_videos": 2
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Ai3BFCvdyEX__n7Ir0qrQF",
+  "batch_index": 1,
+  "n_batches": 6,
+  "is_first_batch": false,
+  "n_videos": 2
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Ai3BFCvdyEX__n7Ir0qrQF",
+  "batch_index": 2,
+  "n_batches": 6,
+  "is_first_batch": false,
+  "n_videos": 2
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Ai3BFCvdyEX__n7Ir0qrQF",
+  "batch_index": 3,
+  "n_batches": 6,
+  "is_first_batch": false,
+  "n_videos": 2
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Ai3BFCvdyEX__n7Ir0qrQF",
+  "batch_index": 4,
+  "n_batches": 6,
+  "is_first_batch": false,
+  "n_videos": 2
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Ai3BFCvdyEX__n7Ir0qrQF",
+  "batch_index": 5,
+  "n_batches": 6,
+  "is_first_batch": false,
+  "n_videos": 1
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5CfL_UCuxSmmr0hyQNZlZjL",
+  "batch_index": 0,
+  "n_batches": 1,
+  "is_first_batch": true,
+  "n_videos": 11
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5B9vdWLhwX2Xhvz6EzpdUti",
+  "batch_index": 0,
+  "n_batches": 1,
+  "is_first_batch": true,
+  "n_videos": 9
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AvXR3_tS4UPU23Or57yXQ5",
+  "batch_index": 0,
+  "n_batches": 1,
+  "is_first_batch": true,
+  "n_videos": 6
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BoCPR6750Eh-_mxhkzQVrF",
+  "batch_index": 0,
+  "n_batches": 3,
+  "is_first_batch": true,
+  "n_videos": 11
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BoCPR6750Eh-_mxhkzQVrF",
+  "batch_index": 1,
+  "n_batches": 3,
+  "is_first_batch": false,
+  "n_videos": 7
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BoCPR6750Eh-_mxhkzQVrF",
+  "batch_index": 2,
+  "n_batches": 3,
+  "is_first_batch": false,
+  "n_videos": 4
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Bh6p1wNnnKM0gRYw_8cSRR",
+  "batch_index": 0,
+  "n_batches": 2,
+  "is_first_batch": true,
+  "n_videos": 15
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Bh6p1wNnnKM0gRYw_8cSRR",
+  "batch_index": 1,
+  "n_batches": 2,
+  "is_first_batch": false,
+  "n_videos": 1
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5DQMi_zX-35YR5AcB5P4-dX",
+  "batch_index": 0,
+  "n_batches": 3,
+  "is_first_batch": true,
+  "n_videos": 6
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5DQMi_zX-35YR5AcB5P4-dX",
+  "batch_index": 1,
+  "n_batches": 3,
+  "is_first_batch": false,
+  "n_videos": 13
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5DQMi_zX-35YR5AcB5P4-dX",
+  "batch_index": 2,
+  "n_batches": 3,
+  "is_first_batch": false,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Cf8zmKh6qanOqoFeXDf0T1",
+  "batch_index": 0,
+  "n_batches": 2,
+  "is_first_batch": true,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5Cf8zmKh6qanOqoFeXDf0T1",
+  "batch_index": 1,
+  "n_batches": 2,
+  "is_first_batch": false,
+  "n_videos": 2
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AlUKhGlU7z1dqj9XBCPtHa",
+  "batch_index": 0,
+  "n_batches": 4,
+  "is_first_batch": true,
+  "n_videos": 11
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AlUKhGlU7z1dqj9XBCPtHa",
+  "batch_index": 1,
+  "n_batches": 4,
+  "is_first_batch": false,
+  "n_videos": 12
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AlUKhGlU7z1dqj9XBCPtHa",
+  "batch_index": 2,
+  "n_batches": 4,
+  "is_first_batch": false,
+  "n_videos": 14
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AlUKhGlU7z1dqj9XBCPtHa",
+  "batch_index": 3,
+  "n_batches": 4,
+  "is_first_batch": false,
+  "n_videos": 3
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5D5QI_eADJoeof22QCELv7e",
+  "batch_index": 0,
+  "n_batches": 1,
+  "is_first_batch": true,
+  "n_videos": 6
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5DnGSoabI7MQJKrqjbe2nce",
+  "batch_index": 0,
+  "n_batches": 2,
+  "is_first_batch": true,
+  "n_videos": 13
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5DnGSoabI7MQJKrqjbe2nce",
+  "batch_index": 1,
+  "n_batches": 2,
+  "is_first_batch": false,
+  "n_videos": 8
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BFurDWz5mCHy8kU83q-dyN",
+  "batch_index": 0,
+  "n_batches": 8,
+  "is_first_batch": true,
+  "n_videos": 8
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BFurDWz5mCHy8kU83q-dyN",
+  "batch_index": 1,
+  "n_batches": 8,
+  "is_first_batch": false,
+  "n_videos": 9
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BFurDWz5mCHy8kU83q-dyN",
+  "batch_index": 2,
+  "n_batches": 8,
+  "is_first_batch": false,
+  "n_videos": 7
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BFurDWz5mCHy8kU83q-dyN",
+  "batch_index": 3,
+  "n_batches": 8,
+  "is_first_batch": false,
+  "n_videos": 8
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BFurDWz5mCHy8kU83q-dyN",
+  "batch_index": 4,
+  "n_batches": 8,
+  "is_first_batch": false,
+  "n_videos": 7
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BFurDWz5mCHy8kU83q-dyN",
+  "batch_index": 5,
+  "n_batches": 8,
+  "is_first_batch": false,
+  "n_videos": 9
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BFurDWz5mCHy8kU83q-dyN",
+  "batch_index": 6,
+  "n_batches": 8,
+  "is_first_batch": false,
+  "n_videos": 15
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BFurDWz5mCHy8kU83q-dyN",
+  "batch_index": 7,
+  "n_batches": 8,
+  "is_first_batch": false,
+  "n_videos": 11
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5DHRySGYxUgYPDBeSf4zhd0",
+  "batch_index": 0,
+  "n_batches": 2,
+  "is_first_batch": true,
+  "n_videos": 15
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5DHRySGYxUgYPDBeSf4zhd0",
+  "batch_index": 1,
+  "n_batches": 2,
+  "is_first_batch": false,
+  "n_videos": 6
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BNBJ_NtTruKKOFuDWjMgRl",
+  "batch_index": 0,
+  "n_batches": 3,
+  "is_first_batch": true,
+  "n_videos": 15
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BNBJ_NtTruKKOFuDWjMgRl",
+  "batch_index": 1,
+  "n_batches": 3,
+  "is_first_batch": false,
+  "n_videos": 15
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BNBJ_NtTruKKOFuDWjMgRl",
+  "batch_index": 2,
+  "n_batches": 3,
+  "is_first_batch": false,
+  "n_videos": 14
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AEE8jRv1D5RymHH7pe1NLz",
+  "batch_index": 0,
+  "n_batches": 2,
+  "is_first_batch": true,
+  "n_videos": 15
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5AEE8jRv1D5RymHH7pe1NLz",
+  "batch_index": 1,
+  "n_batches": 2,
+  "is_first_batch": false,
+  "n_videos": 4
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5CAClgFOTY1XtU2aL5dUV1w",
+  "batch_index": 0,
+  "n_batches": 1,
+  "is_first_batch": true,
+  "n_videos": 5
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BJEpEMcQhl4UitRFQW36nR",
+  "batch_index": 0,
+  "n_batches": 2,
+  "is_first_batch": true,
+  "n_videos": 15
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BJEpEMcQhl4UitRFQW36nR",
+  "batch_index": 1,
+  "n_batches": 2,
+  "is_first_batch": false,
+  "n_videos": 2
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5BfvfBdUdrOsCoh8iPsNd-s",
+  "batch_index": 0,
+  "n_batches": 1,
+  "is_first_batch": true,
+  "n_videos": 5
+ },
+ {
+  "playlist_id": "PLoHwt4KyUk5CXbNFDvh7mqHBXf9_2Wc-B",
+  "batch_index": 0,
+  "n_batches": 1,
+  "is_first_batch": true,
+  "n_videos": 5
+ }
+]
