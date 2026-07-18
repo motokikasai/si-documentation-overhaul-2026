@@ -1,0 +1,3 @@
+97569;note=LIVE BUG (hfs audit): 18KB speech text pasted into _inpost_head_script meta — strip at transform; page head renders broken on live
+70006;note=hfs audit: third-party form embed in _inpost_head_script (forms.sbc29.com) — keep/strip decision at transform
+71763;note=hfs audit: third-party form embed in _inpost_head_script (forms.sbc28.com) — keep/strip decision at transform
