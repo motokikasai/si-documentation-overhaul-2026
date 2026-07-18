@@ -31,6 +31,7 @@ need nothing from you.
 | `si_conference` | a conference landing page |
 | `si_statement` | the Institute speaking as an organization: appeal, open letter, petition, resolution, press release |
 | `si_coverage` | third-party media coverage about us |
+| `si_document` | a substantial report/plan with standing (long programmatic texts, PDF editions) |
 | `retire` | unpublished (NOT deleted) — junk, test pages, obsolete drafts |
 
 ---
@@ -48,7 +49,7 @@ One row per conference. The machine guessed titles, years and matches; **dates a
 
 One row per person. Only ~500 rows are flagged (`needs_review=1`); the rest are settled.
 
-- **Rows with note "added by reconcile from video-segmentation"** (~450): these came from YouTube
+- **Rows with notes "added by reconcile from video-segmentation" / "added via seg-auto presort merge"** (~460): these came from YouTube
   speaker lists. Check `canonical_name` is a clean person name (not a talk title or "Discussion").
   If it's not a person at all → `final_action` = `drop`.
 - **Duplicates:** if two rows are the same person, keep the better one and on the other row set
@@ -64,12 +65,13 @@ One row per proposed presentation record from a conference video. `final_action`
 
 Work by the `case` column, easiest first:
 
-- **case 3** (59 rows, one video = one talk, 2017–19): check `speaker_raw`/`talk_title` split looks right. Mostly fine.
+- **case 3** (154 rows, one video = one talk): check `speaker_raw`/`talk_title` split looks right. Mostly fine.
+  24 short excerpt clips are already marked `skip` with a note — leave those alone unless one looks wrong.
 - **case 1** (segments with exact start times): flagged rows only — open the YouTube video, jump to
   `start_seconds`, confirm the right speaker starts there. Fix numbers in place + `final_action=edit`.
 - **case 5** (328 rows, full session with speaker agenda): accept unless the agenda is obviously wrong.
   These become one record per video with the speaker list attached — safe default.
-- **case 4** (217 rows, no info): these are mostly concerts, short excerpt clips, and trailers.
+- **case 4** (122 rows, no info): these are mostly concerts, remaining clips, and trailers.
   For excerpt/duplicate clips → `skip`. For real full-session panels → accept. When in doubt, `skip`
   is safe (the video stays on YouTube; we just don't make a page for it).
 
