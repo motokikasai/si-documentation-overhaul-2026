@@ -1,0 +1,86 @@
+# WPML pair-consistency audit — fable-day1, 2026-07-18
+# Every translation group (trid) must carry ONE effective type or the element_type rename
+# breaks the pairing (08 §4). Rules: reviewed/evidence side propagates; mixed video-vs-text
+# pairs → post (least-disruptive, no URL change); outlet appearances → si_coverage both;
+# SI-activity news wrongly carrying coverage categories → post both.
+
+# --- statement pairs: propagate statement to siblings
+2375;type=si_statement;note=ES sibling of Stop-WWIII appeal (trid 1163)
+31857;type=si_statement;note=IT sibling of trid 1163
+1874;type=si_statement;note=RU sibling of trid 1163
+32075;type=si_statement;note=ZH sibling of trid 1163
+2307;type=si_statement;note=DE pair of Mission Statement 2246
+37346;type=si_statement;note=DE pair of UNGA appeal 37329
+3015;type=si_statement;note=EL sibling of Frankfurt Resolution
+3049;type=si_statement;note=RU sibling of Frankfurt Resolution
+3783;type=si_statement;note=DE pair of UN appeal 3785
+57308;type=si_statement;note=EN pair of Soleimani statement 57353
+57384;type=si_statement;note=EN pair of appeal 57412
+57843;type=si_statement;note=EN pair of Dringender Appell 57909 (also second-opinion vote)
+59687;type=si_statement;note=DE pair of appeal 59484
+65544;type=si_statement;note=EN pair of Elders statement 65566
+83098;type=si_statement;note=EN pair of CCD press release 83113
+89622;type=si_statement;note=paired with declaration 89649 (trid 157151)
+110551;type=si_statement;note=EN pair of 110602
+115190;type=si_statement;note=EN pair of open letter 115202
+115400;type=si_statement;note=DE pair of press release 115334
+
+# --- video pairs where BOTH sides are videos → si_video both
+72263;type=si_video;note=pair of DE video 72302 (Cardinal Zenari)
+76282;type=si_video;note=DE pair of 76265
+83175;type=si_video;note=DE pair of 83121
+83229;type=si_video;note=DE pair of 83184
+83358;type=si_video;note=DE pair of 83298
+83424;type=si_video;note=EN pair of 83446
+86401;type=si_video;note=DE pair of 86378 (auto coverage was mislabel)
+44844;type=si_video;note=DE draft mirror of webcast 44858
+
+# --- mixed video/text pairs → post both (least-disruptive; video stays embedded)
+81490;type=post;note=pair sync with keynote text 81311 (mixed video/text pair)
+85492;type=post;note=pair sync with article 85486
+87102;type=post;note=pair sync with conference summary 86939 (teaser video embeds in article)
+89481;type=post;note=pair sync with DE action-day report 89509 (mixed pair)
+91350;type=post;note=pair sync with keynote text 91238
+93570;type=post;note=pair sync with EIR symposium text 93593
+94031;type=post;note=pair sync with New Year message text 94024
+94474;type=post;note=pair sync with 94466
+98204;type=post;note=pair sync with H4P announcement 98161
+50767;type=post;note=pair sync with 50843 (New Year message)
+42985;type=post;note=pair sync with DE news 42978
+34087;type=post;note=pair sync with DE news 34132 (conference video embeds in article)
+
+# --- outlet appearances → si_coverage both
+78791;type=post;note=press-roundup article; coverage CPT needs single external_url — post both (pair 78806)
+78806;type=post;note=pair sync with 78791
+85437;type=si_coverage;note=CGTN appearance (pair 85450)
+33926;type=si_coverage;note=DE pair of Arabic Daily coverage 33488
+34165;type=si_coverage;note=DE pair of TASS interview 34185
+38448;type=si_coverage;note=DE pair of Xinhua interview 38435
+47145;type=si_coverage;note=DE pair of GBTimes coverage 46997
+
+# --- SI-activity news wrongly carrying coverage cats → post both
+79829;type=post;note=pair sync with 79810 (SI news, not media coverage)
+84351;type=post;note=adherence letter news (pair 84316)
+84353;type=post;note=adherence letter news (pair 84338)
+85811;type=post;note=pair sync with 85756
+33839;type=post;note=ministry sponsorship news, not media coverage (pair 33906)
+41975;type=post;note=thank-you letter news (pair 41949)
+47326;type=post;note=pair sync with 47338 (SI activity)
+52458;type=post;note=condolence messages received — not media coverage (pair 52406)
+54076;type=post;note=pair sync with 54056 (SI activity)
+59849;type=post;note=pair sync with 59771
+60695;type=post;note=pair sync with 60668
+63230;type=post;note=pair sync with conference announcement 63165
+105041;type=post;note=pair sync with announcement 104704
+
+# --- presentation / conference pairs
+97553;type=si_presentation;note=DE video pair of Strasbourg keynote 97463
+29868;type=si_conference;note=DE sibling of Paris 2015 conference page 29572
+29601;type=si_conference;note=FR sibling of Paris 2015
+31520;type=si_conference;note=ZH sibling of Paris 2015
+56294;type=si_conference;note=EN page of Bad Soden Nov 2019 conference (pair 56471); matches playlist row in conference-map
+
+# --- stragglers (mixed video/text pairs → post both)
+61017;type=post;note=pair sync with Binney article 60960 (press-conference video embeds)
+100489;type=post;note=pair sync with keynote text 100454
+102333;type=post;series=ipc-meeting;note=pair sync with IPC report 102350 (recording embeds; series kept)
