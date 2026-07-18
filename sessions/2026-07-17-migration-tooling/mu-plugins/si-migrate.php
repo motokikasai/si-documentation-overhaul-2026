@@ -784,6 +784,12 @@ final class SI_Migrate_Command {
         if (preg_match('/\bconference\b|\bkonferenz\b/iu', $title) && in_array('activity-conference', $cats, true)) {
             return ['R4', 'si_conference', 'medium', '1', 'conference post — resolve promote-vs-link in conference-map.csv (C5)'];
         }
+        foreach ($cats as $c) {
+            $e = $catmap[$c] ?? null;
+            if ($e && $e['kind'] === 'si_statement') {
+                return ['R6', 'si_statement', 'low', '1', "statement-signal category '$c' — many are ordinary reports; verify"];
+            }
+        }
         return ['R9', 'post', 'auto', '0', ''];
     }
 
