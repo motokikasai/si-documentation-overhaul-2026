@@ -1,0 +1,521 @@
+id,post_type,title,tokens,flags
+91,page,Navigation,"{""hr"":1}",
+864,page,Home,[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+891,page,"Panel 1: The Great Middle East",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+895,page,Contact,"{""info_box"":1}",
+922,page,"International Conference • November 24-25, 2012",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+958,page,"Panel 2: Space Cooperation and Other Common Aims of Mankind",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1072,page,"Panel 3: The Alternative To World War and Chaos",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1078,page,"Panel 4: There Is Life After the Euro! What Kind of a Europe Do We Want?",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1087,post,"Two Opposing Worlds Meet; Development or Death","{""blockquote"":6}",
+1092,page,"Stop Green Fascism","{""title_big"":1,""button"":1,""testimonial"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+1103,page,"About Us","{""title_big"":1,""call_to_action_big"":2,""hr"":1,""toggle"":47,""wide_bar"":1,""one_half"":1,""one_half_last"":1,""one_third"":2,""one_third_last"":93,""two_third"":93,""two_third_last"":2,""one_fourth"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+1158,page,"Toward a Renaissance of Classical Culture","{""title_big"":5,""title_small"":5,""button"":2,""image"":4,""call_to_action_big"":1,""hr"":6,""toggle"":4,""one_half"":4,""one_half_last"":4,""one_third_last"":4,""two_third"":4}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+1161,page,"The World Land-Bridge","{""title_big"":4,""button"":1,""image"":1,""hr"":3,""testimonial"":1,""one_half"":1,""one_half_last"":1,""one_third_last"":1,""two_third"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+1206,page,Kontakt,"{""button"":1,""info_box"":1}",
+1238,page,"Classical Concert",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1244,page,Start,"{""title_big"":7,""title_small"":2,""button"":8,""image"":1,""call_to_action_big"":1,""info_box"":4,""wide_bar"":4,""one_half"":3,""one_half_last"":3,""one_third"":1,""one_third_last"":2,""two_third"":2,""two_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+1256,page,Accueil,[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1351,page,"Panel Discussion",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1492,page,"Klassisches Konzert",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1498,page,"Thema 1: Großraum Nahost",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1503,page,"Thema 2: Raumfahrt und die gemeinsamen Ziele der Menschheit",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1505,page,"Thema 3: Die Alternative zu Weltkrieg und Chaos",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1507,page,"Thema 4: Es gibt ein Leben nach dem Euro! Was für ein Europa wollen wir?",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1515,page,Podiumsdiskussion,[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1666,page,"Über uns","{""title_big"":3,""title_small"":2,""wide_bar"":2,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+1670,page,Contattaci!,"{""info_box"":1}",
+1677,page,"""Grün"" bedeutet Tod","{""title_big"":1,""button"":2,""call_to_action_big"":1,""hr"":6,""info_box"":1,""testimonial"":1,""blockquote"":1,""one_half"":2,""one_half_last"":2,""one_third"":2,""one_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+1681,page,"Die Weltlandbrücke aufbauen","{""title_big"":1,""button"":1,""testimonial"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+1684,page,"Baut die Weltlandbrücke!","{""title_big"":2,""button"":2,""image"":1,""hr"":1,""testimonial"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+1716,page,Contactez-nous !,"{""info_box"":1}",
+1733,page,"Concert classique",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1736,page,"Panel I : Le grand Moyen-Orient",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1739,page,"Panel II : L’exploration spatiale et les buts communs de l’humanité",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1743,page,"Panel III : L’alternative à la guerre et au chaos",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1745,page,"Panel IV : Il y a une vie après l’euro !",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1747,page,"Table ronde",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1774,page,Контакты,"{""info_box"":1}",
+1780,page,Contact,"{""info_box"":1}",
+1801,page,Главная,[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert; dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+1816,page,"Contact Us","{""info_box"":1}",
+1850,page,"СЕКЦИОННОЕ ОСУЖДЕНИЕ: РЕНЕССАНС",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1851,page,"КОНЦЕРТ КЛАССИЧЕСКОЙ МУЗЫКИ",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1852,page,"ЗАСЕДАНИЕ 4 — ЕСТЬ ЖИЗНЬ ПОСЛЕ ЕВРО!",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1853,page,"ЗАСЕДАНИЕ 3 — АЛЬТЕРНАТИВА МИРОВОЙ ВОЙНЕ",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1854,page,"ЗАСЕДАНИЕ 2 — СОТРУДНИЧЕСТВО В КОСМОСЕ",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1856,page,"ЗАСЕДАНИЕ 1 — БОЛЬШОЙ БЛИЖНИЙ ВОСТОК",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+1875,page,"Построить мировой наземный мост","{""button"":1,""testimonial"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+1876,page,"Начать новый Ренессанс","{""button"":1,""testimonial"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+1878,page,"Для «зеленой» политики человечеству места нет","{""button"":1,""testimonial"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+2014,page,¡Contáctenos!,"{""info_box"":1}",
+2015,page,¡Contáctenos!,"{""info_box"":1}",
+2194,page,Inicio,[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+2405,page,"Renaissance cut outs","{""hr"":1,""blockquote"":1}",
+2407,page,"Renaissance Auschnitte","{""testimonial"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+2413,page,"SDE: Strategic Defense of Earth","{""title_big"":1,""title_small"":6,""image"":15,""hr"":4,""toggle"":9,""info_box"":2,""one_fourth"":3,""one_fourth_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+2814,page,"Frankfurt Conference • April 13 - 14, 2013","{""toggle"":1,""blockquote"":1}",
+2822,page,"Frankfurt • 13. - 14. April 2013","{""title_big"":1,""toggle"":1,""blockquote"":1}",
+3055,page,"ФРАНКФУРТ, ГЕРМАНИЯ ● 13 – 14 АПРЕЛЯ 2013 г.","{""title_big"":6,""title_small"":6,""toggle"":2,""blockquote"":1}",
+3382,page,"Conférence de Francfort • 13 - 14 avril 2013","{""toggle"":1,""blockquote"":1}",
+3804,post,"Schiller Institute To Present Mozart Requiem in Remembrance of President John F. Kennedy","{""hr"":2}",
+3931,page,"San Francisco • June 29, 2013","{""hr"":1,""toggle"":2}",
+3938,page,"A Remembrance of John F. Kennedy And a Recommitment to the Principles of His Presidency","{""button"":4,""image"":1,""hr"":5,""applause"":4,""toggle"":2}",
+4259,page,"A Remembrance of John F. Kennedy And a Recommitment to the Principles of His Presidency","{""button"":4,""image"":1,""hr"":4,""applause"":4,""toggle"":2}",
+4262,page,"A Remembrance of John F. Kennedy And a Recommitment to the Principles of His Presidency","{""button"":4,""image"":1,""hr"":4,""applause"":4,""toggle"":2}",
+4265,page,"A Remembrance of John F. Kennedy And a Recommitment to the Principles of His Presidency","{""button"":4,""image"":1,""hr"":4,""applause"":4,""toggle"":2}",
+4271,post,"The Schiller Institute Presents: A Tribute to John F. Kennedy — W.A. MOZART · REQUIEM","{""image"":1,""hr"":1,""blockquote"":1}",
+4337,page,"A Tribute to John F. Kennedy",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+4338,page,"A Tribute to John F. Kennedy","{""title_small"":3,""button"":1,""hr"":2,""applause"":4,""toggle"":13,""testimonial"":4,""wide_bar"":3}",
+4735,post,"Das Schiller-Institut feiert sein 30. Jubiläum!","{""button"":1}",
+5123,post,"Helga Zepp-LaRouche: China, Contrary to the West, Is Not Operating on the Basis of Geopolitics","{""blockquote"":4}",
+11053,page,,"{""title_big"":1,""wide_bar"":1}",
+18463,post,"Helga Zepp-LaRouche: China, Contrary to the West, Is Not Operating on the Basis of Geopolitics","{""image"":2,""one_third_last"":1,""two_third"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+18512,post,"The New Silk Road Leads to the Future Of Mankind!","{""title_big"":1,""wide_bar"":1,""one_half"":2,""one_half_last"":2,""one_third_last"":1,""two_third"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+18762,page,TEST001,"{""image"":1,""hr"":6}",
+18836,post,"China Expands Its Plans To Move Away from The Dollar Currency","{""title_small"":1,""one_third_last"":1,""two_third"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+19003,post,"Bolivia Asks China for $3 Billion for Major Infrastructure","{""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+19052,post,"India ""Creates History"" With Successful Mars Mission","{""title_small"":2,""image"":1,""one_fourth"":1,""one_fourth_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+19952,page,"30th Anniversary Conference  •  Frankfurt  •  October 18th, 2014","{""title_big"":1,""button"":1,""hr"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+21273,page,"30th Anniversary Conference  •  Frankfurt  •  October 18th, 2014","{""title_big"":1,""button"":1}",
+21282,page,"30th Anniversary Conference  •  Frankfurt  •  October 18th, 2014","{""title_big"":1,""button"":1}",
+21284,page,"30th Anniversary Conference  •  Frankfurt  •  October 18th, 2014","{""title_big"":1,""button"":1,""hr"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+21286,page,"30. Jahrestag der Gründung des Schiller-Instituts","{""title_big"":1,""button"":1,""hr"":1,""toggle"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+21824,post,"Ray McGovern Arrested for Attempting to Attend Speech with Former CIA Director","{""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+22599,page,"30th Anniversary Conference  •  Frankfurt  •  October 18th, 2014","{""title_big"":1,""button"":1}",
+23630,page,"New England Conference - Dec. 7th, 2014 - The U.S. Must Join the BRICS","{""title_big"":1,""button"":1}",
+24315,page,"Livestream: January 17th International Schiller Institute Event","{""title_big"":2,""hr"":8,""applause"":1,""toggle"":8,""blockquote"":1,""wide_bar"":1,""one_third_last"":1,""two_third"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+24587,post,"LaRouche Hails Stunning Greek Electoral Repudiation of Troika","{""hr"":1,""blockquote"":2,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+24659,page,"Internationale Konference in New York 17. Januar 2015","{""hr"":1,""toggle"":4}",
+24798,page,"The Manhattan Project","{""title_big"":3,""button"":4,""call_to_action_big"":1,""wide_bar"":4,""one_half"":3,""one_half_last"":3,""one_fourth_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+25050,page,"Archive: February 14th International Schiller Institute Event in NY","{""title_big"":2,""hr"":9,""wide_bar"":1,""one_half"":8,""one_half_last"":8}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+25248,post,"Schiller Institute Celebrates Dialogue of Cultures in Düsseldorf","{""image"":7,""one_half"":2,""one_half_last"":2}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+25698,post,"Das allerwichtigste ist die Beschäftigung mit der menschlichen Kreativität","{""wide_bar"":1,""one_half"":10,""one_half_last"":10}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+25753,post,"«Синьхуа» о выступлении Хельги Цепп-Ларуш в Нью-Йорке: США и Европа должны сотрудничать со странами БРИКС","{""hr"":2,""one_third"":1,""two_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+25797,page,Home,"{""title_big"":4,""button"":3,""hr"":3,""toggle"":1,""wide_bar"":1,""one_half"":2,""one_fourth"":3,""one_fourth_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+25933,page,"Berlin Konferenz","{""title_big"":1,""hr"":6,""toggle"":3,""one_half"":6,""one_half_last"":6,""one_third_last"":1,""two_third"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+29495,page,"Schiller Institute Conference  •  Paris • Press Release","{""title_big"":1}",
+29526,post,"Two Opposing Worlds Meet; Development or Death","{""blockquote"":6}",
+29528,page,"l'Institut de Schiller  •  Paris • Communiqué de presse","{""title_big"":1}",
+29529,page,"Internationale Konferenz des Schiller-Instituts Presseerklärung","{""title_big"":1}",
+30979,page,首页,"{""title_big"":2,""button"":2,""hr"":2,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+32356,post,"Zepp-LaRouche Presents EIR's New Silk Road Report at Beijing Symposium","{""blockquote"":6,""one_half"":4,""one_half_last"":4}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+32417,page,"Jetzt Spenden","{""title_big"":1,""blockquote"":1,""one_half"":1,""one_half_last"":1,""one_third"":1,""two_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+32438,post,"In the Face of the Refugee Crisis: Realizing a Grand Vision",[],
+32726,post,"Хельга Цепп-Ларуш представила доклад EIR о Новом шёлковом пути на симпозиуме в Пекине","{""hr"":1}",
+32872,post,"ZEPP-LAROUCHE: THE NEED OF GLOBAL PUBLIC WORKS–THE NEW SILK ROAD BECOMES THE WORLD LAND-BRIDGE","{""hr"":2}",
+33017,post,"Ukrainian Government in Chaos, Leftist Opposition Appeals against Police-State Repression","{""title_big"":1,""hr"":2}",
+33029,post,"Helga Zepp-LaRouche Speaks in New Delhi","{""hr"":1,""applause"":1,""toggle"":1}",
+33289,post,"Die Neue Seidenstraße als neues Paradigma für die Menschheit","{""hr"":1}",
+33303,page,"Helga Zepp-LaRouche","{""title_big"":4,""title_small"":19,""button"":7,""call_to_action_big"":1,""hr"":17,""one_half"":8,""one_half_last"":8}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+33542,page,"HZL : weltweite Aktivitäten für die Neue Seidenstraße","{""title_big"":3,""title_small"":5,""button"":13,""hr"":9,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+33639,post,"Die Notwendigkeit von Großprojekten:  Die Neue Seidenstraße wird zur Weltlandbrücke","{""hr"":1}",
+33645,post,"Krieg verhindern mit Wirtschaftsaufbau und kultureller Renaissance",[],
+33673,post,"„Das allerwichtigste ist die Beschäftigung mit der menschlichen Kreativität“","{""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+33839,post,"Egyptian Transportation Minisitry sponsored launching of Arabic version of EIR's ""World Land Bridge"" Report","{""title_small"":1,""hr"":1,""one_half"":6,""one_half_last"":6}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+33906,post,"Ägyptisches Verkehrsministerium unterstützt Veröffentlichung der arabischen Ausgabe des EIR-Reports zur Weltlandbrücke","{""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+33985,post,"EIR Seminar in Frankfurt on New Silk Road for Mideast and Africa","{""one_half"":2,""one_half_last"":2}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+34087,post,"Manhattan Conference: Building A World Land-Bridge—Realizing Mankind's True Humanity, April 7th","{""hr"":6,""applause"":7,""toggle"":2,""one_half"":2,""one_half_last"":2}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+34132,post,"Landbrücken-Konferenz des Schiller-Instituts in New York","{""one_half"":2,""one_half_last"":2}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+34159,post,"Strategic Seminar","{""hr"":6}",
+35648,page,"Conferenza Internazionale dello Schiller Institute, Berlino, 25-26 giugno 2016","{""title_big"":1,""tabs"":1}",
+35653,page,"Conferenza Internazionale dello Schiller Institute, Berlino, 25-26 giugno 2016","{""title_big"":2,""call_to_action_big"":1,""call_to_action_bar"":1,""hr"":2,""tabs"":1,""one_half"":3,""one_half_last"":3}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+36506,page,"Musical Dialogue of Cultures","{""call_to_action_big"":1,""hr"":20,""wide_bar"":1,""tabs"":2,""one_half"":4,""one_half_last"":4,""one_third"":6,""one_third_last"":11,""two_third"":11,""two_third_last"":6}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+36775,page,"MUSIKALISCHER DIALOG DER KULTUREN","{""call_to_action_big"":1,""hr"":19,""wide_bar"":1,""tabs"":2,""one_half"":3,""one_half_last"":3,""one_third"":6,""one_third_last"":11,""two_third"":11,""two_third_last"":6}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+37371,post,"9/11 Memorial Concert","{""applause"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+37397,post,"Erfolgreiche Konferenz des Schiller-Instituts in Lyon und Essen: Europa muß die Chancen der Neuen Seidenstraße ergreifen!","{""title_big"":1,""title_small"":11,""button"":2,""hr"":11,""toggle"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+37437,post,"Deutschlands Potential beim Ausbau der Weltlandbrücke","{""hr"":1}",
+37447,page,"Schiller Institute Leads Living Memorial to Victims of 9/11","{""title_big"":3,""title_small"":5,""button"":1,""hr"":6,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+37470,post,"Проект «Феникс»: тезисы для обсуждения восстановления Сирии","{""one_half"":4,""one_half_last"":4}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+37533,post,"Соболезнование Х. Цепп-Ларуш в связи с кончиной академика М.Л. Титаренко","{""hr"":1}",
+37581,post,"ВОССТАНОВИТЬ ИДЕЮ ШЕЛКОВОГО ПУТИ","{""title_small"":1}",
+37623,post,"Open Letter from Chairman of the Progressive Socialist Party of Ukraine Natalia Vitrenko","{""hr"":1}",
+37630,post,"Открытое обращение Председателя Прогрессивной социалистической партии Украины Наталии Витренко","{""hr"":1}",
+37638,post,"Ein Offener Brief der Vorsitzenden der Progressiven Sozialistischen Partei der Ukraine, Natalja Witrenko","{""hr"":1}",
+37645,page,"The Inalienable Rights of Man","{""title_big"":1,""call_to_action_big"":1,""hr"":4,""one_half"":2,""one_half_last"":2}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+37692,post,"Ein Vorgeschmack auf die Renaissance","{""hr"":1}",
+37718,post,"Ein Vorgeschmack auf die Renaissance","{""hr"":1}",
+37789,post,"Message of condolence to the Alexandrov Ensemble and the People of Russia","{""hr"":2}",
+37795,post,"Kondolenzbotschaft an das Alexandrow-Ensemble und an das russische Volk","{""hr"":1}",
+37799,post,"Акция хора Шиллеровского института в Нью-Йорке в память погибших в авиакатастрофе 25 декабря 2016 года","{""hr"":2}",
+37802,post,"Акция хора Шиллеровского института в Нью-Йорке в память погибших в авиакатастрофе 25 декабря 2016 года","{""hr"":2}",
+37808,post,"Historic Schiller Institute Memorial To Tu-154 Disaster at the Tear-Drop Memorial in Bayonne, New Jersey","{""hr"":1}",
+37821,post,"Schiller-Institut Chor bei Gedenkfeier für Alexandrow Ensemble in Bayonne/USA","{""hr"":1}",
+37824,post,"Акция хора Шиллеровского института в Нью-Йорке в память погибших в авиакатастрофе 25 декабря 2016 года","{""hr"":2}",
+37852,page,"International Conferences",[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+38457,page,"TEST - Home / About us Page",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+38721,post,"Schiller Institute Concert in Denmark: Musical Dialogue of Cultures","{""tabs"":1}",
+38752,post,"Message of Helga Zepp-LaRouche to the Berlin Conference on ""The Forgotten War Crimes in Yemen""","{""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+38924,page,"Recent news",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+40114,post,"The Dream of American Politician Lyndon LaRouche Becomes True One Third of a Century Later","{""hr"":1}",
+40546,page,"Beautiful Souls: Friends and Associates of the Schiller Institute","{""title_big"":5,""hr"":4,""one_third"":1,""two_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+40932,page,"On the Centennial of the German-American Space Pioneer: ""Realizing Krafft Ehricke’s Vision for the Future of Mankind""","{""title_big"":1,""hr"":3,""one_third_last"":2,""two_third"":2}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+41027,page,"New Silk Road: A Global Infrastructure Renaissance","{""title_big"":1,""button"":7,""hr"":8,""one_third_last"":8,""two_third"":8}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+41070,page,"Krafft Ehrickes Vision für die Zukunft der Menschheit: Schiller Institut Konferenz in München","{""title_big"":1,""hr"":6,""one_third_last"":5,""two_third"":5}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+41076,page,"Krafft Ehrickes Vision für die Zukunft der Menschheit: Schiller Institut Konferenz in München","{""title_big"":1,""hr"":4,""one_third_last"":3,""two_third"":3}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+41089,post,"Ukraine: Nazi Hit Squads attack political leaders Natalia Vitrenko and Vladimir Marchenko","{""hr"":5,""one_third"":3,""one_third_last"":1,""two_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+41212,page,"Belt and Road Forum: May 14 - 15, 2017","{""title_big"":11,""button"":9,""call_to_action_bar"":19,""hr"":9,""toggle"":4,""wide_bar"":1,""one_half"":10,""one_half_last"":10}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+41376,page,"Belt and Road Forum: 14. - 15. Mai 2017","{""title_big"":3,""button"":3,""hr"":3,""toggle"":2,""one_half"":1,""one_half_last"":1,""one_third_last"":1,""two_third"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+41445,page,"Belt and Road Forum (May 14 - 15, 2017) - Quotes of World Leaders","{""title_big"":1,""call_to_action_bar"":20,""wide_bar"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+41507,post,"Zepp-LaRouche Addresses a Forum at Largest Publishing House in China","{""call_to_action_big"":1,""hr"":1}",
+41679,post,"Was Berlin immer noch nicht verstanden hat: Deutschlands Zukunft liegt in der Neuen Seidenstraße","{""hr"":1}",
+41722,post,"Symposium:  ""The Aesthetic Education of Humanity Through Music"" Concluding Event of Two Day Tribute to Sylvia Olden Lee","{""title_small"":12,""hr"":11,""toggle"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+41758,page,"""食物换取和平：经济发展实现和平""","{""title_big"":1,""title_small"":9,""hr"":9}",
+41789,post,"Food for Peace & Thought: China-U.S. Agricultural Cooperation","{""one_half"":5,""one_half_last"":5}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+41895,post,"Berlin Conference: The China Model and Its Implications","{""title_big"":2,""hr"":2}",
+42129,page,"Schiller Institute Weekly Webcast",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+42422,post,"Helga Zepp-LaRouche kommentiert Xi Jinpings Rede in chinesischen Medien","{""blockquote"":2}",
+42449,post,"Helga Zepp-LaRouche: A New Era of Hope","{""blockquote"":1}",
+42533,page,"Nouvelles Routes de la Soie : Réussir une coopération gagnante-gagnante avec la Chine","{""title_big"":1,""button"":1,""toggle"":5,""tabs"":1}",
+43333,page,"Fulfilling The Dream of Mankind","{""title_big"":1,""title_small"":1,""button"":4,""hr"":1,""applause"":1,""toggle"":2,""one_fourth_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+43420,page,"Bad Soden • 25.- 26. November 2017","{""title_big"":1,""title_small"":1,""button"":4,""hr"":1,""toggle"":2,""one_fourth_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+43429,page,"Resolution: EUROPE MUST END POVERTY FOR ITS 120 MILLION POOR BY 2020","{""hr"":1}",
+43439,page,"Resolution: END THE WAR AND HUMANITARIAN CRISIS IN YEMEN","{""hr"":1}",
+43627,post,"Konferenzbericht: ""Den Traum der Menschheit verwirklichen""","{""title_small"":1,""button"":4,""toggle"":2}",
+43783,page,"Fällt die Hexenjagd gegen Trump auf die Urheber zurück?","{""title_big"":1}",
+43952,page,"Webcast mit Helga Zepp-LaRouche",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+44244,page,"Extending the New Silk Road to West Asia and Africa","{""title_big"":1,""title_small"":1,""button"":1,""FN"":23,""hr"":18,""testimonial"":2,""tabs"":1,""one_half"":7,""one_half_last"":7,""one_third_last"":5,""two_third"":5}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+45006,post,"The U.S. Must Join China’s Belt and Road In Developing The Caribbean and Central America",[],
+45111,page,"Belt and Road Initiative",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+45235,page,Berichterstattung,"{""title_big"":1}",
+45295,page,Coverage,[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+45299,post,"Pakistan PM Abbasi: ""BRI More Than Infrastructure""","{""blockquote"":1}",
+45450,page,"Die Neue Seidenstraße wird zur Weltlandbrücke","{""title_big"":1,""title_small"":1,""call_to_action_bar"":2,""hr"":1,""testimonial"":4,""one_third"":2,""one_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+45761,page,"Für eine Renaissance der klassischen Kultur","{""title_big"":11,""title_small"":3,""button"":7,""image"":4,""call_to_action_big"":1,""hr"":2,""toggle"":4,""blockquote"":2,""wide_bar"":5,""one_half"":6,""one_half_last"":6,""one_third"":1,""one_third_last"":4,""two_third"":4,""two_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+45811,page,"Who is Schiller?","{""title_big"":1,""title_small"":6,""image"":7,""hr"":1,""info_box"":1,""testimonial"":2,""one_half"":1,""one_half_last"":1,""one_third"":1,""one_third_last"":1,""two_third"":1,""two_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+46936,post,"Schiller Institute Conference in Bad Soden: Panel 1","{""title_big"":1}",
+48403,page,"Why China’s ‘Debtbook Diplomacy’ is a Hoax","{""info_box"":1}",
+48757,post,"Successful Launching of the BRIX at Belt & Road Business Forum in Stockholm","{""blockquote"":1}",
+48943,post,"Seminar in Berlin: „Felix Jemen“ statt Völkermord!","{""toggle"":1}",
+49010,page,"Новости и анализ",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+49014,post,"Обращение Хельги Цепп-Ларуш в честь празднования Дня Победы","{""title_big"":1}",
+49314,page,Test,[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+49936,post,"Friedrich Schiller Birthday Concert: Awakening the Mind and Heart","{""blockquote"":6}",
+50651,post,"Wer ist Lyndon LaRouche","{""button"":1,""hr"":3,""wide_bar"":2,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+50685,page,"Our Activity",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+51043,post,"Schiller Institute Participates in Alexandrov Choir Commemoration","{""blockquote"":1}",
+51112,page,"Schiller Institute Community Choruses",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+51121,page,"Schiller Institute Community Chorus",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+51132,page,"Helga Zepp-LaRouche",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+51143,page,"Renaissance of Classical Culture",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+51162,post,"Virginia Schiller Institute Chorus Rings in the New Year","{""blockquote"":1}",
+52020,post,"Lyndon H. LaRouche jr. (1922-2019): Ein wohlgenutztes Talent","{""toggle"":2}",
+52285,page,"Create a New Epoch for Mankind • February 16, 2019","{""tabs"":1}",
+52304,post,"Konferenz: Schaffen wir eine neue, menschlichere Epoche für die Menschheit","{""toggle"":3}",
+52641,page,"Schiller Institute Choruses","{""hr"":3,""info_box"":3}",
+53415,post,"Houston Chorus Performs Mozart's Vespers & Spirituals","{""button"":1}",
+53734,page,"Our economic development events",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+53740,page,"Our musical events",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+53745,page,"Our cultural events",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+53749,page,"Economic development updates",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+53887,post,"Schiller Institute NYC Chorus Memorializes LaRouche in Bronx Concert","{""hr"":1,""testimonial"":1}",
+54056,post,"Zepp-LaRouche in China: ""The Highest Ideal of Mankind is the Potential of the Future""","{""hr"":1}",
+54076,post,"Zepp-LaRouche spricht in Beijing bei Konferenz über Dialog der asiatischen Zivilisationen","{""hr"":1}",
+54366,post,"Schiller Institute's Sébastien Périmony Goes to Ivory Coast & Angola","{""hr"":2}",
+54504,page,"Northern Virginia Schiller Institute Community Chorus",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+54519,post,"VA Community Chorus Concert: ""Scientia sine ars nihil est""","{""hr"":2}",
+54861,post,"Conference: APOLLO +50","{""hr"":6}",
+55241,post,Appell,"{""title_big"":1}",
+55610,post,"Schiller Institute Seminar: The Role of the Belt & Road in Peace and Stability in West Asia & Africa","{""hr"":7}",
+55739,post,"The Necessity of Redefining “Sustainable Development” as “Sustained Development”","{""hr"":2}",
+55839,post,"Seminar: Ein rationaler Dialog über die außenpolitischen Absichten Chinas","{""title_small"":1,""hr"":8}",
+57025,post,"New Year's Concert: Timeless Choruses of the Masters","{""button"":1,""hr"":1}",
+57148,post,"EIR Releases Report Exposing Anti-China Hysteria as Part of Coup Against President Trump","{""button"":1,""hr"":1}",
+57613,post,"Zerstörung Beethovens im Beethovenjahr 2020?","{""title_big"":1,""title_small"":4,""info_box"":1}",
+57892,post,"A Conversation with NSA Whistleblowers: Rescuing the Republic from the Surveillance State","{""hr"":2,""applause"":3}",
+58136,post,"COVID-19 Pandemic Forces Rethinking: International Cooperation Indispensable!","{""button"":1}",
+58258,post,"Conference: Mankind’s Existence Now Depends on the Establishment of a New Paradigm!","{""hr"":7}",
+58317,post,"Internet-Konferenz: Die Existenz der Menschheit hängt jetzt von der Schaffung eines neuen Paradigmas ab!","{""title_small"":33,""button"":1,""toggle"":17,""tabs"":1}",
+58401,post,"Defeating the Pandemic, Part III: Industry, Infrastructure, and Political Requirements","{""call_to_action_big"":1}",
+58469,post,"Eine neue Ebene der Menschlichkeit schaffen!","{""title_small"":4,""blockquote"":1}",
+58532,post,"Bekämpfung der globalen Pandemie, Teil III: Industrie, Infrastruktur und politische Bedingungen","{""call_to_action_big"":1}",
+58713,post,"Konferenzbericht: Aufbruch in das neue Paradigma","{""title_small"":9}",
+58957,post,"Gipfeltreffen der Blockfreien Bewegung","{""title_small"":1}",
+59048,post,"Video — The Economics of Defeating the Coronavirus","{""button"":1}",
+59223,page,Petitionen,"{""title_small"":5}",
+59421,post,"6. Juni 15- 18 Uhr Webinar: Neustart für die Weltwirtschaft unter den Bedingungen der Coronavirus-Pandemie!","{""button"":1}",
+59435,post,"Video — The Economics of Defeating the Coronavirus","{""button"":1}",
+59771,post,"Former Amb. of Burundi to the U.S. : “Get their knee off LaRouche’s ‘neck’. ”","{""button"":1}",
+59849,post,"Ehemaliger Botschafter von Burundi in den USA:  „Nehmt euer Knie von LaRouches Hals""","{""button"":1}",
+59900,post,"Conference: Will Humanity Prosper, or Perish? The Future Demands a 'Four-Power' Summit Now","{""button"":2}",
+59966,post,"Konferenz 27. Juni: Wird die Menschheit prosperieren oder untergehen? Die Zukunft erfordert ein sofortiges Vier-Mächte-Gipfeltreffen","{""button"":2}",
+60226,post,"27. Juni Konferenz: Wird die Menschheit prosperieren oder untergehen? Die Zukunft erfordert ein sofortiges Vier-Mächte-Gipfeltreffen","{""title_small"":9,""toggle"":24,""tabs"":1}",
+60471,post,"Die Botschaft, die López Obrador Trump überbringen sollte: Ein Weltgipfel der Nationen ist dringend notwendig, um die Krise anzugehen","{""button"":1}",
+60867,page,"Internet-Konferenz: Die Existenz der Menschheit hängt jetzt von der Schaffung eines neuen Paradigmas ab!","{""title_small"":33,""button"":1,""toggle"":17,""tabs"":1}",
+61380,post,"Erster „splash down“ amerikanischer Astronauten seit den Apollo-Missionen","{""button"":1}",
+61476,post,"Das nächste Hiroshima vor November? Wir brauchen eine Weltfriedensordnung!","{""button"":1}",
+61731,post,"Internet-Konferenz: Kriegstreiberei bis zum Armageddon oder ein neues Paradigma souveräner Nationen, geeint durch die gemeinsamen Ziele der Menschheit?","{""button"":1,""toggle"":2,""info_box"":2,""tabs"":1}",
+62407,page,"Kirk Wiebe und William Binney: ""Geheimdienstveteranen fordern Schließung des illegalen Überwachungsstaats""","{""toggle"":2}",
+62444,page,"Lyndon H. LaRouche Jr. (1922-2019): Rede Labor-Day Konferenz des Schiller-Instituts 2000","{""toggle"":1}",
+62459,page,"Marco Zanni: ""Warum das EU-Superstaatprojekt zum Scheitern verurteilt ist""","{""toggle"":1}",
+62475,page,"Jason Ross: ""Menschlicher Fortschritt: die Entwicklung höherer Wissenschafts- und Technologieplattformen""","{""toggle"":1,""one_half"":1,""one_half_last"":1,""one_third"":2,""one_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+62488,page,"Dr. Stephen O. Dean: ""Wie wir die Kernfusion erreichen""","{""toggle"":1}",
+62491,page,"Michael Paluszek: ""Kernfusionsbetriebene Marsmission""","{""toggle"":1,""one_third"":2,""one_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+62495,page,"Sergej Pulinez: ""Die Beziehung zwischen Politik und Wissenschaft""","{""toggle"":1}",
+62509,page,"Paul Driessen: ""Werden wir dem Ökoimperialismus erlauben Entwicklung zu verhindern?""","{""toggle"":1}",
+62516,page,"Philip Tsokolibane: ""LaRouche und die Entwicklung von Afrika""","{""toggle"":1}",
+62521,page,"Dr. Kelvin Kemm: ""Kernenergie in Südafrika und Afrika""","{""toggle"":1}",
+62608,page,"Dennis Small: ""Das LaRouche-Programm für den Planeten: 1,5 Mrd neue produktive Arbeitsplätze""","{""toggle"":1}",
+62623,page,"Hassan Daud Butt: ""BRI und CPAC- Vorboten nachhaltiger Entwicklung""","{""toggle"":1}",
+62636,page,"Dr. Björn Peters: ""Die Suche nach sauberer und billiger Energie""","{""toggle"":1}",
+62641,page,"Diskussion: ""Baut ein Weltgesundheitssystem""","{""toggle"":7}",
+62955,post,"11. Oktober: Chor des Schiller-Instituts führt Beethovens Missa Solemnis auf","{""button"":1}",
+63047,page,"Dr. Natalia Vitrenko: ""Unüberbrückbare Probleme drängen die Welt in die Katastrophe""","{""toggle"":1}",
+63832,page,,[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+63904,page,"Daily Beethoven — Sparks of Joy",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+63909,page,"The Committee for the Coincidence of Opposites",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+65633,post,"Die revolutionäre Denkmethode des Nikolaus von Kues","{""blockquote"":1}",
+65771,page,"Das Komitee für die Coincidentia Oppositorum","{""call_to_action_big"":1,""blockquote"":1}",
+66704,page,"Harley Schlanger Daily Strategic Updates",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+66790,page,"Helga Zepp-LaRouche","{""hr"":2,""blockquote"":1,""tabs"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+67050,page,"""Grün"" bedeutet Tod – Es gibt keine Grenzen des Wachstums! Präsentationen","{""button"":1,""one_third"":6,""two_third_last"":6}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+67273,page,"Beethoven als sokratischer Revolutionär","{""call_to_action_big"":1,""hr"":2}",
+67291,page,"An den Quellen der Kreativität: Beethovens Hymne an die Freude","{""call_to_action_big"":1,""hr"":2,""blockquote"":2}",
+67310,page,"Die physische Kraft der klassischen Poesie und Musik","{""call_to_action_big"":1,""hr"":2}",
+67322,page,"Große Schönheit hören: Beethoven und Helen Keller","{""call_to_action_big"":1,""hr"":1,""blockquote"":1}",
+67476,page,"""Grün"" bedeutet Tod","{""title_big"":1,""hr"":1}",
+68179,page,,[],"dynamic:[portfolio] — rebuild page on a CPT-archive template, do not convert"
+68372,post,"UAE’s Hope Mission: Mars Is “a Collaborative Project for the Entire Human Race”","{""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+68395,post,"Die Hope-Mission der VAE: Der Mars ist „ein Gemeinschaftsprojekt für die gesamte Menschheit“","{""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+68941,page,"The International LaRouche Youth Movement","{""hr"":2,""one_half"":4,""one_half_last"":4,""one_third"":1,""two_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+69762,page,"""Grün"" bedeutet Tod - Es gibt keine Grenzen des Wachstums","{""hr"":1,""one_half"":4,""one_half_last"":4}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+70006,page,"Konferenz des Schiller-Instituts am 20. und 21. März 2021","{""hr"":2,""wide_bar"":1}",
+70181,page,"„Grün“ bedeutet Tod – Es gibt keine Grenzen des Wachstums","{""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+70246,page,,"{""title_big"":3,""button"":2,""hr"":3}",
+70470,post,"Conference invitation by Professor Leonardo Merino from Ecuador","{""title_big"":2,""button"":2}",
+70500,post,"Conference Invitation by Professor Leonardo Merino from Ecuador","{""title_big"":2,""button"":2}",
+70568,post,"Konferenzankündigung: Die Welt am Scheideweg!","{""button"":1}",
+70581,post,"WORLD AT A CROSSROAD: Two Months into the New Administration","{""hr"":1}",
+70864,post,"Konferenz: Die Welt am Scheideweg: Zwei Monate unter der Neuen US-Regierung","{""button"":1}",
+71960,post,"Die revolutionäre Denkmethode des Nikolaus von Kues","{""blockquote"":1}",
+72199,post,"Mit vereinten Kräften gegen Pandemie und Hungersnot","{""hr"":1,""testimonial"":1}",
+72409,post,"Die Zivilisation an sich steht auf dem Spiel:","{""call_to_action_big"":1}",
+72720,post,"Der Ibykus ist wieder da!","{""one_third"":3,""two_third_last"":3}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+72952,post,"8. Mai 2021: Internationale Schiller-Institut/ ICLC Internetkonferenz","{""call_to_action_bar"":1}",
+72992,post,"„Explosiver Mix aus steigenden Lebensmittelpreisen und Konflikten“ erhöht den Hunger in Westafrika um ein Drittel","{""call_to_action_bar"":1}",
+73003,post,"Leitartikel der Global Times verteidigt „Industrialisierung“ der Entwicklungsländer gegenüber Klima-Geopolitik","{""call_to_action_bar"":1}",
+73051,post,"Mexikos UN-Botschafter prangert die „Gleichgültigkeit“ der Welt gegenüber dem „Gespenst des Hungers“ an, das den Planeten heimsucht","{""call_to_action_bar"":1}",
+73057,post,"WFP-Präsident Beasley unterzeichnete ein Memorandum of Understanding mit der venezolanischen Regierung, um den zunehmenden Hunger zu bekämpfen","{""call_to_action_bar"":1}",
+73064,post,"„Den Armen die Energie zu entziehen, ist schlechte Klimapolitik“, warnt Bjorn Lomborg in einem China Daily-Artikel","{""call_to_action_bar"":1}",
+73142,post,"Putin warnt den Westen: Überschreiten Sie nicht Rußlands rote Linien","{""call_to_action_bar"":1}",
+73145,post,"Argentinien produziert als erstes iberoamerikanisches Land den Impfstoff Sputnik V","{""call_to_action_bar"":1}",
+73151,post,"Chinesische COVID-19-Impfstoffproduzenten planen Technologietransfer in Entwicklungsländer","{""call_to_action_bar"":1}",
+73163,post,"Chas Freeman warnt eindringlich vor der Verschlechterung der Beziehungen zwischen den USA und China.","{""call_to_action_bar"":1}",
+73256,post,"Helga Zepp-LaRouche: Die größte Bedrohung ist nicht Klimawandel, sondern Atomkrieg und Gleichgültigkeit","{""button"":1,""call_to_action_bar"":1}",
+73306,post,"Bush-Parteigänger warnen, daß die USA einen Krieg gegen China über Taiwan verlieren würden","{""button"":1,""call_to_action_bar"":1}",
+73308,post,"Selbstmordbeobachtung: Tag eins von Bidens „Leaders-Summit“ über das Klima","{""button"":1,""call_to_action_bar"":1}",
+73310,post,"Chas Freeman: Sanktionen sind „sowohl heuchlerisch und kontraproduktiv als auch grausam“","{""button"":1,""call_to_action_bar"":1}",
+73399,post,"Mars-Helikopter stellt neue Rekorde auf!","{""button"":1,""call_to_action_bar"":1}",
+73401,post,"Pandemie gewinnt in Indien die Oberhand; Biden schaut in die andere Richtung","{""button"":1,""call_to_action_bar"":1}",
+73403,post,"New Yorker Chor des Schiller-Instituts widmet Konzert dem „Geist der Elbe“","{""button"":1,""call_to_action_bar"":1}",
+73469,post,"Bericht: Rußland bringt Weizen, Öl, Medikamente nach Syrien","{""button"":1,""call_to_action_bar"":1}",
+73471,post,"Vier Tage dauerte es, bis viele Länder auf Indiens Kampf gegen COVID-19 aufmerksam wurden","{""button"":1,""call_to_action_bar"":1}",
+73625,post,"Mexikanischer und russischer Außenminister unterzeichnen bei Treffen in Moskau weitreichende Abkommen","{""button"":1,""call_to_action_bar"":1}",
+73627,post,"Putin spricht mit Modi, während Flugzeugladungen voll russischer Hilfe starten","{""button"":1,""call_to_action_bar"":1}",
+73629,post,"Rosatom startet „Atome für die Menschheit“","{""button"":1,""call_to_action_bar"":1}",
+73631,post,"Lyle Goldstein stellt eine „unbequeme Frage“: Warum bedrohen die USA das nukleare Rußland an so vielen Fronten?","{""button"":1,""call_to_action_bar"":1}",
+73635,post,"Ehemaliger britischer Außenminister will globales faschistisches System zur Bekämpfung von CO2","{""button"":1,""call_to_action_bar"":1}",
+73637,post,"China startet das Kernmodul seiner Raumstation","{""button"":1,""call_to_action_bar"":1}",
+73639,post,"Skandinavien und Europa über Pakistan an die BRI anbinden","{""button"":1,""call_to_action_bar"":1}",
+73682,post,"Tulsi Gabbard wendet sich gegen den Versuch, die Menschen nach Hautfarbe und ethnischer Zugehörigkeit zu unterteilen","{""button"":1,""call_to_action_bar"":1}",
+73684,post,"US-Außenminister Blinken besucht die Ukraine am 5. und 6. Mai","{""button"":1,""call_to_action_bar"":1}",
+73687,post,"Indien: eine verspätete Mobilisierung beginnt","{""button"":1,""call_to_action_bar"":1}",
+73689,post,"Ramsey Clark: Ein Mann mit Courage","{""button"":2,""call_to_action_bar"":1}",
+73740,post,"Kissinger über Kriegsgefahr zwischen den USA und China","{""button"":1,""call_to_action_bar"":1}",
+73797,post,"Polizeistaatliche Maßnahmen gegen Demonstranten mit 'falschen' Gedanken","{""button"":1,""call_to_action_bar"":1}",
+73799,post,"Economist benennt „den gefährlichsten Ort der Welt“: Taiwan","{""button"":1,""call_to_action_bar"":1}",
+73801,post,"Zakharova warnt vor Fallstricken des westlichen „Sanktionskriegs“","{""button"":1,""call_to_action_bar"":1}",
+73864,post,"Ein zu wenig vorbereitetes Indien taumelt unter dem Angriff der zweiten Covid-19-Welle","{""button"":1,""call_to_action_bar"":1}",
+73866,post,"Der Westen schickt einen Fingerhut voll Hilfe nach Indien","{""button"":1,""call_to_action_bar"":1}",
+73868,post,"Conference: The Moral Collapse of the Trans-Atlantic World Cries Out for a New Paradigm","{""title_big"":1,""button"":1,""hr"":1}",
+73899,post,"Konferenz: Der moralische Bankrott der transatlantischen Welt schreit nach einem Neuen Paradigma","{""title_big"":5,""button"":1,""hr"":2}",
+73948,page,,"{""title_big"":1,""hr"":2,""toggle"":1,""blockquote"":2,""wide_bar"":1,""one_half"":1,""one_half_last"":1,""one_third"":1,""two_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+74041,page,"Stop the Sanctions","{""title_small"":2,""button"":1,""hr"":2,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+74043,page,"Stoppt die Sanktionen!","{""title_small"":2,""button"":1,""hr"":2,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+74104,post,"Dr. Hans Köchler - Unilaterale Wirtschaftssanktionen: Unmoral und Arroganz der Großmachtpolitik","{""hr"":1}",
+74254,post,"Videos - Sanktionen sind völkerrechtswidrig","{""title_big"":1,""button"":1,""hr"":1}",
+74457,page,"Newsletter des internationalen Schiller-Instituts","{""hr"":1}",
+75063,page,"Internationale Schiller-Institut Internetkonferenz, 26. u. 27. Juni 2021","{""title_big"":1,""hr"":1}",
+75197,post,"Valdai Club bei St. Petersburger Wirtschaftsforum: „Dollar als Waffe“ zwingt die Welt, diese Währung zu verlassen","{""call_to_action_big"":1}",
+75202,post,"Lateinamerika wendet sich zwecks wirtschaftlicher Beziehungen Eurasischer Wirtschaftsunion zu","{""call_to_action_big"":1}",
+75238,post,"Klima-Wissenschaftler erklärt, beim 'Klima-Notstand' ginge es nur um Finanzen","{""call_to_action_big"":1,""hr"":1}",
+75243,post,"Chinesisches Außenministerium entlarvt Michael Gordons Wuhan-Lügen als Kriegsprovokation","{""call_to_action_big"":1,""hr"":1}",
+75318,post,"Second ""Dialogue on Climate"" Webinar in Italy","{""call_to_action_big"":1}",
+75332,post,"China Constructs a Mobile Covid-testing Lab in Ten Hours, Capable of One Million Tests/Day","{""call_to_action_big"":1}",
+75369,post,"Zweites Webinar zum „Klimadialog“ in Italien","{""call_to_action_big"":1,""hr"":1}",
+75372,post,"China baut mobiles Covid-Testlabor für 1 Million Tests pro Tag innerhalb von zehn Stunden","{""call_to_action_big"":1,""hr"":1}",
+75376,post,"WHO Director General: G7 Health Declaration Is Insufficient","{""call_to_action_big"":1,""hr"":1}",
+75380,post,"World Food Program Director David Beasley Sounds the Alarm on Famine in Ethiopia","{""call_to_action_big"":1,""hr"":1}",
+75400,post,"China Space Agency Lays Out Exploration Plans","{""call_to_action_big"":1,""hr"":1}",
+75405,post,"Green Dealers Have To Digest Swiss Vote against Them","{""call_to_action_big"":1}",
+75417,post,"Diplomacy by Example: Ibero-America Shares Its Vaccine Production","{""call_to_action_big"":1}",
+75430,post,"Iraq Plans Eight Nuclear Reactors, Looks to Russia for Help","{""call_to_action_big"":1}",
+75446,post,"Diplomatie durch gutes Beispiel: Lateinamerika teilt seine Impfstoffproduktion","{""call_to_action_big"":1}",
+75448,post,"„Green Dealer“ müssen das Schweizer Votum verdauen","{""call_to_action_big"":1}",
+75452,post,"Chinesische Raumfahrtbehörde legt Weltraumerkundungspläne vor","{""call_to_action_big"":1}",
+75455,post,"WHO-Generaldirektor: G7-Gesundheitserklärung ist unzureichend","{""call_to_action_big"":1}",
+75457,post,"Welternährungsprogramm-Direktor David Beasley schlägt Alarm wegen der Hungersnot in Äthiopien","{""call_to_action_big"":1}",
+75468,post,"Roscosmos Head Rogozin Calls for Global Cooperation Against Space Threats to the Planet","{""call_to_action_big"":1}",
+75480,post,"Shenzhou Astronauts Are on Their Way to the Space Station!","{""call_to_action_big"":1}",
+75492,post,"Putin Emphasizes Importance of U.S.-Russian Space Cooperation in NBC Interview","{""call_to_action_big"":1}",
+75508,post,"Präzedenzfall für Europa? Schweiz lehnt CO2-Gesetz ab","{""call_to_action_big"":1}",
+75525,post,"NBC-Interview: Putin betont die Bedeutung der amerikanisch-russischen Raumfahrtkooperation","{""call_to_action_big"":1}",
+75527,post,"Roscosmos-Chef Rogosin ruft zu globaler Zusammenarbeit gegen Bedrohungen aus dem Weltraum auf","{""call_to_action_big"":1}",
+75529,post,"Shenzhou-Astronauten auf dem Weg zur Raumstation","{""call_to_action_big"":1}",
+75614,post,"Matlock: Wir haben uns von Grundsatzvereinbarungen mit Rußland zurückgezogen","{""call_to_action_big"":1}",
+75616,post,"Jake Sullivan von der NSA: Biden und Xi Jinping konferieren bald","{""call_to_action_big"":1}",
+75652,post,"Schweiz: Vor allem junge Menschen stimmten gegen das CO2-Gesetz","{""call_to_action_big"":1}",
+75750,post,"Afrika wird von dritter Covid-Welle getroffen; eine gerechte Impfstoffverteilung hätte sie verhindern können","{""call_to_action_big"":1}",
+75752,post,"Führendes Mitglied des Valdai-Diskussionsklubs ruft zum strategischen Vier-Mächte-Dialog auf","{""call_to_action_big"":1}",
+76576,post,"LaRouche Legacy Foundation veranstaltet Internetseminar: Sind Sie endlich bereit, etwas über Wirtschaft zu lernen?","{""title_big"":1}",
+76940,page,"Es gibt keinen 'Klimanotstand'","{""title_big"":1,""button"":1,""call_to_action_big"":1}",
+77363,page,Konferenz,"{""title_big"":1,""call_to_action_big"":4,""testimonial"":1}",
+77912,post,"Afghanistan-Internetkonferenz des Schiller-Instituts: Ein Entwicklungsprogramm sofort in Angriff nehmen","{""call_to_action_big"":1}",
+77978,post,"Das Goddard-Institut der NASA schüttet kaltes Wasser auf die Verkaufsmasche ‚Klimawandel‘","{""call_to_action_big"":1,""hr"":1}",
+77988,page,"Shakespeare In Exile","{""title_big"":6,""button"":20,""hr"":4,""wide_bar"":6,""one_half"":3,""one_half_last"":3,""one_third"":7,""one_third_last"":3,""two_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+78122,post,"Klimamodelle: Mit genügend „freien Parametern“ kann man aus den Daten alles ableiten","{""call_to_action_big"":1}",
+79419,post,"Herzlichen Glückwunsch Lyndon LaRouche - Shakespeare im Exile","{""button"":1}",
+80125,post,"Das Große Erwachen","{""button"":1}",
+80328,page,"Afghanistan am Scheideweg","{""title_big"":5,""button"":13,""hr"":1,""wide_bar"":3,""one_half"":5,""one_half_last"":5,""one_third"":4,""one_third_last"":2}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+80924,post,"International Youth Call with Helga Zepp-LaRouche","{""button"":1}",
+81173,post,"Internetkonferenz am 13. und 14. November 2021","{""toggle"":7}",
+81191,post,"Helga Zepp-LaRouche sprach auf dem „Internationalen Akademischen Forum in China 2021“","{""title_big"":1}",
+82066,page,test,"{""wide_bar"":1,""one_half"":2,""one_half_last"":2}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+85492,post,"Helga Zepp-LaRouche: Lügen und Wahrheiten über die Ukraine","{""button"":1}",
+86004,post,"Internet-Konferenz am 9. April 2022: Die Schaffung einer neuen Sicherheits- und Entwicklungsarchitektur für alle Nationen","{""button"":1,""call_to_action_big"":1,""toggle"":1}",
+89159,post,"Eingefrorene afghanische Vermögenswerte verhindern Bemühungen zur Räumung von Landminen","{""call_to_action_big"":1}",
+90035,page,"Weltweite Reaktionen auf die Nazi-Hitliste der Ukraine","{""call_to_action_big"":2}",
+90181,post,"Video:  Baerbock muss Selenskyjs ""schwarze Liste"" zurückweisen.","{""button"":1}",
+90423,post,"Weltweite Reaktionen auf die Nazi-Hitliste der Ukraine – Teil 2","{""call_to_action_big"":2}",
+90545,post,"Internationaler Druck erzwingt Löschung der ukrainischen Hitliste von der CCD-Webseite: Jetzt weiter mobilisieren!","{""call_to_action_big"":1}",
+91628,page,"Den atomaren 3. Weltkrieg stoppen: Weg mit den neuen Goebbels-Propaganda-Operationen!","{""button"":3,""hr"":2,""blockquote"":1,""wide_bar"":6,""one_half"":5,""one_half_last"":5,""one_third"":3,""two_third_last"":3}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+91747,post,"Mobilisierung Alarmstufe Rot: Den atomaren 3. Weltkrieg stoppen: Weg mit den neuen Goebbels-Propaganda-Operationen!","{""button"":1}",
+92018,post,"Sabotage under Cover of Fog, By Lt.Col Ralph Bosshard","{""hr"":2}",
+92217,post,"Internationale Schiller-Institut Konferenz, 27. Oktober: Für den Weltfrieden - Stoppt die Atomkriegsgefahr","{""blockquote"":1}",
+92463,post,"„Stoppt die Atomkriegsgefahr jetzt!“ - Drittes Seminar der politischen und sozialen Führer der Welt","{""hr"":1}",
+92773,post,"Schiller-Institut spricht bei BRICS-Forschungskonferenz","{""blockquote"":1}",
+92780,post,"Aussichten für eine auf Fusionsenergie basierende Wirtschaft für die BRICS-Staaten und ihre Partner","{""blockquote"":3}",
+94474,post,"Helga Zepp-LaRouche: Warum befindet sich Deutschland im Griff der Kriegstreiber?","{""toggle"":1}",
+94537,post,"Internetkonferenz: Das Zeitalter der Vernunft oder die Auslöschung der Menschheit?","{""toggle"":8}",
+95832,post,"Ohne die Entwicklung aller Nationen kann es keinen dauerhaften Frieden auf dem Planeten geben","{""hr"":1,""toggle"":34}",
+97668,post,"Am Rande eines neuen Weltkriegs: Die europäischen Nationen müssen mit dem Globalen Süden kooperieren!","{""toggle"":13,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+97978,post,"Die Internationale Friedenskoalition","{""button"":114,""call_to_action_big"":1,""hr"":102,""one_half"":1,""one_half_last"":1,""one_third"":2,""two_third_last"":2}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+98417,post,"Internationale Internetkonferenz des Schiller-Instituts : Laßt uns gemeinsam mit der globalen Mehrheit ein neues Kapitel der Weltgeschichte aufschlagen!","{""hr"":1,""toggle"":15}",
+98538,post,"Schiller-Insitut Bericht vom Rußland-Afrika Gipfel in St. Petersburg: Der westliche Kolonialismus ist vorbei!","{""call_to_action_big"":1}",
+99395,page,"International Peace Coalition",[],"dynamic:[ajax_load_more] — rebuild page on a CPT-archive template, do not convert"
+100354,post,"Nein, eine Grenze hat Tyrannenmacht! Unterstützt die mutigen Retter Deutschlands!","{""testimonial"":1}",
+100489,post,"Helga Zepp-LaRouche: 2024-2074 - Ein neues Paradigma für die kommenden 50 Jahre","{""toggle"":1}",
+100773,post,"Petition: Internationaler Aufruf zur Aufhebung der Sanktionen gegen die Zusammenarbeit im Bereich des kulturellen Erbes","{""toggle"":3}",
+100780,post,"Paris Schiller Institute to Stage Afghan Civil Society Protest Exposing UNESCO Sanctions Against Cultural Heritage Cooperation","{""toggle"":2}",
+100797,post,"Pariser Schiller-Institut organisiert Protestveranstaltung der afghanischen Zivilgesellschaft gegen die UNESCO-Sanktionen gegen die Zusammenarbeit im Bereich des kulturellen Erbes","{""button"":1,""toggle"":3}",
+101091,post,"Internetkonferenz: Der Oasenplan: Die LaRouche-Lösung für Frieden durch Entwicklung","{""button"":5,""toggle"":17,""info_box"":1,""tabs"":1}",
+101206,post,"International Experts Warn of Danger of Nuclear War Today","{""toggle"":1}",
+101412,post,"Leading Palestinian Doctor and Peace Activist Gives Interview to Schiller Institute: ‘I Shall Not Hate’","{""call_to_action_big"":1,""toggle"":1}",
+101678,post,"Ein Interview mit S.E. Botschafter Prof. Dr. Manuel Hassassian: Frieden und Unabhängigkeit für Palästina und der Oasenplan","{""hr"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+102333,post,"International Peace Coalition #49: ‘There Is Goodness in the Universe, and That Will Prevail’","{""toggle"":1}",
+102350,post,"„Es gibt Gutes im Universum, und es wird sich durchsetzen“ - Ein Bericht vom 49. Treffen der Internationalen Friedenskoalition","{""one_third"":1,""two_third_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+102437,post,"French Schiller Institute–FAACA Conference: ‘China-Africa Cooperation in the Fight To Eliminate Poverty’","{""blockquote"":1}",
+102595,post,"Internetkonferenz des Schiller Instituts: Die Welt am Abgrund: Für einen neuen Westfälischen Frieden!","{""hr"":1,""toggle"":25,""info_box"":1}",
+103547,post,"Rußland: Kampf gegen neokoloniale Praktiken","{""one_half"":2,""one_half_last"":2}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+103952,post,"Internationale Friedenskoalition - Am Vorabend des Weltkriegs: Wir sprechen ohne Furcht","{""call_to_action_big"":1}",
+104042,post,"„Wir müssen über unseren Schatten springen“ - Bericht vom 64. Treffen der Internationalen Friedenskoalition am 23. August 2024","{""call_to_action_big"":2}",
+104424,post,"NATO-Blutsauger heulen auf","{""button"":2,""info_box"":2}",
+104480,post,"Atomkriegsgefahr wird zum Thema im US-Präsidentschaftswahlkampf","{""button"":2,""info_box"":2}",
+104557,post,"Putin kündigt überarbeitete Nukleardoktrin an; die Welt steht am Rande eines allgemeinen Krieges","{""button"":1,""info_box"":1}",
+104787,post,"Die Ära des Wahnsinns muss beendet werden","{""button"":1,""info_box"":1}",
+104906,post,"Ein Lösungsansatz, um zu verhindern, dass zwei regionale Krisen zum Dritten Weltkrieg führen","{""button"":1,""info_box"":1}",
+105014,post,"Wo sind die mutigen Führungspersönlichkeiten? Greifen Sie mit Schönheit in die Geschichte ein","{""button"":2,""info_box"":2}",
+105041,post,"Helga Zepp-LaRouche spricht auf BRICS-Konferenz in Lima, Peru","{""toggle"":1}",
+105168,post,"Ungeachtet des Ausgangs der US-Wahlen …","{""button"":2,""info_box"":2}",
+105267,post,"Konferenz: Im Geiste Schillers und Beethovens: Alle Menschen werden Brüder!","{""hr"":1,""toggle"":22}",
+105317,post,"Nach den US-Wahlen: Schließen Sie sich der Internationalen Friedenskoalition an!","{""button"":2,""info_box"":2}",
+105388,post,"Hört auf, die Welt zu schikanieren - wir brauchen einen Neuanfang","{""button"":2,""info_box"":2}",
+105415,post,"Die kommenden 60 Tage sind die gefährlichsten Ihres Lebens","{""button"":2,""info_box"":2}",
+105620,post,"Alle Menschen werden Brüder!","{""button"":2,""info_box"":2}",
+106026,post,"Finden Sie die Vorstellung eines nuklearen Schlagabtauschs zwischen den USA und Russland beruhigend?","{""button"":2,""info_box"":2}",
+106077,post,"Momentanes vs. dauerhaftes Überleben - IPC-Treffen, 20.12.2024","{""button"":2,""info_box"":2}",
+106275,post,"Treffen der Internationalen Friedenskoalition, Freitag 3. Januar 2025","{""button"":2,""info_box"":2}",
+106410,post,"Treffen der Internationalen Friedenskoalition, 10. Januar, 17.00 Uhr","{""button"":2,""info_box"":2}",
+106552,post,"Treffen der Internationalen Friedenskoalition, 17. Januar, 17.00 Uhr","{""button"":2,""info_box"":2}",
+106623,post,"Treffen der Internationalen Friedenskoalition, 24. Januar, 17.00 Uhr","{""button"":2,""info_box"":2}",
+106722,post,"Treffen der Internationalen Friedenskoalition, 31. Januar, 17.00 Uhr","{""button"":2,""info_box"":2}",
+106727,post,"The LaRouche Oasis Plan Endorsements: Peace Through Development for Palestine and Israel","{""wide_bar"":5,""one_third_last"":1,""two_third"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+106829,post,"Internationale Friedenskoalition #88, 7. Feb., 17.00 Uhr","{""button"":1,""info_box"":1}",
+106922,post,"Internationale Friedenskoalition #89, 14. Feb., 17.00 Uhr","{""button"":1,""info_box"":1}",
+107105,post,"Internationale Friedenskoalition #90, 21. Feb., 17.00 Uhr","{""button"":2,""info_box"":2}",
+107252,post,"Internationale Friedenskoalition #91, 28. Feb., 17.00 Uhr","{""button"":1,""info_box"":1}",
+107440,post,"Internationale Friedenskoalition #92, 7.3.2025, 17.00 Uhr","{""button"":1,""info_box"":1}",
+107685,page,"The Oasis Plan - The LaRouche Solution for Southwest Asia","{""title_big"":1,""call_to_action_big"":1,""testimonial"":1,""wide_bar"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+107824,post,"Internationale Friedenskoalition #93, 14.3.2025, 16.00 Uhr MEZ","{""button"":1,""info_box"":1}",
+107882,page,"Oasis Plan Concepts","{""title_big"":1,""button"":9,""call_to_action_big"":2,""wide_bar"":3,""one_half"":2,""one_half_last"":2}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+107997,page,"Videos / Articles / Press Releases","{""call_to_action_big"":2,""wide_bar"":2}",
+108027,page,Endorsements,"{""call_to_action_big"":2,""info_box"":1,""wide_bar"":2}",
+108163,page,"Organize and Take Action","{""call_to_action_big"":1,""wide_bar"":1,""one_half"":1,""one_half_last"":1}","layout-columns converted to si-col divs — needs visual QA (+ .si-col CSS in theme)"
+108206,post,"Internationale Friedenskoalition #94, 21.3.2025, 16.00 Uhr MEZ","{""button"":1,""info_box"":1}",
+108368,post,"Internationale Friedenskoalition #95, 28.3.2025, 16.00 Uhr MEZ","{""button"":1,""info_box"":1}",
+108496,post,"Internationale Friedenskoalition #96, 4.4.2025, 17.00 Uhr MEZ","{""button"":1,""info_box"":1}",
+108516,post,"An Oasis Plan for the Mutual Development of Southwest Asia - by Jacques Cheminade","{""applause"":1}",
+108687,post,"Internationale Friedenskoalition #97, 11.04.25, 17 .00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+108752,post,"Was jetzt jedes Land tun muß","{""testimonial"":1}",
+108956,post,"Internationale Friedenskoalition #98, 18.04.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+109012,post,"Internationale Friedenskoalition #99, 25.04.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+109131,post,"Internationale Friedenskoalition #100, 02.05.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+109296,post,"Internationale Friedenskoalition #101, 09.05.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+109457,post,"Internationale Friedenskoalition #102, 16.05.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+109716,post,"Internationale Friedenskoalition #104, 30.05.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+109890,page,"„Der Mensch ist nicht des Menschen Wolf“","{""title_big"":2,""wide_bar"":2}",
+109959,post,"Internationale Friedenskoalition #105, 06.06.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+110046,page,"„Der Mensch ist nicht des Menschen Wolf“","{""title_big"":1}",
+110095,page,"„Der Mensch ist nicht des Menschen Wolf“","{""title_big"":1}",
+110200,page,"“Man Is Not a Wolf to Man”","{""wide_bar"":2}",
+110232,post,"Internationale Friedenskoalition #106, 13.06.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+110440,post,"Internationale Friedenskoalition #107, 20.06.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+110618,post,"Internationale Friedenskoalition #108, 27.06.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+110722,post,"Internationale Friedenskoalition #109, 4.7.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+110950,post,"Internationale Friedenskoalition #111, 18.7.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+111133,post,"Internationale Friedenskoalition #112, 25.7.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+111265,post,"Internationale Friedenskoalition #113, 01.08.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+111368,post,"Internationale Friedenskoalition #114, 08.08.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+111590,post,"Internationale Friedenskoalition #115, 15.08.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+111696,post,"Internationale Friedenskoalition #116, 22.08.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+111764,post,"Internationale Friedenskoalition #117, 29.08.25, 17.00 Uhr (MEZ)","{""button"":1,""info_box"":1}",
+111922,post,"Internationale Friedenskoalition #118, 5. September 2025, 18.30 MEZ","{""button"":1,""info_box"":1}",
+112134,post,"Internationale Friedenskoalition #119, 12. September 2025, 17.00 Uhr MEZ","{""button"":1,""info_box"":1}",
+112225,post,"Internationale Friedenskoalition #120, 19. September 2025, 17.00 Uhr MEZ","{""button"":1,""info_box"":1}",
+112278,post,"Internationale Friedenskoalition #121, 26. September 2025, 17.00 Uhr MEZ","{""button"":1,""info_box"":1}",
+112398,post,"Internationale Friedenskoalition #122, 03. Oktober 2025, 17.00 Uhr MEZ","{""button"":1,""info_box"":1}",
+112458,post,"Internationale Friedenskoalition #123, 10. Oktober 2025, 17.00 Uhr MEZ","{""button"":1,""info_box"":1}",
+112523,post,"Internationale Friedenskoalition #124, 17. Oktober 2025, 17.00 Uhr MEZ","{""button"":1,""info_box"":1}",
+112627,post,"Internationale Friedenskoalition #125, 24. Oktober 2025, 17.00 Uhr MEZ","{""button"":1,""info_box"":1}",
+112798,post,"Internationale Friedenskoalition #126, 31. Oktober 2025, 16.00 Uhr MEZ","{""button"":1,""info_box"":1}",
+113030,post,"Internationale Friedenskoalition #128, 14.11.2025, 17.00 Uhr","{""button"":1,""info_box"":1}",
+113166,post,"Internationale Friedenskoalition #129, 21.11.2025, 17.00 Uhr","{""button"":1,""info_box"":1}",
+113252,post,"Internationale Friedenskoalition #130, 28.11.2025, 17.00 Uhr","{""button"":1,""info_box"":1}",
+113392,post,"Internationale Friedenskoalition #131, 05.12.2025, 17.00 Uhr","{""button"":1,""info_box"":1}",
+113524,post,"Internationale Friedenskoalition #132, 12.12.2025, 17.00 Uhr","{""button"":1,""info_box"":1}",
+113663,post,"Internationale Friedenskoalition #133, 19.12.2025, 17.00 Uhr","{""button"":1,""info_box"":1}",
+113821,post,"Internationale Friedenskoalition #134, 26.12.2025, 17.00 Uhr","{""button"":1,""info_box"":1}",
+113883,post,"Internationale Friedenskoalition #135, 02.01.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+113994,post,"Internationale Friedenskoalition #136, 09.01.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+114176,post,"Internationale Friedenskoalition #137, 16.01.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+114265,post,"Internationale Friedenskoalition #138, 23.01.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+114370,post,"Internationale Friedenskoalition #139, 30.01.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+114486,post,"Internationale Friedenskoalition #140, 06.02.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+114726,post,"Internationale Friedenskoalition #141, 13.02.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+114861,post,"Internationale Friedenskoalition #142, 20.02.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+114979,post,"Internationale Friedenskoalition #143, 27.02.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+115110,post,"Internationale Friedenskoalition #144, 06.03.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+115264,post,"Internationale Friedenskoalition #145, 13.03.2026, 16.00 Uhr","{""button"":1,""info_box"":1}",
+115530,post,"Internationale Friedenskoalition #146, 20.03.2026, 16.00 Uhr","{""button"":1,""info_box"":1}",
+115622,post,"Internationale Friedenskoalition #147, 27.03.2026, 16.00 Uhr","{""button"":1,""info_box"":1}",
+115773,post,"Internationale Friedenskoalition #148, 03.04.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+115974,post,"Internationale Friedenskoalition #149, 10.04.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+116054,post,"Internationale Friedenskoalition #150, 17.04.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+116137,post,"Internationale Friedenskoalition #151, 24.04.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+116331,post,"Internationale Friedenskoalition #152, 01.05.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+116466,post,"Internationale Friedenskoalition #153, 08.05.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+116659,post,"Internationale Friedenskoalition #155, 22.05.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+116757,post,"Internationale Friedenskoalition #156, 29.05.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+116848,post,"Internationale Friedenskoalition #157, 05.06.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+116999,post,"Internationale Friedenskoalition #158, 12.06.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",
+117124,post,"Internationale Friedenskoalition #159, 19.06.2026, 17.00 Uhr","{""button"":1,""info_box"":1}",

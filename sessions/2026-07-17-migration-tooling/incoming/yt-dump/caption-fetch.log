@@ -166,3 +166,43 @@ WARNING: [youtube] No supported JavaScript runtime could be found. Only deno is 
 WARNING: The extractor specified to use impersonation for this download, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies
 ERROR: Unable to download video subtitles for 'en': HTTP Error 429: Too Many Requests
 19:37 throttled at 6-aMTq7uDdI - sleeping 15 min
+Deprecated Feature: Support for Python version 3.10 has been deprecated. Please update to Python 3.11 or above
+[youtube] Extracting URL: https://www.youtube.com/watch?v=6GUmA55J4hE
+[youtube] 6GUmA55J4hE: Downloading webpage
+WARNING: [youtube] No supported JavaScript runtime could be found. Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one
+[youtube] 6GUmA55J4hE: Downloading android vr player API JSON
+[info] 6GUmA55J4hE: Downloading 1 format(s): 137+140
+[info] There are no subtitles for the requested languages
+Deprecated Feature: Support for Python version 3.10 has been deprecated. Please update to Python 3.11 or above
+[youtube] Extracting URL: https://www.youtube.com/watch?v=7oYXspNOmbE
+[youtube] 7oYXspNOmbE: Downloading webpage
+WARNING: [youtube] No supported JavaScript runtime could be found. Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one
+[youtube] 7oYXspNOmbE: Downloading android vr player API JSON
+[info] 7oYXspNOmbE: Downloading subtitles: en
+[info] 7oYXspNOmbE: Downloading 1 format(s): 136+251
+[info] Writing video subtitles to: incoming/yt-dump/subs/7oYXspNOmbE.en.vtt
+WARNING: The extractor specified to use impersonation for this download, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies
+ERROR: Unable to download video subtitles for 'en': HTTP Error 429: Too Many Requests
+19:52 throttled at 7oYXspNOmbE - sleeping 15 min
+Deprecated Feature: Support for Python version 3.10 has been deprecated. Please update to Python 3.11 or above
+[youtube] Extracting URL: https://www.youtube.com/watch?v=8zp6OcJouR0
+[youtube] 8zp6OcJouR0: Downloading webpage
+WARNING: [youtube] No supported JavaScript runtime could be found. Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one
+[youtube] 8zp6OcJouR0: Downloading android vr player API JSON
+[info] 8zp6OcJouR0: Downloading subtitles: en
+[info] 8zp6OcJouR0: Downloading 1 format(s): 136+251
+[info] Writing video subtitles to: incoming/yt-dump/subs/8zp6OcJouR0.en.vtt
+WARNING: The extractor specified to use impersonation for this download, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies
+[download] Destination: incoming/yt-dump/subs/8zp6OcJouR0.en.vtt
+[download]    1.00KiB at  664.39KiB/s (00:00:03)[download]    3.00KiB at    1.23MiB/s (00:00:03)[download]    7.00KiB at    2.32MiB/s (00:00:03)[download]   15.00KiB at    3.85MiB/s (00:00:03)[download]   31.00KiB at  896.59KiB/s (00:00:03)[download]   63.00KiB at    1.02MiB/s (00:00:03)[download]  127.00KiB at    1.31MiB/s (00:00:03)[download]  127.43KiB at    1.30MiB/s (00:00:03)[download] 100% of  127.43KiB in 00:00:03 at 41.00KiB/s
+Deprecated Feature: Support for Python version 3.10 has been deprecated. Please update to Python 3.11 or above
+[youtube] Extracting URL: https://www.youtube.com/watch?v=A7j7L1Veank
+[youtube] A7j7L1Veank: Downloading webpage
+WARNING: [youtube] No supported JavaScript runtime could be found. Only deno is enabled by default; to use another runtime add  --js-runtimes RUNTIME[:PATH]  to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See  https://github.com/yt-dlp/yt-dlp/wiki/EJS  for details on installing one
+[youtube] A7j7L1Veank: Downloading android vr player API JSON
+[info] A7j7L1Veank: Downloading subtitles: en
+[info] A7j7L1Veank: Downloading 1 format(s): 136+251
+[info] Writing video subtitles to: incoming/yt-dump/subs/A7j7L1Veank.en.vtt
+WARNING: The extractor specified to use impersonation for this download, but no impersonate target is available. If you encounter errors, then see  https://github.com/yt-dlp/yt-dlp#impersonation  for information on installing the required dependencies
+ERROR: Unable to download video subtitles for 'en': HTTP Error 429: Too Many Requests
+20:08 throttled at A7j7L1Veank - sleeping 15 min

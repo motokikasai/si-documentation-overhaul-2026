@@ -1,0 +1,2 @@
+74713;type=retire;note=exact duplicate publish of 74711 (same slug+language) — verify-gate catch
+74762;type=retire;note=petition page duplicating post 61757 (predicted in pair-audit) — post keeps the URL

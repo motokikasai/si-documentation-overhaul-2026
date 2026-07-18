@@ -1273,8 +1273,22 @@ final class SI_Migrate_Command {
                 $r = wp_insert_term('Unsorted (housekeeping)', 'category', ['slug' => 'si-unsorted']);
                 if (!is_wp_error($r)) { $hk = get_term($r['term_id'], 'category'); }
             }
-            if ($hk && !$this->dry) { update_option('default_category', $hk->term_id); }
-            $this->log('prep: default_category → si-unsorted' . ($this->dry ? ' (dry)' : ''));
+            if ($hk && !$this->dry) {
+                // direct write — WPML filters 'default_category' per-language and silently
+                // overrides update_option() (rehearsal 2026-07-18: allgemein stayed default)
+                global $wpdb;
+                $wpdb->update($wpdb->options, ['option_value' => (string) $hk->term_id], ['option_name' => 'default_category']);
+                wp_cache_delete('alloptions', 'options');
+                wp_cache_delete('default_category', 'options');
+                $icl = get_option('icl_sitepress_settings');
+                if (is_array($icl) && !empty($icl['default_categories'])) {
+                    foreach ($icl['default_categories'] as $lang => $ttid) {
+                        $icl['default_categories'][$lang] = (int) get_term($hk->term_id, 'category')->term_taxonomy_id;
+                    }
+                    update_option('icl_sitepress_settings', $icl);
+                }
+            }
+            $this->log('prep: default_category → si-unsorted (direct write + WPML per-language defaults)' . ($this->dry ? ' (dry)' : ''));
         }
 
         if (in_array($phase, ['merge', 'all'], true)) {
@@ -1385,7 +1399,11 @@ final class SI_Migrate_Command {
             foreach (SI_Csv::read($assoc['baseline']) as $r) { $base[$r['element_type']] = (int) $r['count']; }
             $post_total_before = array_sum(array_filter($base, static fn($v, $k) => str_starts_with($k, 'post_') , ARRAY_FILTER_USE_BOTH));
             $post_total_after = array_sum(array_filter($icl, static fn($v, $k) => str_starts_with($k, 'post_'), ARRAY_FILTER_USE_BOTH));
-            $check('icl post_* row total preserved', $post_total_before === $post_total_after, "$post_total_before → $post_total_after");
+            // growth = records the pipeline CREATED (persons/conferences/presentations get icl rows
+            // when WPML is active); loss would mean the rename dropped pairings.
+            $check('icl post_* rows not lost (growth = created records)', $post_total_after >= $post_total_before, "$post_total_before → $post_total_after");
+            $check('icl attachment rows not lost', ($icl['post_attachment'] ?? 0) >= ($base['post_attachment'] ?? 0),
+                ($base['post_attachment'] ?? 0) . ' → ' . ($icl['post_attachment'] ?? 0));
         }
 
         // 3. presentations integrity
@@ -1393,7 +1411,8 @@ final class SI_Migrate_Command {
         if ($pres_total) {
             $no_conf = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->posts} p WHERE p.post_type='si_presentation' AND p.post_status='publish'
                 AND NOT EXISTS (SELECT 1 FROM {$wpdb->postmeta} pm WHERE pm.post_id=p.ID AND pm.meta_key='parent_conference' AND pm.meta_value != '')");
-            $check('presentations have parent_conference', $no_conf === 0, "$no_conf orphans of $pres_total");
+            $budget = (int) ($assoc['orphan-budget'] ?? 0);   // reviewed allowance (unmapped-base list)
+            $check('presentations have parent_conference' . ($budget ? " (budget $budget)" : ''), $no_conf <= $budget, "$no_conf orphans of $pres_total");
             $bad_yt = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->postmeta} WHERE meta_key='yt_video_id' AND meta_value != '' AND meta_value NOT REGEXP '^[A-Za-z0-9_-]{11}$'");
             $check('yt_video_id format valid', $bad_yt === 0, "$bad_yt malformed");
             $bad_range = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->postmeta} s
@@ -1409,10 +1428,16 @@ final class SI_Migrate_Command {
             AND post_type IN ('post','page') AND post_content REGEXP '$re'");
         $check('no leftover Vanguard shortcodes', $leftover === 0, "$leftover items (dynamic-flag pages excluded manually)");
 
-        // 5. slug collisions inside each rewrite base
-        $dupes = (int) $wpdb->get_var("SELECT COUNT(*) FROM (SELECT post_name, post_type, COUNT(*) c FROM {$wpdb->posts}
-            WHERE post_status='publish' AND post_type LIKE 'si\_%' GROUP BY post_name, post_type HAVING c > 1) d");
-        $check('no slug collisions within CPT bases', $dupes === 0, "$dupes duplicate slugs");
+        // 5. slug collisions inside each rewrite base — SAME language only (WPML translations
+        //    legitimately share slugs across languages; 276 benign groups seen in rehearsal)
+        $icl_table = SI_WPML::table();
+        $dupes = (int) $wpdb->get_var("SELECT COUNT(*) FROM (
+            SELECT p.post_name, p.post_type, COUNT(*) c, COUNT(DISTINCT icl.language_code) langs
+            FROM {$wpdb->posts} p
+            LEFT JOIN $icl_table icl ON icl.element_id = p.ID AND icl.element_type = CONCAT('post_', p.post_type)
+            WHERE p.post_status='publish' AND p.post_type LIKE 'si\_%'
+            GROUP BY p.post_name, p.post_type HAVING c > 1 AND langs < c) d");
+        $check('no same-language slug collisions within CPT bases', $dupes === 0, "$dupes duplicate slugs");
 
         // 6. allgemein status
         $allg = get_term_by('slug', 'allgemein', 'category');

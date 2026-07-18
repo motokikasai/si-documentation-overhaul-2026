@@ -36,6 +36,22 @@ the interface between the two is **`01-csv-contracts.md`**; Day-1 outputs land i
 
 Offline Day-1 toolchain (all in `tools/`): `day1-extract.py` (dump → items.jsonl signals) · `day1-classify.py` (R-rules + category map + queues) · `day1-apply-review.py` (decision merge) · `day1-persons.py` · `day1-erab.py` · `day1-yt.py` (stages B+C) · `day1-scan.php` (stage D, reuses the unit-tested SI_Parse) · `polite-fetch.sh`.
 
+## ✅ DRESS REHEARSAL PASSED (Local `si-v1`, 2026-07-18) — `si:verify` 0 failures
+
+The full chain ran on real WP 7.0.1 + PHP 8.3 + Pods + WPML against the sandbox dump:
+classify (byte-identical to canonical, 0/5,397 diff) → persons (722) → conferences (57+2 new)
+→ transform (2,549 type changes; **0 icl rows lost, allgemein retired**) → presentations (821
+generated + 709/786 legacy auto-linked, 121 orphans budgeted for team) → shortcodes (465
+converted, 55 dynamic-flagged) → categories (44 merges + 247 retires) → redirects (**1,720
+row-301s** + patterns) → verify **all PASS**. Rehearsal outputs harvested to `incoming/`
+(redirects.csv · shortcode-report.csv · orphan-presentations.csv).
+
+Bugs found & fixed by the rehearsal (all in git): classify statement-signal parity (83 rows) ·
+unregistered-taxonomy term reads · fuzzy conference-term cross-linking (9.8k mislinks) · WPML
+default-category override blocking allgemein retirement · language-blind verify checks ·
+portfolio permalinks on unregistered type · never-public translations emitting redirects ·
+PHP fputcsv escape corruption. Two live-content duplicates caught and retired (74713, 74762).
+
 ## Execution runbook (on Local, sandbox dump imported; replayed verbatim on staging at P6)
 
 ```bash
