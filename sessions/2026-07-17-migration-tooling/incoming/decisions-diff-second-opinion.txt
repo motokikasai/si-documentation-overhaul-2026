@@ -1,0 +1,134 @@
+# Second-opinion diff adjudication — fable-day1, 2026-07-18
+# Source: row-level diff vs work/worksheets/classification.csv (other session).
+# Principle: accept theirs where notes carry body evidence (PDFs, char counts, duplicate ids);
+# mine stands where theirs is "deterministic: default" (a non-judgment) or contradicts policy
+# (C5 conference posts, external-event talks, URL-preserving page defaults).
+
+# --- empty/test/duplicate drafts my pass never queued (post/page drafts fell through R9) → retire
+25236;type=retire;note=empty-title draft (second-opinion diff)
+25429;type=retire;note=empty-title draft (second-opinion diff)
+29789;type=retire;note=empty-title draft (second-opinion diff)
+44895;type=retire;note=empty-title draft (second-opinion diff)
+45372;type=retire;note=empty-slug draft duplicate of 45373
+49499;type=retire;note=draft duplicate of 49500
+63112;type=retire;note=empty-title draft (second-opinion diff)
+66456;type=retire;note=empty-title published page (second-opinion diff)
+68179;type=retire;note=empty-title published page (second-opinion diff)
+68666;type=retire;note=empty-title draft (second-opinion diff)
+68920;type=retire;note=empty-title draft (second-opinion diff)
+70246;type=retire;note=empty-title published page (second-opinion diff)
+71739;type=retire;note=empty-title draft (second-opinion diff)
+75825;type=retire;note=test draft (second-opinion diff)
+75826;type=retire;note=empty-title draft (second-opinion diff)
+94064;type=retire;note=empty-title draft (second-opinion diff)
+96717;type=retire;note=test draft (second-opinion diff)
+99477;type=retire;note=empty-title draft (second-opinion diff)
+100517;type=retire;note=empty-title draft (second-opinion diff)
+100538;type=retire;note=draft duplicate of 100540
+103801;type=retire;note=empty-title draft (second-opinion diff)
+103802;type=retire;note=draft duplicate of 103803
+110125;type=retire;note=test draft (second-opinion diff)
+
+# --- statements confirmed by body evidence (PDF / signature form / declaration text)
+2246;type=si_statement;note=founding mission statement with PDF (second-opinion)
+58381;type=si_statement;note=programmatic urgent call Part I (second-opinion)
+58465;type=si_statement;note=DE pair of 58381
+58505;type=si_statement;note=issued HZL statement (second-opinion)
+58538;type=si_statement;note=DE pair of 58505
+68504;type=si_statement;note=LYM statement (second-opinion)
+68664;type=si_statement;note=DE pair of 68504
+71935;type=si_statement;note=CCD project-launch statement (second-opinion)
+71948;type=si_statement;note=DE pair of CCD founding statement 63615
+72036;type=si_statement;note=DE pair of 71935
+89649;type=si_statement;note=joint declaration of first signers vs CCD blacklist (89622 stays post: news report)
+99221;type=si_statement;note=artists' appeal on Schiller's Die Künstler (pairs 99642)
+99642;type=si_statement;note=artists' appeal text (second-opinion)
+99874;type=si_statement;note=HZL leaflet/appeal, Berlin peace demo (second-opinion)
+100304;type=si_statement;note=US farmers' signed support statement with PDF; external signers
+110602;type=si_statement;note=declaration for leaflet distribution with PDF (second-opinion)
+112063;type=si_statement;note=call-to-action text of NWEO petition (second-opinion)
+112108;type=si_statement;note=DE pair of 112063
+113465;type=si_statement;note=rallying-call statement with endorsement mechanism (second-opinion)
+113414;type=si_statement;note=DE pair of 113465 (flipped for WPML pair consistency)
+115202;type=si_statement;note=open letter to Pope Leo XIV with signature form + PDF
+107504;type=si_statement;note=DE declaration page; pairs with 107592 statement
+# petition/appeal PAGES duplicating statement posts — become statements, DEDUPE at transform
+1163;type=si_statement;note=the Stop-WWIII appeal page; dedupe vs post twins at transform
+1656;type=si_statement;note=DE pair of 1163
+31944;type=si_statement;note=FR pair of 1163
+74741;type=si_statement;note=petition page duplicating post 57909 — dedupe at transform
+74757;type=si_statement;note=petition page duplicating post 59156 — dedupe at transform
+74762;type=si_statement;note=petition page duplicating post 61757 — dedupe at transform
+74772;type=si_statement;note=resolution page duplicating post 64616 — dedupe at transform
+
+# --- coverage confirmed (outlet appearances without coverage categories)
+19583;type=si_coverage;note=CCTV appearance (second-opinion)
+31478;type=si_coverage;note=Sputnik interview (second-opinion)
+31413;type=si_coverage;note=EN pair of 31478 (flipped for pair consistency)
+41998;type=si_coverage;note=People's Daily coverage (second-opinion)
+90002;type=si_coverage;note=RT TV interview (second-opinion)
+90029;type=si_coverage;note=DE pair of 90002
+
+# --- videos confirmed (SI's own broadcasts/interviews with transcripts)
+69541;type=si_video;note=SI interview video (second-opinion)
+94378;type=si_video;note=DE dialogue video; EN pair 94192 already si_video
+102333;type=si_video;series=ipc-meeting;note=IPC meeting recording with transcript (second-opinion)
+103721;type=si_video;note=SI/EIR video interview with transcript (second-opinion)
+98239;type=si_video;note=H4P rally broadcast is SI content — hzl-coverage category misleading
+
+# --- presentations: July 2023 Strasbourg per-talk TEXT posts (transcript-only is valid, 06 §2.3)
+97463;type=si_presentation;note=Strasbourg July 2023 talk text — conference-map needs a Strasbourg row
+97592;type=si_presentation;note=Strasbourg July 2023 talk text
+97604;type=si_presentation;note=Strasbourg July 2023 talk text
+97616;type=si_presentation;note=Strasbourg July 2023 talk text
+97631;type=si_presentation;note=Strasbourg July 2023 talk text
+97644;type=si_presentation;note=Strasbourg July 2023 talk text
+97656;type=si_presentation;note=Strasbourg July 2023 talk text
+97729;type=si_presentation;note=Strasbourg July 2023 talk text
+97741;type=si_presentation;note=Strasbourg July 2023 talk text
+97753;type=si_presentation;note=Strasbourg July 2023 talk text
+97765;type=si_presentation;note=Strasbourg July 2023 talk text
+97793;type=si_presentation;note=Strasbourg July 2023 talk text
+97916;type=si_presentation;note=Strasbourg July 2023 talk text
+# other confirmed talks
+23530;type=si_presentation;note=transcript of video address to conference (second-opinion)
+52027;type=si_presentation;note=message presented to Feb 2019 conference
+70845;type=si_presentation;note=single conference talk video (second-opinion)
+85163;type=si_presentation;note=conference keynote text, no video (transcript-only valid)
+# per-talk PAGES my R4.1 regex missed (embeds without t= deep links)
+62485;type=si_presentation;note=Sept 2020 DE per-talk page (R4.1 family; regex missed non-deep-link embed)
+62617;type=si_presentation;note=Sept 2020 DE per-talk page
+62630;type=si_presentation;note=Sept 2020 DE per-talk page
+79160;type=si_presentation;note=Shakespeare workshop page: video + transcript PDF
+112036;type=si_presentation;note=Berlin 2025 DE per-talk page (Daqi Fan)
+
+# --- documents: long programmatic reports published inline (60-80k chars, PDF editions)
+80604;type=si_document;note=Haiti reconstruction plan inline ~77k chars (second-opinion)
+80391;type=si_document;note=EN pair of 80604 (flipped for pair consistency)
+83214;type=si_document;note=SI memorandum ~70k chars (second-opinion)
+83383;type=si_document;note=DE pair of 83214
+86540;type=si_document;note=LaRouche Plan programmatic paper ~72k chars
+86410;type=si_document;note=EN pair of 86540 (flipped for pair consistency)
+86671;type=si_document;note=EIR preprint pointer with PDF download
+
+# --- conference
+56471;type=si_conference;note=DE page of Nov 2019 LaRouche memorial conference; dedupe vs post 56447
+
+# --- corrections of category-driven misfires
+73899;type=post;note=hzl-coverage category misfire — DE announcement pair of 73868 (C5: stays Article)
+
+# --- mine stands, second opinion recorded in notes (no type change)
+57843;note=second opinion says statement; no body evidence — team verify
+95456;note=second opinion says statement; conference-title article — team verify
+99314;note=third-party proposal republished with PDF; stays post for WPML pair consistency with 99309
+47107;note=talk at external UN HRC event — stays post (Presentation requires SI conference parent)
+64777;note=paper at external conference — stays post (same policy)
+22599;note=RU minimal conference landing — stays page (dead-language noindex policy); attach via conference-map
+41376;note=press release stored as page — stays page (URL preservation default)
+90035;note=news compilation stored as page — stays page (URL preservation default)
+97978;note=IPC hub built as post — stays post; P7 builds the real campaign landing Page
+90942;note=coverage candidate (Russian committee republication) — kept post with EN pair 90921; team may flip both
+90921;note=see 90942
+89622;note=news report on blacklist responses — distinct from declaration 89649
+90961;note=si_document is a defensible alternative (fact sheet w/ PDF); kept statement
+100773;note=draft DE translation of petition 99746 — retire upheld; keep-candidate if team wants the translation

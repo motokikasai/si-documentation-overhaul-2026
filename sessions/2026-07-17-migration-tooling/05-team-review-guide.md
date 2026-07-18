@@ -35,16 +35,16 @@ need nothing from you.
 
 ---
 
-## File 1 — `conference-map.csv` · 73 rows · **do this one first** (~2 h, best done by someone who remembers the conferences)
+## File 1 — `conference-map.csv` · 55 rows · **do this one first** (~2 h, best done by someone who remembers the conferences)
 
 One row per conference. The machine guessed titles, years and matches; **dates are the weakest part**.
 
 - Fix `title` (official conference name), `start_date` / `end_date` (real dates, format `2023-09-09`), `location`.
 - `action`: `create` = we build a new conference page and keep the old blog post as an article (the safe default). `promote` = the old post/page itself *becomes* the conference page. If unsure, leave `create`.
-- The 16 rows with a note "portfolio-only conference" are pre-2017 conferences (Flörsheim 2012, Paris 2015, …). They have machine-made names like `2015-paris-conference` — please give them proper titles and dates.
+- Rows with a note "portfolio-only conference" are pre-2017 conferences (Paris 2015, Frankfurt 2013, …) with machine-made names — please give them proper titles and dates. The Flörsheim Nov-2012 and Strasbourg July-2023 rows were reconstructed by hand; double-check their dates.
 - Done = every row has real dates + your initials.
 
-## File 2 — `person-map.csv` · 727 rows · ~3 h
+## File 2 — `person-map.csv` · 740 rows · ~3 h
 
 One row per person. Only ~500 rows are flagged (`needs_review=1`); the rest are settled.
 
@@ -79,7 +79,7 @@ Everything already has a decision. Please check three filtered slices (use a fil
 
 1. `notes` contains **"verify"** (~86 rows): borderline calls (mostly statement-vs-article) — read
    the actual post on the live site and confirm `final_type` is right; fix + initials if not.
-2. `final_type` = **retire** (~63 published rows): scan the titles — is anything there that must
+2. `final_type` = **retire** (~66 published rows): scan the titles — is anything there that must
    NOT be unpublished? Two draft pages are already marked KEEP-CANDIDATE (Leonore Summer 2021,
    LaRouche Oasis Plan) — decide if they should be finished and published.
 3. `final_topics` = **"-"** (30 rows): genuinely topic-less articles. Assign a topic only if one
