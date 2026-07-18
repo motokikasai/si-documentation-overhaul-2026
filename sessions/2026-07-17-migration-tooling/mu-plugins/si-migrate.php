@@ -1060,14 +1060,19 @@ final class SI_Migrate_Command {
                 $key = $persons[SI_Person_Key::key($p->post_title)] ?? SI_Person_Key::key($p->post_title);
                 $pid = $this->person_post_id($key);
                 if ($pid) { $fields['presenters'] = [$pid]; }
-                // panel from portfolio_category term (panel-*), conference rel resolved by si:conferences later
-                $terms = wp_get_object_terms($p->ID, 'portfolio_category', ['fields' => 'slugs']);
-                if (!is_wp_error($terms)) {
-                    foreach ($terms as $t) {
-                        if (preg_match('/^panel-?(.+)$/', $t, $pm)) { $fields['panel_title'] = 'Panel ' . strtoupper($pm[1]); }
-                    }
-                    if ($terms) { update_post_meta($p->ID, '_legacy_portfolio_terms', implode('|', $terms)); }
+                // panel from portfolio_category term (panel-*), conference rel resolved by si:conferences later.
+                // Direct SQL: portfolio_category is UNREGISTERED once Vanguard is gone, so the
+                // taxonomy API refuses — the rows are still in the DB (found in rehearsal 2026-07-18).
+                global $wpdb;
+                $terms = $wpdb->get_col($wpdb->prepare(
+                    "SELECT t.slug FROM {$wpdb->term_relationships} tr
+                     JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id
+                     JOIN {$wpdb->terms} t ON t.term_id = tt.term_id
+                     WHERE tr.object_id = %d AND tt.taxonomy = 'portfolio_category'", $p->ID));
+                foreach ($terms as $t) {
+                    if (preg_match('/^panel-?(.+)$/', $t, $pm)) { $fields['panel_title'] = 'Panel ' . strtoupper($pm[1]); }
                 }
+                if ($terms) { update_post_meta($p->ID, '_legacy_portfolio_terms', implode('|', $terms)); }
                 break;
 
             case 'si_coverage':
@@ -1768,11 +1773,23 @@ final class SI_Migrate_Command {
                 'start_date' => $row['start_date'] ?? '', 'end_date' => $row['end_date'] ?? '',
                 'location' => $row['location'] ?? '', 'featured_video' => $row['yt_playlist_id'] ?? '',
             ]));
-            // link legacy presentations by portfolio_category terms (11 §3)
+            // link legacy presentations by portfolio_category terms (11 §3).
+            // EXACT pipe-delimited match; generic per-item terms (panel-*/concert/music) are
+            // NEVER conference identifiers (rehearsal 2026-07-18: LIKE matching mislinked 9.8k).
+            global $wpdb;
             foreach (array_filter(array_map('trim', explode('|', $row['portfolio_terms'] ?? ''))) as $pterm) {
-                $ids = get_posts(['post_type' => 'si_presentation', 'meta_key' => '_legacy_portfolio_terms',
-                    'meta_value' => $pterm, 'meta_compare' => 'LIKE', 'posts_per_page' => -1, 'fields' => 'ids', 'post_status' => 'any']);
+                if (preg_match('/^(panel|concert|music|konzert|article|transcript|greetings|messages)/i', $pterm)) {
+                    $this->log("  SKIP generic portfolio term '$pterm' (not a conference identifier)");
+                    continue;
+                }
+                $like = '%' . $wpdb->esc_like($pterm) . '%';
+                $ids = $wpdb->get_col($wpdb->prepare(
+                    "SELECT pm.post_id FROM {$wpdb->postmeta} pm JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+                     WHERE pm.meta_key = '_legacy_portfolio_terms' AND p.post_type = 'si_presentation'
+                     AND pm.meta_value LIKE %s", $like));
                 foreach ($ids as $pid) {
+                    $terms = explode('|', get_post_meta((int) $pid, '_legacy_portfolio_terms', true));
+                    if (!in_array($pterm, $terms, true)) { continue; }   // exact term, not substring
                     SI_Fields::save('si_presentation', (int) $pid, ['parent_conference' => $conf_id]);
                     $n['linked_presentations']++;
                 }
