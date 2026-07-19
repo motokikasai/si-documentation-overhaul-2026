@@ -3,8 +3,8 @@ green-fr,“Green” Means No Humanity,French,“Green” Means No Humanity,2,0,
 180,180,English (default),180,3,0,2022-07-10,merge-duplicate,CONFIRMED original: 'brics-de' (BRICS). Inherit: topic-remap → si_topic: New Silk Road & Great Projects
 316,316,English (default),316,1,0,2022-12-14,merge-duplicate,CONFIRMED original: 'allgemein-zh-hans' (Allgemein @zh-hans). Inherit: retire → default dump — reclassify member posts
 33,33,English (default),33,1,0,2021-07-11,merge-duplicate,CONFIRMED original: 'updates-war' (World war danger updates). Inherit: topic-remap → si_topic: Peace & Strategy
-37,37,English (default),37,251,10,2024-11-27,merge-duplicate,CONFIRMED original: 'allgemein-de' (Allgemein). Inherit: original not in dropdown export — check on clone
-,40,unknown,40,0,0,,retire,empty/unresolvable term
+37,37,English (default),37,251,10,2024-11-27,retire,"fate changed merge-duplicate->retire 2026-07-19: survivor 'allgemein-de' absent on clone (rehearsal skipped the merge, term survived with 250 posts); allgemein-de's own fate was retire/default-dump, so retiring directly is equivalent. Was: CONFIRMED original: 'allgemein-de' (Allgemein). Inherit: original not in dropdown export — check on clone"
+40,40,unknown,40,0,0,,retire,resolved on clone 2026-07-19 (leftover in wp-admin after rehearsal); empty/unresolvable term
 436,436,English (default),436,13,5,2024-09-25,merge-duplicate,CONFIRMED original: 'hzl' (Helga Zepp-LaRouche). Inherit: person-signal → Person: Helga Zepp-LaRouche
 438,438,English (default),438,47,3,2024-11-27,merge-duplicate,CONFIRMED original: 'helga-zepp-larouche-de' (Helga Zepp-LaRouche). Inherit: person-signal → Person: Helga Zepp-LaRouche
 448,448,English (default),448,12,0,2022-03-09,merge-duplicate,CONFIRMED original: 'bri-de' (BRI). Inherit: topic-remap → si_topic: New Silk Road & Great Projects
@@ -25,7 +25,7 @@ green-fr,“Green” Means No Humanity,French,“Green” Means No Humanity,2,0,
 537,537,English (default),537,12,2,2024-11-27,merge-duplicate,CONFIRMED original: 'hzl-video-de' (Helga Video). Inherit: cpt-signal → si_video
 539,539,English (default),539,16,0,2022-12-09,merge-duplicate,CONFIRMED original: 'hzl-coverage-de' (Helga media coverage or interview). Inherit: cpt-signal → si_coverage
 540,540,English (default),540,16,0,2022-12-09,merge-duplicate,CONFIRMED original: 'activity-coverage-de' (Media coverage of our activity). Inherit: cpt-signal → si_coverage
-,541,unknown,541,0,0,,retire,empty/unresolvable term
+541,541,unknown,541,0,0,,retire,resolved on clone 2026-07-19 (leftover in wp-admin after rehearsal); empty/unresolvable term
 542,542,English (default),542,9,1,2024-07-25,merge-duplicate,"CONFIRMED original: 'hzl-text-de' (Helga statement, article, transcript). Inherit: cpt-signal → Article+Person:HZL"
 544,544,English (default),544,19,0,2022-08-30,merge-duplicate,CONFIRMED original: 'updates-space-de' (Space updates). Inherit: topic-remap → si_topic: Science & Space
 550,550,English (default),550,6,0,2022-05-29,merge-duplicate,CONFIRMED original: 'updates-finance-de' (New financial order updates). Inherit: topic-remap → si_topic: Physical Economy & Development
@@ -63,9 +63,9 @@ allgemein-fr,Allgemein,French,Allgemein,1,0,2014-12-29,retire,default dump — r
 allgemein-ru,Allgemein,Russian,Allgemein,38,0,2019-02-16,retire,default dump — reclassify member posts
 allgemein-el,Allgemein,Greek,Allgemein,1,0,2013-04-27,retire,default dump — reclassify member posts
 allgemein-it,Allgemein,Italian,Allgemein,1,0,2015-08-31,retire,default dump — reclassify member posts
-,Allgemein,unknown,Allgemein,0,0,,retire,empty/unresolvable term
-,Allgemein,unknown,Allgemein,0,0,,retire,empty/unresolvable term
-,Allgemein,unknown,Allgemein,0,0,,retire,empty/unresolvable term
+allgemein-es,Allgemein,Spanish,Allgemein,0,0,,retire,resolved on clone 2026-07-19 (leftover in wp-admin after rehearsal); empty/unresolvable term
+allgemein-fa,Allgemein,Farsi,Allgemein,0,0,,retire,resolved on clone 2026-07-19 (leftover in wp-admin after rehearsal); empty/unresolvable term
+allgemein-ar,Allgemein,Arabic,Allgemein,0,0,,retire,resolved on clone 2026-07-19 (leftover in wp-admin after rehearsal); empty/unresolvable term
 allgemein-zh-hans,Allgemein @zh-hans,Chinese,Allgemein @zh-hans,4,2,2025-06-14,retire,default dump — reclassify member posts
 bri-de,BRI,German,BRI,120,1,2024-12-19,topic-remap,si_topic: New Silk Road & Great Projects
 brics-de-2,BRICS,German,BRICS,37,0,2023-08-22,topic-remap,si_topic: New Silk Road & Great Projects
@@ -190,7 +190,7 @@ history,History,English (default),History,8,0,2023-11-15,topic-remap,si_topic: H
 ibn-sina,Ibn Sina,English (default),Ibn Sina,11,0,2022-03-25,campaign-remap,si_campaign: Operation Ibn Sina
 international-peace-coalition,International Peace Coalition,English (default),International Peace Coalition,124,86,2026-06-22,campaign-remap,si_campaign: International Peace Coalition
 komitee-coincidenica-oppositorum-zusammenfall-der-gegensatze-de,Komitee Coincidenica Oppositorum (Zusammenfall der Gegensätze),German,Komitee Coincidenica Oppositorum (Zusammenfall der Gegensätze),16,0,2022-01-20,campaign-remap,si_campaign: Coincidence of Opposites
-,Locations of our activity,unknown,Locations of our activity,0,0,,retire,empty/unresolvable term
+location,Locations of our activity,unknown,Locations of our activity,0,0,,retire,resolved on clone 2026-07-19 (leftover in wp-admin after rehearsal); empty/unresolvable term
 location-africa-subsaharan,Africa (Subsaharan) SI activity,English (default),Locations of our activity > Africa (Subsaharan) SI activity,1,0,2019-06-26,region-remap,si_region (continent; country child only if high-volume)
 location-asia-c-n,Asia (Central & Northern) SI activity,English (default),Locations of our activity > Asia (Central & Northern) SI activity,2,0,2019-08-12,region-remap,si_region (continent; country child only if high-volume)
 location-russia,Russia SI activity,English (default),Locations of our activity > Asia (Central & Northern) SI activity > Russia SI activity,6,0,2019-08-08,region-remap,si_region (continent; country child only if high-volume)
@@ -212,7 +212,7 @@ los-angeles-si-activity,Los Angeles SI activity,English (default),Locations of o
 location-nyc,New York City SI activity,English (default),Locations of our activity > United States SI activity > New York City SI activity,34,0,2021-04-26,region-remap,si_region (continent; country child only if high-volume)
 location-va,Northern Virginia SI activity,English (default),Locations of our activity > United States SI activity > Northern Virginia SI activity,6,0,2021-04-26,region-remap,si_region (continent; country child only if high-volume)
 location-sf,San Francisco Bay Area SI activity,English (default),Locations of our activity > United States SI activity > San Francisco Bay Area SI activity,1,0,2019-07-02,region-remap,si_region (continent; country child only if high-volume)
-,Seattle SI activity,unknown,Locations of our activity > United States SI activity > Seattle SI activity,0,0,,retire,empty/unresolvable term
+location-seattle,Seattle SI activity,unknown,Locations of our activity > United States SI activity > Seattle SI activity,0,0,,retire,resolved on clone 2026-07-19 (leftover in wp-admin after rehearsal); empty/unresolvable term
 lyndon-larouche-legacy,Lyndon LaRouche legacy,English (default),Lyndon LaRouche legacy,5,0,2022-01-01,topic-remap,si_topic: History & Method
 activity-coverage-de,Media coverage of our activity,German,Media coverage of our activity,31,3,2025-08-04,cpt-signal,si_coverage
 updates-music-de,Music updates,German,Music updates,3,0,2021-05-14,topic-remap,si_topic: Classical Culture
@@ -241,8 +241,8 @@ committee-for-the-coincidence-of-opposites,The Committee for the Coincidence of 
 committee-for-the-coincidence-of-opposites-de,The Committee for the Coincidence of Opposites,German,The Committee for the Coincidence of Opposites,19,0,2022-01-20,campaign-remap,si_campaign: Coincidence of Opposites
 healthcare-de,Healthcare,German,The Committee for the Coincidence of Opposites > Healthcare,60,0,2022-03-25,topic-remap,si_topic: Health & Food Security
 covid-19,COVID-19,English (default),The Committee for the Coincidence of Opposites > Healthcare > COVID-19,85,0,2022-11-29,topic-remap,si_topic: Health & Food Security
-,The World Land-Bridge,unknown,The World Land-Bridge,0,0,,retire,empty/unresolvable term
-,Uncategorized @da,Danish,Uncategorized @da,0,0,,retire,empty/unresolvable term
+world-land-bridge-ru,The World Land-Bridge,Russian,The World Land-Bridge,0,0,,retire,resolved on clone 2026-07-19 (leftover in wp-admin after rehearsal); empty/unresolvable term
+uncategorized-da,Uncategorized @da,Danish,Uncategorized @da,0,0,,retire,resolved on clone 2026-07-19 (leftover in wp-admin after rehearsal); empty/unresolvable term
 location-usa-de,United States SI activity,German,United States SI activity,5,0,2022-11-13,region-remap,si_region (continent; country child only if high-volume)
 unsere-kampagne,Unsere Kampagne,English (default),Unsere Kampagne,7,0,2018-11-13,campaign-remap,si_campaign: (campaign parent — retire)
 grun-bedeutet-tod,“Grün” bedeutet Tod,English (default),Unsere Kampagne > “Grün” bedeutet Tod,61,0,2022-03-25,topic-remap,si_topic: Energy & Environment

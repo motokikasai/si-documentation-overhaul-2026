@@ -997,7 +997,18 @@ final class SI_Migrate_Command {
             $this->extract_fields($target, get_post($id), $persons);
             update_post_meta($id, '_si_transformed', gmdate('c'));
         }
-        $this->done($n + ['rows_total' => count($rows), 'resume_offset' => $i]);
+        if ($this->unknown_term_slugs) {
+            foreach ($this->unknown_term_slugs as $key => $hits) {
+                WP_CLI::warning("unknown term slug skipped (fix the CSV or seed the term): $key ×$hits");
+            }
+        }
+        // counts computed at assignment time miss items whose post_type changed afterwards
+        // (assign runs before set_post_type) — recount now that types are final.
+        if (!$this->dry) {
+            WP_CLI::runcommand('term recount si_topic si_region si_campaign si_series si_format', ['exit_error' => false]);
+        }
+        $this->done($n + ['rows_total' => count($rows), 'resume_offset' => $i,
+            'unknown_term_slugs' => count($this->unknown_term_slugs)]);
         if (!$this->dry) { $this->log('Reminder: wp cache flush && wp rewrite flush'); }
     }
 
@@ -1028,15 +1039,31 @@ final class SI_Migrate_Command {
         return $cache[$key];
     }
 
+    /** slugs that reached assign_taxonomies but matched no existing term: "tax:slug" => hits */
+    private array $unknown_term_slugs = [];
+
     private function assign_taxonomies(int $id, array $row): void {
         $sets = [
             'si_topic' => SI_Csv::effective($row, 'topics') ?? ($row['needs_review'] === '0' ? $row['proposed_topics'] : ''),
+            // regions/campaigns/series intentionally NOT gated by needs_review: they come
+            // from the deterministic category-equivalence map, not LLM judgment (decision
+            // 2026-07-19; the review flag concerns type/topic only).
             'si_region' => $row['proposed_regions'] ?? '', 'si_campaign' => $row['proposed_campaigns'] ?? '',
             'si_series' => $row['proposed_series'] ?? '',
         ];
         foreach ($sets as $tax => $spec) {
             $slugs = array_filter(array_map('trim', explode('|', (string) $spec)));
-            if ($slugs && !$this->dry) { wp_set_object_terms($id, $slugs, $tax, false); }
+            if (!$slugs) { continue; }
+            // Resolve to term IDs of EXISTING terms only. Raw strings let
+            // wp_set_object_terms auto-create unknown ones — how 21 garbage terms (leaked
+            // reviewer notes in final_topics) entered si_topic in the 2026-07-18 rehearsal.
+            $ids = [];
+            foreach ($slugs as $slug) {
+                $term = get_term_by('slug', $slug, $tax);
+                if ($term) { $ids[] = (int) $term->term_id; }
+                else { $this->unknown_term_slugs["$tax:$slug"] = ($this->unknown_term_slugs["$tax:$slug"] ?? 0) + 1; }
+            }
+            if ($ids && !$this->dry) { wp_set_object_terms($id, $ids, $tax, false); }
         }
     }
 
@@ -1296,6 +1323,11 @@ final class SI_Migrate_Command {
                 if ($e['fate'] !== 'merge-duplicate' || $e['original'] === '') { continue; }
                 $dying = get_term_by('slug', $slug, 'category');
                 $survivor = get_term_by('slug', $e['original'], 'category');
+                if ($dying && !$survivor) {
+                    // never skip silently — this is how '37' (250 posts) survived the
+                    // 2026-07-18 rehearsal: survivor 'allgemein-de' didn't exist on the clone
+                    WP_CLI::warning("merge skipped: '$slug' → survivor '{$e['original']}' not found (fix the map row)");
+                }
                 if (!$dying || !$survivor) { continue; }
                 $n['merged_numeric']++;
                 if ($this->dry) { continue; }
@@ -1322,13 +1354,35 @@ final class SI_Migrate_Command {
             usort($queue, static fn($a, $b) => ($a === 'allgemein') <=> ($b === 'allgemein'));
             foreach ($queue as $slug) {
                 $term = get_term_by('slug', $slug, 'category');
-                if (!$term) { continue; }
+                if (!$term) { continue; }   // already gone — normal on idempotent re-runs
                 $n['retired']++;
                 if ($this->dry) { continue; }
                 $n['icl_rows_cleaned'] += SI_WPML::delete_term_rows([$term->term_taxonomy_id]);
                 wp_delete_term($term->term_id, 'category');   // never deletes posts; children re-parent (08 §5)
             }
+
+            // tag kill (06 §1 "Tag taxonomy emptied" — spec'd but unimplemented until 2026-07-19;
+            // the 5 meaningful tags are already folded into Topic/Campaign via classification)
+            $tags = get_terms(['taxonomy' => 'post_tag', 'hide_empty' => false]);
+            foreach (is_wp_error($tags) ? [] : $tags as $tag) {
+                $n['tags_deleted'] = ($n['tags_deleted'] ?? 0) + 1;
+                if ($this->dry) { continue; }
+                $n['icl_rows_cleaned'] += SI_WPML::delete_term_rows([$tag->term_taxonomy_id]);
+                wp_delete_term($tag->term_id, 'post_tag');
+            }
+
             if (!$this->dry) { WP_CLI::runcommand('term recount category', ['exit_error' => false]); }
+
+            // end-state audit: the ONLY category left standing should be the housekeeping
+            // term. Anything else (term missing from the map, empty-slug map row, failed
+            // merge) is reported here instead of being discovered in wp-admin.
+            $left = get_terms(['taxonomy' => 'category', 'hide_empty' => false]);
+            foreach (is_wp_error($left) ? [] : $left as $t) {
+                if ($t->slug === 'si-unsorted') { continue; }
+                $n['leftover_categories'] = ($n['leftover_categories'] ?? 0) + 1;
+                WP_CLI::warning(sprintf('leftover category: "%s" (slug %s, id %d, count %d) — not covered by the map',
+                    $t->name, $t->slug, $t->term_id, $t->count));
+            }
         }
         $n['kept'] = count($map) - $n['retired'] - $n['merged_numeric'];
         $this->done($n);
@@ -1447,6 +1501,47 @@ final class SI_Migrate_Command {
         $dangling = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->postmeta} pm WHERE pm.meta_key IN ('presenters','hosts','authors','signatories_internal','featured_people')
             AND pm.meta_value REGEXP '^[0-9]+$' AND NOT EXISTS (SELECT 1 FROM {$wpdb->posts} p WHERE p.ID = CAST(pm.meta_value AS SIGNED) AND p.post_type='si_person')");
         $check('person relations resolve', $dangling === 0, "$dangling dangling refs");
+
+        // 8. taxonomy cleanliness (added 2026-07-19: the rehearsal shipped 21 garbage
+        //    si_topic terms + zero-visible-count seeds and still "passed" — verify only
+        //    catches what it's told to look for). All direct SQL: immune to stale count
+        //    caches and WPML language filtering.
+        if (class_exists('SI_Model')) {
+            $expected = [
+                'si_topic'    => array_keys(SI_Model::TOPICS),
+                'si_region'   => array_keys(SI_Model::REGIONS),
+                'si_campaign' => array_keys(SI_Model::CAMPAIGNS),
+                'si_series'   => array_keys(SI_Model::SERIES),
+                'si_format'   => array_keys(SI_Model::FORMATS),
+            ];
+            foreach ($expected as $tax => $slugs) {
+                $actual = $wpdb->get_col($wpdb->prepare(
+                    "SELECT t.slug FROM {$wpdb->term_taxonomy} tt JOIN {$wpdb->terms} t ON t.term_id=tt.term_id WHERE tt.taxonomy=%s", $tax));
+                $stray = array_diff($actual, $slugs);
+                $missing = array_diff($slugs, $actual);
+                $check("$tax term set matches seeds exactly", !$stray && !$missing,
+                    trim(($stray ? 'stray: ' . implode(',', $stray) : '') . ($missing ? ' missing: ' . implode(',', $missing) : '')));
+            }
+            $encoded = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->terms} t
+                JOIN {$wpdb->term_taxonomy} tt ON tt.term_id=t.term_id
+                WHERE tt.taxonomy LIKE 'si\_%' AND t.name LIKE '%&amp;%'");
+            $check('si term names not entity-encoded', $encoded === 0, "$encoded names contain &amp;");
+        }
+        // assignment coverage — thresholds ≈ 80% of what the canonical classification.csv
+        // implies (si_topic 2,546 · si_series 1,206 · si_region 594 · si_campaign 373)
+        foreach (['si_topic' => 2000, 'si_series' => 950, 'si_region' => 450, 'si_campaign' => 280] as $tax => $min) {
+            $objs = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(DISTINCT tr.object_id)
+                FROM {$wpdb->term_relationships} tr
+                JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id=tr.term_taxonomy_id WHERE tt.taxonomy=%s", $tax));
+            $check("$tax assigned to >=$min items", $objs >= $min, "$objs items carry terms");
+        }
+        // native taxonomies emptied (category cutover is the LAST content op, so at gate
+        // time only the housekeeping term may remain and post_tag must be empty)
+        $cats = $wpdb->get_col("SELECT t.slug FROM {$wpdb->term_taxonomy} tt JOIN {$wpdb->terms} t ON t.term_id=tt.term_id WHERE tt.taxonomy='category'");
+        $extra_cats = array_diff($cats, ['si-unsorted']);
+        $check('category taxonomy emptied (only si-unsorted left)', !$extra_cats, $extra_cats ? implode(',', $extra_cats) : '');
+        $ntags = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->term_taxonomy} WHERE taxonomy='post_tag'");
+        $check('post_tag taxonomy emptied', $ntags === 0, "$ntags tag terms");
 
         $this->done(['failures' => $fail]);
         if ($fail > 0) { WP_CLI::halt(1); }

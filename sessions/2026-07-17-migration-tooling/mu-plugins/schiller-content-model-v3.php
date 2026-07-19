@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Schiller Content Model v3
  * Description: Registers the 7 si_* CPTs + 5 taxonomies of content-model v3 (sessions/2026-07-16-consolidation-roadmap/06-content-model-v3.md), seeds canonical terms, auto-assigns si_format. Types/taxonomies are registered with WP core APIs (bulletproof under WP-CLI); Pods extends them with the field groups below.
- * Version:     3.0.0
+ * Version:     3.1.0
  * Author:      SI migration tooling (session 2026-07-17)
  *
  * INSTALL: drop into wp-content/mu-plugins/ (both files: this + si-migrate.php).
@@ -32,7 +32,8 @@ defined('ABSPATH') || exit;
 
 final class SI_Model {
 
-    const VERSION = '3.0.0';            // bump to re-run term seeding
+    const VERSION = '3.1.0';            // bump to re-run term seeding (3.1.0: hierarchical
+                                        // UI flip + closed-vocabulary caps + name self-heal)
     const SEED_OPTION = 'si_model_seeded';
 
     /** post types that carry each taxonomy */
@@ -145,10 +146,22 @@ final class SI_Model {
             'show_ui'           => true,
             'show_in_rest'      => true,
             'show_admin_column' => true,
+            // Closed vocabulary (user decision 2026-07-19, editorial rule 05 §11): editors
+            // assign terms, only admins create/edit/delete them.
+            'capabilities'      => [
+                'manage_terms' => 'manage_options',
+                'edit_terms'   => 'manage_options',
+                'delete_terms' => 'manage_options',
+                'assign_terms' => 'edit_posts',
+            ],
         ];
+        // hierarchical=>true on conceptually FLAT taxonomies (topic/campaign/series) is
+        // deliberate and UI-only: Gutenberg renders hierarchical taxonomies as a checkbox
+        // list of existing terms instead of a free-text token field that auto-creates
+        // whatever an editor types (user decision 2026-07-19). Never seed child terms.
         register_taxonomy('si_topic', self::TAX_MAP['si_topic'], $common + [
             'labels'       => self::labels('Topic', 'Topics'),
-            'hierarchical' => false,
+            'hierarchical' => true,
             'rewrite'      => ['slug' => 'topic', 'with_front' => false],
         ]);
         register_taxonomy('si_region', self::TAX_MAP['si_region'], $common + [
@@ -158,12 +171,12 @@ final class SI_Model {
         ]);
         register_taxonomy('si_campaign', self::TAX_MAP['si_campaign'], $common + [
             'labels'       => self::labels('Campaign', 'Campaigns'),
-            'hierarchical' => false,
+            'hierarchical' => true,
             'rewrite'      => ['slug' => 'campaign', 'with_front' => false],
         ]);
         register_taxonomy('si_series', self::TAX_MAP['si_series'], $common + [
             'labels'       => self::labels('Series', 'Series'),
-            'hierarchical' => false,
+            'hierarchical' => true,
             'rewrite'      => ['slug' => 'series', 'with_front' => false],
         ]);
         register_taxonomy('si_format', self::TAX_MAP['si_format'], [
@@ -277,8 +290,16 @@ final class SI_Model {
     }
 
     private static function ensure_term(string $tax, string $slug, string $label, int $parent = 0): void {
-        if (!get_term_by('slug', $slug, $tax)) {
+        $existing = get_term_by('slug', $slug, $tax);
+        if (!$existing) {
             wp_insert_term($label, $tax, ['slug' => $slug, 'parent' => $parent]);
+            return;
+        }
+        // Self-heal drifted names — rehearsal 2026-07-18 left seeded names entity-encoded
+        // ("Peace &amp; Strategy"; encoder unidentified, suspected WPML insert hook).
+        // Compare decoded so an encoder that also mangles wp_update_term can't loop us.
+        if (html_entity_decode($existing->name, ENT_QUOTES) !== $label) {
+            wp_update_term($existing->term_id, $tax, ['name' => $label]);
         }
     }
 

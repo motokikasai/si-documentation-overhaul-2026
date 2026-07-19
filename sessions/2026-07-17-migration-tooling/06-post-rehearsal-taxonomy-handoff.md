@@ -5,8 +5,9 @@
 **Repo state at handoff:** `main` @ `f23a857` (this doc) + a revision incorporating a
 second-opinion review from another Claude instance (2026-07-19: corrected fix-3 mechanism
 note, added §3.4 needs_review inconsistency, sharpened §3.3 with the count asymmetry + WPML
-hypothesis + per-term census). No migration code or CSVs were touched — diagnosis +
-decisions only. Every fix below is TODO.
+hypothesis + per-term census) + **the repo-side fixes, implemented 2026-07-19 in the same
+session — see §5 for per-item status.** Still open: the §3.3 instance diagnostics and the
+rehearsal replay (both instance-side).
 
 ---
 
@@ -200,40 +201,70 @@ Cosmetic but will double-escape on the front end. Check raw:
      `assign_terms` => `edit_posts`. Pattern already exists on `si_format` (line ~177).
    - This structurally enforces editorial rule 05 §11 ("no new terms without owner+purpose").
 
-## 5. Consolidated fix list (all TODO — nothing implemented yet)
+## 5. Consolidated fix list — STATUS 2026-07-19 (implemented in THIS session unless noted)
 
-1. **Resolve the taxonomy-count fork first** (§3.3) — it decides whether a transform bug
-   hunt is needed.
-2. **Clean the 25 classification.csv rows**: move prose to `notes`, set `final_topics` to
-   real slugs or empty (script with the regex above; keep the audit trail).
-3. **Harden `assign_taxonomies`** (si-migrate.php:1031): resolve slugs → existing **term
-   IDs**; unknown slug = log + skip, NEVER auto-create — **for all four taxonomies**, and
-   decide consciously whether `needs_review` should gate regions/campaigns/series too
-   (§3.4). Mechanism note (corrected 2026-07-19 after second-opinion review):
-   `wp_set_object_terms` resolves string members via `term_exists()`, which matches slug OR
-   name regardless of hierarchy — so seeded slugs survive the hierarchical flip fine, and
-   the flip does NOT change string semantics here (the strings-as-names gotcha lives in
-   `wp_insert_post`'s `tax_input`, not in `wp_set_object_terms`). Unknown strings
-   auto-create in BOTH modes — that, not the flip, is the bug class IDs eliminate. Ordering
-   between fixes 3 and 4 is therefore not critical.
-4. **Registration change** per decision §4.3 (hierarchical + capabilities). Data survives a
-   flag flip; no migration needed.
-5. **Category leftovers**: resolve the 9 empty-slug map rows by term_id on the clone, fill
-   real slugs into `category-map-draft.csv`; fix `37` (remap its 250 posts per allgemein
-   fate → si-unsorted, then delete term); rerun `merge`+`retire`. End state: exactly 1
-   category term.
-6. **Implement the tag kill** (delete all `post_tag` terms; 06 §1).
-7. **Extend `si:verify`** (this is the structural lesson — the rehearsal "passed" because
-   verify never looked): assert si_topic term set == exactly the 10 seeded slugs (no
-   strays), si_region == seeded set, si_campaign/si_series likewise; category terms ≤ 1;
-   post_tag terms == 0; per-taxonomy assignment counts ≥ thresholds (~2,000 si_topic
-   relationship rows expected); term names contain no `&amp;`.
-8. **Fix the `&amp;` names** (after finding the encoder; likely `wp term update` or fix at
-   seed + reseed).
-9. **Hide Categories/Tags UI on posts** — later theme phase, not part of migration chain.
-10. **Re-run the dress rehearsal** from a restored snapshot; judge from `wp term list`
-    output + Published posts filter, not drafts. User explicitly OK with another rehearsal
-    round.
+1. **Resolve the taxonomy-count fork** (§3.3) — ⏳ OPEN, instance-side; still the first
+   thing to get from the user. (The code fixes below are correct under every fork outcome.)
+2. **Clean the dirty classification.csv rows** — ✅ DONE. Turned out to be **30 rows, not
+   25**: validating against the seeded vocabulary (instead of a slug-shape regex) caught 5
+   more rows whose `final_topics` was the bare word `verify` (slug-shaped junk — it's the
+   "verify" garbage term from wp-admin). Junk moved to `notes` as
+   `[moved from final_topics 2026-07-19: …]`, `final_topics` emptied (falls back to the
+   proposed path); no mixed valid+junk rows existed. Audit:
+   `incoming/decisions-final-topics-cleanup.txt`. Post-check: 0 invalid rows remain, 5,397
+   rows preserved. NOTE: 29 rows legitimately contain `-` (explicit "no topic" per the
+   `effective()` convention) — these are NOT junk.
+3. **Harden `assign_taxonomies`** — ✅ DONE (si-migrate.php): resolves slugs → existing term
+   IDs for all four taxonomies; unknown slugs are counted per `tax:slug`, WARNed at end of
+   transform, and NEVER auto-created. needs_review gating decision recorded in-code:
+   regions/campaigns/series stay ungated (deterministic category-map origin — user-approved
+   assumption 2026-07-19). Also: transform now runs `wp term recount si_*` at the end
+   (assignment happens before `set_post_type`, so counts computed at assignment time missed
+   items whose type changed — §3.3 hypothesis 2 fixed permanently). Mechanism note
+   (corrected after second-opinion review): `wp_set_object_terms` resolves strings via
+   `term_exists()` (slug OR name, hierarchy-independent) — the flip does NOT change string
+   semantics; unknown-string auto-creation exists in both modes and is what ID-resolution
+   eliminates.
+4. **Registration change** — ✅ DONE (schiller-content-model-v3.php v3.1.0):
+   `hierarchical => true` on si_topic/si_campaign/si_series (checkbox UI; comment marks it
+   UI-only — never seed children); closed-vocabulary `capabilities` on all four editorial
+   taxonomies (`assign_terms => edit_posts`, manage/edit/delete `=> manage_options`).
+   VERSION bumped 3.0.0 → 3.1.0 so seeding re-runs.
+5. **Category leftovers** — ✅ map fixed (`category-map-draft.csv`): all 9 empty-slug rows
+   filled with the real slugs from the wp-admin term list (40, 541, allgemein-es/-fa/-ar,
+   location, location-seattle, world-land-bridge-ru, uncategorized-da; languages corrected);
+   `37` fate changed merge-duplicate → retire (survivor `allgemein-de` absent on clone;
+   allgemein-de's own fate was retire/default-dump, so equivalent — `wp_delete_term` on
+   category auto-reassigns the 250 posts to the default `si-unsorted`). Verified: 0
+   empty-slug rows remain, 257 rows preserved, classify parity unaffected (`classify_one`
+   branches only on `kind`, and all touched rows are kind-less). ⏳ instance-side: rerun
+   `merge`+`retire` (or full rehearsal). Additionally `si:categories` now WARNs on skipped
+   merges (missing survivor) and audits leftover categories ≠ si-unsorted at the end of
+   retire.
+6. **Tag kill** — ✅ DONE: retire phase now deletes all `post_tag` terms (+ their icl rows),
+   logged as `tags_deleted`.
+7. **Extend `si:verify`** — ✅ DONE (new section 8, all direct SQL — immune to stale counts
+   and WPML filtering): per-taxonomy term set == seeded slugs exactly (strays AND missing
+   reported, incl. si_format); no `&amp;` in si term names; assignment coverage thresholds
+   ≈80% of canonical-CSV volumes (si_topic ≥2,000 of 2,546 · si_series ≥950 of 1,206 ·
+   si_region ≥450 of 594 · si_campaign ≥280 of 373); category == {si-unsorted} only;
+   post_tag == 0.
+8. **Fix the `&amp;` names** — ✅ self-healing `ensure_term`: on seed re-run (VERSION bump),
+   existing terms whose decoded name ≠ seed label get `wp_update_term`'d. Encoder still
+   unidentified — if it re-encodes on update, the verify check (fix 7) will catch it on the
+   next rehearsal; then hunt the hook.
+9. **Hide Categories/Tags UI on posts** — ⏳ deliberately deferred to the theme phase.
+10. **Re-run the dress rehearsal** — ⏳ instance-side, user-run, from a restored snapshot;
+    judge from `si:verify` (now strict) + `wp term list` + Published posts filter.
+
+**Local verification done for 1–8 (code side):** `php -l` clean on both mu-plugins;
+`php tools/test-parsers.php` → 71/71 green; CSV assertions above.
+
+**New minor open item:** the single post attached to `world-land-bridge-ru` (term count 1)
+has NO row in classification.csv (outside classify scope — likely a non-scoped status/type).
+After retire it silently loses that categorization. Instance-side 1-minute check: find the
+object (`wp post list --category=world-land-bridge-ru` or via term_relationships), confirm
+it either carries `si_campaign: world-land-bridge` or doesn't need it.
 
 ## 6. Key code/file references
 
