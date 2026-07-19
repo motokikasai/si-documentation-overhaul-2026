@@ -55,8 +55,9 @@ PHP fputcsv escape corruption. Two live-content duplicates caught and retired (7
 ## Execution runbook (on Local, sandbox dump imported; replayed verbatim on staging at P6)
 
 ```bash
-# 0. install: copy mu-plugins/*.php into wp-content/mu-plugins/; wpml-config.xml into the child theme
-#    capture the WPML baseline BEFORE anything:  (element_type,count CSV for verify)
+# 0. PREFLIGHT: follow 07-replay-preflight-checklist.md COMPLETELY before this block
+#    (restore, snapshot, the 3 file copies + install verification, input paths).
+#    Then capture the WPML baseline BEFORE anything:  (element_type,count CSV for verify)
 wp db query "SELECT element_type, COUNT(*) AS count FROM wp_icl_translations GROUP BY element_type" --skip-column-names | tr '\t' ',' > icl-baseline.csv
 
 # 1. classification proposal (mechanical rules; Day-1 Fable output supersedes/augments rows)
