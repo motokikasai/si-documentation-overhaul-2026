@@ -1,0 +1,374 @@
+/* ==========================================================================
+   Schiller Institute — the INSTITUTIONAL WING (about · contact · donate ·
+   join · 404). Loaded AFTER landing.css and landing-v4.css.
+
+   These are not doors. The doors are polychrome — each topic gets its own
+   accent; the institutional pages are the house itself, so the whole wing
+   shares ONE accent: the seal blue of the Institute's own ink. Gold stays
+   gold, as everywhere. Register: quieter than the doors — trust over
+   spectacle; at most one restrained showpiece per page.
+
+   Adds: the shared accent, HERO FORM C (compact — the utility overture the
+   covenant reserved but never drafted), and the wing's small patterns:
+   bureau cards, the letter form, the patronage (gift) grid, the threshold
+   ladder, and the 404's broken arc.
+   ========================================================================== */
+
+body.lp-institute {  /* the whole wing · seal blue (the house's own ink) */
+  --accent-deep: #26476b;
+  --accent-soft: #b6cbe4;
+  --accent-veil: rgba(38, 71, 107, 0.26);
+  --accent-tint: #182f4d;
+}
+
+/* --------------------------------------------------------------------------
+   Hero form C — compact (utility register). For pages whose job is service,
+   not persuasion: short ivory band, left-aligned, same type DNA as A/B,
+   no scroll theater. Closes on a gold hairline.
+   -------------------------------------------------------------------------- */
+.lp-heroc {
+  background: var(--ivory-50);
+  padding: clamp(7.5rem, 16vh, 10rem) 0 clamp(2.6rem, 6vh, 4rem);
+  border-bottom: 1px solid rgba(212, 169, 76, 0.4);
+}
+.lp-heroc-kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-bottom: 1rem;
+}
+.lp-heroc h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--navy-800);
+  max-width: 18em;
+  text-wrap: balance;
+}
+.lp-heroc-dek {
+  margin-top: 1.1rem;
+  max-width: 36rem;
+  font-size: 1.02rem;
+  color: var(--ink-600);
+}
+
+/* --------------------------------------------------------------------------
+   Bureau — the contact-channel cards. White plates on ivory, gold tick on
+   hover; each card is one door into the correspondence.
+   -------------------------------------------------------------------------- */
+.bureau {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.1rem;
+  margin-top: 2.6rem;
+}
+.bureau-card {
+  display: block;
+  padding: 1.7rem 1.8rem 1.9rem;
+  background: #fff;
+  border: 1px solid rgba(15, 31, 61, 0.12);
+  border-top: 2px solid rgba(212, 169, 76, 0.55);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.bureau-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px -22px rgba(15, 31, 61, 0.45);
+}
+.bureau-card small {
+  display: block;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-bottom: 0.5rem;
+}
+.bureau-card h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.18rem;
+  color: var(--navy-800);
+}
+.bureau-card p {
+  margin-top: 0.45rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--ink-600);
+}
+.bureau-card .bureau-addr {
+  display: block;
+  margin-top: 0.8rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--navy-800);
+  word-break: break-word;
+}
+
+/* --------------------------------------------------------------------------
+   The letter form — the wing's long-form contact form. Same input DNA as
+   the signup form; stacked; the send button stays gold.
+   -------------------------------------------------------------------------- */
+.letter-form {
+  max-width: 40rem;
+  margin: 2.6rem auto 0;
+  display: grid;
+  gap: 0.8rem;
+}
+.letter-form .letter-row {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 560px) {
+  .letter-form .letter-row { grid-template-columns: 1fr; }
+}
+.letter-form input,
+.letter-form select,
+.letter-form textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font: inherit;
+  font-size: 0.92rem;
+  color: var(--ink-900);
+  background: #fff;
+  border: 1px solid rgba(15, 31, 61, 0.22);
+  border-radius: 0;
+  appearance: none;
+}
+.letter-form textarea { min-height: 9.5rem; resize: vertical; }
+.letter-form input::placeholder,
+.letter-form textarea::placeholder { color: #98a0ad; }
+.letter-form input:focus,
+.letter-form select:focus,
+.letter-form textarea:focus {
+  outline: none;
+  border-color: var(--gold-500);
+}
+.letter-form .letter-send { justify-self: center; margin-top: 0.6rem; }
+.letter-note {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--ink-600);
+}
+
+/* --------------------------------------------------------------------------
+   Patronage — the gift grid (donate). Three engraved sums; the chosen card
+   holds the gold. Amounts are prototype placeholders; NationBuilder carries
+   the transaction in production.
+   -------------------------------------------------------------------------- */
+.patron-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-top: 2.4rem;
+}
+.patron-toggle button {
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.6rem;
+  background: transparent;
+  color: var(--ink-600);
+  border: 1px solid rgba(15, 31, 61, 0.25);
+  cursor: pointer;
+}
+.patron-toggle button + button { border-left: 0; }
+.patron-toggle button.is-active {
+  background: var(--navy-800);
+  color: var(--ivory-50);
+  border-color: var(--navy-800);
+}
+.gift-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr));
+  gap: 1.1rem;
+  max-width: 52rem;
+  margin: 1.6rem auto 0;
+}
+.gift {
+  display: block;
+  padding: 2rem 1.6rem 1.9rem;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  background: #fff;
+  border: 1px solid rgba(15, 31, 61, 0.14);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.gift:hover {
+  transform: translateY(-3px);
+  border-color: rgba(212, 169, 76, 0.75);
+  box-shadow: 0 18px 36px -24px rgba(15, 31, 61, 0.45);
+}
+.gift-sum {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--navy-800);
+}
+.gift-sum sup { font-size: 0.45em; top: -0.9em; }
+.gift-name {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.gift-does {
+  display: block;
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(212, 169, 76, 0.4);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--ink-600);
+}
+.gift--open .gift-sum { font-size: 1.9rem; padding-top: 0.35rem; }
+
+/* --------------------------------------------------------------------------
+   The threshold — the ways-in ladder (join). Four rungs from lightest to
+   deepest; one gold rail climbs past them (the declarative scrub grammar
+   draws it — no bespoke JS). Classes carry the th- prefix because the
+   homepage ladder already owns `.rung` (story-v3.css §7).
+   -------------------------------------------------------------------------- */
+.threshold {
+  position: relative;
+  list-style: none;
+  max-width: 42rem;
+  margin: 3rem auto 0;
+  padding: 0;
+}
+.threshold-rail {
+  position: absolute;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  left: 1.05rem;
+  width: 30px;
+  height: calc(100% - 0.8rem);
+  overflow: visible;
+}
+.threshold-rail line {
+  stroke: var(--gold-500);
+  stroke-width: 2;
+}
+.th-rung {
+  position: relative;
+  padding: 0 0 2.6rem 4.2rem;
+}
+.th-rung:last-child { padding-bottom: 0; }
+.th-rung::before {  /* the node, centered on the rail line (rail left + line x - half node) */
+  content: "";
+  position: absolute;
+  left: calc(1.05rem + 15px - 0.36rem);
+  top: 0.32rem;
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 50%;
+  border: 1px solid var(--gold-500);
+  background: var(--ivory-50);
+}
+.th-cost {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.th-rung h3 {
+  margin-top: 0.25rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.32rem;
+  color: var(--navy-800);
+}
+.th-rung p {
+  margin-top: 0.45rem;
+  max-width: 32rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink-600);
+}
+.th-go {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-deep);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(212, 169, 76, 0.6);
+  padding-bottom: 0.15rem;
+}
+.th-go:hover { color: #8a6d2f; }
+
+/* --------------------------------------------------------------------------
+   404 — the lost letter. The signature arc, interrupted: the gold line
+   breaks mid-flight and the you-ring waits at the gap.
+   -------------------------------------------------------------------------- */
+.lost { text-align: center; }
+.lost-code {
+  font-family: var(--font-display);
+  font-size: clamp(5.5rem, 16vw, 9rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--navy-800);
+  letter-spacing: 0.02em;
+}
+.lost-code span { color: var(--gold-500); }
+.lost-arc { max-width: 340px; margin: 2.2rem auto 0; display: block; overflow: visible; }
+.lost-arc .ya-line {
+  fill: none;
+  stroke: rgba(212, 169, 76, 0.85);
+  stroke-width: 1.5;
+}
+.lost-arc .ya-gap-label {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 10px;
+  fill: var(--ink-600);
+}
+.lost-arc .ya-port { fill: var(--gold-500); }
+.lost-arc .ya-star-shape { fill: var(--gold-500); }
+.lost-arc .ya-you-ring {
+  fill: none;
+  stroke: var(--navy-800);
+  stroke-width: 1.5;
+}
+.lost-search {
+  display: flex;
+  gap: 0.6rem;
+  max-width: 26rem;
+  margin: 2.4rem auto 0;
+}
+.lost-search input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.85rem 1rem;
+  font: inherit;
+  font-size: 0.92rem;
+  color: var(--ink-900);
+  background: #fff;
+  border: 1px solid rgba(15, 31, 61, 0.22);
+  border-radius: 0;
+}
+.lost-search input:focus { outline: none; border-color: var(--gold-500); }
+
+/* --------------------------------------------------------------------------
+   Reduced motion — the wing's pieces land settled
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .bureau-card,
+  .gift { transition: none; }
+}
