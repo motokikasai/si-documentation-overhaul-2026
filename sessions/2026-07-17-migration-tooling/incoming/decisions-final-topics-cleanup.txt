@@ -1,0 +1,32 @@
+# final_topics junk -> notes (2026-07-19 session; verify-gate hardening)
+# legacy_id	moved_text
+387	conference Nov 2012
+1163	dedupe vs post twins at transform
+22599	attach via conference-map
+29495	verify before unpublish
+56294	matches playlist row in conference-map
+56471	dedupe vs post 56447
+57843	no body evidence — team verify
+58235	verify body is the statement text
+59383	verify
+62482	talk reaches /media/ via YT pipeline dedupe
+62485	regex missed non-deep-link embed)
+78791	coverage CPT needs single external_url — post both (pair 78806)
+80716	verify
+81561	verify
+88336	link PDF as si_document
+90942	team may flip both
+90961	kept statement
+93708	verify
+94378	EN pair 94192 already si_video
+95456	conference-title article — team verify
+97569	page head renders broken on live
+97978	P7 builds the real campaign landing Page
+98552	pamphlet PDF likely → link si_document later
+99314	stays post for WPML pair consistency with 99309
+99487	verify
+100304	external signers
+100773	keep-candidate if team wants the translation
+102333	series kept)
+107504	pairs with 107592 statement
+109155	exists as post
