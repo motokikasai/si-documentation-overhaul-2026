@@ -385,10 +385,13 @@ final class SI_Shortcodes {
 
         foreach (self::DYNAMIC as $dyn) {
             if (preg_match('/\[' . $dyn . '(?![\w-])/', $html)) {
-                $flags[] = "dynamic:[$dyn] — rebuild page on a CPT-archive template, do not convert";
+                $flags[] = "dynamic:[$dyn] — page needs a CPT-archive template rebuild (P7)";
             }
         }
-        if ($flags) { return ['html' => $html, 'converted' => [], 'flags' => $flags]; }
+        // Dynamic tokens themselves have no conversion rule and stay raw, but the REST of
+        // the page converts normally. (Until 2026-07-19 this was an early-return that left
+        // ALL tokens raw on flagged pages — 117 pages incl. Home/About/campaign hubs showed
+        // raw [title_big]/[button]/columns in wp-admin.)
 
         $attr = static function (string $attrs, string $name): string {
             return preg_match('/' . $name . '\s*=\s*"([^"]*)"/i', $attrs, $m) ? trim($m[1]) : '';
@@ -1170,12 +1173,14 @@ final class SI_Migrate_Command {
             $changed = $content !== $r->post_content;
             $is_dynamic = (bool) array_filter($res['flags'], static fn($f) => str_starts_with($f, 'dynamic:'));
             if ($is_dynamic) { $n['flagged_dynamic']++; }
-            elseif ($changed) { $n['converted']++; }
-            else { $n['untouched']++; continue; }
+            if ($changed) { $n['converted']++; }            // may overlap flagged_dynamic (2026-07-19)
+            if (!$changed && !$is_dynamic) { $n['untouched']++; continue; }
 
             $report[] = ['id' => $r->ID, 'post_type' => $r->post_type, 'title' => wp_strip_all_tags($r->post_title),
                 'tokens' => wp_json_encode($res['converted']), 'flags' => implode('; ', $res['flags'])];
-            if ($changed && !$is_dynamic && !$this->dry) {
+            // dynamic pages get their static tokens written too — only the dynamic token
+            // itself stays raw, carried by the report as the P7 rebuild list
+            if ($changed && !$this->dry) {
                 wp_update_post(['ID' => $r->ID, 'post_content' => $content]);
                 update_post_meta($r->ID, '_si_shortcodes_converted', gmdate('c'));
             }
@@ -1475,12 +1480,25 @@ final class SI_Migrate_Command {
             $check('start_seconds < end_seconds', $bad_range === 0, "$bad_range inverted");
         }
 
-        // 4. leftover Vanguard shortcodes in published content
-        $toks = SI_Shortcodes::vanguard_tokens();
-        $re = '\\[(' . implode('|', array_map(static fn($t) => preg_quote($t, null), $toks)) . ')([ \\]/])';
-        $leftover = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_status='publish'
-            AND post_type IN ('post','page') AND post_content REGEXP '$re'");
-        $check('no leftover Vanguard shortcodes', $leftover === 0, "$leftover items (dynamic-flag pages excluded manually)");
+        // 4. leftover Vanguard shortcodes in published content — ALL content types (former
+        //    posts carry shortcodes into si_* CPTs after transform). Interpolating the
+        //    pattern into the SQL string ate the backslash (MySQL string literal: '\[' →
+        //    '['), turning the anchor into a character class — the check matched nothing
+        //    and silently PASSED the 2026-07-18 rehearsal. prepare() escapes correctly;
+        //    the probe row proves the pattern actually matches before we trust a zero.
+        $static_toks = array_diff(SI_Shortcodes::vanguard_tokens(), SI_Shortcodes::DYNAMIC);
+        $tail = '([ \\]/])';   // token followed by space, ] or / — matches [hr], [hr /], [button …]
+        $static_re = '\\[(' . implode('|', array_map(static fn($t) => preg_quote($t, null), $static_toks)) . ')' . $tail;
+        $dyn_re = '\\[(' . implode('|', SI_Shortcodes::DYNAMIC) . ')' . $tail;
+        $probe = (int) $wpdb->get_var($wpdb->prepare("SELECT '[button text=\"x\"]' REGEXP %s", $static_re));
+        $check('leftover-shortcode pattern self-test', $probe === 1 && $wpdb->last_error === '', $wpdb->last_error ?: "probe=$probe");
+        $content_types = "'post','page','si_conference','si_presentation','si_video','si_document','si_statement','si_coverage'";
+        $static_left = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_status='publish'
+            AND post_type IN ($content_types) AND post_content REGEXP %s", $static_re));
+        $dynamic_left = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_status='publish'
+            AND post_type IN ($content_types) AND post_content REGEXP %s", $dyn_re));
+        $this->log("  dynamic-token pages awaiting P7 template rebuild: $dynamic_left (deliberate, see shortcode-report.csv)");
+        $check('no leftover static Vanguard shortcodes (all content types)', $static_left === 0, "$static_left items");
 
         // 5. slug collisions inside each rewrite base — SAME language only (WPML translations
         //    legitimately share slugs across languages; 276 benign groups seen in rehearsal)

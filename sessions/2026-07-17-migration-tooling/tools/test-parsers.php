@@ -195,8 +195,17 @@ ok((bool) array_filter($res['flags'], fn($f) => str_contains($f, 'visual QA')), 
 
 $dynamic = 'intro [portfolio columns="2" numberPosts="6" cats="24" /] outro';
 $res = SI_Shortcodes::convert($dynamic);
-eq($dynamic, $res['html'], 'dynamic [portfolio] page left untouched');
+eq($dynamic, $res['html'], 'dynamic [portfolio] token itself left untouched');
 ok((bool) array_filter($res['flags'], fn($f) => str_starts_with($f, 'dynamic:')), 'dynamic flag raised');
+
+// 2026-07-19: dynamic pages still get their STATIC tokens converted (previously an
+// early-return left the whole page raw — 117 pages showed raw shortcodes in wp-admin)
+$mixed = '[title_big title="Hub" /] [portfolio columns="2" /] [button text="go" url="https://x.example/" /]';
+$res = SI_Shortcodes::convert($mixed);
+ok(str_contains($res['html'], '<h2 class="si-title-big">Hub</h2>'), 'mixed page: static title_big converted');
+ok(str_contains($res['html'], 'href="https://x.example/">go</a>'), 'mixed page: static button converted');
+ok(str_contains($res['html'], '[portfolio columns="2" /]'), 'mixed page: dynamic token preserved');
+ok((bool) array_filter($res['flags'], fn($f) => str_starts_with($f, 'dynamic:')), 'mixed page: dynamic flag still raised');
 
 $tabs = '[tabs titles="Panel I, Panel II"][tab]content one[tab]content two[/tabs]';
 $res = SI_Shortcodes::convert($tabs);

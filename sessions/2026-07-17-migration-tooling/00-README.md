@@ -86,7 +86,11 @@ wp si:conferences --apply=incoming/conference-map.csv   # rerun: links legacy pr
 # 5. generated presentations + transcripts + content cleanup + documents
 wp si:presentations --csv=incoming/video-segmentation.csv --person-map=incoming/person-map.csv
 wp si:transcripts --dir=yt-dump
-wp si:shortcodes --normalize-domains          # report → shortcode-report.csv (dynamic pages → P7 list)
+wp si:shortcodes --normalize-domains --post-type=page,post,si_conference,si_presentation,si_video,si_document,si_statement,si_coverage
+#   ↑ ALL content types (2026-07-19: transform runs first, so former posts carry their
+#   shortcodes into si_* CPTs — the old page,post default missed them). Report →
+#   shortcode-report.csv; dynamic-flagged rows = the P7 template-rebuild list (their
+#   static tokens ARE converted now; only [portfolio]/[ajax_load_more] stay raw)
 wp si:media --rank                            # → document-candidates.csv → review
 wp si:media --promote --csv=incoming/document-candidates.csv
 
