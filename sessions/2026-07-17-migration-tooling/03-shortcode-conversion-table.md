@@ -42,6 +42,15 @@ class-prefixed `si-*` so the Blocksy child theme can style it in one small style
 | `[portfolio columns numberPosts cats /]` | 59 pages | page's function replaced by `si_presentation`/`si_conference` archive templates (P7); page listed in `shortcode-report.csv` with `dynamic:` flag |
 | `[ajax_load_more …]` | 31 pages (incl. `/coverage/`, `/recent-news/`) | replaced by `si_coverage` archive + `/blog/` index |
 
+**Behavior revision (2026-07-19):** the dynamic flag no longer short-circuits the page — the
+page's OTHER (static) tokens are converted normally and written; only the dynamic token
+itself stays raw, and the `dynamic:` report flag remains the P7 rebuild list. (The original
+early-return left flagged pages entirely raw — 117 pages incl. Home/About/campaign hubs
+showed raw `[title_big]`/`[button]`/column tokens; the rehearsal count "55 dynamic-flagged"
+in 00-README understated it, the harvested report has 151 flagged rows, 117 pages.) Also:
+run the pass over ALL content types (see revised runbook step 5) — transform precedes it,
+so former posts carry shortcodes into `si_*` CPTs.
+
 ## 4. Cross-cutting cleanup in the same pass
 
 - `--normalize-domains`: `newparadigm.schillerinstitute.com` + `schillermeet.de` → `https://schillerinstitute.com` (V6 in `02-dump-verification.md`).

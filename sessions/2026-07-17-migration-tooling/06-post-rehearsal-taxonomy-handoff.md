@@ -262,9 +262,52 @@ Cosmetic but will double-escape on the front end. Check raw:
 
 **New minor open item:** the single post attached to `world-land-bridge-ru` (term count 1)
 has NO row in classification.csv (outside classify scope — likely a non-scoped status/type).
-After retire it silently loses that categorization. Instance-side 1-minute check: find the
-object (`wp post list --category=world-land-bridge-ru` or via term_relationships), confirm
-it either carries `si_campaign: world-land-bridge` or doesn't need it.
+`wp post list --post_type=any --post_status=any --category_name=world-land-bridge-ru` came
+back EMPTY (2026-07-19) — likely a non-post object or WPML artifact. User decided to skip;
+the term retires either way and the new leftover audit reports anything unexpected.
+
+## 5b. SHORTCODE FINDINGS + FIXES (added 2026-07-19, same session — user question
+"why do Pages still show raw Vanguard shortcodes?")
+
+Diagnosis (all verified against `incoming/shortcode-report.csv` + code):
+
+- **F1 — dynamic early-return:** `SI_Shortcodes::convert()` returned the page UNTOUCHED when
+  any dynamic token (`[portfolio]`/`[ajax_load_more]`) was present — so flagged pages kept
+  ALL their static tokens raw. Real scale: **151 flagged report rows, 117 of them pages**
+  (incl. Home 864, About Us 1103, Stop Green Fascism 1092, The World Land-Bridge 1161) —
+  the README's "55 dynamic-flagged" understated it. This is what the user saw in wp-admin.
+- **F2 — verify's leftover-shortcode check NEVER WORKED:** the regex was interpolated into
+  the SQL string, MySQL's string literal ate the backslash (`'\['` → `'['`), the anchor
+  became a character-class opener, and the malformed match returned nothing → `(int)` → 0 →
+  PASS. Same lesson as taxonomy: a check that can fail silently is not a check.
+- **F3 — coverage gap:** runbook order is transform (step 4) → shortcodes (step 5), but the
+  scan defaulted to `post_type IN ('page','post')` — former posts transformed into si_*
+  CPTs (posts-side census: 1,788 occurrences) were never scanned; verify also only looked
+  at post/page.
+
+Fixes — ✅ ALL IMPLEMENTED (si-migrate.php + tools/test-parsers.php + docs):
+
+11. `convert()` no longer early-returns: static tokens convert on dynamic-flagged pages,
+    only the dynamic token stays raw, `dynamic:` flag + report = P7 rebuild list unchanged.
+    Caller writes changed dynamic pages too (`converted` counter may overlap
+    `flagged_dynamic` now). New mixed-content unit test (75/75 green).
+12. verify check 4 rebuilt: pattern passed via `$wpdb->prepare` (correct escaping), split
+    into a **probe self-test** (a literal `'[button text="x"]' REGEXP pattern` must return
+    1, `$wpdb->last_error` must be empty — a broken pattern now FAILS loudly), a
+    **static-leftover check** (static tokens only, must be 0) and an informational
+    **dynamic-remaining count** (deliberate, P7 list) — both across ALL content types
+    (post, page + the 7 si_* CPTs).
+13. Runbook step 5 now runs `si:shortcodes` with the full `--post-type` list;
+    `03-shortcode-conversion-table.md` §3 records the behavior revision.
+
+Pages/landing-page decisions confirmed with the user (2026-07-19): Pages stay the
+general-purpose hand-built type (campaign hubs, org/static, cultural works, Economics hub)
+**including the homepage** (P7 hybrid homepage; drafts in
+`projects/schiller-wp-rebuild/homepage-draft/` + `landing/`). Page rebuild = P7, tiered:
+hand-rebuild the high-value hubs from block patterns; keep the auto-converted long tail
+(needs the small `si-*` child-theme stylesheet, 03 §5, + visual QA on column pages);
+"121 Pages" in wp-admin = WPML language filter showing EN only (220 pages remain across
+languages, 218 published).
 
 ## 6. Key code/file references
 

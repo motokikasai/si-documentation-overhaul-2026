@@ -1,3 +1,5 @@
 videos/
 subs/
 yt-errors.log
+caption-fetch.log
+dump-progress.log
