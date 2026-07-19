@@ -2,8 +2,11 @@
 
 **Read this together with:** `00-README.md` (rehearsal results + runbook) and
 `../2026-07-16-consolidation-roadmap/HANDOFF.md` (project-wide handoff).
-**Repo state at handoff:** `main` @ `4781d5a`, clean. Nothing was written or fixed in this
-session — it was pure diagnosis + decisions. Every fix below is TODO.
+**Repo state at handoff:** `main` @ `f23a857` (this doc) + a revision incorporating a
+second-opinion review from another Claude instance (2026-07-19: corrected fix-3 mechanism
+note, added §3.4 needs_review inconsistency, sharpened §3.3 with the count asymmetry + WPML
+hypothesis + per-term census). No migration code or CSVs were touched — diagnosis +
+decisions only. Every fix below is TODO.
 
 ---
 
@@ -103,14 +106,25 @@ The equivalence data (old category → new taxonomy, e.g. location-nyc → north
 
 ### 3.3 The UNRESOLVED fork — are the term relationships in the DB or not?
 
-All real topic/region counts read 0. Two hypotheses:
+All real topic/region counts read 0. **Key asymmetry (second-opinion review 2026-07-19):**
+the garbage term `attach via conference-map` shows count **1** while every seeded term shows
+0 — counting therefore WORKED at assignment time, so "globally stale counts" cannot be the
+whole story. Hypotheses, ranked:
 
-- **Benign:** relationships exist; the `count` column is stale (recount was only run for
-  `category`, si-migrate.php:1331) and/or WPML-filtered. Supporting evidence: the retire
-  guard (si-migrate.php:1311-1315) counts si_topic relationships via **direct SQL** and
-  refuses below 1,000 — and retire ran without `--force` being reported, so at that moment
-  ≥1,000 posts had si_topic rows.
-- **Bad:** relationships genuinely missing/wiped → real transform bug to hunt.
+1. **WPML term duplication / language filtering (leading benign suspect):** relationships
+   may hang on per-language copies of the seeded terms, or `wp term list` shows only the
+   default-language originals while counts live on translations. (WPML term duplication is
+   the same mechanism that produced the numeric legacy categories.)
+2. **Stale counts from operation ordering:** `assign_taxonomies` runs BEFORE
+   `set_post_type` (si-migrate.php:984 vs 995), so items still typed `portfolio_cpt` at
+   assignment time count as 0 (`_update_post_term_count` only counts attached object
+   types), and nothing recounts after the type change. Explains transformed CPTs but NOT
+   zeros on kept `post`-type articles — insufficient alone.
+3. **Bad:** relationships genuinely missing/wiped → real transform bug to hunt.
+
+Evidence relationships existed at some point: the retire guard (si-migrate.php:1311-1315)
+counts si_topic relationships via **direct SQL** and refuses below 1,000 — and retire ran
+without `--force` being reported.
 
 **The user was about to run the deciding diagnostics when the session ended. NEXT SESSION:
 get these outputs first.** On the Local instance:
@@ -130,11 +144,32 @@ working PHP connection (Windows-cmd-safe quoting):
 wp eval "global $wpdb; foreach($wpdb->get_results(\"SELECT tt.taxonomy, COUNT(*) rels, COUNT(DISTINCT tr.object_id) objs FROM $wpdb->term_relationships tr JOIN $wpdb->term_taxonomy tt ON tt.term_taxonomy_id=tr.term_taxonomy_id WHERE tt.taxonomy LIKE 'si_%' GROUP BY tt.taxonomy\") as $x) echo \"$x->taxonomy: $x->rels rels, $x->objs posts\n\";"
 ```
 
-Counts fill in → stale-bookkeeping path (benign, add recount to the chain). Near-zero rows →
-transform assignment bug (start at `assign_taxonomies` + whether taxonomies were registered
+And the **per-term census** that distinguishes all three hypotheses in one output (cached
+count vs real relationship rows vs WPML language, per term):
+
+```
+wp eval "global $wpdb; foreach($wpdb->get_results(\"SELECT t.name, t.slug, tt.term_taxonomy_id ttid, tt.count cached, COUNT(tr.object_id) real_rels, tl.language_code lang FROM $wpdb->term_taxonomy tt JOIN $wpdb->terms t ON t.term_id=tt.term_id LEFT JOIN $wpdb->term_relationships tr ON tr.term_taxonomy_id=tt.term_taxonomy_id LEFT JOIN {$wpdb->prefix}icl_translations tl ON tl.element_id=tt.term_taxonomy_id AND tl.element_type='tax_si_topic' WHERE tt.taxonomy='si_topic' GROUP BY tt.term_taxonomy_id ORDER BY t.name\") as $x) echo \"$x->name [$x->slug] ttid=$x->ttid lang=$x->lang cached=$x->cached real=$x->real_rels\n\";"
+```
+
+Reading the output: `real_rels` high on seeded terms → hypothesis 1/2 (benign; recount +
+possibly WPML term-language repair). `real_rels` high but on duplicate/other-language term
+copies → hypothesis 1 (WPML; consolidate). `real_rels` ~0 everywhere → hypothesis 3
+(transform assignment bug: start at `assign_taxonomies` + whether taxonomies were registered
 in the CLI context at transform time).
 
-### 3.4 Minor: `&amp;` in seeded term names
+### 3.4 Inconsistency: `needs_review` only gates TOPICS (second-opinion finding, verified)
+
+In `assign_taxonomies()` (si-migrate.php:1033-1035) only `si_topic` goes through
+`SI_Csv::effective()` + the `needs_review` gate; **`si_region`, `si_campaign`, `si_series`
+are assigned unconditionally from `proposed_*`** — the 303 flagged rows get their proposed
+regions/campaigns/series applied anyway. Additionally the CSV contract has **no
+`final_regions`/`final_campaigns`/`final_series` columns**, so reviewers cannot override
+those dimensions at all. Possibly defensible (regions/campaigns derive mostly from the
+deterministic category-equivalence map, not LLM judgment) but it contradicts "flagged rows
+wait for team review" and was never a recorded decision. → Make it a conscious decision, and
+route all four taxonomies through the same validated assignment path (fix 3).
+
+### 3.5 Minor: `&amp;` in seeded term names
 
 `schiller-content-model-v3.php` seeds pass plain `'Peace & Strategy'` (line 69), yet the DB
 shows `Peace &amp; Strategy`. Encoding happened at insert time — suspect a WPML term hook.
@@ -152,8 +187,9 @@ Cosmetic but will double-escape on the front end. Check raw:
 2. **Identity model confirmed:** posts must not *lose* classification identity; it is
    *remapped* (location-nyc → si_region north-america). User now understands the pipeline
    already does this via classification.csv (and where the exceptions are: no-signal
-   Allgemein posts → LLM pass, ~53 topic-less floor; flagged rows wait for team review;
-   retired posts get nothing; many-to-one coarsening like NYC→North America is intentional).
+   Allgemein posts → LLM pass, ~53 topic-less floor; flagged rows wait for team review —
+   **topics only, see §3.4**; retired posts get nothing; many-to-one coarsening like
+   NYC→North America is intentional).
 3. **UI decision:** user wants **checkbox term selection with a fixed preset list, term
    creation limited to admins**. Concretely:
    - Register `si_topic`, `si_campaign`, `si_series` with `hierarchical => true` (UI-only
@@ -171,10 +207,15 @@ Cosmetic but will double-escape on the front end. Check raw:
 2. **Clean the 25 classification.csv rows**: move prose to `notes`, set `final_topics` to
    real slugs or empty (script with the regex above; keep the audit trail).
 3. **Harden `assign_taxonomies`** (si-migrate.php:1031): resolve slugs → existing **term
-   IDs**; unknown slug = log + skip, NEVER auto-create. ⚠️ CRITICAL INTERACTION: after the
-   hierarchical flip, `wp_set_object_terms` treats bare strings as term **names** (not
-   slugs) and would create a term literally named "peace-strategy" — passing IDs eliminates
-   the class of bug.
+   IDs**; unknown slug = log + skip, NEVER auto-create — **for all four taxonomies**, and
+   decide consciously whether `needs_review` should gate regions/campaigns/series too
+   (§3.4). Mechanism note (corrected 2026-07-19 after second-opinion review):
+   `wp_set_object_terms` resolves string members via `term_exists()`, which matches slug OR
+   name regardless of hierarchy — so seeded slugs survive the hierarchical flip fine, and
+   the flip does NOT change string semantics here (the strings-as-names gotcha lives in
+   `wp_insert_post`'s `tax_input`, not in `wp_set_object_terms`). Unknown strings
+   auto-create in BOTH modes — that, not the flip, is the bug class IDs eliminate. Ordering
+   between fixes 3 and 4 is therefore not critical.
 4. **Registration change** per decision §4.3 (hierarchical + capabilities). Data survives a
    flag flip; no migration needed.
 5. **Category leftovers**: resolve the 9 empty-slug map rows by term_id on the clone, fill
