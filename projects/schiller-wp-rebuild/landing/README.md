@@ -18,7 +18,34 @@ copy of every token, pattern and behavior.
 
 ## The drafts
 
-### The archive wing — /conferences/, one page three ways (newest)
+### The institutional wing — the standard pages (newest)
+
+Not doors: the house itself — About, Contact, Donate, Join and the 404.
+Where the doors are polychrome (one accent each), the whole wing shares
+ONE accent, `lp-institute` (seal blue, the Institute's own ink), so these
+pages read as the institution rather than another campaign. Register is
+deliberately quieter: trust over spectacle; at most one restrained
+showpiece per page. Shared additions in `css/landing-inst.css` +
+`js/landing-inst.js` (loaded after the v3 layer; the pages also load
+`landing-v4.css` for the wordmark header and `.ph` placeholders).
+
+`contact.html` finally drafts **hero form C (compact)** — the utility
+overture the v3 covenant reserved but never built; the 404 reuses it.
+
+| File | Character | Notes |
+|---|---|---|
+| `about.html` | "The Charter" — who these people are | all stock patterns on purpose: plates (founder/name), shelf of the four instruments, people row, epochs 1984→today. Timeline dates from the public record; proof quote is editorial, cited as "the founding idea" |
+| `contact.html` | "The Bureau" — write to us, a person answers | hero C debut · bureau channel cards · the letter form (prototype; CRM in production) · regional directory consolidating the live site's EIGHT contact-template pages. **All addresses/emails are declared placeholders** |
+| `donate.html` | "The Patron" — independence as a line item | patronage grid (once/monthly toggle, 3 sums + free sum — **amounts are placeholders**; NationBuilder carries checkout) · the 1791 Augustenburg precedent (true story: the Aesthetic Letters were written on a Danish patron's pension) |
+| `join.html` | "The Threshold" — start where you are | the ways-in ladder: four rungs from two minutes to a life's work, gold rail drawn by the shared data-scrub grammar (no bespoke JS) · testimonial is a declared placeholder |
+| `404.html` | "The Lost Letter" — brief, charming, gone | **spine intentionally waived** (a 404 is chrome, not a landing page): the signature arc interrupted — the you-ring waits at the gap — search stub, four doors out, `noindex` |
+
+The five pages cross-link each other and the doors with real hrefs (nav
+Get Involved → `join.html`, About → `about.html`, Donate → `donate.html`;
+footers likewise). The older drafts' footers still point at `#` — align
+them when the wing's URLs are settled in WordPress.
+
+### The archive wing — /conferences/, one page three ways
 
 Three treatments of a single page: the **conference archive index** (the
 future `si_conference` archive at `/conferences/` — see
