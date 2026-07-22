@@ -74,7 +74,7 @@ ali-reza-sheikh-attar,Ali Reza Sheikh Attar,,,,speaker,Ali Reza Sheikh Attar,por
 lyndon-h-larouche-jr,"Lyndon H. LaRouche, Jr.",,,,speaker,"Lyndon H. LaRouche, Jr.",portfolio:2101|portfolio:3440,2,0,,,mk
 sean-stone,Sean Stone,,,,speaker,Sean Stone,portfolio:2232|portfolio:2317,2,0,,,mk
 norton-mezvinsky,Norton Mezvinsky,,,,speaker,Norton Mezvinsky,portfolio:2240|portfolio:2761,2,0,,,mk
-james-benham,James Benham,,,,speaker,James Benham,portfolio:2674|portfolio:3213,2,0,,,mk
+james-benham,James Benham,,,,speaker,James Benham,portfolio:2674|portfolio:3213,2,0,,merge:jim-benham,mk
 thomas-jackson,Rep. Thomas Jackson,Rep.,,,speaker,Rep. Thomas Jackson,portfolio:2677|portfolio:3210,2,0,,,mk
 paul-gallagher,Paul Gallagher,,,,speaker,Paul Gallagher,portfolio:2683|portfolio:3225,2,0,,,mk
 jeff-steinberg,Jeff Steinberg,,,,speaker,Jeff Steinberg,portfolio:2736|portfolio:3181,2,0,,,mk
@@ -90,14 +90,14 @@ harley-schlanger,Harley Schlanger,,,,speaker,Harley Schlanger,portfolio:3734|por
 mike-billington,Mike Billington,,,,speaker,Mike Billington,portfolio:3904|portfolio:4995,2,0,possible duplicate of: michael-billington,merge:michael-billington,mk
 wolfgang-lillge,Dr. Wolfgang Lillge,Dr.,"Editor-in-chief of the Fusion Magazine, Berlin, Germany",,speaker,Dr. Wolfgang Lillge,portfolio:20428|portfolio:21763,2,0,,,mk
 fatemeh-hashemi-rafsanjani,Dr Fatemeh Hashemi Rafsanjani,Dr.,"President of WSA (Women Solidarity Association), Teheran, Islamic Republic of Iran.",,speaker,Dr Fatemeh Hashemi Rafsanjani|Dr. Fatemeh Hashemi Rafsanjani,portfolio:21552|portfolio:21717,2,0,,,mk
-pei-hua-chen-bo,Pei Hua & Chen Bo,,Salutations et présentation de la Fondation Chinoise Soong Ching Ling,,speaker,Pei Hua & Chen Bo,portfolio:21801|portfolio:22622,2,0,,,mk
+pei-hua-chen-bo,Pei Hua & Chen Bo,,Salutations et présentation de la Fondation Chinoise Soong Ching Ling,,speaker,Pei Hua & Chen Bo,portfolio:21801|portfolio:22622,2,0,"TWO real presenters (Pei Hua; Chen Bo), Soong Ching Ling Foundation (China). Bilingual si_presentation FR=portfolio:21801 / DE=portfolio:22622, 2014-10-21. Neither has a person row; person_hints empty. merge can't split — needs machine-side ""&""/""and"" speaker-split into two person rows, both linked to the talk.",drop,mk
 dieter-ameling,Prof. Dieter Ameling,Prof. Dr.,"President of the German Steel Federation (until 2008), Essen, Germany.",,speaker,Prof. Dieter Ameling|Prof. Dr. Dieter Ameling,portfolio:22338|portfolio:22638,2,0,,,mk
 zepp-larouche-resolution,Zepp-LaRouche - Resolution,,"founder of the Schiller Institute, reads the resolution ""Let us grow up into the Adult Age of Mankind!"" during the Schiller Institute conference.",,speaker,Zepp-LaRouche - Resolution,portfolio:22642|portfolio:22671,2,0,possible duplicate of: zepp-larouche-frankfurter-resolution,merge:helga-zepp-larouche,mk
 michail-titarenko,Prof. Michail Titarenko,Prof.,"Directeur de l’Institut d’études pour l’Extrême-Orient, Académie des Sciences",,speaker,Prof. Michail Titarenko,portfolio:22833|portfolio:22996,2,0,,,mk
 wangsuo-wu,Prof. Dr. Wangsuo Wu,Prof. Dr.,"Doyen de l’École de science et de technologie nucléaire, Université de Lanzhou, Chine.",,speaker,Prof. Dr. Wangsuo Wu,portfolio:22889|portfolio:22890,2,0,possible duplicate of: wangsou-wu — reviewed: KEEP (merge target of the alias row),,mk
 chandra-muzaffar,Dr. Chandra Muzaffar,Dr.,Fondateur et Président du Mouvement international pour un monde juste (JUST),,speaker,Dr. Chandra Muzaffar,portfolio:22913|portfolio:22914,2,0,,,mk
 benjamin-deniston,Benjamin Deniston,,"Wissenschaftsteam des LaRouche-Aktionskomitees, Washington",,speaker,Benjamin Deniston,portfolio:30090|portfolio:31312,2,0,possible duplicate of: ben-deniston — reviewed: KEEP (merge target of the alias row),,mk
-maelle-mercier-jean-jaures,Maëlle Mercier - Jean Jaurès,,"(The Positive Philosophy, 1867)",,speaker,Maëlle Mercier - Jean Jaurès,portfolio:30175|portfolio:30492,2,0,,,mk
+maelle-mercier-jean-jaures,Maëlle Mercier - Jean Jaurès,,"(The Positive Philosophy, 1867)",,speaker,Maëlle Mercier - Jean Jaurès,portfolio:30175|portfolio:30492,2,0,,merge:maelle-mercier,mk
 charles-paperon,Charles Paperon,,"Veteran Figher of the French Resistance, decorated of the Free France medal",,speaker,Charles Paperon,portfolio:30601|portfolio:30602,2,0,,,mk
 tatiana-seliverstova,Tatiana Seliverstova,,Head of the department of the international cooperation and innovative activities of the Russian Union of Youth.,,speaker,Tatiana Seliverstova,portfolio:30806|portfolio:30807,2,0,,,mk
 jean-pierre-gerard,Jean-Pierre Gérard,,"Economist, Entrepreneur,",,speaker,Jean-Pierre Gérard,portfolio:30832|portfolio:31352,2,0,,,mk
@@ -107,8 +107,8 @@ ulrich-scholz,Colonel Ulrich Scholz (cr),Lt. col.,"I'm going to use three metaph
 fouad-al-ghaffari,Fouad Al-Ghaffari,,"C’est un grand plaisir de pouvoir m’exprimer devant vous, au moins de façon électronique, après avoir fait tant d’effort sans succès pour être parmi vous en per",,speaker,Fouad Al-Ghaffari,portfolio:35441|portfolio:35776,2,0,,,mk
 scott-ritter,Scott Ritter,,former UN Weapons Inspector in Iraq,U.S.,speaker,Scott Ritter,post:98908@yt:A7sx7BUvdK4@5052|post:102333@yt:M9sYi4Io7Zk@820,2,0,,,mk
 attar,Ambassador Attar,Ambassador,"Ali Reza Sheikh Attar, Ambassador of the Islamic Republic of Iran to Germany",,speaker,Ambassador Attar,portfolio:900,1,0,"possible duplicate of: ali-reza-sheik-attar, ali-reza-sheikh-attar",merge:ali-reza-sheikh-attar,mk
-guell,Dr. Güell,Dr.,,,speaker,Dr. Güell,portfolio:946,1,0,,,mk
-hankel,Prof. Hankel,Prof.,,,speaker,Prof. Hankel,portfolio:1012,1,0,,,mk
+guell,Dr. Güell,Dr.,,,speaker,Dr. Güell,portfolio:946,1,0,,merge:antonio-guell,mk
+hankel,Prof. Hankel,Prof.,,,speaker,Prof. Hankel,portfolio:1012,1,0,,merge:wilhelm-hankel,mk
 george-tsobanoglou,George Tsobanoglou,,,,speaker,George Tsobanoglou,portfolio:1032,1,0,possible duplicate of: george-o-tsobanoglou — reviewed: KEEP (merge target of the alias row),,mk
 katsanevas,Prof. Katsanevas,Prof.,,,speaker,Prof. Katsanevas,portfolio:1034,1,0,,merge:theodore-katsanevas,mk
 ali-reza-sheik-attar,S.E. Ali Reza Sheik Attar,S.e.,Text bald verfügbar!,,speaker,S.E. Ali Reza Sheik Attar,portfolio:1270,1,0,"possible duplicate of: attar, ali-reza-sheikh-attar",merge:ali-reza-sheikh-attar,mk
@@ -163,7 +163,7 @@ natalia-witrenko,Natalia Witrenko,,,,speaker,Natalia Witrenko,portfolio:3364,1,0
 др-урбан-клеве,Др. Урбан Клеве (Германия),,,,speaker,Др. Урбан Клеве (Германия),portfolio:3428,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 kirill-benediktov,Kirill Benediktov,,,,speaker,Kirill Benediktov,portfolio:3446,1,0,,,mk
 michail-deljagin,Michail Deljagin,,,,speaker,Michail Deljagin,portfolio:3584,1,0,,,mk
-dr-ing-urban-cleve,Dr.-Ing. Urban Cleve,,,,speaker,Dr.-Ing. Urban Cleve,portfolio:3611,1,0,,,mk
+dr-ing-urban-cleve,Dr.-Ing. Urban Cleve,,,,speaker,Dr.-Ing. Urban Cleve,portfolio:3611,1,0,,merge:urban-cleve,mk
 das-zukunftige-paradigma,Das zukünftige Paradigma,,Podiumsdiskussion mit,,speaker,Das zukünftige Paradigma,portfolio:3620,1,0,,drop,mk
 andrej-fursow,Andrej Fursow,,,,speaker,Andrej Fursow,portfolio:3621,1,0,,,mk
 robert-hux,Dr. Robert Hux,Dr.,,,speaker,Dr. Robert Hux,portfolio:3660,1,0,,,mk
@@ -281,7 +281,7 @@ gesang-des-gebets,Gesang des Gebets,,"überraschte. Das Gebet ist eine von vier 
 2-amb-anatoly-antonov,2) Amb. Anatoly Antonov,,,,speaker,"2) Amb. Anatoly Antonov, H.E. Ambassador Anatoly Antonov, Ambassador of The Russian Federation to the United States: ""Pr",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 2-helga-zepp-larouche,"2) Helga Zepp-LaRouche: ""Operation Ibn Sina""",,,,speaker,"2) Helga Zepp-LaRouche: ""Operation Ibn Sina"", Dipl. Ing. Daud Azimi - Board Member Peace National Front of Afghanistan: ",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:helga-zepp-larouche,mk
 3-princy-mthombeni-communication-specialist,3) Princy Mthombeni; Communication Specialist,,,,speaker,"3) Princy Mthombeni; Communication Specialist, Africa4Nuclear Founder, South Africa: ""Energy Security for Africa""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-3-sam-pitroda-innovator,3) Sam Pitroda; Innovator,,,,speaker,"3) Sam Pitroda; Innovator, Entrepreneur and Policy-Maker; U.S./India: ""The Need to Redesign the World""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+3-sam-pitroda-innovator,3) Sam Pitroda; Innovator,,,,speaker,"3) Sam Pitroda; Innovator, Entrepreneur and Policy-Maker; U.S./India: ""The Need to Redesign the World""",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:sam-pitroda,mk
 5-chen-xiaohan,5) Chen Xiaohan,,,,speaker,"5) Chen Xiaohan, Chinese People's Association for Peace and Disarmament: ""Shared Future of Mankind""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 5-fraydique-gaitan,5) Fraydique Gaitán,,,,speaker,"5) Fraydique Gaitán, President of the CTU USCTRAB Workers Confederation of Colombia; and Pedro Rubio, President of the A",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 7-p-s-raghavan,7) P.S. Raghavan,,,,speaker,"7) P.S. Raghavan, Former Indian Ambassador to Russia: ""The Indian Perspective""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -294,7 +294,7 @@ address-by-diogene-senny,Address by Diogène Senny,,,,speaker,"Address by Diogè
 address-by-natalia-vitrenko,Address by Natalia Vitrenko,,,,speaker,"Address by Natalia Vitrenko, Economist, Chairwoman of the Progressive Socialist Party of Ukraine, Kiev, Ukraine.",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:natalia-vitrenko,mk
 address-by-ray-mcgovern,Address by Ray McGovern,,,,speaker,"Address by Ray McGovern, Veteran Intelligence Professionals for Sanity (VIPS), USA.",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:raymond-mcgovern,mk
 adrian-pearl,Adrian Pearl (U.S.),,,,speaker,Adrian Pearl (U.S.),yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-alain-gachet-vorsitzender,Alain Gachet – Vorsitzender,,,,speaker,"Alain Gachet – Vorsitzender, Radar Technologies International, Frankreich",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+alain-gachet-vorsitzender,Alain Gachet – Vorsitzender,,,,speaker,"Alain Gachet – Vorsitzender, Radar Technologies International, Frankreich",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:alain-gachet,mk
 alejandro-yaya,Alejandro Yaya (Argentina),,,,speaker,Alejandro Yaya (Argentina),yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 alexander-demissie,Dr. (cand.) Alexander Demissie,,,,speaker,Dr. (cand.) Alexander Demissie,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 alexander-hamilton,Alexander Hamilton,,,,speaker,"Alexander Hamilton, LaRouche, and the Credit System",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -362,7 +362,7 @@ e-p-ce-y-a,Джейшри Сенгупта,,,,speaker,"Джейшри Сенгу
 earl-rasmussen,Earl Rasmussen (U.S.),,,,speaker,"Earl Rasmussen (U.S.), The Eurasia Center",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 economic-cooperation-organisation,Economic Cooperation Organisation (BSEC),,,,speaker,Economic Cooperation Organisation (BSEC),yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 ed-calabrese,Dr. Ed Calabrese,,,,speaker,Dr. Ed Calabrese,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-egbert-drews-international-networking-in-the-economy,Egbert Drews – International networking in the economy: Prac,,,,speaker,Egbert Drews – International networking in the economy: Practical experience,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+egbert-drews-international-networking-in-the-economy,Egbert Drews – International networking in the economy: Prac,,,,speaker,Egbert Drews – International networking in the economy: Practical experience,yt-segmentation,1,1,added by reconcile from video-segmentation,merge:egbert-drews,mk
 elisabeth-murray,Elisabeth Murray,,,,speaker,Elisabeth Murray,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 elison-karuhanga,Elison Karuhanga (Uganda),,,,speaker,"Elison Karuhanga (Uganda), Attorney; Expert in Energy Law; former State Attorney, Directorate of Civil Litigation, Attor",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 elvira-green,Elvira Green,,,,speaker,"Elvira Green, Mezzo-soprano, 30-year member of the Metropolitan Opera, Founder of the Spiritual Renaissance Singers of G",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -398,7 +398,7 @@ grussworte-von-lynne-speed,Grußworte von Lynne Speed,,,,speaker,"Grußworte von
 h-t-burleigh,H.T. Burleigh,,,,speaker,"H.T. Burleigh, arr: ""Deep River""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 ha-b-pe-o,Натлья Витренко,,,,speaker,"Натлья Витренко, экономист, председатель Прогрессивной социалистической партии Украины, Киев",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 haidar-al-fuadi-al-atabe,Haidar Al-Fuadi Al-Atabe,,,,speaker,Haidar Al-Fuadi Al-Atabe,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-hal-cooper-jr,Dr. Hal Cooper Jr.,,,,speaker,"Dr. Hal Cooper Jr., Chairman, Seattle Freight Transport Advisory Board; expert on the proposed Bering Strait railroad tu",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+hal-cooper-jr,Dr. Hal Cooper Jr.,,,,speaker,"Dr. Hal Cooper Jr., Chairman, Seattle Freight Transport Advisory Board; expert on the proposed Bering Strait railroad tu",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:hal-cooper,mk
 hans-christof-von-sponeck,Hans-Christof von Sponeck,,,,speaker,Hans-Christof von Sponeck,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 hans-kochler,Prof Hans Köchler,,,,speaker,"Prof Hans Köchler, President of I.P.O.",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 hans-von-helldorff,Hans von Helldorff,,,,speaker,"Hans von Helldorff, Spokesman, Federal Association of the German Silk Road Initiative",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -508,7 +508,7 @@ pakdee-tanapura,Pakdee Tanapura: Contribution from Thailand,,,,speaker,Pakdee Ta
 panel-2-diplomatic-dialogue,Panel 2 Diplomatic Dialogue: Peace through Development and C,,,,speaker,Panel 2 Diplomatic Dialogue: Peace through Development and Cooperation or Annihilation?,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 par-jean-christophe-vautrin,par Jean-Christophe Vautrin,,,,speaker,"par Jean-Christophe Vautrin, Président du Club Chine EMLyon Forever",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 par-jean-francois-di-meglio,Par Jean-François Di Meglio,,,,speaker,"Par Jean-François Di Meglio, président d'ASIA Centre.",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:jean-francois-di-meglio,mk
-par-marco-zanni,par Marco Zanni,,,,speaker,"par Marco Zanni, député européen.",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+par-marco-zanni,par Marco Zanni,,,,speaker,"par Marco Zanni, député européen.",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:marco-zanni,mk
 par-moni-abdullah,par Moni Abdullah,,,,speaker,par Moni Abdullah,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 paul-driessen,Paul Driessen,,,,speaker,Paul Driessen,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 pe-ma-o-ep,Рей Макговерн,,,,speaker,"Рей Макговерн, организация ""Ветераны-профессионалы разведки за здравый смысл"", США",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -528,10 +528,10 @@ po-p-ba-co,Проф. д-р У Вансо,,,,speaker,"Проф. д-р У Ванс
 pr-carl-otto-weiss,Pr Carl-Otto Weiss,,,,speaker,"Pr Carl-Otto Weiss, consultant à l'Institut européen pour le climat et l'énergie, ancien président de l'Agence nationale",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:carl-otto-weiss,mk
 pr-safieeldin-mohamed-metwally,Pr Safieeldin Mohamed Metwally,,,,speaker,"Pr Safieeldin Mohamed Metwally, Centre national de recherche sur les déserts, Le Caire, Egypte.",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 presentation-by-richard-trifan,Presentation by Richard Trifan,,,,speaker,"Presentation by Richard Trifan, VP of the Eurasia Center, to the ""New Silk Road: A Global Engineering Renaissance"" confe",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-professeur-enzo-siviero,Professeur Enzo Siviero,,,,speaker,"Professeur Enzo Siviero, Membre du Conseil National Italien des Universités, Venise, Italie",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+professeur-enzo-siviero,Professeur Enzo Siviero,,,,speaker,"Professeur Enzo Siviero, Membre du Conseil National Italien des Universités, Venise, Italie",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:enzo-siviero,mk
 project-phoenix-aleppo,Project Phoenix—Aleppo: The Eternal City,,,,speaker,Project Phoenix—Aleppo: The Eternal City,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 rachel-brinkley,Rachel Brinkley,,,,speaker,"Rachel Brinkley, Former Congressional Candidate. Presentation on the danger of world war and colored revolution, and the",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-rainer-sandau-technical-director,Rainer Sandau – Technical Director,,,,speaker,"Rainer Sandau – Technical Director, Satellites and Space Applications of the International Academy of Astronautics (IAA)",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+rainer-sandau-technical-director,Rainer Sandau – Technical Director,,,,speaker,"Rainer Sandau – Technical Director, Satellites and Space Applications of the International Academy of Astronautics (IAA)",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:rainer-sandau,mk
 reading-from-friedrich-schiller,Reading from Friedrich Schiller,,,,speaker,"Reading from Friedrich Schiller, Dikran Tulaine",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 recorded-june-13,Recorded June 13,,,,speaker,"Recorded June 13, 2022",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 rede-von-dr-hermann-schwiesau,Rede von Dr. Hermann Schwiesau,,,,speaker,"Rede von Dr. Hermann Schwiesau, Botschafter a.D.",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -565,7 +565,7 @@ simon-estes,Simon Estes,,,,speaker,"Simon Estes, baritone, talks about his histo
 simon-levy,Simon Levy (Mexico),,,,speaker,Simon Levy (Mexico),yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 soloists-gregor-kitzis,Soloists: Gregor Kitzis,,,,speaker,"Soloists: Gregor Kitzis, violin; Laura Thompson, flute; My-Hoa Steger, piano",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 space-historian,Space Historian (Europe),,,,speaker,Space Historian (Europe),yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
-speakers-harley-schlanger,Speakers: Harley Schlanger,,,,speaker,"Speakers: Harley Schlanger, spokesman, The LaRouche Organization",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+speakers-harley-schlanger,Speakers: Harley Schlanger,,,,speaker,"Speakers: Harley Schlanger, spokesman, The LaRouche Organization",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:harley-schlanger,mk
 speakers-include-jason-ross,Speakers include: Jason Ross,,,,speaker,"Speakers include: Jason Ross, Dr. Augustinus Berkhout, Prof. Carl Otto Weiss, State Senator Mike Thompson, Adrian Badesc; Multi-speaker list → drop; ""Adrian Badesc…"" (name truncated in source) has no person row — recover at video-segmentation stage ",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 speaking-from-yemen,Speaking from Yemen,,,,speaker,"Speaking from Yemen, he opened the taped video message, telling the audience gathered in Germany, ""With a great deal of ",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 speech-by-daniel-heydt,Speech by Daniel Heydt,,,,speaker,"Speech by Daniel Heydt, Mayor of Bellange, Moselle, France, at the international Schiller Institute conference in Rüssel",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -630,7 +630,7 @@ benjamin-telmanyi-lylloff,Benjamin Telmányi Lylloff,,,,speaker,"Benjamin Telmá
 black,Col. Black: U.S. Nuclear Policy is No Longer Defensive,,,,speaker,"Col. Black: U.S. Nuclear Policy is No Longer Defensive, but OFFENSIVE",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:richard-black,mk
 butch-valdes,Butch Valdes: Pacific Contribution from the Philippines,,,,speaker,Butch Valdes: Pacific Contribution from the Philippines,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 caleb-maupin,Caleb Maupin (U.S.),,,,speaker,"Caleb Maupin (U.S.), Founder and Director, Center for Political Innovation: ""Security Effects of Unilateral Sanctions by",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-chas-freeman-things-fall-apart,Chas Freeman – Things Fall Apart: America,,,,speaker,"Chas Freeman – Things Fall Apart: America, Europe, and Asia in the New World Disorder",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+chas-freeman-things-fall-apart,Chas Freeman – Things Fall Apart: America,,,,speaker,"Chas Freeman – Things Fall Apart: America, Europe, and Asia in the New World Disorder",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:chas-freeman,mk
 covid-19-triage,COVID-19 & Triage: A Slippery Slope,,,,speaker,COVID-19 & Triage: A Slippery Slope,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 daisuke-kotegawa-canon-institute,Daisuke Kotegawa – Canon Institute,,,,speaker,"Daisuke Kotegawa – Canon Institute, Japan, ehem. Vertreter Japan",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:daisuke-kotegawa,mk
 daniel-burke,Daniel Burke,,,,speaker,"Daniel Burke, Schiller Institute, USA",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -663,7 +663,7 @@ kildare-clarke,Kildare Clarke,,,,speaker,"Kildare Clarke, MD · Physician in New
 kirk-meighoo,Dr. Kirk Meighoo,,,,speaker,"Dr. Kirk Meighoo, political economist, broadcaster, and former Senator, Trinidad & Tobago: ""The Caribbean's True Importa",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 larouche-legacy-foundation-www-larouchelegacyfoundation-org,LaRouche Legacy Foundation: www.larouchelegacyfoundation.org,,,,speaker,LaRouche Legacy Foundation: www.larouchelegacyfoundation.org,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 larry-bell,Larry Bell,,,,speaker,"Larry Bell, Founder, Sasakawa International Center for Space Architecture, College of Engineering, University of Houston",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-leonidas-chrysantopoulos-die-globale-krise,Leonidas Chrysantopoulos – Die globale Krise: Lösungsvorschl,,,,speaker,Leonidas Chrysantopoulos – Die globale Krise: Lösungsvorschläge,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+leonidas-chrysantopoulos-die-globale-krise,Leonidas Chrysantopoulos – Die globale Krise: Lösungsvorschl,,,,speaker,Leonidas Chrysantopoulos – Die globale Krise: Lösungsvorschläge,yt-segmentation,1,1,added by reconcile from video-segmentation,merge:leonidas-chrysantopoulos,mk
 lt-col-ulrich-scholz,Lt. Col. (ret.) Ulrich Scholz,,,,speaker,"Lt. Col. (ret.) Ulrich Scholz, former NATO planner",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 lt-col-ulrich-scholz-war,Lt. Col. (ret.) Ulrich Scholz – War: a pathology of the West,,,,speaker,Lt. Col. (ret.) Ulrich Scholz – War: a pathology of the West,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 marc-gabriel-draghi,Marc-Gabriel Draghi (France),,,,speaker,"Marc-Gabriel Draghi (France), Economist: ""Orderly Debt Cancellation: Historical Precedents and Present Relevance.""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -688,7 +688,7 @@ performer-camerata-geminiani,Performer: Camerata Geminiani,,,,speaker,Performer:
 plenary-session,Plenary Session,,,,speaker,Plenary Session,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 po-ep-ap,Роберт Барвик,,,,speaker,"Роберт Барвик, Совет граждан-избирателей, Австралия",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 po-p-ep-a-e,Проф. д-р Дитер Амелинг,,,,speaker,"Проф. д-р Дитер Амелинг,президент Германской федерации производителей стали (до 2008 г.), Эссен, Германия",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-pr-francois-gervais,Pr François Gervais,,,,speaker,"Pr François Gervais, professeur émérite à l'Université François Rabelais de Tours, rapporteur critique auprès du GIEC – ",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+pr-francois-gervais,Pr François Gervais,,,,speaker,"Pr François Gervais, professeur émérite à l'Université François Rabelais de Tours, rapporteur critique auprès du GIEC – ",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:francois-gervais,mk
 pr-shi-ze,Pr Shi Ze,,,,speaker,"Pr Shi Ze, chercheur et directeur des études stratégiques internationales sur les questions énergétiques à l'Institut ch",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:shi-ze,mk
 princy-mthombeni,Princy Mthombeni (South Africa),,,,speaker,"Princy Mthombeni (South Africa), Communication Specialist, Founder, Africa4Nuclear: ""Energy Security for Africa""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 r-thomas-buffenbarger,R. Thomas Buffenbarger,,,,speaker,"R. Thomas Buffenbarger,",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
