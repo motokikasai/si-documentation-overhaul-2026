@@ -151,7 +151,7 @@ representante-walter-jones,Representante Walter Jones,,,,speaker,Representante W
 брюс-феин,Брюс Фейн (США),,,,speaker,Брюс Фейн (США),portfolio:3277,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 линдон-ларуш,Линдон Ларуш (США),,,,speaker,Линдон Ларуш (США),portfolio:3279,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 lyndon-h-larouche,Lyndon H. LaRouche,,,,speaker,Lyndon H. LaRouche,portfolio:3299,1,0,possible duplicate of: lyndon-larouche,merge:lyndon-h-larouche-jr,mk
-kyrill-benediktow,Kyrill Benediktow,,Kyrill Benediktow ist Autor und Mitglied der Redaktionsleitung der Internetseite „Terra America“. Für die Konferenz des Schiller-Instituts am 13.-14. verfaßte e,,speaker,Kyrill Benediktow,portfolio:3327,1,0,,,mk
+kyrill-benediktow,Kyrill Benediktow,,Kyrill Benediktow ist Autor und Mitglied der Redaktionsleitung der Internetseite „Terra America“. Für die Konferenz des Schiller-Instituts am 13.-14. verfaßte e,,speaker,Kyrill Benediktow,portfolio:3327,1,0,,merge:kirill-benediktov,mk
 natalia-witrenko,Natalia Witrenko,,,,speaker,Natalia Witrenko,portfolio:3364,1,0,possible duplicate of: natalja-witrenko,merge:natalia-vitrenko,mk
 джеисон-росс,Джейсон Росс,,,,speaker,Джейсон Росс,portfolio:3379,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 андреи-фурсов,Андрей Фурсов,,,,speaker,Андрей Фурсов,portfolio:3410,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
@@ -172,7 +172,7 @@ frank-endres,Frank Endres,,,,speaker,Frank Endres,portfolio:3692,1,0,,,mk
 victor-chang,Victor Chang,,,,speaker,Victor Chang,portfolio:3709,1,0,,,mk
 megan-beets,Megan Beets,,,,speaker,Megan Beets,portfolio:3743,1,0,,,mk
 phil-rubinstein,Phil Rubinstein,,,,speaker,Phil Rubinstein,portfolio:3746,1,0,,,mk
-megan-beets-biogeochemical-effect-of-culture,Megan Beets · Biogeochemical Effect of Culture,,,,speaker,Megan Beets · Biogeochemical Effect of Culture,portfolio:3864,1,0,,,mk
+megan-beets-biogeochemical-effect-of-culture,Megan Beets · Biogeochemical Effect of Culture,,,,speaker,Megan Beets · Biogeochemical Effect of Culture,portfolio:3864,1,0,,merge:megan-beets,mk
 leni-rubinstein,Leni Rubinstein,,,,speaker,Leni Rubinstein,portfolio:3887,1,0,,,mk
 howard-chang,Dr. Howard Chang,Dr.,,,speaker,Dr. Howard Chang,portfolio:3898,1,0,,,mk
 ramtanu-maitra,Ramtanu Maitra,,,,speaker,Ramtanu Maitra,portfolio:3913,1,0,,,mk
@@ -189,7 +189,7 @@ bao-shixiu,Col. Bao Shixiu,Col.,,,speaker,Col. Bao Shixiu,portfolio:5076,1,0,,,m
 helga-zepp-larouche-in-china,Helga Zepp-LaRouche in China,,China Investment,,speaker,Helga Zepp-LaRouche in China,portfolio:19508,1,0,,merge:helga-zepp-larouche,mk
 rede-in-beijing,Rede in Beijing,,"Die folgende Rede hielt die Präsidentin des Schiller-Instituts auf der Konferenz „Ein Gürtel, eine Straße“ am 5. September 2014 in Beijing.",,speaker,Rede in Beijing,portfolio:19617,1,0,,drop,mk
 resolution,Resolution,,"Die mehr als 300 Teilnehmer der internationalen Konferenz „Die Neue Seidenstraße und Chinas Weltraumprogramm: Die Menschheit ist die einzige kreative Gattung!“,",,speaker,Resolution,portfolio:19680,1,0,,drop,mk
-ass-prof-milena-nikolic-dragan-duncic,"Ass. Prof. Milena Nikolic, Dragan Duncic",,"Higher Education Institute for Applied Studies, Belgrade, Serbia",,speaker,"Ass. Prof. Milena Nikolic, Dragan Duncic",portfolio:20084,1,0,,,mk
+ass-prof-milena-nikolic-dragan-duncic,"Ass. Prof. Milena Nikolic, Dragan Duncic",,"Higher Education Institute for Applied Studies, Belgrade, Serbia",,speaker,"Ass. Prof. Milena Nikolic, Dragan Duncic",portfolio:20084,1,0,"TWO co-presenters comma-joined (Milena Nikolić, Ass.Prof., Higher Ed. Inst. for Applied Studies Belgrade; Dragan Dunčić). EN edition portfolio:20084. Same pair as row 216 (DE, portfolio:23005) where surname is spelled ""Dincic"". Neither has a person row. Needs machine-side comma-split + EN/DE de-dup + Dunčić/Dinčić spelling reconcile → two person records linked to both editions.",drop,mk
 h-zepp-larouche,H. Zepp-LaRouche,,Gründerin des Schiller Institutes,,speaker,H. Zepp-LaRouche,portfolio:21419,1,0,possible duplicate of: helga-zepp-larouche,merge:helga-zepp-larouche,mk
 natalja-witrenko,Natalja Witrenko,,"Wirtschaftswissenschaftlerin &amp; Vorsitzende der Progressiven Sozialistischen Partei der Ukraine, Kiew, Ukraine.",,speaker,Natalja Witrenko,portfolio:21587,1,0,possible duplicate of: natalia-witrenko,merge:natalia-vitrenko,mk
 wangsou-wu,Prof. Wangsou Wu,Prof.,"Dean of the School of Nuclear Science and Technology, Lanzhou University, China",,speaker,Prof. Wangsou Wu,portfolio:21601,1,0,possible duplicate of: wangsuo-wu,merge:wangsuo-wu,mk
@@ -208,18 +208,18 @@ zepp-larouche-frankfurter-resolution,Zepp-LaRouche - Frankfurter Resolution,,Fra
 реи-макговерн,Рей Макговерн,,"организация “Ветераны-профессионалы разведки за здравый смысл”, США",,speaker,Рей Макговерн,portfolio:22859,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 панос-камменос,Панос Камменос,,"председатель Партии независимых греков, член парламента Греции, Афины, Греция",,speaker,Панос Камменос,portfolio:22865,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 проф-эндзо-сивьеро,Проф. Эндзо Сивьеро,,"член Итальянского национального совета университетов, Венеция, Италия",,speaker,Проф. Эндзо Сивьеро,portfolio:22875,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
-professeur-dr-dieter-ameling,Professeur Dr. Dieter Ameling,,,,speaker,Professeur Dr. Dieter Ameling,portfolio:22879,1,0,,,mk
+professeur-dr-dieter-ameling,Professeur Dr. Dieter Ameling,,,,speaker,Professeur Dr. Dieter Ameling,portfolio:22879,1,0,,merge:dieter-ameling,mk
 проф-д-р-дитер-амелинг,Проф. д-р Дитер Амелинг,,"президент Германской федерации производителей стали (до 2008 г.), Эссен, Германия",,speaker,Проф. д-р Дитер Амелинг,portfolio:22880,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 проф-д-р-у-вансо,Проф. д-р У Вансо,,"декан факультета ядерной науки и техники, Университет Ланьчжоу, Китай",,speaker,Проф. д-р У Вансо,portfolio:22891,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 тони-кестнер,Тони Кестнер,,"председатель Фонда термоядерной энергетики, Эссен, Германия",,speaker,Тони Кестнер,portfolio:22933,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 le-professeur-shi-ze,Le professeur Shi Ze,,"chercheur et directeur des études stratégiques internationales sur les questions énergétiques àl’Institut chinois d’études internationales (CIIS), un think-tank",,speaker,Le professeur Shi Ze,portfolio:22978,1,0,,merge:shi-ze,mk
-milena-nikolic-dragan-dincic,"Prof. Milena Nikolic, Dragan Dincic",Prof.,Dozentin an der Fachhochschule Belgrad,,speaker,"Prof. Milena Nikolic, Dragan Dincic",portfolio:23005,1,0,,,mk
+milena-nikolic-dragan-dincic,"Prof. Milena Nikolic, Dragan Dincic",Prof.,Dozentin an der Fachhochschule Belgrad,,speaker,"Prof. Milena Nikolic, Dragan Dincic",portfolio:23005,1,0,"duplicate of row 192 (DE edition, portfolio:23005). Same two co-presenters. See row 192 note. Surname here ""Dincic"" vs ""Duncic"" in 192 — reconcile machine-side.",drop,mk
 д-р-вольфганг-лилльге,Д-р Вольфганг Лилльге,,"главный редактор журнала “Фузион”, Берлин, Германия",,speaker,Д-р Вольфганг Лилльге,portfolio:23217,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 алена-петрова,Алёна Петрова,,"Директор компании «Арт Ассамблее», Баден-Баден, Германия",,speaker,Алёна Петрова,portfolio:23222,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 драган-дунчич-доцент-милена-николич,"Драган Дунчич, Доцент Милена Николич",,"Республиканское управление территориального планирования, Белград, Сербия",,speaker,"Драган Дунчич, Доцент Милена Николич",portfolio:23234,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 press-release,Press Release,,Press Release:,,speaker,Press Release,portfolio:23402,1,0,,drop,mk
 presseerklarung,Presseerklärung,,,,speaker,Presseerklärung,portfolio:23447,1,0,,drop,mk
-ranjani-saigal-the-culture-of-india,Ranjani Saigal - The Culture of India,,Executive Director of the Ekal Vidyalaya Foundation of U.S.A. - Presentation on the history and culture of India.,,speaker,Ranjani Saigal - The Culture of India,portfolio:23717,1,0,,,mk
+ranjani-saigal-the-culture-of-india,Ranjani Saigal - The Culture of India,,Executive Director of the Ekal Vidyalaya Foundation of U.S.A. - Presentation on the history and culture of India.,,speaker,Ranjani Saigal - The Culture of India,portfolio:23717,1,0,,merge:ranjani-saigal,mk
 cloret-carl-ferguson-on-friedrich-schiller,Cloret Carl Ferguson on Friedrich Schiller,,Cloret Carl Ferguson on Friedrich Schiller,,speaker,Cloret Carl Ferguson on Friedrich Schiller,portfolio:23843,1,0,,,mk
 ali-ahani,H.E. Ali Ahani,H.e.,,,speaker,H.E. Ali Ahani,portfolio:30228,1,0,,,mk
 safieeldin-mohamed-metwally-rebuilding-egypt,Prof. Safieeldin Mohamed Metwally - Rebuilding Egypt,Prof.,,,speaker,Prof. Safieeldin Mohamed Metwally - Rebuilding Egypt,portfolio:30340,1,0,,,mk
@@ -234,7 +234,7 @@ s-e-m-ali-ahani,S.E.M. Ali Ahani,,,,speaker,S.E.M. Ali Ahani,portfolio:31558,1,0
 alain-corvez-上校,Alain Corvez 上校,,,,speaker,Alain Corvez 上校,portfolio:31637,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 bouthaina-shaaban,Her Excellency Dr. Bouthaina Shaaban,Her excellency Dr.,"One of the major problems we face in our country, is that today, Western countries approach our countries with the feeling of exceptionalism or a feeling of rig",,speaker,Her Excellency Dr. Bouthaina Shaaban,portfolio:34244,1,0,,,mk
 aleppo,Aleppo,,"Throughout history, Aleppo has witnessed many moments of greatness as well as decline and turmoil, but it always arose again like the bird of the Phoenix. The p",,speaker,Aleppo,portfolio:34296,1,0,,drop,mk
-otl-a-d-ulrich-scholz,OTL a.D. Ulrich Scholz,,"Ich werde drei Metaphern verwenden, und ich werde Sie drei Fragen lehren, die man stellen muß, um zu dem Schluß zu kommen, daß der Krieg kein Mittel der Politik",,speaker,OTL a.D. Ulrich Scholz,portfolio:34904,1,0,,,mk
+otl-a-d-ulrich-scholz,OTL a.D. Ulrich Scholz,,"Ich werde drei Metaphern verwenden, und ich werde Sie drei Fragen lehren, die man stellen muß, um zu dem Schluß zu kommen, daß der Krieg kein Mittel der Politik",,speaker,OTL a.D. Ulrich Scholz,portfolio:34904,1,0,,merge:ulrich-scholz,mk
 das-phonix-projekt,Das Phönix-Projekt,,"In der Geschichte erlebte die Stadt Aleppo immer wieder Momente der Größe, aber auch des Niedergangs und Turbulenzen, aber es erhob sich immer wieder wie der Vo",,speaker,Das Phönix-Projekt,portfolio:35428,1,0,,drop,mk
 s-e-bouthaina-shaaban,S. E. Bouthaina Shaaban,,"L’un des problèmes majeurs auquel nous devons faire face aujourd’hui est le fait que les pays occidentaux pensent réellement que le monde leur appartient, qu’il",,speaker,S. E. Bouthaina Shaaban,portfolio:35627,1,0,,,mk
 ihre-exzellenz-dr-bouthaina-shaaban,Ihre Exzellenz Dr. Bouthaina Shaaban,,"Eines der großen Probleme, vor dem wir heute in unserem Land stehen, ist, daß die westlichen Länder heute an uns mit einem Gefühl der Besonderheit oder einem Ge",,speaker,Ihre Exzellenz Dr. Bouthaina Shaaban,portfolio:36005,1,0,,,mk
@@ -301,7 +301,7 @@ alexander-hamilton,Alexander Hamilton,,,,speaker,"Alexander Hamilton, LaRouche, 
 alexander-k-bobrov,Alexander K. Bobrov (Russia),,,,speaker,"Alexander K. Bobrov (Russia), Associate Professor at the Department of Diplomacy, MGIMO University, Moscow",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 alexey-boguslavskiy,Mr. Alexey Boguslavskiy,,,,speaker,Mr. Alexey Boguslavskiy,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 alf-schmidt,Alf Schmidt (Germany),,,,speaker,"Alf Schmidt (Germany), Independent farmer, Leader of Farmers Demonstrations in Berlin",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-ameling,Prof. Ameling: The Energy Shift in Germany Will Lead to Dein,,,,speaker,Prof. Ameling: The Energy Shift in Germany Will Lead to Deindustrialization,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+ameling,Prof. Ameling: The Energy Shift in Germany Will Lead to Dein,,,,speaker,Prof. Ameling: The Energy Shift in Germany Will Lead to Deindustrialization,yt-segmentation,1,1,added by reconcile from video-segmentation,merge:dieter-ameling,mk
 american-president-donald-trump,American President Donald Trump,,,,speaker,"American President Donald Trump, Chinese President Xi Jinping, and Russian President Vladimir Putin could together, in t",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 amna-malik,Mrs. Amna Malik (Pakistan),,,,speaker,"Mrs. Amna Malik (Pakistan), president, Center of Pakistan and International Relations (COPAIR)",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 amzat-boukari-yabara,Amzat Boukari-Yabara,,,,speaker,"Amzat Boukari-Yabara, African Historian, General Secretary of the Panafrican League Umoja",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -381,7 +381,7 @@ foreign-director-for-bonifica-s-p-a,Foreign Director for Bonifica S.p.A,,,,speak
 founder-and-artistic-director,Founder and Artistic Director,,,,speaker,"Founder and Artistic Director, Harlem Opera Theater.",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 founder-and-chairman,Founder and Chairman,,,,speaker,"Founder and Chairman, Schiller Institute",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 francesco-battaglia,Francesco Battaglia,,,,speaker,Francesco Battaglia,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-frank-endres-california,Frank Endres; California,,,,speaker,"Frank Endres; California, member of the National Farmers Organization for 63 years,",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+frank-endres-california,Frank Endres; California,,,,speaker,"Frank Endres; California, member of the National Farmers Organization for 63 years,",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:frank-endres,mk
 frank-mathis-performs-glinka-s,"Frank Mathis performs Glinka's ""I Remember a Wondrous Moment",,,,speaker,"Frank Mathis performs Glinka's ""I Remember a Wondrous Moment""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 franklin-mireri,Franklin Mireri,,,,speaker,"Franklin Mireri, YouLead Partnerships Coordinator, Tanzania: ""The Greatest Want of the World is for True Leaders.""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 fred-m-membe,Dr. Fred M'membe,,,,speaker,"Dr. Fred M'membe, (Zambia), President of the Socialist Party of Zambia; former editor, Zambia Post; former Presidential ",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -501,7 +501,7 @@ on-saturday,On Saturday,,,,speaker,"On Saturday, April 7, Schiller institute fou
 on-the-ground-interview,On the Ground Interview: Can US-Russia Cooperation be Develo,,,,speaker,On the Ground Interview: Can US-Russia Cooperation be Developed?,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 on-wednesday,On Wednesday,,,,speaker,"On Wednesday, June 12 at the National Press Club in Washington, D.C., a distinguished panel of four experts will each ma",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 original-german,Original German:,,,,speaker,Original German:,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
-otl-a-d-ulrich-scholz-krieg,OTL a.D. Ulrich Scholz – Krieg: eine Pathologie des Westens,,,,speaker,OTL a.D. Ulrich Scholz – Krieg: eine Pathologie des Westens,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+otl-a-d-ulrich-scholz-krieg,OTL a.D. Ulrich Scholz – Krieg: eine Pathologie des Westens,,,,speaker,OTL a.D. Ulrich Scholz – Krieg: eine Pathologie des Westens,yt-segmentation,1,1,added by reconcile from video-segmentation,merge:ulrich-scholz,mk
 p-a-e-xa-e,Д-р Фатиме Хашеми,,,,speaker,"Д-р Фатиме Хашеми, президент Ассоциации солидарности женщин Ирана, Тегеран, Исламская республика Иран",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 p-bo-a-e,Д-р Вольфганг Лилльге,,,,speaker,"Д-р Вольфганг Лилльге, главный редактор журнала ""Фузион"", Берлин, Германия",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 pakdee-tanapura,Pakdee Tanapura: Contribution from Thailand,,,,speaker,Pakdee Tanapura: Contribution from Thailand,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -664,8 +664,8 @@ kirk-meighoo,Dr. Kirk Meighoo,,,,speaker,"Dr. Kirk Meighoo, political economist,
 larouche-legacy-foundation-www-larouchelegacyfoundation-org,LaRouche Legacy Foundation: www.larouchelegacyfoundation.org,,,,speaker,LaRouche Legacy Foundation: www.larouchelegacyfoundation.org,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 larry-bell,Larry Bell,,,,speaker,"Larry Bell, Founder, Sasakawa International Center for Space Architecture, College of Engineering, University of Houston",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 leonidas-chrysantopoulos-die-globale-krise,Leonidas Chrysantopoulos – Die globale Krise: Lösungsvorschl,,,,speaker,Leonidas Chrysantopoulos – Die globale Krise: Lösungsvorschläge,yt-segmentation,1,1,added by reconcile from video-segmentation,merge:leonidas-chrysantopoulos,mk
-lt-col-ulrich-scholz,Lt. Col. (ret.) Ulrich Scholz,,,,speaker,"Lt. Col. (ret.) Ulrich Scholz, former NATO planner",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-lt-col-ulrich-scholz-war,Lt. Col. (ret.) Ulrich Scholz – War: a pathology of the West,,,,speaker,Lt. Col. (ret.) Ulrich Scholz – War: a pathology of the West,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+lt-col-ulrich-scholz,Lt. Col. (ret.) Ulrich Scholz,,,,speaker,"Lt. Col. (ret.) Ulrich Scholz, former NATO planner",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:ulrich-scholz,mk
+lt-col-ulrich-scholz-war,Lt. Col. (ret.) Ulrich Scholz – War: a pathology of the West,,,,speaker,Lt. Col. (ret.) Ulrich Scholz – War: a pathology of the West,yt-segmentation,1,1,added by reconcile from video-segmentation,merge:ulrich-scholz,mk
 marc-gabriel-draghi,Marc-Gabriel Draghi (France),,,,speaker,"Marc-Gabriel Draghi (France), Economist: ""Orderly Debt Cancellation: Historical Precedents and Present Relevance.""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 marie-korsaga,Marie Korsaga,,,,speaker,"Marie Korsaga, PhD · Astrophysicist, Burkina Faso · ""The Necessity of Science Education for African Youth""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 marino-elsevyf,Marino Elsevyf,,,,speaker,"Marino Elsevyf, Attorney-at-Law, Dominican Republic, Member of 1995 MLK Tribunal",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
