@@ -102,3 +102,83 @@ Topic slugs you can use in `final_topics` (separate two with `|`):
 Tell Motoki which file(s) you finished. Don't email edited copies around — edit the files in place
 (or in one shared Google Sheet per file, exported back to the same filename). One owner per file at
 a time, please: two people editing the same CSV separately cannot be merged.
+
+---
+
+## Known data-quality flag — `person-map.csv`, `honorific` column
+
+Honorifics are split inconsistently between two columns:
+
+- **55 rows** carry the title in the `honorific` field (`Dr.`, `Prof.`, `Ambassador`, `H.E.`, `Prof. Dr.`, …).
+- **89 rows** have the title still embedded in `canonical_name` itself (`"Dr. Nino Galloni"`,
+  `"Prof. Shi Ze"`, `"Prof. Dr. Wangsuo Wu"`).
+
+The `honorific()` extractor in `si-migrate.php` only pulled titles off some records and left them in
+`canonical_name` in all cases, so the two fields overlap. **Risk:** if the `si_person` template renders
+`honorific + canonical_name`, any row that appears in both lists will display a doubled title
+("Dr. Dr. Nino Galloni").
+
+This is a machine-side normalization issue, **not** something the review pass should fix by hand
+(editing `canonical_name` isn't allowed, and adding to `honorific` manually would *create* the
+double-title). Suggested fix: normalize on the migration side before display — strip leading titles
+from `canonical_name` into `honorific`, then de-dupe — rather than asking reviewers to touch it.
+
+---
+
+## Known parser artifacts in `person-map.csv` (read before reviewing `final_action`)
+
+The YouTube/portfolio scrapers produced several recurring junk patterns. Recognising them saves time
+and prevents two mistakes: (a) creating a bogus "person" from a title/list, and (b) silently losing a
+real speaker by dropping a row when a `merge` (or a note) was needed.
+
+**Reminder on the two flags:** `final_action` always overrides `needs_review`. Rows with
+`needs_review=1` and a blank `final_action` are skipped by the migration anyway; rows with
+`needs_review=0` and a blank `final_action` **get created as-is** — so a junk `needs_review=0` row
+*must* be acted on or it becomes a bad person record.
+
+### 1. Field-swap (talk title ↔ speaker)
+`canonical_name` holds a **talk title**, `affiliation` holds the **real speaker** (often still wrapped
+in `<b>…</b>`). Signature: `<b>` present in `affiliation`. Found on 3 rows (lines 245–247), all
+`needs_review=0`, e.g. `canonical_name="The Economic Method of LaRouche"`,
+`affiliation="<b>Jason Ross</b>, Schiller Institute Science Team"`.
+- Real speaker **has a clean row** → `merge:<speaker-key>` (suppresses the junk person *and* links the
+  talk to the presenter). e.g. line 247 → `merge:jason-ross`.
+- Real speaker **has no clean row** → `drop` + a `notes` entry preserving the speaker name/bio for
+  recovery at the presentation stage.
+- Caveat: the `<b>` grep only catches swaps that kept the bold tag; swaps without it won't show this
+  signature, so there may be others.
+
+### 2. Multi-person rows (rosters / conjunctions)
+`canonical_name` is two or more people, or a "list" prefix: `"A and B"`, `"Speakers include: …"`,
+`"Symposium participants …"`, `"Panel 2 …"`. `merge:` **cannot** split one row across people.
+- `drop` the row **only after confirming each named person has their own row**. If one doesn't,
+  add a `notes` entry naming the missing speaker — recovery happens at the `video-segmentation.csv`
+  stage, not by hand-adding rows here.
+- Watch for `needs_review=0` conjunctions (e.g. line 276 `machuca-lopez-and-fernando-garzon`): these
+  create a two-headed person if left blank, and if neither person exists elsewhere a plain `drop`
+  loses both — decide deliberately (usually `drop` + note if they're article mentions, not participants).
+
+### 3. 120-char alias truncation
+`aliases` is hard-truncated at 120 characters, so the **last name in a roster is often cut off**
+(e.g. `"…State Senator Mike Thompson, Adrian Badesc"`). You cannot recover the full name from this file —
+note it and leave recovery to the segmentation stage.
+
+### 4. Noise-wrapped single person
+One real person buried in role/language noise: `"Moderator: Jason Ross (U.S.)"`, `"Von Jason Ross"`,
+`"par Moni Abdullah"`, `"Address by …"`. These are **not** drops —
+- clean sibling row exists → `merge:<clean-key>` (this is how the junk title gets cleaned; the migration
+  does **no** automatic name-cleanup — `canonical_name` becomes the WP `post_title` verbatim).
+- no clean sibling → it will migrate with the noisy name; flag it (Case-2, can't fix via CSV).
+
+### 5. Subject, not participant
+A real human name who was the *subject*, not a participant: composers whose work was performed
+(`"Wolfgang Amadeus Mozart"`), or historical/quoted figures. Also piece titles (`"Ave Verum Corpus by
+Mozart"`, `"L. Beethoven: Sonata …"`). All → `drop`. The test is **participation, not fame or era** —
+never drop a real participant just because they're prominent.
+
+### Duplicate clusters seen so far (merge to one survivor)
+- `helga-zepp-larouche` ← `h-zepp-larouche` (already handled)
+- `carl-otto-weiss` ← `pr-carl-otto-weiss`
+- Elvira Green: `elvira-green` / `elvira-o-green` / `elvira-green-mezzosoprano` → pick one survivor
+- Jason Ross noise rows: `moderator-jason-ross`, `von-jason-ross` → `merge:jason-ross`
+  (but `speakers-include-jason-ross` and `megan-beets-and-jason-ross` are multi-person lists → `drop`)
