@@ -74,7 +74,7 @@ ali-reza-sheikh-attar,Ali Reza Sheikh Attar,,,,speaker,Ali Reza Sheikh Attar,por
 lyndon-h-larouche-jr,"Lyndon H. LaRouche, Jr.",,,,speaker,"Lyndon H. LaRouche, Jr.",portfolio:2101|portfolio:3440,2,0,,,mk
 sean-stone,Sean Stone,,,,speaker,Sean Stone,portfolio:2232|portfolio:2317,2,0,,,mk
 norton-mezvinsky,Norton Mezvinsky,,,,speaker,Norton Mezvinsky,portfolio:2240|portfolio:2761,2,0,,,mk
-james-benham,James Benham,,,,speaker,James Benham,portfolio:2674|portfolio:3213,2,0,,merge:jim-benham,mk
+james-benham,James Benham,,,,speaker,James Benham,portfolio:2674|portfolio:3213,2,0,,,mk
 thomas-jackson,Rep. Thomas Jackson,Rep.,,,speaker,Rep. Thomas Jackson,portfolio:2677|portfolio:3210,2,0,,,mk
 paul-gallagher,Paul Gallagher,,,,speaker,Paul Gallagher,portfolio:2683|portfolio:3225,2,0,,,mk
 jeff-steinberg,Jeff Steinberg,,,,speaker,Jeff Steinberg,portfolio:2736|portfolio:3181,2,0,,,mk
@@ -222,7 +222,7 @@ presseerklarung,Presseerklärung,,,,speaker,Presseerklärung,portfolio:23447,1,0
 ranjani-saigal-the-culture-of-india,Ranjani Saigal - The Culture of India,,Executive Director of the Ekal Vidyalaya Foundation of U.S.A. - Presentation on the history and culture of India.,,speaker,Ranjani Saigal - The Culture of India,portfolio:23717,1,0,,merge:ranjani-saigal,mk
 cloret-carl-ferguson-on-friedrich-schiller,Cloret Carl Ferguson on Friedrich Schiller,,Cloret Carl Ferguson on Friedrich Schiller,,speaker,Cloret Carl Ferguson on Friedrich Schiller,portfolio:23843,1,0,,,mk
 ali-ahani,H.E. Ali Ahani,H.e.,,,speaker,H.E. Ali Ahani,portfolio:30228,1,0,,,mk
-safieeldin-mohamed-metwally-rebuilding-egypt,Prof. Safieeldin Mohamed Metwally - Rebuilding Egypt,Prof.,,,speaker,Prof. Safieeldin Mohamed Metwally - Rebuilding Egypt,portfolio:30340,1,0,,,mk
+safieeldin-mohamed-metwally-rebuilding-egypt,Prof. Safieeldin Mohamed Metwally - Rebuilding Egypt,Prof.,,,speaker,Prof. Safieeldin Mohamed Metwally - Rebuilding Egypt,portfolio:30340,1,0,,merge:safieeldin-mohamed-metwally,mk
 safieeldin-mohamed-metwally,Prof. Safieeldin Mohamed Metwally,Prof.,,,speaker,Prof. Safieeldin Mohamed Metwally,portfolio:30365,1,0,,,mk
 congressman-walter-jones,Congressman Walter Jones,,,,speaker,Congressman Walter Jones,portfolio:30645,1,0,,merge:walter-jones,mk
 concluding-addresses,Concluding Addresses,,"President of Solidarité &amp; Progrès, Paris.",,speaker,Concluding Addresses,portfolio:30886,1,0,,drop,mk
@@ -230,14 +230,14 @@ abschlußrede,Abschlußrede,,"Präsident Solidarité &amp; Progrès, Paris/Frank
 石泽博士,石泽博士,,,,speaker,石泽博士,portfolio:31270,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 maelle-mercier,Maëlle Mercier,,,,speaker,Maëlle Mercier,portfolio:31311,1,0,,,mk
 mohqmed-metwally-博士,Mohqmed Metwally 博士,,,,speaker,Mohqmed Metwally 博士,portfolio:31350,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
-s-e-m-ali-ahani,S.E.M. Ali Ahani,,,,speaker,S.E.M. Ali Ahani,portfolio:31558,1,0,,,mk
+s-e-m-ali-ahani,S.E.M. Ali Ahani,,,,speaker,S.E.M. Ali Ahani,portfolio:31558,1,0,,merge:ali-ahani,mk
 alain-corvez-上校,Alain Corvez 上校,,,,speaker,Alain Corvez 上校,portfolio:31637,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 bouthaina-shaaban,Her Excellency Dr. Bouthaina Shaaban,Her excellency Dr.,"One of the major problems we face in our country, is that today, Western countries approach our countries with the feeling of exceptionalism or a feeling of rig",,speaker,Her Excellency Dr. Bouthaina Shaaban,portfolio:34244,1,0,,,mk
 aleppo,Aleppo,,"Throughout history, Aleppo has witnessed many moments of greatness as well as decline and turmoil, but it always arose again like the bird of the Phoenix. The p",,speaker,Aleppo,portfolio:34296,1,0,,drop,mk
 otl-a-d-ulrich-scholz,OTL a.D. Ulrich Scholz,,"Ich werde drei Metaphern verwenden, und ich werde Sie drei Fragen lehren, die man stellen muß, um zu dem Schluß zu kommen, daß der Krieg kein Mittel der Politik",,speaker,OTL a.D. Ulrich Scholz,portfolio:34904,1,0,,merge:ulrich-scholz,mk
 das-phonix-projekt,Das Phönix-Projekt,,"In der Geschichte erlebte die Stadt Aleppo immer wieder Momente der Größe, aber auch des Niedergangs und Turbulenzen, aber es erhob sich immer wieder wie der Vo",,speaker,Das Phönix-Projekt,portfolio:35428,1,0,,drop,mk
-s-e-bouthaina-shaaban,S. E. Bouthaina Shaaban,,"L’un des problèmes majeurs auquel nous devons faire face aujourd’hui est le fait que les pays occidentaux pensent réellement que le monde leur appartient, qu’il",,speaker,S. E. Bouthaina Shaaban,portfolio:35627,1,0,,,mk
-ihre-exzellenz-dr-bouthaina-shaaban,Ihre Exzellenz Dr. Bouthaina Shaaban,,"Eines der großen Probleme, vor dem wir heute in unserem Land stehen, ist, daß die westlichen Länder heute an uns mit einem Gefühl der Besonderheit oder einem Ge",,speaker,Ihre Exzellenz Dr. Bouthaina Shaaban,portfolio:36005,1,0,,,mk
+s-e-bouthaina-shaaban,S. E. Bouthaina Shaaban,,"L’un des problèmes majeurs auquel nous devons faire face aujourd’hui est le fait que les pays occidentaux pensent réellement que le monde leur appartient, qu’il",,speaker,S. E. Bouthaina Shaaban,portfolio:35627,1,0,,merge:bouthaina-shaaban,mk
+ihre-exzellenz-dr-bouthaina-shaaban,Ihre Exzellenz Dr. Bouthaina Shaaban,,"Eines der großen Probleme, vor dem wir heute in unserem Land stehen, ist, daß die westlichen Länder heute an uns mit einem Gefühl der Besonderheit oder einem Ge",,speaker,Ihre Exzellenz Dr. Bouthaina Shaaban,portfolio:36005,1,0,,merge:bouthaina-shaaban,mk
 sebastien-drochon,Sébastien Drochon,,,,speaker,Sébastien Drochon,portfolio:42686,1,0,,,mk
 sebastien-perimony,Sébastien Périmony,,,,speaker,Sébastien Périmony,portfolio:42693,1,0,,,mk
 mana-boubakari,Mana Boubakari,,,,speaker,Mana Boubakari,portfolio:42797,1,0,,,mk
@@ -249,7 +249,7 @@ joycelyn-elders,Dr. Joycelyn Elders,Dr.,„Das Gemeinwohl aller Menschen erforde
 kelvin-kemm-ph-d,"Kelvin Kemm, Ph.D",,"(South Africa), nuclear physicist, former Chairman of the Nuclear Energy Corporation of South Africa",,speaker,"Kelvin Kemm, Ph.D",post:75575@yt:3F_Gl_KkwpE@1802,1,0,,,mk
 ben-greenspan-m-d,"Ben Greenspan, M.D.",,"(U.S.); Board of Directors, The American Board of Science in Nuclear Medicine; Past President, Society of Nuclear Medicine and Molecular Imaging",,speaker,"Ben Greenspan, M.D.",post:75575@yt:3F_Gl_KkwpE@6437,1,0,,,mk
 state-senator-mike-thompson,State Senator Mike Thompson,,"(U.S.-Kansas), Chairman of Senate Utilities Committee",,speaker,State Senator Mike Thompson,post:75575@yt:ZLvX9r4D0xk@3951,1,0,,,mk
-marc-gabriel-dragh,Marc Gabriel Dragh,,"(France), Economist, Jurist and Author",,speaker,Marc Gabriel Dragh,post:75575@yt:ZLvX9r4D0xk@6488,1,0,,,mk
+marc-gabriel-dragh,Marc Gabriel Dragh,,"(France), Economist, Jurist and Author",,speaker,Marc Gabriel Dragh,post:75575@yt:ZLvX9r4D0xk@6488,1,0,,merge:marc-gabriel-draghi,mk
 mayor-david-castro,Mayor David Castro,,"(Honduras), President, Mayors Without Borders Coalition",,speaker,Mayor David Castro,post:75575@yt:6n5KERjjwVY@8935,1,0,,,mk
 andrey-kortunov,Andrey Kortunov,,(Russia); Director General of the Russian International Affairs Council (RIAC),,speaker,Andrey Kortunov,post:88412@yt:JD3d_guFUV4@2495,1,0,,,mk
 clifford-kiracofe,Dr. Clifford Kiracofe,Dr.,"(U.S.); Former Senior Staff Member, U.S. Senate Committee on Foreign Relations; President, Washington Institute for Peace and Development",,speaker,Dr. Clifford Kiracofe,post:88412@yt:JD3d_guFUV4@7476,1,0,possible duplicate of: cliff-kiracofe — reviewed: KEEP (merge target of the alias row),,mk
@@ -273,18 +273,18 @@ dr-nbsp-chandra-muzzaffar,Dr.&nbsp;Chandra Muzzaffar,,argued that the West has n
 sian-bloor,"Sian Bloor,",,"reported on George Galloway’s February 29 victory in a by-election for Parliament. Galloway, running as an independent for the small party, won more votes than ",,speaker,"Sian Bloor,",post:102333@yt:M9sYi4Io7Zk@3471,1,0,,,mk
 vincenzo-romanello,Vincenzo Romanello,,"warned that, in addition to the horrors of nuclear war described by Dr.&nbsp;Starr, the worst part of the story would be the resultant radioactive fallout, foll",Atoms for Peace,speaker,Vincenzo Romanello,post:102333@yt:M9sYi4Io7Zk@4395,1,0,,,mk
 harry-bury,Father Harry Bury,Father,spoke passionately about the need to,,speaker,Father Harry Bury,post:102333@yt:M9sYi4Io7Zk@4682,1,0,,,mk
-machuca-lopez-and-fernando-garzon,Machuca López and Fernando Garzón,,"who were participating in a demonstration for Gaza in Guayaquil, Ecuador.",,speaker,Machuca López and Fernando Garzón,post:102333@yt:M9sYi4Io7Zk@4993,1,0,,drop,mk
+machuca-lopez-and-fernando-garzon,Machuca López and Fernando Garzón,,"who were participating in a demonstration for Gaza in Guayaquil, Ecuador.",,speaker,Machuca López and Fernando Garzón,post:102333@yt:M9sYi4Io7Zk@4993,1,0,"TWO people named in one article (post:102333), NOT SI event participants — Machuca López & Fernando Garzón, ""participating in a demonstration for Gaza in Guayaquil, Ecuador"" (occ=1). Conjunction row; neither has a person record; affiliation is scraped body text. Article subjects → drop (not a speaker-split case).",drop,mk
 we-have-the-solution,We Have The Solution,,,,speaker,We Have The Solution,post:107997@yt:FaWOAs0zMJU@1,1,0,,drop,mk
 gesang-des-gebets,Gesang des Gebets,,"überraschte. Das Gebet ist eine von vier marianischen Antiphonen oder Gebeten an die Jungfrau Maria, die während der Osterzeit gesprochen werden.",,speaker,Gesang des Gebets,post:109374@yt:8gDRJrMK0M0@573,1,0,,drop,mk
 1-helga-zepp-larouche-founder,1) Helga Zepp-LaRouche; Founder,,,,speaker,"1) Helga Zepp-LaRouche; Founder, Schiller Institute: Welcome and Keynote, ""The Need for a New Paradigm""",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:helga-zepp-larouche,mk
 1-jacques-cheminade-president,1) Jacques Cheminade; President,,,,speaker,"1) Jacques Cheminade; President, S&P, France: ""The Peace of Westphalia to Escape the Thucydides Trap""",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:jacques-cheminade,mk
-2-amb-anatoly-antonov,2) Amb. Anatoly Antonov,,,,speaker,"2) Amb. Anatoly Antonov, H.E. Ambassador Anatoly Antonov, Ambassador of The Russian Federation to the United States: ""Pr",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+2-amb-anatoly-antonov,2) Amb. Anatoly Antonov,,,,speaker,"2) Amb. Anatoly Antonov, H.E. Ambassador Anatoly Antonov, Ambassador of The Russian Federation to the United States: ""Pr",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:anatoly-antonov,mk
 2-helga-zepp-larouche,"2) Helga Zepp-LaRouche: ""Operation Ibn Sina""",,,,speaker,"2) Helga Zepp-LaRouche: ""Operation Ibn Sina"", Dipl. Ing. Daud Azimi - Board Member Peace National Front of Afghanistan: ",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:helga-zepp-larouche,mk
-3-princy-mthombeni-communication-specialist,3) Princy Mthombeni; Communication Specialist,,,,speaker,"3) Princy Mthombeni; Communication Specialist, Africa4Nuclear Founder, South Africa: ""Energy Security for Africa""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+3-princy-mthombeni-communication-specialist,3) Princy Mthombeni; Communication Specialist,,,,speaker,"3) Princy Mthombeni; Communication Specialist, Africa4Nuclear Founder, South Africa: ""Energy Security for Africa""",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:princy-mthombeni,mk
 3-sam-pitroda-innovator,3) Sam Pitroda; Innovator,,,,speaker,"3) Sam Pitroda; Innovator, Entrepreneur and Policy-Maker; U.S./India: ""The Need to Redesign the World""",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:sam-pitroda,mk
-5-chen-xiaohan,5) Chen Xiaohan,,,,speaker,"5) Chen Xiaohan, Chinese People's Association for Peace and Disarmament: ""Shared Future of Mankind""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-5-fraydique-gaitan,5) Fraydique Gaitán,,,,speaker,"5) Fraydique Gaitán, President of the CTU USCTRAB Workers Confederation of Colombia; and Pedro Rubio, President of the A",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-7-p-s-raghavan,7) P.S. Raghavan,,,,speaker,"7) P.S. Raghavan, Former Indian Ambassador to Russia: ""The Indian Perspective""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+5-chen-xiaohan,5) Chen Xiaohan,,,,speaker,"5) Chen Xiaohan, Chinese People's Association for Peace and Disarmament: ""Shared Future of Mankind""",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:chen-xiaohan,mk
+5-fraydique-gaitan,5) Fraydique Gaitán,,,,speaker,"5) Fraydique Gaitán, President of the CTU USCTRAB Workers Confederation of Colombia; and Pedro Rubio, President of the A",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:fraydique-alexander-gaitan,mk
+7-p-s-raghavan,7) P.S. Raghavan,,,,speaker,"7) P.S. Raghavan, Former Indian Ambassador to Russia: ""The Indian Perspective""",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:p-s-raghavan,mk
 a-pac-ee,Али Растбеен,,,,speaker,"Али Растбеен, основатель и президент Парижской академии геополитики, Париж, Франция",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 abbey-makoe,Abbey Makoe,,,,speaker,Abbey Makoe,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 academy-of-social-sciences,Academy of Social Sciences (CASS),,,,speaker,"Academy of Social Sciences (CASS), China",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
@@ -297,7 +297,7 @@ adrian-pearl,Adrian Pearl (U.S.),,,,speaker,Adrian Pearl (U.S.),yt-segmentation,
 alain-gachet-vorsitzender,Alain Gachet – Vorsitzender,,,,speaker,"Alain Gachet – Vorsitzender, Radar Technologies International, Frankreich",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:alain-gachet,mk
 alejandro-yaya,Alejandro Yaya (Argentina),,,,speaker,Alejandro Yaya (Argentina),yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 alexander-demissie,Dr. (cand.) Alexander Demissie,,,,speaker,Dr. (cand.) Alexander Demissie,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-alexander-hamilton,Alexander Hamilton,,,,speaker,"Alexander Hamilton, LaRouche, and the Credit System",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+alexander-hamilton,Alexander Hamilton,,,,speaker,"Alexander Hamilton, LaRouche, and the Credit System",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 alexander-k-bobrov,Alexander K. Bobrov (Russia),,,,speaker,"Alexander K. Bobrov (Russia), Associate Professor at the Department of Diplomacy, MGIMO University, Moscow",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 alexey-boguslavskiy,Mr. Alexey Boguslavskiy,,,,speaker,Mr. Alexey Boguslavskiy,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 alf-schmidt,Alf Schmidt (Germany),,,,speaker,"Alf Schmidt (Germany), Independent farmer, Leader of Farmers Demonstrations in Berlin",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -320,15 +320,15 @@ atul-aneja,Atul Aneja,,,,speaker,Atul Aneja,yt-segmentation,1,1,added by reconci
 augustinus-berkhout,Prof. Augustinus Berkhout,,,,speaker,Prof. Augustinus Berkhout,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 benjamin-lylloff,Benjamin Lylloff,,,,speaker,"Benjamin Lylloff, arr: ""Mo Li Hua"" (""Jasmine Flower"")",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 bill-bullard,Bill Bullard,,,,speaker,Bill Bullard,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-bill-bullard-montana,Bill Bullard; Montana,,,,speaker,"Bill Bullard; Montana, CEO R-CALF USA,",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+bill-bullard-montana,Bill Bullard; Montana,,,,speaker,"Bill Bullard; Montana, CEO R-CALF USA,",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:bill-bullard,mk
 billy-anders-estime,Billy Anders Estimé (Haiti),,,,speaker,"Billy Anders Estimé (Haiti), Co-Founder, CAFÉ DIPLO HAÏTI",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-bob-baker,Bob Baker (U.S.),,,,speaker,"Bob Baker (U.S.), Schiller Institute and U.S. Farm leaders (U.S.)",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+bob-baker,Bob Baker (U.S.),,,,speaker,"Bob Baker (U.S.), Schiller Institute and U.S. Farm leaders (U.S.)",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:robert-l-baker,mk
 boris-meshchanov,Boris Meshchanov,,,,speaker,Boris Meshchanov,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 bradley-blankenship,Bradley Blankenship (U.S.),,,,speaker,"Bradley Blankenship (U.S.), Journalist",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 breno-hermann,Hon. Breno Hermann,,,,speaker,"Hon. Breno Hermann, Consul, Cultural Department, Consulate of Brasil in Boston - What is the BRICS and where is it headi",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 brian-harvey,Brian Harvey (Ireland),,,,speaker,"Brian Harvey (Ireland), Space Historian",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 bruce-director,Bruce Director,,,,speaker,"Bruce Director, Secretary-Treasurer, US Schiller Institute",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-carolina-dominguez,Carolina Domínguez (Mexico),,,,speaker,"Carolina Domínguez (Mexico), Schiller Institute",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+carolina-dominguez,Carolina Domínguez (Mexico),,,,speaker,"Carolina Domínguez (Mexico), Schiller Institute",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:carolina-dominguez-cisneros,mk
 carolina-dominguez-cisneros,Carolina Domínguez Cisneros,,,,speaker,"Carolina Domínguez Cisneros, Mexico; Sebastián Debernardi, Peru; Andrés Carpintero, Colombia; Daniel Dufreine Arévalo, M",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 celeste-saenz-de-miera,Celeste Sáenz de Miera (Mexico),,,,speaker,"Celeste Sáenz de Miera (Mexico), Secretary General, Mexico Journalists Club",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 chen-xiaohan,Ms. Chen Xiaohan (China),,,,speaker,"Ms. Chen Xiaohan (China), Deputy Secretary General, The Chinese People's Association for Peace and Disarmament (CPAPD)",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -356,7 +356,7 @@ discours-par-natalia-vitrenko,Discours par Natalia Vitrenko,,,,speaker,"Discours
 dmitri-trenin,Prof. Dmitri Trenin,,,,speaker,Prof. Dmitri Trenin,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 dmitriy-polyanskiy,— Dmitriy Polyanskiy,,,,speaker,"— Dmitriy Polyanskiy, 1st Deputy Permanent Representative",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 domingo-reyes,Domingo Reyes (Dominican Republic),,,,speaker,"Domingo Reyes (Dominican Republic), former professor of Economics, Masters Degree in Higher Education",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-dr-william-happer,Dr.William Happer,,,,speaker,"Dr.William Happer, Professor Emeritus of Princeton University (who had been brought on to the National Security Council ",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+dr-william-happer,Dr.William Happer,,,,speaker,"Dr.William Happer, Professor Emeritus of Princeton University (who had been brought on to the National Security Council ",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:william-happer,mk
 dusko-dimitrijevic,Duško Dimitrijević,,,,speaker,"Duško Dimitrijević, Ph.D., Professorial Fellow, Institute of International Politics and Economics, Serbia",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 e-p-ce-y-a,Джейшри Сенгупта,,,,speaker,"Джейшри Сенгупта, старший научный сотрудник, Аналитический исследовательский фонд, Нью-Дели, Индия",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 earl-rasmussen,Earl Rasmussen (U.S.),,,,speaker,"Earl Rasmussen (U.S.), The Eurasia Center",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -365,22 +365,22 @@ ed-calabrese,Dr. Ed Calabrese,,,,speaker,Dr. Ed Calabrese,yt-segmentation,1,1,ad
 egbert-drews-international-networking-in-the-economy,Egbert Drews – International networking in the economy: Prac,,,,speaker,Egbert Drews – International networking in the economy: Practical experience,yt-segmentation,1,1,added by reconcile from video-segmentation,merge:egbert-drews,mk
 elisabeth-murray,Elisabeth Murray,,,,speaker,Elisabeth Murray,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 elison-karuhanga,Elison Karuhanga (Uganda),,,,speaker,"Elison Karuhanga (Uganda), Attorney; Expert in Energy Law; former State Attorney, Directorate of Civil Litigation, Attor",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-elvira-green,Elvira Green,,,,speaker,"Elvira Green, Mezzo-soprano, 30-year member of the Metropolitan Opera, Founder of the Spiritual Renaissance Singers of G",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+elvira-green,Elvira Green,,,,speaker,"Elvira Green, Mezzo-soprano, 30-year member of the Metropolitan Opera, Founder of the Spiritual Renaissance Singers of G",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:elvira-o-green,mk
 emanuel-hohener,Emanuel Höhener,,,,speaker,Emanuel Höhener,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 english-translation,English Translation:,,,,speaker,English Translation:,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 eric-walcott-director,Eric Walcott – Director,,,,speaker,"Eric Walcott – Director, Strategic Partnerships at Institute of Caribbean Studies, Washington, D.C",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 ernest-johnson,Dr. Ernest Johnson (U.S.) ,,,,speaker,"Dr. Ernest Johnson (U.S.) , President Emeritus Louisiana NAACP, attorney, professor of law Southern University Law Cente",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 eugene-simpson,Eugene Simpson: “Hall Johnson and the Dvorak Dream: From Spi,,,,speaker,"Eugene Simpson: “Hall Johnson and the Dvorak Dream: From Spiritual to Art Song""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-eugene-thamon-simpson,Eugene Thamon Simpson,,,,speaker,"Eugene Thamon Simpson, bass",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+eugene-thamon-simpson,Eugene Thamon Simpson,,,,speaker,"Eugene Thamon Simpson, bass",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:eugene-simpson,mk
 everett-suttle,Everett Suttle,,,,speaker,"Everett Suttle, Tenor",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 faiyaz-murshid-kazi,Mr. Faiyaz Murshid Kazi,,,,speaker,"Mr. Faiyaz Murshid Kazi, Counsellor, the Permanent Mission of Bangladesh to the United Nations addresses the Schiller In",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-felix-mendelssohn-elijah,Felix Mendelssohn: Elijah,,,,speaker,"Felix Mendelssohn: Elijah, No. 14- Lord God of Abraham, Isaac and Israel",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+felix-mendelssohn-elijah,Felix Mendelssohn: Elijah,,,,speaker,"Felix Mendelssohn: Elijah, No. 14- Lord God of Abraham, Isaac and Israel",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 folker-hellmeyer,Folker Hellmeyer,,,,speaker,"Folker Hellmeyer, Economist , Germany",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 food-producers-roundtable,Food Producers Roundtable,,,,speaker,Food Producers Roundtable,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 foreign-director-for-bonifica-s-p-a,Foreign Director for Bonifica S.p.A,,,,speaker,"Foreign Director for Bonifica S.p.A, Italy, Franco Persio Bocchetto's address to the Schiller Institute's conference, ""F",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 founder-and-artistic-director,Founder and Artistic Director,,,,speaker,"Founder and Artistic Director, Harlem Opera Theater.",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 founder-and-chairman,Founder and Chairman,,,,speaker,"Founder and Chairman, Schiller Institute",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
-francesco-battaglia,Francesco Battaglia,,,,speaker,Francesco Battaglia,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+francesco-battaglia,Francesco Battaglia,,,,speaker,Francesco Battaglia,yt-segmentation,1,1,added by reconcile from video-segmentation,merge:franco-battaglia,mk
 frank-endres-california,Frank Endres; California,,,,speaker,"Frank Endres; California, member of the National Farmers Organization for 63 years,",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:frank-endres,mk
 frank-mathis-performs-glinka-s,"Frank Mathis performs Glinka's ""I Remember a Wondrous Moment",,,,speaker,"Frank Mathis performs Glinka's ""I Remember a Wondrous Moment""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 franklin-mireri,Franklin Mireri,,,,speaker,"Franklin Mireri, YouLead Partnerships Coordinator, Tanzania: ""The Greatest Want of the World is for True Leaders.""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -389,8 +389,8 @@ friedrich-schiller-birthday-celebration-concert,Friedrich Schiller Birthday Cele
 geoff-young,Geoff Young,,,,speaker,Geoff Young,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 george-koo,George Koo,,,,speaker,"George Koo, Retired Business Consultant; Chairman, Burlingame Foundation",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 german-economist,German Economist (Germany),,,,speaker,German Economist (Germany),yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
-gian-marco-sanna-geigenvirtuose,Gian Marco Sanna – Geigenvirtuose,,,,speaker,"Gian Marco Sanna – Geigenvirtuose, Gründer und künstlerischer Leiter des Camerata-Projekts, London",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-gian-marco-sanna-violinist,Gian Marco Sanna – Violinist,,,,speaker,"Gian Marco Sanna – Violinist, Founder and artistic director of The Geminiani Project, London",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+gian-marco-sanna-geigenvirtuose,Gian Marco Sanna – Geigenvirtuose,,,,speaker,"Gian Marco Sanna – Geigenvirtuose, Gründer und künstlerischer Leiter des Camerata-Projekts, London",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:gian-marco-sanna,mk
+gian-marco-sanna-violinist,Gian Marco Sanna – Violinist,,,,speaker,"Gian Marco Sanna – Violinist, Founder and artistic director of The Geminiani Project, London",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:gian-marco-sanna,mk
 glenn-diesen,Glenn Diesen (Norway),,,,speaker,"Glenn Diesen (Norway), Professor and Author",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 gretchen-small,Gretchen Small (U.S.),,,,speaker,"Gretchen Small (U.S.), Executive Intelligence Review",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 grusswort-von-helga-zepp-larouche,Grußwort von Helga Zepp-LaRouche,,,,speaker,"Grußwort von Helga Zepp-LaRouche, Präsidentin des Schiller-Institutes",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:helga-zepp-larouche,mk
@@ -426,19 +426,19 @@ jacques-cheminade-l-identite-de-l-europe,Jacques Cheminade - L'identité de l'Eu
 jacques-cheminade-president,Jacques Cheminade (France) President,,,,speaker,"Jacques Cheminade (France) President, Solidarite et Progres",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:jacques-cheminade,mk
 jacques-hogard,Colonel Jacques Hogard,,,,speaker,Colonel Jacques Hogard,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 james-george-jatras,James George Jatras,,,,speaker,"James George Jatras, former U.S. diplomat and former advisor to the Republican Senate leadership.",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-james-jatras,James Jatras (U.S.),,,,speaker,"James Jatras (U.S.), former diplomat, former Advisor, U.S. Senate Republican Leadership",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+james-jatras,James Jatras (U.S.),,,,speaker,"James Jatras (U.S.), former diplomat, former Advisor, U.S. Senate Republican Leadership",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:james-george-jatras,mk
 jan-carnogursky,H.E. Ján Čarnogurský (Slovakia),,,,speaker,"H.E. Ján Čarnogurský (Slovakia), former Prime Minister of Slovakia",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 jay-naidoo,Jay Naidoo,,,,speaker,"Jay Naidoo, cabinet minister under President Nelson Mandela, stresses the urgent need for NATO and Russia to negotiate a",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 jerome-ravenet,Dr. Jérôme Ravenet,,,,speaker,Dr. Jérôme Ravenet,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 jhonny-estor,Jhonny Estor (Haiti),,,,speaker,"Jhonny Estor (Haiti), Founder, ""Renaissance Haiti""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-jim-benham,Jim Benham,,,,speaker,"Jim Benham, Indiana; State Pres. of Indiana Farmers Union, 20 Yr. National Board member, National Farmers Union,",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+jim-benham,Jim Benham,,,,speaker,"Jim Benham, Indiana; State Pres. of Indiana Farmers Union, 20 Yr. National Board member, National Farmers Union,",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:james-benham,mk
 joe-maxwell,Joe Maxwell,,,,speaker,"Joe Maxwell, Missouri; former Missouri Lt. Governor, co-founder of Family Farm Action Alliance,",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-johannes-brahms,Johannes Brahms,,,,speaker,"Johannes Brahms, Von ewiger Liebe, Op. 43 No. 1",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+johannes-brahms,Johannes Brahms,,,,speaker,"Johannes Brahms, Von ewiger Liebe, Op. 43 No. 1",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 john-gong,John Gong,,,,speaker,"John Gong, Professor of Economics at the University of International Business and Economics, Beijing — ""Chinese Investme",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 john-sigerson,John Sigerson (U.S.),,,,speaker,"John Sigerson (U.S.), Musical Director, Schiller Institute",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 join-the-schiller-institute-https-bit-ly-join-si,JOIN THE SCHILLER INSTITUTE! https://bit.ly/join-si,,,,speaker,JOIN THE SCHILLER INSTITUTE! https://bit.ly/join-si,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 jose-vega,Jose Vega (U.S.),,,,speaker,"Jose Vega (U.S.), LaRouche Youth Movement Leader, Independent Congressional Candidate, Bronx, New York",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-josef-miklosko,Josef Miklosko,,,,speaker,"Josef Miklosko, Former vice Prime Minister of Czechoslovakia",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+josef-miklosko,Josef Miklosko,,,,speaker,"Josef Miklosko, Former vice Prime Minister of Czechoslovakia",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:jozef-miklosko,mk
 jozef-miklosko,Jozef Mikloško (Slovak Republic),,,,speaker,Jozef Mikloško (Slovak Republic),yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 julio-de-vido,Julio De Vido (Argentina),,,,speaker,"Julio De Vido (Argentina), former Minister of Planning and Public Investment, former member of Congress: ""BRICS-Plus: Br",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 jurgen-schottle,Jürgen Schöttle (Germany),,,,speaker,"Jürgen Schöttle (Germany), Master in Engineering, Power Plant Construction",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -451,7 +451,7 @@ kwame-cole,Kwame Cole,,,,speaker,"Kwame Cole, viola",yt-segmentation,1,1,added b
 kynan-thistlethwaite,Kynan Thistlethwaite (U.S.),,,,speaker,Kynan Thistlethwaite (U.S.),yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 l-beethoven,L. Beethoven: Sonata for Cello and Piano No. 4 in C Major,,,,speaker,"L. Beethoven: Sonata for Cello and Piano No. 4 in C Major, Op. 102, No. 1",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 larouche-collected-works,LaRouche Collected Works,,,,speaker,"LaRouche Collected Works, Volume I—Two for $75 https://bit.ly/llf-special",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
-larry-wilkerson,Col. (ret.) Larry Wilkerson,,,,speaker,"Col. (ret.) Larry Wilkerson, (U.S.) former chief of staff to the US Secretary of State",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+larry-wilkerson,Col. (ret.) Larry Wilkerson,,,,speaker,"Col. (ret.) Larry Wilkerson, (U.S.) former chief of staff to the US Secretary of State",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:lawrence-wilkerson,mk
 leevke-hinrichs,Leevke Hinrichs,,,,speaker,"Leevke Hinrichs, flute",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 liliana-gorini,Liliana Gorini (Italy),,,,speaker,"Liliana Gorini (Italy), Chairwoman of Movisol, and Sebastiano Brusco (Italy), Pianist",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 linda-childs,Linda Childs,,,,speaker,"Linda Childs, Alto",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -478,9 +478,9 @@ mike-callicrate,Mike Callicrate,,,,speaker,Mike Callicrate,yt-segmentation,1,1,a
 mike-campbell,Mike Campbell (U.S.),,,,speaker,Mike Campbell (U.S.),yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 mike-robinson,Mike Robinson,,,,speaker,Mike Robinson,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 moderator-claudio-celani,Moderator: Claudio Celani (Italy),,,,speaker,"Moderator: Claudio Celani (Italy), Executive Intelligence Review",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-moderator-daniel-burke,Moderator: Daniel Burke (U.S.),,,,speaker,"Moderator: Daniel Burke (U.S.), The Schiller Institute",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+moderator-daniel-burke,Moderator: Daniel Burke (U.S.),,,,speaker,"Moderator: Daniel Burke (U.S.), The Schiller Institute",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:daniel-burke,mk
 moderator-dennis-small,Moderator: Dennis Small (U.S.),,,,speaker,"Moderator: Dennis Small (U.S.), LaRouche Legacy Foundation",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:dennis-small,mk
-moderator-dennis-speed,Moderator: Dennis Speed (U.S.),,,,speaker,"Moderator: Dennis Speed (U.S.), The Schiller Institute",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+moderator-dennis-speed,Moderator: Dennis Speed (U.S.),,,,speaker,"Moderator: Dennis Speed (U.S.), The Schiller Institute",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:dennis-speed,mk
 moderator-jason-ross,Moderator: Jason Ross (U.S.),,,,speaker,"Moderator: Jason Ross (U.S.), Science Advisor to the Schiller Institute: Welcome and Introduction",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:jason-ross,mk
 moderator-stephan-ossenkopp,Moderator: Stephan Ossenkopp (Germany),,,,speaker,"Moderator: Stephan Ossenkopp (Germany), Schiller Institute: Welcome and Introduction",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 mohammed-bila,Mohammed Bila,,,,speaker,"Mohammed Bila, Expert Modeler, Lake Chad Basin Observatory, Lake Chad Basin Commission",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -520,13 +520,13 @@ performer-schiller-institute-chorus,Performer: Schiller Institute Chorus,,,,spea
 performer-the-schiller-institute-chorus,Performer: The Schiller Institute Chorus,,,,speaker,"Performer: The Schiller Institute Chorus, Camerata Geminiani, Russian Children's Chorus and the audiences.",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 phil-rubenstein,Phil Rubenstein,,,,speaker,"Phil Rubenstein, a long time scientific collaborator of American Statesman and economist Lyndon LaRouche, delivers a str",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 piano-accompaniment-by-brent-bedford,Piano Accompaniment by Brent Bedford,,,,speaker,Piano Accompaniment by Brent Bedford,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-ping-huang,Ambassador Ping Huang,,,,speaker,Ambassador Ping Huang,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+ping-huang,Ambassador Ping Huang,,,,speaker,Ambassador Ping Huang,yt-segmentation,1,1,added by reconcile from video-segmentation,merge:huang-ping,mk
 pino-arlacchi,Pino Arlacchi (Italy),,,,speaker,"Pino Arlacchi (Italy), Sociology Professor at Sassari University, Former Executive Director of the UN Office for Drug Co",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 plo-lumumba,Prof. PLO Lumumba,,,,speaker,Prof. PLO Lumumba,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 po-o-c-epo,Проф. Эндзо Сивьеро,,,,speaker,"Проф. Эндзо Сивьеро, член Итальянского национального совета университетов, Венеция, Италия",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 po-p-ba-co,Проф. д-р У Вансо,,,,speaker,"Проф. д-р У Вансо, декан факультета ядерной науки и техники, Университет Ланьчжоу, Китай",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 pr-carl-otto-weiss,Pr Carl-Otto Weiss,,,,speaker,"Pr Carl-Otto Weiss, consultant à l'Institut européen pour le climat et l'énergie, ancien président de l'Agence nationale",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:carl-otto-weiss,mk
-pr-safieeldin-mohamed-metwally,Pr Safieeldin Mohamed Metwally,,,,speaker,"Pr Safieeldin Mohamed Metwally, Centre national de recherche sur les déserts, Le Caire, Egypte.",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+pr-safieeldin-mohamed-metwally,Pr Safieeldin Mohamed Metwally,,,,speaker,"Pr Safieeldin Mohamed Metwally, Centre national de recherche sur les déserts, Le Caire, Egypte.",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:safieeldin-mohamed-metwally,mk
 presentation-by-richard-trifan,Presentation by Richard Trifan,,,,speaker,"Presentation by Richard Trifan, VP of the Eurasia Center, to the ""New Silk Road: A Global Engineering Renaissance"" confe",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 professeur-enzo-siviero,Professeur Enzo Siviero,,,,speaker,"Professeur Enzo Siviero, Membre du Conseil National Italien des Universités, Venise, Italie",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:enzo-siviero,mk
 project-phoenix-aleppo,Project Phoenix—Aleppo: The Eternal City,,,,speaker,Project Phoenix—Aleppo: The Eternal City,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
@@ -544,18 +544,18 @@ rep-walter-jones,Rep. Walter Jones: Act Now on Two Bills to Save the United S,,,
 richard-freeman,Richard Freeman,,,,speaker,"Richard Freeman, (U.S.), Executive Intelligence Review and co-author of Schiller Institute Plan to Develop Haiti.",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 richard-trifan,Richard Trifan,,,,speaker,"Richard Trifan, Vice President, Government Relations and Trade, The Eurasia Center, Washington, D.C. addresses the Schil",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 riverside-church,Riverside Church,,,,speaker,"Riverside Church, New York City · January 26, 2013",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
-robert-baker,Robert Baker (U.S.),,,,speaker,"Robert Baker (U.S.), Schiller Institute Agriculture Advisor",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+robert-baker,Robert Baker (U.S.),,,,speaker,"Robert Baker (U.S.), Schiller Institute Agriculture Advisor",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:robert-l-baker,mk
 robert-castle,Robert Castle (U.S.),,,,speaker,Robert Castle (U.S.),yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 robert-schumann,Robert Schumann: Träumerei,,,,speaker,Robert Schumann: Träumerei,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 roger-stone,Roger Stone: It's a Fight for the Republic,,,,speaker,"Roger Stone: It's a Fight for the Republic, Not the Two-Party Duopoly",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-s-e-bouthaina-shabaan,S. E. Bouthaina Shabaan,,,,speaker,"S. E. Bouthaina Shabaan, présidence syrienne.",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+s-e-bouthaina-shabaan,S. E. Bouthaina Shabaan,,,,speaker,"S. E. Bouthaina Shabaan, présidence syrienne.",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:bouthaina-shaaban,mk
 saad-mohamed-mahmoud-elgioshy,Dr. Saad Mohamed Mahmoud Elgioshy,,,,speaker,"Dr. Saad Mohamed Mahmoud Elgioshy, Former Transport Minister, Egypt, presents an inspiring vision for Egypt's future in ",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 sarah-fahim,Sarah Fahim,,,,speaker,"Sarah Fahim, Student from Morocco Studying in Paris, France",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 schiller-institute,Schiller Institute,,,,speaker,Schiller Institute,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 schiller-institute-chorus,Schiller Institute Chorus,,,,speaker,Schiller Institute Chorus,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 schiller-institute-conference,Schiller Institute Conference,,,,speaker,Schiller Institute Conference,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 schiller-institute-orchestra,Schiller Institute Orchestra,,,,speaker,Schiller Institute Orchestra,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
-sebastien-drochon-space-policy-director,Sébastien Drochon: Space Policy Director,,,,speaker,"Sébastien Drochon: Space Policy Director, French Schiller Institute",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+sebastien-drochon-space-policy-director,Sébastien Drochon: Space Policy Director,,,,speaker,"Sébastien Drochon: Space Policy Director, French Schiller Institute",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:sebastien-drochon,mk
 sergei-pulinets,Prof. Sergei Pulinets,,,,speaker,Prof. Sergei Pulinets,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 sergey-pulinets,Sergey Pulinets (Russia),,,,speaker,"Sergey Pulinets (Russia), Principal Research Scientist, Space Research Institute, Russian Academy of Sciences, Moscow",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 shah-mehrabi,Dr. Shah Mehrabi (Afghanistan),,,,speaker,"Dr. Shah Mehrabi (Afghanistan), Member of Board of Governors of Central Bank of Afghanistan and Chairman of Audit Commit",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -626,7 +626,7 @@ antonino-galloni-enrico-mattei,Antonino Galloni – Enrico Mattei,,,,speaker,"An
 ave-verum-corpus-by-mozart,Ave Verum Corpus by Mozart,,,,speaker,Ave Verum Corpus by Mozart,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 baifeng-sun,Baifeng Sun,,,,speaker,"Baifeng Sun, Confucius Institute, UMASS Boston. On developing cultural relations between the United States and China",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 bass-chanyoung-lee-korea,Baß: Chanyoung Lee - Korea,,,,speaker,Baß: Chanyoung Lee - Korea,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-benjamin-telmanyi-lylloff,Benjamin Telmányi Lylloff,,,,speaker,"Benjamin Telmányi Lylloff, piano",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+benjamin-telmanyi-lylloff,Benjamin Telmányi Lylloff,,,,speaker,"Benjamin Telmányi Lylloff, piano",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:benjamin-lylloff,mk
 black,Col. Black: U.S. Nuclear Policy is No Longer Defensive,,,,speaker,"Col. Black: U.S. Nuclear Policy is No Longer Defensive, but OFFENSIVE",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:richard-black,mk
 butch-valdes,Butch Valdes: Pacific Contribution from the Philippines,,,,speaker,Butch Valdes: Pacific Contribution from the Philippines,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 caleb-maupin,Caleb Maupin (U.S.),,,,speaker,"Caleb Maupin (U.S.), Founder and Director, Center for Political Innovation: ""Security Effects of Unilateral Sanctions by",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -638,7 +638,7 @@ die-losung-fur-griechenland-euro-austritt,Die Lösung für Griechenland: Euro-Au
 discours-par-robert-barwick,Discours par Robert Barwick,,,,speaker,"Discours par Robert Barwick, Citizens Electoral Council CEC, Australie.",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:robert-barwick,mk
 doctor-of-economics,Doctor of Economics,,,,speaker,"Doctor of Economics, MP (1994-2002) and Chairwoman of the Progressive Socialist Party of Ukraine, Dr. Natalia Vitrenko's",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 eiffel-valdecoa,Eiffel Valdecoa,,,,speaker,Eiffel Valdecoa,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-elvira-green-mezzosoprano,Elvira Green (U.S.) Mezzosoprano,,,,speaker,"Elvira Green (U.S.) Mezzosoprano, formerly with the New York Metropolitan Opera",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+elvira-green-mezzosoprano,Elvira Green (U.S.) Mezzosoprano,,,,speaker,"Elvira Green (U.S.) Mezzosoprano, formerly with the New York Metropolitan Opera",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:elvira-o-green,mk
 emmanuel-dupuy,Prof. Emmanuel Dupuy (France),,,,speaker,"Prof. Emmanuel Dupuy (France), Founder and President, Institute of European Prospective and Security (IPSE): ""What is at",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 eric-de-keuleneer,Eric De Keuleneer,,,,speaker,"Eric De Keuleneer, Economics Professor at Solvay Business School, former Member of the Belgian Surveillance Board of the",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 ewert,Prof. Ewert: The Anthropogenic Climate Change Swindle,,,,speaker,Prof. Ewert: The Anthropogenic Climate Change Swindle,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -672,7 +672,7 @@ marino-elsevyf,Marino Elsevyf,,,,speaker,"Marino Elsevyf, Attorney-at-Law, Domin
 mark-sweazy,Mark Sweazy,,,,speaker,"Mark Sweazy, former UAW trade union leader, United States: ""Returning the U.S. Work Force to a Culture of Scientific Pro",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 matthieu-fontana,Matthieu Fontana,,,,speaker,"Matthieu Fontana, cello",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 maurizio-abbate,Maurizio Abbate,,,,speaker,"Maurizio Abbate, President of the National Institute for Cultural Activities (ENAC), Italy",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-megan-dobrodt-president,Megan Dobrodt (U.S.) President,,,,speaker,"Megan Dobrodt (U.S.) President, Schiller Institute U.S.A.",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+megan-dobrodt-president,Megan Dobrodt (U.S.) President,,,,speaker,"Megan Dobrodt (U.S.) President, Schiller Institute U.S.A.",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:megan-dobrodt,mk
 michelle-erin,Michelle Erin,,,,speaker,"Michelle Erin, soprano; Everett Suttle, tenor; Dura Jun, piano: Johannes Brahms: ""Schwesterlein"" (""Sister""), WoO 33, Vol",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 moderator-jen-pearl,Moderator: Jen Pearl (U.S.),,,,speaker,"Moderator: Jen Pearl (U.S.), The Schiller Institute",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 ole-doering,Ole Doering,,,,speaker,"Ole Doering, PhD (Germany), Sinologist and Philosopher: ""A Salutogenic Symphony with Ancient Chinese Philosophy: Harmony",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
@@ -699,7 +699,7 @@ robert-l-baker,Robert L. Baker,,,,speaker,"Robert L. Baker, Schiller Institute, 
 robert-lechner-schobel,Robert Lechner-Schobel,,,,speaker,"Robert Lechner-Schobel, Business Consultant, Germany",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 robert-mcferrin,Robert McFerrin,,,,speaker,"Robert McFerrin, baritone, Raymond Jackson, piano",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 roberto-valdes,Roberto Valdes,,,,speaker,Roberto Valdes,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-ruijia-dong-mezzo-soprano-louis-arques,Ruijia Dong (China) mezzo-soprano; Louis Arques,,,,speaker,"Ruijia Dong (China) mezzo-soprano; Louis Arques, clarinet; Dura Jun, piano. Wolfgang Amadeus Mozart, ""Parto, ma tu ben m",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+ruijia-dong-mezzo-soprano-louis-arques,Ruijia Dong (China) mezzo-soprano; Louis Arques,,,,speaker,"Ruijia Dong (China) mezzo-soprano; Louis Arques, clarinet; Dura Jun, piano. Wolfgang Amadeus Mozart, ""Parto, ma tu ben m",yt-segmentation,1,1,"THREE performers of a Mozart concert item — Ruijia Dong (mezzo-soprano), Louis Arques (clarinet), Dura Jun (piano). ""Wolfgang Amadeus Mozart"" in alias is the COMPOSER (subject, not a participant). canonical_name captured only first 2; alias truncated at 120 chars. Source yt-segmentation; none has a person row. Needs machine-side split into 3 performer records — recover full roster + piece at video-segmentation stage.",drop,mk
 saeed-naqvi,Saeed Naqvi (India),,,,speaker,"Saeed Naqvi (India), Indian journalist, television commentator and interviewer: ""Media Role and Responsibility""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 schiller-institute-conference-saturday,Schiller Institute conference Saturday,,,,speaker,"Schiller Institute conference Saturday, February 4: Two panels, 10 am-1 pm and 2 pm-5 pm EST",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 schiller-institute-covid-19-policy-https-schillerinstitute-com-blog-2020-04-11-larouches-apollo-mission-to-defeat-the-global-pandemic-build-a-world-health-system-now,Schiller Institute COVID-19 Policy: https://schillerinstitut,,,,speaker,Schiller Institute COVID-19 Policy: https://schillerinstitute.com/blog/2020/04/11/larouches-apollo-mission-to-defeat-the,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
@@ -720,7 +720,7 @@ von-panos-kammenos,Von Panos Kammenos ,,,,speaker,"Von Panos Kammenos , Vorsitze
 walter-formento,Walter Formento,,,,speaker,"Walter Formento, Director, Center for Political and Economic Research, Argentina; ""South America on the New Multipolar R",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 war-must-stop,"War Must Stop: ""Get off this command and control architectur",,,,speaker,"War Must Stop: ""Get off this command and control architecture""",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 what-italy-s-future-depends-on,What Italy's Future Depends On,,,,speaker,What Italy's Future Depends On,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
-will-happer,Will Happer,,,,speaker,"Will Happer, PhD · Professor Emeritus of Physics, Princeton University · ""The Inside Story of Contemporary Science""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+will-happer,Will Happer,,,,speaker,"Will Happer, PhD · Professor Emeritus of Physics, Princeton University · ""The Inside Story of Contemporary Science""",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:william-happer,mk
 wolfgang-amadeus-mozart,Wolfgang Amadeus Mozart,,,,speaker,"Wolfgang Amadeus Mozart, motet Ave Verum corpus (Hail, true body) presentation by John Sigerson (Music Director, Schille",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 xe-a-e-apy,Хельга Цепп-Ларуш,,,,speaker,"Хельга Цепп-Ларуш, президент Шиллеровского института",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 xu-jian,Dr. Xu Jian,,,,speaker,"Dr. Xu Jian, Vice President of China Institute of International Studies (CIIS), Director of CIIS",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
