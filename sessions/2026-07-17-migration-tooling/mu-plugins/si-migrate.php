@@ -72,6 +72,31 @@ final class SI_Text {
         }
         return null;
     }
+
+    /**
+     * Display-title cleanup for the si_person post_title ONLY.
+     * Safe: identity/slug (person_key / post_name) and person_lookup never read the title,
+     * so this is purely cosmetic and cannot affect key generation or reference resolution.
+     *   Rule A — leading role/language prefix ("Moderator: X", "Address by X", "Von X")  → removed
+     *   Rule B — trailing parenthetical(s)   ("X (U.S.)", "X (ret.)", "X (U.S.) (ret.)")  → removed
+     * Never returns empty — falls back to the original if a rule would blank the name.
+     * NOTE: "Von"/"par" are the only slightly risky tokens (a surname could start with "Von");
+     * in this dataset every "Von X"/"par X" is the German/French "by X". Revisit if that changes.
+     */
+    public static function clean_display_name(string $raw): string {
+        $s = self::normalize($raw);
+        $s = preg_replace(
+            '/^\s*(?:Moderator|Host|Chair(?:person)?|Keynote|Introduction by|Address by|Speech by|'
+            . 'Presentation by|Remarks by|Welcome(?: by| remarks)?|Opening(?: remarks| by)?|'
+            . 'Message from|Greetings from|Saludos de|Discurso de|Palabras de|Intervention de|'
+            . "Pr\xC3\xA9sent\xC3\xA9 par|Presented by|Von|par|by)\\b[\\s:.\\-\xE2\x80\x93\xE2\x80\x94]+/iu",
+            '', $s
+        );
+        $prev = null;
+        while ($prev !== $s) { $prev = $s; $s = preg_replace('/\s*\([^)]*\)\s*$/u', '', $s); }
+        $s = trim($s, " \t,:;\xE2\x80\x93\xE2\x80\x94-");
+        return $s !== '' ? $s : self::normalize($raw);
+    }
 }
 
 /** Canonical person keys — the cross-CSV identity contract (01-csv-contracts.md §2). */
@@ -910,7 +935,7 @@ final class SI_Migrate_Command {
             if ($this->dry) { $made++; continue; }
             $id = wp_insert_post([
                 'post_type' => 'si_person', 'post_status' => 'publish',
-                'post_title' => $row['canonical_name'], 'post_name' => $key,
+                'post_title' => SI_Text::clean_display_name($row['canonical_name']), 'post_name' => $key,
             ]);
             if (is_wp_error($id)) { $this->log("FAIL person $key: " . $id->get_error_message()); continue; }
             update_post_meta($id, '_person_key', $key);

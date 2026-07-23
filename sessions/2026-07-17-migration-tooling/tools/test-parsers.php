@@ -30,6 +30,15 @@ eq('isXaT4NQlG8', SI_Text::yt_id('<iframe src="https://www.youtube.com/embed/isX
 eq('1XM7VIH3J9w', SI_Text::yt_id('http://www.youtube.com/watch?v=1XM7VIH3J9w&width=640&height=360'), 'yt id vanguard meta format');
 // U+2219 ∙ and U+00B7 · both normalize to ·; NBSP dies
 eq('12:21 · Jacques Cheminade', SI_Text::normalize("12:21 \xE2\x88\x99 Jacques\xC2\xA0Cheminade"), 'normalize mid-dots + NBSP');
+// clean_display_name: strip leading role prefix + trailing parentheticals (title-only, key-safe)
+eq('Claudio Celani', SI_Text::clean_display_name('Moderator: Claudio Celani (Italy)'), 'cdn moderator + country');
+eq('Antonino Galloni', SI_Text::clean_display_name('Address by Antonino Galloni'), 'cdn address by');
+eq('Alain Corvez', SI_Text::clean_display_name('Von Alain Corvez'), 'cdn von prefix');
+eq('Jean-Christophe Vautrin', SI_Text::clean_display_name('par Jean-Christophe Vautrin'), 'cdn par prefix');
+eq('Theodore Postol', SI_Text::clean_display_name('Theodore Postol (U.S.)'), 'cdn trailing country');
+eq('Dennis Small', SI_Text::clean_display_name('Moderator: Dennis Small (U.S.) (ret.)'), 'cdn prefix + two trailing parens');
+eq('Helga Zepp-LaRouche', SI_Text::clean_display_name('Helga Zepp-LaRouche'), 'cdn clean name untouched');
+eq('(U.S.)', SI_Text::clean_display_name('(U.S.)'), 'cdn never blanks — falls back to original');
 
 // ---------------------------------------------------------------- SI_Person_Key
 echo "== SI_Person_Key\n";

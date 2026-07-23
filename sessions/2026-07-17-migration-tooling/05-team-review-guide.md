@@ -182,3 +182,80 @@ never drop a real participant just because they're prominent.
 - Elvira Green: `elvira-green` / `elvira-o-green` / `elvira-green-mezzosoprano` → pick one survivor
 - Jason Ross noise rows: `moderator-jason-ross`, `von-jason-ross` → `merge:jason-ross`
   (but `speakers-include-jason-ross` and `megan-beets-and-jason-ross` are multi-person lists → `drop`)
+
+---
+
+## Machine-side migration TODOs (NOT reviewer work)
+
+These are code changes for whoever runs the migration. Reviewers cannot and should not do them by
+hand (they touch `canonical_name`, a machine-written column, or need re-parsing). Listed here so they
+aren't lost.
+
+### TODO 1 — Clean display titles for `si_person` (role prefixes + trailing parentheticals)
+
+Some rows keep noise in `canonical_name` that will otherwise become the WordPress `post_title`
+verbatim (`si-migrate.php:913` inserts it unchanged, no cleanup). This is only the rows that *aren't*
+merged/dropped away — a small residue (~10 role-prefix rows; ~100 parenthetical rows).
+
+**Why it's safe:** identity, slug (`post_name`) and reference resolution (`person_lookup`) all use
+`person_key`, never the title. So cleaning the title is purely cosmetic and cannot break keys or links.
+
+Two conservative rules, both anchored so they can't chew into a real name:
+- **A. leading role/language prefix** — `Moderator:`, `Address by`, `Speech by`, `Von`, `par`,
+  `Saludos de`, `Intervention de`, `Presentation by`, … (35 rows in the file; ~25 already merged/dropped).
+- **B. trailing parenthetical(s)** — `(U.S.)`×35, `(China)`, `(Germany)`, `(ret.)`, Cyrillic `(США)` etc.
+  (117 rows have a parenthetical; 106 are trailing).
+
+Drop-in helper for `SI_Text` (reuses `SI_Text::normalize`); then change line 913 to
+`'post_title' => SI_Text::clean_display_name($row['canonical_name']),`
+
+```php
+/**
+ * Display-title cleanup for the si_person post_title ONLY.
+ * Safe: identity/slug (person_key / post_name) and person_lookup never read the title,
+ * so this is purely cosmetic and cannot affect key generation or reference resolution.
+ *   Rule A — leading role/language prefix ("Moderator: X", "Address by X", "Von X")  → removed
+ *   Rule B — trailing parenthetical(s)   ("X (U.S.)", "X (ret.)", "X (U.S.) (ret.)")  → removed
+ * Never returns empty — falls back to the original if a rule would blank the name.
+ */
+public static function clean_display_name(string $raw): string {
+    $s = self::normalize($raw);
+
+    // Rule A: curated whitelist, case-insensitive, anchored at start.
+    // NOTE: "Von"/"par" are the only slightly risky tokens (a name could start with "Von");
+    // in this dataset every "Von X"/"par X" is the German/French "by X". Revisit if that changes.
+    $s = preg_replace(
+        '/^\s*(?:Moderator|Host|Chair(?:person)?|Keynote|Introduction by|Address by|Speech by|'
+        . 'Presentation by|Remarks by|Welcome(?: by| remarks)?|Opening(?: remarks| by)?|'
+        . 'Message from|Greetings from|Saludos de|Discurso de|Palabras de|Intervention de|'
+        . "Pr\xC3\xA9sent\xC3\xA9 par|Presented by|Von|par|by)\\b[\\s:.\\-\xE2\x80\x93\xE2\x80\x94]+/iu",
+        '', $s
+    );
+
+    // Rule B: strip trailing parentheticals, repeated for "X (U.S.) (ret.)".
+    $prev = null;
+    while ($prev !== $s) { $prev = $s; $s = preg_replace('/\s*\([^)]*\)\s*$/u', '', $s); }
+
+    $s = trim($s, " \t,:;\xE2\x80\x93\xE2\x80\x94-");
+    return $s !== '' ? $s : self::normalize($raw);
+}
+```
+
+**Country caveat (decided):** `si_person` has **no country field** (fields are
+honorific/role/affiliation/person_type/short_bio/links), and country is not saved today. So Rule B
+discards nothing that was going to be stored — the nationality still lives in `person-map.csv` and in
+`si_presentation.agenda` lines. *If* a country field is later added to the model, capture it from the
+parenthetical (map Cyrillic: США→USA, Китай→China, Япония→Japan, Германия→Germany) before stripping,
+rather than re-scraping.
+
+### TODO 2 — Split co-presenter rows (`<A> & <B>: title`, comma, `and`/`und`/`et`)
+
+The extractor keys joined co-presenters as one person (e.g. `Pei Hua & Chen Bo`,
+`Milena Nikolić, Dragan Dinčić`, 3-performer concert rows). `merge` can't split; reviewers `drop`
+these with a note. The real fix is machine-side: split on `&`/`,`/`and`/`und`/`et` (only *before* a
+talk-title colon), create one person per name, link all to the presentation, and reconcile
+cross-language spelling drift (e.g. Dunčić/Dinčić). Full list: `person-map-copresenter-sweep.md`.
+
+### TODO 3 — Honorific ↔ canonical_name split
+See the "data-quality flag" section above — normalize leading honorifics into the `honorific` field
+rather than leaving `"Prof. X"` in the title (and avoid the "Dr. Dr. X" double-title on display).
