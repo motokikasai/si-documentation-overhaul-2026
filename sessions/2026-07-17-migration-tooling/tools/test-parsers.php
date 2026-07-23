@@ -39,6 +39,9 @@ eq('Theodore Postol', SI_Text::clean_display_name('Theodore Postol (U.S.)'), 'cd
 eq('Dennis Small', SI_Text::clean_display_name('Moderator: Dennis Small (U.S.) (ret.)'), 'cdn prefix + two trailing parens');
 eq('Helga Zepp-LaRouche', SI_Text::clean_display_name('Helga Zepp-LaRouche'), 'cdn clean name untouched');
 eq('(U.S.)', SI_Text::clean_display_name('(U.S.)'), 'cdn never blanks — falls back to original');
+eq('Dr. Hermann Schwiesau', SI_Text::clean_display_name('Rede von Dr. Hermann Schwiesau'), 'cdn German "Rede von"');
+eq('Helga Zepp-LaRouche', SI_Text::clean_display_name('Grußwort von Helga Zepp-LaRouche'), 'cdn German "Grußwort von"');
+eq('Rede in Beijing', SI_Text::clean_display_name('Rede in Beijing'), 'cdn bare "Rede" NOT stripped (talk title)');
 
 // ---------------------------------------------------------------- SI_Person_Key
 echo "== SI_Person_Key\n";

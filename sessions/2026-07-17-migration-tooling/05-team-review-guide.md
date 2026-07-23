@@ -202,7 +202,9 @@ merged/dropped away — a small residue (~10 role-prefix rows; ~100 parenthetica
 
 Two conservative rules, both anchored so they can't chew into a real name:
 - **A. leading role/language prefix** — `Moderator:`, `Address by`, `Speech by`, `Von`, `par`,
-  `Saludos de`, `Intervention de`, `Presentation by`, … (35 rows in the file; ~25 already merged/dropped).
+  `Saludos de`, `Intervention de`, `Presentation by`, and German `Rede von` / `Grußwort von` /
+  `Vortrag von` / `Ansprache von`, … (~45 rows in the file; most already merged/dropped).
+  NB: strip only `Rede von <name>`, NOT bare `Rede` (e.g. `"Rede in Beijing"` is a talk title).
 - **B. trailing parenthetical(s)** — `(U.S.)`×35, `(China)`, `(Germany)`, `(ret.)`, Cyrillic `(США)` etc.
   (117 rows have a parenthetical; 106 are trailing).
 
@@ -228,6 +230,7 @@ public static function clean_display_name(string $raw): string {
         '/^\s*(?:Moderator|Host|Chair(?:person)?|Keynote|Introduction by|Address by|Speech by|'
         . 'Presentation by|Remarks by|Welcome(?: by| remarks)?|Opening(?: remarks| by)?|'
         . 'Message from|Greetings from|Saludos de|Discurso de|Palabras de|Intervention de|'
+        . 'Rede von|Grußwort von|Vortrag von|Ansprache von|'
         . "Pr\xC3\xA9sent\xC3\xA9 par|Presented by|Von|par|by)\\b[\\s:.\\-\xE2\x80\x93\xE2\x80\x94]+/iu",
         '', $s
     );

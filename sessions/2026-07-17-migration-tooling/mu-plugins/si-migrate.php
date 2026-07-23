@@ -89,6 +89,7 @@ final class SI_Text {
             '/^\s*(?:Moderator|Host|Chair(?:person)?|Keynote|Introduction by|Address by|Speech by|'
             . 'Presentation by|Remarks by|Welcome(?: by| remarks)?|Opening(?: remarks| by)?|'
             . 'Message from|Greetings from|Saludos de|Discurso de|Palabras de|Intervention de|'
+            . 'Rede von|Grußwort von|Vortrag von|Ansprache von|'
             . "Pr\xC3\xA9sent\xC3\xA9 par|Presented by|Von|par|by)\\b[\\s:.\\-\xE2\x80\x93\xE2\x80\x94]+/iu",
             '', $s
         );
