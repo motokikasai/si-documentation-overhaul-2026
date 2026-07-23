@@ -42,6 +42,12 @@ eq('(U.S.)', SI_Text::clean_display_name('(U.S.)'), 'cdn never blanks — falls 
 eq('Dr. Hermann Schwiesau', SI_Text::clean_display_name('Rede von Dr. Hermann Schwiesau'), 'cdn German "Rede von"');
 eq('Helga Zepp-LaRouche', SI_Text::clean_display_name('Grußwort von Helga Zepp-LaRouche'), 'cdn German "Grußwort von"');
 eq('Rede in Beijing', SI_Text::clean_display_name('Rede in Beijing'), 'cdn bare "Rede" NOT stripped (talk title)');
+// Rule B: fused "Name: talk title" tail
+eq('Eugene Simpson', SI_Text::clean_display_name('Eugene Simpson: "Hall Johnson and the Dvorak Dream"'), 'cdn fused title (quoted)');
+eq('Roger Stone', SI_Text::clean_display_name("Roger Stone: It's a Fight for the Republic"), 'cdn fused title (plain)');
+eq('Prof. Ewert', SI_Text::clean_display_name('Prof. Ewert: The Anthropogenic Climate Change Swindle'), 'cdn fused title keeps honorific');
+eq('Stephan Ossenkopp', SI_Text::clean_display_name('Moderator: Stephan Ossenkopp (Germany)'), 'cdn prefix + name (no over-strip) + country');
+eq('Pakdee Tanapura', SI_Text::clean_display_name('Pakdee Tanapura: Contribution from Thailand'), 'cdn fused title');
 
 // ---------------------------------------------------------------- SI_Person_Key
 echo "== SI_Person_Key\n";

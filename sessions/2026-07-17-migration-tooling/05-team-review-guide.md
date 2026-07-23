@@ -200,12 +200,14 @@ merged/dropped away — a small residue (~10 role-prefix rows; ~100 parenthetica
 **Why it's safe:** identity, slug (`post_name`) and reference resolution (`person_lookup`) all use
 `person_key`, never the title. So cleaning the title is purely cosmetic and cannot break keys or links.
 
-Two conservative rules, both anchored so they can't chew into a real name:
+Three conservative rules, all anchored so they can't chew into a real name:
 - **A. leading role/language prefix** — `Moderator:`, `Address by`, `Speech by`, `Von`, `par`,
   `Saludos de`, `Intervention de`, `Presentation by`, and German `Rede von` / `Grußwort von` /
   `Vortrag von` / `Ansprache von`, … (~45 rows in the file; most already merged/dropped).
   NB: strip only `Rede von <name>`, NOT bare `Rede` (e.g. `"Rede in Beijing"` is a talk title).
-- **B. trailing parenthetical(s)** — `(U.S.)`×35, `(China)`, `(Germany)`, `(ret.)`, Cyrillic `(США)` etc.
+- **B. fused `": talk title"` tail** — `Eugene Simpson: "Hall Johnson…"`, `Roger Stone: It's a Fight…`,
+  `Prof. Ewert: The … Swindle`. Runs AFTER A so `Moderator: X` (prefix already gone) is not over-stripped.
+- **C. trailing parenthetical(s)** — `(U.S.)`×35, `(China)`, `(Germany)`, `(ret.)`, Cyrillic `(США)` etc.
   (117 rows have a parenthetical; 106 are trailing).
 
 Drop-in helper for `SI_Text` (reuses `SI_Text::normalize`); then change line 913 to
@@ -217,8 +219,9 @@ Drop-in helper for `SI_Text` (reuses `SI_Text::normalize`); then change line 913
  * Safe: identity/slug (person_key / post_name) and person_lookup never read the title,
  * so this is purely cosmetic and cannot affect key generation or reference resolution.
  *   Rule A — leading role/language prefix ("Moderator: X", "Address by X", "Von X")  → removed
- *   Rule B — trailing parenthetical(s)   ("X (U.S.)", "X (ret.)", "X (U.S.) (ret.)")  → removed
- * Never returns empty — falls back to the original if a rule would blank the name.
+ *   Rule B — fused ": talk title" tail   ("Eugene Simpson: Hall Johnson…", "Roger Stone: …") → removed
+ *   Rule C — trailing parenthetical(s)   ("X (U.S.)", "X (ret.)", "X (U.S.) (ret.)")  → removed
+ * Rule B runs AFTER A (so "Moderator: X" has already lost its prefix). Never returns empty.
  */
 public static function clean_display_name(string $raw): string {
     $s = self::normalize($raw);
@@ -235,7 +238,10 @@ public static function clean_display_name(string $raw): string {
         '', $s
     );
 
-    // Rule B: strip trailing parentheticals, repeated for "X (U.S.) (ret.)".
+    // Rule B: strip a fused ": talk title" tail (colon + space onward). Runs after Rule A.
+    $s = preg_replace('/\s*:\s.*$/su', '', $s);
+
+    // Rule C: strip trailing parentheticals, repeated for "X (U.S.) (ret.)".
     $prev = null;
     while ($prev !== $s) { $prev = $s; $s = preg_replace('/\s*\([^)]*\)\s*$/u', '', $s); }
 

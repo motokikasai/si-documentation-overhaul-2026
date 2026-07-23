@@ -78,8 +78,10 @@ final class SI_Text {
      * Safe: identity/slug (person_key / post_name) and person_lookup never read the title,
      * so this is purely cosmetic and cannot affect key generation or reference resolution.
      *   Rule A — leading role/language prefix ("Moderator: X", "Address by X", "Von X")  → removed
-     *   Rule B — trailing parenthetical(s)   ("X (U.S.)", "X (ret.)", "X (U.S.) (ret.)")  → removed
-     * Never returns empty — falls back to the original if a rule would blank the name.
+     *   Rule B — fused ": talk title" tail   ("Eugene Simpson: Hall Johnson…", "Roger Stone: …") → removed
+     *   Rule C — trailing parenthetical(s)   ("X (U.S.)", "X (ret.)", "X (U.S.) (ret.)")  → removed
+     * Rule B runs AFTER A, so "Moderator: X" has already lost its prefix (no colon left) and only
+     * genuine "Name: Title" fusions are cut. Never returns empty — falls back to the original.
      * NOTE: "Von"/"par" are the only slightly risky tokens (a surname could start with "Von");
      * in this dataset every "Von X"/"par X" is the German/French "by X". Revisit if that changes.
      */
@@ -93,6 +95,9 @@ final class SI_Text {
             . "Pr\xC3\xA9sent\xC3\xA9 par|Presented by|Von|par|by)\\b[\\s:.\\-\xE2\x80\x93\xE2\x80\x94]+/iu",
             '', $s
         );
+        // Rule B: strip a fused ": talk title" tail (colon + space onward). Runs after Rule A.
+        $s = preg_replace('/\s*:\s.*$/su', '', $s);
+        // Rule C: strip trailing parenthetical(s), repeated for "X (U.S.) (ret.)".
         $prev = null;
         while ($prev !== $s) { $prev = $s; $s = preg_replace('/\s*\([^)]*\)\s*$/u', '', $s); }
         $s = trim($s, " \t,:;\xE2\x80\x93\xE2\x80\x94-");

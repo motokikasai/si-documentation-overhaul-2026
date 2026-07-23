@@ -66,7 +66,7 @@ health-food energy-environment education-youth history-method new-paradigm`.
 | `occurrences` | | how many items reference this person |
 | `needs_review` | ✔ | `1` for risky merges (same surname, different people!) |
 | `notes` | | disambiguation evidence |
-| `final_action` | | blank=keep · `merge:<person_key>` (this row folds into that one) · `drop` |
+| `final_action` | | `needs_review=0`: blank=keep(create). `needs_review=1`: blank=**skip**(not created), `accept`=create. Both: `merge:<person_key>` (folds into that row — the target MUST itself be created, i.e. `accept` or `nr=0`) · `drop` |
 | `reviewer` | | |
 
 ## 3. `video-segmentation.csv` — one row per proposed Presentation (consumed by `si:presentations --source=yt`)
