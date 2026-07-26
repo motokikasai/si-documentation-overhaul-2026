@@ -171,11 +171,19 @@
       if (t <= now) t.setUTCDate(t.getUTCDate() + 7);
       return t;
     };
-    var target = nextFriday();
+    /* Optional fixed target: data-countdown="2026-09-05T14:00:00Z" for a dated
+       conference. Empty value keeps the recurring next-Friday behavior. */
+    var fixedRaw = cd.getAttribute("data-countdown");
+    var fixed = fixedRaw ? new Date(fixedRaw) : null;
+    if (fixed && isNaN(fixed)) fixed = null;
+    var target = fixed || nextFriday();
     var pad = function (n) { return n < 10 ? "0" + n : "" + n; };
     var tick = function () {
       var ms = target - new Date();
-      if (ms < 0) { target = nextFriday(); ms = target - new Date(); }
+      if (ms < 0) {
+        if (fixed) { ms = 0; }
+        else { target = nextFriday(); ms = target - new Date(); }
+      }
       var s = Math.floor(ms / 1000);
       if (segs.d) segs.d.textContent = pad(Math.floor(s / 86400));
       if (segs.h) segs.h.textContent = pad(Math.floor(s / 3600) % 24);

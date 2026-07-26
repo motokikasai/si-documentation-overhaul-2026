@@ -1,0 +1,619 @@
+/* ==========================================================================
+   Schiller Institute — the CONFERENCE wing (individual conference pages).
+   Loaded AFTER landing.css + landing-v4.css. Where the archive treatments
+   (/conferences/) answer "how do I browse forty years of conferences", these
+   pages answer "how do I stand inside ONE of them" — its programme, its
+   voices, its argument, its recordings, its call to act.
+
+   One reusable base ("The Proceedings"), plus two divergent registers that
+   share this same vocabulary: "The Rostrum" (speaker-forward, cinematic) and
+   "The Convocation" (immersive, event-driven, campaign launch).
+
+   New patterns only. Everything structural (wrap/section/section-head/
+   head-ornament, btn, credo, people, shelf, plate, epochs, ph, countdown,
+   marquee, the you-arc) comes from the sheets already imported above.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Conference accents — the accent dial, three new settings.
+   Same contract as landing.css: touches hero veil, kickers, plate tint.
+   Gold stays gold. A conference in production would carry its own accent
+   as a custom field; these three are the drafts' worked examples.
+   -------------------------------------------------------------------------- */
+body.lp-conf-record {      /* The Proceedings · assembly plum */
+  --accent-deep: #5a2a52;
+  --accent-soft: #e0b8d6;
+  --accent-veil: rgba(58, 20, 52, 0.34);
+  --accent-tint: #3d1c39;
+}
+body.lp-conf-rostrum {     /* The Rostrum · bordeaux, human warmth */
+  --accent-deep: #7a2230;
+  --accent-soft: #edb6a0;
+  --accent-veil: rgba(74, 18, 26, 0.34);
+  --accent-tint: #521821;
+}
+body.lp-conf-convoke {     /* The Convocation · imperial indigo */
+  --accent-deep: #2c2f74;
+  --accent-soft: #b9bef0;
+  --accent-veil: rgba(20, 22, 66, 0.40);
+  --accent-tint: #23255c;
+}
+
+/* --------------------------------------------------------------------------
+   Template review bar — cross-links the three drafts (review aid only; drops
+   out in production, exactly like the archive wing's "treatment strip").
+   -------------------------------------------------------------------------- */
+.conf-switch {
+  background: var(--navy-950);
+  border-bottom: 1px solid rgba(212, 169, 76, 0.25);
+}
+.conf-switch .wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem 1.1rem;
+  flex-wrap: wrap;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+.conf-switch-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+  margin-right: 0.3rem;
+}
+.conf-switch a {
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: rgba(250, 247, 240, 0.66);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+.conf-switch a:hover { color: #fff; border-bottom-color: var(--gold-500); }
+.conf-switch a[aria-current="page"] { color: #fff; border-bottom-color: var(--gold-500); }
+
+/* --------------------------------------------------------------------------
+   Conference hero meta — the vitals line under the H1 (date · place · format).
+   Sits inside .lp-hero / .lp-herotype and inherits their register.
+   -------------------------------------------------------------------------- */
+.conf-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
+  margin-top: 1.5rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+.conf-meta > span {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+.conf-meta > span + span::before {
+  content: "";
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gold-500);
+  transform: rotate(45deg);
+  margin-right: 0.8rem;
+  margin-left: -0.2rem;
+}
+.conf-meta b { font-weight: 600; color: #fff; }
+/* ivory-hero variant */
+.lp-herotype .conf-meta { justify-content: center; }
+.lp-herotype .conf-meta > span { color: var(--ink-600); }
+.lp-herotype .conf-meta b { color: var(--navy-800); }
+.conf-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.28rem 0.8rem;
+  border: 1px solid rgba(212, 169, 76, 0.6);
+  border-radius: 2rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+.conf-status::before {
+  content: "";
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--gold-500);
+  box-shadow: 0 0 0 0 rgba(212, 169, 76, 0.7);
+}
+.conf-status--live::before { animation: conf-pulse 2s infinite; }
+@keyframes conf-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(212, 169, 76, 0.6); }
+  70%  { box-shadow: 0 0 0 8px rgba(212, 169, 76, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(212, 169, 76, 0); }
+}
+
+/* --------------------------------------------------------------------------
+   Facts strip — the conference in numbers (sessions · speakers · countries…).
+   Works on any surface; hairline-separated, count-up friendly (js-countup).
+   -------------------------------------------------------------------------- */
+.conf-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 1px;
+  margin-top: 3rem;
+  background: rgba(212, 169, 76, 0.22);
+  border: 1px solid rgba(212, 169, 76, 0.22);
+}
+.conf-fact {
+  background: var(--navy-950);
+  padding: 1.7rem 1.2rem;
+  text-align: center;
+}
+.section-ivory .conf-fact,
+.section-ivory-alt .conf-fact { background: var(--ivory-50); }
+.conf-fact-num {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 4.5vw, 2.9rem);
+  line-height: 1;
+  color: #fff;
+}
+.section-ivory .conf-fact-num,
+.section-ivory-alt .conf-fact-num { color: var(--navy-800); }
+.conf-fact-num em { font-style: normal; color: var(--gold-500); }
+.conf-fact-lab {
+  margin-top: 0.6rem;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+.section-ivory .conf-fact-lab,
+.section-ivory-alt .conf-fact-lab { color: var(--ink-600); }
+
+/* --------------------------------------------------------------------------
+   Programme — the day, session by session, each session holding its talks.
+   A talk = a Presentation record (video). This is the query-loop heart of a
+   conference page: in WordPress each .session is a session term and each
+   .talk a si_presentation bound to it.
+   -------------------------------------------------------------------------- */
+.programme {
+  margin-top: 3.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.6rem, 5vw, 4rem);
+}
+.session {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  gap: clamp(1.4rem, 3vw, 2.6rem);
+}
+.session-rail {
+  position: relative;
+  padding-top: 0.3rem;
+}
+.session-day {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.session-ivory-alt .session-day { color: var(--accent-deep); }
+.session-time {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--navy-800);
+  margin-top: 0.3rem;
+}
+.section-navy .session-time,
+.section-navy .session-name { color: #fff; }
+.session-name {
+  margin-top: 0.15rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--ink-600);
+}
+.section-navy .session-name { color: rgba(255,255,255,0.6); }
+.session-talks {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(15, 31, 61, 0.14);
+}
+.section-navy .session-talks { border-top-color: rgba(212,169,76,0.28); }
+
+/* one talk row — video thumb + title + speaker + affiliation + watch */
+.talk {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr auto;
+  align-items: center;
+  gap: 1.3rem;
+  padding: 1.15rem 0.2rem;
+  border-bottom: 1px solid rgba(15, 31, 61, 0.14);
+  text-decoration: none;
+  transition: background 0.25s ease;
+}
+.section-navy .talk { border-bottom-color: rgba(212,169,76,0.22); }
+.talk:hover { background: rgba(212, 169, 76, 0.07); }
+.talk-thumb {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  min-height: 0;
+  border-radius: 2px;
+}
+.talk-thumb .ph-play { width: 40px; height: 40px; }
+.talk-thumb .ph-play::before {
+  border-left-width: 11px; border-top-width: 7px; border-bottom-width: 7px;
+}
+.talk-title {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.08rem;
+  line-height: 1.32;
+  color: var(--navy-800);
+}
+.section-navy .talk-title { color: #fff; }
+.talk-by {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--ink-600);
+}
+.section-navy .talk-by { color: rgba(255,255,255,0.7); }
+.talk-by b { font-weight: 600; color: var(--ink-900); }
+.section-navy .talk-by b { color: #fff; }
+.talk-affil {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--accent-deep);
+}
+.section-navy .talk-affil { color: var(--accent-soft); }
+.talk-dur {
+  flex: none;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-500);
+  white-space: nowrap;
+}
+.talk-dur::after {
+  content: " ▸";
+  color: var(--gold-500);
+}
+@media (max-width: 720px) {
+  .session { grid-template-columns: 1fr; gap: 1rem; }
+  .session-rail { display: flex; align-items: baseline; gap: 0.8rem; }
+  .session-time { margin-top: 0; }
+  .talk { grid-template-columns: 6rem 1fr; }
+  .talk-dur { grid-column: 2; justify-self: start; }
+}
+
+/* --------------------------------------------------------------------------
+   Video feature — the keynote/plenary as a full 16:9 stage. The page's
+   biggest "video as bait" moment. Placeholder now; a real embed later.
+   -------------------------------------------------------------------------- */
+.vfeature { margin-top: 3rem; }
+.vfeature-frame {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(212, 169, 76, 0.4);
+  overflow: hidden;
+  text-decoration: none;
+}
+.vfeature-frame .ph { position: absolute; inset: 0; }
+.vfeature-frame .ph-play { width: 84px; height: 84px; }
+.vfeature-frame .ph-play::before {
+  border-left-width: 22px; border-top-width: 14px; border-bottom-width: 14px;
+}
+.vfeature-cap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 1.2rem;
+  margin-top: 1.1rem;
+}
+.vfeature-cap strong {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--navy-800);
+}
+.section-navy .vfeature-cap strong { color: #fff; }
+.vfeature-cap span { font-size: 0.8rem; color: var(--ink-600); }
+.section-navy .vfeature-cap span { color: rgba(255,255,255,0.7); }
+
+/* split variant: video beside a short billing */
+.vfeature--split {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: clamp(1.6rem, 4vw, 3rem);
+  align-items: center;
+}
+.vfeature--split .vfeature-frame { margin: 0; }
+.vfeature-bill h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--navy-800);
+  line-height: 1.15;
+}
+.section-navy .vfeature-bill h3 { color: #fff; }
+.vfeature-bill .talk-affil { margin-top: 0.5rem; font-size: 0.82rem; }
+.vfeature-bill p { margin-top: 0.9rem; color: var(--ink-600); font-size: 0.95rem; }
+.section-navy .vfeature-bill p { color: rgba(255,255,255,0.75); }
+@media (max-width: 760px) {
+  .vfeature--split { grid-template-columns: 1fr; }
+}
+
+/* --------------------------------------------------------------------------
+   Video wall — a mosaic of session highlights. Immersive register.
+   -------------------------------------------------------------------------- */
+.vwall {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+.vwall-item {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border: 1px solid rgba(212, 169, 76, 0.3);
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+}
+.vwall-item .ph { position: absolute; inset: 0; }
+.vwall-item--lg { grid-column: span 2; aspect-ratio: 16 / 9; }
+.vwall-cap {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 2;
+  padding: 1.6rem 1.1rem 0.9rem;
+  background: linear-gradient(0deg, rgba(6,13,31,0.9), transparent);
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  color: #fff;
+  line-height: 1.3;
+}
+.vwall-cap em {
+  display: block;
+  font-style: normal;
+  font-family: var(--font-text);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--gold-300);
+  margin-top: 0.25rem;
+}
+@media (max-width: 620px) {
+  .vwall-item--lg { grid-column: span 1; }
+}
+
+/* --------------------------------------------------------------------------
+   Speaker roster — the rich card. Affiliation is NOT an afterthought here:
+   it carries a hairline rule and the accent, because on a Schiller stage the
+   institution a voice speaks from is half the argument.
+   -------------------------------------------------------------------------- */
+.roster {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr));
+  gap: 2.2rem 1.8rem;
+  margin-top: 3.2rem;
+}
+.speaker { text-decoration: none; display: block; }
+.speaker-portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  background: var(--navy-900);
+  border: 1px solid rgba(212, 169, 76, 0.3);
+}
+.speaker-portrait img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) sepia(0.16);
+  transition: filter 0.5s ease, transform 0.5s ease;
+}
+.speaker:hover .speaker-portrait img { filter: none; transform: scale(1.03); }
+.speaker-portrait .ph { position: absolute; inset: 0; }
+.speaker-name {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.12rem;
+  line-height: 1.2;
+  color: var(--navy-800);
+}
+.section-navy .speaker-name { color: #fff; }
+.speaker-role {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.82rem;
+  color: var(--ink-600);
+}
+.section-navy .speaker-role { color: rgba(255,255,255,0.72); }
+.speaker-affil {
+  display: block;
+  margin-top: 0.6rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid rgba(212, 169, 76, 0.4);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+  color: var(--accent-deep);
+}
+.section-navy .speaker-affil { color: var(--accent-soft); }
+.speaker-affil b { display: block; font-weight: 600; }
+.speaker-flag {
+  font-size: 0.72rem;
+  color: var(--ink-600);
+  letter-spacing: 0.1em;
+}
+
+/* the "billing" list — a lean typographic roster (names as a printed bill) */
+.billing {
+  margin-top: 2.6rem;
+  columns: 2;
+  column-gap: 3rem;
+}
+.billing-row {
+  break-inside: avoid;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.section-ivory .billing-row,
+.section-ivory-alt .billing-row { border-bottom-color: rgba(15,31,61,0.12); }
+.billing-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #fff;
+}
+.section-ivory .billing-name,
+.section-ivory-alt .billing-name { color: var(--navy-800); }
+.billing-affil {
+  font-size: 0.75rem;
+  color: var(--accent-soft);
+  letter-spacing: 0.03em;
+}
+.section-ivory .billing-affil,
+.section-ivory-alt .billing-affil { color: var(--accent-deep); }
+@media (max-width: 560px) { .billing { columns: 1; } }
+
+/* --------------------------------------------------------------------------
+   Rostrum plate affiliation — used with the imported .plate grammar when a
+   folio plate carries a speaker instead of a project. Portrait media aspect.
+   -------------------------------------------------------------------------- */
+.plate-media--portrait { aspect-ratio: 4 / 5; }
+.plate-affil {
+  margin: 0.2rem 0 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: #8a6d2f;
+}
+.plate-affil b { font-weight: 600; }
+.plate-watch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-500);
+  text-decoration: none;
+}
+.plate-watch::before {
+  content: "";
+  width: 0; height: 0;
+  border-left: 9px solid var(--gold-500);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+.plate-watch:hover { color: #8a6d2f; }
+
+/* --------------------------------------------------------------------------
+   Declaration band — the conference's statement / campaign launch, with a
+   sign-your-name CTA and a live signatory tally. The strongest text-as-action
+   moment; a darker cousin of the credo band.
+   -------------------------------------------------------------------------- */
+.declaration {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(212, 169, 76, 0.12), transparent 60%),
+    var(--navy-950);
+  color: #fff;
+  overflow: hidden;
+}
+.declaration .wrap { max-width: 52rem; text-align: center; }
+.declaration-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+.declaration-text {
+  margin-top: 1.6rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.5;
+  color: #fff;
+  text-wrap: balance;
+}
+.declaration-text .lead {
+  display: block;
+  font-size: 1.25em;
+  margin-bottom: 0.6rem;
+  color: var(--gold-300);
+}
+.declaration-form {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 30rem;
+  margin: 2.4rem auto 0;
+}
+.declaration-form input {
+  flex: 1 1 12rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: #fff;
+  padding: 0.85rem 1rem;
+  font: inherit;
+  font-size: 0.92rem;
+}
+.declaration-form input::placeholder { color: rgba(255,255,255,0.5); }
+.declaration-form input:focus { outline: none; border-color: var(--gold-500); }
+.declaration-tally {
+  margin-top: 1.7rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.66);
+}
+.declaration-tally b { color: var(--gold-300); font-weight: 600; }
+
+/* --------------------------------------------------------------------------
+   Program note / opening statement — a two-column editorial text block for
+   the conference's intro article, with a lead standfirst.
+   -------------------------------------------------------------------------- */
+.confnote { max-width: 48rem; }
+.confnote-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.2vw, 1.42rem);
+  line-height: 1.6;
+  color: var(--ink-900);
+}
+.section-navy .confnote-lead { color: #fff; }
+.confnote-cols {
+  margin-top: 1.6rem;
+  columns: 2;
+  column-gap: 2.6rem;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--ink-600);
+}
+.section-navy .confnote-cols { color: rgba(255,255,255,0.78); }
+.confnote-cols p { margin: 0 0 1rem; break-inside: avoid; }
+@media (max-width: 620px) { .confnote-cols { columns: 1; } }
+
+/* --------------------------------------------------------------------------
+   Reduced-motion: the status dot stops pulsing; portraits land colorless.
+   (All scrub/fx pieces are already covered by the imported sheets.)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .conf-status--live::before { animation: none; }
+  .speaker-portrait img { transition: none; }
+}

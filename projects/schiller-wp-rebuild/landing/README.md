@@ -18,7 +18,42 @@ copy of every token, pattern and behavior.
 
 ## The drafts
 
-### The institutional wing — the standard pages (newest)
+### The conference wing — one INDIVIDUAL conference, three ways (newest)
+
+Where the archive wing (below) makes forty years of conferences *browsable*,
+this wing is the page you land on for **one** conference — its programme, its
+voices, its recordings, its argument, its call to act. It is drafted three
+ways, deliberately worked up against three real records from
+`js/conferences-data.js` so the set doubles as a walk through a single
+conference's whole lifecycle: a **past** record, a **recent** one, and an
+**upcoming** event. Shared conference patterns live in `css/landing-conf.css`
+(loaded after `landing-v4.css`); no new JS — the pages reuse the fx reveal,
+the count-up (`data-count`), the signup handlers and the countdown. Video is
+honest: every play-badge `.ph` links the **real** YouTube playlist; speaker
+portraits and affiliations are declared placeholders.
+
+**Template 1, "The Proceedings," is the reusable base** — the aesthetically
+safe default. The other two are divergent registers built from the same
+vocabulary; all three hold to the covenant spine (hero · credo · movements ·
+proof · action + arc).
+
+| File | Character | Accent | Example (register) | Signature moves |
+|---|---|---|---|---|
+| `conf-proceedings.html` | "The Proceedings" — a complete, walkable record (**the base**) | assembly plum | *In the Spirit of Schiller and Beethoven*, Dec 2024 (**past**) | session-by-session **programme** (each talk a Presentation/video) · rich **speaker roster** with affiliation rules · **facts strip** (count-up) · the **resolution** adopted, with a sign CTA |
+| `conf-rostrum.html` | "The Rostrum" — the conference told through its people | bordeaux | *Man Is Not a Wolf to Man*, Berlin, Jul 2025 (**recent**) | cinematic keynote **video feature** · each principal voice a full duotone **folio** (reuses `.plate`, colorizes on scroll) with affiliation set large · lean **billing** list · findable **shelf** |
+| `conf-convocation.html` | "The Convocation" — a gathering already in motion | imperial indigo | *A Movement of World Citizens*, 2026 (**upcoming**) | starfield hero + live **countdown to a fixed date** · the day as an ascending **agenda-arc** (reuses `.epochs`) · **video-wall** mosaic · speaker **constellation** (marquee) + roster · **campaign-launch pledge** |
+
+The affiliation line is treated as first-class throughout (its own hairline
+and accent): on a Schiller stage the institution a voice speaks from is half
+the argument. New shared patterns: `.conf-meta`/`.conf-status`, `.conf-facts`,
+`.programme`/`.session`/`.talk`, `.vfeature`(+`--split`), `.vwall`, `.roster`/
+`.speaker`, `.billing`, `.declaration`, `.confnote`, and the review-only
+`.conf-switch` strip cross-linking the three. One small, backward-compatible
+change reached outside this sheet: `js/landing-v4.js`'s countdown now honors an
+optional `data-countdown="<ISO date>"` (empty value keeps the recurring
+next-Friday behavior the peace page relies on).
+
+### The institutional wing — the standard pages
 
 Not doors: the house itself — About, Contact, Donate, Join and the 404.
 Where the doors are polychrome (one accent each), the whole wing shares
