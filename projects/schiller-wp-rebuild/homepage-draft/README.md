@@ -246,3 +246,176 @@ Google Fonts loads via CDN in the prototype only — self-host in the theme buil
   placeholders until real content is wired in.
 - Hero weight: ~670 KB JS + ~900 KB textures, lazy-loadable and cacheable —
   acceptable for the flagship page, but verify on IONOS + Cloudflare.
+
+---
+
+# v5 — "The Folio" (`index-v5.html`)
+
+A different kind of draft. v2→v4 iterated on the hero and kept a broadly
+similar page under it. **v5 keeps the v4 hero byte-for-byte and replaces
+everything below it**, rebuilt to the governing concept of
+`../PORTABLE-HANDOFF-V2.md`.
+
+```sh
+python3 -m http.server 8741   # then open /index-v5.html
+```
+
+## What changed, and why
+
+The V2 handoff makes one decisive addition (§2): the audience the Institute
+most wants to reach is the one that fact-checks. So the site's job is **not to
+assert but to let the reader verify** — *provocation through rigor, not
+rhetoric*. That is a structural requirement, not a copy note, and v5 is built
+around it:
+
+- **Nothing is asserted in markup.** Every claim renders from `js/data-v5.js`,
+  whose entries carry `source` and `status` fields. An entry whose Institute
+  document has not been located prints a visible **"Source required"** badge
+  instead of going quiet. The badge is a feature — do not strip it to make the
+  page look finished.
+- **Third-party sources are named at the point of the claim**, including where
+  they cut against us (the World Bank's debt-sustainability warning sits in the
+  same dossier as its trade-gain estimate).
+- **The footer colophon is generated from the citations that actually
+  rendered**, so it can never overstate what the page relied on. Currently 10
+  outside authorities.
+- **Register shift.** The hero speaks in space and light (navy/gold, Playfair);
+  the folio speaks in classical print (ivory/ink/crimson/gold, Cormorant
+  Garamond + EB Garamond + Inter small-caps) — the handoff's §5 palette and
+  type exactly. The navy masthead retires at the seam and a classical one
+  takes over, once, at one place on the page.
+
+## Sections
+
+| | Section | Handoff |
+|---|---|---|
+| I | **The fork** — the two-path IA as the first thing below the hero; evidence path for the skeptic, study path for the student, both terminating in the Library. Choosing one marks its sections with a gold spine; it never reorders or hides anything. | §6 |
+| II | **The Record** — the juxtaposition ledger: claim + source document on the left, "what followed" + outside authority on the right, the year in the gutter. Toggles to a **genealogy** view (*proposed → dismissed → adopted*) over the same data, and filters by domain (economics / strategy / culture). | §7.1 |
+| III | **The Bridge** — scroll-driven atlas (below). | new |
+| IV | **Method** — the steelman spread. Three questions, two columns; the orthodox account stated in its own terms and cited to Solow 1956, Romer 1990, SNA 2008 before anything is said against it. Plus the four-concept glossary and a numbered reading path. | §7.2 |
+| V | **The Library** — collections, live faceting (collection × decade × type), the "from the archive" facsimile slot, and the **legacy-archive band**: every item declares whether it is re-typeset, scan-only, or not yet migrated. | §7.3 |
+| VI | **Conferences** — one flagship event set as a concert programme, and past proceedings as a **shelf of book spines** you can scan along and pull. | §8.6 |
+| VII | **Founder & Culture** — Helga Zepp-LaRouche featured, with the pull-quote slot **deliberately left as an empty dashed bracket** (§10: never fabricate a quote). Classical aesthetics presented as epistemology, not decoration. | §8.7, §7.4 |
+| VIII | **On the controversy** — included, small, near the end. Handoff marks it optional and higher-risk; it is one deletable block. | §7.5 |
+| IX | **Take part** — newsletter / membership / chapters, with the NationBuilder `join.` subdomain routing noted inline. | §4 |
+
+## The Bridge — the scroll-driven atlas
+
+The section that gives the map an argument rather than a mood: **the same
+geography drawn twice** — dashed crimson for what the Institute proposed, with
+a date; solid gold for what an outside authority records as operating or
+financed. A `Both / Proposed / Built` toggle switches the juxtaposition.
+
+Six plates, scroll-driven, each holding still for four fifths of its span
+before the camera travels:
+
+| Plate | Frame | Argument |
+|---|---|---|
+| I | World | The proposal, entire |
+| II | Eurasia | The corridor that was built — and carries someone else's name |
+| III | Southwest Asia | The Oasis Plan, 1975: not built; regional water stress now the worst measured |
+| IV | Africa | A spine partly begun — Lobito, financed from an unexpected direction |
+| V | Bering / the Americas | Two gaps, 82 km and ~100 km |
+| VI | World | The plate read as a ledger: 13 proposed, 4 recorded as built |
+
+**Why not WebGL.** The hero already spends its budget on a globe; a second one
+below it would be decoration, and on a sphere half the evidence always faces
+away. So: SVG over the two NASA equirectangular textures **the hero already
+loads** (`earth-day.jpg`, `earth-night.jpg` — cached, no new image bytes),
+inverted and multiplied against the ivory paper into an engraved plate: pale
+landmass under the world's night lights as ink stipple. Total added weight for
+the whole section is `atlas-v5.js` (~23 KB, no dependencies).
+
+Implementation notes worth keeping:
+
+- **Projection** is plain equirectangular matching the 2048×1024 source
+  (`x = (lon+180)/360·2048`, `y = (90−lat)/180·1024`), so the gazetteer
+  coordinates in `data-v5.js` are real decimal degrees.
+- **The camera** is a centre in degrees plus a width in degrees; height comes
+  from the live stage aspect, so a phone gets a genuinely closer view rather
+  than a shrunken one. Close plates crop in longitude to fill; the two world
+  plates keep their full width and sit matted inside a ruled **neatline**.
+- **Draw animation via mask.** Each corridor's growth is a stroked copy of its
+  own path inside a `<mask>`, which leaves the visible path free to carry its
+  dash pattern — doing the draw with the visible path's own `dasharray` would
+  mean giving the dashes up, and dashed-vs-solid *is* the argument.
+- **Base layers trade places with zoom** (set per frame): Black Marble is
+  ~20 km/px, so the night lights carry real information at world zoom and turn
+  into ink smudges close in; the landmass runs the other way.
+- **The gazetteer** below the map renders every line and place from the same
+  data, with figures and source links. That is what a screen reader, a printer
+  and a search engine get, and it is complete. Corridors and marked places are
+  also focusable and operable by keyboard.
+- **`prefers-reduced-motion`**: no pinning, all corridors drawn, world view,
+  and the six plates' text rendered as a stacked reading.
+
+## Data and provenance
+
+`js/data-v5.js` is the single source of truth (and maps to the intended
+`si_record` / `si_corridor` / `si_document` CPTs). Figures verified
+**2026-08-12** against:
+
+China State Railway Group (via People's Daily) · Green Finance & Development
+Center, Griffith Asia Institute · World Bank, *Belt and Road Economics* 2019 ·
+IEA *World Energy Outlook 2025* · World Resources Institute Aqueduct 4.0 ·
+AIIB · OECD and Atlantic Council on the Lobito Corridor · International Railway
+Journal on the Gibraltar fixed link · Federal Reserve History · Financial Crisis
+Inquiry Commission · Solow 1956 · Romer 1990 · SNA 2008 · Riemann 1854 ·
+Vernadsky 1945.
+
+**Not verified, and marked as such on the page:** every Schiller Institute
+document behind the five Record entries. The handoff (§7.1) lists these as
+illustrative and requires real dated originals; none were located for this
+draft, so all five carry the badge, and the 1988 tuning entry prints **no
+outcome line** rather than the frequently-repeated Italian-parliament claim,
+which could not be checked against a parliamentary record.
+
+## Verified in browser
+
+Playwright/Firefox 153, 1440×900 and 390×844: no console errors, no page
+errors, no failed requests, zero horizontal overflow on mobile. Exercised:
+ledger ⇄ genealogy, domain filters, atlas register toggle, corridor and place
+selection, library facets incl. the empty state, conference spines, path
+choice, colophon generation, and `prefers-reduced-motion`.
+
+## Files added by v5
+
+```
+index-v5.html        hero (v4, verbatim) + the folio
+css/folio-v5.css     classical-crimson system, scoped under .folio
+js/data-v5.js        THE data layer — claims, corridors, library, sources
+js/atlas-v5.js       the scroll-driven plate
+js/folio-v5.js       ledger/genealogy, steelman, facets, spines, colophon
+```
+
+v1–v4 and their CSS/JS are untouched. `css/styles.css` is still loaded for the
+hero; `folio-v5.css` adds exactly two rules outside `.folio` (the masthead
+handoff), and nothing in v5 can reach into the hero.
+
+## v5 → WordPress
+
+- `data-v5.js` becomes CPTs: `si_record` (`year, domain, claim, claim_source,
+  followed, genealogy`), `si_corridor` (`register, act, path, dated, datum,
+  source`), `si_document`. Sources become a taxonomy or a repeater so a
+  citation can never drift from its URL.
+- **The provenance badge must survive the port.** If the editor can publish a
+  Record entry with no source document and no badge, the whole architecture is
+  gone.
+- Atlas: a block that prints the corridor/node JSON into the page and enqueues
+  `atlas-v5.js`. Geometry is computed client-side from coordinates.
+- Forms are stubs → NationBuilder embeds on `join.` (no WP donation plugin;
+  it would split the five-country supporter database).
+
+## Open decisions carried forward (handoff §11)
+
+- **Roman numerals** — used only where the content is a real ordered sequence
+  (the two paths, the Method reading path, the conference programme, the plate
+  index). Still worth asking whether even that reads as too formal.
+- **"On the controversy"** — included at VIII; delete the one block to drop it.
+  Nothing in it should ship until the answers are written and checked by
+  someone with no stake in them being persuasive.
+- **Founder portrait** — no image in this asset set is cleared; the slot is a
+  labelled placeholder rather than a borrowed photograph.
+- **Mobile masthead** — collapses to Join/Donate only. A real menu is needed.
+- **Palette** — crimson, per the handoff's recommendation. Navy+gold remains
+  the alternate; the folio is tokenised, so it is a variable swap.

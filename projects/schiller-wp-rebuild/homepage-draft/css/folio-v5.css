@@ -1,0 +1,2105 @@
+/* ==========================================================================
+   Schiller Institute — homepage draft v5 · "The Folio"
+
+   Everything below the hero. The hero itself (and the navy masthead over it)
+   is v4, untouched: this stylesheet is scoped under `.folio` and the two
+   explicit overrides at the top, so it cannot reach into the hero.
+
+   Design system: PORTABLE-HANDOFF-V2 §5 — classical crimson.
+   Paper, ink, one accent, gold hairlines, near-zero radius, no shadows
+   pretending to be depth. Restraint is the credibility signal (§2), so
+   nothing here decorates: every rule, numeral and margin note carries
+   information.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Tokens
+   -------------------------------------------------------------------------- */
+.folio,
+.f-mast {
+  --paper: #fbf8f1;
+  --paper-2: #f4efe3;
+  --paper-3: #efe8d8;
+  --ink: #211e19;
+  --ink-2: #5a5347;
+  --ink-3: #8a8170;
+  --crimson: #7c1d2b;
+  --crimson-deep: #5e141f;
+  --crimson-wash: rgba(124, 29, 43, 0.07);
+  --gold: #9a7b3f;
+  --gold-light: #c3a468;
+  --hair: #ddd4c3;
+  --hair-strong: #c9bda6;
+
+  --display: "Cormorant Garamond", "Cormorant", Garamond, Georgia, serif;
+  --text: "EB Garamond", Garamond, Georgia, "Times New Roman", serif;
+  --util: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --measure: 34rem;
+  --folio-w: 76rem;
+  --mast-h: 3.5rem; /* the classical masthead's own height */
+  --gut: clamp(1.25rem, 5vw, 4rem);
+  --r: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Masthead handoff — the navy hero header retires, the classical masthead
+   takes over. Two registers, one page: the hero speaks in light, the folio
+   speaks in print. The swap happens once, at the seam.
+   -------------------------------------------------------------------------- */
+.site-header {
+  transition:
+    padding 0.3s ease,
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+body.is-folio .site-header {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.f-mast {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  background: var(--paper);
+  border-bottom: 1px solid var(--hair);
+  opacity: 0;
+  transform: translateY(-100%);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+  pointer-events: none;
+}
+body.is-folio .f-mast {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.f-mast::after {
+  /* the gold under-rule (§5) */
+  content: "";
+  position: absolute;
+  inset: auto 0 -2px 0;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+.f-mast-in {
+  max-width: var(--folio-w);
+  margin: 0 auto;
+  padding: 0.6rem var(--gut);
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
+.f-wordmark {
+  font-family: var(--display);
+  font-size: 1.32rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  line-height: 1.1;
+}
+.f-wordmark span {
+  display: block;
+  font-family: var(--util);
+  font-size: 0.54rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: 0.18rem;
+}
+.f-mast nav {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(0.6rem, 1.6vw, 1.4rem);
+  margin-left: auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.f-mast nav a {
+  font-family: var(--util);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+.f-mast nav a:hover {
+  color: var(--crimson);
+  border-bottom-color: var(--crimson);
+}
+.f-mast nav a.is-cta {
+  color: var(--paper);
+  background: var(--crimson);
+  padding: 0.42rem 0.85rem;
+  border-radius: var(--r);
+  border-bottom: 0;
+}
+.f-mast nav a.is-cta:hover {
+  background: var(--crimson-deep);
+  color: var(--paper);
+}
+.f-mast nav a.is-quiet {
+  color: var(--crimson);
+  border-bottom-color: var(--hair-strong);
+}
+@media (max-width: 900px) {
+  .f-mast nav a:not(.is-cta):not(.is-quiet) {
+    display: none;
+  }
+  .f-mast-in {
+    align-items: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Folio base
+   -------------------------------------------------------------------------- */
+.folio {
+  position: relative;
+  z-index: 1; /* over the hero's fixed canvas at z-index -1 */
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: clamp(1.02rem, 0.42vw + 0.95rem, 1.16rem);
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+.folio ::selection {
+  background: var(--crimson);
+  color: var(--paper);
+}
+.folio a {
+  color: var(--crimson);
+  text-decoration-color: var(--hair-strong);
+  text-underline-offset: 0.16em;
+}
+.folio a:hover {
+  color: var(--crimson-deep);
+  text-decoration-color: currentColor;
+}
+.folio [id],
+.folio section {
+  scroll-margin-top: calc(var(--mast-h) + 1rem);
+}
+.f-wrap {
+  max-width: var(--folio-w);
+  margin: 0 auto;
+  padding-left: var(--gut);
+  padding-right: var(--gut);
+}
+.f-measure {
+  max-width: var(--measure);
+}
+.f-sec {
+  padding: clamp(4rem, 9vw, 8.5rem) 0;
+  position: relative;
+}
+.f-sec + .f-sec {
+  border-top: 1px solid var(--hair);
+}
+.f-sec-tint {
+  background: var(--paper-2);
+}
+.f-sec-ink {
+  background: var(--ink);
+  color: var(--paper-2);
+  border-top: 0;
+}
+.f-sec-ink a {
+  color: #e2b9a8;
+}
+
+/* Type ------------------------------------------------------------------- */
+.f-kicker {
+  font-family: var(--util);
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--crimson);
+  margin: 0 0 0.9rem;
+}
+.f-sec-ink .f-kicker {
+  color: #cf8f7e;
+}
+.f-kicker-mute {
+  color: var(--ink-3);
+}
+.f-h {
+  font-family: var(--display);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+  margin: 0 0 1.1rem;
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  text-wrap: balance;
+}
+.f-h em {
+  font-style: italic;
+  color: var(--crimson);
+}
+.f-sec-ink .f-h em {
+  color: #d8a08e;
+}
+.f-h-sm {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.3rem, 1.6vw, 1.6rem);
+  line-height: 1.18;
+  margin: 0 0 0.5rem;
+}
+.f-lede {
+  font-size: 1.16em;
+  color: var(--ink-2);
+  margin: 0 0 1.4rem;
+}
+.f-sec-ink .f-lede {
+  color: rgba(244, 239, 227, 0.8);
+}
+.f-p {
+  margin: 0 0 1.05rem;
+}
+.f-dropcap::first-letter {
+  font-family: var(--display);
+  font-weight: 600;
+  float: left;
+  font-size: 4.2em;
+  line-height: 0.82;
+  padding: 0.06em 0.12em 0 0;
+  color: var(--crimson);
+}
+.f-sm {
+  font-family: var(--util);
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+.f-num {
+  font-family: var(--display);
+  font-variant-numeric: lining-nums;
+  color: var(--gold);
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+}
+
+/* Rules ------------------------------------------------------------------ */
+.f-rule {
+  border: 0;
+  border-top: 1px solid var(--hair);
+  margin: 2.4rem 0;
+}
+.f-rule-gold {
+  border-top-color: var(--gold);
+  opacity: 0.55;
+}
+.f-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.4rem;
+  margin-bottom: clamp(2rem, 4vw, 3.4rem);
+}
+.f-head::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: var(--hair);
+  margin-top: 1.6rem;
+}
+.f-sec-ink .f-head::after {
+  background: rgba(244, 239, 227, 0.22);
+}
+
+/* Buttons ---------------------------------------------------------------- */
+/* `.folio a` (0,1,1) outranks a bare `.f-btn` (0,1,0), which silently painted
+   crimson label text onto a crimson button. Every button rule is scoped to
+   beat it. */
+.folio .f-btn,
+.f-mast .f-btn {
+  display: inline-block;
+  font-family: var(--util);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.78rem 1.5rem;
+  border-radius: var(--r);
+  border: 1px solid var(--crimson);
+  background: var(--crimson);
+  color: var(--paper);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+.folio .f-btn:hover {
+  background: var(--crimson-deep);
+  border-color: var(--crimson-deep);
+  color: var(--paper);
+}
+.folio .f-btn-ghost {
+  background: transparent;
+  color: var(--crimson);
+}
+.folio .f-btn-ghost:hover {
+  background: var(--crimson-wash);
+  color: var(--crimson-deep);
+}
+.folio .f-sec-ink .f-btn-ghost {
+  color: #e2b9a8;
+  border-color: rgba(226, 185, 168, 0.5);
+}
+.folio .f-sec-ink .f-btn-ghost:hover {
+  background: rgba(226, 185, 168, 0.12);
+  color: #f3d8cd;
+}
+
+/* Provenance chips ------------------------------------------------------- */
+.f-cite {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.34em;
+  font-family: var(--util);
+  font-size: 0.63rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  text-decoration: none;
+  border: 1px solid var(--hair-strong);
+  border-radius: var(--r);
+  padding: 0.2rem 0.48rem;
+  background: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+.f-cite:hover {
+  border-color: var(--gold);
+  color: var(--ink);
+}
+.f-cite b {
+  font-weight: 600;
+}
+.f-cite i {
+  font-style: normal;
+  color: var(--ink-3);
+}
+.f-sec-ink .f-cite {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(244, 239, 227, 0.25);
+  color: rgba(244, 239, 227, 0.75);
+}
+.f-cites {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+
+/* The badge that makes an unsourced claim visible rather than invisible. */
+.f-pending {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
+  font-family: var(--util);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--crimson);
+  border: 1px dashed var(--crimson);
+  border-radius: var(--r);
+  padding: 0.2rem 0.5rem;
+  background: var(--crimson-wash);
+}
+
+/* Reveal ----------------------------------------------------------------- */
+.f-rev {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+.f-rev.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   I. THE FORK — two-path architecture (handoff §6)
+   ========================================================================== */
+.f-fork {
+  background:
+    linear-gradient(var(--paper-2), var(--paper-2)) padding-box;
+}
+.f-fork-grid {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 860px) {
+  .f-fork-grid {
+    grid-template-columns: 1fr 1px 1fr;
+  }
+  .f-fork-div {
+    background: var(--hair-strong);
+  }
+}
+.f-fork-div {
+  display: none;
+}
+@media (min-width: 860px) {
+  .f-fork-div {
+    display: block;
+  }
+}
+.f-path {
+  border: 1px solid transparent;
+  border-radius: var(--r);
+  padding: clamp(1.2rem, 2vw, 1.9rem);
+  margin: calc(-1 * clamp(1.2rem, 2vw, 1.9rem));
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease;
+  cursor: pointer;
+}
+.f-path:hover,
+.f-path.is-chosen {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: var(--hair-strong);
+}
+.f-path.is-chosen {
+  border-color: var(--gold);
+}
+.f-path-for {
+  font-family: var(--util);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 0.5rem;
+}
+.f-path h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+  line-height: 1.1;
+  margin: 0 0 0.7rem;
+}
+.f-path > p {
+  color: var(--ink-2);
+  margin: 0 0 1.3rem;
+}
+.f-steps {
+  list-style: none;
+  margin: 0 0 1.4rem;
+  padding: 0;
+  counter-reset: step;
+}
+.f-steps li {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr;
+  gap: 0.4rem;
+  padding: 0.72rem 0;
+  border-top: 1px solid var(--hair);
+  align-items: baseline;
+}
+.f-steps li::before {
+  counter-increment: step;
+  content: counter(step, upper-roman) ".";
+  font-family: var(--display);
+  color: var(--gold);
+  font-size: 0.92rem;
+  letter-spacing: 0.06em;
+}
+.f-steps b {
+  font-family: var(--text);
+  font-weight: 600;
+  display: block;
+}
+.f-steps span {
+  color: var(--ink-2);
+  font-size: 0.92em;
+}
+.f-terminus {
+  text-align: center;
+  margin-top: clamp(2.4rem, 5vw, 4rem);
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold);
+  position: relative;
+}
+.f-terminus::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  background: var(--paper-2);
+  border: 1px solid var(--gold);
+  transform: translateX(-50%) rotate(45deg);
+}
+/* Scoped to the last line only: `.f-terminus p` also caught the kicker and
+   blew it up to display size. */
+.f-terminus > p:last-child {
+  font-family: var(--display);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-style: italic;
+  color: var(--ink-2);
+  margin: 0.6rem 0 0;
+}
+.f-terminus > p:last-child a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+}
+
+/* Choosing a path marks the sections that belong to it. It does NOT reorder
+   or hide anything: a skeptic who wanders into Method should find Method,
+   and a student who wanders into the Record should find the Record. The
+   choice is a reading aid, not a filter on the site. */
+[data-path] .folio [data-for]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: transparent;
+  transition: background 0.4s ease;
+}
+[data-path="evidence"] .folio [data-for="evidence"]::before,
+[data-path="study"] .folio [data-for="study"]::before {
+  background: var(--gold);
+}
+
+/* ==========================================================================
+   II. THE RECORD — the juxtaposition ledger (handoff §7.1)
+   ========================================================================== */
+.f-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2.2rem;
+}
+.f-controls-label {
+  font-family: var(--util);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-right: 0.4rem;
+}
+.f-chip {
+  font-family: var(--util);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  background: transparent;
+  border: 1px solid var(--hair-strong);
+  border-radius: var(--r);
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+.f-chip:hover {
+  border-color: var(--gold);
+  color: var(--ink);
+}
+.f-chip[aria-pressed="true"],
+.f-chip.is-on {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+.f-chip-sep {
+  width: 1px;
+  align-self: stretch;
+  background: var(--hair);
+  margin: 0 0.5rem;
+}
+
+/* Ledger view */
+.f-ledger {
+  border-top: 1px solid var(--ink);
+}
+.f-entry {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem 2rem;
+  padding: clamp(1.6rem, 3vw, 2.6rem) 0;
+  border-bottom: 1px solid var(--hair);
+}
+@media (min-width: 900px) {
+  .f-entry {
+    grid-template-columns: 1fr 6.5rem 1fr;
+    align-items: start;
+  }
+}
+.f-entry.is-hidden {
+  display: none;
+}
+.f-entry-year {
+  grid-row: 1;
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--gold);
+  text-align: left;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+@media (min-width: 900px) {
+  .f-entry-year {
+    grid-column: 2;
+    text-align: center;
+    position: relative;
+  }
+  .f-entry-year::before,
+  .f-entry-year::after {
+    content: "";
+    position: absolute;
+    top: 0.55em;
+    width: 1.1rem;
+    height: 1px;
+    background: var(--hair-strong);
+  }
+  .f-entry-year::before {
+    left: -0.9rem;
+  }
+  .f-entry-year::after {
+    right: -0.9rem;
+  }
+}
+.f-side {
+  min-width: 0;
+}
+@media (min-width: 900px) {
+  .f-side-claim {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: right;
+  }
+  .f-side-claim .f-cites {
+    justify-content: flex-end;
+  }
+  .f-side-out {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}
+.f-side-h {
+  font-family: var(--util);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 0.55rem;
+}
+.f-side-claim .f-side-h {
+  color: var(--crimson);
+}
+.f-side p {
+  margin: 0;
+}
+.f-side-claim p {
+  font-size: 1.05em;
+}
+.f-side-out p {
+  color: var(--ink-2);
+}
+.f-doc {
+  margin-top: 0.75rem;
+  font-family: var(--util);
+  font-size: 0.7rem;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+.f-doc b {
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+/* Genealogy view */
+.f-gen {
+  display: none;
+  border-top: 1px solid var(--ink);
+}
+.f-record.is-gen .f-ledger {
+  display: none;
+}
+.f-record.is-gen .f-gen {
+  display: block;
+}
+.f-gen-head {
+  display: none;
+  grid-template-columns: 5rem repeat(3, 1fr);
+  gap: 1.4rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--hair);
+}
+@media (min-width: 900px) {
+  .f-gen-head {
+    display: grid;
+  }
+}
+.f-gen-head span {
+  font-family: var(--util);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.f-gen-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem 1.4rem;
+  padding: 1.3rem 0;
+  border-bottom: 1px solid var(--hair);
+}
+@media (min-width: 900px) {
+  .f-gen-row {
+    grid-template-columns: 5rem repeat(3, 1fr);
+    align-items: start;
+  }
+}
+.f-gen-row.is-hidden {
+  display: none;
+}
+.f-gen-y {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  color: var(--gold);
+  line-height: 1.2;
+}
+.f-gen-cell {
+  position: relative;
+  padding-left: 0.95rem;
+  color: var(--ink-2);
+  font-size: 0.95em;
+}
+.f-gen-cell::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  border: 1px solid var(--hair-strong);
+  background: var(--paper);
+}
+.f-gen-cell[data-stage="adopted"]::before {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.f-gen-cell[data-stage="dismissed"]::before {
+  background: var(--paper);
+  border-color: var(--crimson);
+}
+.f-gen-cell[data-stage="proposed"]::before {
+  background: var(--crimson);
+  border-color: var(--crimson);
+}
+@media (min-width: 900px) {
+  .f-gen-cell:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    right: -1.4rem;
+    top: 0.62em;
+    height: 1px;
+    background: var(--hair);
+    z-index: -1;
+  }
+}
+.f-gen-label {
+  display: block;
+  font-family: var(--util);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 0.2rem;
+}
+@media (min-width: 900px) {
+  .f-gen-label {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   III. THE ATLAS — scroll-driven plate
+   ========================================================================== */
+.f-atlas {
+  position: relative;
+  background: var(--paper-2);
+  border-top: 1px solid var(--hair);
+}
+.f-atlas-intro {
+  padding: clamp(4rem, 8vw, 7rem) 0 clamp(2rem, 4vw, 3rem);
+}
+.f-atlas-run {
+  height: 640vh; /* six plates × ~107vh of scroll each */
+  position: relative;
+}
+/* The pin starts below the masthead rather than at the viewport top. With
+   top:0 the plate's own frame — the register toggle, the index, the top edge
+   of the map — sat underneath an opaque fixed bar. */
+.f-atlas-pin {
+  position: sticky;
+  top: var(--mast-h);
+  height: calc(100vh - var(--mast-h));
+  height: calc(100svh - var(--mast-h));
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 52vh 1fr;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+@media (min-width: 1000px) {
+  .f-atlas-pin {
+    grid-template-columns: 1fr minmax(20rem, 27rem);
+    grid-template-rows: 1fr;
+  }
+}
+
+/* The plate itself */
+.f-plate {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+  border-right: 1px solid var(--hair);
+}
+.f-plate svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* The engraved base: NASA Blue Marble inverted to a pale landmass, with
+   Black Marble city lights inverted over it as ink stipple. Multiply against
+   the ivory paper keeps the whole thing inside the palette — it reads as a
+   printed plate, not a photograph. */
+.f-plate-land {
+  filter: grayscale(1) invert(1) brightness(1.06) contrast(1.3) sepia(0.55);
+  mix-blend-mode: multiply;
+}
+.f-plate-lights {
+  filter: grayscale(1) invert(1) contrast(3.1) brightness(1.2) sepia(0.6);
+  mix-blend-mode: multiply;
+}
+/* Opacity of both layers is set per frame by atlas-v5.js from the camera
+   width: the city-lights texture is ~20 km per pixel, so it carries real
+   information at world zoom and turns into ink smudges close in, while the
+   landmass wants the opposite treatment. */
+.f-plate-neat {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1px;
+  opacity: 0.45;
+}
+.f-graticule line {
+  stroke: var(--hair-strong);
+  stroke-width: 0.6;
+  opacity: 0.5;
+}
+.f-graticule line.is-major {
+  stroke: var(--gold);
+  opacity: 0.42;
+  stroke-dasharray: 6 5;
+}
+
+/* Corridors */
+.f-corr {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.f-corr[data-register="proposed"] {
+  stroke: var(--crimson);
+  stroke-width: 1.5px;
+  stroke-dasharray: 0.006 0.008;
+  opacity: 0.72;
+}
+.f-corr[data-register="built"] {
+  stroke: var(--gold);
+  stroke-width: 2.6px;
+  opacity: 0.95;
+}
+.f-corr-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 16px;
+  cursor: pointer;
+}
+.f-corr.is-lit[data-register="built"] {
+  stroke: var(--crimson-deep);
+  stroke-width: 3.4px;
+}
+.f-corr.is-lit[data-register="proposed"] {
+  opacity: 1;
+  stroke-width: 2.2px;
+}
+.f-atlas.reg-proposed .f-corr[data-register="built"],
+.f-atlas.reg-proposed .f-node[data-register="built"] {
+  opacity: 0.1;
+}
+.f-atlas.reg-built .f-corr[data-register="proposed"],
+.f-atlas.reg-built .f-node[data-register="proposed"] {
+  opacity: 0.1;
+}
+
+/* Nodes */
+.f-node circle {
+  stroke-width: 1.4px;
+}
+.f-node .dot {
+  fill: var(--paper);
+  stroke: var(--ink-2);
+}
+.f-node[data-register="built"] .dot {
+  fill: var(--gold);
+  stroke: var(--crimson-deep);
+}
+.f-node[data-keyed="1"] {
+  cursor: pointer;
+}
+.f-node[data-keyed="1"] .halo {
+  fill: none;
+  stroke: var(--crimson);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.f-node.is-lit .halo,
+.f-node[data-keyed="1"]:hover .halo {
+  opacity: 0.75;
+}
+.f-node text {
+  font-family: var(--util);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+.f-node.is-quiet text {
+  opacity: 0;
+}
+
+/* Plate index (left edge of the plate) */
+.f-plate-index {
+  position: absolute;
+  left: clamp(0.7rem, 1.6vw, 1.4rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  z-index: 3;
+  background: rgba(251, 248, 241, 0.86);
+  border: 1px solid var(--hair);
+  border-radius: var(--r);
+  padding: 0.6rem 0.75rem 0.6rem 0.55rem;
+}
+.f-plate-index button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 0;
+  padding: 0.1rem 0;
+  cursor: pointer;
+  font-family: var(--util);
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  transition: color 0.25s;
+}
+.f-plate-index button::before {
+  content: "";
+  width: 1.1rem;
+  height: 1px;
+  background: var(--hair-strong);
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+
+.f-plate-legend {
+  position: absolute;
+  right: clamp(0.7rem, 1.6vw, 1.4rem);
+  bottom: clamp(0.7rem, 1.6vw, 1.2rem);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: flex-end;
+  background: rgba(251, 248, 241, 0.86);
+  border: 1px solid var(--hair);
+  border-radius: var(--r);
+  padding: 0.5rem 0.7rem;
+  max-width: min(21rem, 60%);
+}
+.f-plate-legend span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--util);
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-align: right;
+}
+.f-plate-legend i {
+  flex: 0 0 auto;
+  order: -1;
+  width: 1.5rem;
+  height: 0;
+  border-top: 2px solid;
+}
+.f-plate-legend .k-proposed {
+  border-color: var(--crimson);
+  border-top-style: dashed;
+}
+.f-plate-legend .k-built {
+  border-color: var(--gold);
+  border-top-width: 3px;
+}
+@media (max-width: 700px) {
+  .f-plate-legend {
+    max-width: 68%;
+    padding: 0.35rem 0.5rem;
+  }
+  .f-plate-legend span {
+    font-size: 0.5rem;
+  }
+}
+.f-plate-index button.is-on {
+  color: var(--crimson);
+}
+.f-plate-index button.is-on::before {
+  width: 2.2rem;
+  background: var(--crimson);
+}
+@media (max-width: 760px) {
+  /* On a phone the index would sit on top of the place labels in the middle
+     of the plate; the top-left corner is the one part of the frame nothing
+     else claims. */
+  .f-plate-index {
+    top: clamp(0.7rem, 1.6vw, 1.4rem);
+    transform: none;
+    flex-direction: row;
+    gap: 0.1rem;
+    padding: 0.3rem 0.45rem;
+  }
+  .f-plate-index button span {
+    display: none;
+  }
+  .f-plate-index button {
+    padding: 0.15rem 0.3rem;
+  }
+  .f-plate-index button::before {
+    display: none;
+  }
+  .f-plate-index button.is-on {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: var(--r);
+  }
+}
+
+/* Register toggle */
+.f-plate-reg {
+  position: absolute;
+  right: clamp(0.7rem, 1.6vw, 1.4rem);
+  top: clamp(0.7rem, 1.6vw, 1.4rem);
+  display: flex;
+  gap: 0.3rem;
+  z-index: 3;
+  background: rgba(251, 248, 241, 0.9);
+  border: 1px solid var(--hair);
+  border-radius: var(--r);
+  padding: 0.22rem;
+}
+.f-plate-reg button {
+  font-family: var(--util);
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 0;
+  background: none;
+  color: var(--ink-3);
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--r);
+  cursor: pointer;
+}
+.f-plate-reg button.is-on {
+  background: var(--ink);
+  color: var(--paper);
+}
+.f-plate-scale {
+  position: absolute;
+  left: clamp(0.7rem, 1.6vw, 1.4rem);
+  bottom: clamp(0.7rem, 1.6vw, 1.2rem);
+  z-index: 3;
+  font-family: var(--util);
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.f-plate-scale::before {
+  content: "";
+  display: block;
+  height: 5px;
+  border: 1px solid var(--ink-3);
+  border-top: 0;
+  width: 5.5rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Dossier */
+.f-dossier {
+  position: relative;
+  background: var(--paper);
+  padding: clamp(1.1rem, 2.4vw, 2.2rem);
+  overflow-y: auto;
+  border-top: 1px solid var(--hair);
+}
+@media (min-width: 1000px) {
+  .f-dossier {
+    border-top: 0;
+    padding-top: clamp(3rem, 6vw, 5rem);
+  }
+}
+.f-dossier-kicker {
+  font-family: var(--util);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 0.5rem;
+}
+.f-dossier h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 2.3vw, 2.05rem);
+  line-height: 1.1;
+  margin: 0 0 0.9rem;
+}
+.f-dossier-lede {
+  font-size: 0.97em;
+  color: var(--ink-2);
+  margin: 0 0 1.3rem;
+}
+.f-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--hair);
+}
+.f-facts li {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--hair);
+  font-size: 0.94em;
+}
+.f-facts li p {
+  margin: 0 0 0.45rem;
+}
+.f-dossier-body {
+  transition: opacity 0.3s ease;
+}
+.f-dossier-body.is-fading {
+  opacity: 0;
+}
+.f-dossier-sel {
+  margin-top: 1.2rem;
+  border: 1px solid var(--gold);
+  border-radius: var(--r);
+  padding: 0.9rem 1rem;
+  background: rgba(154, 123, 63, 0.06);
+  font-size: 0.94em;
+}
+.f-dossier-sel[hidden] {
+  display: none;
+}
+.f-dossier-hint {
+  margin: 1.4rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--hair);
+  font-family: var(--util);
+  font-size: 0.68rem;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+.f-dossier-sel h4 {
+  font-family: var(--util);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--crimson);
+  margin: 0 0 0.4rem;
+}
+.f-dossier-sel p {
+  margin: 0 0 0.5rem;
+  color: var(--ink-2);
+}
+
+/* Gazetteer — the whole map as text, always in the DOM */
+.f-gazetteer {
+  padding: clamp(3rem, 6vw, 5rem) 0;
+  border-top: 1px solid var(--hair);
+  background: var(--paper);
+}
+.f-gaz-grid {
+  display: grid;
+  gap: 1.6rem 2.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  margin-top: 1.8rem;
+}
+.f-gaz-grid h4 {
+  font-family: var(--util);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 0.6rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--hair);
+}
+.f-gaz-grid ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.f-gaz-grid li {
+  font-size: 0.9em;
+  padding: 0.45rem 0;
+  color: var(--ink-2);
+  border-bottom: 1px solid rgba(221, 212, 195, 0.55);
+}
+.f-gaz-grid li b {
+  color: var(--ink);
+  font-weight: 600;
+}
+.f-gaz-tag {
+  font-family: var(--util);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-left: 0.4em;
+}
+.f-gaz-tag[data-r="proposed"] {
+  color: var(--crimson);
+}
+
+/* Static fallback (reduced motion / no JS) */
+.f-atlas-static {
+  display: none;
+}
+.folio.no-motion .f-atlas-run {
+  height: auto;
+}
+.folio.no-motion .f-atlas-pin {
+  position: relative;
+  height: auto;
+  grid-template-rows: auto auto;
+}
+.folio.no-motion .f-plate {
+  aspect-ratio: 2 / 1;
+  height: auto;
+}
+
+/* ==========================================================================
+   IV. METHOD — the steelman spread (handoff §7.2)
+   ========================================================================== */
+.f-steel {
+  margin-top: 2.4rem;
+  border-top: 1px solid var(--ink);
+}
+.f-pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 clamp(2rem, 5vw, 4.5rem);
+  padding: clamp(1.8rem, 3.5vw, 3rem) 0;
+  border-bottom: 1px solid var(--hair);
+  position: relative;
+}
+@media (min-width: 880px) {
+  .f-pair {
+    grid-template-columns: 1fr 1fr;
+  }
+  .f-pair::before {
+    content: "";
+    position: absolute;
+    top: clamp(1.8rem, 3.5vw, 3rem);
+    bottom: clamp(1.8rem, 3.5vw, 3rem);
+    left: 50%;
+    width: 1px;
+    background: var(--hair);
+  }
+}
+.f-pair-q {
+  grid-column: 1 / -1;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  color: var(--ink);
+  margin: 0 0 1.4rem;
+}
+.f-pair-q::before {
+  content: attr(data-n) ".";
+  font-style: normal;
+  color: var(--gold);
+  font-size: 0.62em;
+  letter-spacing: 0.1em;
+  margin-right: 0.6em;
+  vertical-align: 0.12em;
+}
+.f-col-h {
+  font-family: var(--util);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 0.7rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--hair);
+}
+.f-col-orthodox .f-col-h {
+  color: var(--ink-3);
+}
+.f-col-physical .f-col-h {
+  color: var(--crimson);
+}
+.f-col p {
+  margin: 0;
+  color: var(--ink-2);
+}
+.f-col-physical p {
+  color: var(--ink);
+}
+@media (max-width: 879px) {
+  .f-col-physical {
+    margin-top: 1.6rem;
+  }
+}
+
+/* Glossary */
+.f-gloss {
+  margin-top: clamp(2.4rem, 5vw, 3.6rem);
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--hair);
+}
+.f-gloss details {
+  border-bottom: 1px solid var(--hair);
+}
+.f-gloss summary {
+  cursor: pointer;
+  padding: 0.95rem 0;
+  font-family: var(--display);
+  font-size: 1.18rem;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.f-gloss summary::-webkit-details-marker {
+  display: none;
+}
+.f-gloss summary::after {
+  content: "+";
+  font-family: var(--util);
+  font-size: 0.9rem;
+  color: var(--gold);
+}
+.f-gloss details[open] summary::after {
+  content: "–";
+}
+.f-gloss p {
+  margin: 0 0 1.1rem;
+  color: var(--ink-2);
+  max-width: var(--measure);
+}
+
+/* ==========================================================================
+   V. THE LIBRARY (handoff §7.3)
+   ========================================================================== */
+/* The 1px-gap-over-a-hairline-background trick leaves any unfilled cell in
+   the last row showing as a solid block. 18rem forces 3 / 2 / 1 columns at
+   every width, and six collections divide evenly into all three. */
+.f-collections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1px;
+  background: var(--hair);
+  border: 1px solid var(--hair);
+  margin-bottom: clamp(2.4rem, 5vw, 3.6rem);
+}
+.f-collection {
+  background: var(--paper);
+  padding: 1.35rem 1.4rem;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: background 0.25s;
+}
+.f-collection:hover {
+  background: var(--paper-2);
+  color: inherit;
+}
+.f-collection h4 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: 0 0 0.35rem;
+  line-height: 1.15;
+}
+.f-collection p {
+  margin: 0;
+  font-size: 0.88em;
+  color: var(--ink-3);
+}
+
+.f-stacks {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 980px) {
+  .f-stacks {
+    grid-template-columns: minmax(0, 1fr) 21rem;
+  }
+}
+.f-shelf {
+  border-top: 1px solid var(--ink);
+}
+.f-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.3rem 1.2rem;
+  align-items: baseline;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--hair);
+}
+.f-item.is-hidden {
+  display: none;
+}
+.f-item-t {
+  font-family: var(--display);
+  font-size: 1.14rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.f-item-m {
+  grid-column: 1 / -1;
+  font-family: var(--util);
+  font-size: 0.68rem;
+  color: var(--ink-3);
+  letter-spacing: 0.03em;
+}
+.f-item-y {
+  font-family: var(--display);
+  color: var(--gold);
+  font-size: 1.05rem;
+}
+.f-mig {
+  display: inline-block;
+  font-family: var(--util);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  padding: 0.12rem 0.4rem;
+  border-radius: var(--r);
+  border: 1px solid;
+  margin-left: 0.45rem;
+  vertical-align: 0.05em;
+}
+.f-mig[data-m="typeset"] {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+.f-mig[data-m="scanned"] {
+  color: var(--ink-3);
+  border-color: var(--hair-strong);
+}
+.f-mig[data-m="not-migrated"] {
+  color: var(--crimson);
+  border-color: var(--crimson);
+  border-style: dashed;
+}
+.f-facets {
+  align-self: start;
+  position: sticky;
+  top: 5.5rem;
+}
+.f-facet + .f-facet {
+  margin-top: 1.5rem;
+}
+.f-facet h4 {
+  font-family: var(--util);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 0.6rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--hair);
+}
+.f-facet .f-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.f-empty {
+  padding: 2rem 0;
+  color: var(--ink-3);
+  font-style: italic;
+}
+
+/* Archive band — the legacy site, treated as provenance and not hidden */
+.f-archive {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  border: 1px solid var(--hair-strong);
+  border-radius: var(--r);
+  background: var(--paper-2);
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  display: grid;
+  gap: 1.4rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 860px) {
+  .f-archive {
+    grid-template-columns: 1.35fr 1fr;
+    gap: 2.6rem;
+  }
+}
+.f-archive h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  margin: 0 0 0.7rem;
+  line-height: 1.15;
+}
+.f-mig-key {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--hair-strong);
+}
+.f-mig-key li {
+  padding: 0.62rem 0;
+  border-bottom: 1px solid var(--hair-strong);
+  font-size: 0.88em;
+  color: var(--ink-2);
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+}
+
+/* Featured facsimile */
+.f-facsimile {
+  display: grid;
+  gap: clamp(1.6rem, 4vw, 3rem);
+  grid-template-columns: 1fr;
+  align-items: center;
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  padding-top: clamp(2.4rem, 5vw, 3.5rem);
+  border-top: 1px solid var(--gold);
+}
+@media (min-width: 800px) {
+  .f-facsimile {
+    grid-template-columns: 15rem 1fr;
+  }
+}
+.f-facsimile figure {
+  margin: 0;
+  position: relative;
+}
+.f-facsimile img {
+  width: 100%;
+  border: 1px solid var(--hair-strong);
+  filter: sepia(0.28) saturate(0.72) contrast(1.04);
+}
+.f-facsimile figcaption {
+  margin-top: 0.55rem;
+  font-family: var(--util);
+  font-size: 0.62rem;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   VI. CONFERENCES — programme + the shelf of proceedings
+   ========================================================================== */
+.f-programme {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.6rem, 4vw, 3.4rem);
+  border: 1px solid var(--gold);
+  padding: clamp(1.6rem, 4vw, 3.2rem);
+  background: var(--paper);
+}
+@media (min-width: 900px) {
+  .f-programme {
+    grid-template-columns: 1fr 1.15fr;
+  }
+}
+.f-prog-when {
+  font-family: var(--util);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--crimson);
+  margin: 0 0 0.9rem;
+}
+.f-prog-title {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+  line-height: 1.08;
+  margin: 0 0 0.9rem;
+}
+.f-prog-sub {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--ink-2);
+  margin: 0 0 1.4rem;
+}
+.f-prog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--hair);
+}
+.f-prog-list li {
+  display: grid;
+  grid-template-columns: 4.2rem 1fr;
+  gap: 0.9rem;
+  padding: 0.72rem 0;
+  border-bottom: 1px solid var(--hair);
+  align-items: baseline;
+}
+.f-prog-list .n {
+  font-family: var(--display);
+  color: var(--gold);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+}
+.f-prog-list b {
+  font-weight: 600;
+  display: block;
+}
+.f-prog-list span {
+  color: var(--ink-3);
+  font-size: 0.9em;
+}
+
+/* The shelf: past proceedings as book spines. The archive made touchable. */
+.f-shelfrow {
+  margin-top: clamp(2.4rem, 5vw, 3.6rem);
+}
+.f-spines {
+  display: flex;
+  gap: 3px;
+  overflow-x: auto;
+  padding: 1.4rem 0 1.6rem;
+  border-bottom: 3px solid var(--ink-2);
+  scrollbar-width: thin;
+}
+.f-spine {
+  flex: 0 0 auto;
+  width: 2.55rem;
+  height: clamp(11rem, 22vw, 15rem);
+  border: 0;
+  border-radius: 1px 1px 0 0;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 0;
+  background: var(--crimson);
+  color: rgba(255, 255, 255, 0.9);
+  transition:
+    transform 0.28s ease,
+    filter 0.28s ease;
+  align-self: flex-end;
+  box-shadow: inset -3px 0 0 rgba(0, 0, 0, 0.16),
+    inset 3px 0 0 rgba(255, 255, 255, 0.08);
+}
+.f-spine:nth-child(3n + 2) {
+  background: #33403a;
+  height: clamp(10rem, 20vw, 13.6rem);
+}
+.f-spine:nth-child(3n) {
+  background: #3c3630;
+  height: clamp(11.6rem, 23vw, 15.8rem);
+}
+.f-spine:nth-child(5n) {
+  background: var(--crimson-deep);
+}
+.f-spine:nth-child(7n) {
+  background: #2c3a4d;
+}
+.f-spine::before,
+.f-spine::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.75;
+}
+.f-spine::before {
+  top: 1.1rem;
+}
+.f-spine::after {
+  bottom: 1.1rem;
+}
+.f-spine span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--display);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 100%;
+}
+.f-spine:hover,
+.f-spine:focus-visible {
+  transform: translateY(-12px);
+  filter: brightness(1.14);
+  outline: none;
+}
+.f-spine.is-on {
+  transform: translateY(-18px);
+}
+.f-spine-read {
+  min-height: 5.5rem;
+  margin-top: 1.2rem;
+  max-width: var(--measure);
+}
+.f-spine-read p {
+  margin: 0;
+  color: var(--ink-2);
+}
+
+/* ==========================================================================
+   VII. FOUNDER & CULTURE
+   ========================================================================== */
+.f-founder {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.8rem, 4vw, 3.6rem);
+  align-items: center;
+}
+@media (min-width: 860px) {
+  .f-founder {
+    grid-template-columns: 17rem 1fr;
+  }
+}
+.f-founder figure {
+  margin: 0;
+}
+.f-founder img {
+  width: 100%;
+  filter: grayscale(1) sepia(0.3) contrast(1.06);
+  border: 1px solid var(--hair-strong);
+}
+.f-founder figcaption {
+  margin-top: 0.5rem;
+  font-family: var(--util);
+  font-size: 0.62rem;
+  color: var(--ink-3);
+}
+.f-quote {
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+  font-style: italic;
+  line-height: 1.24;
+  margin: 0 0 1.1rem;
+  color: var(--ink);
+}
+.f-quote-slot {
+  display: block;
+  border: 1px dashed var(--crimson);
+  background: var(--crimson-wash);
+  border-radius: var(--r);
+  padding: 1rem 1.2rem;
+  font-family: var(--text);
+  font-style: normal;
+  font-size: 1rem;
+  color: var(--crimson-deep);
+  line-height: 1.5;
+}
+/* The same bracket over the ink ground of the founder section. */
+.f-sec-ink .f-quote-slot {
+  border-color: #cf8f7e;
+  background: rgba(207, 143, 126, 0.1);
+  color: rgba(244, 239, 227, 0.86);
+}
+.f-sec-ink .f-quote-slot strong {
+  color: #e8b6a5;
+}
+.f-sec-ink .f-pending {
+  color: #e8b6a5;
+  border-color: #cf8f7e;
+  background: rgba(207, 143, 126, 0.12);
+}
+
+.f-culture {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1px;
+  background: rgba(244, 239, 227, 0.2);
+  margin-top: clamp(2.4rem, 5vw, 3.6rem);
+}
+.f-culture > div {
+  background: var(--ink);
+  padding: 1.5rem 1.4rem;
+}
+.f-culture h4 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.35rem;
+  margin: 0 0 0.5rem;
+  color: var(--paper);
+}
+.f-culture p {
+  margin: 0;
+  font-size: 0.92em;
+  color: rgba(244, 239, 227, 0.72);
+}
+.f-culture .f-num {
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+/* ==========================================================================
+   VIII. CONTROVERSY
+   ========================================================================== */
+.f-controversy {
+  border-left: 2px solid var(--crimson);
+  padding-left: clamp(1.2rem, 3vw, 2.4rem);
+  max-width: calc(var(--measure) + 8rem);
+}
+
+/* ==========================================================================
+   IX. JOIN
+   ========================================================================== */
+.f-join {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1px;
+  background: var(--hair);
+  border: 1px solid var(--hair);
+}
+.f-join > div {
+  background: var(--paper);
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  display: flex;
+  flex-direction: column;
+}
+.f-join h4 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.32rem;
+  margin: 0 0 0.5rem;
+}
+.f-join p {
+  margin: 0 0 1.2rem;
+  color: var(--ink-2);
+  font-size: 0.95em;
+}
+.f-join .f-btn,
+.f-join form {
+  margin-top: auto;
+}
+.f-form {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.f-form input {
+  flex: 1 1 10rem;
+  min-width: 0;
+  font-family: var(--text);
+  font-size: 1rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--hair-strong);
+  border-radius: var(--r);
+  background: var(--paper-2);
+  color: var(--ink);
+}
+.f-form input:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+.f-form button {
+  flex: 0 0 auto;
+}
+.f-form-note {
+  margin: 0.7rem 0 0 !important;
+  font-family: var(--util);
+  font-size: 0.66rem;
+  color: var(--ink-3);
+}
+
+/* ==========================================================================
+   Footer + colophon
+   ========================================================================== */
+.f-foot {
+  background: var(--ink);
+  color: rgba(244, 239, 227, 0.72);
+  padding: clamp(3rem, 6vw, 5rem) 0 2.4rem;
+  font-size: 0.95em;
+}
+.f-foot a {
+  color: rgba(244, 239, 227, 0.82);
+  text-decoration: none;
+}
+.f-foot a:hover {
+  color: #e2b9a8;
+  text-decoration: underline;
+}
+.f-foot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 2rem;
+  padding-bottom: 2.4rem;
+  border-bottom: 1px solid rgba(244, 239, 227, 0.16);
+}
+.f-foot h5 {
+  font-family: var(--util);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 0.8rem;
+}
+.f-foot ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.f-foot li {
+  padding: 0.22rem 0;
+  font-size: 0.92em;
+}
+.f-foot-motto {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.16rem;
+  line-height: 1.35;
+  color: var(--paper-2);
+  max-width: 26rem;
+}
+.f-colophon {
+  padding-top: 2rem;
+}
+.f-colophon h5 {
+  margin-bottom: 0.9rem;
+}
+.f-colophon ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  columns: 2;
+  column-gap: 2.4rem;
+  font-family: var(--util);
+  font-size: 0.66rem;
+  line-height: 1.6;
+  color: rgba(244, 239, 227, 0.6);
+}
+@media (max-width: 700px) {
+  .f-colophon ol {
+    columns: 1;
+  }
+}
+.f-colophon li {
+  break-inside: avoid;
+  padding: 0.2rem 0;
+}
+.f-foot-bottom {
+  margin-top: 2rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(244, 239, 227, 0.16);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 2rem;
+  justify-content: space-between;
+  font-family: var(--util);
+  font-size: 0.66rem;
+  color: rgba(244, 239, 227, 0.55);
+}
+
+/* ==========================================================================
+   Reduced motion — everything lands in its final state.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .folio *,
+  .f-mast * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  .f-rev {
+    opacity: 1;
+    transform: none;
+  }
+}

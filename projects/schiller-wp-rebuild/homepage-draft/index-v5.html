@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Schiller Institute — The Record (homepage draft v5)</title>
+  <meta name="description" content="Dated proposals set beside what followed, an atlas of the World Land-Bridge as proposed and as built, a physical-economy primer that states the orthodox case first, and a research library. Every claim linked to a source." />
+
+  <!-- Favicons — brand/assets/favicon/ (S roundel small, portrait mark large) -->
+  <link rel="icon" href="assets/favicons/favicon.ico" sizes="48x48" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicons/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/favicons/apple-touch-icon.png" />
+
+  <!-- Draft note: Google Fonts via CDN for the prototype; self-host in the theme build.
+       Playfair + Inter are the hero's (v4, unchanged). Cormorant Garamond + EB Garamond
+       are the folio's, per PORTABLE-HANDOFF-V2 §5. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/folio-v5.css" />
+  <style>
+    /* v3/v4 parallax handoff, carried over unchanged: the scene layers are
+       viewport-fixed at z-index -1. While the hero is pinned this is visually
+       identical, but at pin release the headline/form scroll away with the page
+       while Earth, Moon and stars hold their final positions — the folio then
+       slides over the frozen scene. Requires: no transform on .hero-pin, and
+       .hero made transparent so the canvas shows through. */
+    .hero { background: transparent; }
+    .hero-canvas,
+    .hero-fallback,
+    .hero-vignette {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+    }
+    .hero-vignette {
+      background: linear-gradient(rgba(6, 13, 31, 0.55), transparent 22%, transparent 68%, rgba(6, 13, 31, 0.9));
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= Header — locked IA nav: Ideas · Events · Get Involved · Donate · About ================= -->
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="#">
+        <img class="brand-logo" src="assets/logos/header-logo-dark-2x.png" alt="The International Schiller Institute" width="265" height="52" />
+      </a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span></button>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#ideas">Ideas</a>
+        <a href="#events">Events</a>
+        <a href="#involved">Get Involved</a>
+        <a href="#about">About</a>
+        <a href="#involved" class="nav-donate">Donate</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= Hero — scroll-driven WebGL journey ================= -->
+  <section class="hero" id="top">
+    <!-- Scene layers live OUTSIDE the sticky pin: sticky creates a stacking
+         context, which would hoist their z-index:-1 above the sections that
+         follow. At root level, -1 sits beneath every section background. -->
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-fallback" aria-hidden="true"></div>
+    <div class="hero-vignette" aria-hidden="true"></div>
+    <div class="hero-pin">
+
+      <!-- Act 0 · Crisis → alternative -->
+      <div class="hero-stage" data-stage="0">
+        <p class="hero-kicker">The Schiller Institute · Since 1984</p>
+        <h1>The old order is collapsing.<br /><em>A new paradigm</em> is ours to build.</h1>
+        <p>Economic breakdown, the danger of war, a culture in decay — none of it is inevitable. Mankind is the only creative species we know of in the universe. That changes everything.</p>
+      </div>
+
+      <!-- Act 1 · World Land-Bridge -->
+      <div class="hero-stage" data-stage="1">
+        <p class="hero-kicker">The New Silk Road · The Oasis Plan</p>
+        <h2>Build the <em>World Land-Bridge</em></h2>
+        <p>Development corridors of rail, water and power connecting every continent — from the Bering Strait to the Gibraltar tunnel to a blooming Southwest Asia. Without the development of all nations, there can be no lasting peace.</p>
+      </div>
+
+      <!-- Act 2 · The extraterrestrial imperative -->
+      <div class="hero-stage" data-stage="2">
+        <p class="hero-kicker">Fusion · Space · The Noösphere</p>
+        <h2>Then upward — the <em>extraterrestrial imperative</em></h2>
+        <p>“Lifting the human species out of its ordinary existence.” — Krafft Ehricke. Fusion power and the joint exploration of space are the common aims of mankind, and the proof that growth has no limits.</p>
+      </div>
+
+      <!-- Act 3 · Invitation (primary conversion: email capture) -->
+      <div class="hero-stage" data-stage="3">
+        <p class="hero-kicker">A Movement of World Citizens</p>
+        <h2>The future needs <em>you</em></h2>
+        <p>Join a worldwide movement for peace through development and a new renaissance of classical culture.</p>
+        <div class="hero-cta-card">
+          <form class="hero-form js-signup" novalidate>
+            <input type="email" name="email" placeholder="Your email address" aria-label="Email address" required />
+            <button type="submit">Join the movement</button>
+          </form>
+          <p class="hero-form-note">Weekly ideas, webcasts &amp; invitations. Double opt-in, unsubscribe anytime.</p>
+        </div>
+      </div>
+
+      <div class="hero-scrollhint">Scroll</div>
+      <div class="hero-chapters" aria-label="Hero chapters">
+        <button aria-label="A new paradigm" class="is-active"></button>
+        <button aria-label="The World Land-Bridge"></button>
+        <button aria-label="The extraterrestrial imperative"></button>
+        <button aria-label="Join the movement"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================
+       THE FOLIO — everything below the hero.
+
+       v5 is not a revision of v3/v4's story layer; it replaces it. The
+       governing concept is PORTABLE-HANDOFF-V2 §2, credibility
+       architecture: the page's job is not to assert but to let the reader
+       verify. Consequences visible in the markup below —
+
+         · every claim renders from js/data-v5.js, which forces a source
+           field; where the Institute's own document has not been located
+           for this draft, a visible badge says so;
+         · the two-path IA (§6) is the first thing the reader meets, and
+           both paths terminate in the Library;
+         · the register shifts from the hero's "space and light" to
+           classical print: ivory, ink, crimson, gold hairlines.
+       ================================================================== -->
+
+  <div class="f-seam" aria-hidden="true"></div>
+
+  <!-- The masthead that takes over from the hero's. Serif wordmark,
+       small-caps nav on the handoff's IA, gold under-rule (§5, §8.1). -->
+  <header class="f-mast">
+    <div class="f-mast-in">
+      <a class="f-wordmark" href="#top">Schiller Institute<span>Founded 1984 · Wiesbaden</span></a>
+      <nav aria-label="Folio">
+        <a href="#record">The Record</a>
+        <a href="#bridge">The Bridge</a>
+        <a href="#method">Method</a>
+        <a href="#library">Library</a>
+        <a href="#conferences">Conferences</a>
+        <a href="#culture">Culture</a>
+        <a href="#about">About</a>
+        <a href="#join" class="is-quiet">Join</a>
+        <a href="#join" class="is-cta">Donate</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="folio">
+
+    <!-- ============================================================
+         I. THE FORK — the two-path architecture, stated up front.
+         Handoff §6: an evidence path for the doubter, a study path for
+         the curious, both terminating in the Library.
+         ============================================================ -->
+    <section class="f-sec f-fork" id="paths">
+      <div class="f-wrap">
+        <div class="f-head f-rev">
+          <p class="f-kicker">Provocation through rigor, not rhetoric</p>
+          <h1 class="f-h">Do not take our word for <em>any</em> of it.</h1>
+        </div>
+
+        <div class="f-measure f-rev">
+          <p class="f-p f-dropcap">The Schiller Institute has been publishing dated proposals and forecasts since 1984, and dated criticism of the prevailing order for longer than that. Some of it was ignored and then happened. Some of it was ignored and did not. Both kinds are in this record, because a record that contains only the first kind is not a record.</p>
+          <p class="f-p">So the pages below are built to be checked rather than believed. Every claim on this site is anchored to a dated document you can open. Where the outcome is drawn from an outside authority — the World Bank, the IEA, the World Resources Institute, a national railway operator — that authority is named and linked at the point of the claim, including where its findings cut against us. Where our own document has not yet been located in the archive, the entry says so in plain sight rather than going quiet.</p>
+          <p class="f-p">There are two ways in. They meet in the same place.</p>
+        </div>
+
+        <hr class="f-rule f-rule-gold" />
+
+        <div class="f-fork-grid f-rev">
+          <div class="f-path" data-path="evidence" role="button" tabindex="0">
+            <p class="f-path-for">If you are here to test the claims</p>
+            <h3>The evidence path</h3>
+            <p>Dated documents beside dated outcomes, and a map of what was proposed against what third parties record as built. Nothing here asks for agreement — only for a reading of the record.</p>
+            <ol class="f-steps">
+              <li><span><b>The Record</b><span>Forecast, source document, what followed. Filterable; every entry sourced or badged.</span></span></li>
+              <li><span><b>The Bridge</b><span>An atlas in two registers: proposed and dated, against built and independently recorded.</span></span></li>
+              <li><span><b>The Library</b><span>The primary sources themselves, including the ones that did not age well.</span></span></li>
+            </ol>
+            <a class="f-btn f-btn-ghost" href="#record">Begin with the record</a>
+          </div>
+
+          <div class="f-fork-div" aria-hidden="true"></div>
+
+          <div class="f-path" data-path="study" role="button" tabindex="0">
+            <p class="f-path-for">If you are here to study the argument</p>
+            <h3>The study path</h3>
+            <p>Physical economy as a discipline, opened with the orthodox account stated fairly and in its own literature — then answered. A graduate seminar, not a manifesto.</p>
+            <ol class="f-steps">
+              <li><span><b>Method</b><span>Three questions, two columns. Solow and Romer on the left, in their own terms.</span></span></li>
+              <li><span><b>Classical aesthetics</b><span>Beauty as a theory of mind: why the science and the music sit under one roof.</span></span></li>
+              <li><span><b>The Library</b><span>Primer to primary text, in a stated order.</span></span></li>
+            </ol>
+            <a class="f-btn f-btn-ghost" href="#method">Begin with the method</a>
+          </div>
+        </div>
+
+        <div class="f-terminus f-rev">
+          <p class="f-kicker f-kicker-mute">Both paths terminate here</p>
+          <p><a href="#library">The Library</a> — the documents, unmediated.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         II. THE RECORD — handoff §7.1, surfaced high on the page as the
+         intellectual hook for the arriving skeptic (§8.3).
+
+         Two renderings of one dataset: the ledger (juxtaposition) and the
+         genealogy (proposed → dismissed → adopted), which the handoff
+         names as the next thing to develop. Domain filtering as specified.
+         ============================================================ -->
+    <section class="f-sec f-record" id="record" data-for="evidence">
+      <div class="f-wrap">
+        <div class="f-head f-rev">
+          <p class="f-kicker">The Record</p>
+          <h2 class="f-h">What was written, and when.<br />What <em>followed</em>.</h2>
+          <p class="f-lede f-measure">Left: the claim, with the document it came from. Right: what happened, sourced to an authority that has no stake in this institute. The years between them are the whole argument, and we have not written it out for you.</p>
+        </div>
+
+        <div class="f-controls f-rev">
+          <span class="f-controls-label">View</span>
+          <button class="f-chip" data-record-view="ledger" aria-pressed="true">Ledger</button>
+          <button class="f-chip" data-record-view="genealogy" aria-pressed="false">Genealogy</button>
+          <span class="f-chip-sep" aria-hidden="true"></span>
+          <span class="f-controls-label">Domain</span>
+          <button class="f-chip" data-record-domain="all" aria-pressed="true">All</button>
+          <button class="f-chip" data-record-domain="economics" aria-pressed="false">Economics</button>
+          <button class="f-chip" data-record-domain="strategy" aria-pressed="false">Strategy</button>
+          <button class="f-chip" data-record-domain="culture" aria-pressed="false">Culture</button>
+        </div>
+
+        <div class="f-ledger f-rev"><!-- rendered from js/data-v5.js --></div>
+        <div class="f-gen"><!-- rendered from js/data-v5.js --></div>
+
+        <p class="f-sm f-measure" style="margin-top:1.6rem">
+          Five entries are shown. Each Institute-side document in this draft carries a
+          <span class="f-pending">Source required</span> badge: the illustrative entries named in the design handoff have <em>not</em> been matched to dated originals in the archive, and the badge stays until they are. An entry whose outcome could not be verified — the 1988 tuning campaign — prints no outcome line rather than a favourable one.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         III. THE BRIDGE — the World Land-Bridge as a scroll-driven plate.
+
+         The section that gives the map its argument: the same geography
+         drawn twice, once as the Institute proposed it (dashed, dated) and
+         once as outside authorities record it (solid, cited). See
+         js/atlas-v5.js for why this is SVG over the hero's own NASA
+         textures rather than a second WebGL scene.
+         ============================================================ -->
+    <section class="f-atlas reg-both" id="bridge" data-for="evidence">
+      <div class="f-atlas-intro">
+        <div class="f-wrap">
+          <div class="f-head f-rev">
+            <p class="f-kicker">The Bridge · An atlas in two registers</p>
+            <h2 class="f-h">The map we published, and the map that <em>exists</em>.</h2>
+            <p class="f-lede f-measure">Six plates. Dashed crimson is a Schiller Institute proposal with a date on it. Solid gold is infrastructure that a third party — a railway operator, the OECD, the World Bank, the US development finance corporation — records as operating or financed. Scroll to move between plates; select any line or place to read its figure and open its source.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="f-atlas-run">
+        <div class="f-atlas-pin">
+          <div class="f-plate">
+            <svg class="f-atlas-svg" viewBox="0 0 2048 1024" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Equirectangular plate of the World Land-Bridge. A complete text equivalent follows the map, under Gazetteer.">
+              <defs>
+                <!-- Trim the polar caps off the base plate: an ice sheet at
+                     each end of an equirectangular projection is all distortion
+                     and no information, and the white mass fights the paper. -->
+                <clipPath id="atlas-plate-clip"><rect x="0" y="34" width="2048" height="830" /></clipPath>
+              </defs>
+              <g class="f-atlas-base" clip-path="url(#atlas-plate-clip)" aria-hidden="true">
+                <!-- NASA Blue Marble and Black Marble, already loaded by the hero.
+                     Inverted and multiplied against the ivory paper they stop being
+                     photographs and become a printed plate: pale landmass, and the
+                     world's night lights as ink stipple. -->
+                <image class="f-plate-land" href="assets/images/earth-day.jpg" x="0" y="0" width="2048" height="1024" preserveAspectRatio="none" />
+                <image class="f-plate-lights" href="assets/images/earth-night.jpg" x="0" y="0" width="2048" height="1024" preserveAspectRatio="none" />
+              </g>
+              <!-- The neatline. A plate on a page is matted, not bled: at world
+                   zoom the projection cannot fill a stage this tall, so the
+                   margin is ruled and becomes part of the object. -->
+              <rect class="f-plate-neat" x="0" y="34" width="2048" height="830" vector-effect="non-scaling-stroke" />
+              <g class="f-graticule" clip-path="url(#atlas-plate-clip)" aria-hidden="true"></g>
+              <g class="f-lines"></g>
+              <g class="f-nodes"></g>
+            </svg>
+
+            <div class="f-plate-index" role="group" aria-label="Plates">
+              <button type="button">I<span>The proposal</span></button>
+              <button type="button">II<span>Eurasia</span></button>
+              <button type="button">III<span>Southwest Asia</span></button>
+              <button type="button">IV<span>Africa</span></button>
+              <button type="button">V<span>Two gaps</span></button>
+              <button type="button">VI<span>The ledger</span></button>
+            </div>
+
+            <div class="f-plate-reg" role="group" aria-label="Register">
+              <button type="button" class="is-on" data-reg="both">Both</button>
+              <button type="button" data-reg="proposed">Proposed</button>
+              <button type="button" data-reg="built">Built</button>
+            </div>
+
+            <div class="f-plate-legend">
+              <span><i class="k-proposed"></i>Proposed, dated — Schiller Institute</span>
+              <span><i class="k-built"></i>Built or financed — third-party record</span>
+            </div>
+
+            <p class="f-plate-scale">—</p>
+          </div>
+
+          <aside class="f-dossier" aria-live="polite">
+            <div class="f-dossier-body"><!-- rendered per plate --></div>
+            <div class="f-dossier-sel" hidden></div>
+            <p class="f-dossier-hint">Select any line or place on the plate to read its figure and open its source. Every corridor and every marked place is also reachable by keyboard, and listed in full under the map.</p>
+          </aside>
+        </div>
+      </div>
+
+      <div class="f-gazetteer">
+        <div class="f-wrap">
+          <div class="f-head">
+            <p class="f-kicker">Gazetteer</p>
+            <h3 class="f-h" style="font-size:clamp(1.5rem,2.6vw,2.1rem)">The plate, entirely in text</h3>
+            <p class="f-lede f-measure">Every line and every place on the map, with its figure and its source. Generated from the same data as the plate, so the two cannot drift apart — and so that nothing on this map is available only to a reader who can use a mouse.</p>
+          </div>
+          <div class="f-gaz-grid"><!-- rendered from js/data-v5.js --></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         IV. METHOD — handoff §7.2. The steelman comes first, in the
+         orthodox account's own literature, before anything is said
+         against it. Tone: graduate seminar.
+         ============================================================ -->
+    <section class="f-sec f-sec-tint" id="method" data-for="study">
+      <div class="f-wrap">
+        <div class="f-head f-rev">
+          <p class="f-kicker">Method · Physical economy as a discipline</p>
+          <h2 class="f-h">The strongest version of the case <em>against</em> us, first.</h2>
+          <p class="f-lede f-measure">Three questions, two columns. The left column is not a caricature: it states the orthodox account as its own authors state it, and cites them. Read it before the right. If the left column is wrong, it should be possible to say where — and that is a harder and more interesting exercise than agreeing with us.</p>
+        </div>
+
+        <div class="f-steel f-rev"><!-- rendered from js/data-v5.js --></div>
+
+        <div style="margin-top:clamp(2.4rem,5vw,3.6rem)">
+          <p class="f-kicker f-kicker-mute">Core concepts</p>
+          <div class="f-gloss f-measure"><!-- rendered from js/data-v5.js --></div>
+        </div>
+
+        <div class="f-measure" style="margin-top:clamp(2.4rem,5vw,3.6rem)">
+          <p class="f-kicker f-kicker-mute">A reading order, because this one is a real sequence</p>
+          <ol class="f-steps">
+            <li><span><b>Primer</b><span>Forty minutes. What the four concepts above are for.</span></span></li>
+            <li><span><b>The Triple Curve, with the data</b><span>An evening. Draw the three curves yourself from public series.</span></span></li>
+            <li><span><b>Primary texts</b><span>Riemann 1854; Vernadsky 1945; the Institute's own economics literature.</span></span></li>
+          </ol>
+          <a class="f-btn f-btn-ghost" href="#library">Open the reading path in the Library</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         V. THE LIBRARY — handoff §7.3, and the honest answer to "what
+         happens to the old site?". The legacy archive is not hidden
+         behind a redirect: each item declares whether it has been
+         re-typeset, exists only as a scan, or has not been migrated.
+         ============================================================ -->
+    <section class="f-sec f-library" id="library">
+      <div class="f-wrap">
+        <div class="f-head f-rev">
+          <p class="f-kicker">The Library</p>
+          <h2 class="f-h">Where both paths <em>end</em>.</h2>
+          <p class="f-lede f-measure">Four decades of proposals, proceedings, forecasts and correspondence, presented as a research collection rather than a blog with an old back-catalogue. The apparatus is the point: if the sources are not findable, the record is not checkable.</p>
+        </div>
+
+        <div class="f-collections f-rev"><!-- rendered from js/data-v5.js --></div>
+
+        <div class="f-stacks">
+          <div>
+            <div class="f-shelf f-rev"><!-- rendered from js/data-v5.js --></div>
+            <p class="f-empty" hidden>Nothing in the collection matches that combination.</p>
+            <p class="f-sm" style="margin-top:1rem">Twelve items shown — a sample standing in for the full corpus. Faceting in the build is over the whole collection.</p>
+          </div>
+          <div class="f-facets"><!-- rendered from js/data-v5.js --></div>
+        </div>
+
+        <!-- The old site, integrated rather than buried. -->
+        <div class="f-archive f-rev">
+          <div>
+            <p class="f-kicker">The legacy archive</p>
+            <h3>Four decades already online, in three different states of repair.</h3>
+            <p class="f-p">archive.schillerinstitute.com holds material going back to the founding. Some of it has been re-typeset into the new library; some exists only as a page scan; a good deal has not been migrated at all. Rather than quietly dropping the third category, every record in this library declares which of the three it is — so a reader who hits a scan knows it is a scan, and a reader who finds nothing knows the gap is ours and not theirs.</p>
+            <a class="f-btn f-btn-ghost" href="https://archive.schillerinstitute.com/" target="_blank" rel="noopener">Search the legacy archive</a>
+          </div>
+          <div>
+            <p class="f-kicker f-kicker-mute">Key</p>
+            <ul class="f-mig-key">
+              <li><span class="f-mig" data-m="typeset">re-typeset</span><span>Full text, searchable, in the new library.</span></li>
+              <li><span class="f-mig" data-m="scanned">scan only</span><span>Facsimile available; text not yet captured.</span></li>
+              <li><span class="f-mig" data-m="not-migrated">not yet migrated</span><span>Catalogued here; the document itself is still on the old site or in the physical archive.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- From the archive — the rotating featured facsimile (§7.1, §7.3). -->
+        <div class="f-facsimile f-rev">
+          <figure>
+            <img src="assets/images/plate-history-cusa.jpg" alt="Engraved portrait of Nicholas of Cusa" loading="lazy" />
+            <figcaption>Nicholas of Cusa (1401–1464). Engraving, public domain via Wikimedia Commons. <strong>Placeholder:</strong> in the build this slot carries a facsimile of the featured document itself, not a portrait.</figcaption>
+          </figure>
+          <div>
+            <p class="f-kicker">From the archive</p>
+            <h3 class="f-h" style="font-size:clamp(1.5rem,2.6vw,2.1rem)">One document, with a note on why it is worth an hour.</h3>
+            <p class="f-p">A weekly slot: a single dated piece from the collection, introduced in a paragraph by whoever chose it, with the reason stated plainly and the document one click away. No summary that saves you from reading it.</p>
+            <p class="f-sm">Editorial rule for this slot: the note names what the document got wrong as well as what it got right. A curated archive that only ever surfaces vindications is an advertisement, and reads as one.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         VI. CONFERENCES — handoff §8.6, presented with ceremony rather
+         than as a blog post. Past proceedings get the shelf: the archive
+         given a shape a reader can scan along.
+         ============================================================ -->
+    <section class="f-sec f-sec-tint" id="conferences">
+      <div class="f-wrap">
+        <div class="f-head f-rev">
+          <p class="f-kicker">Conferences</p>
+          <h2 class="f-h">A programme, not a <em>listing</em>.</h2>
+        </div>
+
+        <div class="f-programme f-rev">
+          <div>
+            <p class="f-prog-when">Forthcoming · dates to be confirmed</p>
+            <h3 class="f-prog-title">All Men Become Brethren</h3>
+            <p class="f-prog-sub">An international conference on the security and development architecture</p>
+            <p class="f-p">Two days, four sessions, simultaneous interpretation in five languages. The full programme, the speakers with their bibliographies, and the proceedings afterwards — all on this site, all citable.</p>
+            <p><a class="f-btn" href="#join">Register interest</a> <a class="f-btn f-btn-ghost" href="../landing/conferences.html">All conferences</a></p>
+            <p class="f-sm" style="margin-top:1rem">Placeholder programme. Dates, speakers and session titles are illustrative until the real event is wired in.</p>
+          </div>
+          <div>
+            <p class="f-kicker f-kicker-mute">Programme</p>
+            <ul class="f-prog-list">
+              <li><span class="n">I</span><span><b>The security architecture</b><span>Sovereignty, and the terms on which nations agree not to destroy one another.</span></span></li>
+              <li><span class="n">II</span><span><b>The development architecture</b><span>The corridors, the financing, and who is actually building them.</span></span></li>
+              <li><span class="n">III</span><span><b>Physical economy</b><span>Energy-flux density and the measurement of a real economy.</span></span></li>
+              <li><span class="n">IV</span><span><b>Concert</b><span>Chorus and orchestra at C = 256 Hz. The argument of the last session, performed.</span></span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="f-shelfrow f-rev">
+          <p class="f-kicker f-kicker-mute">Proceedings, 1984 onward</p>
+          <div class="f-spines" role="group" aria-label="Past proceedings"><!-- rendered from js/data-v5.js --></div>
+          <div class="f-spine-read"><p class="f-sm">Select a volume.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         VII. FOUNDER & CULTURE — handoff §8.7 (feature the founder) and
+         §7.4 (classical aesthetics as epistemology, not decoration).
+
+         The pull-quote slot is deliberately empty. Handoff §10: never
+         fabricate a quote attributed to a real person. A dashed bracket
+         is the correct state of this element until a sourced quotation
+         is supplied.
+         ============================================================ -->
+    <section class="f-sec f-sec-ink" id="about" data-for="study">
+      <div class="f-wrap">
+        <div class="f-founder f-rev">
+          <figure>
+            <div style="aspect-ratio:3/4;border:1px dashed rgba(226,185,168,.5);border-radius:2px;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;color:rgba(244,239,227,.55);font-family:Inter,sans-serif;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;line-height:1.7">Portrait<br />to be supplied<br />from the Institute's<br />own photography</div>
+            <figcaption>Helga Zepp-LaRouche, founder. No portrait in this prototype's asset set is cleared for this use.</figcaption>
+          </figure>
+          <div>
+            <p class="f-kicker">The founder</p>
+            <h2 class="f-h">Helga Zepp-LaRouche</h2>
+            <p class="f-lede">Founded the Schiller Institute in 1984 to put the aesthetic education of Schiller and the development of the physical economy under one argument, and has written continuously on both since.</p>
+            <blockquote class="f-quote">
+              <span class="f-quote-slot"><strong>Pull-quote slot — intentionally empty.</strong> A quotation goes here only when it comes from a dated, linkable document. Nothing plausible-sounding may be composed for this space, and this bracket ships to review rather than a placeholder that reads as real.</span>
+            </blockquote>
+            <a class="f-btn f-btn-ghost" href="#library">Her bibliography in the Library</a>
+          </div>
+        </div>
+
+        <div id="culture" style="margin-top:clamp(3rem,6vw,5rem)">
+          <p class="f-kicker">Classical culture · Why it is in the same building as the economics</p>
+          <h3 class="f-h" style="font-size:clamp(1.5rem,2.8vw,2.2rem)">Beauty as a theory of mind</h3>
+          <p class="f-lede f-measure">The claim is not that art is uplifting. It is that the act by which a composer resolves a dissonance and the act by which a scientist overturns an axiom are the same act — and that a society which cannot do the first will stop being able to do the second. If that claim is wrong, the Institute's two halves have no business under one roof. It is an epistemological position, and it is arguable.</p>
+          <div class="f-culture">
+            <div><span class="f-num">I</span><h4>Schiller</h4><p>The aesthetic education, 1795: freedom is reached through beauty, or not at all.</p></div>
+            <div><span class="f-num">II</span><h4>Beethoven</h4><p>Motivic development as an argument that can be followed, disputed, and got wrong.</p></div>
+            <div><span class="f-num">III</span><h4>C = 256 Hz</h4><p>The Verdi tuning, argued from the registers of the human voice rather than from tradition.</p></div>
+            <div><span class="f-num">IV</span><h4>Kepler to Vernadsky</h4><p>Discovery in the complex domain: Kepler, Gauss, Riemann, and the biosphere as a geological force.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         VIII. ENGAGE THE CONTROVERSY — handoff §7.5, marked there as
+         optional and higher-risk, and as potentially the most disarming
+         thing on the site for this audience. Included here, deliberately
+         small and near the end, so the decision can be made by deleting
+         one block. See README, "open decisions".
+         ============================================================ -->
+    <section class="f-sec" id="controversy">
+      <div class="f-wrap">
+        <div class="f-controversy f-rev">
+          <p class="f-kicker">On the controversy</p>
+          <h2 class="f-h" style="font-size:clamp(1.6rem,3vw,2.4rem)">You have probably read something unflattering about this organisation.</h2>
+          <p class="f-p">Very likely you have. The Schiller Institute and the movement around it have been the subject of hostile press, litigation, and serious criticism over four decades, and some of that criticism is substantial rather than lazy. We would rather you read it here, with our answer beside it, than discover it later and conclude we hoped you would not look.</p>
+          <p class="f-p">This page will list the principal criticisms with links to the strongest version of each, and answer them one at a time — conceding where a concession is owed. It is being written now and is not yet published; when it is, it will be linked from this paragraph.</p>
+          <p class="f-sm">Draft status: section included in v5 for review. Handoff §11 leaves both its inclusion and its placement open. Nothing in it should ship until the responses are written and checked by someone with no stake in them being persuasive.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         IX. JOIN — handoff §4: NationBuilder keeps the supporter record
+         for all five national organisations, reskinned onto join. so the
+         platform jump stops leaking trust. No WordPress donation plugin:
+         it would split the shared database.
+         ============================================================ -->
+    <section class="f-sec f-sec-tint" id="join">
+      <div class="f-wrap">
+        <div class="f-head f-rev">
+          <p class="f-kicker">Take part</p>
+          <h2 class="f-h">Three ways in, in order of <em>commitment</em>.</h2>
+        </div>
+        <div class="f-join f-rev">
+          <div>
+            <h4>Read what we publish</h4>
+            <p>A weekly dispatch: one dated document from the archive, one piece of new analysis, and the week's conferences. No campaigning copy.</p>
+            <form class="f-form f-signup" novalidate>
+              <input type="email" name="email" placeholder="Your email address" aria-label="Email address" required />
+              <button type="submit" class="f-btn">Subscribe</button>
+            </form>
+            <p class="f-form-note">Double opt-in. Unsubscribe in one click. <!-- build: NationBuilder embed --></p>
+          </div>
+          <div>
+            <h4>Become a member</h4>
+            <p>Membership funds the research and the translation work, and is the reason the library can stay free to read. Recurring first; one-off is fine too.</p>
+            <a class="f-btn" href="#">Join the Institute</a>
+            <p class="f-form-note">Handled on join.schillerinstitute.com — same masthead, same typography, same site. <!-- build: reskinned NationBuilder Liquid theme --></p>
+          </div>
+          <div>
+            <h4>Find your chapter</h4>
+            <p>Five national organisations and local chapters in a good many more countries. Reading groups, choruses, and the Friday sessions.</p>
+            <a class="f-btn f-btn-ghost" href="#">Chapters and contacts</a>
+            <p class="f-form-note">Deutschland · France · Danmark · Sverige · United States</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER — with the colophon. Listing every outside authority the
+         page relied on, in one place, is itself part of the argument.
+         ============================================================ -->
+    <footer class="f-foot">
+      <div class="f-wrap">
+        <div class="f-foot-grid">
+          <div>
+            <p class="f-foot-motto">“Live with your epoch, but be not its offspring; serve your fellow man — not with what he applauds, but with what he needs.”</p>
+            <p class="f-sm" style="margin-top:.8rem;color:rgba(244,239,227,.5)">Friedrich Schiller</p>
+          </div>
+          <div>
+            <h5>The record</h5>
+            <ul>
+              <li><a href="#record">Forecasts &amp; documents</a></li>
+              <li><a href="#bridge">The Bridge atlas</a></li>
+              <li><a href="#library">Library</a></li>
+              <li><a href="https://archive.schillerinstitute.com/" target="_blank" rel="noopener">Legacy archive</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5>Study</h5>
+            <ul>
+              <li><a href="#method">Method</a></li>
+              <li><a href="#culture">Classical aesthetics</a></li>
+              <li><a href="#library">Reading paths</a></li>
+              <li><a href="#conferences">Proceedings</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5>Take part</h5>
+            <ul>
+              <li><a href="#join">Newsletter</a></li>
+              <li><a href="#join">Membership</a></li>
+              <li><a href="#join">Chapters</a></li>
+              <li><a href="#controversy">On the controversy</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5>Institute</h5>
+            <ul>
+              <li><a href="#about">Helga Zepp-LaRouche</a></li>
+              <li><a href="#about">Founding principle</a></li>
+              <li><a href="#">Press</a></li>
+              <li><a href="#">Deutsch · Français · Dansk · Svenska</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="f-colophon">
+          <h5>Colophon — <span class="f-colophon-count">0</span> outside authorities cited on this page</h5>
+          <ol><!-- generated from the citations that actually rendered --></ol>
+          <p class="f-sm" style="margin-top:1rem;color:rgba(244,239,227,.5)">Figures verified 2026-08-12. Base plates: NASA Blue Marble and Black Marble (public domain). Engraving: Wikimedia Commons (public domain). Where an Institute document has not been located, the page says so rather than citing itself.</p>
+        </div>
+
+        <div class="f-foot-bottom">
+          <span>© <span class="js-year">2026</span> Schiller Institute · Founded 1984 by Helga Zepp-LaRouche</span>
+          <span><a href="#">Privacy</a> · <a href="#">Impressum</a> · Homepage draft v5</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module" src="js/hero-v4.js"></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/data-v5.js" defer></script>
+  <script src="js/folio-v5.js" defer></script>
+  <script src="js/atlas-v5.js" defer></script>
+</body>
+</html>
