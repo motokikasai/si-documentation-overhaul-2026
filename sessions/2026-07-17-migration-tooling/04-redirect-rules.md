@@ -32,6 +32,11 @@ redirect source of truth; C14: rank by inlink count + a one-off free-tier backli
 2. **Video promotions** (webcast/series posts, R3): `/blog/…/slug/` → `/videos/slug/`.
 3. **Conference promotions** (`action=promote` rows in conference-map.csv): old post/page URL → `/conferences/slug/`. (`action=create` rows keep the old post as an Article — no redirect.)
 4. **Retired pages** (38 junk + review outcomes): → nearest hub or `/` (case-by-case column in classification.csv notes).
+   **NB:** `si:redirects` only emits rows for posts with `post_status = 'publish'`, and retiring sets
+   status to `draft` — so a retired page **never gets an auto-generated redirect** and its URL 404s.
+   That is intended for junk slugs. Where a retired page's content survives elsewhere, the rule must
+   be added by hand to `incoming/redirect-patterns.csv` and merged with
+   `si:redirects --patterns=incoming/redirect-patterns.csv`.
 5. **DE per-talk pages** (R4.1): `/de/{slug}/` → `/de/media/{new-slug}/`.
 
 ## 4. Open items for P5
