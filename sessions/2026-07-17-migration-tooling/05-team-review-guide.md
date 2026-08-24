@@ -11,8 +11,11 @@ need nothing from you.
    LibreOffice. *Avoid Excel double-click-open* — it can silently mangle special characters.
    If you must use Excel, use Data → From Text/CSV and choose UTF-8. Save back as **CSV (UTF-8)**.
 2. **You may edit ONLY these columns:** `final_type`, `final_topics`, `final_action`, `notes`,
-   `reviewer`. Everything else is machine-written — if a machine column looks wrong, say so in
-   `notes`, don't fix it in place.
+   `reviewer` — **plus the value columns each file's own section tells you to correct** (File 1:
+   `title`, `start_date`, `end_date`, `location`, `action`; File 3: `speaker_raw`, `talk_title`,
+   `panel_title`, `start_seconds`, `end_seconds`, `person_key`, `country`, `affiliation`).
+   Everything else is machine-written — if a machine column looks wrong, say so in `notes`, don't
+   fix it in place. `tools/day2-preflight.py --baseline HEAD` flags any edit outside this set.
 3. **When you decide anything on a row, put your initials in `reviewer`** (replacing or appending
    after `fable-day1`). That's how we know a human saw it.
 4. Leaving a row untouched means **you accept the proposal** (`proposed_…` column) if
@@ -58,33 +61,68 @@ One row per person. Only ~500 rows are flagged (`needs_review=1`); the rest are 
   through the translation links. Nothing to do unless you spot an obvious error.
 - Fill `honorific` / `affiliation` / `country` only if you happen to know them — nice, not required.
 
-## File 3 — `video-segmentation.csv` · 816 rows · ~4 h (needs someone comfortable with YouTube)
+## File 3 — `video-segmentation.csv` · 845 rows · ~5–6 h (needs someone comfortable with YouTube)
 
-One row per proposed presentation record from a conference video. `final_action`: blank = accept ·
-`edit` = you corrected values in the row · `skip` = don't create this record.
+One row per proposed presentation record from a conference video.
+
+> **⚠ Blank does NOT mean accept on this file.** Golden rule 4 applies in full: a row with
+> `needs_review=1` and a blank `final_action` is **skipped** — no presentation record is created.
+> 590 of the 845 rows are flagged, so accepting one means *typing a value*, not leaving it alone.
+> (The rule is `si-migrate.php:1986`: skip when `final_action=skip`, or when `needs_review=1` and
+> `final_action` is blank. Any other value = accept.)
+
+`final_action`: `accept` = create this record as proposed · `edit` = you corrected values in the row
+(also accepts it) · `skip` = don't create this record. Initials in `reviewer` either way.
+
+**Don't work straight from the CSV.** `video-segmentation-review-worklist.md` groups all 590 flagged
+rows into tranches — cheapest first, YouTube-only work last — with each row's line number, a
+deep-linked video URL and its speaker resolved against the finished `person-map.csv`. Regenerate it
+with `python3 tools/day2-seg-worklist.py`, and check your progress any time with
+`python3 tools/day2-preflight.py`, which reports exactly which rows would still be dropped.
+
+Two things that save wasted effort before you start:
+
+- **60 flagged rows point at a conference `conference-map.csv` skips.** They can never produce a
+  record whatever you write. Mark them `skip` in bulk, or reassign `conference_key` to the surviving
+  sibling conference — the five are French/German duplicates of conferences that do migrate.
+- **145 speakers named here were deliberately left unbuilt in `person-map.csv`.** That is fine and
+  expected: the agenda text still saves, only the presenter link is lost. Not a reason to reject a row.
 
 Work by the `case` column, easiest first:
 
-- **case 3** (154 rows, one video = one talk): check `speaker_raw`/`talk_title` split looks right. Mostly fine.
-  24 short excerpt clips are already marked `skip` with a note — leave those alone unless one looks wrong.
-- **case 1** (segments with exact start times): flagged rows only — open the YouTube video, jump to
-  `start_seconds`, confirm the right speaker starts there. Fix numbers in place + `final_action=edit`.
-- **case 5** (328 rows, full session with speaker agenda): accept unless the agenda is obviously wrong.
-  These become one record per video with the speaker list attached — safe default.
-- **case 4** (122 rows, no info): these are mostly concerts, remaining clips, and trailers.
-  For excerpt/duplicate clips → `skip`. For real full-session panels → accept. When in doubt, `skip`
-  is safe (the video stays on YouTube; we just don't make a page for it).
+- **case 5** (315 rows, 315 flagged — full session with speaker agenda): despite the label, 190 of
+  these have a one-entry agenda and are really "one video, one speaker". The worklist splits off the
+  105 with a clean, identified speaker for bulk `accept` — filter, fill the column down, done.
+  The rest become one record per video with the speaker list attached; mark `accept` unless the
+  agenda is obviously wrong.
+- **case 3** (154 rows, 59 flagged — one video = one talk): check the `speaker_raw`/`talk_title`
+  split looks right, then `accept` (or fix + `edit`). Mostly fine. 24 short excerpt clips are already
+  marked `skip` with a note — leave those alone unless one looks wrong.
+- **case 1** (250 rows, 105 flagged — segments with exact start times): flagged rows only — open the
+  YouTube video, jump to `start_seconds`, confirm the right speaker starts there. Fix numbers in
+  place + `final_action=edit`, otherwise `accept`. The worklist deep-links each timestamp.
+- **case 4** (122 rows, 107 flagged — no info): mostly concerts, remaining clips, and trailers.
+  For excerpt/duplicate clips → `skip`. For real full-session panels → `accept`. When in doubt,
+  `skip` is safe (the video stays on YouTube; we just don't make a page for it).
+- **case 2** (4 rows): chapter marks exist but are labelled with topics rather than speakers.
+  One decision for all four — `accept` as a chaptered full session, or `skip`.
 
 ## File 4 — `classification.csv` · 5,397 rows · **spot-check only** (~3 h)
 
-Everything already has a decision. Please check three filtered slices (use a filter on the columns):
+Everything already has a decision — verified: every one of the 303 flagged rows carries a
+`final_type`, so unlike File 3 nothing here is silently dropped. Blank `final_type` on an unflagged
+row means "accept the proposal", exactly as golden rule 4 says. This file is a genuine spot-check.
 
-1. `notes` contains **"verify"** (~86 rows): borderline calls (mostly statement-vs-article) — read
-   the actual post on the live site and confirm `final_type` is right; fix + initials if not.
-2. `final_type` = **retire** (~66 published rows): scan the titles — is anything there that must
-   NOT be unpublished? Two draft pages are already marked KEEP-CANDIDATE (Leonore Summer 2021,
-   LaRouche Oasis Plan) — decide if they should be finished and published.
-3. `final_topics` = **"-"** (30 rows): genuinely topic-less articles. Assign a topic only if one
+Please check three filtered slices (use a filter on the columns):
+
+1. `notes` contains **"verify"** (89 rows, all published): borderline calls (mostly
+   statement-vs-article — currently 49 `post`, 34 `si_statement`) — read the actual post on the live
+   site and confirm `final_type` is right; fix + initials if not.
+2. `final_type` = **retire** (73 rows, but only **10 are published**): the other 63 are already
+   drafts or private, so they are invisible either way — scan the 10 published titles hard, then
+   skim the drafts. Two draft pages are marked KEEP-CANDIDATE (Leonore Summer 2021, LaRouche Oasis
+   Plan) — decide if they should be finished and published.
+3. `final_topics` = **"-"** (29 rows): genuinely topic-less articles. Assign a topic only if one
    jumps out; an honest "none" is allowed.
 
 Topic slugs you can use in `final_topics` (separate two with `|`):
@@ -98,6 +136,12 @@ Topic slugs you can use in `final_topics` (separate two with `|`):
   and gets its own (shorter) instructions.
 
 ## When you're done
+
+**Run the check first:** `python3 tools/day2-preflight.py` from the session directory. It applies the
+migration's real gating rules and tells you what is still outstanding — rows that would be silently
+dropped, unrecognised `final_action` values, `merge:` targets that don't exist, speakers that don't
+resolve, and (with `--baseline HEAD`) any accidental edit to a machine-written column, which is the
+usual casualty of a spreadsheet round-trip. Exit code 0 means clean.
 
 Tell Motoki which file(s) you finished. Don't email edited copies around — edit the files in place
 (or in one shared Google Sheet per file, exported back to the same filename). One owner per file at
