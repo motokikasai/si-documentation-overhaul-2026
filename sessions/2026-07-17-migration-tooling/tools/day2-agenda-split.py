@@ -30,6 +30,7 @@ Usage:
   python3 tools/day2-agenda-split.py --dir incoming --limit 20
 """
 import argparse
+import collections
 import csv
 import importlib.util
 import json
@@ -63,9 +64,14 @@ ORG_ONLY_RE = re.compile(
     r'^\s*(?:The\s+|An?\s+)?(?:International(?:e)?\s+)?[A-Za-zÄÖÜäöüß\- ]{0,40}?'
     r'(?:Conference|Konferenz|Conf\u00e9rence)\s*[:.\u2022\u00b7]?\s*$', re.I)
 CONTENT_AFTER = re.compile(r'["\u201c:]\s*\S')
+# Performer credits carry the only attribution a concert row has. They must never
+# be pruned, however often they repeat across a conference's programme.
+CREDIT_RE = re.compile(
+    r'\b(Performer|Sopran|Alt|Tenor|Bass|Bariton|Baritone|Mezzo|Klavier|piano|accompani\w*|'
+    r'director|Dirigent|arr\.|arr:|violin|cello|flute|Soloists?|conductor)\b', re.I)
 
 
-def prune_reason(a, pm, wl, idx):
+def prune_reason(a, pm, wl, idx, repeats=0, threshold=3):
     """Why this agenda entry is safe to drop, or '' to keep it.
 
     Requires POSITIVE evidence that the text is boilerplate. An earlier version
@@ -78,6 +84,13 @@ def prune_reason(a, pm, wl, idx):
 
     So: the entry must be keyed to a dropped person, carry no talk_title, name
     nobody, AND match one of the boilerplate signatures below.
+
+    `repeats` is how many rows of the SAME conference carry this exact text. Real
+    content does not repeat that way — each video has its own agenda — so a line
+    copied across the whole playlist is the conference's own header. That signal
+    is what distinguishes "Attaining Freedom Through Necessity:" (the 2013
+    Frankfurt conference title, on 34 rows) from a genuine talk title, which a
+    regex cannot tell apart from one row alone.
     """
     key = (a.get('person_key') or '').strip()
     if (pm.get(key, {}).get('final_action') or '').strip() != 'drop':
@@ -93,6 +106,8 @@ def prune_reason(a, pm, wl, idx):
         return 'bare recording date'
     if ORG_ONLY_RE.match(text) and not CONTENT_AFTER.search(text):
         return 'bare conference name'
+    if repeats >= threshold and not CREDIT_RE.search(text):
+        return f'repeated on {repeats} rows of this conference'
     return ''
 
 
@@ -113,6 +128,9 @@ def main():
     ap.add_argument('--apply', action='store_true', help='write changes (default: dry run)')
     ap.add_argument('--prune', action='store_true',
                     help='also drop junk agenda entries keyed to a dropped person')
+    ap.add_argument('--repeat-threshold', type=int, default=3, metavar='N',
+                    help='with --prune, treat an agenda line repeated on N+ rows of the '
+                         'same conference as that conference\'s header (default 3)')
     ap.add_argument('--limit', type=int, default=0, help='only report the first N rows')
     args = ap.parse_args()
 
@@ -123,6 +141,20 @@ def main():
     pm = {r['person_key']: r for r in
           csv.DictReader(open(os.path.join(args.dir, 'person-map.csv'), encoding='utf-8-sig'))}
     idx = wl.name_index(pm)
+
+    # How many rows of each conference carry each exact agenda line.
+    repeats = collections.Counter()
+    for r in rows:
+        if (r.get('final_action') or '').strip() == 'skip' or not r.get('agenda_json'):
+            continue
+        try:
+            seen = {(a.get('speaker_raw') or '').strip()
+                    for a in json.loads(r['agenda_json'])}
+        except json.JSONDecodeError:
+            continue
+        for t in seen:
+            if t:
+                repeats[(r['conference_key'], t)] += 1
 
     changed, added_total, removed_total = 0, 0, 0
     report, protected = [], []
@@ -160,7 +192,10 @@ def main():
         if args.prune:
             kept = []
             for a in agenda:
-                why = prune_reason(a, pm, wl, idx)
+                why = prune_reason(
+                    a, pm, wl, idx,
+                    repeats[(r['conference_key'], (a.get('speaker_raw') or '').strip())],
+                    args.repeat_threshold)
                 if why:
                     removals.append(a)
                     protected.append((i + 2, why, (a.get('speaker_raw') or '')[:58]))
