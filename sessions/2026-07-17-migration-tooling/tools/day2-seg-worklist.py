@@ -61,6 +61,74 @@ def suspect_speaker(s):
     return ''
 
 
+# Honorifics and trailing parentheticals get stripped before indexing, so
+# "Col. (ret.) Larry Wilkerson" is findable as the bare "Larry Wilkerson" that
+# actually appears in a collapsed agenda line.
+TITLE_PREFIX = re.compile(
+    rf'^\s*(?:{HONORIFIC}|Col|Dr|Prof|Mr|Ms|Mrs|Sen|Rep|Amb|Ambassador|H\.E|Hon)\.?\s+', re.I)
+PAREN_ANY = re.compile(r'\([^)]*\)')
+
+
+def bare_name(raw):
+    """A canonical_name reduced to the plain personal name, or '' if unusable.
+
+    Parentheticals are dropped wherever they sit, not just at the end: the
+    interesting case is "Col. (ret.) Larry Wilkerson", where a mid-string
+    "(ret.)" would otherwise block the honorific strip and leave a name that
+    matches no real text.
+    """
+    n = PAREN_ANY.sub(' ', raw or '')
+    n = re.sub(r'\s+', ' ', n).strip(' ,')
+    prev = None
+    while n != prev:
+        prev = n
+        n = TITLE_PREFIX.sub('', n).strip(' ,')
+    return n if len(n.split()) >= 2 else ''   # single tokens match far too much
+
+
+def name_index(pm):
+    """{lowercased multi-token name: person_key} over canonical names and aliases."""
+    idx = {}
+    for key, r in pm.items():
+        for raw in [r.get('canonical_name', ''), *(r.get('aliases') or '').split('|')]:
+            n = bare_name(raw)
+            if n:
+                idx.setdefault(n.lower(), key)
+    return idx
+
+
+def also_named(text, keyed, idx, pm):
+    """People named in `text` that the entry does not key. keyed = keys already linked.
+
+    Catches the collapsed-agenda case: one entry whose speaker_raw reads
+    "A, B and C" but carries only A's person_key, so B and C lose their link.
+    """
+    low = (text or '').lower()
+    if not low:
+        return []
+    settled = set()
+    for k in keyed:
+        settled.add(k)
+        fa = (pm.get(k, {}).get('final_action') or '').strip()
+        if fa.startswith('merge:'):
+            settled.add(fa[6:])
+    hits = []
+    for name, key in idx.items():
+        if name not in low:
+            continue
+        if not re.search(rf'\b{re.escape(name)}\b', low):
+            continue
+        fa = (pm.get(key, {}).get('final_action') or '').strip()
+        resolved = fa[6:] if fa.startswith('merge:') else key
+        if key in settled or resolved in settled:
+            continue
+        if fa == 'drop':
+            continue
+        settled.add(key); settled.add(resolved)
+        hits.append((pm[key].get('canonical_name') or key, resolved))
+    return hits
+
+
 def yt(vid, start=None):
     if start and str(start).strip().isdigit() and int(start) > 0:
         return f"https://youtu.be/{vid}?t={int(start)}"
@@ -99,7 +167,7 @@ def person_state(key, pm):
     return key, 'ok (unflagged)'
 
 
-def entry(i, r, pm, line_of, show_time=False):
+def entry(i, r, pm, line_of, show_time=False, idx=None):
     """One markdown bullet for a segmentation row."""
     key, state = person_state((r.get('person_key') or '').strip(), pm)
     title = clip(r['talk_title']) or '*(no talk title)*'
@@ -113,17 +181,27 @@ def entry(i, r, pm, line_of, show_time=False):
     if key:
         bits.append(f"`{key}` — {state}")
     out.append('  ' + ' · '.join(bits) + '  ')
+    if idx:
+        extra = also_named(r['speaker_raw'], [key] if key else [], idx, pm)
+        if extra:
+            names = ', '.join(f"{nm} (`{k}`)" for nm, k in extra)
+            out.append(f"  ↳ also names, but does **not** link: {names}  ")
     if r['notes']:
         out.append(f"  _{clip(r['notes'], 90)}_  ")
     return '\n'.join(out)
 
 
-def agenda_entry(i, r, pm, line_of, why=False):
+def agenda_entry(i, r, pm, line_of, why=False, idx=None):
     agenda = json.loads(r['agenda_json'] or '[]')
+    n = len(agenda)
+    count = f"{n} agenda entr{'y' if n == 1 else 'ies'}"
     out = [f"- **L{line_of(i)}** [{r['yt_video_id']}]({yt(r['yt_video_id'])}) · "
-           f"`{r['conference_key']}` · {len(agenda)} speakers  "]
+           f"`{r['conference_key']}` · {count}  "]
     if r['talk_title']:
         out.append(f"  {clip(r['talk_title'])}  ")
+    keyed = [k for k in (str(a.get('person_key') or '').strip() for a in agenda) if k]
+    if str(r.get('person_key') or '').strip():
+        keyed.append(r['person_key'].strip())
     for a in agenda:
         key, state = person_state((a.get('person_key') or '').strip(), pm)
         flag = ' ⚠' if state.startswith('⚠') or state.startswith('**') else ''
@@ -134,6 +212,11 @@ def agenda_entry(i, r, pm, line_of, why=False):
             s = suspect_speaker(a.get('speaker_raw') or '')
             note = f" — _{s}_" if s else (f" — _{state}_" if flag else '')
         out.append(f"    - {who}{flag}" + (f" — *{talk}*" if talk else '') + note + '  ')
+        if idx:
+            extra = also_named(a.get('speaker_raw') or '', keyed, idx, pm)
+            if extra:
+                names = ', '.join(f"{nm} (`{k}`)" for nm, k in extra)
+                out.append(f"      ↳ also names, but does **not** link: {names}  ")
     return '\n'.join(out)
 
 
@@ -147,6 +230,7 @@ def main():
     seg = list(csv.DictReader(open(os.path.join(d, 'video-segmentation.csv'), encoding='utf-8')))
     pm = {r['person_key']: r for r in
           csv.DictReader(open(os.path.join(d, 'person-map.csv'), encoding='utf-8'))}
+    idx = name_index(pm)
     conf = {r['conference_key']: r for r in
             csv.DictReader(open(os.path.join(d, 'conference-map.csv'), encoding='utf-8'))}
     dead_conf = {k for k, r in conf.items()
@@ -218,128 +302,148 @@ def main():
     w("")
     w("| # | Tranche | Rows | Videos | Where |")
     w("|---|---|---:|---:|---|")
-    w(f"| 0 | Dead conference — do not review | {len(dead)} | "
-      f"{len(set(r['yt_video_id'] for _, r in dead))} | — |")
-    w(f"| A | case 5, single speaker | {len(A)} | {len(set(r['yt_video_id'] for _, r in A))} | desk |")
-    w(f"| B | case 3, one video = one talk | {len(B)} | {len(set(r['yt_video_id'] for _, r in B))} | desk |")
-    w(f"| C | case 5, multi-speaker agenda | {len(C)} | {len(set(r['yt_video_id'] for _, r in C))} | desk |")
-    w(f"| D | case 1 + 4 + 2 | {len(D1) + len(D4) + len(D2)} | "
-      f"{len(set(r['yt_video_id'] for _, r in D1 + D4 + D2))} | YouTube |")
+    def tranche_row(tag, label, group, where):
+        """One table row, omitted once that tranche is fully reviewed."""
+        if not group:
+            return
+        w(f"| {tag} | {label} | {len(group)} | "
+          f"{len(set(r['yt_video_id'] for _, r in group))} | {where} |")
+
+    tranche_row('0', 'Dead conference — do not review', dead, '—')
+    tranche_row('A', 'case 5, single speaker', A, 'desk')
+    tranche_row('B', 'case 3, one video = one talk', B, 'desk')
+    tranche_row('C', 'case 5, multi-speaker agenda', C, 'desk')
+    tranche_row('D', 'case 1 + 4 + 2', D1 + D4 + D2, 'YouTube')
     w(f"| | **total** | **{len(flagged)}** | | |")
     w("")
 
     # ---- tranche 0
-    w("---")
-    w("")
-    w(f"## 0. Dead conference — skip these ({len(dead)})")
-    w("")
-    w("These rows point at a conference `conference-map.csv` does not build, so "
-      "`presentations` will hit `no_conference` and create nothing no matter what you write here. "
-      "Set `final_action=skip` in bulk, **or** reassign `conference_key` to the surviving "
-      "sibling conference if these videos belong to one.")
-    w("")
-    for k in sorted({r['conference_key'] for _, r in dead}):
-        rows_k = [p for p in dead if p[1]['conference_key'] == k]
-        c = conf[k]
-        w(f"- `{k}` — {clip(c['title'], 60)} — **{len(rows_k)} rows** "
-          f"(L{', L'.join(str(line_of(i)) for i, _ in rows_k[:12])}"
-          f"{'…' if len(rows_k) > 12 else ''})")
-    w("")
+    if dead:
+        w("---")
+        w("")
+        w(f"## 0. Dead conference — skip these ({len(dead)})")
+        w("")
+        w("These rows point at a conference `conference-map.csv` does not build, so "
+          "`presentations` will hit `no_conference` and create nothing no matter what you write "
+          "here. Set `final_action=skip` in bulk. Some of these are French/German duplicates of "
+          "conferences that *do* migrate — if a video belongs to the surviving sibling, say so in "
+          "`notes`: `conference_key` is machine-written, so re-pointing it by hand is an "
+          "out-of-contract edit that `day2-preflight.py --baseline HEAD` will flag.")
+        w("")
+        for k in sorted({r['conference_key'] for _, r in dead}):
+            rows_k = [p for p in dead if p[1]['conference_key'] == k]
+            c = conf[k]
+            w(f"- `{k}` — {clip(c['title'], 60)} — **{len(rows_k)} rows** "
+              f"(L{', L'.join(str(line_of(i)) for i, _ in rows_k[:12])}"
+              f"{'…' if len(rows_k) > 12 else ''})")
+        w("")
 
     # ---- tranche A
-    w("---")
-    w("")
-    w(f"## A. case 5 — single-speaker sessions ({len(A)})  · ~30 min")
-    w("")
-    w("The agenda has one entry, so these are really \"one video, one speaker\" despite the "
-      "case-5 label. **Bulk-accept the clean ones**: filter `case=5`, sort by agenda length, "
-      "fill `final_action=accept` down the column.")
-    w("")
-    w(f"### A1 · speaker resolves cleanly — bulk accept ({len(A_ok)})")
-    w("")
-    for i, r in A_ok:
-        agenda = json.loads(r['agenda_json'] or '[]')
-        who = clip((agenda[0].get('speaker_raw') if agenda else '') or r['speaker_raw'], 44)
-        w(f"- **L{line_of(i)}** [{r['yt_video_id']}]({yt(r['yt_video_id'])}) · "
-          f"`{r['conference_key']}` · {who}")
-    w("")
-    w(f"### A2 · blank or dropped speaker — needs your eyes ({len(A_eyes)})")
-    w("")
-    w("The session still migrates; only the presenter link is missing. Accept unless the row "
-      "is junk.")
-    w("")
-    for i, r in A_eyes:
-        w(agenda_entry(i, r, pm, line_of, why=True))
-    w("")
+    if A:
+        w("---")
+        w("")
+        w(f"## A. case 5 — single-speaker sessions ({len(A)})  · ~30 min")
+        w("")
+        intro = ("The agenda has one entry, so these are really \"one video, one speaker\" "
+                 "despite the case-5 label.")
+        if A_ok:
+            intro += (" **Bulk-accept the clean ones**: filter `case=5`, sort by agenda length, "
+                      "fill `final_action=accept` down the column.")
+        w(intro)
+        w("")
+        if A_ok:
+            w(f"### A1 · speaker resolves cleanly — bulk accept ({len(A_ok)})")
+            w("")
+            for i, r in A_ok:
+                agenda = json.loads(r['agenda_json'] or '[]')
+                who = clip((agenda[0].get('speaker_raw') if agenda else '') or r['speaker_raw'], 44)
+                w(f"- **L{line_of(i)}** [{r['yt_video_id']}]({yt(r['yt_video_id'])}) · "
+                  f"`{r['conference_key']}` · {who}")
+            w("")
+        if A_eyes:
+            w(f"### A2 · blank or dropped speaker — needs your eyes ({len(A_eyes)})")
+            w("")
+            w("The session still migrates; only the presenter link is missing. Accept unless "
+              "the row is junk.")
+            w("")
+            for i, r in A_eyes:
+                w(agenda_entry(i, r, pm, line_of, why=True, idx=idx))
+            w("")
 
     # ---- tranche B
-    w("---")
-    w("")
-    w(f"## B. case 3 — one video = one talk ({len(B)})  · ~1 h")
-    w("")
-    w("Check the `speaker_raw` / `talk_title` split reads correctly. Fix in place + "
-      "`final_action=edit`, otherwise `accept`.")
-    w("")
-    for i, r in B:
-        w(entry(i, r, pm, line_of))
-    w("")
+    if B:
+        w("---")
+        w("")
+        w(f"## B. case 3 — one video = one talk ({len(B)})  · ~1 h")
+        w("")
+        w("Check the `speaker_raw` / `talk_title` split reads correctly. Fix in place + "
+          "`final_action=edit`, otherwise `accept`.")
+        w("")
+        for i, r in B:
+            w(entry(i, r, pm, line_of, idx=idx))
+        w("")
 
     # ---- tranche C
-    w("---")
-    w("")
-    w(f"## C. case 5 — multi-speaker agendas ({len(C)})  · ~1.5 h")
-    w("")
-    w("One record per video with the speaker list attached. Accept unless the agenda is "
-      "obviously wrong. ⚠ marks a speaker with no person page — the agenda line is still "
-      "saved as text, only the presenter link is lost, so this is rarely a reason to reject.")
-    w("")
-    for i, r in sorted(C, key=lambda p: -len(json.loads(p[1]['agenda_json'] or '[]'))):
-        w(agenda_entry(i, r, pm, line_of))
-    w("")
+    if C:
+        w("---")
+        w("")
+        w(f"## C. case 5 — multi-speaker agendas ({len(C)})  · ~1.5 h")
+        w("")
+        w("One record per video with the speaker list attached. Accept unless the agenda is "
+          "obviously wrong. ⚠ marks a speaker with no person page — the agenda line is still "
+          "saved as text, only the presenter link is lost, so this is rarely a reason to reject.")
+        w("")
+        for i, r in sorted(C, key=lambda p: -len(json.loads(p[1]['agenda_json'] or '[]'))):
+            w(agenda_entry(i, r, pm, line_of, idx=idx))
+        w("")
 
     # ---- tranche D
-    w("---")
-    w("")
-    w(f"## D. Needs YouTube open ({len(D1) + len(D4) + len(D2)})  · ~2.5 h")
-    w("")
-    w(f"### D1 · case 1 — segments with start times ({len(D1)}, "
-      f"{len(set(r['yt_video_id'] for _, r in D1))} videos)")
-    w("")
-    w("Links jump straight to `start_seconds`. Confirm the named speaker actually starts there. "
-      "Fix the number in place + `final_action=edit`.")
-    w("")
-    byvid = collections.OrderedDict()
-    for i, r in sorted(D1, key=lambda p: (p[1]['conference_key'], p[1]['yt_video_id'],
-                                          int(p[1]['start_seconds'] or 0))):
-        byvid.setdefault(r['yt_video_id'], []).append((i, r))
-    for vid, group in byvid.items():
-        w(f"**{vid}** · `{group[0][1]['conference_key']}` · {len(group)} segments — "
-          f"[open]({yt(vid)})")
-        for i, r in group:
-            key, state = person_state((r.get('person_key') or '').strip(), pm)
-            w(f"  - **L{line_of(i)}** [{hhmm(r['start_seconds'])}]"
-              f"({yt(vid, r['start_seconds'])}) — {clip(r['speaker_raw'], 40) or '—'}"
-              + (f" · {state}" if key and state != 'ok' else '')
-              + (f" · *{clip(r['talk_title'], 40)}*" if r['talk_title'] else ''))
+    if D1 or D4 or D2:
+        w("---")
         w("")
+        w(f"## D. Needs YouTube open ({len(D1) + len(D4) + len(D2)})  · ~2.5 h")
+        w("")
+        if D1:
+            w(f"### D1 · case 1 — segments with start times ({len(D1)}, "
+              f"{len(set(r['yt_video_id'] for _, r in D1))} videos)")
+            w("")
+            w("Links jump straight to `start_seconds`. Confirm the named speaker actually starts "
+              "there. Fix the number in place + `final_action=edit`.")
+            w("")
+            byvid = collections.OrderedDict()
+            for i, r in sorted(D1, key=lambda p: (p[1]['conference_key'], p[1]['yt_video_id'],
+                                                  int(p[1]['start_seconds'] or 0))):
+                byvid.setdefault(r['yt_video_id'], []).append((i, r))
+            for vid, group in byvid.items():
+                w(f"**{vid}** · `{group[0][1]['conference_key']}` · {len(group)} segments — "
+                  f"[open]({yt(vid)})")
+                for i, r in group:
+                    key, state = person_state((r.get('person_key') or '').strip(), pm)
+                    w(f"  - **L{line_of(i)}** [{hhmm(r['start_seconds'])}]"
+                      f"({yt(vid, r['start_seconds'])}) — {clip(r['speaker_raw'], 40) or '—'}"
+                      + (f" · {state}" if key and state != 'ok' else '')
+                      + (f" · *{clip(r['talk_title'], 40)}*" if r['talk_title'] else ''))
+                w("")
 
-    w(f"### D2 · case 4 — no marks, no agenda ({len(D4)})")
-    w("")
-    w("Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `accept`. "
-      "When in doubt `skip` is safe: the video stays on YouTube, we just don't build a page.")
-    w("")
-    for i, r in sorted(D4, key=lambda p: p[1]['conference_key']):
-        w(entry(i, r, pm, line_of))
-    w("")
+        if D4:
+            w(f"### D2 · case 4 — no marks, no agenda ({len(D4)})")
+            w("")
+            w("Excerpt clips, concerts and trailers → `skip`. Real full-session panels → "
+              "`accept`. When in doubt `skip` is safe: the video stays on YouTube, we just "
+              "don't build a page.")
+            w("")
+            for i, r in sorted(D4, key=lambda p: p[1]['conference_key']):
+                w(entry(i, r, pm, line_of, idx=idx))
+            w("")
 
-    if D2:
-        w(f"### D3 · case 2 — chapter marks labelled with topics, not speakers ({len(D2)})")
-        w("")
-        w("Decide once: accept as a chaptered full session, or skip.")
-        w("")
-        for i, r in D2:
-            w(entry(i, r, pm, line_of))
-        w("")
+        if D2:
+            w(f"### D3 · case 2 — chapter marks labelled with topics, not speakers ({len(D2)})")
+            w("")
+            w("Decide once: accept as a chaptered full session, or skip.")
+            w("")
+            for i, r in D2:
+                w(entry(i, r, pm, line_of, idx=idx))
+            w("")
 
     out = args.out or os.path.join(os.path.dirname(d) or '.',
                                    'video-segmentation-review-worklist.md')

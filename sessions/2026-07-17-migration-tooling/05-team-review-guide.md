@@ -82,9 +82,12 @@ with `python3 tools/day2-seg-worklist.py`, and check your progress any time with
 
 Two things that save wasted effort before you start:
 
-- **60 flagged rows point at a conference `conference-map.csv` skips.** They can never produce a
-  record whatever you write. Mark them `skip` in bulk, or reassign `conference_key` to the surviving
-  sibling conference — the five are French/German duplicates of conferences that do migrate.
+- **Rows pointing at a conference `conference-map.csv` skips can never produce a record**, whatever
+  you write. Mark them `skip` in bulk. Five such conferences exist, French/German duplicates of
+  conferences that do migrate; if a video belongs to the surviving sibling, note that in `notes`
+  rather than re-pointing `conference_key` yourself — that column is machine-written, and editing it
+  is an out-of-contract change `day2-preflight.py --baseline HEAD` will flag. (All 92 such rows —
+  60 flagged, 32 unflagged — were bulk-skipped on 2026-08-27; this is here for the next regeneration.)
 - **145 speakers named here were deliberately left unbuilt in `person-map.csv`.** That is fine and
   expected: the agenda text still saves, only the presenter link is lost. Not a reason to reject a row.
 

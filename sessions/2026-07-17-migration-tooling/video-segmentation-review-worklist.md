@@ -6,7 +6,7 @@ Editable columns: `final_action`, `notes`, `reviewer`, plus the value columns yo
 
 ## ⚠ Read this first — blank does not mean accept
 
-`si-migrate.php:1986` skips a row when `final_action == 'skip'` **or** when `needs_review == '1'` and `final_action` is blank. All 590 rows in this worklist are flagged, so leaving one untouched **discards it**. To accept a row you must type a value — use `accept`; use `edit` if you also corrected cells in that row; `skip` to discard deliberately. Put your initials in `reviewer` either way.
+`si-migrate.php:1986` skips a row when `final_action == 'skip'` **or** when `needs_review == '1'` and `final_action` is blank. All 424 rows in this worklist are flagged, so leaving one untouched **discards it**. To accept a row you must type a value — use `accept`; use `edit` if you also corrected cells in that row; `skip` to discard deliberately. Put your initials in `reviewer` either way.
 
 Run `python3 tools/day2-preflight.py` at any point to see what is still outstanding.
 
@@ -14,279 +14,146 @@ Run `python3 tools/day2-preflight.py` at any point to see what is still outstand
 
 | # | Tranche | Rows | Videos | Where |
 |---|---|---:|---:|---|
-| 0 | Dead conference — do not review | 60 | 60 | — |
-| A | case 5, single speaker | 151 | 151 | desk |
+| A | case 5, single speaker | 42 | 42 | desk |
 | B | case 3, one video = one talk | 53 | 53 | desk |
-| C | case 5, multi-speaker agenda | 124 | 124 | desk |
+| C | case 5, multi-speaker agenda | 127 | 127 | desk |
 | D | case 1 + 4 + 2 | 202 | 127 | YouTube |
-| | **total** | **590** | | |
+| | **total** | **424** | | |
 
 ---
 
-## 0. Dead conference — skip these (60)
+## A. case 5 — single-speaker sessions (42)  · ~30 min
 
-These rows point at a conference `conference-map.csv` does not build, so `presentations` will hit `no_conference` and create nothing no matter what you write here. Set `final_action=skip` in bulk, **or** reassign `conference_key` to the surviving sibling conference if these videos belong to one.
+The agenda has one entry, so these are really "one video, one speaker" despite the case-5 label.
 
-- `2013-konferenz-york-januar-2013` — Konferenz in New York • 26. Januar 2013 — **5 rows** (L765, L766, L767, L768, L769)
-- `2015-paris-juin-2015` — Conférence de Paris - 13 et 14 juin 2015 — **29 rows** (L546, L547, L549, L550, L551, L553, L554, L555, L556, L558, L559, L560…)
-- `2016-internationale-berlin-juin-2016` — Conférence internationale Berlin — 25 et 26 juin 2016 — **6 rows** (L484, L485, L494, L495, L497, L503)
-- `2016-internationale-konferenz-berlin-juni` — Internationale Konferenz in Berlin — 25-26. Juni 2016 — **7 rows** (L506, L509, L510, L512, L513, L516, L518)
-- `2017-francais-soden` — Fulfilling the Dream of Mankind - November 25-26, 2017 • Ba… — **13 rows** (L392, L393, L394, L395, L396, L397, L398, L399, L400, L401, L402, L403…)
-
----
-
-## A. case 5 — single-speaker sessions (151)  · ~30 min
-
-The agenda has one entry, so these are really "one video, one speaker" despite the case-5 label. **Bulk-accept the clean ones**: filter `case=5`, sort by agenda length, fill `final_action=accept` down the column.
-
-### A1 · speaker resolves cleanly — bulk accept (105)
-
-- **L2** [hhdocM6T7cg](https://youtu.be/hhdocM6T7cg) · `2025-berlin-wolf-paradigm-relations` · Ray McGovern, a former CIA analyst, speakin…
-- **L3** [53PJFyf4ovw](https://youtu.be/53PJFyf4ovw) · `2025-berlin-wolf-paradigm-relations` · Prof. Zhang Weiwei, professor of internatio…
-- **L26** [EyhLk_2i82I](https://youtu.be/EyhLk_2i82I) · `2025-berlin-wolf-paradigm-relations` · Prof. Dmitri Trenin, Academic Supervisor of…
-- **L27** [LpElI9n-GZk](https://youtu.be/LpElI9n-GZk) · `2025-berlin-wolf-paradigm-relations` · Dr. Naledi Pandor, former Minister of Inter…
-- **L33** [mshJMsRmYAU](https://youtu.be/mshJMsRmYAU) · `2025-2025-memorial-weekend-beautiful` · H.E. Naledi Pandor, former Minister of Inte…
-- **L94** [ltNnL_1RmYU](https://youtu.be/ltNnL_1RmYU) · `2023-february-reason-annihilation-humanity` · Helga Zepp-LaRouche (Germany), Founder, The…
-- **L184** [U6cPUO5mIRo](https://youtu.be/U6cPUO5mIRo) · `2022-april-2022-establish-security` · H.E. Ambassador Anatoly Antonov, Ambassador…
-- **L185** [GYWGRqiVfTE](https://youtu.be/GYWGRqiVfTE) · `2022-april-2022-establish-security` · Jay Naidoo, cabinet minister under Presiden…
-- **L186** [xDvn3_c40Q8](https://youtu.be/xDvn3_c40Q8) · `2022-april-2022-establish-security` · Alessia Ruggeri, spokeswoman of the Comitat…
-- **L187** [QAQVSgXlkPk](https://youtu.be/QAQVSgXlkPk) · `2022-april-2022-establish-security` · Jacques Cheminade (France) President, Solid…
-- **L233** [Fz61xzEQyik](https://youtu.be/Fz61xzEQyik) · `2021-june` · Col.(ret.) Richard H. Black (U.S.), former …
-- **L234** [QERKSNMmwmU](https://youtu.be/QERKSNMmwmU) · `2021-june` · Megan Dobrodt, President, Schiller Institut…
-- **L235** [c5qpBxkq49U](https://youtu.be/c5qpBxkq49U) · `2021-june` · Megan Dobrodt, President, Schiller Institut…
-- **L286** [2qhxj6GkWpE](https://youtu.be/2qhxj6GkWpE) · `2021-march-world-crossroad-months` · Dr.William Happer, Professor Emeritus of Pr…
-- **L311** [tpBShnr0czg](https://youtu.be/tpBShnr0czg) · `2020-april-2020` · Robert McFerrin, baritone, Raymond Jackson,…
-- **L316** [be7RKfnwLrM](https://youtu.be/be7RKfnwLrM) · `2020-april-2020` · John Sigerson, tenor / Dura Jun, piano
-- **L328** [Yb9EZAGPmJc](https://youtu.be/Yb9EZAGPmJc) · `2019-november-2019-soden` · Helga Zepp-LaRouche, Chairwoman of the Schi…
-- **L329** [CqtJuLsZdzA](https://youtu.be/CqtJuLsZdzA) · `2019-november-2019-soden` · Natalia Vitrenko, doctor of economic scienc…
-- **L330** [vHJWfidcacQ](https://youtu.be/vHJWfidcacQ) · `2019-november-2019-soden` · Jacques Cheminade, President of Solidarité …
-- **L347** [-CcTioYyvvw](https://youtu.be/-CcTioYyvvw) · `2018-paris-november-2018` · Intervention d'Helga Zepp-LaRouche, préside…
-- **L352** [WrqFLO7MK_E](https://youtu.be/WrqFLO7MK_E) · `2018-sept-2018` · James George Jatras, former U.S. diplomat a…
-- **L355** [0J4P-y0VigE](https://youtu.be/0J4P-y0VigE) · `2018-sept-2018` · Dr. Xu Wenhong
-- **L388** [WOAlJ9rH7zU](https://youtu.be/WOAlJ9rH7zU) · `2018-june-july-conf-soden` · Roger Stone, a political strategist from th…
-- **L438** [YreWCc3XUBQ](https://youtu.be/YreWCc3XUBQ) · `2017-york-april-2017-china` · Ms. Meifang Zhang, Deputy Consul General, t…
-- **L440** [9w1Xvhai1VI](https://youtu.be/9w1Xvhai1VI) · `2017-york-april-2017-china` · Prof. Nie Lei, Dean, School of Traffic and …
-- **L441** [mC_RIoCfa4k](https://youtu.be/mC_RIoCfa4k) · `2017-york-april-2017-china` · Jason Ross, 21st Century Science and Techno…
-- **L442** [Ss0TGiFOTQc](https://youtu.be/Ss0TGiFOTQc) · `2017-york-april-2017-china` · Mr. Faiyaz Murshid Kazi, Counsellor, the Pe…
-- **L444** [_sJI4WSj5V0](https://youtu.be/_sJI4WSj5V0) · `2017-york-april-2017-china` · Dr. Liu Qiang, Director of Energy Economics…
-- **L445** [4JS20hk_En8](https://youtu.be/4JS20hk_En8) · `2017-york-april-2017-china` · Benjamin Deniston, 21st Century Science and…
-- **L447** [TSr1RK-p3D0](https://youtu.be/TSr1RK-p3D0) · `2017-york-april-2017-china` · Richard Trifan, Vice President, Government …
-- **L452** [AVU41wACIB0](https://youtu.be/AVU41wACIB0) · `2017-april-2017-silk-road` · Presentation by Richard Trifan, VP of the E…
-- **L453** [alPGK-GGTw0](https://youtu.be/alPGK-GGTw0) · `2017-april-2017-silk-road` · Hal Cooper, PhD, P.E. addresses the "New Si…
-- **L456** [m0ymiYAcums](https://youtu.be/m0ymiYAcums) · `2016-lyon` · Par Helga Zepp-LaRouche, présidente de l'In…
-- **L457** [8zp6OcJouR0](https://youtu.be/8zp6OcJouR0) · `2016-lyon` · par Jean-Christophe Vautrin, Président du C…
-- **L538** [HzT-a5JVJA4](https://youtu.be/HzT-a5JVJA4) · `2016-berlin-june-2016-creating` · Gian Marco Sanna – Violinist, Founder and a…
-- **L585** [bKX8kqJRejw](https://youtu.be/bKX8kqJRejw) · `2015-neue-seidenstra-beginn-einer` · Grußwort von Helga Zepp-LaRouche, Präsident…
-- **L587** [aNGgX_NkZVk](https://youtu.be/aNGgX_NkZVk) · `2015-neue-seidenstra-beginn-einer` · Rede von Dr. Hermann Schwiesau, Botschafter…
-- **L588** [Xvze-WctF80](https://youtu.be/Xvze-WctF80) · `2015-neue-seidenstra-beginn-einer` · Rede von Rainer Apel, Mitglied des Vorstand…
-- **L589** [S-fZBeOAU9c](https://youtu.be/S-fZBeOAU9c) · `2015-neue-seidenstra-beginn-einer` · Grußworte von Lynne Speed, LaRouche Politic…
-- **L592** [1ekuoKwp5To](https://youtu.be/1ekuoKwp5To) · `2014-england-december-2014` · Rachel Brinkley, Former Congressional Candi…
-- **L594** [eCFvk8zrN8c](https://youtu.be/eCFvk8zrN8c) · `2014-england-december-2014` · Hon. Breno Hermann, Consul, Cultural Depart…
-- **L602** [gniPjCB9uHc](https://youtu.be/gniPjCB9uHc) · `2014-england-december-2014` · George Hillman, American Entrepreneur, on w…
-- **L605** [sDVBWWrDTd0](https://youtu.be/sDVBWWrDTd0) · `2014-england-december-2014` · Hon. Andrea Boland, State Representative fr…
-- **L608** [mTNwbzSwDi0](https://youtu.be/mTNwbzSwDi0) · `2014-england-december-2014` · Baifeng Sun, Confucius Institute, UMASS Bos…
-- **L612** [oj42VdS-iKo](https://youtu.be/oj42VdS-iKo) · `2014-frankfurt-october-2014-30th` · Address by Prof. Shi Ze, China Institute of…
-- **L614** [ji7j1XLM50s](https://youtu.be/ji7j1XLM50s) · `2014-frankfurt-october-2014-30th` · Address by Jayshree Sengupta, Senior Fellow…
-- **L616** [D-dwHjP-In8](https://youtu.be/D-dwHjP-In8) · `2014-frankfurt-october-2014-30th` · Address by Natalia Vitrenko, Economist, Cha…
-- **L617** [sEBJ3NQrx88](https://youtu.be/sEBJ3NQrx88) · `2014-frankfurt-october-2014-30th` · Address by Jacques Cheminade, President of …
-- **L618** [M0inLlRjAj8](https://youtu.be/M0inLlRjAj8) · `2014-frankfurt-october-2014-30th` · Address by Ray McGovern, Veteran Intelligen…
-- **L619** [AEO61Y8aOMc](https://youtu.be/AEO61Y8aOMc) · `2014-frankfurt-october-2014-30th` · Professor Enzo Siviero, member of the Itali…
-- **L621** [rWaWU15Qgy8](https://youtu.be/rWaWU15Qgy8) · `2014-frankfurt-october-2014-30th` · Address by Ali Rastbeen, Founder and Presid…
-- **L622** [omH7XeIcFJU](https://youtu.be/omH7XeIcFJU) · `2014-frankfurt-october-2014-30th` · Address by Col. (ret.) Alain Corvez, Former…
-- **L623** [LK_mFy7eZxs](https://youtu.be/LK_mFy7eZxs) · `2014-frankfurt-october-2014-30th` · Address by Diogène Senny, Secretary General…
-- **L625** [WpXacB9ohL8](https://youtu.be/WpXacB9ohL8) · `2014-frankfurt-october-2014-30th` · Address by Antonino Galloni, Economist, Sta…
-- **L626** [H_hlRgeHkXU](https://youtu.be/H_hlRgeHkXU) · `2014-frankfurt-october-2014-30th` · Helga Zepp-LaRouche, founder of the Schille…
-- **L627** [p86oZQC2O-c](https://youtu.be/p86oZQC2O-c) · `2014-frankfurt-october-2014-30th` · Хельга Цепп-Ларуш, президент Шиллеровского …
-- **L630** [YZnZ-i4JO88](https://youtu.be/YZnZ-i4JO88) · `2014-frankfurt-october-2014-30th` · Натлья Витренко, экономист, председатель Пр…
-- **L631** [iPvcEYcJQ9A](https://youtu.be/iPvcEYcJQ9A) · `2014-frankfurt-october-2014-30th` · Rede von Dr. Natalja Witrenko, Wirtschaftsw…
-- **L632** [JEg0Uzl7zwM](https://youtu.be/JEg0Uzl7zwM) · `2014-frankfurt-october-2014-30th` · Discours par Natalia Vitrenko, Économiste, …
-- **L633** [4Ns9g1_rN78](https://youtu.be/4Ns9g1_rN78) · `2014-frankfurt-october-2014-30th` · Джейшри Сенгупта, старший научный сотрудник…
-- **L634** [7rNUQxbb4eA](https://youtu.be/7rNUQxbb4eA) · `2014-frankfurt-october-2014-30th` · Rede von Jayshree Sengupta, Senior Fellow, …
-- **L635** [VP3vtHJ_gBI](https://youtu.be/VP3vtHJ_gBI) · `2014-frankfurt-october-2014-30th` · Discours par Jayshree Sengupta, Membre Hono…
-- **L636** [3BsbCBKqM3M](https://youtu.be/3BsbCBKqM3M) · `2014-frankfurt-october-2014-30th` · Д-р Фатиме Хашеми, президент Ассоциации сол…
-- **L640** [_njR--iWnFw](https://youtu.be/_njR--iWnFw) · `2014-frankfurt-october-2014-30th` · Али Растбеен, основатель и президент Парижс…
-- **L641** [h5hmr2NB41Q](https://youtu.be/h5hmr2NB41Q) · `2014-frankfurt-october-2014-30th` · Rede von Ali Rastbeen, Gründer und Präsiden…
-- **L642** [DlkoAVQJ52Y](https://youtu.be/DlkoAVQJ52Y) · `2014-frankfurt-october-2014-30th` · Discours par Ali Rastbeen, Fondateur et Pré…
-- **L644** [nSXBwHQ4Yi0](https://youtu.be/nSXBwHQ4Yi0) · `2014-frankfurt-october-2014-30th` · Address by Panos Kammenos, Chairman of the …
-- **L646** [mJzSeaa2VRk](https://youtu.be/mJzSeaa2VRk) · `2014-frankfurt-october-2014-30th` · Discours par Robert Barwick, Citizens Elect…
-- **L647** [9-FeKQQO3Io](https://youtu.be/9-FeKQQO3Io) · `2014-frankfurt-october-2014-30th` · Rede von Robert Barwick, Citizens Electoral…
-- **L648** [kZC6IlpO0JU](https://youtu.be/kZC6IlpO0JU) · `2014-frankfurt-october-2014-30th` · Роберт Барвик, Совет граждан-избирателей, А…
-- **L650** [-Zif_2QV3kU](https://youtu.be/-Zif_2QV3kU) · `2014-frankfurt-october-2014-30th` · Rede von Jacques Cheminade, Präsident von S…
-- **L652** [_lxrZNo2Tsw](https://youtu.be/_lxrZNo2Tsw) · `2014-frankfurt-october-2014-30th` · Проф. Эндзо Сивьеро, член Итальянского наци…
-- **L653** [0ETPPbYqdjs](https://youtu.be/0ETPPbYqdjs) · `2014-frankfurt-october-2014-30th` · Professeur Enzo Siviero, Membre du Conseil …
-- **L656** [Qj-1K4sn1xs](https://youtu.be/Qj-1K4sn1xs) · `2014-frankfurt-october-2014-30th` · Von Alain Corvez, Oberst a.D., ehemaliger B…
-- **L660** [bOq8L-BvJ2g](https://youtu.be/bOq8L-BvJ2g) · `2014-frankfurt-october-2014-30th` · Проф. д-р У Вансо, декан факультета ядерной…
-- **L661** [-oH7eqxPLJk](https://youtu.be/-oH7eqxPLJk) · `2014-frankfurt-october-2014-30th` · Рей Макговерн, организация "Ветераны-профес…
-- **L663** [t1lIzv3TErQ](https://youtu.be/t1lIzv3TErQ) · `2014-frankfurt-october-2014-30th` · Панос Камменос, председатель Партии независ…
-- **L664** [wsUVx7yIW-w](https://youtu.be/wsUVx7yIW-w) · `2014-frankfurt-october-2014-30th` · Panos Kammenos, Président des Grecques Indé…
-- **L665** [y477Uj8Y5bk](https://youtu.be/y477Uj8Y5bk) · `2014-frankfurt-october-2014-30th` · Von Panos Kammenos , Vorsitzender der Parte…
-- **L666** [t4LVIpkTjT8](https://youtu.be/t4LVIpkTjT8) · `2014-frankfurt-october-2014-30th` · Проф. д-р Дитер Амелинг,президент Германско…
-- **L667** [A7j7L1Veank](https://youtu.be/A7j7L1Veank) · `2014-frankfurt-october-2014-30th` · Professeur Dr. Dieter Ameling, Président de…
-- **L671** [kwvGGZc8Znw](https://youtu.be/kwvGGZc8Znw) · `2014-frankfurt-october-2014-30th` · Antonino Galloni – Enrico Mattei, eine Sing…
-- **L677** [Tp0XUrab1Ys](https://youtu.be/Tp0XUrab1Ys) · `2014-frankfurt-october-2014-30th` · Jason Ross, de l'équipe scientifique de LaR…
-- **L678** [QL2EIvZ1GC8](https://youtu.be/QL2EIvZ1GC8) · `2014-frankfurt-october-2014-30th` · Von Jason Ross, Basement-Wissenschaftsteam …
-- **L680** [e5jhOd9rtr0](https://youtu.be/e5jhOd9rtr0) · `2014-frankfurt-october-2014-30th` · Dr. Wolfgang Lillge, Rédacteur en chef du m…
-- **L682** [UxcqWWMOojA](https://youtu.be/UxcqWWMOojA) · `2014-frankfurt-october-2014-30th` · Д-р Вольфганг Лилльге, главный редактор жур…
-- **L688** [EVfmz4-Mfrc](https://youtu.be/EVfmz4-Mfrc) · `2013-angeles-november-2013-second` · Phil Rubenstein, a long time scientific col…
-- **L751** [stiiMZ_JiQA](https://youtu.be/stiiMZ_JiQA) · `2013-virginia-march-2013-30th` · Rachel Douglas, EIR Russia / CIS Countries …
-- **L771** [qPJ1KAn-Hvs](https://youtu.be/qPJ1KAn-Hvs) · `2013-york-january-2013-paradigm` · Bruce Fein, a former U.S. Department of Jus…
-- **L781** [3uHo--Yv27g](https://youtu.be/3uHo--Yv27g) · `2013-york-january-2013-paradigm` · Lynn Yen, Executive Director at Foundation …
-- **L794** [ACFv44ZZMo4](https://youtu.be/ACFv44ZZMo4) · `2013-rescuing-civilization-brink` · Speech by Lyndon LaRouche, U.S. Economist a…
-- **L797** [dYnoavaeyvU](https://youtu.be/dYnoavaeyvU) · `2013-rescuing-civilization-brink` · Speech by Erwin Schöpges, President of the …
-- **L799** [7Q1l8NMcGTY](https://youtu.be/7Q1l8NMcGTY) · `2013-rescuing-civilization-brink` · Speech by Jacques Cheminade, Presidential C…
-- **L800** [MO4GRnlvC4w](https://youtu.be/MO4GRnlvC4w) · `2013-rescuing-civilization-brink` · Speech by Eric Verhaeghe, Former Executive …
-- **L801** [BDPQZwTEeRY](https://youtu.be/BDPQZwTEeRY) · `2013-rescuing-civilization-brink` · Speech by Daniel Heydt, Mayor of Bellange, …
-- **L810** [TWNDDIYGIH4](https://youtu.be/TWNDDIYGIH4) · `2012-11-24-floersheim-intl-conference` · Helga Zepp-LaRouche, présidente de l'Instit…
-- **L811** [qtOuoc86K5I](https://youtu.be/qtOuoc86K5I) · `2012-11-24-floersheim-intl-conference` · Theodore Katsanevas, professeur d'économie …
-- **L812** [PDPrsGGpCMY](https://youtu.be/PDPrsGGpCMY) · `2012-11-24-floersheim-intl-conference` · George O. Tsobanoglou, président du comité …
-- **L813** [WhIeQqaA4qI](https://youtu.be/WhIeQqaA4qI) · `2012-11-24-floersheim-intl-conference` · Lorella Presotto, Confédération civique nat…
-- **L814** [ZlES_mCnvqc](https://youtu.be/ZlES_mCnvqc) · `2012-11-24-floersheim-intl-conference` · Daniel Estulin, journaliste, Espagne
-- **L815** [aY_eeAtgkdQ](https://youtu.be/aY_eeAtgkdQ) · `2012-11-24-floersheim-intl-conference` · Prof. Wilhelm Hankel, ancien économiste en …
-- **L816** [R49azzcd5pw](https://youtu.be/R49azzcd5pw) · `2012-11-24-floersheim-intl-conference` · Helga Zepp-LaRouche, présidente de l'Instit…
-- **L817** [b6InLi3wrf4](https://youtu.be/b6InLi3wrf4) · `2012-11-24-floersheim-intl-conference` · Ali Reza Sheikh Attar, Ambassadeur de la Ré…
-- **L818** [2tw9KSpKjvg](https://youtu.be/2tw9KSpKjvg) · `2012-11-24-floersheim-intl-conference` · Hussein Askary, Président de l'EAP, Suède
-- **L819** [pWMx24-LrkM](https://youtu.be/pWMx24-LrkM) · `2012-11-24-floersheim-intl-conference` · Bassam Tahhan, porte-parole du Collectif po…
-
-### A2 · blank or dropped speaker — needs your eyes (46)
+### A2 · blank or dropped speaker — needs your eyes (42)
 
 The session still migrates; only the presenter link is missing. Accept unless the row is junk.
 
-- **L59** [r8qiH_paYeQ](https://youtu.be/r8qiH_paYeQ) · `2024-press-danger-nuclear-real` · 1 speakers  
-  Did the U.S. Help Ukraine Target Russia's Nuclear Defense Capabilities?  
-    - Scott Ritter, Larry Wilkerson and Col. Rich… — *The Danger of Nuclear War Is Real, and Must B…* — _may name more than one person_  
-- **L89** [7c9fnezJ7nY](https://youtu.be/7c9fnezJ7nY) · `2023-february-reason-annihilation-humanity` · 1 speakers  
+- **L89** [7c9fnezJ7nY](https://youtu.be/7c9fnezJ7nY) · `2023-february-reason-annihilation-humanity` · 1 agenda entry  
   Building an Alternative to Global NATO — World Citizens Unite!  
     - ZEPP-LAROUCHE: Well, I think that the confe… — _looks like a transcript line, not a speaker_  
-- **L95** [wE7Sm16bvcg](https://youtu.be/wE7Sm16bvcg) · `2023-february-reason-annihilation-humanity` · 1 speakers  
+- **L95** [wE7Sm16bvcg](https://youtu.be/wE7Sm16bvcg) · `2023-february-reason-annihilation-humanity` · 1 agenda entry  
   Uganda’s Oil Project and Energy Independence  
     - Elison Karuhanga (Uganda), Partner, Kampala… ⚠ — *Uganda's Oil Project and Energy Independence* — _may name more than one person_  
-- **L96** [pTYnLOj7mLo](https://youtu.be/pTYnLOj7mLo) · `2023-february-reason-annihilation-humanity` · 1 speakers  
+- **L96** [pTYnLOj7mLo](https://youtu.be/pTYnLOj7mLo) · `2023-february-reason-annihilation-humanity` · 1 agenda entry  
   Can Americans Put Aside Their Divisions to Stop Nuclear War?  
     - Diane Sare (United States), candidate for U… — *Can Americans Put Aside Their Divisions to St…* — _semicolons — probably several speakers in one cell_  
-- **L97** [ywTqRye0d7Q](https://youtu.be/ywTqRye0d7Q) · `2023-february-reason-annihilation-humanity` · 1 speakers  
+- **L97** [ywTqRye0d7Q](https://youtu.be/ywTqRye0d7Q) · `2023-february-reason-annihilation-humanity` · 1 agenda entry  
   The Age of Colonialism Must Be Replaced by Win-Win Cooperation  
     - Dr. Fred M'membe (Zambia), President of the… ⚠ — *The Age of Colonialism Must Be Replaced by Wi…* — _semicolons — probably several speakers in one cell_  
-- **L158** [W_54M0muoJU](https://youtu.be/W_54M0muoJU) · `2022-there-peace-without-bankruptcy` · 1 speakers  
+- **L158** [W_54M0muoJU](https://youtu.be/W_54M0muoJU) · `2022-there-peace-without-bankruptcy` · 1 agenda entry  
   Ukraine Has Lost the War: But Thermonuclear War Still Threatens  
     - Recorded June 13, 2022 ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L161** [CNKwkP5zsOs](https://youtu.be/CNKwkP5zsOs) · `2022-there-peace-without-bankruptcy` · 1 speakers  
+- **L161** [CNKwkP5zsOs](https://youtu.be/CNKwkP5zsOs) · `2022-there-peace-without-bankruptcy` · 1 agenda entry  
   Why China’s Rise Is Beneficial to the World — Dr. Wang Wen  
     - Dr. Wang Wen (China), Executive Dean of Cho… — _may name more than one person_  
-- **L191** [gwaCEuJRWjc](https://youtu.be/gwaCEuJRWjc) · `2021-mankind-immortal-species` · 1 speakers  
+- **L191** [gwaCEuJRWjc](https://youtu.be/gwaCEuJRWjc) · `2021-mankind-immortal-species` · 1 agenda entry  
   Today's Strategic Crisis: A Terrible End or a New Paradigm? — Keynote a…  
     - JOIN THE SCHILLER INSTITUTE: https://bit.ly… ⚠ — _looks like a transcript line, not a speaker_  
-- **L194** [DrAfNEl5C-w](https://youtu.be/DrAfNEl5C-w) · `2021-mankind-immortal-species` · 1 speakers  
-  There Are No Limits to Growth in the Universe — Conference excerpts  
-    - Speakers include: Jason Ross, Dr. Augustinu… ⚠ — _reads as a speaker list, not one person_  
-- **L239** [JRLrakxMO8U](https://youtu.be/JRLrakxMO8U) · `2020-december-2020-world-after` · 1 speakers  
+- **L239** [JRLrakxMO8U](https://youtu.be/JRLrakxMO8U) · `2020-december-2020-world-after` · 1 agenda entry  
   Panel 1—“Hang Together, or Hang Separately”: Free and Sovereign Republi…  
     - LaRouche Collected Works, Volume I—Two for … ⚠ — _contains a URL — promo text, not a speaker_  
-- **L241** [ts3pLWoledE](https://youtu.be/ts3pLWoledE) · `2020-december-2020-world-after` · 1 speakers  
+- **L241** [ts3pLWoledE](https://youtu.be/ts3pLWoledE) · `2020-december-2020-world-after` · 1 agenda entry  
   Panel 3 — Overcoming the World Health Crisis & Hunger Pandemic  
     - LaRouche Collected Works, Volume I—Two for … ⚠ — _contains a URL — promo text, not a speaker_  
-- **L242** [DQ-gngOx1HE](https://youtu.be/DQ-gngOx1HE) · `2020-december-2020-world-after` · 1 speakers  
+- **L242** [DQ-gngOx1HE](https://youtu.be/DQ-gngOx1HE) · `2020-december-2020-world-after` · 1 agenda entry  
   Panel 4 — A Human Future for Youth: A Beethoven-Driven Renaissance of C…  
     - LaRouche Collected Works, Volume I—Two for … ⚠ — _contains a URL — promo text, not a speaker_  
-- **L289** [fOWsNuegsNI](https://youtu.be/fOWsNuegsNI) · `2021-march-world-crossroad-months` · 1 speakers  
+- **L289** [fOWsNuegsNI](https://youtu.be/fOWsNuegsNI) · `2021-march-world-crossroad-months` · 1 agenda entry  
   U.S. Policy Towards Syria: Will it be based on Western Supremacy or the…  
     - Dr. Bouthaina Shaaban, Media and Political … — *the rise of China.* — _may name more than one person_  
-- **L319** [YtYE91YK8VU](https://youtu.be/YtYE91YK8VU) · `2020-april-2020` · 1 speakers  
+- **L319** [YtYE91YK8VU](https://youtu.be/YtYE91YK8VU) · `2020-april-2020` · 1 agenda entry  
   Frank Endres, CA Wheat and Cattle Rancher  
     - West Side of Sacramento Valley, CA, Wheat a… ⚠ — _may name more than one person_  
-- **L320** [TtO5Ijy-tGA](https://youtu.be/TtO5Ijy-tGA) · `2020-april-2020` · 1 speakers  
+- **L320** [TtO5Ijy-tGA](https://youtu.be/TtO5Ijy-tGA) · `2020-april-2020` · 1 agenda entry  
   Jim Benham, State President of Indiana Farmers Union  
     - Indiana Grain and Livestock Farmer, State P… ⚠ — _may name more than one person_  
-- **L390** [90SAushN6qs](https://youtu.be/90SAushN6qs) · `2018-april-manhattan-dialogue-three` · 1 speakers  
-  A Dialogue of Three Presidencies: Trump, Putin, Xi Jinping  
-    - On Saturday, April 7, Schiller institute fo… ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L407** [K19K7bqiq9s](https://youtu.be/K19K7bqiq9s) · `2017-soden-fulfilling-dream-mankind` · 1 speakers  
+- **L407** [K19K7bqiq9s](https://youtu.be/K19K7bqiq9s) · `2017-soden-fulfilling-dream-mankind` · 1 agenda entry  
   What Europe Should Contribute to the New World Paradigm  
     - Jacques Cheminade, former Presidential Cand… — _contains a URL — promo text, not a speaker_  
-- **L408** [yzwhWzNBX50](https://youtu.be/yzwhWzNBX50) · `2017-soden-fulfilling-dream-mankind` · 1 speakers  
-  China's Initiative: A View from Ukraine  
-    - Doctor of Economics, MP (1994-2002) and Cha… ⚠ — *Fulfilling the Dream of Mankind* — _contains a URL — promo text, not a speaker_  
-- **L409** [bdufn9hLWn4](https://youtu.be/bdufn9hLWn4) · `2017-soden-fulfilling-dream-mankind` · 1 speakers  
+- **L409** [bdufn9hLWn4](https://youtu.be/bdufn9hLWn4) · `2017-soden-fulfilling-dream-mankind` · 1 agenda entry  
   The Economic Method of LaRouche  
     - Jason Ross, with the U.S. Schiller Institut… — *The Economic Method of LaRouche: A Non-Scalar…* — _contains a URL — promo text, not a speaker_  
-- **L410** [YH5PzzRDuWM](https://youtu.be/YH5PzzRDuWM) · `2017-soden-fulfilling-dream-mankind` · 1 speakers  
+- **L410** [YH5PzzRDuWM](https://youtu.be/YH5PzzRDuWM) · `2017-soden-fulfilling-dream-mankind` · 1 agenda entry  
   President Xi's Perspective for the Year 2050 and the Perspective of Afr…  
     - Chinese Academy of Social Science, Director… ⚠ — *Fulfilling the Dream of Mankind* — _contains a URL — promo text, not a speaker_  
-- **L412** [2YwsH0TIDnw](https://youtu.be/2YwsH0TIDnw) · `2017-soden-fulfilling-dream-mankind` · 1 speakers  
+- **L412** [2YwsH0TIDnw](https://youtu.be/2YwsH0TIDnw) · `2017-soden-fulfilling-dream-mankind` · 1 agenda entry  
   Integration of Egypt's Transportation Plans 2030 with the New Silk Road…  
     - Dr. Saad Mohamed Mahmoud Elgioshy, Former T… ⚠ — _contains a URL — promo text, not a speaker_  
-- **L413** [LPb9rSLsjoI](https://youtu.be/LPb9rSLsjoI) · `2017-soden-fulfilling-dream-mankind` · 1 speakers  
+- **L413** [LPb9rSLsjoI](https://youtu.be/LPb9rSLsjoI) · `2017-soden-fulfilling-dream-mankind` · 1 agenda entry  
   Italy China Alliance for Transaqua  
     - Foreign Director for Bonifica S.p.A, Italy,… ⚠ — *Fulfilling the Dream of Mankind* — _contains a URL — promo text, not a speaker_  
-- **L427** [zjHA4tcULsQ](https://youtu.be/zjHA4tcULsQ) · `2017-symposium-aesthetic-education-humanity` · 1 speakers  
+- **L427** [zjHA4tcULsQ](https://youtu.be/zjHA4tcULsQ) · `2017-symposium-aesthetic-education-humanity` · 1 agenda entry  
   Dennis Speed, Introduction - The Aesthetical Education of Humanity Thro…  
     - On June 30, 2017, singers, teachers and oth… ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L429** [QrAHjHmwLo8](https://youtu.be/QrAHjHmwLo8) · `2017-symposium-aesthetic-education-humanity` · 1 speakers  
+- **L429** [QrAHjHmwLo8](https://youtu.be/QrAHjHmwLo8) · `2017-symposium-aesthetic-education-humanity` · 1 agenda entry  
   Carmela Altamura - The Art of Bel Canto singing  
     - On June 30, 2017, singers, teachers and oth… ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L430** [6GUmA55J4hE](https://youtu.be/6GUmA55J4hE) · `2017-symposium-aesthetic-education-humanity` · 1 speakers  
+- **L430** [6GUmA55J4hE](https://youtu.be/6GUmA55J4hE) · `2017-symposium-aesthetic-education-humanity` · 1 agenda entry  
   Mauricio Trejo (tenor) - The Aesthetical Education of Humanity Through …  
     - On June 30, 2017, singers, teachers and oth… ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L431** [EN9EMFCO8zY](https://youtu.be/EN9EMFCO8zY) · `2017-symposium-aesthetic-education-humanity` · 1 speakers  
+- **L431** [EN9EMFCO8zY](https://youtu.be/EN9EMFCO8zY) · `2017-symposium-aesthetic-education-humanity` · 1 agenda entry  
   Jennifer Adams (soprano) - The Aesthetical Education of Humanity Throug…  
     - On June 30, 2017, singers, teachers and oth… ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L432** [WjyHGyBMduU](https://youtu.be/WjyHGyBMduU) · `2017-symposium-aesthetic-education-humanity` · 1 speakers  
+- **L432** [WjyHGyBMduU](https://youtu.be/WjyHGyBMduU) · `2017-symposium-aesthetic-education-humanity` · 1 agenda entry  
   Gustavo Ahualli (baritone) - The Aesthetical Education of Humanity Thro…  
     - On June 30, 2017, singers, teachers and oth… ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L434** [PebY03U8jQs](https://youtu.be/PebY03U8jQs) · `2017-symposium-aesthetic-education-humanity` · 1 speakers  
+- **L434** [PebY03U8jQs](https://youtu.be/PebY03U8jQs) · `2017-symposium-aesthetic-education-humanity` · 1 agenda entry  
   Anthony Morss - Saving Grace, Saving Voices  
     - On June 30, 2017, singers, teachers and oth… ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L446** [CAOMYVb2kVc](https://youtu.be/CAOMYVb2kVc) · `2017-york-april-2017-china` · 1 speakers  
+- **L446** [CAOMYVb2kVc](https://youtu.be/CAOMYVb2kVc) · `2017-york-april-2017-china` · 1 agenda entry  
   Dr. Hal Cooper Jr., Chairman, Seattle Freight Transport Advisory Board  
     - Dr. Hal Cooper Jr., Chairman, Seattle Freig… — *U.S.-China Cooperation on the Belt & Road Ini…* — _semicolons — probably several speakers in one cell_  
-- **L470** [twOn1KeB4HA](https://youtu.be/twOn1KeB4HA) · `2016-building-world-land-bridge` · 1 speakers  
+- **L470** [twOn1KeB4HA](https://youtu.be/twOn1KeB4HA) · `2016-building-world-land-bridge` · 1 agenda entry  
   World Land Bridge & Mankind's True Humanity Panel I, The New Silk Road  
     - Schiller Institute Conference "Building a W… ⚠ — *Building a World Land-Bridge: Realizing Manki…* — _⚠ dropped in person-map — no presenter link_  
-- **L471** [ysuQRLg6i3Q](https://youtu.be/ysuQRLg6i3Q) · `2016-building-world-land-bridge` · 1 speakers  
+- **L471** [ysuQRLg6i3Q](https://youtu.be/ysuQRLg6i3Q) · `2016-building-world-land-bridge` · 1 agenda entry  
   World Land Bridge & Mankind's True Humanity Panel II, Scientific Fronti…  
     - Schiller Institute Conference "Building a W… ⚠ — *Building a World Land-Bridge: Realizing Manki…* — _⚠ dropped in person-map — no presenter link_  
-- **L472** [h56VwMTzfQ0](https://youtu.be/h56VwMTzfQ0) · `2016-building-world-land-bridge` · 1 speakers  
+- **L472** [h56VwMTzfQ0](https://youtu.be/h56VwMTzfQ0) · `2016-building-world-land-bridge` · 1 agenda entry  
   World Land Bridge & Mankind's True Humanity Panel III Classical Culture  
     - Schiller Institute Manhattan Conference - "… ⚠ — *Building a World Land-Bridge: Realizing Manki…* — _⚠ dropped in person-map — no presenter link_  
-- **L526** [LRTSpOvWI9k](https://youtu.be/LRTSpOvWI9k) · `2016-berlin-june-2016-creating` · 1 speakers  
+- **L526** [LRTSpOvWI9k](https://youtu.be/LRTSpOvWI9k) · `2016-berlin-june-2016-creating` · 1 agenda entry  
   Leonidas Chrysantopoulos – Global Crisis: Proposals for Solution  
     - Economic Cooperation Organisation (BSEC) ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L527** [bHu-A86esrk](https://youtu.be/bHu-A86esrk) · `2016-berlin-june-2016-creating` · 1 speakers  
+- **L527** [bHu-A86esrk](https://youtu.be/bHu-A86esrk) · `2016-berlin-june-2016-creating` · 1 agenda entry  
   Ren Lin – The New Silk Road win-win perspective  
     - Academy of Social Sciences (CASS), China ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L537** [NAz6zxqpTdg](https://youtu.be/NAz6zxqpTdg) · `2016-berlin-june-2016-creating` · 1 speakers  
+- **L537** [NAz6zxqpTdg](https://youtu.be/NAz6zxqpTdg) · `2016-berlin-june-2016-creating` · 1 agenda entry  
   Rainer Sandau – Towards a New Era of International Space Cooperation  
     - Rainer Sandau – Technical Director, Satelli… — _may name more than one person_  
-- **L746** [v0Ep6HY9pBU](https://youtu.be/v0Ep6HY9pBU) · `2013-virginia-march-2013-30th` · 1 speakers  
+- **L746** [v0Ep6HY9pBU](https://youtu.be/v0Ep6HY9pBU) · `2013-virginia-march-2013-30th` · 1 agenda entry  
   Helga Zepp-LaRouche • Introduction: The Definition of the Common Aims o…  
     - New Paradigm Conference · Sterling, Virgini… ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L764** [HkuN0pjH368](https://youtu.be/HkuN0pjH368) · `2013-virginia-march-2013-30th` · 1 speakers  
+- **L764** [HkuN0pjH368](https://youtu.be/HkuN0pjH368) · `2013-virginia-march-2013-30th` · 1 agenda entry  
   Michael Kirsch • The Hamiltonian Credit System  
     - New Paradigm Conference · Sterling, Virgini… ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L795** [CdYCAMgadiI](https://youtu.be/CdYCAMgadiI) · `2013-rescuing-civilization-brink` · 1 speakers  
+- **L795** [CdYCAMgadiI](https://youtu.be/CdYCAMgadiI) · `2013-rescuing-civilization-brink` · 1 agenda entry  
   Rescuing Civilization from the Brink - Panel 1 discussion  
     - International Schiller Institute conference ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L802** [OGZFtsl0IbA](https://youtu.be/OGZFtsl0IbA) · `2013-rescuing-civilization-brink` · 1 speakers  
+- **L802** [OGZFtsl0IbA](https://youtu.be/OGZFtsl0IbA) · `2013-rescuing-civilization-brink` · 1 agenda entry  
   Lyndon LaRouche: Creativity as Such  
     - International Schiller Institute conference ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L805** [I6HNcQ1HPZo](https://youtu.be/I6HNcQ1HPZo) · `2012-interviews-2012-germany` · 1 speakers  
+- **L805** [I6HNcQ1HPZo](https://youtu.be/I6HNcQ1HPZo) · `2012-interviews-2012-germany` · 1 agenda entry  
   Interview with Ghoncheh Tazmini • International Conference of the Schil…  
     - International Schiller Institute Conference: ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L806** [0czmdarUjpw](https://youtu.be/0czmdarUjpw) · `2012-interviews-2012-germany` · 1 speakers  
+- **L806** [0czmdarUjpw](https://youtu.be/0czmdarUjpw) · `2012-interviews-2012-germany` · 1 agenda entry  
   Interview with Michael Billington • International Conference of the Sch…  
     - International Schiller Institute Conference: ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L807** [oSjl1iEBgDU](https://youtu.be/oSjl1iEBgDU) · `2012-interviews-2012-germany` · 1 speakers  
+- **L807** [oSjl1iEBgDU](https://youtu.be/oSjl1iEBgDU) · `2012-interviews-2012-germany` · 1 agenda entry  
   Interview with Hussein Askary • International Conference of the Schille…  
     - International Schiller Institute Conference: ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L808** [dahldXqxNVc](https://youtu.be/dahldXqxNVc) · `2012-interviews-2012-germany` · 1 speakers  
+- **L808** [dahldXqxNVc](https://youtu.be/dahldXqxNVc) · `2012-interviews-2012-germany` · 1 agenda entry  
   Interview with Daniel Estulin • International Conference of the Schille…  
     - International Schiller Institute Conference: ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L820** [6-aMTq7uDdI](https://youtu.be/6-aMTq7uDdI) · `2012-11-24-floersheim-intl-conference` · 1 speakers  
+- **L820** [6-aMTq7uDdI](https://youtu.be/6-aMTq7uDdI) · `2012-11-24-floersheim-intl-conference` · 1 agenda entry  
   Ghoncheh Tazmini: Une perspective nouvelle pour l'Iran  
     - Ghoncheh Tazmini, chercheuse à l Institute … — _may name more than one person_  
-- **L821** [uKyw-jZxTCc](https://youtu.be/uKyw-jZxTCc) · `2012-11-24-floersheim-intl-conference` · 1 speakers  
+- **L821** [uKyw-jZxTCc](https://youtu.be/uKyw-jZxTCc) · `2012-11-24-floersheim-intl-conference` · 1 agenda entry  
   Panel II: There is life after the Euro! What kind of a Europe do we wan…  
     - International Schiller Institute conference: ⚠ — _⚠ dropped in person-map — no presenter link_  
-- **L846** [bxMfF5BzvSI](https://youtu.be/bxMfF5BzvSI) · `2012-11-24-floersheim-intl-conference` · 1 speakers  
+- **L846** [bxMfF5BzvSI](https://youtu.be/bxMfF5BzvSI) · `2012-11-24-floersheim-intl-conference` · 1 agenda entry  
   Prof. Wilhelm Hankel: Hat der Euro eine Chance, zu überleben?  
     - Internationale Konferenz: ⚠ — _⚠ dropped in person-map — no presenter link_  
 
@@ -511,11 +378,11 @@ Check the `speaker_raw` / `talk_title` split reads correctly. Fix in place + `fi
 
 ---
 
-## C. case 5 — multi-speaker agendas (124)  · ~1.5 h
+## C. case 5 — multi-speaker agendas (127)  · ~1.5 h
 
 One record per video with the speaker list attached. Accept unless the agenda is obviously wrong. ⚠ marks a speaker with no person page — the agenda line is still saved as text, only the presenter link is lost, so this is rarely a reason to reject.
 
-- **L195** [U2jhXuyvQ1E](https://youtu.be/U2jhXuyvQ1E) · `2021-mankind-immortal-species` · 22 speakers  
+- **L195** [U2jhXuyvQ1E](https://youtu.be/U2jhXuyvQ1E) · `2021-mankind-immortal-species` · 22 agenda entries  
   The Science of Physical Economy — Panel 2  
     - Moderator: Claudio Celani (Italy), Executiv… ⚠  
     - Felix Mendelssohn: Elijah, No. 14- Lord God… ⚠  
@@ -539,7 +406,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Alf Schmidt (Germany), Independent farmer, … ⚠  
     - Jhonny Estor (Haiti), Founder, "Renaissance… ⚠ — *Renaissance Haiti*  
     - Richard Freeman, (U.S.), Executive Intellig…  
-- **L181** [zDNuhb-ViaM](https://youtu.be/zDNuhb-ViaM) · `2022-april-2022-establish-security` · 20 speakers  
+- **L181** [zDNuhb-ViaM](https://youtu.be/zDNuhb-ViaM) · `2022-april-2022-establish-security` · 21 agenda entries  
   Conference Summary: To Establish a New Security and Development Archite…  
     - Plenary Session ⚠  
     - Helga Zepp-LaRouche, Founder, The Schiller … — *The Need for a New Paradigm.*  
@@ -561,7 +428,8 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Dennis Speed (U.S.), Committee for the Coin… — *The Urgent Need for a World Health System*  
     - Helga Zepp-LaRouche, Founder, The Schiller … — *Operation Ibn Sina*  
     - Princy Mthombeni (South Africa), Communicat… — *Energy Security for Africa*  
-- **L339** [RqtZS8odIpA](https://youtu.be/RqtZS8odIpA) · `2019-presidents-national-2019` · 19 speakers  
+    - Pedro Rubio  
+- **L339** [RqtZS8odIpA](https://youtu.be/RqtZS8odIpA) · `2019-presidents-national-2019` · 19 agenda entries  
   The Aesthetic Education of Man for the Beauty of the Mind and the Soul …  
     - Benjamin Lylloff, arr: "Mo Li Hua" ("Jasmin… — *Mo Li Hua*  
     - Benjamin Lylloff, director  
@@ -582,7 +450,22 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Schiller Institute Orchestra, Chorus, and S… ⚠  
     - John Sigerson, director  
     - My-Hoa Steger, piano ⚠  
-- **L196** [XMS4fI8hYbE](https://youtu.be/XMS4fI8hYbE) · `2021-mankind-immortal-species` · 13 speakers  
+- **L39** [gUk_uBdziJI](https://youtu.be/gUk_uBdziJI) · `2025-2025-memorial-weekend-beautiful` · 13 agenda entries  
+  The Beauty of the Diversity of Cultures — Panel 2  
+    - Moderator: Jen Pearl (U.S.), The Schiller I… ⚠  
+    - Megan Dobrodt (U.S.) President, Schiller In…  
+    - Elvira Green (U.S.) Mezzosoprano, formerly …  
+    - Helga Zepp-LaRouche (Germany), Founder, The…  
+    - Feride Istogu Soprano, Schiller Institute a… ⚠ — *Little Halit*  
+    - Ruijia Dong (China) mezzo-soprano; Louis Ar… ⚠ — *Parto, ma tu ben mio,*  
+    - Yulin Wang (China) tenor, Dura Jun, piano. … ⚠ — *在水一方*  
+    - Everett Suttle (U.S.), Internationally know… ⚠ — *Vai, azulão*  
+    - Everett Suttle, tenor; Dura Jun, piano: Ser… ⚠ — *Не пой, красавица*  
+    - Michelle Erin, soprano; Everett Suttle, ten… ⚠ — *Schwesterlein*  
+    - Wolfgang Amadeus Mozart, motet Ave Verum co… ⚠  
+    - Ave Verum Corpus by Mozart ⚠  
+    - John Sigerson (U.S.)  
+- **L196** [XMS4fI8hYbE](https://youtu.be/XMS4fI8hYbE) · `2021-mankind-immortal-species` · 13 agenda entries  
   Can a Strategic Crisis Between the Major Powers Be Avoided  — Panel 1  
     - Moderator: Dennis Speed (U.S.), The Schille…  
     - Johannes Brahms, Von ewiger Liebe, Op. 43 N… ⚠  
@@ -597,21 +480,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Madison Tang (U.S.), CODEPINK, ⚠  
     - Dr. Nikolay Megits (U.S.), President of Ins… ⚠  
     - Earl Rasmussen (U.S.), The Eurasia Center ⚠  
-- **L39** [gUk_uBdziJI](https://youtu.be/gUk_uBdziJI) · `2025-2025-memorial-weekend-beautiful` · 12 speakers  
-  The Beauty of the Diversity of Cultures — Panel 2  
-    - Moderator: Jen Pearl (U.S.), The Schiller I… ⚠  
-    - Megan Dobrodt (U.S.) President, Schiller In…  
-    - Elvira Green (U.S.) Mezzosoprano, formerly …  
-    - Helga Zepp-LaRouche (Germany), Founder, The…  
-    - Feride Istogu Soprano, Schiller Institute a… ⚠ — *Little Halit*  
-    - Ruijia Dong (China) mezzo-soprano; Louis Ar… ⚠ — *Parto, ma tu ben mio,*  
-    - Yulin Wang (China) tenor, Dura Jun, piano. … ⚠ — *在水一方*  
-    - Everett Suttle (U.S.), Internationally know… ⚠ — *Vai, azulão*  
-    - Everett Suttle, tenor; Dura Jun, piano: Ser… ⚠ — *Не пой, красавица*  
-    - Michelle Erin, soprano; Everett Suttle, ten… ⚠ — *Schwesterlein*  
-    - Wolfgang Amadeus Mozart, motet Ave Verum co… ⚠  
-    - Ave Verum Corpus by Mozart ⚠  
-- **L35** [cRBXdmrBWsY](https://youtu.be/cRBXdmrBWsY) · `2025-2025-memorial-weekend-beautiful` · 11 speakers  
+- **L35** [cRBXdmrBWsY](https://youtu.be/cRBXdmrBWsY) · `2025-2025-memorial-weekend-beautiful` · 11 agenda entries  
   Shaping the Earth’s Next 50 Years  
     - Moderator: Daniel Burke (U.S.), The Schille…  
     - Jason Ross (U.S.), Science Advisor to the S…  
@@ -624,7 +493,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Ashley Tran (US) ⚠  
     - Jose Vega (U.S.), LaRouche Youth Movement L… ⚠  
     - Megan Dobrodt (U.S.), President, Schiller I…  
-- **L93** [TmWFAdBk-VA](https://youtu.be/TmWFAdBk-VA) · `2023-february-reason-annihilation-humanity` · 10 speakers  
+- **L93** [TmWFAdBk-VA](https://youtu.be/TmWFAdBk-VA) · `2023-february-reason-annihilation-humanity` · 10 agenda entries  
   The Name of Peace: A New Security and Economic Development Architecture…  
     - Jacques Cheminade (France), President of So… — *LaRouche's Design for the New Paradigm*  
     - Shakeel Ahmad Ramay (Pakistan), CEO, Asian … — *Sustainable Peace through Inclusive Developme…*  
@@ -636,84 +505,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Julio De Vido (Argentina), former Minister … ⚠ — *BRICS-Plus: Bringing the Belt and Road Initia…*  
     - Pedro Pinho (Brazil), President, Associatio… ⚠ — *Brazil Must Back its BRICS Partners to End th…*  
     - Celeste Sáenz de Miera (Mexico), Secretary … ⚠  
-- **L4** [eth7wIYEBb4](https://youtu.be/eth7wIYEBb4) · `2025-berlin-wolf-paradigm-relations` · 9 speakers  
-  The Beauty of the Diversity of Cultures & Role of Young People in Shapi…  
-    - Harley Schlanger, Vice President of the Sch…  
-    - Maurizio Abbate, President of the National … ⚠  
-    - Helena Chang, Columnist, China/Austria ⚠  
-    - Anastasia Battle, Co-Initiator, Internation…  
-    - Carolina Dominguez, Schiller Institute, Mex…  
-    - Kynan Thistlethwaite, Schiller Institute, U… ⚠  
-    - Ashley Tran, Schiller Institute, USA ⚠  
-    - Chérine Sultan, Institut Schiller, France ⚠  
-    - Daniel Burke, Schiller Institute, USA  
-- **L40** [Wkc97KwskC0](https://youtu.be/Wkc97KwskC0) · `2025-2025-memorial-weekend-beautiful` · 9 speakers  
-  Strategic Challenges and the Emerging New Order — Panel 1  
-    - Moderator: Dennis Speed (U.S.), The Schille…  
-    - Helga Zepp-LaRouche (Germany), Founder, The…  
-    - H.E. Naledi Pandor (South Africa), former M…  
-    - Prof. Dmitri Trenin (Russia), Academic Supe…  
-    - Prof. Zhang Weiwei, Professor of Internatio…  
-    - H.E. Donald Ramotar (Guyana), Former Presid…  
-    - Ambassador Chas Freeman (U.S.), former U.S.…  
-    - Ray McGovern (U.S.), former Senior Analyst,…  
-    - Scott Ritter (U.S.), former USMC Intel. and…  
-- **L63** [K9xiNZsefUs](https://youtu.be/K9xiNZsefUs) · `2023-strategic-situation-after-historic` · 9 speakers  
-  H.E. Donald Ramotar, Former President of Guyana: "Prospects and Challen…  
-    - Moderator: Dennis Speed, The Schiller Insti…  
-    - Helga Zepp-LaRouche (Germany), Founder, The… — *BRICS: A Transformation Greater than that of …*  
-    - H.E. Donald Ramotar (Guyana), Former Presid… — *Prospects and Challenges post BRICS Summit*  
-    - Prof. Georgy Toloraya (Russia), Retired Sen… — *BRICS: A War Prevention Medicine*  
-    - Robert Cushing (U.S.), Association of U.S. … — *A Policy for Peace*  
-    - Raymond McGovern (U.S.), former Senior Anal… — *JFK and Russia, Making a Shift Towards Sanity…*  
-    - Diane Sare (U.S.), LaRouche independent can…  
-    - Scott Ritter (U.S.), former UN Weapons Insp… — *The NATO Worldview Is Colliding with Reality*  
-    - His Excellency Donald Ramotar, former Presi…  
-- **L64** [Vl8LLv3VxzA](https://youtu.be/Vl8LLv3VxzA) · `2023-strategic-situation-after-historic` · 9 speakers  
-  "BRICS: A Transformation Greater than that of the End of the Cold War" …  
-    - Moderator: Dennis Speed, The Schiller Insti…  
-    - Helga Zepp-LaRouche (Germany), Founder, The… — *BRICS: A Transformation Greater than that of …*  
-    - H.E. Donald Ramotar (Guyana), Former Presid… — *Prospects and Challenges post BRICS Summit*  
-    - Prof. Georgy Toloraya (Russia), Retired Sen… — *BRICS: A War Prevention Medicine*  
-    - Robert Cushing (U.S.), Association of U.S. … — *A Policy for Peace*  
-    - Raymond McGovern (U.S.), former Senior Anal… — *JFK and Russia, Making a Shift Towards Sanity…*  
-    - Diane Sare (U.S.), LaRouche independent can…  
-    - Scott Ritter (U.S.), former UN Weapons Insp… — *The NATO Worldview Is Colliding with Reality*  
-    - Helga Zepp-LaRouche, Founder of the Interna…  
-- **L65** [k3ko8P8rwt4](https://youtu.be/k3ko8P8rwt4) · `2023-strategic-situation-after-historic` · 9 speakers  
-  Former CIA Analyst Ray McGovern: “JFK and Russia, Shifting Towards Sani…  
-    - Moderator: Dennis Speed, The Schiller Insti…  
-    - Helga Zepp-LaRouche (Germany), Founder, The… — *BRICS: A Transformation Greater than that of …*  
-    - H.E. Donald Ramotar (Guyana), Former Presid… — *Prospects and Challenges post BRICS Summit*  
-    - Prof. Georgy Toloraya (Russia), Retired Sen… — *BRICS: A War Prevention Medicine*  
-    - Robert Cushing (U.S.), Association of U.S. … — *A Policy for Peace*  
-    - Raymond McGovern (U.S.), former Senior Anal… — *JFK and Russia, Making a Shift Towards Sanity…*  
-    - Diane Sare (U.S.), LaRouche independent can…  
-    - Scott Ritter (U.S.), former UN Weapons Insp… — *The NATO Worldview Is Colliding with Reality*  
-    - Raymond McGovern, a former Senior Analyst o…  
-- **L66** [rNI55NoKxJE](https://youtu.be/rNI55NoKxJE) · `2023-strategic-situation-after-historic` · 9 speakers  
-  Diane Sare - The Strategic Situation After the Historic BRICS Summit  
-    - Moderator: Dennis Speed, The Schiller Insti…  
-    - Helga Zepp-LaRouche (Germany), Founder, The… — *BRICS: A Transformation Greater than that of …*  
-    - H.E. Donald Ramotar (Guyana), Former Presid… — *Prospects and Challenges post BRICS Summit*  
-    - Prof. Georgy Toloraya (Russia), Retired Sen… — *BRICS: A War Prevention Medicine*  
-    - Robert Cushing (U.S.), Association of U.S. … — *A Policy for Peace*  
-    - Raymond McGovern (U.S.), former Senior Anal… — *JFK and Russia, Making a Shift Towards Sanity…*  
-    - Diane Sare (U.S.), LaRouche independent can…  
-    - Scott Ritter (U.S.), former UN Weapons Insp… — *The NATO Worldview Is Colliding with Reality*  
-    - Diane Sare, a LaRouche Independent Candidat…  
-- **L240** [tCCDBK4cgKE](https://youtu.be/tCCDBK4cgKE) · `2020-december-2020-world-after` · 9 speakers  
-  Panel 2 — Escaping the Danger of World War III: A Strategic Order Based…  
-    - LaRouche Collected Works, Volume I—Two for … ⚠  
-    - Helga Zepp-LaRouche, Schiller Institute Pre…  
-    - Yan Wang, PhD, "The Chinese Economic Model" ⚠ — *The Chinese Economic Model*  
-    - Marcelo Muñoz (Spain), Founder and Presiden… ⚠ — *China and the US: Rivalry, Confrontation, or …*  
-    - Ole Doering, PhD (Germany), Sinologist and … ⚠ — *A Salutogenic Symphony with Ancient Chinese P…*  
-    - Prof. Emmanuel Dupuy (France), Founder and … ⚠ — *What is at Stake in the on-going Renovation o…*  
-    - Col. Richard H. Black (USA Ret.), former he… — *NATO Must Be Dissolved*  
-    - Paul Gallagher, (US), Executive Intelligenc…  
-    - Marc-Gabriel Draghi (France), Economist: "O… — *Orderly Debt Cancellation: Historical Precede…*  
-- **L315** [N1B27voNUBw](https://youtu.be/N1B27voNUBw) · `2020-april-2020` · 9 speakers  
+- **L315** [N1B27voNUBw](https://youtu.be/N1B27voNUBw) · `2020-april-2020` · 10 agenda entries  
   Beethoven Mass in C Major, Op. 86 — NYC Schiller Institute Chorus and O…  
     - Performed November 18, 2018 at St. Bartholo… ⚠  
     - Friedrich Schiller Birthday Celebration Con… ⚠  
@@ -724,7 +516,96 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Linda Childs, Alto ⚠  
     - Everett Suttle, Tenor ⚠  
     - Costas Tsourakis, Bass ⚠  
-- **L476** [gR4Wu39Vlvw](https://youtu.be/gR4Wu39Vlvw) · `2016-musical-dialogue-cultures-berlin` · 9 speakers  
+    - John Sigerson (U.S.)  
+- **L4** [eth7wIYEBb4](https://youtu.be/eth7wIYEBb4) · `2025-berlin-wolf-paradigm-relations` · 9 agenda entries  
+  The Beauty of the Diversity of Cultures & Role of Young People in Shapi…  
+    - Harley Schlanger, Vice President of the Sch…  
+    - Maurizio Abbate, President of the National … ⚠  
+    - Helena Chang, Columnist, China/Austria ⚠  
+    - Anastasia Battle, Co-Initiator, Internation…  
+    - Carolina Dominguez, Schiller Institute, Mex…  
+    - Kynan Thistlethwaite, Schiller Institute, U… ⚠  
+    - Ashley Tran, Schiller Institute, USA ⚠  
+    - Chérine Sultan, Institut Schiller, France ⚠  
+    - Daniel Burke, Schiller Institute, USA  
+- **L40** [Wkc97KwskC0](https://youtu.be/Wkc97KwskC0) · `2025-2025-memorial-weekend-beautiful` · 9 agenda entries  
+  Strategic Challenges and the Emerging New Order — Panel 1  
+    - Moderator: Dennis Speed (U.S.), The Schille…  
+    - Helga Zepp-LaRouche (Germany), Founder, The…  
+    - H.E. Naledi Pandor (South Africa), former M…  
+    - Prof. Dmitri Trenin (Russia), Academic Supe…  
+    - Prof. Zhang Weiwei, Professor of Internatio…  
+    - H.E. Donald Ramotar (Guyana), Former Presid…  
+    - Ambassador Chas Freeman (U.S.), former U.S.…  
+    - Ray McGovern (U.S.), former Senior Analyst,…  
+    - Scott Ritter (U.S.), former USMC Intel. and…  
+- **L63** [K9xiNZsefUs](https://youtu.be/K9xiNZsefUs) · `2023-strategic-situation-after-historic` · 9 agenda entries  
+  H.E. Donald Ramotar, Former President of Guyana: "Prospects and Challen…  
+    - Moderator: Dennis Speed, The Schiller Insti…  
+    - Helga Zepp-LaRouche (Germany), Founder, The… — *BRICS: A Transformation Greater than that of …*  
+    - H.E. Donald Ramotar (Guyana), Former Presid… — *Prospects and Challenges post BRICS Summit*  
+    - Prof. Georgy Toloraya (Russia), Retired Sen… — *BRICS: A War Prevention Medicine*  
+    - Robert Cushing (U.S.), Association of U.S. … — *A Policy for Peace*  
+    - Raymond McGovern (U.S.), former Senior Anal… — *JFK and Russia, Making a Shift Towards Sanity…*  
+    - Diane Sare (U.S.), LaRouche independent can…  
+    - Scott Ritter (U.S.), former UN Weapons Insp… — *The NATO Worldview Is Colliding with Reality*  
+    - His Excellency Donald Ramotar, former Presi…  
+- **L64** [Vl8LLv3VxzA](https://youtu.be/Vl8LLv3VxzA) · `2023-strategic-situation-after-historic` · 9 agenda entries  
+  "BRICS: A Transformation Greater than that of the End of the Cold War" …  
+    - Moderator: Dennis Speed, The Schiller Insti…  
+    - Helga Zepp-LaRouche (Germany), Founder, The… — *BRICS: A Transformation Greater than that of …*  
+    - H.E. Donald Ramotar (Guyana), Former Presid… — *Prospects and Challenges post BRICS Summit*  
+    - Prof. Georgy Toloraya (Russia), Retired Sen… — *BRICS: A War Prevention Medicine*  
+    - Robert Cushing (U.S.), Association of U.S. … — *A Policy for Peace*  
+    - Raymond McGovern (U.S.), former Senior Anal… — *JFK and Russia, Making a Shift Towards Sanity…*  
+    - Diane Sare (U.S.), LaRouche independent can…  
+    - Scott Ritter (U.S.), former UN Weapons Insp… — *The NATO Worldview Is Colliding with Reality*  
+    - Helga Zepp-LaRouche, Founder of the Interna…  
+- **L65** [k3ko8P8rwt4](https://youtu.be/k3ko8P8rwt4) · `2023-strategic-situation-after-historic` · 9 agenda entries  
+  Former CIA Analyst Ray McGovern: “JFK and Russia, Shifting Towards Sani…  
+    - Moderator: Dennis Speed, The Schiller Insti…  
+    - Helga Zepp-LaRouche (Germany), Founder, The… — *BRICS: A Transformation Greater than that of …*  
+    - H.E. Donald Ramotar (Guyana), Former Presid… — *Prospects and Challenges post BRICS Summit*  
+    - Prof. Georgy Toloraya (Russia), Retired Sen… — *BRICS: A War Prevention Medicine*  
+    - Robert Cushing (U.S.), Association of U.S. … — *A Policy for Peace*  
+    - Raymond McGovern (U.S.), former Senior Anal… — *JFK and Russia, Making a Shift Towards Sanity…*  
+    - Diane Sare (U.S.), LaRouche independent can…  
+    - Scott Ritter (U.S.), former UN Weapons Insp… — *The NATO Worldview Is Colliding with Reality*  
+    - Raymond McGovern, a former Senior Analyst o…  
+- **L66** [rNI55NoKxJE](https://youtu.be/rNI55NoKxJE) · `2023-strategic-situation-after-historic` · 9 agenda entries  
+  Diane Sare - The Strategic Situation After the Historic BRICS Summit  
+    - Moderator: Dennis Speed, The Schiller Insti…  
+    - Helga Zepp-LaRouche (Germany), Founder, The… — *BRICS: A Transformation Greater than that of …*  
+    - H.E. Donald Ramotar (Guyana), Former Presid… — *Prospects and Challenges post BRICS Summit*  
+    - Prof. Georgy Toloraya (Russia), Retired Sen… — *BRICS: A War Prevention Medicine*  
+    - Robert Cushing (U.S.), Association of U.S. … — *A Policy for Peace*  
+    - Raymond McGovern (U.S.), former Senior Anal… — *JFK and Russia, Making a Shift Towards Sanity…*  
+    - Diane Sare (U.S.), LaRouche independent can…  
+    - Scott Ritter (U.S.), former UN Weapons Insp… — *The NATO Worldview Is Colliding with Reality*  
+    - Diane Sare, a LaRouche Independent Candidat…  
+- **L240** [tCCDBK4cgKE](https://youtu.be/tCCDBK4cgKE) · `2020-december-2020-world-after` · 9 agenda entries  
+  Panel 2 — Escaping the Danger of World War III: A Strategic Order Based…  
+    - LaRouche Collected Works, Volume I—Two for … ⚠  
+    - Helga Zepp-LaRouche, Schiller Institute Pre…  
+    - Yan Wang, PhD, "The Chinese Economic Model" ⚠ — *The Chinese Economic Model*  
+    - Marcelo Muñoz (Spain), Founder and Presiden… ⚠ — *China and the US: Rivalry, Confrontation, or …*  
+    - Ole Doering, PhD (Germany), Sinologist and … ⚠ — *A Salutogenic Symphony with Ancient Chinese P…*  
+    - Prof. Emmanuel Dupuy (France), Founder and … ⚠ — *What is at Stake in the on-going Renovation o…*  
+    - Col. Richard H. Black (USA Ret.), former he… — *NATO Must Be Dissolved*  
+    - Paul Gallagher, (US), Executive Intelligenc…  
+    - Marc-Gabriel Draghi (France), Economist: "O… — *Orderly Debt Cancellation: Historical Precede…*  
+- **L326** [TiBx_1ykC80](https://youtu.be/TiBx_1ykC80) · `2019-november-2019-soden` · 9 agenda entries  
+  Who is Lyndon LaRouche? — Panel 3  
+    - Diogène Senny, President of the Panafrican …  
+    - Josef Miklosko, Former vice Prime Minister …  
+    - Dennis Small, Coordinator for Latin America…  
+    - Theo Mitchell, former State Senator of Sout… ⚠  
+    - Nino Galloni, former director general of th…  
+    - Hussein Askary, Southwest Asia Coordinator …  
+    - Claudio Giudici, Chairman, Uritaxi (Nationa… ⚠  
+    - Harley Schlanger, Former spokesman for Lynd…  
+    - Lyndon H. LaRouche, Jr.  
+- **L476** [gR4Wu39Vlvw](https://youtu.be/gR4Wu39Vlvw) · `2016-musical-dialogue-cultures-berlin` · 9 agenda entries  
   Peter Tchaikovsky: Andante Cantabile  
     - Performer: Camerata Geminiani ⚠  
     - Gian Marco Sanna  
@@ -735,7 +616,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Eiffel Valdecoa ⚠  
     - Olesya Sablina ⚠  
     - Jochen Heibertshausen (guest artist) ⚠  
-- **L42** [i0QnKEVUHlw](https://youtu.be/i0QnKEVUHlw) · `2024-spirit-beethoven-become-brethren` · 8 speakers  
+- **L42** [i0QnKEVUHlw](https://youtu.be/i0QnKEVUHlw) · `2024-spirit-beethoven-become-brethren` · 8 agenda entries  
   A U.S./Russia Nuclear Conflict Is Not Just a Possibility, but Increasin…  
     - Dmitri Trenin (Russia), Professor, Academic…  
     - H.E. Donald Ramotar (Guyana), former Presid…  
@@ -745,7 +626,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Scott Ritter (U.S.), former UN Weapons Insp…  
     - Col. (ret.) Larry Wilkerson, (U.S.) former …  
     - Amb. Hossein Mousavian (Iran), former ambas… ⚠  
-- **L43** [SaaUj4uIAoE](https://youtu.be/SaaUj4uIAoE) · `2024-spirit-beethoven-become-brethren` · 8 speakers  
+- **L43** [SaaUj4uIAoE](https://youtu.be/SaaUj4uIAoE) · `2024-spirit-beethoven-become-brethren` · 8 agenda entries  
   The Next Several Weeks Until the 20th of January Are the Most Dangerous…  
     - Dmitri Trenin (Russia), Professor, Academic…  
     - H.E. Donald Ramotar (Guyana), former Presid…  
@@ -755,7 +636,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Scott Ritter (U.S.), former UN Weapons Insp…  
     - Col. (ret.) Larry Wilkerson, (U.S.) former …  
     - Amb. Hossein Mousavian (Iran), former ambas… ⚠  
-- **L45** [S9ltnjy5W4Q](https://youtu.be/S9ltnjy5W4Q) · `2024-spirit-beethoven-become-brethren` · 8 speakers  
+- **L45** [S9ltnjy5W4Q](https://youtu.be/S9ltnjy5W4Q) · `2024-spirit-beethoven-become-brethren` · 8 agenda entries  
   The Science Drivers of Physical Economy Today  
     - Moderator: Jason Ross (U.S.), Science Advis…  
     - Theodore Postol (U.S.), Professor Emeritus … ⚠  
@@ -765,7 +646,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Sergey Pulinets (Russia), Principal Researc…  
     - Jürgen Schöttle (Germany), Master in Engine… ⚠  
     - Space Historian (Europe) ⚠  
-- **L294** [TEgNPGzmuQ8](https://youtu.be/TEgNPGzmuQ8) · `2020-june-2020-humanity-prosper` · 8 speakers  
+- **L294** [TEgNPGzmuQ8](https://youtu.be/TEgNPGzmuQ8) · `2020-june-2020-humanity-prosper` · 8 agenda entries  
   Panel 3 — The Job of Youth  
     - Helga Zepp-LaRouche, Schiller Institute, Ge…  
     - Carolina Domínguez Cisneros, Mexico; Sebast… — *Getting Back the Great Ideas That Were Stolen…*  
@@ -775,7 +656,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Lissie Brobjerg, Schiller Institute, United… ⚠ — *Are You a Large-Scale Geological Force?*  
     - Areej Atef, Education Committee Vice Presid… ⚠ — *Youth of the World Face Two World Systems: Th…*  
     - Jose Vega, Bronx, NY: "A New Space CCC" ⚠ — *A New Space CCC*  
-- **L304** [xQlZ-2CcXiY](https://youtu.be/xQlZ-2CcXiY) · `2020-april-2020` · 8 speakers  
+- **L304** [xQlZ-2CcXiY](https://youtu.be/xQlZ-2CcXiY) · `2020-april-2020` · 8 agenda entries  
   Panel 2: “For a Better Understanding of How Our Universe Functions”  
     - Moderator: Jason Ross  
     - Jean-Pierre Luminet, PhD · Astrophysicist; … ⚠ — *The Role of 'Free Invention' in Creative Disc…*  
@@ -785,17 +666,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Guangxi Li, MD, PhD · Chinese Academy of Me… ⚠ — *Chinese Medicine Treatment of COVID-19*  
     - LaRouche Legacy Foundation: www.laroucheleg… ⚠  
     - Schiller Institute COVID-19 Policy: https:/… ⚠  
-- **L326** [TiBx_1ykC80](https://youtu.be/TiBx_1ykC80) · `2019-november-2019-soden` · 8 speakers  
-  Who is Lyndon LaRouche? — Panel 3  
-    - Diogène Senny, President of the Panafrican …  
-    - Josef Miklosko, Former vice Prime Minister …  
-    - Dennis Small, Coordinator for Latin America…  
-    - Theo Mitchell, former State Senator of Sout… ⚠  
-    - Nino Galloni, former director general of th…  
-    - Hussein Askary, Southwest Asia Coordinator …  
-    - Claudio Giudici, Chairman, Uritaxi (Nationa… ⚠  
-    - Harley Schlanger, Former spokesman for Lynd…  
-- **L41** [FuS2MyfbC7Q](https://youtu.be/FuS2MyfbC7Q) · `2024-spirit-beethoven-become-brethren` · 7 speakers  
+- **L41** [FuS2MyfbC7Q](https://youtu.be/FuS2MyfbC7Q) · `2024-spirit-beethoven-become-brethren` · 7 agenda entries  
   How Should the Global South Respond?—H.E. Naledi Pandor with Helga Zepp…  
     - H.E. Naledi Pandor (South Africa), former M… — *In the Spirit of Schiller and Beethoven: All …*  
     - H.E. Naledi Pandor (South Africa), former M… — *How Should the South Respond?*  
@@ -804,7 +675,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Sergey Pulinets (Russia), Principal Researc…  
     - Jürgen Schöttle (Germany), Master in Engine… ⚠  
     - Brian Harvey (Ireland), Space Historian ⚠  
-- **L52** [pPRUHXXnyIQ](https://youtu.be/pPRUHXXnyIQ) · `2024-spirit-beethoven-become-brethren` · 7 speakers  
+- **L52** [pPRUHXXnyIQ](https://youtu.be/pPRUHXXnyIQ) · `2024-spirit-beethoven-become-brethren` · 7 agenda entries  
   The Strategic Crisis: New and Final World War, or a New Paradigm of the…  
     - Moderator: Dennis Speed (U.S.), Schiller In…  
     - H.E. Naledi Pandor (South Africa), former M… — *How Should the South Respond?*  
@@ -813,7 +684,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - H.E. Ján Čarnogurský (Slovakia), former Pri… ⚠  
     - Ambassador Chas W. Freeman, Jr. (U.S.), for…  
     - Former U.S. State Department Official (U.S.) ⚠  
-- **L92** [yvb5qML-_os](https://youtu.be/yvb5qML-_os) · `2023-february-reason-annihilation-humanity` · 7 speakers  
+- **L92** [yvb5qML-_os](https://youtu.be/yvb5qML-_os) · `2023-february-reason-annihilation-humanity` · 7 agenda entries  
   How Nuclear World War III Can Be Avoided — Panel 1  
     - Helga Zepp-LaRouche (Germany), Founder, The… — *How to Avoid Nuclear War: The Nature of Man*  
     - H. E. Donald Ramotar (Guyana), former Presi… — *Russia/Ukraine and its Importance for the Glo…*  
@@ -822,7 +693,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Sam Pitroda (U.S./India), Telecom and IT In… — *Potential for Peace in a Hyperconnected World*  
     - Diane Sare (United States), candidate for U… — *Can Americans Put Aside Their Divisions to St…*  
     - Religious Leaders (United States) ⚠  
-- **L193** [efw9yTulB4A](https://youtu.be/efw9yTulB4A) · `2021-mankind-immortal-species` · 7 speakers  
+- **L193** [efw9yTulB4A](https://youtu.be/efw9yTulB4A) · `2021-mankind-immortal-species` · 7 agenda entries  
   Global Leaders Discuss: Can a Strategic Crisis Between the Major Powers…  
     - Helga Zepp-LaRouche, Founder and President …  
     - Ms. Chen Xiaohan (China), Deputy Secretary …  
@@ -831,7 +702,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Col. Richard H. Black (ret.) (U.S.), former…  
     - Dr. George Koo (U.S.), Chairman, Burlingame…  
     - Kirk Wiebe (U.S.), Senior Analyst (Ret.), U… ⚠  
-- **L293** [gmvQftqGuqM](https://youtu.be/gmvQftqGuqM) · `2020-june-2020-humanity-prosper` · 7 speakers  
+- **L293** [gmvQftqGuqM](https://youtu.be/gmvQftqGuqM) · `2020-june-2020-humanity-prosper` · 7 agenda entries  
   Panel 2 — The World Needs 1.5 Billion New Productive Jobs to End War, F…  
     - Diogène Senny, Founder of the Pan-African L… — *Thrive or perish: An Introduction to the Geop…*  
     - Walter Formento, Director, Center for Polit… ⚠ — *South America on the New Multipolar Road*  
@@ -840,7 +711,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Robert L. Baker, Schiller Institute, United…  
     - Mike Callicrate, Board of Directors, Organi… — *Food Unites People Around the Planet*  
     - Alicia Díaz Brown, Citizens Movement for Wa… ⚠ — *Let Us Return to the Best Moments of the U.S.…*  
-- **L310** [aNnuigrJTwc](https://youtu.be/aNnuigrJTwc) · `2020-april-2020` · 7 speakers  
+- **L310** [aNnuigrJTwc](https://youtu.be/aNnuigrJTwc) · `2020-april-2020` · 7 agenda entries  
   Excerpt—Eating Is a Moral Right, A Dialogue with 6 American Farmer Lead…  
     - Bob Baker, Virginia; Schiller Institute agr…  
     - Joe Maxwell, Missouri; former Missouri Lt. …  
@@ -849,7 +720,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Bill Bullard; Montana, CEO R-CALF USA,  
     - Jim Benham, Indiana; State Pres. of Indiana…  
     - Mike Callicrate, Kansas; Colorado, Bd of Di…  
-- **L745** [T0a-8lK-mtU](https://youtu.be/T0a-8lK-mtU) · `2013-frankfurt-april-2013-attaining` · 7 speakers  
+- **L745** [T0a-8lK-mtU](https://youtu.be/T0a-8lK-mtU) · `2013-frankfurt-april-2013-attaining` · 7 agenda entries  
   Roundtable: Aesthetical Education and Beauty  
     - Antonella Banaudi, Opera singer, Italy  
     - Helga Zepp-LaRouche, Founder and leader of …  
@@ -858,7 +729,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L44** [Hi2cUOmeveQ](https://youtu.be/Hi2cUOmeveQ) · `2024-spirit-beethoven-become-brethren` · 6 speakers  
+- **L44** [Hi2cUOmeveQ](https://youtu.be/Hi2cUOmeveQ) · `2024-spirit-beethoven-become-brethren` · 6 agenda entries  
   The Beauty of the Cultures of the World: A Dialogue Among Civilizations  
     - Helga Zepp-LaRouche (Germany), Founder, Sch…  
     - William Ferguson (U.S.), Schiller Institute ⚠  
@@ -866,7 +737,7 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - John Sigerson (U.S.), Musical Director, Sch…  
     - Liliana Gorini (Italy), Chairwoman of Movis…  
     - Nader Majd (Iran/U.S.), President and Direc… ⚠  
-- **L190** [RuusNL-T_aY](https://youtu.be/RuusNL-T_aY) · `2021-mankind-immortal-species` · 6 speakers  
+- **L190** [RuusNL-T_aY](https://youtu.be/RuusNL-T_aY) · `2021-mankind-immortal-species` · 6 agenda entries  
   The Art of Aesthetical Education  
     - Helga Zepp-LaRouche (Germany), Founder and …  
     - Diane Sare (U.S.), The Schiller Institute  
@@ -874,448 +745,475 @@ One record per video with the speaker list attached. Accept unless the agenda is
     - Xu Wang (China), Executive Dean of Boao Cul… ⚠  
     - Prof. Zaher Wahab (Afghanistan), Professor … ⚠  
     - Denise Rainey (U.S.), retired educator and … ⚠  
-- **L25** [zs9bsTyYMxo](https://youtu.be/zs9bsTyYMxo) · `2025-berlin-wolf-paradigm-relations` · 5 speakers  
+- **L325** [GLJGQdiri_Q](https://youtu.be/GLJGQdiri_Q) · `2019-november-2019-soden` · 6 agenda entries  
+  The Fundamental Scientific Issues of our Future and the Space Silk Road…  
+    - Jacques Cheminade, President of Solidarité …  
+    - Sébastien Drochon: Space Policy Director, F…  
+    - Megan Beets and Jason Ross, the "Basement T… ⚠ — *Basement Team*  
+    - Lyndon H. LaRouche, Jr.  
+    - Jason Ross  
+    - Megan Beets  
+- **L25** [zs9bsTyYMxo](https://youtu.be/zs9bsTyYMxo) · `2025-berlin-wolf-paradigm-relations` · 5 agenda entries  
   The Scientific Challenges in the New Paradigm  
     - Jason Ross, Scientific Advisor of the Schil…  
     - Prof. Franco Battaglia, Professor of Physic…  
     - Prof. Dr. Carl-Otto Weiss, Professor and Di…  
     - Robert Lechner-Schobel, Business Consultant… ⚠  
     - Dennis Small, Director of the Latin America…  
-- **L237** [g2r5rJkkNp4](https://youtu.be/g2r5rJkkNp4) · `2020-september-2020-youth-world` · 5 speakers  
+- **L165** [mVb1m8SqXTw](https://youtu.be/mVb1m8SqXTw) · `2022-there-peace-without-bankruptcy` · 5 agenda entries  
+  This July 4, Declare for A New Bretton Woods!!  
+    - On Sunday, July 3, Helga Zepp-LaRouche will… ⚠ — *Lyndon LaRouche New Bretton Woods*  
+    - On July 4, 1776, America declared independe… ⚠  
+    - Helga Zepp-LaRouche  
+    - Lyndon H. LaRouche, Jr.  
+    - Diane Sare  
+- **L194** [DrAfNEl5C-w](https://youtu.be/DrAfNEl5C-w) · `2021-mankind-immortal-species` · 5 agenda entries  
+  There Are No Limits to Growth in the Universe — Conference excerpts  
+    - Speakers include: Jason Ross, Dr. Augustinu… ⚠  
+    - Jason Ross  
+    - State Senator Mike Thompson  
+    - Prof. Franco Battaglia  
+    - Prof. Augustinus Berkhout  
+- **L237** [g2r5rJkkNp4](https://youtu.be/g2r5rJkkNp4) · `2020-september-2020-youth-world` · 5 agenda entries  
   The World Needs the Exoneration of Lyndon LaRouche — Panel 1  
     - Helga Zepp-LaRouche, Founder and Chairman, …  
     - Jozef Mikloško, Former Deputy Prime Ministe…  
     - Marino Elsevyf, Attorney-at-Law, Dominican … ⚠  
     - Paul Gallagher, EIR Economics Editor, Forme…  
     - Dennis Small, EIR Ibero-American Editor, Fo…  
-- **L479** [nGPss-yMUSU](https://youtu.be/nGPss-yMUSU) · `2016-musical-dialogue-cultures-berlin` · 5 speakers  
+- **L479** [nGPss-yMUSU](https://youtu.be/nGPss-yMUSU) · `2016-musical-dialogue-cultures-berlin` · 5 agenda entries  
   Wolfgang Amadeus Mozart — Mass in C „Coronation“, KV 317  
     - Sopran: Sua Baek - Korea ⚠  
     - Alto: Mayumi Nakamura - Japan ⚠  
     - Baß: Chanyoung Lee - Korea ⚠  
     - The Schiller Institute Chorus ⚠  
     - Conductor – Ingo Bathow ⚠  
-- **L332** [qDxilIhSJbw](https://youtu.be/qDxilIhSJbw) · `2019-presidents-national-2019` · 4 speakers  
+- **L62** [aOrmFJXyAVI](https://youtu.be/aOrmFJXyAVI) · `2024-press-danger-nuclear-real` · 4 agenda entries  
+  Emergency Press Conference: The Danger of Nuclear War Is Real, and Must…  
+    - Schiller Institute ⚠  
+    - On June 3, the U.S. State Department preven… ⚠  
+    - On Wednesday, June 12 at the National Press… ⚠  
+    - Scott Ritter  
+- **L192** [_-1N76f_iYU](https://youtu.be/_-1N76f_iYU) · `2021-mankind-immortal-species` · 4 agenda entries  
+  Afghanistan:  Fulcrum for a New Paradigm  
+    - Helga Zepp-LaRouche, Ambassador Anna Evstig…  
+    - JOIN THE SCHILLER INSTITUTE! https://bit.ly… ⚠  
+    - Pino Arlacchi (Italy) ⚠  
+    - Dr. Shah Mehrabi (Afghanistan) ⚠  
+- **L332** [qDxilIhSJbw](https://youtu.be/qDxilIhSJbw) · `2019-presidents-national-2019` · 4 agenda entries  
   The Frontiers of Science: Mankind's Future with Fusion and Space Explor…  
     - Kesha Rogers, LaRouchePAC Policy Committee,… — *The Frontier of Space: Fulfilling Mankind's D…*  
     - Thomas Wysmuller, Founding member of NASA T… ⚠ — *What NASA Has Done and Where NASA Is Going*  
     - Larry Bell, Founder, Sasakawa International… ⚠ — *What Makes People Exceptional*  
     - Benjamin Deniston, LaRouchePAC Scientific R… — *LaRouche's Strategic Defense of Earth*  
-- **L705** [D5nlgk46toE](https://youtu.be/D5nlgk46toE) · `2013-frankfurt-april-2013-attaining` · 4 speakers  
+- **L391** [SIvC_Kdvc4E](https://youtu.be/SIvC_Kdvc4E) · `2018-april-manhattan-dialogue-three` · 4 agenda entries  
+  Africa's Bright Future on China's Belt and Road Initiative  
+    - Jason Ross, co-author of the Schiller insti… — *Extending The New Silk Road To West Africa An…*  
+    - American President Donald Trump, Chinese Pr… ⚠  
+    - On Saturday, April 7, Schiller institute fo… ⚠  
+    - Helga Zepp-LaRouche  
+- **L436** [em2Ns7W2yIE](https://youtu.be/em2Ns7W2yIE) · `2017-symposium-aesthetic-education-humanity` · 4 agenda entries  
+  A Discussion of Sylvia Olden Lee's Life and Work  
+    - Symposium participants Simon Estes (bass-ba… ⚠  
+    - On June 30, 2017, singers, teachers and oth… ⚠  
+    - Elvira O. Green  
+    - Simon Estes ⚠  
+- **L705** [D5nlgk46toE](https://youtu.be/D5nlgk46toE) · `2013-frankfurt-april-2013-attaining` · 4 agenda entries  
   Helga Zepp-LaRouche • Mankind Is Better Than the Oligarchy Can Imagine  
     - Helga Zepp-LaRouche, President of the inter…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L706** [WgbglIVLb1M](https://youtu.be/WgbglIVLb1M) · `2013-frankfurt-april-2013-attaining` · 4 speakers  
+- **L706** [WgbglIVLb1M](https://youtu.be/WgbglIVLb1M) · `2013-frankfurt-april-2013-attaining` · 4 agenda entries  
   Lyndon H. LaRouche, Jr. • The Strategic View from the U.S.  
     - Lyndon LaRouche, Intellectual Author of the…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L707** [XXzcFe-9mDE](https://youtu.be/XXzcFe-9mDE) · `2013-frankfurt-april-2013-attaining` · 4 speakers  
+- **L707** [XXzcFe-9mDE](https://youtu.be/XXzcFe-9mDE) · `2013-frankfurt-april-2013-attaining` · 4 agenda entries  
   Alexander Nagorny • The Chinese Dimension of the Strategic USA-China-Ru…  
     - Alexander Nagorny, Historian, deputy editor…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L708** [_A5jUHJ4RVc](https://youtu.be/_A5jUHJ4RVc) · `2013-frankfurt-april-2013-attaining` · 4 speakers  
+- **L708** [_A5jUHJ4RVc](https://youtu.be/_A5jUHJ4RVc) · `2013-frankfurt-april-2013-attaining` · 4 agenda entries  
   Kirill Benediktov • The Asteroid-Comet Danger and Planetary Defense — A…  
     - Kirill Benediktov  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L709** [hwzavKGLjjY](https://youtu.be/hwzavKGLjjY) · `2013-frankfurt-april-2013-attaining` · 4 speakers  
+- **L709** [hwzavKGLjjY](https://youtu.be/hwzavKGLjjY) · `2013-frankfurt-april-2013-attaining` · 4 agenda entries  
   Jason Ross • The Physical Profit of Planetary Defense  
     - Jason Ross, LaRouche Basement Team, USA  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L710** [2oa-ohmJ9Ho](https://youtu.be/2oa-ohmJ9Ho) · `2013-frankfurt-april-2013-attaining` · 4 speakers  
+- **L710** [2oa-ohmJ9Ho](https://youtu.be/2oa-ohmJ9Ho) · `2013-frankfurt-april-2013-attaining` · 4 agenda entries  
   Bruce Fein • The Foundations of Civilization  
     - Bruce Fein, Former Assistant Attorney Gener…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L711** [QC6BTNXBHQw](https://youtu.be/QC6BTNXBHQw) · `2013-frankfurt-april-2013-attaining` · 4 speakers  
+- **L711** [QC6BTNXBHQw](https://youtu.be/QC6BTNXBHQw) · `2013-frankfurt-april-2013-attaining` · 4 agenda entries  
   Prof. Dr. Henri Safa • Why Nuclear Energy of the Future Is the Only Sol…  
     - Prof. Dr. Henri Safa, Nuclear physicist, au…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L712** [vBIyZZuQl4A](https://youtu.be/vBIyZZuQl4A) · `2013-frankfurt-april-2013-attaining` · 4 speakers  
+- **L712** [vBIyZZuQl4A](https://youtu.be/vBIyZZuQl4A) · `2013-frankfurt-april-2013-attaining` · 4 agenda entries  
   Prof. Dr. Eduardo Greaves • Thorium as Nuclear Fuel in the Molten Salt …  
     - Prof. Dr. Eduardo Greaves, Nuclear physicis…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L716** [Y5o-k0pL8po](https://youtu.be/Y5o-k0pL8po) · `2013-frankfurt-april-2013-attaining` · 4 speakers  
+- **L716** [Y5o-k0pL8po](https://youtu.be/Y5o-k0pL8po) · `2013-frankfurt-april-2013-attaining` · 4 agenda entries  
   Daisuke Kotegawa • Lost Two Decades for the EU and U.S.A.?  
     - Daisuke Kotegawa, Research Director at the …  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L717** [MAUEZDfJ71Y](https://youtu.be/MAUEZDfJ71Y) · `2013-frankfurt-april-2013-attaining` · 4 speakers  
+- **L717** [MAUEZDfJ71Y](https://youtu.be/MAUEZDfJ71Y) · `2013-frankfurt-april-2013-attaining` · 4 agenda entries  
   Dr. Cui Hongjian • Confucius in China Today  
     - Dr. Cui Hongjian, Senior Fellow and Directo…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L718** [R60R2aFsbfk](https://youtu.be/R60R2aFsbfk) · `2013-frankfurt-april-2013-attaining` · 4 speakers  
+- **L718** [R60R2aFsbfk](https://youtu.be/R60R2aFsbfk) · `2013-frankfurt-april-2013-attaining` · 4 agenda entries  
   Diane Sare • The Glass-Steagall Fight in the U.S.  
     - Diane Sare, LaRouche Policy Committee; Cand…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L722** [guOpnV90i2Y](https://youtu.be/guOpnV90i2Y) · `2013-frankfurt-april-2013-attaining` · 4 speakers  
+- **L722** [guOpnV90i2Y](https://youtu.be/guOpnV90i2Y) · `2013-frankfurt-april-2013-attaining` · 4 agenda entries  
   Natalia Vitrenko • Eurasian Integration as a Chance for Survival in the…  
     - Natalia Vitrenko, Doctor of Economics, lead…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L723** [q0jqjqwjtb4](https://youtu.be/q0jqjqwjtb4) · `2013-frankfurt-april-2013-attaining` · 4 speakers  
+- **L723** [q0jqjqwjtb4](https://youtu.be/q0jqjqwjtb4) · `2013-frankfurt-april-2013-attaining` · 4 agenda entries  
   Dr. Urban Cleve • Breeding of fissile Uranium 233 by use of Thorium 232  
     - Dr. Urban Cleve, Senior nuclear engineer, G…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L742** [K_KCeerpAFs](https://youtu.be/K_KCeerpAFs) · `2013-frankfurt-april-2013-attaining` · 4 speakers  
+- **L742** [K_KCeerpAFs](https://youtu.be/K_KCeerpAFs) · `2013-frankfurt-april-2013-attaining` · 4 agenda entries  
   Andrey Fursov • The Current World Crisis: Its Social Nature and Challen…  
     - Andrey Fursov, Historian, Institute of Scie…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L788** [nTR10aFD5ms](https://youtu.be/nTR10aFD5ms) · `2013-rescuing-civilization-brink` · 4 speakers  
+- **L788** [nTR10aFD5ms](https://youtu.be/nTR10aFD5ms) · `2013-rescuing-civilization-brink` · 4 agenda entries  
   Mozart Piano Quartet KV 478 - II. Andante  
     - Benjamin Telmányi Lylloff, piano  
     - Anika Telmányi Lylloff, violin ⚠  
     - Kwame Cole, viola ⚠  
     - Matthieu Fontana, cello ⚠  
-- **L789** [LH8N4y57p0A](https://youtu.be/LH8N4y57p0A) · `2013-rescuing-civilization-brink` · 4 speakers  
+- **L789** [LH8N4y57p0A](https://youtu.be/LH8N4y57p0A) · `2013-rescuing-civilization-brink` · 4 agenda entries  
   Mozart Flute Quartet KV 285 - II. Adagio  
     - Leevke Hinrichs, flute ⚠  
     - Anika Telmányi Lylloff, violin ⚠  
     - Kwame Cole, viola ⚠  
     - Uschik Choi, cello ⚠  
-- **L62** [aOrmFJXyAVI](https://youtu.be/aOrmFJXyAVI) · `2024-press-danger-nuclear-real` · 3 speakers  
-  Emergency Press Conference: The Danger of Nuclear War Is Real, and Must…  
-    - Schiller Institute ⚠  
-    - On June 3, the U.S. State Department preven… ⚠  
-    - On Wednesday, June 12 at the National Press… ⚠  
-- **L98** [Pt1OX6rhXiQ](https://youtu.be/Pt1OX6rhXiQ) · `2023-january-stop-nato-world` · 3 speakers  
+- **L98** [Pt1OX6rhXiQ](https://youtu.be/Pt1OX6rhXiQ) · `2023-january-stop-nato-world` · 3 agenda entries  
   Nevertheless, We Persist — Ray McGovern  
     - The Schiller Institute, in accordance with … ⚠ — *nonviolence or non-existence*  
     - Dr. King became, in the last year of his li… ⚠ — *Wisdom born of experience should tell us that…*  
     - Dr. King's formulation, that "the choice is… ⚠ — *the choice is no longer between violence and …*  
-- **L102** [AyoqE-z73YA](https://youtu.be/AyoqE-z73YA) · `2023-january-stop-nato-world` · 3 speakers  
+- **L102** [AyoqE-z73YA](https://youtu.be/AyoqE-z73YA) · `2023-january-stop-nato-world` · 3 agenda entries  
   Why is Germany in the Grip of War-Mongers?  
     - The Schiller Institute, in accordance with … ⚠ — *nonviolence or non-existence*  
     - Dr. King became, in the last year of his li… ⚠ — *Wisdom born of experience should tell us that…*  
     - Dr. King's formulation, that "the choice is… ⚠ — *the choice is no longer between violence and …*  
-- **L325** [GLJGQdiri_Q](https://youtu.be/GLJGQdiri_Q) · `2019-november-2019-soden` · 3 speakers  
-  The Fundamental Scientific Issues of our Future and the Space Silk Road…  
-    - Jacques Cheminade, President of Solidarité …  
-    - Sébastien Drochon: Space Policy Director, F…  
-    - Megan Beets and Jason Ross, the "Basement T… ⚠ — *Basement Team*  
-- **L327** [Bk-3k83mk5w](https://youtu.be/Bk-3k83mk5w) · `2019-november-2019-soden` · 3 speakers  
+- **L327** [Bk-3k83mk5w](https://youtu.be/Bk-3k83mk5w) · `2019-november-2019-soden` · 3 agenda entries  
   Beauty and Classical Art as Mankind’s Vocation: The Cultural Silk Road …  
     - Diane Sare, Director of the Manhattan Choru…  
     - Antonella Banaudi, Soprano and singing teac…  
     - Elvira Green, Mezzo-soprano, 30-year member…  
-- **L391** [SIvC_Kdvc4E](https://youtu.be/SIvC_Kdvc4E) · `2018-april-manhattan-dialogue-three` · 3 speakers  
-  Africa's Bright Future on China's Belt and Road Initiative  
-    - Jason Ross, co-author of the Schiller insti… — *Extending The New Silk Road To West Africa An…*  
-    - American President Donald Trump, Chinese Pr… ⚠  
-    - On Saturday, April 7, Schiller institute fo… ⚠  
-- **L600** [_z_5A461edI](https://youtu.be/_z_5A461edI) · `2014-england-december-2014` · 3 speakers  
+- **L600** [_z_5A461edI](https://youtu.be/_z_5A461edI) · `2014-england-december-2014` · 3 agenda entries  
   Ricardo Lopez performs China's National Anthem "March of the Volunteers…  
     - Piano Accompaniment by Brent Bedford ⚠  
     - English Translation: ⚠  
     - Arise! Arise! Arise! ⚠  
-- **L724** [ktgf8BnSQck](https://youtu.be/ktgf8BnSQck) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L724** [ktgf8BnSQck](https://youtu.be/ktgf8BnSQck) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Q&A Part 2, Question 5: Should Banks Be Allowed to Create Credit?  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L725** [hIHg6Rzqr38](https://youtu.be/hIHg6Rzqr38) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L725** [hIHg6Rzqr38](https://youtu.be/hIHg6Rzqr38) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 2, Question 4: Could China Go Back to Confucianism T…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L726** [pkctSttPLAo](https://youtu.be/pkctSttPLAo) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L726** [pkctSttPLAo](https://youtu.be/pkctSttPLAo) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 2, Question 3: The United Nations and Space  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L727** [PrKomXUwIUQ](https://youtu.be/PrKomXUwIUQ) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L727** [PrKomXUwIUQ](https://youtu.be/PrKomXUwIUQ) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 2, Question 2: Space Laws  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L728** [RoDPmTyXD1g](https://youtu.be/RoDPmTyXD1g) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L728** [RoDPmTyXD1g](https://youtu.be/RoDPmTyXD1g) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 2, Question 1: Why Is Obama Worse Than Bush and Reag…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L729** [MUshr5qcBDQ](https://youtu.be/MUshr5qcBDQ) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L729** [MUshr5qcBDQ](https://youtu.be/MUshr5qcBDQ) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 1, Question 6: What Is Wrong With "Renewable" Energi…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L730** [3fTVqkmT3wY](https://youtu.be/3fTVqkmT3wY) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L730** [3fTVqkmT3wY](https://youtu.be/3fTVqkmT3wY) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 1, Question 3: How Do Scientists View Iran's Nuclear…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L731** [vescIDrCQig](https://youtu.be/vescIDrCQig) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L731** [vescIDrCQig](https://youtu.be/vescIDrCQig) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 1, Question 2: Could the USA Cut Off Energy to China?  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L732** [86zGRRKewqE](https://youtu.be/86zGRRKewqE) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L732** [86zGRRKewqE](https://youtu.be/86zGRRKewqE) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 1, Question 18: Shall We Leave the Euro-Madness, Tog…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L733** [1uy91F94_sk](https://youtu.be/1uy91F94_sk) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L733** [1uy91F94_sk](https://youtu.be/1uy91F94_sk) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 1, Question 17: How Can We Lovingly Change People?  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L734** [sZgJj1732HY](https://youtu.be/sZgJj1732HY) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L734** [sZgJj1732HY](https://youtu.be/sZgJj1732HY) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 1, Question 16: How Can We Prevent Laziness, Arising…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L735** [1NqBXki5zqs](https://youtu.be/1NqBXki5zqs) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L735** [1NqBXki5zqs](https://youtu.be/1NqBXki5zqs) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 1, Question 14: How Can We Make Asteroid Defense Saf…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L736** [Q4Z3gb5lygE](https://youtu.be/Q4Z3gb5lygE) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L736** [Q4Z3gb5lygE](https://youtu.be/Q4Z3gb5lygE) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 1, Question 13: How Is Civilization Defined?  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L737** [EX-owHcu4a0](https://youtu.be/EX-owHcu4a0) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L737** [EX-owHcu4a0](https://youtu.be/EX-owHcu4a0) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 1, Question 12: What Can Argentina Do To Help?  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L738** [QAx_somJ5KU](https://youtu.be/QAx_somJ5KU) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L738** [QAx_somJ5KU](https://youtu.be/QAx_somJ5KU) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 1, Question 11: How Do We Create An International Fl…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L739** [qYmXItte4kA](https://youtu.be/qYmXItte4kA) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L739** [qYmXItte4kA](https://youtu.be/qYmXItte4kA) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 1, Question 10: How Are Classical Art and Energy-Flu…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L740** [Kjk-bKmm1G4](https://youtu.be/Kjk-bKmm1G4) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L740** [Kjk-bKmm1G4](https://youtu.be/Kjk-bKmm1G4) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 1, Question 8: What Stops People From Saving Themsel…  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L741** [AO6URMztSY0](https://youtu.be/AO6URMztSY0) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L741** [AO6URMztSY0](https://youtu.be/AO6URMztSY0) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Frankfurt Q&A Part 1, Question 7: What Is Behind The Green Fascism?  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L743** [K7gVuGd8DOk](https://youtu.be/K7gVuGd8DOk) · `2013-frankfurt-april-2013-attaining` · 3 speakers  
+- **L743** [K7gVuGd8DOk](https://youtu.be/K7gVuGd8DOk) · `2013-frankfurt-april-2013-attaining` · 3 agenda entries  
   Lynn Yen • Classical Culture is Absolutely Essential  
     - Schiller Institute Conference ⚠  
     - Attaining Freedom Through Necessity: ⚠  
     - THE LAST CHANCE FOR HUMANITY ⚠  
-- **L824** [f8Tg44K4zWw](https://youtu.be/f8Tg44K4zWw) · `2012-11-24-floersheim-intl-conference` · 3 speakers  
+- **L824** [f8Tg44K4zWw](https://youtu.be/f8Tg44K4zWw) · `2012-11-24-floersheim-intl-conference` · 3 agenda entries  
   Lorella Presotto: What Italy's Future Depends On  
     - What Italy's Future Depends On ⚠  
     - Lorella Presotto, Confederazione Civica Naz…  
     - International Schiller Institute conference: ⚠  
-- **L840** [rKqth9iKPOs](https://youtu.be/rKqth9iKPOs) · `2012-11-24-floersheim-intl-conference` · 3 speakers  
+- **L840** [rKqth9iKPOs](https://youtu.be/rKqth9iKPOs) · `2012-11-24-floersheim-intl-conference` · 3 agenda entries  
   Ghoncheh Tazmini: A New Perspective For Iran  
     - A New Perspective For Iran ⚠  
     - Ghoncheh Tazmini, Research Fellow at the In…  
     - International Schiller Institute conference: ⚠  
-- **L842** [vsyVmYIQPww](https://youtu.be/vsyVmYIQPww) · `2012-11-24-floersheim-intl-conference` · 3 speakers  
+- **L842** [vsyVmYIQPww](https://youtu.be/vsyVmYIQPww) · `2012-11-24-floersheim-intl-conference` · 3 agenda entries  
   Theodore Katsanevas: Die Lösung für Griechenland  
     - Die Lösung für Griechenland: Euro-Austritt,… ⚠  
     - Theodore Katsanevas, Professor für Ökonomie…  
     - Internationale Konferenz: ⚠  
-- **L844** [0rE6FjDP2wY](https://youtu.be/0rE6FjDP2wY) · `2012-11-24-floersheim-intl-conference` · 3 speakers  
+- **L844** [0rE6FjDP2wY](https://youtu.be/0rE6FjDP2wY) · `2012-11-24-floersheim-intl-conference` · 3 agenda entries  
   Lorella Presotto: Wovon Italiens Zukunft abhängt  
     - Wovon Italiens Zukunft abhängt ⚠  
     - Lorella Presotto, Conferderazione Civica Na…  
     - Internationale Konferenz: ⚠  
-- **L84** [_2ppE7pXUD4](https://youtu.be/_2ppE7pXUD4) · `2023-join-hands-global-majority` · 2 speakers  
+- **L84** [_2ppE7pXUD4](https://youtu.be/_2ppE7pXUD4) · `2023-join-hands-global-majority` · 2 agenda entries  
   LaRouche to Mexican Students, 2002: "This Is a Systemic Crisis. Obvious…  
     - In South America, we see that Argentina has… ⚠  
     - If Brazil resists, and does not submit, it … ⚠  
-- **L90** [y7xqXhMWDPg](https://youtu.be/y7xqXhMWDPg) · `2023-february-reason-annihilation-humanity` · 2 speakers  
+- **L90** [y7xqXhMWDPg](https://youtu.be/y7xqXhMWDPg) · `2023-february-reason-annihilation-humanity` · 2 agenda entries  
   Building an Alternative to Global NATO — World Citizens Unite!  
     - Schiller Institute conference Saturday, Feb… ⚠  
     - ZEPP-LAROUCHE: Well, I think that the confe…  
-- **L165** [mVb1m8SqXTw](https://youtu.be/mVb1m8SqXTw) · `2022-there-peace-without-bankruptcy` · 2 speakers  
-  This July 4, Declare for A New Bretton Woods!!  
-    - On Sunday, July 3, Helga Zepp-LaRouche will… ⚠ — *Lyndon LaRouche New Bretton Woods*  
-    - On July 4, 1776, America declared independe… ⚠  
-- **L192** [_-1N76f_iYU](https://youtu.be/_-1N76f_iYU) · `2021-mankind-immortal-species` · 2 speakers  
-  Afghanistan:  Fulcrum for a New Paradigm  
-    - Helga Zepp-LaRouche, Ambassador Anna Evstig…  
-    - JOIN THE SCHILLER INSTITUTE! https://bit.ly… ⚠  
-- **L238** [Ey9g5LzTcz4](https://youtu.be/Ey9g5LzTcz4) · `2020-september-2020-youth-world` · 2 speakers  
+- **L238** [Ey9g5LzTcz4](https://youtu.be/Ey9g5LzTcz4) · `2020-september-2020-youth-world` · 2 agenda entries  
   The Science, Culture, and Great Projects of a Global Renaissance  
     - Think Like Beethoven! ⚠  
     - Alexander Hamilton, LaRouche, and the Credi… ⚠  
-- **L312** [QaflszJdRtQ](https://youtu.be/QaflszJdRtQ) · `2020-april-2020` · 2 speakers  
+- **L312** [QaflszJdRtQ](https://youtu.be/QaflszJdRtQ) · `2020-april-2020` · 2 agenda entries  
   "Take My Mother Home" Arr. Hall Johnson  
     - Eugene Thamon Simpson, bass  
     - Eugene Simpson, bass; Lawrence Wicks, Kelle…  
-- **L313** [1tb3H--Kgfo](https://youtu.be/1tb3H--Kgfo) · `2020-april-2020` · 2 speakers  
+- **L313** [1tb3H--Kgfo](https://youtu.be/1tb3H--Kgfo) · `2020-april-2020` · 2 agenda entries  
   "Oh, Glory"  Hall Johnson  
     - Eugene Thamon Simpson, bass  
     - Eugene Simpson, bass; Lawrence Wicks, Kelle…  
-- **L314** [o-PmfNcl85k](https://youtu.be/o-PmfNcl85k) · `2020-april-2020` · 2 speakers  
+- **L314** [o-PmfNcl85k](https://youtu.be/o-PmfNcl85k) · `2020-april-2020` · 2 agenda entries  
   "Ain't Got Time to Die"  Hall Johnson  
     - Eugene Thamon Simpson, bass  
     - Eugene Simpson, bass; Lawrence Wicks, Kelle…  
-- **L411** [L2Ahykq5HaM](https://youtu.be/L2Ahykq5HaM) · `2017-soden-fulfilling-dream-mankind` · 2 speakers  
+- **L390** [90SAushN6qs](https://youtu.be/90SAushN6qs) · `2018-april-manhattan-dialogue-three` · 2 agenda entries  
+  A Dialogue of Three Presidencies: Trump, Putin, Xi Jinping  
+    - On Saturday, April 7, Schiller institute fo… ⚠  
+    - Helga Zepp-LaRouche  
+- **L408** [yzwhWzNBX50](https://youtu.be/yzwhWzNBX50) · `2017-soden-fulfilling-dream-mankind` · 2 agenda entries  
+  China's Initiative: A View from Ukraine  
+    - Doctor of Economics, MP (1994-2002) and Cha… ⚠ — *Fulfilling the Dream of Mankind*  
+    - Natalia Vitrenko  
+- **L411** [L2Ahykq5HaM](https://youtu.be/L2Ahykq5HaM) · `2017-soden-fulfilling-dream-mankind` · 2 agenda entries  
   Message from Yemeni BRICS Youth Cabinet to the Schiller Institute Confe…  
     - Fouad Al-Ghaffari, founder of the Office fo…  
     - Speaking from Yemen, he opened the taped vi… ⚠ — *With a great deal of pain mixed with hope, we…*  
-- **L426** [V9qifdjwmfU](https://youtu.be/V9qifdjwmfU) · `2017-symposium-aesthetic-education-humanity` · 2 speakers  
+- **L426** [V9qifdjwmfU](https://youtu.be/V9qifdjwmfU) · `2017-symposium-aesthetic-education-humanity` · 2 agenda entries  
   Prelude - Lynn Yen and the Schiller Institute NYC Chorus  
     - Lynn Yen, founder and director of the Found… — *I'll Never Turn Back No Mo'*  
     - On June 30, 2017, singers, teachers and oth… ⚠  
-- **L428** [bJgrzGJMEAM](https://youtu.be/bJgrzGJMEAM) · `2017-symposium-aesthetic-education-humanity` · 2 speakers  
+- **L428** [bJgrzGJMEAM](https://youtu.be/bJgrzGJMEAM) · `2017-symposium-aesthetic-education-humanity` · 2 agenda entries  
   John Sigerson - The Schiller Institute Campaign to Restore the Verdi Tu…  
     - John Sigerson, music director of the Schill…  
     - On June 30, 2017, singers, teachers and oth… ⚠  
-- **L433** [ILnjs6DxPtE](https://youtu.be/ILnjs6DxPtE) · `2017-symposium-aesthetic-education-humanity` · 2 speakers  
+- **L433** [ILnjs6DxPtE](https://youtu.be/ILnjs6DxPtE) · `2017-symposium-aesthetic-education-humanity` · 2 agenda entries  
   Reginald Bouknight - Auf dem Hügel sitz ich spähend  
     - Reginald Bouknight, Tenor, performs "Auf de… ⚠ — *Auf dem Hügel sitz ich spähend*  
     - On June 30, 2017, singers, teachers and oth… ⚠  
-- **L435** [9dQudoJRcy8](https://youtu.be/9dQudoJRcy8) · `2017-symposium-aesthetic-education-humanity` · 2 speakers  
+- **L435** [9dQudoJRcy8](https://youtu.be/9dQudoJRcy8) · `2017-symposium-aesthetic-education-humanity` · 2 agenda entries  
   A Discussion with Simon Estes - The Aesthetical Education of Humanity T…  
     - Simon Estes, baritone, talks about his hist… ⚠  
     - On June 30, 2017, singers, teachers and oth… ⚠  
-- **L436** [em2Ns7W2yIE](https://youtu.be/em2Ns7W2yIE) · `2017-symposium-aesthetic-education-humanity` · 2 speakers  
-  A Discussion of Sylvia Olden Lee's Life and Work  
-    - Symposium participants Simon Estes (bass-ba… ⚠  
-    - On June 30, 2017, singers, teachers and oth… ⚠  
-- **L473** [C9O6AsUyKPU](https://youtu.be/C9O6AsUyKPU) · `2016-musical-dialogue-cultures-berlin` · 2 speakers  
+- **L473** [C9O6AsUyKPU](https://youtu.be/C9O6AsUyKPU) · `2016-musical-dialogue-cultures-berlin` · 2 agenda entries  
   Ludwig van Beethoven: "Die Himmel rühmen des Ewigen Ehre"  
     - Performer: Schiller Institute Chorus, Camer… ⚠  
     - Conductor: Ingo Bathow ⚠  
-- **L474** [L-p_F0dC3Y0](https://youtu.be/L-p_F0dC3Y0) · `2016-musical-dialogue-cultures-berlin` · 2 speakers  
+- **L474** [L-p_F0dC3Y0](https://youtu.be/L-p_F0dC3Y0) · `2016-musical-dialogue-cultures-berlin` · 2 agenda entries  
   Mykola Leontovych: Schdryk  
     - Performer: Russian Children's Chorus, Schos… ⚠  
     - Conductor: Irina Freitag ⚠  
-- **L480** [gUZL0FU1cmY](https://youtu.be/gUZL0FU1cmY) · `2016-musical-dialogue-cultures-berlin` · 2 speakers  
+- **L480** [gUZL0FU1cmY](https://youtu.be/gUZL0FU1cmY) · `2016-musical-dialogue-cultures-berlin` · 2 agenda entries  
   Giuseppe Verdi — Va, pensiero  
     - Performer: The Schiller Institute Chorus, C… ⚠  
     - Conductor : Ingo Bathow ⚠  
-- **L481** [0CP16D2enXg](https://youtu.be/0CP16D2enXg) · `2016-musical-dialogue-cultures-berlin` · 2 speakers  
+- **L481** [0CP16D2enXg](https://youtu.be/0CP16D2enXg) · `2016-musical-dialogue-cultures-berlin` · 2 agenda entries  
   Giuseppe Verdi — Va, pensiero (Encore)  
     - Performer: The Schiller Institute Chorus, C… ⚠  
     - Conductor : Ingo Bathow ⚠  
-- **L601** [VwtWi7zEWfk](https://youtu.be/VwtWi7zEWfk) · `2014-england-december-2014` · 2 speakers  
+- **L601** [VwtWi7zEWfk](https://youtu.be/VwtWi7zEWfk) · `2014-england-december-2014` · 2 agenda entries  
   Frank Mathis performs Glinka's "I Remember a Wondrous Moment" Dec 7, 20…  
     - Frank Mathis performs Glinka's "I Remember … ⚠ — *I Remember a Wondrous Moment*  
     - Piano Accompaniment by Brent Bedford ⚠  
-- **L679** [LYDqmYG-HXE](https://youtu.be/LYDqmYG-HXE) · `2014-frankfurt-october-2014-30th` · 2 speakers  
+- **L679** [LYDqmYG-HXE](https://youtu.be/LYDqmYG-HXE) · `2014-frankfurt-october-2014-30th` · 2 agenda entries  
   Dr. Wolfgang Lillge: Fighting Diseases and Pandemics Through a Policy o…  
     - of Global Development ⚠  
     - Dr. Wolfgang Lillge, Editor-in-chief of the…  
-- **L744** [Bnmv7VnxcO8](https://youtu.be/Bnmv7VnxcO8) · `2013-frankfurt-april-2013-attaining` · 2 speakers  
+- **L744** [Bnmv7VnxcO8](https://youtu.be/Bnmv7VnxcO8) · `2013-frankfurt-april-2013-attaining` · 2 agenda entries  
   Adelaide - Ludwig van Beethoven  
     - John Sigerson, tenor  
     - Michael Gründler, piano ⚠  
-- **L782** [4GDUO6bmnCA](https://youtu.be/4GDUO6bmnCA) · `2013-york-january-2013-paradigm` · 2 speakers  
+- **L782** [4GDUO6bmnCA](https://youtu.be/4GDUO6bmnCA) · `2013-york-january-2013-paradigm` · 2 agenda entries  
   Q&A Part 1 • How Can Beauty Be Restored in Society? • New York Conferen…  
     - Schiller Institute Conference: "A New Parad… ⚠ — *A New Paradigm to Save Mankind*  
     - Riverside Church, New York City · January 2… ⚠  
-- **L783** [o3-le0kW4tk](https://youtu.be/o3-le0kW4tk) · `2013-york-january-2013-paradigm` · 2 speakers  
+- **L783** [o3-le0kW4tk](https://youtu.be/o3-le0kW4tk) · `2013-york-january-2013-paradigm` · 2 agenda entries  
   Q&A Part 2 • Only Man Bounds Man's Development • New York Conference  
     - Schiller Institute Conference: "A New Parad… ⚠ — *A New Paradigm to Save Mankind*  
     - Riverside Church, New York City · January 2… ⚠  
-- **L784** [Zh5-8jbn_10](https://youtu.be/Zh5-8jbn_10) · `2013-york-january-2013-paradigm` · 2 speakers  
+- **L784** [Zh5-8jbn_10](https://youtu.be/Zh5-8jbn_10) · `2013-york-january-2013-paradigm` · 2 agenda entries  
   Q&A Part 3 • Leadership, in a Crisis Like This? • New York Conference  
     - Schiller Institute Conference: "A New Parad… ⚠ — *A New Paradigm to Save Mankind*  
     - Riverside Church, New York City · January 2… ⚠  
-- **L785** [jx7upPN85o8](https://youtu.be/jx7upPN85o8) · `2013-york-january-2013-paradigm` · 2 speakers  
+- **L785** [jx7upPN85o8](https://youtu.be/jx7upPN85o8) · `2013-york-january-2013-paradigm` · 2 agenda entries  
   Q&A Part 4 • Bringing Humanism Back to Washington D.C. • New York Confe…  
     - Schiller Institute Conference: "A New Parad… ⚠ — *A New Paradigm to Save Mankind*  
     - Riverside Church, New York City · January 2… ⚠  
-- **L786** [wIodEOR3Lr0](https://youtu.be/wIodEOR3Lr0) · `2013-york-january-2013-paradigm` · 2 speakers  
+- **L786** [wIodEOR3Lr0](https://youtu.be/wIodEOR3Lr0) · `2013-york-january-2013-paradigm` · 2 agenda entries  
   Q&A Part 5 • Don't Give Up! Reach Out With Great Ideas • New York Confe…  
     - Schiller Institute Conference: "A New Parad… ⚠ — *A New Paradigm to Save Mankind*  
     - Riverside Church, New York City · January 2… ⚠  
-- **L791** [p2oPXm-cqpc](https://youtu.be/p2oPXm-cqpc) · `2013-rescuing-civilization-brink` · 2 speakers  
+- **L791** [p2oPXm-cqpc](https://youtu.be/p2oPXm-cqpc) · `2013-rescuing-civilization-brink` · 2 agenda entries  
   I.A.M. International President Tom Buffenbarger Greets Schiller Institu…  
     - Tom Buffenbarger, the International Preside…  
     - R. Thomas Buffenbarger,  
-- **L792** [ylfyJQUiQOg](https://youtu.be/ylfyJQUiQOg) · `2013-rescuing-civilization-brink` · 2 speakers  
+- **L792** [ylfyJQUiQOg](https://youtu.be/ylfyJQUiQOg) · `2013-rescuing-civilization-brink` · 2 agenda entries  
   Prof. Eric de Keuleneer: From Big Bang to Black Hole  
     - Eric De Keuleneer, Economics Professor at S… ⚠  
     - International Schiller Institute conference ⚠  
-- **L793** [_tKYaJ0EwSg](https://youtu.be/_tKYaJ0EwSg) · `2013-rescuing-civilization-brink` · 2 speakers  
+- **L793** [_tKYaJ0EwSg](https://youtu.be/_tKYaJ0EwSg) · `2013-rescuing-civilization-brink` · 2 agenda entries  
   Prof. Christen Sørensen: Lessons to Be Learned from the Financial Crisis  
     - Christen Sørensen, former Chairman of the E… ⚠  
     - International Schiller Institute conference ⚠  
-- **L798** [gg3_9e5nyNY](https://youtu.be/gg3_9e5nyNY) · `2013-rescuing-civilization-brink` · 2 speakers  
+- **L798** [gg3_9e5nyNY](https://youtu.be/gg3_9e5nyNY) · `2013-rescuing-civilization-brink` · 2 agenda entries  
   Prof. Sergey Pulinets: Are Earthquakes Foreseeable?  
     - Professor Sergey Pulinets, of the Institute…  
     - International Schiller Institute Conference ⚠  
-- **L809** [safptFz9U9k](https://youtu.be/safptFz9U9k) · `2012-interviews-2012-germany` · 2 speakers  
+- **L809** [safptFz9U9k](https://youtu.be/safptFz9U9k) · `2012-interviews-2012-germany` · 2 agenda entries  
   Hat der Euro eine Chance, zu überleben? - Interview mit Dr. Wilhelm Han…  
     - Prof. Dr. Wilhelm Hankel, früherer Chefökon…  
     - Internationale Konferenz: ⚠  
-- **L822** [l2vepBZSwtU](https://youtu.be/l2vepBZSwtU) · `2012-11-24-floersheim-intl-conference` · 2 speakers  
+- **L822** [l2vepBZSwtU](https://youtu.be/l2vepBZSwtU) · `2012-11-24-floersheim-intl-conference` · 2 agenda entries  
   Theodore Katsanevas: The solution for Greece  
     - Theodore Katsanevas, Professor of economics…  
     - International Schiller Institute conference: ⚠  
-- **L823** [bAn6LHUGPgA](https://youtu.be/bAn6LHUGPgA) · `2012-11-24-floersheim-intl-conference` · 2 speakers  
+- **L823** [bAn6LHUGPgA](https://youtu.be/bAn6LHUGPgA) · `2012-11-24-floersheim-intl-conference` · 2 agenda entries  
   George O. Tsobanoglou: The Dynamics of the Greek Crisis  
     - George O. Tsobanoglou, President of the Int…  
     - International Schiller Institute conference: ⚠  
-- **L827** [aQFUxdC5-zc](https://youtu.be/aQFUxdC5-zc) · `2012-11-24-floersheim-intl-conference` · 2 speakers  
+- **L827** [aQFUxdC5-zc](https://youtu.be/aQFUxdC5-zc) · `2012-11-24-floersheim-intl-conference` · 2 agenda entries  
   Prof. Wilhelm Hankel: Does the Euro have a chance of surviving?  
     - Prof. Wilhelm Hankel, former head of the Mo…  
     - International Schiller Institute conference: ⚠  
-- **L828** [szBiBhq_uDg](https://youtu.be/szBiBhq_uDg) · `2012-11-24-floersheim-intl-conference` · 2 speakers  
+- **L828** [szBiBhq_uDg](https://youtu.be/szBiBhq_uDg) · `2012-11-24-floersheim-intl-conference` · 2 agenda entries  
   Helga Zepp-LaRouche: Nur ein vollständiger Wechsel des Paradigmas kann …  
     - Helga Zepp-LaRouche, Vorsitzende des Schill…  
     - Internationale Konferenz: ⚠  
-- **L829** [cxV11CMA3pg](https://youtu.be/cxV11CMA3pg) · `2012-11-24-floersheim-intl-conference` · 2 speakers  
+- **L829** [cxV11CMA3pg](https://youtu.be/cxV11CMA3pg) · `2012-11-24-floersheim-intl-conference` · 2 agenda entries  
   Ali Reza Sheik Attar: Die globalen Konsequenzen von Instabilität im Mit…  
     - Ali Reza Sheik Attar, Botschafter der Islam…  
     - Internationale Konferenz: ⚠  
-- **L830** [7oYXspNOmbE](https://youtu.be/7oYXspNOmbE) · `2012-11-24-floersheim-intl-conference` · 2 speakers  
+- **L830** [7oYXspNOmbE](https://youtu.be/7oYXspNOmbE) · `2012-11-24-floersheim-intl-conference` · 2 agenda entries  
   Hussein Askary: Ein revolutionärer Entwicklungsplan für den Nahen und M…  
     - Hussein Askary, Vorsitzender der EAP Schwed…  
     - Internationale Konferenz: ⚠  
-- **L831** [FbyKERTmZqU](https://youtu.be/FbyKERTmZqU) · `2012-11-24-floersheim-intl-conference` · 2 speakers  
+- **L831** [FbyKERTmZqU](https://youtu.be/FbyKERTmZqU) · `2012-11-24-floersheim-intl-conference` · 2 agenda entries  
   Prof. Bassam Tahhan: Eine Friedensperspektive für Syrien und die Region  
     - Prof. Bassam Tahhan, Sprecher des Kollektiv…  
     - Internationale Konferenz: ⚠  
-- **L832** [uBwUV1fpzXc](https://youtu.be/uBwUV1fpzXc) · `2012-11-24-floersheim-intl-conference` · 2 speakers  
+- **L832** [uBwUV1fpzXc](https://youtu.be/uBwUV1fpzXc) · `2012-11-24-floersheim-intl-conference` · 2 agenda entries  
   Ghoncheh Tazmini: Eine neue Perspektive für den Iran  
     - Ghoncheh Tazmini, Executive Director der "P… — *Portugal Middle East Business Association*  
     - Internationale Konferenz: ⚠  
-- **L833** [n-4nEx-kuDk](https://youtu.be/n-4nEx-kuDk) · `2012-11-24-floersheim-intl-conference` · 2 speakers  
+- **L833** [n-4nEx-kuDk](https://youtu.be/n-4nEx-kuDk) · `2012-11-24-floersheim-intl-conference` · 2 agenda entries  
   Helga Zepp-LaRouche: Only a complete change in paradigm can avoid catas…  
     - Helga Zepp-LaRouche, President of the Schil…  
     - International Schiller Institute conference: ⚠  
-- **L841** [eQt0cYxIkiQ](https://youtu.be/eQt0cYxIkiQ) · `2012-11-24-floersheim-intl-conference` · 2 speakers  
+- **L841** [eQt0cYxIkiQ](https://youtu.be/eQt0cYxIkiQ) · `2012-11-24-floersheim-intl-conference` · 2 agenda entries  
   Es gibt ein Leben nach dem Euro! Was für ein Europa wollen wir?  
     - Helga Zepp-LaRouche, Vorsitzende des Schill…  
     - Internationale Konferenz: ⚠  
-- **L843** [FYhL4AMes1w](https://youtu.be/FYhL4AMes1w) · `2012-11-24-floersheim-intl-conference` · 2 speakers  
+- **L843** [FYhL4AMes1w](https://youtu.be/FYhL4AMes1w) · `2012-11-24-floersheim-intl-conference` · 2 agenda entries  
   George O. Tsobanoglou: Die Dynamik der griechischen Krise  
     - George O. Tsobanoglou, Präsident des Forsch…  
     - Internationale Konferenz: ⚠  
-- **L845** [iot0BzOeE_g](https://youtu.be/iot0BzOeE_g) · `2012-11-24-floersheim-intl-conference` · 2 speakers  
+- **L845** [iot0BzOeE_g](https://youtu.be/iot0BzOeE_g) · `2012-11-24-floersheim-intl-conference` · 2 agenda entries  
   Daniel Estulin: Der Ausweg aus der spanischen Krise  
     - Daniel Estulin, Journalist, Spanien  
     - Internationale Konferenz: ⚠  
@@ -1500,18 +1398,22 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L684** [SnOx02_iYHA](https://youtu.be/SnOx02_iYHA) · `2013-angeles-november-2013-second`  
   Lyndon LaRouche Speaks to the Schiller Institute Conference  
   speaker: Lyndon LaRouche Speaks to the Schiller Institut…  
+  ↳ also names, but does **not** link: Lyndon LaRouche (`lyndon-h-larouche-jr`)  
   _no marks, no agenda_  
 - **L685** [XkYTOKPUcd8](https://youtu.be/XkYTOKPUcd8) · `2013-angeles-november-2013-second`  
   LA Conference:Presentation by Helga Zepp-LaRouche  
   speaker: LA Conference:Presentation by Helga Zepp-LaRouc…  
+  ↳ also names, but does **not** link: Helga Zepp-LaRouche (`helga-zepp-larouche`)  
   _no marks, no agenda_  
 - **L686** [9Xvwg4RGYok](https://youtu.be/9Xvwg4RGYok) · `2013-angeles-november-2013-second`  
   Lyndon LaRouche and Helga Zepp-LaRouche Q&A  
   speaker: Lyndon LaRouche and Helga Zepp-LaRouche Q&A  
+  ↳ also names, but does **not** link: Helga Zepp-LaRouche (`helga-zepp-larouche`), Lyndon LaRouche (`lyndon-h-larouche-jr`)  
   _no marks, no agenda_  
 - **L690** [OZsDFNsnAc8](https://youtu.be/OZsDFNsnAc8) · `2013-angeles-november-2013-second`  
   Megan Beets · Biogeochemical Effect of Culture  
   speaker: Megan Beets · Biogeochemical Effect of Culture  
+  ↳ also names, but does **not** link: Megan Beets (`megan-beets`)  
   _no marks, no agenda_  
 - **L692** [pDqbpCG1vCA](https://youtu.be/pDqbpCG1vCA) · `2013-angeles-november-2013-second`  
   Requiem in D minor  
@@ -1524,6 +1426,7 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L750** [ikRNzELPjWM](https://youtu.be/ikRNzELPjWM) · `2013-virginia-march-2013-30th`  
   Ben Deniston • An Introduction to the Strategic Defense of Earth  
   speaker: Ben Deniston • An Introduction to the Strategic…  
+  ↳ also names, but does **not** link: Ben Deniston (`benjamin-deniston`)  
   _no marks, no agenda_  
 - **L753** [20yhyIp7aNA](https://youtu.be/20yhyIp7aNA) · `2013-virginia-march-2013-30th`  
   Panel 1 - Discussion  
@@ -1532,14 +1435,17 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L755** [UjkjzRgjkqM](https://youtu.be/UjkjzRgjkqM) · `2013-virginia-march-2013-30th`  
   Rep. Thomas Jackson • The Nationwide Fight to Implement Glass-Steagall  
   speaker: Rep. Thomas Jackson • The Nationwide Fight to I…  
+  ↳ also names, but does **not** link: Rep. Thomas Jackson (`thomas-jackson`)  
   _no marks, no agenda_  
 - **L756** [Gz68tDjaeDI](https://youtu.be/Gz68tDjaeDI) · `2013-virginia-march-2013-30th`  
   James Benham • Nationwide Fight to Implement Glass-Steagall  
   speaker: James Benham • Nationwide Fight to Implement Gl…  
+  ↳ also names, but does **not** link: James Benham (`james-benham`)  
   _no marks, no agenda_  
 - **L759** [BHgoV_6jC10](https://youtu.be/BHgoV_6jC10) · `2013-virginia-march-2013-30th`  
   Paul Gallagher • Winning the War for Restoring the American Credit Syst…  
   speaker: Paul Gallagher • Winning the War for Restoring …  
+  ↳ also names, but does **not** link: Paul Gallagher (`paul-gallagher`)  
   _no marks, no agenda_  
 - **L760** [YRgEwwPNMvs](https://youtu.be/YRgEwwPNMvs) · `2013-virginia-march-2013-30th`  
   Panel 2 - Discussion Period  
@@ -1588,6 +1494,7 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L606** [7z0LqBGszao](https://youtu.be/7z0LqBGszao) · `2014-england-december-2014`  
   Ben Deniston on what is Mankind?  Dec 7th, 2014  
   speaker: Ben Deniston on what is Mankind?  Dec 7th, 2014  
+  ↳ also names, but does **not** link: Ben Deniston (`benjamin-deniston`)  
   _no marks, no agenda_  
 - **L607** [7klzIefSXQ0](https://youtu.be/7klzIefSXQ0) · `2014-england-december-2014`  
   Question and Answer. Panel 2. Dec. 7th, 2014  
@@ -1596,6 +1503,7 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L609** [BbrsZ8at9GQ](https://youtu.be/BbrsZ8at9GQ) · `2014-england-december-2014`  
   Cloret Carl Ferguson on Friedrich Schiller. Dec 7th, 2014  
   speaker: Cloret Carl Ferguson on Friedrich Schiller. Dec…  
+  ↳ also names, but does **not** link: Cloret Carl Ferguson on Friedrich Schiller (`cloret-carl-ferguson-on-friedrich-schiller`)  
   _no marks, no agenda_  
 - **L610** [pJ-GkMs-9HM](https://youtu.be/pJ-GkMs-9HM) · `2014-england-december-2014`  
   Excerpts from Mozart's Requiem. Dec. 7th, 2014  
@@ -1604,6 +1512,7 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L611** [0hZiGechD2g](https://youtu.be/0hZiGechD2g) · `2014-frankfurt-october-2014-30th`  
   Helga Zepp-LaRouche - The New Silk Road is Transforming the Planet: A N…  
   speaker: Helga Zepp-LaRouche - The New Silk Road is Tran…  
+  ↳ also names, but does **not** link: Helga Zepp-LaRouche (`helga-zepp-larouche`)  
   _no marks, no agenda_  
 - **L615** [OV28FmY5ycI](https://youtu.be/OV28FmY5ycI) · `2014-frankfurt-october-2014-30th`  
   Pei Hua & Chen Bo - Greeting address from the China Soong Ching Ling Fo…  
@@ -1612,6 +1521,7 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L624** [K4V_kTnwjfo](https://youtu.be/K4V_kTnwjfo) · `2014-frankfurt-october-2014-30th`  
   Dr. Chandra Muzaffar (ENGLISH)  
   speaker: Dr. Chandra Muzaffar (ENGLISH)  
+  ↳ also names, but does **not** link: Dr. Chandra Muzaffar (`chandra-muzaffar`)  
   _no marks, no agenda_  
 - **L628** [nvT_LZknS4E](https://youtu.be/nvT_LZknS4E) · `2014-frankfurt-october-2014-30th`  
   Zepp-LaRouche - La Nouvelle Route de la Soie transforme la planète: Une…  
@@ -1620,10 +1530,12 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L629** [KkdncVtMfI8](https://youtu.be/KkdncVtMfI8) · `2014-frankfurt-october-2014-30th`  
   Helga Zepp-LaRouche - Die Neue Seidenstraße transformiert den Planeten:…  
   speaker: Helga Zepp-LaRouche - Die Neue Seidenstraße tra…  
+  ↳ also names, but does **not** link: Helga Zepp-LaRouche (`helga-zepp-larouche`)  
   _no marks, no agenda_  
 - **L654** [buRk0Embw9M](https://youtu.be/buRk0Embw9M) · `2014-frankfurt-october-2014-30th`  
   Col. Alain Corvez (cr) – Les intérêts communs de sécurité en Eurasie  
   speaker: Col. Alain Corvez (cr) – Les intérêts communs d…  
+  ↳ also names, but does **not** link: Alain Corvez (`alain-corvez`)  
   _no marks, no agenda_  
 - **L655** [xXk_Z4DATV0](https://youtu.be/xXk_Z4DATV0) · `2014-frankfurt-october-2014-30th`  
   Полковник в отставке Ален Корвез - Общие интересы безопасности в Евразии  
@@ -1632,6 +1544,7 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L668** [ZAFCDBLR0Ug](https://youtu.be/ZAFCDBLR0Ug) · `2014-frankfurt-october-2014-30th`  
   Хелга Цепп-ЛаРуш  
   speaker: Хелга Цепп-ЛаРуш  
+  ↳ also names, but does **not** link: Хелга Цепп-ЛаРуш (`хелга-цепп-ларуш`)  
   _no marks, no agenda_  
 - **L669** [ftjEvunXgCc](https://youtu.be/ftjEvunXgCc) · `2014-frankfurt-october-2014-30th`  
   Zepp-LaRouche – Wachsen wir hinein in das Erwachsenenalter der Menschhe…  
@@ -1644,10 +1557,12 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L672** [pUv1K5Alkzc](https://youtu.be/pUv1K5Alkzc) · `2014-frankfurt-october-2014-30th`  
   Дёжэн Сенни  
   speaker: Дёжэн Сенни  
+  ↳ also names, but does **not** link: Дёжэн Сенни (`дежэн-сенни`)  
   _no marks, no agenda_  
 - **L674** [qlnY_51tPz8](https://youtu.be/qlnY_51tPz8) · `2014-frankfurt-october-2014-30th`  
   Жак Шеминад – Идентичность Европы  
   speaker: Жак Шеминад – Идентичность Европы  
+  ↳ also names, but does **not** link: ЖАК ШЕМИНАД (`жак-шеминад`)  
   _no marks, no agenda_  
 - **L675** [55ekHYwaiAg](https://youtu.be/55ekHYwaiAg) · `2014-frankfurt-october-2014-30th`  
   Пэй Уа & Чен Бо  
@@ -1660,6 +1575,7 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L681** [1AYHTLdN024](https://youtu.be/1AYHTLdN024) · `2014-frankfurt-october-2014-30th`  
   Dr. med. Wolfgang Lillge - Seuchen und Pandemien mit einer globalen Ent…  
   speaker: Dr. med. Wolfgang Lillge - Seuchen und Pandemie…  
+  ↳ also names, but does **not** link: Dr. Wolfgang Lillge (`wolfgang-lillge`)  
   _no marks, no agenda_  
 - **L586** [bJxlqqQmQ0g](https://youtu.be/bJxlqqQmQ0g) · `2015-neue-seidenstra-beginn-einer`  
   Address by His Excellency Syed Hasan Javed  
@@ -1668,14 +1584,17 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L522** [2HnTVRt_6DQ](https://youtu.be/2HnTVRt_6DQ) · `2016-berlin-june-2016-creating`  
   Col. (ret.) Alain Corvez — Will the American hubris come to an end...  
   speaker: Col. (ret.) Alain Corvez — Will the American h…  
+  ↳ also names, but does **not** link: Alain Corvez (`alain-corvez`)  
   _no marks, no agenda_  
 - **L531** [rVfEA3ZZFPg](https://youtu.be/rVfEA3ZZFPg) · `2016-berlin-june-2016-creating`  
   Her Excellency Dr. Bouthaina Shaaban – Reconstruction with Syrian chara…  
   speaker: Her Excellency Dr. Bouthaina Shaaban – Reconstr…  
+  ↳ also names, but does **not** link: Her Excellency Dr. Bouthaina Shaaban (`bouthaina-shaaban`)  
   _no marks, no agenda_  
 - **L540** [vcUoWGJXP-8](https://youtu.be/vcUoWGJXP-8) · `2016-francisco-june-2016-strategic`  
   Helga Zepp-LaRouche Keynote—Will the U.S. Join the New Silk Road?  
   speaker: Helga Zepp-LaRouche Keynote—Will the U.S. Join …  
+  ↳ also names, but does **not** link: Helga Zepp-LaRouche (`helga-zepp-larouche`)  
   _no marks, no agenda_  
 - **L541** [PYxWZeBvaJ0](https://youtu.be/PYxWZeBvaJ0) · `2016-francisco-june-2016-strategic`  
   Hon. Sergey Petrov, Consul General of Russian Consulate in San Francisco  
@@ -1688,6 +1607,7 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L543** [IZFTjVstSV4](https://youtu.be/IZFTjVstSV4) · `2016-francisco-june-2016-strategic`  
   Dr. Howard Chang addresses San Francisco Schiller Institute event  
   speaker: Dr. Howard Chang addresses San Francisco Schill…  
+  ↳ also names, but does **not** link: Dr. Howard Chang (`howard-chang`)  
   _no marks, no agenda_  
 - **L461** [HIu6EBNJOpc](https://youtu.be/HIu6EBNJOpc) · `2016-lyon`  
   Questions & answers - Lyon conference  
@@ -1700,10 +1620,12 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L463** [mUhLBvv7h4Y](https://youtu.be/mUhLBvv7h4Y) · `2016-lyon`  
   Pr Shi Ze [VO] Les opportunités stratégiques ouvertes par les nouvelles…  
   speaker: Pr Shi Ze [VO] Les opportunités stratégiques ou…  
+  ↳ also names, but does **not** link: Prof. Shi Ze (`shi-ze`)  
   _no marks, no agenda_  
 - **L466** [0FNtEWfay_8](https://youtu.be/0FNtEWfay_8) · `2016-york-september-2016-memorial`  
   VA State Senator Richard Black Addresses September 11 Memorial Schiller…  
   speaker: VA State Senator Richard Black Addresses Septem…  
+  ↳ also names, but does **not** link: Sen. Richard Black (`richard-black`)  
   _no marks, no agenda_  
 - **L467** [U3LTTbOYVfU](https://youtu.be/U3LTTbOYVfU) · `2016-york-september-2016-memorial`  
   Syrian Ambassador to UN Address to Schiller Institute September 11 Memo…  
@@ -1712,6 +1634,7 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L469** [imlKi7VJzac](https://youtu.be/imlKi7VJzac) · `2016-york-september-2016-memorial`  
   Frmr Attorney General Ramsey Clark's Address to Schiller Institute Sept…  
   speaker: Frmr Attorney General Ramsey Clark's Address to…  
+  ↳ also names, but does **not** link: Ramsey Clark (`ramsey-clark`)  
   _no marks, no agenda_  
 - **L414** [vJhoTwBoiXM](https://youtu.be/vJhoTwBoiXM) · `2017-paris-octobre-2017`  
   Réussir une coopération gagnante-gagnante avec la Chine  
@@ -1764,6 +1687,7 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L443** [lKrK2y1P-Mo](https://youtu.be/lKrK2y1P-Mo) · `2017-york-april-2017-china`  
   VA Senator Richard Black (R-13)  
   speaker: VA Senator Richard Black (R-13)  
+  ↳ also names, but does **not** link: Sen. Richard Black (`richard-black`)  
   _no marks, no agenda_  
 - **L341** [kYw2UnN6WhM](https://youtu.be/kYw2UnN6WhM) · `2018-paris-november-2018`  
   L'Institut Schiller lance son nouveau dossier sur les Nouvelles Routes …  
@@ -1788,6 +1712,7 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L350** [iLE3NpFjz98](https://youtu.be/iLE3NpFjz98) · `2018-sept-2018`  
   Question and Answer with Helga Zepp-LaRouche and Jason Ross  
   speaker: Question and Answer with Helga Zepp-LaRouche an…  
+  ↳ also names, but does **not** link: Helga Zepp-LaRouche (`helga-zepp-larouche`), Jason Ross (`jason-ross`)  
   _no marks, no agenda_  
 - **L351** [itZvULRSUHE](https://youtu.be/itZvULRSUHE) · `2018-sept-2018`  
   Reconciliation and in Rebuilding in Syria, as a Great Battle Looms in I…  
@@ -1796,6 +1721,7 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L354** [6jESHzDKlNE](https://youtu.be/6jESHzDKlNE) · `2018-sept-2018`  
   Question and Answers with Roger Stone and Helga Zepp-LaRouche  
   speaker: Question and Answers with Roger Stone and Helga…  
+  ↳ also names, but does **not** link: Helga Zepp-LaRouche (`helga-zepp-larouche`)  
   _no marks, no agenda_  
 - **L356** [AIHZ5Aq2D-s](https://youtu.be/AIHZ5Aq2D-s) · `2018-sept-2018`  
   We Are Keen for Friendship and Economic Partnership, No Matter How Diff…  
@@ -1832,6 +1758,7 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L159** [yjLDpnlXhek](https://youtu.be/yjLDpnlXhek) · `2022-there-peace-without-bankruptcy`  
   Let’s Win Mission Impossible or Find Another Planet! — Helga Zepp-LaRou…  
   speaker: Let’s Win Mission Impossible or Find Another Pl…  
+  ↳ also names, but does **not** link: Helga Zepp-LaRouche (`helga-zepp-larouche`)  
   _no marks, no agenda_  
 - **L160** [ayqGRKnFZ8M](https://youtu.be/ayqGRKnFZ8M) · `2022-there-peace-without-bankruptcy`  
   Food Producers Roundtable — Science and Culture to End Famine—Principle…  
@@ -1840,6 +1767,7 @@ Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `a
 - **L162** [pL-ZeLdY5F4](https://youtu.be/pL-ZeLdY5F4) · `2022-there-peace-without-bankruptcy`  
   U.S.-China Cultural Relations Are Critical to Prevent War — Dr. George …  
   speaker: U.S.-China Cultural Relations Are Critical to P…  
+  ↳ also names, but does **not** link: George Koo (`george-koo`)  
   _no marks, no agenda_  
 - **L163** [ZQLy28eZgE0](https://youtu.be/ZQLy28eZgE0) · `2022-there-peace-without-bankruptcy`  
   Don't Be Afraid to 'Kick Against the Pricks'!  Science Disproves Linear…  
