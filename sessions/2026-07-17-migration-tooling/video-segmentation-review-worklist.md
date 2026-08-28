@@ -6,7 +6,7 @@ Editable columns: `final_action`, `notes`, `reviewer`, plus the value columns yo
 
 ## ⚠ Read this first — blank does not mean accept
 
-`si-migrate.php:1986` skips a row when `final_action == 'skip'` **or** when `needs_review == '1'` and `final_action` is blank. All 108 rows in this worklist are flagged, so leaving one untouched **discards it**. To accept a row you must type a value — use `accept`; use `edit` if you also corrected cells in that row; `skip` to discard deliberately. Put your initials in `reviewer` either way.
+`si-migrate.php:1986` skips a row when `final_action == 'skip'` **or** when `needs_review == '1'` and `final_action` is blank. All 94 rows in this worklist are flagged, so leaving one untouched **discards it**. To accept a row you must type a value — use `accept`; use `edit` if you also corrected cells in that row; `skip` to discard deliberately. Put your initials in `reviewer` either way.
 
 Run `python3 tools/day2-preflight.py` at any point to see what is still outstanding.
 
@@ -14,42 +14,16 @@ Run `python3 tools/day2-preflight.py` at any point to see what is still outstand
 
 | # | Tranche | Rows | Videos | Where |
 |---|---|---:|---:|---|
-| D | case 1 + 4 + 2 | 108 | 33 | YouTube |
-| | **total** | **108** | | |
+| D | case 1 + 4 + 2 | 94 | 27 | YouTube |
+| | **total** | **94** | | |
 
 ---
 
-## D. Needs YouTube open (108)  · ~2.5 h
+## D. Needs YouTube open (94)  · ~2.5 h
 
-### D1 · case 1 — segments with start times (105, 30 videos)
+### D1 · case 1 — segments with start times (91, 24 videos)
 
 Links jump straight to `start_seconds`. Confirm the named speaker actually starts there. Fix the number in place + `final_action=edit`.
-
-**1XM7VIH3J9w** · `2012-11-24-floersheim-intl-conference` · 2 segments — [open](https://youtu.be/1XM7VIH3J9w)
-  - **L834** [0:00](https://youtu.be/1XM7VIH3J9w) — Ali Reza Sheikh Attar, Ambassador of th… · ok (unflagged)
-  - **L835** [28:10](https://youtu.be/1XM7VIH3J9w?t=1690) — International Schiller Institute confer… · ⚠ dropped in person-map — no presenter link
-
-**5rjRw5Kclko** · `2012-11-24-floersheim-intl-conference` · 2 segments — [open](https://youtu.be/5rjRw5Kclko)
-  - **L825** [0:00](https://youtu.be/5rjRw5Kclko) — Daniel Estulin, Journalist, Spain · ok (unflagged)
-  - **L826** [4:29](https://youtu.be/5rjRw5Kclko?t=269) — International Schiller Institute confer… · ⚠ dropped in person-map — no presenter link
-
-**SGtUuproUWU** · `2012-11-24-floersheim-intl-conference` · 2 segments — [open](https://youtu.be/SGtUuproUWU)
-  - **L836** [0:00](https://youtu.be/SGtUuproUWU) — Hussein Askary, Chairman of EAP Sweden · ok (unflagged)
-  - **L837** [31:36](https://youtu.be/SGtUuproUWU?t=1896) — International Schiller Institute confer… · ⚠ dropped in person-map — no presenter link
-
-**bzdXqmMRjoE** · `2012-11-24-floersheim-intl-conference` · 2 segments — [open](https://youtu.be/bzdXqmMRjoE)
-  - **L838** [0:00](https://youtu.be/bzdXqmMRjoE) — Prof. Bassam Tahhan, Spokesman of the C… · ok (unflagged)
-  - **L839** [27:39](https://youtu.be/bzdXqmMRjoE?t=1659) — International Schiller Institute confer… · ⚠ dropped in person-map — no presenter link
-
-**AiA_khFWt1s** · `2013-frankfurt-april-2013-attaining` · 3 segments — [open](https://youtu.be/AiA_khFWt1s)
-  - **L719** [0:00](https://youtu.be/AiA_khFWt1s) — Mikhail Delyagin, Doctor of Economics, … · ok (unflagged)
-  - **L720** [5:43](https://youtu.be/AiA_khFWt1s?t=343) — Attaining Freedom Through Necessity: · ⚠ dropped in person-map — no presenter link
-  - **L721** [15:08](https://youtu.be/AiA_khFWt1s?t=908) — THE LAST CHANCE FOR HUMANITY · ⚠ dropped in person-map — no presenter link
-
-**EedZoQ3ZxA0** · `2013-frankfurt-april-2013-attaining` · 3 segments — [open](https://youtu.be/EedZoQ3ZxA0)
-  - **L713** [0:00](https://youtu.be/EedZoQ3ZxA0) — Jacques Cheminade, Founder and leader o… · ok (unflagged)
-  - **L714** [5:41](https://youtu.be/EedZoQ3ZxA0?t=341) — Attaining Freedom Through Necessity: · ⚠ dropped in person-map — no presenter link
-  - **L715** [18:23](https://youtu.be/EedZoQ3ZxA0?t=1103) — THE LAST CHANCE FOR HUMANITY · ⚠ dropped in person-map — no presenter link
 
 **Ic8b23CxBSU** · `2018-june-july-conf-soden` · 7 segments — [open](https://youtu.be/Ic8b23CxBSU)
   - **L379** [10:54](https://youtu.be/Ic8b23CxBSU?t=654) — How Eastern and South-Eastern Europe Ca…
@@ -124,7 +98,7 @@ Links jump straight to `start_seconds`. Confirm the named speaker actually start
   - **L223** [2:16:05](https://youtu.be/ZLvX9r4D0xk?t=8165) — Question and Answer Session
 
 **83Kzsg20gAo** · `2021-march-world-crossroad-months` · 3 segments — [open](https://youtu.be/83Kzsg20gAo)
-  - **L252** [0:00](https://youtu.be/83Kzsg20gAo) — Moderator: Harley Schlanger
+  - **L252** [0:00](https://youtu.be/83Kzsg20gAo) — Moderator: Harley Schlanger · ok (unflagged)
   - **L258** [1:15:25](https://youtu.be/83Kzsg20gAo?t=4525) — Question and Answer Session
   - **L266** [3:28:37](https://youtu.be/83Kzsg20gAo?t=12517) — Question and Answer Session
 
@@ -148,7 +122,7 @@ Links jump straight to `start_seconds`. Confirm the named speaker actually start
   - **L180** [1:45:18](https://youtu.be/_9k2RlLGkMc?t=6318) — 3) Princy Mthombeni; Communication Spec… · merges → `princy-mthombeni` · *Energy Security for Africa*
 
 **J8Gpbyb1JDY** · `2022-inspiring-humanity-survive-greatest` · 1 segments — [open](https://youtu.be/J8Gpbyb1JDY)
-  - **L118** [27:04](https://youtu.be/J8Gpbyb1JDY?t=1624) — Lyndon LaRouche Video Presentation: “La… · *LaRouche in Dialogue with the Nations o…*
+  - **L118** [27:04](https://youtu.be/J8Gpbyb1JDY?t=1624) — Lyndon LaRouche Video Presentation: “La… · ok (unflagged) · *LaRouche in Dialogue with the Nations o…*
 
 **aF2d8EAMQ0o** · `2022-inspiring-humanity-survive-greatest` · 7 segments — [open](https://youtu.be/aF2d8EAMQ0o)
   - **L110** [5:41](https://youtu.be/aF2d8EAMQ0o?t=341) — Diane Sare (U.S.), Candidate for United… · ok (unflagged)
@@ -164,7 +138,7 @@ Links jump straight to `start_seconds`. Confirm the named speaker actually start
   - **L169** [22:37](https://youtu.be/7Co3IlbwibA?t=1357) — Mike Robinson, UK Column
 
 **LxM9omHPMV4** · `2022-there-peace-without-bankruptcy` · 1 segments — [open](https://youtu.be/LxM9omHPMV4)
-  - **L155** [54:51](https://youtu.be/LxM9omHPMV4?t=3291) — Dr. Zaher Wahab · *Dialogue, Not Clash, of Civilizations*
+  - **L155** [54:51](https://youtu.be/LxM9omHPMV4?t=3291) — Dr. Zaher Wahab · ⚠ left unbuilt in person-map — no person page · *Dialogue, Not Clash, of Civilizations*
 
 **7O11ENxM-zA** · `2023-january-stop-nato-world` · 3 segments — [open](https://youtu.be/7O11ENxM-zA)
   - **L99** [0:00](https://youtu.be/7O11ENxM-zA) — The Schiller Institute, in accordance w… · ⚠ dropped in person-map — no presenter link · *nonviolence or non-existence*

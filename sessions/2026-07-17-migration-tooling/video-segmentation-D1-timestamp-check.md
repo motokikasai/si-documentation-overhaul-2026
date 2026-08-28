@@ -1,6 +1,6 @@
 # Tranche D1 — timestamp check (case 1)
 
-96 undecided segments across 29 videos. **This is the only part of File 3 that needs the video.**
+91 undecided segments across 24 videos. **This is the only part of File 3 that needs the video.**
 
 Open each deep link and confirm the named person is the one who starts speaking there.
 
@@ -115,7 +115,7 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 | ✓ | line | jump to | span | covers | named speaker | links as |
 |---|---|---|---|---|---|---|
 | ✓  | L117 | [7:36](https://youtu.be/J8Gpbyb1JDY?t=456) | 7:36–27:03 | 10% | Helga Zepp-LaRouche (Germany) | `helga-zepp-larouche` |
-| ☐ | L118 | [27:04](https://youtu.be/J8Gpbyb1JDY?t=1624) | 27:04–1:49:55 | 44% | Lyndon LaRouche Video Presentation: “LaRouche… | — |
+| ☐ | L118 | [27:04](https://youtu.be/J8Gpbyb1JDY?t=1624) | 27:04–1:49:55 | 44% | Lyndon LaRouche Video Presentation: “LaRouche… | `lyndon-h-larouche-jr` |
 | ✓  | L119 | [1:49:56](https://youtu.be/J8Gpbyb1JDY?t=6596) | 1:49:56–2:20:23 | 16% | John Sigerson (U.S.) | `john-sigerson` |
 | ✓  | L120 | [2:20:24](https://youtu.be/J8Gpbyb1JDY?t=8424) | 2:20:24–3:09:35 | 26% | Gretchen Small (U.S.) | `gretchen-small` |
 
@@ -129,7 +129,7 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 |---|---|---|---|---|---|---|
 | ✓  | L153 | [23:42](https://youtu.be/LxM9omHPMV4?t=1422) | 23:42–41:37 | 9% | Jacques Cheminade | `jacques-cheminade` |
 | ✓  | L154 | [41:38](https://youtu.be/LxM9omHPMV4?t=2498) | 41:38–54:50 | 7% | Felipe Maruf Quintas | `felipe-maruf-quintas` |
-| ☐ | L155 | [54:51](https://youtu.be/LxM9omHPMV4?t=3291) | 54:51–1:05:31 | 5% | Dr. Zaher Wahab | — |
+| ☐ | L155 | [54:51](https://youtu.be/LxM9omHPMV4?t=3291) | 54:51–1:05:31 | 5% | Dr. Zaher Wahab | ⚠ ⚠ left unbuilt in person-map … |
 | ✓  | L156 | [1:05:32](https://youtu.be/LxM9omHPMV4?t=3932) | 1:05:32–1:17:50 | 6% | Dr. George Koo | `george-koo` |
 | ✓  | L157 | [1:17:51](https://youtu.be/LxM9omHPMV4?t=4671) | 1:17:51–3:16:25 | 60% | Mike Robinson | `mike-robinson` |
 
@@ -257,7 +257,7 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 | ✓  | L245 | [1:26:49](https://youtu.be/KcduPjapbRc?t=5209) | 1:26:49–1:44:22 | 8% | Liliana Gorini (Italy), Chairwoman, MoviSol (… | `liliana-gorini` |
 | ✓  | L246 | [1:44:23](https://youtu.be/KcduPjapbRc?t=6263) | 1:44:23–2:05:37 | 10% | Diane Sare, Schiller Institute (USA) | `diane-sare` |
 | ✓  | L247 | [2:05:38](https://youtu.be/KcduPjapbRc?t=7538) | 2:05:38–2:15:59 | 5% | Carolina Domínguez, Schiller Institute (Mexic… | `carolina-dominguez` |
-| ☐ | L248 | [2:16:00](https://youtu.be/KcduPjapbRc?t=8160) | 2:16:00–2:22:23 | 3% | Video: John Sigerson, tenor; Margaret Greensp… | — |
+| ☐ | L248 | [2:16:00](https://youtu.be/KcduPjapbRc?t=8160) | 2:16:00–2:22:23 | 3% | Video: John Sigerson, tenor; Margaret Greensp… | `john-sigerson` |
 | ✓  | L249 | [2:22:24](https://youtu.be/KcduPjapbRc?t=8544) | 2:22:24–2:34:59 | 6% | Megan Dobrodt, President (USA), Schiller Inst… | `megan-dobrodt` |
 | ✓  | L250 | [2:35:00](https://youtu.be/KcduPjapbRc?t=9300) | 2:35:00–2:38:18 | 2% | Anastasia Battle (USA), The LaRouche Organiza… | `anastasia-battle` |
 | ☐ | L251 | [2:38:19](https://youtu.be/KcduPjapbRc?t=9499) | 2:38:19–3:27:22 | 24% | Question &amp; Answer Session | — |
@@ -270,7 +270,7 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 
 | ✓ | line | jump to | span | covers | named speaker | links as |
 |---|---|---|---|---|---|---|
-| ☐ | L252 | [0:00](https://youtu.be/83Kzsg20gAo) | 0:00–2:39 | 1% | Moderator: Harley Schlanger | — |
+| ☐ | L252 | [0:00](https://youtu.be/83Kzsg20gAo) | 0:00–2:39 | 1% | Moderator: Harley Schlanger | `harley-schlanger` |
 | ✓  | L253 | [2:40](https://youtu.be/83Kzsg20gAo?t=160) | 2:40–11:39 | 4% | Helga Zepp-LaRouche, President | `helga-zepp-larouche` |
 | ✓  | L254 | [11:40](https://youtu.be/83Kzsg20gAo?t=700) | 11:40–28:12 | 7% | Ambassador Ping Huang | `ping-huang` |
 | ✓  | L255 | [28:13](https://youtu.be/83Kzsg20gAo?t=1693) | 28:13–36:53 | 3% | Mr. Alexey Boguslavskiy | `alexey-boguslavskiy` |
@@ -392,68 +392,4 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 | ☐ | L383 | [1:36:45](https://youtu.be/Ic8b23CxBSU?t=5805) | 1:36:45–1:57:54 | 8% | Hans von Helldorff, Spokesman, Federal Associ… | `hans-von-helldorff` |
 | ☐ | L384 | [1:57:55](https://youtu.be/Ic8b23CxBSU?t=7075) | 1:57:55–2:16:13 | 7% | of the Black Sea Economic Cooperation Organiz… | — |
 | ☐ | L385 | [2:16:14](https://youtu.be/Ic8b23CxBSU?t=8174) | 2:16:14–4:12:00 | 46% | Professor Nuraly Bekturganov, Vice President … | `nuraly-bekturganov` |
-
-## EedZoQ3ZxA0 · Attaining Freedom through Necessity - The Last Chance for…
-
-32:20 · 1 segments · covers 18% — ⚠ 26:40 unaccounted after the last segment
-
-[open](https://youtu.be/EedZoQ3ZxA0)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L713 | [0:00](https://youtu.be/EedZoQ3ZxA0) | 0:00–5:40 | 18% | Jacques Cheminade, Founder and leader of the … | `jacques-cheminade` |
-
-## AiA_khFWt1s · Attaining Freedom through Necessity - The Last Chance for…
-
-17:40 · 1 segments · covers 32% — ⚠ 11:58 unaccounted after the last segment
-
-[open](https://youtu.be/AiA_khFWt1s)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L719 | [0:00](https://youtu.be/AiA_khFWt1s) | 0:00–5:42 | 32% | Mikhail Delyagin, Doctor of Economics, Direct… | `mikhail-delyagin` |
-
-## 5rjRw5Kclko · A New Paradigm for the Survival of Civilization — Novembe…
-
-17:22 · 1 segments · covers 26% — ⚠ 12:54 unaccounted after the last segment
-
-[open](https://youtu.be/5rjRw5Kclko)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L825 | [0:00](https://youtu.be/5rjRw5Kclko) | 0:00–4:28 | 26% | Daniel Estulin, Journalist, Spain | `daniel-estulin` |
-
-## SGtUuproUWU · A New Paradigm for the Survival of Civilization — Novembe…
-
-1:15:02 · 1 segments · covers 42% — ⚠ 43:27 unaccounted after the last segment
-
-[open](https://youtu.be/SGtUuproUWU)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L836 | [0:00](https://youtu.be/SGtUuproUWU) | 0:00–31:35 | 42% | Hussein Askary, Chairman of EAP Sweden | `hussein-askary` |
-
-## bzdXqmMRjoE · A New Paradigm for the Survival of Civilization — Novembe…
-
-52:28 · 1 segments · covers 53% — ⚠ 24:50 unaccounted after the last segment
-
-[open](https://youtu.be/bzdXqmMRjoE)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L838 | [0:00](https://youtu.be/bzdXqmMRjoE) | 0:00–27:38 | 53% | Prof. Bassam Tahhan, Spokesman of the Collect… | `bassam-tahhan` |
-
----
-
-## Videos with time unaccounted for (5)
-
-The last segment ends well before the video does. Usually a split on header text: the named speaker often continues, in which case clear that segment's `end_seconds`.
-
-| video | ends early by | of |
-|---|---|---|
-| [EedZoQ3ZxA0](https://youtu.be/EedZoQ3ZxA0) | 26:40 | 32:20 |
-| [5rjRw5Kclko](https://youtu.be/5rjRw5Kclko) | 12:54 | 17:22 |
-| [AiA_khFWt1s](https://youtu.be/AiA_khFWt1s) | 11:58 | 17:40 |
-| [SGtUuproUWU](https://youtu.be/SGtUuproUWU) | 43:27 | 1:15:02 |
-| [bzdXqmMRjoE](https://youtu.be/bzdXqmMRjoE) | 24:50 | 52:28 |
 
