@@ -1,6 +1,6 @@
 # Tranche D1 — timestamp check (case 1)
 
-77 undecided segments across 23 videos. **This is the only part of File 3 that needs the video.**
+77 undecided segments across 22 videos. **This is the only part of File 3 that needs the video.**
 
 Open each deep link and confirm the named person is the one who starts speaking there.
 
@@ -89,28 +89,6 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 | ☐ | L99 | [0:00](https://youtu.be/7O11ENxM-zA) | 0:00–4:16 | 20% | The Schiller Institute, in accordance with it… | ⚠ ⚠ dropped in person-map — no … |
 | ☐ | L100 | [4:17](https://youtu.be/7O11ENxM-zA?t=257) | 4:17–15:01 | 51% | Dr. King became, in the last year of his life… | ⚠ ⚠ dropped in person-map — no … |
 | ☐ | L101 | [15:02](https://youtu.be/7O11ENxM-zA?t=902) | 15:02–end | 28% | Dr. King's formulation, that "the choice is n… | ⚠ ⚠ dropped in person-map — no … |
-
-## aF2d8EAMQ0o · Inspiring Humanity to Survive the Greatest Crisis in Worl…
-
-2:46:00 · 11 segments · covers 52% · **every row decided**
-
-⚠ unaccounted: **1:37:35–2:46:00** — a speaker the segmenter missed would sit here. Append a row per missing talk (next free `segment_index` for this video); do not renumber existing rows.
-
-[open](https://youtu.be/aF2d8EAMQ0o)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ✓ edit | L110 | [0:00](https://youtu.be/aF2d8EAMQ0o) | 0:00–11:10 | 7% | Diane Sare (U.S.), Candidate for United State… | `diane-sare` |
-| ✓ edit | L111 | [12:30](https://youtu.be/aF2d8EAMQ0o?t=750) | 12:30–25:04 | 8% | Gretchen Small (U.S.), Executive Intelligence… | `gretchen-small` |
-| ✓ edit | L112 | [25:56](https://youtu.be/aF2d8EAMQ0o?t=1556) | 25:56–37:02 | 7% | Col. Richard H. Black (ret.) (U.S.), former h… | `richard-h-black` |
-| ✓ edit | L113 | [37:49](https://youtu.be/aF2d8EAMQ0o?t=2269) | 37:49–40:43 | 2% | George Koo, Retired Business Consultant; Chai… | `george-koo` |
-| ✓ edit | L114 | [41:09](https://youtu.be/aF2d8EAMQ0o?t=2469) | 41:09–44:37 | 2% | James Jatras (U.S.), former diplomat, former … | `james-jatras` |
-| ✓ edit | L115 | [45:11](https://youtu.be/aF2d8EAMQ0o?t=2711) | 45:11–55:12 | 6% | David T. Pyne (U.S.), Deputy Director of Nati… | `david-t-pyne` |
-| ✓ edit | L116 | [55:55](https://youtu.be/aF2d8EAMQ0o?t=3355) | 55:55–1:06:22 | 6% | Igor Lopatonok (U.S.) | `igor-lopatonok` |
-| ✓ accept | L850 | [1:07:03](https://youtu.be/aF2d8EAMQ0o?t=4023) | 1:07:03–1:12:50 | 3% | Bradley Blankenship (U.S.), Journalist | `bradley-blankenship` |
-| ✓ accept | L847 | [1:13:18](https://youtu.be/aF2d8EAMQ0o?t=4398) | 1:13:18–1:19:52 | 4% | Eva Karene Bartlett | — |
-| ✓ accept | L848 | [1:20:47](https://youtu.be/aF2d8EAMQ0o?t=4847) | 1:20:47–1:26:50 | 4% | Mira Terada | — |
-| ✓ accept | L849 | [1:31:00](https://youtu.be/aF2d8EAMQ0o?t=5460) | 1:31:00–1:37:35 | 4% | Rubén Guzzetti | `ruben-guzzetti` |
 
 ## J8Gpbyb1JDY · Inspiring Humanity to Survive the Greatest Crisis in Worl…
 
@@ -382,14 +360,4 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 | ☐ | L383 | [1:36:45](https://youtu.be/Ic8b23CxBSU?t=5805) | 1:36:45–1:57:54 | 8% | Hans von Helldorff, Spokesman, Federal Associ… | `hans-von-helldorff` |
 | ☐ | L384 | [1:57:55](https://youtu.be/Ic8b23CxBSU?t=7075) | 1:57:55–2:16:13 | 7% | of the Black Sea Economic Cooperation Organiz… | — |
 | ☐ | L385 | [2:16:14](https://youtu.be/Ic8b23CxBSU?t=8174) | 2:16:14–4:12:00 | 46% | Professor Nuraly Bekturganov, Vice President … | `nuraly-bekturganov` |
-
----
-
-## Videos with time unaccounted for (1)
-
-Either a split on header text — the named speaker often continues, so clear that segment's `end_seconds` — or a talk the segmenter never proposed, which needs a new row appended.
-
-| video | unaccounted | of | windows | rows open |
-|---|---|---|---|---|
-| [aF2d8EAMQ0o](https://youtu.be/aF2d8EAMQ0o) | 1:08:25 | 2:46:00 | 1:37:35–2:46:00 | none — decided |
 

@@ -88,13 +88,22 @@ def main():
 
     todo = {i for i, r in enumerate(rows) if undecided(r) and r['case'] == '1'}
 
-    # every surviving segment of every case-1 video, so coverage reflects reality
+    # Segments that will become records — what `covers` measures.
     segs = collections.defaultdict(list)
+    # Every segment that exists, skipped ones included — what gap detection measures.
+    # A skipped row is still ACCOUNTED for: someone looked at that stretch of video and
+    # decided deliberately against a record (a Q&A period, an interlude). Only time no
+    # row describes at all can hide a speaker nobody has seen.
+    known = collections.defaultdict(list)
     for i, r in enumerate(rows):
-        if r['case'] == '1' and (r['final_action'] or '').strip() != 'skip':
+        if r['case'] != '1':
+            continue
+        known[r['yt_video_id']].append((i + 2, r))
+        if (r['final_action'] or '').strip() != 'skip':
             segs[r['yt_video_id']].append((i + 2, r))
-    for v in segs:
-        segs[v].sort(key=lambda p: int(p[1]['start_seconds'] or 0))
+    for d_ in (segs, known):
+        for v in d_:
+            d_[v].sort(key=lambda p: int(p[1]['start_seconds'] or 0))
 
     def gaps_in(vid):
         """Windows no surviving segment accounts for, between or after the segments.
@@ -106,12 +115,12 @@ def main():
         does mean a missing speaker is time between two talks, or after the last one.
         """
         dur = duration(d, vid)
-        if not dur or not segs[vid]:
+        if not dur or not known[vid]:
             return []
         floor = max(120, dur * args.gap_pct / 100)
         out = []
-        cursor = int(segs[vid][0][1]['start_seconds'] or 0)
-        for _, r in segs[vid]:
+        cursor = int(known[vid][0][1]['start_seconds'] or 0)
+        for _, r in known[vid]:
             ss = int(r['start_seconds'] or 0)
             if ss - cursor > floor:
                 out.append((cursor, ss))
