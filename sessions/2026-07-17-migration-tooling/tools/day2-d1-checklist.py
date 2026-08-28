@@ -17,7 +17,11 @@ stored transcript is truncated to match.
 
   * `covers` per row  — how much of the video that segment spans.
   * `covers` per video — how much of it all surviving segments account for.
-  * a trailing gap is flagged when the last segment ends well before the video does.
+  * gaps are flagged wherever they fall — between two segments or after the last one.
+
+A video stays in this document while it has undecided segments OR an unexplained gap.
+Deciding every existing row does not mean the video is done: the segmenter can miss a
+speaker entirely, and that shows up only as time nothing accounts for.
 
 A high-coverage video is almost certainly fine. A low one deserves a scrub before it
 is accepted. Neither figure decides anything on its own — they are triage.
@@ -83,17 +87,48 @@ def main():
         return r['needs_review'] == '1' and not (r['final_action'] or '').strip()
 
     todo = {i for i, r in enumerate(rows) if undecided(r) and r['case'] == '1'}
-    vids = collections.OrderedDict()
-    for i, r in enumerate(rows):
-        if i in todo:
-            vids.setdefault(r['yt_video_id'], None)
-    # every surviving segment of those videos, so coverage reflects reality
+
+    # every surviving segment of every case-1 video, so coverage reflects reality
     segs = collections.defaultdict(list)
     for i, r in enumerate(rows):
-        if r['yt_video_id'] in vids and (r['final_action'] or '').strip() != 'skip':
+        if r['case'] == '1' and (r['final_action'] or '').strip() != 'skip':
             segs[r['yt_video_id']].append((i + 2, r))
     for v in segs:
         segs[v].sort(key=lambda p: int(p[1]['start_seconds'] or 0))
+
+    def gaps_in(vid):
+        """Windows no surviving segment accounts for, between or after the segments.
+
+        The run from 0:00 to the first segment is deliberately NOT reported. Every one
+        of these conference videos opens with music, a title card or a moderator's
+        introduction before the first talk, so a leading gap is the norm: flagging it
+        produced 13 false positives out of 14 and buried the one real finding. What
+        does mean a missing speaker is time between two talks, or after the last one.
+        """
+        dur = duration(d, vid)
+        if not dur or not segs[vid]:
+            return []
+        floor = max(120, dur * args.gap_pct / 100)
+        out = []
+        cursor = int(segs[vid][0][1]['start_seconds'] or 0)
+        for _, r in segs[vid]:
+            ss = int(r['start_seconds'] or 0)
+            if ss - cursor > floor:
+                out.append((cursor, ss))
+            ee = int(r['end_seconds']) if (r['end_seconds'] or '').strip() else dur
+            cursor = max(cursor, ee)
+        if dur - cursor > floor:
+            out.append((cursor, dur))
+        return out
+
+    # a video stays listed while it has undecided rows OR unexplained time
+    vids = collections.OrderedDict()
+    for i, r in enumerate(rows):
+        v = r['yt_video_id']
+        if v in vids or r['case'] != '1':
+            continue
+        if any(j in todo for j, _ in ((L - 2, x) for L, x in segs.get(v, []))) or gaps_in(v):
+            vids[v] = None
 
     O = []
     w = O.append
@@ -128,19 +163,22 @@ def main():
         c = conf.get(group[0][1]['conference_key'], {})
         span = sum((int(r['end_seconds']) if (r['end_seconds'] or '').strip() else (dur or 0))
                    - int(r['start_seconds'] or 0) for _, r in group)
-        last = group[-1][1]
-        last_end = int(last['end_seconds']) if (last['end_seconds'] or '').strip() else (dur or 0)
-        gap = (dur - last_end) if dur else 0
-        warn = dur and gap > max(120, dur * args.gap_pct / 100)
-        if warn:
-            flagged.append((vid, gap, dur))
+        holes = gaps_in(vid)
+        open_rows = sum(1 for L, _ in group if (L - 2) in todo)
+        if holes:
+            flagged.append((vid, sum(b - a for a, b in holes), dur, holes, open_rows))
 
         w(f'## {vid} · {wl.clip(c.get("title", "?"), 58)}')
         w('')
         head = f'{hhmm(dur) if dur else "duration unknown"} · {len(group)} segments · covers {pct(span, dur)}'
-        if warn:
-            head += f' — ⚠ {hhmm(gap)} unaccounted after the last segment'
+        if not open_rows:
+            head += ' · **every row decided**'
         w(head)
+        if holes:
+            w('')
+            w('⚠ unaccounted: ' + ', '.join(f'**{hhmm(a)}–{hhmm(b)}**' for a, b in holes)
+              + ' — a speaker the segmenter missed would sit here. Append a row per missing '
+                'talk (next free `segment_index` for this video); do not renumber existing rows.')
         w('')
         w(f'[open](https://youtu.be/{vid})')
         w('')
@@ -166,18 +204,22 @@ def main():
         w('')
         w(f'## Videos with time unaccounted for ({len(flagged)})')
         w('')
-        w('The last segment ends well before the video does. Usually a split on header text: the '
-          'named speaker often continues, in which case clear that segment\'s `end_seconds`.')
+        w('Either a split on header text — the named speaker often continues, so clear that '
+          'segment\'s `end_seconds` — or a talk the segmenter never proposed, which needs a new '
+          'row appended.')
         w('')
-        w('| video | ends early by | of |')
-        w('|---|---|---|')
-        for vid, gap, dur in sorted(flagged, key=lambda x: -x[1] / x[2]):
-            w(f'| [{vid}](https://youtu.be/{vid}) | {hhmm(gap)} | {hhmm(dur)} |')
+        w('| video | unaccounted | of | windows | rows open |')
+        w('|---|---|---|---|---|')
+        for vid, gap, dur, holes, open_rows in sorted(flagged, key=lambda x: -x[1] / x[2]):
+            wins = ', '.join(f'{hhmm(a)}–{hhmm(b)}' for a, b in holes)
+            w(f'| [{vid}](https://youtu.be/{vid}) | {hhmm(gap)} | {hhmm(dur)} | {wins} | '
+              f'{open_rows or "none — decided"} |')
         w('')
 
     open(args.out, 'w', encoding='utf-8').write('\n'.join(O) + '\n')
     print(f'wrote {args.out}')
-    print(f'  {len(todo)} undecided segments · {len(vids)} videos · {len(flagged)} with a trailing gap')
+    print(f'  {len(todo)} undecided segments · {len(vids)} videos listed · '
+          f'{len(flagged)} with unaccounted time')
 
 
 if __name__ == '__main__':
