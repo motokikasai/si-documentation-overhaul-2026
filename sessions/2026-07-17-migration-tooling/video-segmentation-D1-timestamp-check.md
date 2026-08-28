@@ -1,6 +1,6 @@
 # Tranche D1 — timestamp check (case 1)
 
-91 undecided segments across 24 videos. **This is the only part of File 3 that needs the video.**
+77 undecided segments across 22 videos. **This is the only part of File 3 that needs the video.**
 
 Open each deep link and confirm the named person is the one who starts speaking there.
 
@@ -89,22 +89,6 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 | ☐ | L99 | [0:00](https://youtu.be/7O11ENxM-zA) | 0:00–4:16 | 20% | The Schiller Institute, in accordance with it… | ⚠ ⚠ dropped in person-map — no … |
 | ☐ | L100 | [4:17](https://youtu.be/7O11ENxM-zA?t=257) | 4:17–15:01 | 51% | Dr. King became, in the last year of his life… | ⚠ ⚠ dropped in person-map — no … |
 | ☐ | L101 | [15:02](https://youtu.be/7O11ENxM-zA?t=902) | 15:02–end | 28% | Dr. King's formulation, that "the choice is n… | ⚠ ⚠ dropped in person-map — no … |
-
-## aF2d8EAMQ0o · Inspiring Humanity to Survive the Greatest Crisis in Worl…
-
-2:46:00 · 7 segments · covers 97%
-
-[open](https://youtu.be/aF2d8EAMQ0o)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L110 | [5:41](https://youtu.be/aF2d8EAMQ0o?t=341) | 5:41–21:32 | 10% | Diane Sare (U.S.), Candidate for United State… | `diane-sare` |
-| ☐ | L111 | [21:33](https://youtu.be/aF2d8EAMQ0o?t=1293) | 21:33–34:47 | 8% | Gretchen Small (U.S.), Executive Intelligence… | `gretchen-small` |
-| ☐ | L112 | [34:48](https://youtu.be/aF2d8EAMQ0o?t=2088) | 34:48–46:58 | 7% | Col. Richard H. Black (ret.) (U.S.), former h… | `richard-h-black` |
-| ☐ | L113 | [46:59](https://youtu.be/aF2d8EAMQ0o?t=2819) | 46:59–50:12 | 2% | George Koo, Retired Business Consultant; Chai… | `george-koo` |
-| ☐ | L114 | [50:13](https://youtu.be/aF2d8EAMQ0o?t=3013) | 50:13–54:16 | 2% | James Jatras (U.S.), former diplomat, former … | `james-jatras` |
-| ☐ | L115 | [54:17](https://youtu.be/aF2d8EAMQ0o?t=3257) | 54:17–1:05:00 | 6% | David T. Pyne (U.S.), Deputy Director of Nati… | `david-t-pyne` |
-| ☐ | L116 | [1:05:01](https://youtu.be/aF2d8EAMQ0o?t=3901) | 1:05:01–2:46:00 | 61% | Bradley Blankenship (U.S.), Journalist | `bradley-blankenship` |
 
 ## J8Gpbyb1JDY · Inspiring Humanity to Survive the Greatest Crisis in Worl…
 
@@ -330,22 +314,6 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 | ☐ | L336 | [1:50:33](https://youtu.be/KQcQTMHG1KM?t=6633) | 1:50:33–2:16:49 | 12% | William Binney, Former Technical Director, Na… | `william-binney` |
 | ☐ | L337 | [2:16:50](https://youtu.be/KQcQTMHG1KM?t=8210) | 2:16:50–2:32:40 | 7% | Jason Ross, Schiller Institute co-author "Ext… | `jason-ross` |
 | ☐ | L338 | [2:32:41](https://youtu.be/KQcQTMHG1KM?t=9161) | 2:32:41–3:40:03 | 31% | Dennis Small, Executive Intelligence Review I… | `dennis-small` |
-
-## i4SlJy4KjEI · Schiller Institute Conference — June 30-July 1, 2018 • Ba…
-
-2:57:39 · 7 segments · covers 93%
-
-[open](https://youtu.be/i4SlJy4KjEI)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L360 | [11:52](https://youtu.be/i4SlJy4KjEI?t=712) | 11:52–47:17 | 20% | Helga Zepp-LaRouche, Chairwoman of the Schill… | `helga-zepp-larouche` |
-| ☐ | L361 | [47:18](https://youtu.be/i4SlJy4KjEI?t=2838) | 47:18–1:01:19 | 8% | Vladimir Morozov, Program Coordinator, Russia… | `vladimir-morozov` |
-| ☐ | L362 | [1:01:20](https://youtu.be/i4SlJy4KjEI?t=3680) | 1:01:20–1:26:16 | 14% | Dr. Xu Jian, Vice President of China Institut… | `xu-jian` |
-| ☐ | L363 | [1:26:17](https://youtu.be/i4SlJy4KjEI?t=5177) | 1:26:17–1:49:34 | 13% | US State Senator Richard Black (video present… | `us-state-senator-richard-black` |
-| ☐ | L364 | [1:49:35](https://youtu.be/i4SlJy4KjEI?t=6575) | 1:49:35–2:06:43 | 10% | Lt. Col. (ret.) Ulrich Scholz, former NATO pl… | `lt-col-ulrich-scholz` |
-| ☐ | L365 | [2:06:44](https://youtu.be/i4SlJy4KjEI?t=7604) | 2:06:44–2:33:35 | 15% | Colonel (ret.) Alain Corvez, International Co… | `alain-corvez` |
-| ☐ | L366 | [2:33:36](https://youtu.be/i4SlJy4KjEI?t=9216) | 2:33:36–2:57:39 | 14% | Roger Stone, US Political Strategist of the T… | `roger-stone` |
 
 ## O-6e3dmzDoQ · Schiller Institute Conference — June 30-July 1, 2018 • Ba…
 

@@ -59,6 +59,17 @@ EDITABLE = {
                                 'start_seconds', 'end_seconds', 'country', 'affiliation'},
 }
 
+# Natural key per file: the columns that identify a row regardless of where it sits.
+# The baseline diff compares by this rather than by row position, so appending a row
+# (a real reviewer action — a speaker the segmenter missed) is recognised as an
+# addition instead of knocking every later row out of alignment.
+ROW_KEY = {
+    'classification.csv':      ('legacy_id',),
+    'person-map.csv':          ('person_key',),
+    'conference-map.csv':      ('conference_key',),
+    'video-segmentation.csv':  ('yt_video_id', 'segment_index'),
+}
+
 # final_action vocabularies. '' is handled separately (it is the silent-skip case).
 ACTIONS = {
     'person-map.csv':         {'drop', 'accept'},          # plus merge:<key>
@@ -82,13 +93,19 @@ class Report:
     def warn(self, msg, rows=None):
         self.warns.append((msg, rows or []))
 
-    def note(self, msg):
-        self.info.append(msg)
+    def note(self, msg, rows=None):
+        self.info.append((msg, rows or []))
 
     def print(self, quiet=False, sample=6):
         print(f"\n{'=' * 74}\n{self.name}\n{'=' * 74}")
-        for msg in self.info:
+        for msg, rows in self.info:
             print(f"  ·  {msg}")
+            if quiet:
+                continue
+            for r in rows[:sample]:
+                print(f"           {r}")
+            if len(rows) > sample:
+                print(f"           … and {len(rows) - sample} more")
         for level, bucket in (('ERROR', self.errors), ('WARN ', self.warns)):
             for msg, rows in bucket:
                 print(f"  {level}  {msg}")
@@ -137,6 +154,14 @@ def loc(line_of, i, key=''):
 # --------------------------------------------------------------------------
 
 def baseline_check(rep, path, rows, fields, line_of, rev, editable):
+    """Diff the working file against `rev`, matching rows by their natural key.
+
+    Position is not identity here: appending a segment the machine never proposed is
+    a legitimate review action (a speaker missing from a conference video), and a
+    positional diff would report it as every subsequent row having been rewritten.
+    Keying on ROW_KEY makes additions, deletions and edits each say what they are.
+    Falls back to a positional diff if the key columns are absent or non-unique.
+    """
     rel = subprocess.run(['git', 'ls-files', '--full-name', path],
                          capture_output=True, text=True).stdout.strip()
     if not rel:
@@ -153,14 +178,43 @@ def baseline_check(rep, path, rows, fields, line_of, rev, editable):
         rep.error("header changed vs baseline (columns renamed/reordered/dropped)",
                   [f"baseline: {base_fields}", f"current : {list(fields)}"])
         return
-    if len(base) != len(rows):
-        rep.error(f"row count changed vs baseline: {len(base)} -> {len(rows)} "
-                  "(rows must never be added or deleted)")
-        return
 
     frozen = [f for f in fields if f not in editable]
+    keycols = ROW_KEY.get(os.path.basename(path))
+
+    def keyed(rs):
+        """{key: (index, row)}, or None if the key cannot identify these rows."""
+        if not keycols or not all(c in fields for c in keycols):
+            return None
+        out = {}
+        for i, r in enumerate(rs):
+            k = tuple((r.get(c) or '').strip() for c in keycols)
+            if not any(k) or k in out:
+                return None                      # blank or duplicate: not an identity
+            out[k] = (i, r)
+        return out
+
+    cur_by, base_by = keyed(rows), keyed(base)
+    if cur_by is None or base_by is None:
+        if len(base) != len(rows):
+            rep.error(f"row count changed vs baseline: {len(base)} -> {len(rows)} "
+                      "(no usable row key, so rows must not be added or deleted)")
+            return
+        pairs = [(i, b, c) for i, (b, c) in enumerate(zip(base, rows))]
+    else:
+        added = [k for k in cur_by if k not in base_by]
+        gone = [k for k in base_by if k not in cur_by]
+        if added:
+            rep.note(f"{len(added)} row(s) added since {rev}",
+                     [f"{loc(line_of, cur_by[k][0])} {' '.join(k)}" for k in added])
+        if gone:
+            rep.error(f"{len(gone)} row(s) deleted since {rev} — rows must never be removed",
+                      [' '.join(k) for k in gone])
+        pairs = [(cur_by[k][0], base_by[k][1], cur_by[k][1])
+                 for k in cur_by if k in base_by]
+
     hits = []
-    for i, (b, c) in enumerate(zip(base, rows)):
+    for i, b, c in pairs:
         for f in frozen:
             if (b.get(f) or '') != (c.get(f) or ''):
                 hits.append(f"{loc(line_of, i)} col={f}: "
