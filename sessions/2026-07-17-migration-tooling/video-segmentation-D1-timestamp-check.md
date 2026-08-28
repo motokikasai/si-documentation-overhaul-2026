@@ -92,9 +92,9 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 
 ## aF2d8EAMQ0o · Inspiring Humanity to Survive the Greatest Crisis in Worl…
 
-2:46:00 · 7 segments · covers 37% · **every row decided**
+2:46:00 · 11 segments · covers 52% · **every row decided**
 
-⚠ unaccounted: **1:06:22–2:46:00** — a speaker the segmenter missed would sit here. Append a row per missing talk (next free `segment_index` for this video); do not renumber existing rows.
+⚠ unaccounted: **1:37:35–2:46:00** — a speaker the segmenter missed would sit here. Append a row per missing talk (next free `segment_index` for this video); do not renumber existing rows.
 
 [open](https://youtu.be/aF2d8EAMQ0o)
 
@@ -107,6 +107,10 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 | ✓ edit | L114 | [41:09](https://youtu.be/aF2d8EAMQ0o?t=2469) | 41:09–44:37 | 2% | James Jatras (U.S.), former diplomat, former … | `james-jatras` |
 | ✓ edit | L115 | [45:11](https://youtu.be/aF2d8EAMQ0o?t=2711) | 45:11–55:12 | 6% | David T. Pyne (U.S.), Deputy Director of Nati… | `david-t-pyne` |
 | ✓ edit | L116 | [55:55](https://youtu.be/aF2d8EAMQ0o?t=3355) | 55:55–1:06:22 | 6% | Igor Lopatonok (U.S.) | `igor-lopatonok` |
+| ✓ accept | L850 | [1:07:03](https://youtu.be/aF2d8EAMQ0o?t=4023) | 1:07:03–1:12:50 | 3% | Bradley Blankenship (U.S.), Journalist | `bradley-blankenship` |
+| ✓ accept | L847 | [1:13:18](https://youtu.be/aF2d8EAMQ0o?t=4398) | 1:13:18–1:19:52 | 4% | Eva Karene Bartlett | — |
+| ✓ accept | L848 | [1:20:47](https://youtu.be/aF2d8EAMQ0o?t=4847) | 1:20:47–1:26:50 | 4% | Mira Terada | — |
+| ✓ accept | L849 | [1:31:00](https://youtu.be/aF2d8EAMQ0o?t=5460) | 1:31:00–1:37:35 | 4% | Rubén Guzzetti | `ruben-guzzetti` |
 
 ## J8Gpbyb1JDY · Inspiring Humanity to Survive the Greatest Crisis in Worl…
 
@@ -387,5 +391,5 @@ Either a split on header text — the named speaker often continues, so clear th
 
 | video | unaccounted | of | windows | rows open |
 |---|---|---|---|---|
-| [aF2d8EAMQ0o](https://youtu.be/aF2d8EAMQ0o) | 1:39:38 | 2:46:00 | 1:06:22–2:46:00 | none — decided |
+| [aF2d8EAMQ0o](https://youtu.be/aF2d8EAMQ0o) | 1:08:25 | 2:46:00 | 1:37:35–2:46:00 | none — decided |
 
