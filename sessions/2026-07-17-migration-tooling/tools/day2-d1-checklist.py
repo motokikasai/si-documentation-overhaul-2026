@@ -1,0 +1,184 @@
+#!/usr/bin/env python3
+"""
+day2-d1-checklist.py — the timestamp-check worksheet for case-1 rows (tranche D1).
+
+Case 1 rows carry explicit start/end times, and the one thing no data can settle is
+whether the named person actually starts speaking at `start_seconds`. This groups the
+undecided rows into their videos so a video can be played straight through.
+
+What the coverage figures are for
+---------------------------------
+Video durations come from the yt-dump metadata, so how much of a video its segments
+account for is checkable without opening YouTube. That matters because the caption
+aligner sometimes split on header text rather than a real handover, leaving a segment
+that stops early: skipping the bogus segment does not give the time back, and
+`si transcripts` slices the caption VTT by start/end (si-migrate.php:2080), so the
+stored transcript is truncated to match.
+
+  * `covers` per row  — how much of the video that segment spans.
+  * `covers` per video — how much of it all surviving segments account for.
+  * a trailing gap is flagged when the last segment ends well before the video does.
+
+A high-coverage video is almost certainly fine. A low one deserves a scrub before it
+is accepted. Neither figure decides anything on its own — they are triage.
+
+Usage: python3 tools/day2-d1-checklist.py [--dir incoming] [--out <path>] [--gap-pct 5]
+"""
+import argparse
+import collections
+import csv
+import importlib.util
+import json
+import os
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+
+
+def load_worklist_module():
+    spec = importlib.util.spec_from_file_location(
+        'day2_seg_worklist', os.path.join(HERE, 'day2-seg-worklist.py'))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def hhmm(sec):
+    sec = int(sec or 0)
+    h, m, s = sec // 3600, (sec % 3600) // 60, sec % 60
+    return f'{h}:{m:02d}:{s:02d}' if h else f'{m}:{s:02d}'
+
+
+def duration(d, vid):
+    p = os.path.join(d, 'yt-dump', 'videos', f'{vid}.json')
+    if not os.path.exists(p):
+        return None
+    try:
+        v = json.load(open(p, encoding='utf-8')).get('duration')
+        return int(v) if v else None
+    except (json.JSONDecodeError, ValueError, TypeError):
+        return None
+
+
+def pct(part, whole):
+    return f'{round(100 * part / whole)}%' if whole else '—'
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--dir', default='incoming')
+    ap.add_argument('--out', default='video-segmentation-D1-timestamp-check.md')
+    ap.add_argument('--gap-pct', type=int, default=5,
+                    help='flag a trailing gap larger than this %% of the video (default 5)')
+    args = ap.parse_args()
+
+    wl = load_worklist_module()
+    d = args.dir
+    rows = list(csv.DictReader(open(os.path.join(d, 'video-segmentation.csv'), encoding='utf-8-sig')))
+    pm = {r['person_key']: r for r in
+          csv.DictReader(open(os.path.join(d, 'person-map.csv'), encoding='utf-8-sig'))}
+    conf = {r['conference_key']: r for r in
+            csv.DictReader(open(os.path.join(d, 'conference-map.csv'), encoding='utf-8-sig'))}
+
+    def undecided(r):
+        return r['needs_review'] == '1' and not (r['final_action'] or '').strip()
+
+    todo = {i for i, r in enumerate(rows) if undecided(r) and r['case'] == '1'}
+    vids = collections.OrderedDict()
+    for i, r in enumerate(rows):
+        if i in todo:
+            vids.setdefault(r['yt_video_id'], None)
+    # every surviving segment of those videos, so coverage reflects reality
+    segs = collections.defaultdict(list)
+    for i, r in enumerate(rows):
+        if r['yt_video_id'] in vids and (r['final_action'] or '').strip() != 'skip':
+            segs[r['yt_video_id']].append((i + 2, r))
+    for v in segs:
+        segs[v].sort(key=lambda p: int(p[1]['start_seconds'] or 0))
+
+    O = []
+    w = O.append
+    w('# Tranche D1 — timestamp check (case 1)')
+    w('')
+    w(f'{len(todo)} undecided segments across {len(vids)} videos. '
+      '**This is the only part of File 3 that needs the video.**')
+    w('')
+    w('Open each deep link and confirm the named person is the one who starts speaking there.')
+    w('')
+    w('- right speaker, right moment → `final_action=accept`')
+    w('- wrong time → fix `start_seconds` / `end_seconds` in place, `final_action=edit`')
+    w('- not a real talk (applause, interlude, header text) → `final_action=skip`')
+    w('')
+    w('Initials in `reviewer` either way. Blank = the segment is silently discarded.')
+    w('')
+    w('**When you skip a segment, check the one before it.** Its `end_seconds` was derived from the '
+      'skipped segment\'s start, so it now stops early — extend it to the next surviving start, or '
+      'clear it to run to the end of the video.')
+    w('')
+    w('`covers` is how much of the video a segment spans — triage only, not a verdict. A video whose '
+      'segments account for nearly all of it is likely well cut; a low figure or a flagged trailing '
+      'gap means time is unaccounted for, which is what a bad split looks like.')
+    w('')
+    w('`—` in *links as* means no `person_key`: the record is still built, with no presenter linked.')
+    w('')
+
+    flagged = []
+    for vid in vids:
+        group = segs[vid]
+        dur = duration(d, vid)
+        c = conf.get(group[0][1]['conference_key'], {})
+        span = sum((int(r['end_seconds']) if (r['end_seconds'] or '').strip() else (dur or 0))
+                   - int(r['start_seconds'] or 0) for _, r in group)
+        last = group[-1][1]
+        last_end = int(last['end_seconds']) if (last['end_seconds'] or '').strip() else (dur or 0)
+        gap = (dur - last_end) if dur else 0
+        warn = dur and gap > max(120, dur * args.gap_pct / 100)
+        if warn:
+            flagged.append((vid, gap, dur))
+
+        w(f'## {vid} · {wl.clip(c.get("title", "?"), 58)}')
+        w('')
+        head = f'{hhmm(dur) if dur else "duration unknown"} · {len(group)} segments · covers {pct(span, dur)}'
+        if warn:
+            head += f' — ⚠ {hhmm(gap)} unaccounted after the last segment'
+        w(head)
+        w('')
+        w(f'[open](https://youtu.be/{vid})')
+        w('')
+        w('| ✓ | line | jump to | span | covers | named speaker | links as |')
+        w('|---|---|---|---|---|---|---|')
+        for L, r in group:
+            i = L - 2
+            ss = int(r['start_seconds'] or 0)
+            ee = int(r['end_seconds']) if (r['end_seconds'] or '').strip() else None
+            link = (f'[{hhmm(ss)}](https://youtu.be/{vid}?t={ss})' if ss
+                    else f'[{hhmm(ss)}](https://youtu.be/{vid})')
+            key, state = wl.person_state((r['person_key'] or '').strip(), pm)
+            tgt = (f'`{key}`' if key and not state.startswith(('⚠', '**'))
+                   else ('—' if not key else f'⚠ {wl.clip(state, 30)}'))
+            box = '☐' if i in todo else f"✓ {(r['final_action'] or '').strip()}"
+            who = wl.clip((r['speaker_raw'] or '—').replace('|', '/'), 46)
+            w(f'| {box} | L{L} | {link} | {hhmm(ss)}–{hhmm(ee) if ee else "end"} | '
+              f'{pct((ee if ee is not None else (dur or 0)) - ss, dur)} | {who} | {tgt} |')
+        w('')
+
+    if flagged:
+        w('---')
+        w('')
+        w(f'## Videos with time unaccounted for ({len(flagged)})')
+        w('')
+        w('The last segment ends well before the video does. Usually a split on header text: the '
+          'named speaker often continues, in which case clear that segment\'s `end_seconds`.')
+        w('')
+        w('| video | ends early by | of |')
+        w('|---|---|---|')
+        for vid, gap, dur in sorted(flagged, key=lambda x: -x[1] / x[2]):
+            w(f'| [{vid}](https://youtu.be/{vid}) | {hhmm(gap)} | {hhmm(dur)} |')
+        w('')
+
+    open(args.out, 'w', encoding='utf-8').write('\n'.join(O) + '\n')
+    print(f'wrote {args.out}')
+    print(f'  {len(todo)} undecided segments · {len(vids)} videos · {len(flagged)} with a trailing gap')
+
+
+if __name__ == '__main__':
+    main()
