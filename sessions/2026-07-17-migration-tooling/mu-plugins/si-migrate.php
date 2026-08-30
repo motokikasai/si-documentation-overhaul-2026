@@ -2038,10 +2038,15 @@ final class SI_Migrate_Command {
             }
             if ($row['person_key'] !== '') { $pkeys[] = $row['person_key']; }
             $pids = [];
+            // dedupe on the resolved person, not the raw key: a programme that lists the
+            // same speaker on two lines carries two person_keys that merge to one person,
+            // so array_unique() over $pkeys lets both through and the presenter is linked
+            // twice. Four rows in File 3 do this: Eugene Simpson on QaflszJdRtQ,
+            // 1tb3H--Kgfo and o-PmfNcl85k, and Tom Buffenbarger on p2oPXm-cqpc.
             foreach (array_unique($pkeys) as $k) {
                 $resolved = $persons[$k] ?? $k;
                 $ppid = $this->person_post_id($resolved);
-                if ($ppid) { $pids[] = $ppid; }
+                if ($ppid && !in_array($ppid, $pids, true)) { $pids[] = $ppid; }
             }
             if ($pids) { $fields['presenters'] = $pids; }
             if ($row['upgrade_candidate'] === '1') { update_post_meta($pid, '_upgrade_candidate', 1); }
