@@ -6,7 +6,7 @@ Editable columns: `final_action`, `notes`, `reviewer`, plus the value columns yo
 
 ## ⚠ Read this first — blank does not mean accept
 
-`si-migrate.php:1986` skips a row when `final_action == 'skip'` **or** when `needs_review == '1'` and `final_action` is blank. All 24 rows in this worklist are flagged, so leaving one untouched **discards it**. To accept a row you must type a value — use `accept`; use `edit` if you also corrected cells in that row; `skip` to discard deliberately. Put your initials in `reviewer` either way.
+`si-migrate.php:1986` skips a row when `final_action == 'skip'` **or** when `needs_review == '1'` and `final_action` is blank. All 18 rows in this worklist are flagged, so leaving one untouched **discards it**. To accept a row you must type a value — use `accept`; use `edit` if you also corrected cells in that row; `skip` to discard deliberately. Put your initials in `reviewer` either way.
 
 Run `python3 tools/day2-preflight.py` at any point to see what is still outstanding.
 
@@ -14,14 +14,14 @@ Run `python3 tools/day2-preflight.py` at any point to see what is still outstand
 
 | # | Tranche | Rows | Videos | Where |
 |---|---|---:|---:|---|
-| D | case 1 + 4 + 2 | 24 | 6 | YouTube |
-| | **total** | **24** | | |
+| D | case 1 + 4 + 2 | 18 | 5 | YouTube |
+| | **total** | **18** | | |
 
 ---
 
-## D. Needs YouTube open (24)  · ~2.5 h
+## D. Needs YouTube open (18)  · ~2.5 h
 
-### D1 · case 1 — segments with start times (21, 3 videos)
+### D1 · case 1 — segments with start times (15, 2 videos)
 
 Links jump straight to `start_seconds`. Confirm the named speaker actually starts there. Fix the number in place + `final_action=edit`.
 
@@ -43,14 +43,6 @@ Links jump straight to `start_seconds`. Confirm the named speaker actually start
   - **L395** [1:21:12](https://youtu.be/O-6e3dmzDoQ?t=4872) — Current Situation and Challenges for Pe…
   - **L396** [1:41:00](https://youtu.be/O-6e3dmzDoQ?t=6060) — Hussein Askary, Southwest Asia Coordina… · ok (unflagged)
   - **L397** [2:10:52](https://youtu.be/O-6e3dmzDoQ?t=7852) — Newly Appointed Undersecretary of State…
-
-**_OCAxLIpAMY** · `2020-april-2020` · 6 segments — [open](https://youtu.be/_OCAxLIpAMY)
-  - **L314** [15:57](https://youtu.be/_OCAxLIpAMY?t=957) — — Keynote Address
-  - **L315** [52:43](https://youtu.be/_OCAxLIpAMY?t=3163) — — Dmitriy Polyanskiy, 1st Deputy Perman…
-  - **L316** [1:06:55](https://youtu.be/_OCAxLIpAMY?t=4015) — —H.E. Ambassador Huang Ping
-  - **L318** [1:45:16](https://youtu.be/_OCAxLIpAMY?t=6316) — — Jacques Cheminade · ok (unflagged)
-  - **L319** [2:16:55](https://youtu.be/_OCAxLIpAMY?t=8215) — — Michele Geraci
-  - **L321** [3:21:35](https://youtu.be/_OCAxLIpAMY?t=12095) — — Helga Zepp-LaRouche · ok (unflagged)
 
 ### D2 · case 4 — no marks, no agenda (3)
 
