@@ -165,8 +165,61 @@ def main():
     w('`—` in *links as* means no `person_key`: the record is still built, with no presenter linked.')
     w('')
 
+    def unresolved(r):
+        """True when this row's speaker will not link to a person page."""
+        key = (r.get('person_key') or '').strip()
+        if not key:
+            return True
+        return wl.person_state(key, pm)[1].startswith(('\u26a0 dropped', '**'))
+
+    def profile(vid):
+        """(group, open segments, names needing attention) for ordering."""
+        open_rows = [(L, r) for L, r in known[vid] if (L - 2) in todo]
+        if not open_rows:
+            return 'C', 0, 0
+        bad = sum(1 for _, r in open_rows if unresolved(r))
+        return ('A' if bad == 0 else 'B'), len(open_rows), bad
+
+    # Cheapest first: every-name-resolves before names-to-fix, fewest segments first.
+    order = sorted(vids, key=lambda v: (profile(v)[0], profile(v)[2], profile(v)[1], v))
+    GROUP = {
+        'A': ('A. Every name resolves — timestamps only',
+              'The speaker on each row already links to a person page, so the only question is '
+              'whether it starts where it claims. Click, listen ten seconds, decide.'),
+        'B': ('B. A name needs attention as well',
+              'Same timestamp check, plus at least one row whose speaker will not link. Often a '
+              'session label (`Question & Answer Session`) that is legitimately presenter-less and '
+              'should simply be accepted — see the *links as* column.'),
+        'C': ('C. Every row decided — listed for unaccounted time',
+              'Nothing here is awaiting a decision. The video is still listed because part of its '
+              'runtime is described by no row at all, which is where a missed speaker hides.'),
+    }
+
+    counts = collections.Counter(profile(v)[0] for v in vids)
+    if len(counts) > 1:
+        w('## Where to start')
+        w('')
+        w('| group | videos | segments | |')
+        w('|---|---:|---:|---|')
+        for g in 'ABC':
+            if not counts[g]:
+                continue
+            segn = sum(profile(v)[1] for v in vids if profile(v)[0] == g)
+            w(f'| {g} | {counts[g]} | {segn} | {GROUP[g][1].split(".")[0]}. |')
+        w('')
+
     flagged = []
-    for vid in vids:
+    shown_group = None
+    for vid in order:
+        grp = profile(vid)[0]
+        if grp != shown_group:
+            shown_group = grp
+            w('---')
+            w('')
+            w(f'# {GROUP[grp][0]}')
+            w('')
+            w(GROUP[grp][1])
+            w('')
         group = segs[vid]
         dur = duration(d, vid)
         c = conf.get(group[0][1]['conference_key'], {})
@@ -177,7 +230,9 @@ def main():
         if holes:
             flagged.append((vid, sum(b - a for a, b in holes), dur, holes, open_rows))
 
-        w(f'## {vid} · {wl.clip(c.get("title", "?"), 58)}')
+        _g, _open, _bad = profile(vid)
+        tag = f' · {_open} to check' + (f', {_bad} name(s)' if _bad else '')
+        w(f'## {vid} · {wl.clip(c.get("title", "?"), 50)}{tag}')
         w('')
         head = f'{hhmm(dur) if dur else "duration unknown"} · {len(group)} segments · covers {pct(span, dur)}'
         if not open_rows:
@@ -202,7 +257,10 @@ def main():
             key, state = wl.person_state((r['person_key'] or '').strip(), pm)
             tgt = (f'`{key}`' if key and not state.startswith(('⚠', '**'))
                    else ('—' if not key else f'⚠ {wl.clip(state, 30)}'))
-            box = '☐' if i in todo else f"✓ {(r['final_action'] or '').strip()}"
+            fa = (r['final_action'] or '').strip()
+            # blank + unflagged is not a decision: the migration accepts it because
+            # nobody flagged it. Say so, rather than showing it as reviewed.
+            box = '☐' if i in todo else (f'✓ {fa}' if fa else '· default')
             who = wl.clip((r['speaker_raw'] or '—').replace('|', '/'), 46)
             w(f'| {box} | L{L} | {link} | {hhmm(ss)}–{hhmm(ee) if ee else "end"} | '
               f'{pct((ee if ee is not None else (dur or 0)) - ss, dur)} | {who} | {tgt} |')
