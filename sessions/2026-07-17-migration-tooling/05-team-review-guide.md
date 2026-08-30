@@ -161,10 +161,10 @@ Re-run it after any person-map change, then commit so `--baseline HEAD` stays cl
 
 ### Known, not worth chasing
 
-- **147 people named across this file are deliberately unbuilt in `person-map.csv`** (171 references
+- **139 people named across this file are deliberately unbuilt in `person-map.csv`** (163 references
   over all 880 rows). The agenda text still saves; only the presenter link is lost. Not a reason to
-  reject a row. They would gain links retroactively if those person-map rows were accepted — 192 are
-  still flagged and blank.
+  reject a row. They would gain links retroactively if those person-map rows were accepted — 151 are
+  still flagged and blank, down from 192 after the Cyrillic merge.
 - **125 migrating rows still have no presenter at all** — no `person_key` and no agenda. That is
   down from 163: a sweep keyed the 38 rows whose own speaker was named in `speaker_raw` and already
   existed in `person-map.csv`. What is left is rows whose speaker genuinely is not recorded anywhere
@@ -174,10 +174,15 @@ Re-run it after any person-map change, then commit so `--baseline HEAD` stays cl
   `9Xvwg4RGYok` are Q&A sessions with two participants; a row carries one `person_key`, so the
   first-named is linked and the other is recorded in `notes`. Same shape as the four-person panel
   below.
-- **Russian-language rows point at the canonical Latin key.** `person-map.csv` holds separate
-  Cyrillic rows (`хелга-цепп-ларуш`, `жак-шеминад`, `дежэн-сенни`) that are flagged and blank, so
-  keying a row to them would link nothing. They are the same people; merging those rows into their
-  Latin keys would be the tidier fix, but that is a person-map decision, not a File 3 one.
+- **The Cyrillic person-map rows are merged into their Latin keys.** All 50 were flagged and blank,
+  so any row keyed to one linked nothing. 38 are now `merge:` into the Latin row for the same person,
+  3 are `drop` (a session title, and two rows holding two people each), and 9 are left alone because
+  no Latin counterpart exists — Ayman Rashed, Georgios Tsobanoglou, Dr. Göll, Cui Jiangong, Andrei
+  Fursov, Fatima Hashemi, Antonio Galloni, Prof. Wu Wanso and Toni Kestner appear only in Russian.
+  Accept those nine if they deserve a page; the page would carry the Cyrillic name.
+  Note `person_lookup` (`si-migrate.php:1049`) follows **one** merge hop, not a chain, so a merge
+  must name the final surviving key — `нино-галлони` goes to `antonino-galloni`, not to the
+  `nino-galloni` row that is itself merged away.
 - **One row links only one of its presenters.** `3cEmeoenoaA` L53 is a four-person panel sharing a
   slot; a row carries a single `person_key`, and the other three would have to go in `agenda_json`,
   which `tools/day2-agenda-split.py` will only touch on rows that already have an agenda
