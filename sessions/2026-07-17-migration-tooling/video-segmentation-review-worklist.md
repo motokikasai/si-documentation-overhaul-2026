@@ -6,7 +6,7 @@ Editable columns: `final_action`, `notes`, `reviewer`, plus the value columns yo
 
 ## ⚠ Read this first — blank does not mean accept
 
-`si-migrate.php:1986` skips a row when `final_action == 'skip'` **or** when `needs_review == '1'` and `final_action` is blank. All 59 rows in this worklist are flagged, so leaving one untouched **discards it**. To accept a row you must type a value — use `accept`; use `edit` if you also corrected cells in that row; `skip` to discard deliberately. Put your initials in `reviewer` either way.
+`si-migrate.php:1986` skips a row when `final_action == 'skip'` **or** when `needs_review == '1'` and `final_action` is blank. All 51 rows in this worklist are flagged, so leaving one untouched **discards it**. To accept a row you must type a value — use `accept`; use `edit` if you also corrected cells in that row; `skip` to discard deliberately. Put your initials in `reviewer` either way.
 
 Run `python3 tools/day2-preflight.py` at any point to see what is still outstanding.
 
@@ -14,14 +14,14 @@ Run `python3 tools/day2-preflight.py` at any point to see what is still outstand
 
 | # | Tranche | Rows | Videos | Where |
 |---|---|---:|---:|---|
-| D | case 1 + 4 + 2 | 59 | 15 | YouTube |
-| | **total** | **59** | | |
+| D | case 1 + 4 + 2 | 51 | 15 | YouTube |
+| | **total** | **51** | | |
 
 ---
 
-## D. Needs YouTube open (59)  · ~2.5 h
+## D. Needs YouTube open (51)  · ~2.5 h
 
-### D1 · case 1 — segments with start times (56, 12 videos)
+### D1 · case 1 — segments with start times (48, 12 videos)
 
 Links jump straight to `start_seconds`. Confirm the named speaker actually starts there. Fix the number in place + `final_action=edit`.
 
@@ -44,38 +44,30 @@ Links jump straight to `start_seconds`. Confirm the named speaker actually start
   - **L374** [1:41:00](https://youtu.be/O-6e3dmzDoQ?t=6060) — Hussein Askary, Southwest Asia Coordina… · ok (unflagged)
   - **L375** [2:10:52](https://youtu.be/O-6e3dmzDoQ?t=7852) — Newly Appointed Undersecretary of State…
 
-**_OCAxLIpAMY** · `2020-april-2020` · 9 segments — [open](https://youtu.be/_OCAxLIpAMY)
+**_OCAxLIpAMY** · `2020-april-2020` · 6 segments — [open](https://youtu.be/_OCAxLIpAMY)
   - **L296** [15:57](https://youtu.be/_OCAxLIpAMY?t=957) — — Keynote Address
   - **L297** [52:43](https://youtu.be/_OCAxLIpAMY?t=3163) — — Dmitriy Polyanskiy, 1st Deputy Perman…
   - **L298** [1:06:55](https://youtu.be/_OCAxLIpAMY?t=4015) — —H.E. Ambassador Huang Ping
-  - **L299** [1:23:55](https://youtu.be/_OCAxLIpAMY?t=5035) — — Q&A with Zepp-LaRouche and representa…
   - **L300** [1:45:16](https://youtu.be/_OCAxLIpAMY?t=6316) — — Jacques Cheminade · ok (unflagged)
   - **L301** [2:16:55](https://youtu.be/_OCAxLIpAMY?t=8215) — — Michele Geraci
-  - **L302** [2:34:22](https://youtu.be/_OCAxLIpAMY?t=9262) — — Q&A with Zepp-LaRouche, Cheminade, an…
   - **L303** [3:21:35](https://youtu.be/_OCAxLIpAMY?t=12095) — — Helga Zepp-LaRouche · ok (unflagged)
-  - **L304** [3:35:15](https://youtu.be/_OCAxLIpAMY?t=12915) — — Q&A continued
 
 **cy0uh-BYs7s** · `2020-april-2020` · 3 segments — [open](https://youtu.be/cy0uh-BYs7s)
   - **L306** [23:22](https://youtu.be/cy0uh-BYs7s?t=1402) — Founder and Chairman, Schiller Institute · ⚠ dropped in person-map — no presenter link
   - **L307** [1:20:08](https://youtu.be/cy0uh-BYs7s?t=4808) — Founder and Artistic Director, Harlem O… · ⚠ dropped in person-map — no presenter link
   - **L308** [1:28:27](https://youtu.be/cy0uh-BYs7s?t=5307) — Original German: · ⚠ dropped in person-map — no presenter link
 
-**6n5KERjjwVY** · `2021-june` · 2 segments — [open](https://youtu.be/6n5KERjjwVY)
-  - **L229** [1:11:30](https://youtu.be/6n5KERjjwVY?t=4290) — Question &amp; Answer Session
+**6n5KERjjwVY** · `2021-june` · 1 segments — [open](https://youtu.be/6n5KERjjwVY)
   - **L233** [3:24:22](https://youtu.be/6n5KERjjwVY?t=12262) — Declaration of Independence and Rütli O…
 
-**VHacLTeb9r4** · `2021-june` · 2 segments — [open](https://youtu.be/VHacLTeb9r4)
+**VHacLTeb9r4** · `2021-june` · 1 segments — [open](https://youtu.be/VHacLTeb9r4)
   - **L199** [0:16](https://youtu.be/VHacLTeb9r4?t=16) — Mozart’s, Laudate Dominum
-  - **L205** [1:59:00](https://youtu.be/VHacLTeb9r4?t=7140) — Question &amp; Answer Session
 
-**83Kzsg20gAo** · `2021-march-world-crossroad-months` · 3 segments — [open](https://youtu.be/83Kzsg20gAo)
+**83Kzsg20gAo** · `2021-march-world-crossroad-months` · 1 segments — [open](https://youtu.be/83Kzsg20gAo)
   - **L253** [0:00](https://youtu.be/83Kzsg20gAo) — Moderator: Harley Schlanger · ok (unflagged)
-  - **L259** [1:15:25](https://youtu.be/83Kzsg20gAo?t=4525) — Question and Answer Session
-  - **L267** [3:28:37](https://youtu.be/83Kzsg20gAo?t=12517) — Question and Answer Session
 
-**KcduPjapbRc** · `2021-march-world-crossroad-months` · 2 segments — [open](https://youtu.be/KcduPjapbRc)
+**KcduPjapbRc** · `2021-march-world-crossroad-months` · 1 segments — [open](https://youtu.be/KcduPjapbRc)
   - **L249** [2:16:00](https://youtu.be/KcduPjapbRc?t=8160) — Video: John Sigerson, tenor; Margaret G… · *Abendlied*
-  - **L252** [2:38:19](https://youtu.be/KcduPjapbRc?t=9499) — Question &amp; Answer Session
 
 **VLpRK_XU6hE** · `2022-april-2022-establish-security` · 6 segments — [open](https://youtu.be/VLpRK_XU6hE)
   - **L171** [5:56](https://youtu.be/VLpRK_XU6hE?t=356) — I. PLENARY SESSION (9:00 a.m. EDT) · ⚠ dropped in person-map — no presenter link
