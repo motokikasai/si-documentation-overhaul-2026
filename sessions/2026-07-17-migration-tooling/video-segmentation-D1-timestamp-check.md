@@ -1,6 +1,6 @@
 # Tranche D1 — timestamp check (case 1)
 
-48 undecided segments across 12 videos. **This is the only part of File 3 that needs the video.**
+44 undecided segments across 8 videos. **This is the only part of File 3 that needs the video.**
 
 Open each deep link and confirm the named person is the one who starts speaking there.
 
@@ -16,100 +16,11 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 
 `—` in *links as* means no `person_key`: the record is still built, with no presenter linked.
 
-## Where to start
-
-| group | videos | segments | |
-|---|---:|---:|---|
-| A | 2 | 2 | The speaker on each row already links to a person page, so the only question is whether it starts where it claims. |
-| B | 10 | 46 | Same timestamp check, plus at least one row whose speaker will not link. |
-
----
-
-# A. Every name resolves — timestamps only
-
-The speaker on each row already links to a person page, so the only question is whether it starts where it claims. Click, listen ten seconds, decide.
-
-## 83Kzsg20gAo · WORLD AT A CROSSROAD: Two Months into the New Adm… · 1 to check
-
-4:12:03 · 15 segments · covers 100%
-
-[open](https://youtu.be/83Kzsg20gAo)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L253 | [0:00](https://youtu.be/83Kzsg20gAo) | 0:00–2:39 | 1% | Moderator: Harley Schlanger | `harley-schlanger` |
-| · default | L254 | [2:40](https://youtu.be/83Kzsg20gAo?t=160) | 2:40–11:39 | 4% | Helga Zepp-LaRouche, President | `helga-zepp-larouche` |
-| · default | L255 | [11:40](https://youtu.be/83Kzsg20gAo?t=700) | 11:40–28:12 | 7% | Ambassador Ping Huang | `ping-huang` |
-| · default | L256 | [28:13](https://youtu.be/83Kzsg20gAo?t=1693) | 28:13–36:53 | 3% | Mr. Alexey Boguslavskiy | `alexey-boguslavskiy` |
-| · default | L257 | [36:54](https://youtu.be/83Kzsg20gAo?t=2214) | 36:54–50:12 | 5% | Dr. Bouthaina Shaaban | `bouthaina-shaaban` |
-| · default | L258 | [50:13](https://youtu.be/83Kzsg20gAo?t=3013) | 50:13–1:15:24 | 10% | Dr. William Happer | `william-happer` |
-| ✓ accept | L259 | [1:15:25](https://youtu.be/83Kzsg20gAo?t=4525) | 1:15:25–2:04:18 | 19% | Question and Answer Session | — |
-| · default | L260 | [2:04:19](https://youtu.be/83Kzsg20gAo?t=7459) | 2:04:19–2:13:54 | 4% | Dennis Small (US), Executive Intelligence Rev… | `dennis-small` |
-| · default | L261 | [2:13:55](https://youtu.be/83Kzsg20gAo?t=8035) | 2:13:55–2:19:17 | 2% | Simon Levy (Mexico) | `simon-levy` |
-| · default | L262 | [2:19:18](https://youtu.be/83Kzsg20gAo?t=8358) | 2:19:18–2:29:09 | 4% | Alejandro Yaya (Argentina) | `alejandro-yaya` |
-| · default | L263 | [2:29:10](https://youtu.be/83Kzsg20gAo?t=8950) | 2:29:10–2:56:35 | 11% | Daniel Marmolejo (Mexico) | `daniel-marmolejo` |
-| · default | L264 | [2:56:36](https://youtu.be/83Kzsg20gAo?t=10596) | 2:56:36–3:12:06 | 6% | Denys Pluvinage (France) | `denys-pluvinage` |
-| · default | L265 | [3:12:07](https://youtu.be/83Kzsg20gAo?t=11527) | 3:12:07–3:13:42 | 1% | Sultan M. Hali (Pakistan) | `sultan-m-hali` |
-| · default | L266 | [3:13:43](https://youtu.be/83Kzsg20gAo?t=11623) | 3:13:43–3:28:36 | 6% | Richard Freeman (USA) | `richard-freeman` |
-| ✓ accept | L267 | [3:28:37](https://youtu.be/83Kzsg20gAo?t=12517) | 3:28:37–4:12:03 | 17% | Question and Answer Session | — |
-
-## KcduPjapbRc · WORLD AT A CROSSROAD: Two Months into the New Adm… · 1 to check
-
-3:27:22 · 9 segments · covers 94%
-
-[open](https://youtu.be/KcduPjapbRc)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| · default | L244 | [12:30](https://youtu.be/KcduPjapbRc?t=750) | 12:30–51:11 | 19% | Helga Zepp-LaRouche, President, The Schiller … | `helga-zepp-larouche` |
-| · default | L245 | [51:12](https://youtu.be/KcduPjapbRc?t=3072) | 51:12–1:26:48 | 17% | Dennis Speed, Schiller Institute (USA) | `dennis-speed` |
-| · default | L246 | [1:26:49](https://youtu.be/KcduPjapbRc?t=5209) | 1:26:49–1:44:22 | 8% | Liliana Gorini (Italy), Chairwoman, MoviSol (… | `liliana-gorini` |
-| · default | L247 | [1:44:23](https://youtu.be/KcduPjapbRc?t=6263) | 1:44:23–2:05:37 | 10% | Diane Sare, Schiller Institute (USA) | `diane-sare` |
-| · default | L248 | [2:05:38](https://youtu.be/KcduPjapbRc?t=7538) | 2:05:38–2:15:59 | 5% | Carolina Domínguez, Schiller Institute (Mexic… | `carolina-dominguez` |
-| ☐ | L249 | [2:16:00](https://youtu.be/KcduPjapbRc?t=8160) | 2:16:00–2:22:23 | 3% | Video: John Sigerson, tenor; Margaret Greensp… | `john-sigerson` |
-| · default | L250 | [2:22:24](https://youtu.be/KcduPjapbRc?t=8544) | 2:22:24–2:34:59 | 6% | Megan Dobrodt, President (USA), Schiller Inst… | `megan-dobrodt` |
-| · default | L251 | [2:35:00](https://youtu.be/KcduPjapbRc?t=9300) | 2:35:00–2:38:18 | 2% | Anastasia Battle (USA), The LaRouche Organiza… | `anastasia-battle` |
-| ✓ accept | L252 | [2:38:19](https://youtu.be/KcduPjapbRc?t=9499) | 2:38:19–3:27:22 | 24% | Question &amp; Answer Session | — |
-
 ---
 
 # B. A name needs attention as well
 
 Same timestamp check, plus at least one row whose speaker will not link. Often a session label (`Question & Answer Session`) that is legitimately presenter-less and should simply be accepted — see the *links as* column.
-
-## 6n5KERjjwVY · Schiller Institute conference — June 26-27, 2021 · 1 to check, 1 name(s)
-
-3:44:22 · 9 segments · covers 97%
-
-[open](https://youtu.be/6n5KERjjwVY)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| · default | L225 | [5:32](https://youtu.be/6n5KERjjwVY?t=332) | 5:32–24:59 | 9% | Dr. Joycelyn Elders | `joycelyn-elders` |
-| · default | L226 | [25:00](https://youtu.be/6n5KERjjwVY?t=1500) | 25:00–39:54 | 7% | Helga Zepp-LaRouche | `helga-zepp-larouche` |
-| · default | L227 | [39:55](https://youtu.be/6n5KERjjwVY?t=2395) | 39:55–52:59 | 6% | Boris Meshchanov | `boris-meshchanov` |
-| · default | L228 | [53:00](https://youtu.be/6n5KERjjwVY?t=3180) | 53:00–1:11:29 | 8% | Major General (ret.) Peter Clegg | `major-general-peter-clegg` |
-| ✓ accept | L229 | [1:11:30](https://youtu.be/6n5KERjjwVY?t=4290) | 1:11:30–1:55:37 | 20% | Question &amp; Answer Session | — |
-| · default | L230 | [1:55:38](https://youtu.be/6n5KERjjwVY?t=6938) | 1:55:38–2:28:54 | 15% | Dr. Khadijah Lang | `khadijah-lang` |
-| · default | L231 | [2:28:55](https://youtu.be/6n5KERjjwVY?t=8935) | 2:28:55–2:33:49 | 2% | Mayor David Castro | `mayor-david-castro` |
-| · default | L232 | [2:33:50](https://youtu.be/6n5KERjjwVY?t=9230) | 2:33:50–3:24:21 | 23% | Diane Sare | `diane-sare` |
-| ☐ | L233 | [3:24:22](https://youtu.be/6n5KERjjwVY?t=12262) | 3:24:22–3:44:22 | 9% | Declaration of Independence and Rütli Oath | — |
-
-## VHacLTeb9r4 · Schiller Institute conference — June 26-27, 2021 · 1 to check, 1 name(s)
-
-3:39:19 · 7 segments · covers 100%
-
-[open](https://youtu.be/VHacLTeb9r4)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L199 | [0:16](https://youtu.be/VHacLTeb9r4?t=16) | 0:16–10:59 | 5% | Mozart’s, Laudate Dominum | — |
-| · default | L200 | [11:00](https://youtu.be/VHacLTeb9r4?t=660) | 11:00–57:13 | 21% | Keynote Address, Helga Zepp-LaRouche | `helga-zepp-larouche` |
-| · default | L201 | [57:14](https://youtu.be/VHacLTeb9r4?t=3434) | 57:14–1:12:50 | 7% | Dr. Andrey Kortunov | `andrey-kortunov` |
-| · default | L202 | [1:12:51](https://youtu.be/VHacLTeb9r4?t=4371) | 1:12:51–1:25:06 | 6% | Atul Aneja | `atul-aneja` |
-| · default | L203 | [1:25:07](https://youtu.be/VHacLTeb9r4?t=5107) | 1:25:07–1:45:16 | 9% | Col.(ret.) Richard H. Black | `richard-h-black` |
-| · default | L204 | [1:45:17](https://youtu.be/VHacLTeb9r4?t=6317) | 1:45:17–1:58:59 | 6% | Ray McGovern | `ray-mcgovern` |
-| ✓ accept | L205 | [1:59:00](https://youtu.be/VHacLTeb9r4?t=7140) | 1:59:00–3:39:19 | 46% | Question &amp; Answer Session | — |
 
 ## _OCAxLIpAMY · Schiller Institute Conference — April 25-26, 2020 · 6 to check, 1 name(s)
 
