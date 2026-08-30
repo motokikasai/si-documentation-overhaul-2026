@@ -1,6 +1,6 @@
 # Tranche D1 — timestamp check (case 1)
 
-77 undecided segments across 22 videos. **This is the only part of File 3 that needs the video.**
+75 undecided segments across 20 videos. **This is the only part of File 3 that needs the video.**
 
 Open each deep link and confirm the named person is the one who starts speaking there.
 
@@ -20,7 +20,7 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 
 | group | videos | segments | |
 |---|---:|---:|---|
-| A | 6 | 17 | The speaker on each row already links to a person page, so the only question is whether it starts where it claims. |
+| A | 4 | 15 | The speaker on each row already links to a person page, so the only question is whether it starts where it claims. |
 | B | 16 | 60 | Same timestamp check, plus at least one row whose speaker will not link. |
 
 ---
@@ -28,33 +28,6 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 # A. Every name resolves — timestamps only
 
 The speaker on each row already links to a person page, so the only question is whether it starts where it claims. Click, listen ten seconds, decide.
-
-## J8Gpbyb1JDY · Inspiring Humanity to Survive the Greatest Crisis… · 1 to check
-
-3:09:35 · 4 segments · covers 96%
-
-[open](https://youtu.be/J8Gpbyb1JDY)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| · default | L117 | [7:36](https://youtu.be/J8Gpbyb1JDY?t=456) | 7:36–27:03 | 10% | Helga Zepp-LaRouche (Germany) | `helga-zepp-larouche` |
-| ☐ | L118 | [27:04](https://youtu.be/J8Gpbyb1JDY?t=1624) | 27:04–1:49:55 | 44% | Lyndon LaRouche Video Presentation: “LaRouche… | `lyndon-h-larouche-jr` |
-| · default | L119 | [1:49:56](https://youtu.be/J8Gpbyb1JDY?t=6596) | 1:49:56–2:20:23 | 16% | John Sigerson (U.S.) | `john-sigerson` |
-| · default | L120 | [2:20:24](https://youtu.be/J8Gpbyb1JDY?t=8424) | 2:20:24–3:09:35 | 26% | Gretchen Small (U.S.) | `gretchen-small` |
-
-## LxM9omHPMV4 · There Can Be No Peace Without the Bankruptcy Reor… · 1 to check
-
-3:16:25 · 5 segments · covers 88%
-
-[open](https://youtu.be/LxM9omHPMV4)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| · default | L153 | [23:42](https://youtu.be/LxM9omHPMV4?t=1422) | 23:42–41:37 | 9% | Jacques Cheminade | `jacques-cheminade` |
-| · default | L154 | [41:38](https://youtu.be/LxM9omHPMV4?t=2498) | 41:38–54:50 | 7% | Felipe Maruf Quintas | `felipe-maruf-quintas` |
-| ☐ | L155 | [54:51](https://youtu.be/LxM9omHPMV4?t=3291) | 54:51–1:05:31 | 5% | Dr. Zaher Wahab | ⚠ ⚠ left unbuilt in person-map … |
-| · default | L156 | [1:05:32](https://youtu.be/LxM9omHPMV4?t=3932) | 1:05:32–1:17:50 | 6% | Dr. George Koo | `george-koo` |
-| · default | L157 | [1:17:51](https://youtu.be/LxM9omHPMV4?t=4671) | 1:17:51–3:16:25 | 60% | Mike Robinson | `mike-robinson` |
 
 ## 7Co3IlbwibA · There Can Be No Peace Without the Bankruptcy Reor… · 2 to check
 
