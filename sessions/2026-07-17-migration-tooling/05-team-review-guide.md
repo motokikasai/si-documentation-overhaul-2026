@@ -61,42 +61,65 @@ One row per person. Only ~500 rows are flagged (`needs_review=1`); the rest are 
   through the translation links. Nothing to do unless you spot an obvious error.
 - Fill `honorific` / `affiliation` / `country` only if you happen to know them — nice, not required.
 
-## File 3 — `video-segmentation.csv` · 845 rows · **108 left** (~2–3 h, needs YouTube)
+## File 3 — `video-segmentation.csv` · 880 rows · **complete**
 
 One row per proposed presentation record from a conference video.
 
-**Status (2026-08-28):** 621 rows migrate · 116 skipped · **108 still undecided**. The desk tranches
-are finished; what remains is the part that genuinely needs the video open.
+**Status (2026-08-30): finished.** 738 rows migrate · 142 explicitly skipped · **0 silently
+skipped**. Every row is decided, every video is accounted for from its first segment to its last,
+and `tools/day2-preflight.py` reports no errors on this file.
 
 > **⚠ Blank does NOT mean accept on this file.** Golden rule 4 applies in full: a row with
 > `needs_review=1` and a blank `final_action` is **skipped** — no presentation record is created.
-> All 108 remaining rows are in that state, so accepting one means *typing a value*, not leaving it
-> alone. (The rule is `si-migrate.php:1986`: skip when `final_action=skip`, or when `needs_review=1`
-> and `final_action` is blank. Any other value = accept.)
+> Nothing is in that state now, but the rule still governs any row added later: accepting one means
+> *typing a value*, not leaving it alone. (The rule is `si-migrate.php:1986`: skip when
+> `final_action=skip`, or when `needs_review=1` and `final_action` is blank. Any other value =
+> accept.)
 
 `final_action`: `accept` = create this record as proposed · `edit` = you corrected values in the row
 (also accepts it) · `skip` = don't create this record. Initials in `reviewer` either way.
 
-**Two reviewer marks appear in this file.** `mk` = a human decided that row. `opus-day2-bulk` = filled
-mechanically (dead-conference skips, and the machine-recommended bulk-accept lane) without anyone
-reading the row. Treat the latter as provisional if you ever re-audit.
+**Three reviewer marks appear in this file.** `mk` = a human decided that row (470 rows).
+`opus-day2-bulk` = filled mechanically — dead-conference skips and the machine-recommended
+bulk-accept lane — without anyone reading the row (197 rows). `fable-day1` = the day-1 machine
+(78 rows). Treat the latter two as provisional if you ever re-audit.
 
-### What is left
+### How the row count grew
 
-- **105 rows — the timestamp check.** Work from `video-segmentation-D1-timestamp-check.md`, which
-  groups them into their **30 videos** as checkbox tables, ordered by start time so a video can be
-  played straight through. Open each deep link, confirm the named person starts speaking there:
-  right → `accept`; wrong time → fix `start_seconds` / `end_seconds` in place + `edit`; not a real
-  talk → `skip`. About 43 of the 105 name a conference header rather than a person — usually the
-  segment boundary is right and only the name is wrong, and `speaker_raw` is editable.
-- **3 loose ends in case 4.** `L57` (`pL59RdUPwi4`) has no title at all — needs the video.
-  `L166` / `L167` share the title "Istanbul's Golden Opportunity — Replace Sanctions with Reason" in
-  the same conference; likely two language versions or a re-upload, so skip one unless they are
-  genuinely different talks.
+845 → 880. The segmenter had split the *printed programme* rather than the video on several
+conferences, so rows were missing outright: speakers with no row at all, discussion periods that
+existed only as unaccounted time, and panels whose members shared one slot. 35 rows were appended
+during review. Row identity is `yt_video_id` + `segment_index` (`si-migrate.php:1994`), never row
+order, so appending is safe and `segment_index` is deliberately not sequential on rebuilt videos —
+renumbering would read as deleting and re-adding every row.
 
-Regenerate the tranche worklist with `python3 tools/day2-seg-worklist.py` (fully reviewed tranches
-drop out of it), and check progress with `python3 tools/day2-preflight.py`, which reports exactly
-which rows would still be dropped.
+### What the review found
+
+Kept here because the same shapes will recur if more video is ever imported.
+
+- **Programme text mistaken for segments.** On `_9k2RlLGkMc`, `VLpRK_XU6hE` and `7O11ENxM-zA` the
+  rows were section headers (`III. SECURITY (90 min.)`), numbered agenda lines (`2) Amb. Anatoly
+  Antonov…`) or paragraphs of the YouTube description, each keyed as though it were a person. The
+  numbering gives it away: an agenda running 2, 3, 7, 5 is not a sequence of segments.
+- **A trailing segment ending exactly at the video's runtime was wrong every single time.** Nothing
+  followed it to bound its end, so it swallowed the discussion period. This held on all 14 videos
+  where it appeared, without exception — treat it as a defect, not a coincidence.
+- **Names replaced by roles.** `Founder and Chairman, Schiller Institute`, `of the Black Sea Economic
+  Cooperation Organization (BSEC)`, `Newly Appointed Undersecretary of State…` — the name was in the
+  part that got cut. Only the video recovers these.
+- **Coverage gaps are the only way to find a missing speaker.** Four speakers on `aF2d8EAMQ0o` had no
+  rows at all; no amount of reviewing existing rows would have surfaced them.
+  `tools/day2-d1-checklist.py` reports a gap over ~5% of runtime, ignoring the leading gap (every
+  video opens with music or a title card, so flagging it gave 13 false positives out of 14).
+
+### Tools
+
+Regenerate the tranche worklist with `python3 tools/day2-seg-worklist.py`, the timestamp checklist
+with `python3 tools/day2-d1-checklist.py`, and validate with `python3 tools/day2-preflight.py`
+(`--baseline` defaults to `HEAD`; `--no-baseline` disables). Preflight diffs by row identity, so an
+appended row is reported as an addition rather than knocking every later row out of alignment — and
+it will reject an edit to a machine-written column, which is how four stray `title_autogenerated`
+writes were caught during this review.
 
 ### What was already decided, and why
 
@@ -113,10 +136,15 @@ Useful if a decision looks surprising — the reasoning is also in the git log.
   title, and the scraper had built it by splitting the video title at a colon. Where the colon was
   not a speaker/title separator the title came out truncated ("Träumerei" for "Robert Schumann:
   Träumerei"); `speaker_raw` still holds the original, so repairs came from the row itself.
-- **case 4 (122 rows) — 90 accepted, 3 held back.** The remaining rows read as real sessions, not
-  the clips this case was expected to hold; the obvious excerpt clips were machine-skipped earlier.
+- **case 4 (122 rows) — accepted bar 15 skips.** The rows read as real sessions, not the clips this
+  case was expected to hold; the obvious excerpt clips were machine-skipped earlier. The last three
+  were closed during the timestamp pass: two videos shared a title, description and conference, and
+  the shorter of the pair is skipped as a re-cut of the same talk.
 - **case 2 (4 rows) — accepted** as chaptered full sessions; `chapters_json` is populated, so the
   chapter marks survive as navigable content.
+- **case 1 (285 rows) — the timestamp pass**, the only part that needed the video open. 25 skips:
+  musical performances, readings, moderators' welcomes and programme lines for people who do not
+  present. The rest were confirmed or corrected against the recording.
 
 ### Machine passes applied to this file
 
@@ -133,10 +161,19 @@ Re-run it after any person-map change, then commit so `--baseline HEAD` stays cl
 
 ### Known, not worth chasing
 
-- **154 people named across this file are deliberately unbuilt in `person-map.csv`** (that is
-  preflight's count over all 845 rows; 147 of them on rows that currently migrate). The agenda text
-  still saves; only the presenter link is lost. Not a reason to reject a row. They would gain links
-  retroactively if those person-map rows were accepted — 201 are still flagged and blank.
+- **147 people named across this file are deliberately unbuilt in `person-map.csv`** (171 references
+  over all 880 rows). The agenda text still saves; only the presenter link is lost. Not a reason to
+  reject a row. They would gain links retroactively if those person-map rows were accepted — 192 are
+  still flagged and blank.
+- **38 migrating rows have a blank `person_key` although their own speaker is named in
+  `speaker_raw` and already exists in `person-map.csv`** — for example `K4V_kTnwjfo` "Dr. Chandra
+  Muzaffar (ENGLISH)", with `chandra-muzaffar` sitting unused. Those presentations migrate with no
+  presenter for no good reason. `person_key` is a reviewer column, so this is a straightforward
+  sweep; it was found late and left rather than folded into the timestamp pass.
+- **One row links only one of its presenters.** `3cEmeoenoaA` L53 is a four-person panel sharing a
+  slot; a row carries a single `person_key`, and the other three would have to go in `agenda_json`,
+  which `tools/day2-agenda-split.py` will only touch on rows that already have an agenda
+  (`tools/day2-agenda-split.py:162`). It is the only case in the file.
 - **85 agenda entries across migrating rows name a person `person-map.csv` dropped** (104 if you
   also count row-level `person_key`). Not fixable from this file — `agenda_json` is machine-written.
 

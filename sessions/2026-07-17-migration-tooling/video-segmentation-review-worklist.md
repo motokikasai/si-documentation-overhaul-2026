@@ -6,7 +6,7 @@ Editable columns: `final_action`, `notes`, `reviewer`, plus the value columns yo
 
 ## ⚠ Read this first — blank does not mean accept
 
-`si-migrate.php:1986` skips a row when `final_action == 'skip'` **or** when `needs_review == '1'` and `final_action` is blank. All 3 rows in this worklist are flagged, so leaving one untouched **discards it**. To accept a row you must type a value — use `accept`; use `edit` if you also corrected cells in that row; `skip` to discard deliberately. Put your initials in `reviewer` either way.
+`si-migrate.php:1986` skips a row when `final_action == 'skip'` **or** when `needs_review == '1'` and `final_action` is blank. All 0 rows in this worklist are flagged, so leaving one untouched **discards it**. To accept a row you must type a value — use `accept`; use `edit` if you also corrected cells in that row; `skip` to discard deliberately. Put your initials in `reviewer` either way.
 
 Run `python3 tools/day2-preflight.py` at any point to see what is still outstanding.
 
@@ -14,27 +14,5 @@ Run `python3 tools/day2-preflight.py` at any point to see what is still outstand
 
 | # | Tranche | Rows | Videos | Where |
 |---|---|---:|---:|---|
-| D | case 1 + 4 + 2 | 3 | 3 | YouTube |
-| | **total** | **3** | | |
-
----
-
-## D. Needs YouTube open (3)  · ~2.5 h
-
-### D2 · case 4 — no marks, no agenda (3)
-
-Excerpt clips, concerts and trailers → `skip`. Real full-session panels → `accept`. When in doubt `skip` is safe: the video stays on YouTube, we just don't build a page.
-
-- **L170** [K6ItCuu8xIo](https://youtu.be/K6ItCuu8xIo) · `2022-there-peace-without-bankruptcy`  
-  Istanbul's Golden Opportunity — Replace Sanctions with Reason  
-  speaker: Istanbul's Golden Opportunity — Replace Sanctio…  
-  _no marks, no agenda_  
-- **L171** [_ponP9Edn4M](https://youtu.be/_ponP9Edn4M) · `2022-there-peace-without-bankruptcy`  
-  Istanbul's Golden Opportunity — Replace Sanctions with Reason  
-  speaker: Istanbul's Golden Opportunity — Replace Sanctio…  
-  _no marks, no agenda_  
-- **L60** [pL59RdUPwi4](https://youtu.be/pL59RdUPwi4) · `2024-press-danger-nuclear-real`  
-  *(no talk title)*  
-  speaker: s Loss in Ukraine, the World Needs to Return to…  
-  _presort presenter parse dubious — reverted to case 4 for review_  
+| | **total** | **0** | | |
 
