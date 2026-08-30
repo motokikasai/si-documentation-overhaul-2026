@@ -1,6 +1,6 @@
 # Tranche D1 — timestamp check (case 1)
 
-75 undecided segments across 20 videos. **This is the only part of File 3 that needs the video.**
+60 undecided segments across 17 videos. **This is the only part of File 3 that needs the video.**
 
 Open each deep link and confirm the named person is the one who starts speaking there.
 
@@ -20,65 +20,8 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 
 | group | videos | segments | |
 |---|---:|---:|---|
-| A | 4 | 15 | The speaker on each row already links to a person page, so the only question is whether it starts where it claims. |
 | B | 16 | 60 | Same timestamp check, plus at least one row whose speaker will not link. |
-
----
-
-# A. Every name resolves — timestamps only
-
-The speaker on each row already links to a person page, so the only question is whether it starts where it claims. Click, listen ten seconds, decide.
-
-## 7Co3IlbwibA · There Can Be No Peace Without the Bankruptcy Reor… · 2 to check
-
-2:12:35 · 2 segments · covers 100%
-
-[open](https://youtu.be/7Co3IlbwibA)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L168 | [0:00](https://youtu.be/7Co3IlbwibA) | 0:00–22:36 | 17% | Speakers: Harley Schlanger, spokesman, The La… | `speakers-harley-schlanger` |
-| ☐ | L169 | [22:37](https://youtu.be/7Co3IlbwibA?t=1357) | 22:37–end | 83% | Mike Robinson, UK Column | `mike-robinson` |
-
-## 8Of4R6uMjU8 · A Beautiful Vision for Humanity in Times of Great… · 3 to check
-
-3:07:10 · 3 segments · covers 100%
-
-[open](https://youtu.be/8Of4R6uMjU8)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L36 | [0:22](https://youtu.be/8Of4R6uMjU8?t=22) | 0:22–18:53 | 10% | Moderator: Dennis Small (U.S.), LaRouche Lega… | `moderator-dennis-small` |
-| ☐ | L37 | [18:54](https://youtu.be/8Of4R6uMjU8?t=1134) | 18:54–23:07 | 2% | Lyndon LaRouche, video excerpts | `lyndon-larouche` |
-| ☐ | L38 | [23:08](https://youtu.be/8Of4R6uMjU8?t=1388) | 23:08–end | 88% | Helga Zepp-LaRouche (Germany), Founder, The S… | `helga-zepp-larouche` |
-
-## aC1KwHEBbIY · Schiller Institute Conference — June 30-July 1, 2… · 4 to check
-
-2:42:29 · 4 segments · covers 99%
-
-[open](https://youtu.be/aC1KwHEBbIY)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L375 | [1:48](https://youtu.be/aC1KwHEBbIY?t=108) | 1:48–29:16 | 17% | Jacques Cheminade, President of Solidarité et… | `jacques-cheminade` |
-| ☐ | L376 | [29:17](https://youtu.be/aC1KwHEBbIY?t=1757) | 29:17–1:01:56 | 20% | Prof Hans Köchler, President of I.P.O. | `hans-kochler` |
-| ☐ | L377 | [1:01:57](https://youtu.be/aC1KwHEBbIY?t=3717) | 1:01:57–1:30:39 | 18% | Marco Zanni, Member of the European Parliamen… | `marco-zanni` |
-| ☐ | L378 | [1:30:40](https://youtu.be/aC1KwHEBbIY?t=5440) | 1:30:40–2:42:29 | 44% | Dr. Armin Azima, University of Hamburg | `armin-azima` |
-
-## KQcQTMHG1KM · Create a New Epoch for Mankind — Presidents' Day … · 6 to check
-
-3:40:03 · 6 segments · covers 88%
-
-[open](https://youtu.be/KQcQTMHG1KM)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L333 | [27:06](https://youtu.be/KQcQTMHG1KM?t=1626) | 27:06–1:16:02 | 22% | Jacques Cheminade, president of the French pa… | `jacques-cheminade` |
-| ☐ | L334 | [1:16:03](https://youtu.be/KQcQTMHG1KM?t=4563) | 1:16:03–1:42:05 | 12% | John Gong, Professor of Economics at the Univ… | `john-gong` |
-| ☐ | L335 | [1:42:06](https://youtu.be/KQcQTMHG1KM?t=6126) | 1:42:06–1:50:32 | 4% | H.E. Ambassador Vassily A. Nebenzia, Ambassad… | `vassily-a-nebenzia` |
-| ☐ | L336 | [1:50:33](https://youtu.be/KQcQTMHG1KM?t=6633) | 1:50:33–2:16:49 | 12% | William Binney, Former Technical Director, Na… | `william-binney` |
-| ☐ | L337 | [2:16:50](https://youtu.be/KQcQTMHG1KM?t=8210) | 2:16:50–2:32:40 | 7% | Jason Ross, Schiller Institute co-author "Ext… | `jason-ross` |
-| ☐ | L338 | [2:32:41](https://youtu.be/KQcQTMHG1KM?t=9161) | 2:32:41–3:40:03 | 31% | Dennis Small, Executive Intelligence Review I… | `dennis-small` |
+| C | 1 | 0 | Nothing here is awaiting a decision. |
 
 ---
 
@@ -352,4 +295,33 @@ Same timestamp check, plus at least one row whose speaker will not link. Often a
 | ☐ | L301 | [2:34:22](https://youtu.be/_OCAxLIpAMY?t=9262) | 2:34:22–3:21:34 | 19% | — Q&A with Zepp-LaRouche, Cheminade, and Gera… | — |
 | ☐ | L302 | [3:21:35](https://youtu.be/_OCAxLIpAMY?t=12095) | 3:21:35–3:35:14 | 5% | — Helga Zepp-LaRouche | `helga-zepp-larouche` |
 | ☐ | L303 | [3:35:15](https://youtu.be/_OCAxLIpAMY?t=12915) | 3:35:15–4:10:57 | 14% | — Q&A continued | — |
+
+---
+
+# C. Every row decided — listed for unaccounted time
+
+Nothing here is awaiting a decision. The video is still listed because part of its runtime is described by no row at all, which is where a missed speaker hides.
+
+## 8Of4R6uMjU8 · A Beautiful Vision for Humanity in Times of Great… · 0 to check
+
+3:07:10 · 2 segments · covers 58% · **every row decided**
+
+⚠ unaccounted: **18:53–48:47** — a speaker the segmenter missed would sit here. Append a row per missing talk (next free `segment_index` for this video); do not renumber existing rows.
+
+[open](https://youtu.be/8Of4R6uMjU8)
+
+| ✓ | line | jump to | span | covers | named speaker | links as |
+|---|---|---|---|---|---|---|
+| ✓ edit | L37 | [48:47](https://youtu.be/8Of4R6uMjU8?t=2927) | 48:47–1:55:00 | 35% | Lyndon LaRouche, video excerpts | `lyndon-larouche` |
+| ✓ edit | L38 | [1:56:28](https://youtu.be/8Of4R6uMjU8?t=6988) | 1:56:28–2:38:28 | 22% | Helga Zepp-LaRouche (Germany), Founder, The S… | `helga-zepp-larouche` |
+
+---
+
+## Videos with time unaccounted for (1)
+
+Either a split on header text — the named speaker often continues, so clear that segment's `end_seconds` — or a talk the segmenter never proposed, which needs a new row appended.
+
+| video | unaccounted | of | windows | rows open |
+|---|---|---|---|---|
+| [8Of4R6uMjU8](https://youtu.be/8Of4R6uMjU8) | 29:54 | 3:07:10 | 18:53–48:47 | none — decided |
 
