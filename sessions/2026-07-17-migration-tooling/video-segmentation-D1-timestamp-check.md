@@ -1,6 +1,6 @@
 # Tranche D1 — timestamp check (case 1)
 
-60 undecided segments across 17 videos. **This is the only part of File 3 that needs the video.**
+60 undecided segments across 16 videos. **This is the only part of File 3 that needs the video.**
 
 Open each deep link and confirm the named person is the one who starts speaking there.
 
@@ -15,13 +15,6 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 `covers` is how much of the video a segment spans — triage only, not a verdict. A video whose segments account for nearly all of it is likely well cut; a low figure or a flagged trailing gap means time is unaccounted for, which is what a bad split looks like.
 
 `—` in *links as* means no `person_key`: the record is still built, with no presenter linked.
-
-## Where to start
-
-| group | videos | segments | |
-|---|---:|---:|---|
-| B | 16 | 60 | Same timestamp check, plus at least one row whose speaker will not link. |
-| C | 1 | 0 | Nothing here is awaiting a decision. |
 
 ---
 
@@ -295,33 +288,4 @@ Same timestamp check, plus at least one row whose speaker will not link. Often a
 | ☐ | L301 | [2:34:22](https://youtu.be/_OCAxLIpAMY?t=9262) | 2:34:22–3:21:34 | 19% | — Q&A with Zepp-LaRouche, Cheminade, and Gera… | — |
 | ☐ | L302 | [3:21:35](https://youtu.be/_OCAxLIpAMY?t=12095) | 3:21:35–3:35:14 | 5% | — Helga Zepp-LaRouche | `helga-zepp-larouche` |
 | ☐ | L303 | [3:35:15](https://youtu.be/_OCAxLIpAMY?t=12915) | 3:35:15–4:10:57 | 14% | — Q&A continued | — |
-
----
-
-# C. Every row decided — listed for unaccounted time
-
-Nothing here is awaiting a decision. The video is still listed because part of its runtime is described by no row at all, which is where a missed speaker hides.
-
-## 8Of4R6uMjU8 · A Beautiful Vision for Humanity in Times of Great… · 0 to check
-
-3:07:10 · 2 segments · covers 58% · **every row decided**
-
-⚠ unaccounted: **18:53–48:47** — a speaker the segmenter missed would sit here. Append a row per missing talk (next free `segment_index` for this video); do not renumber existing rows.
-
-[open](https://youtu.be/8Of4R6uMjU8)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ✓ edit | L37 | [48:47](https://youtu.be/8Of4R6uMjU8?t=2927) | 48:47–1:55:00 | 35% | Lyndon LaRouche, video excerpts | `lyndon-larouche` |
-| ✓ edit | L38 | [1:56:28](https://youtu.be/8Of4R6uMjU8?t=6988) | 1:56:28–2:38:28 | 22% | Helga Zepp-LaRouche (Germany), Founder, The S… | `helga-zepp-larouche` |
-
----
-
-## Videos with time unaccounted for (1)
-
-Either a split on header text — the named speaker often continues, so clear that segment's `end_seconds` — or a talk the segmenter never proposed, which needs a new row appended.
-
-| video | unaccounted | of | windows | rows open |
-|---|---|---|---|---|
-| [8Of4R6uMjU8](https://youtu.be/8Of4R6uMjU8) | 29:54 | 3:07:10 | 18:53–48:47 | none — decided |
 
