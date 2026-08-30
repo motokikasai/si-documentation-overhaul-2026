@@ -1,6 +1,6 @@
 # Tranche D1 — timestamp check (case 1)
 
-15 undecided segments across 2 videos. **This is the only part of File 3 that needs the video.**
+8 undecided segments across 1 videos. **This is the only part of File 3 that needs the video.**
 
 Open each deep link and confirm the named person is the one who starts speaking there.
 
@@ -21,22 +21,6 @@ Initials in `reviewer` either way. Blank = the segment is silently discarded.
 # B. A name needs attention as well
 
 Same timestamp check, plus at least one row whose speaker will not link. Often a session label (`Question & Answer Session`) that is legitimately presenter-less and should simply be accepted — see the *links as* column.
-
-## Ic8b23CxBSU · Schiller Institute Conference — June 30-July 1, 2… · 7 to check, 2 name(s)
-
-4:12:00 · 7 segments · covers 96%
-
-[open](https://youtu.be/Ic8b23CxBSU)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L402 | [10:54](https://youtu.be/Ic8b23CxBSU?t=654) | 10:54–25:47 | 6% | How Eastern and South-Eastern Europe Can Part… | — |
-| ☐ | L403 | [25:48](https://youtu.be/Ic8b23CxBSU?t=1548) | 25:48–46:33 | 8% | Prof. Ivo Christov, Member of Bulgarian Parli… | `ivo-christov` |
-| ☐ | L404 | [46:34](https://youtu.be/Ic8b23CxBSU?t=2794) | 46:34–1:10:35 | 10% | Folker Hellmeyer, Economist , Germany | `folker-hellmeyer` |
-| ☐ | L405 | [1:10:36](https://youtu.be/Ic8b23CxBSU?t=4236) | 1:10:36–1:36:44 | 10% | Duško Dimitrijević, Ph.D., Professorial Fello… | `dusko-dimitrijevic` |
-| ☐ | L406 | [1:36:45](https://youtu.be/Ic8b23CxBSU?t=5805) | 1:36:45–1:57:54 | 8% | Hans von Helldorff, Spokesman, Federal Associ… | `hans-von-helldorff` |
-| ☐ | L407 | [1:57:55](https://youtu.be/Ic8b23CxBSU?t=7075) | 1:57:55–2:16:13 | 7% | of the Black Sea Economic Cooperation Organiz… | — |
-| ☐ | L408 | [2:16:14](https://youtu.be/Ic8b23CxBSU?t=8174) | 2:16:14–4:12:00 | 46% | Professor Nuraly Bekturganov, Vice President … | `nuraly-bekturganov` |
 
 ## O-6e3dmzDoQ · Schiller Institute Conference — June 30-July 1, 2… · 8 to check, 2 name(s)
 
