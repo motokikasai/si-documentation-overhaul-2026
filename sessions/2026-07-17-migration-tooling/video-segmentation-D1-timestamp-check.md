@@ -1,6 +1,6 @@
 # Tranche D1 — timestamp check (case 1)
 
-44 undecided segments across 8 videos. **This is the only part of File 3 that needs the video.**
+38 undecided segments across 6 videos. **This is the only part of File 3 that needs the video.**
 
 Open each deep link and confirm the named person is the one who starts speaking there.
 
@@ -92,13 +92,13 @@ Same timestamp check, plus at least one row whose speaker will not link. Often a
 
 | ✓ | line | jump to | span | covers | named speaker | links as |
 |---|---|---|---|---|---|---|
-| ☐ | L380 | [10:54](https://youtu.be/Ic8b23CxBSU?t=654) | 10:54–25:47 | 6% | How Eastern and South-Eastern Europe Can Part… | — |
-| ☐ | L381 | [25:48](https://youtu.be/Ic8b23CxBSU?t=1548) | 25:48–46:33 | 8% | Prof. Ivo Christov, Member of Bulgarian Parli… | `ivo-christov` |
-| ☐ | L382 | [46:34](https://youtu.be/Ic8b23CxBSU?t=2794) | 46:34–1:10:35 | 10% | Folker Hellmeyer, Economist , Germany | `folker-hellmeyer` |
-| ☐ | L383 | [1:10:36](https://youtu.be/Ic8b23CxBSU?t=4236) | 1:10:36–1:36:44 | 10% | Duško Dimitrijević, Ph.D., Professorial Fello… | `dusko-dimitrijevic` |
-| ☐ | L384 | [1:36:45](https://youtu.be/Ic8b23CxBSU?t=5805) | 1:36:45–1:57:54 | 8% | Hans von Helldorff, Spokesman, Federal Associ… | `hans-von-helldorff` |
-| ☐ | L385 | [1:57:55](https://youtu.be/Ic8b23CxBSU?t=7075) | 1:57:55–2:16:13 | 7% | of the Black Sea Economic Cooperation Organiz… | — |
-| ☐ | L386 | [2:16:14](https://youtu.be/Ic8b23CxBSU?t=8174) | 2:16:14–4:12:00 | 46% | Professor Nuraly Bekturganov, Vice President … | `nuraly-bekturganov` |
+| ☐ | L384 | [10:54](https://youtu.be/Ic8b23CxBSU?t=654) | 10:54–25:47 | 6% | How Eastern and South-Eastern Europe Can Part… | — |
+| ☐ | L385 | [25:48](https://youtu.be/Ic8b23CxBSU?t=1548) | 25:48–46:33 | 8% | Prof. Ivo Christov, Member of Bulgarian Parli… | `ivo-christov` |
+| ☐ | L386 | [46:34](https://youtu.be/Ic8b23CxBSU?t=2794) | 46:34–1:10:35 | 10% | Folker Hellmeyer, Economist , Germany | `folker-hellmeyer` |
+| ☐ | L387 | [1:10:36](https://youtu.be/Ic8b23CxBSU?t=4236) | 1:10:36–1:36:44 | 10% | Duško Dimitrijević, Ph.D., Professorial Fello… | `dusko-dimitrijevic` |
+| ☐ | L388 | [1:36:45](https://youtu.be/Ic8b23CxBSU?t=5805) | 1:36:45–1:57:54 | 8% | Hans von Helldorff, Spokesman, Federal Associ… | `hans-von-helldorff` |
+| ☐ | L389 | [1:57:55](https://youtu.be/Ic8b23CxBSU?t=7075) | 1:57:55–2:16:13 | 7% | of the Black Sea Economic Cooperation Organiz… | — |
+| ☐ | L390 | [2:16:14](https://youtu.be/Ic8b23CxBSU?t=8174) | 2:16:14–4:12:00 | 46% | Professor Nuraly Bekturganov, Vice President … | `nuraly-bekturganov` |
 
 ## O-6e3dmzDoQ · Schiller Institute Conference — June 30-July 1, 2… · 8 to check, 2 name(s)
 
@@ -108,36 +108,12 @@ Same timestamp check, plus at least one row whose speaker will not link. Often a
 
 | ✓ | line | jump to | span | covers | named speaker | links as |
 |---|---|---|---|---|---|---|
-| ☐ | L368 | [3:26](https://youtu.be/O-6e3dmzDoQ?t=206) | 3:26–14:44 | 7% | Hussein Askary, Southwest Asia Coordinator of… | `hussein-askary` |
-| ☐ | L369 | [14:45](https://youtu.be/O-6e3dmzDoQ?t=885) | 14:45–24:21 | 6% | Wang Hao, Embassy of the People's Republic of… | `wang-hao` |
-| ☐ | L370 | [24:22](https://youtu.be/O-6e3dmzDoQ?t=1462) | 24:22–38:29 | 9% | H.E. Yusuf Maitama Tuggar, Ambassador of the … | `yusuf-maitama-tuggar` |
-| ☐ | L371 | [38:30](https://youtu.be/O-6e3dmzDoQ?t=2310) | 38:30–1:01:17 | 15% | Mohammed Bila, Expert Modeler, Lake Chad Basi… | `mohammed-bila` |
-| ☐ | L372 | [1:01:18](https://youtu.be/O-6e3dmzDoQ?t=3678) | 1:01:18–1:21:11 | 13% | Amzat Boukari-Yabara, African Historian, Gene… | `amzat-boukari-yabara` |
-| ☐ | L373 | [1:21:12](https://youtu.be/O-6e3dmzDoQ?t=4872) | 1:21:12–1:40:59 | 13% | Current Situation and Challenges for Peace as… | — |
-| ☐ | L374 | [1:41:00](https://youtu.be/O-6e3dmzDoQ?t=6060) | 1:41:00–2:10:51 | 19% | Hussein Askary, Southwest Asia Coordinator of… | `hussein-askary` |
-| ☐ | L375 | [2:10:52](https://youtu.be/O-6e3dmzDoQ?t=7852) | 2:10:52–2:36:34 | 16% | Newly Appointed Undersecretary of State to th… | — |
-
-## 7O11ENxM-zA · Stop NATO's World War and Dismantle the 'Internat… · 3 to check, 3 name(s)
-
-20:56 · 3 segments · covers 100%
-
-[open](https://youtu.be/7O11ENxM-zA)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L100 | [0:00](https://youtu.be/7O11ENxM-zA) | 0:00–4:16 | 20% | The Schiller Institute, in accordance with it… | ⚠ ⚠ dropped in person-map — no … |
-| ☐ | L101 | [4:17](https://youtu.be/7O11ENxM-zA?t=257) | 4:17–15:01 | 51% | Dr. King became, in the last year of his life… | ⚠ ⚠ dropped in person-map — no … |
-| ☐ | L102 | [15:02](https://youtu.be/7O11ENxM-zA?t=902) | 15:02–end | 28% | Dr. King's formulation, that "the choice is n… | ⚠ ⚠ dropped in person-map — no … |
-
-## cy0uh-BYs7s · Schiller Institute Conference — April 25-26, 2020 · 3 to check, 3 name(s)
-
-3:30:06 · 3 segments · covers 89%
-
-[open](https://youtu.be/cy0uh-BYs7s)
-
-| ✓ | line | jump to | span | covers | named speaker | links as |
-|---|---|---|---|---|---|---|
-| ☐ | L306 | [23:22](https://youtu.be/cy0uh-BYs7s?t=1402) | 23:22–1:20:07 | 27% | Founder and Chairman, Schiller Institute | ⚠ ⚠ dropped in person-map — no … |
-| ☐ | L307 | [1:20:08](https://youtu.be/cy0uh-BYs7s?t=4808) | 1:20:08–1:28:26 | 4% | Founder and Artistic Director, Harlem Opera T… | ⚠ ⚠ dropped in person-map — no … |
-| ☐ | L308 | [1:28:27](https://youtu.be/cy0uh-BYs7s?t=5307) | 1:28:27–end | 58% | Original German: | ⚠ ⚠ dropped in person-map — no … |
+| ☐ | L372 | [3:26](https://youtu.be/O-6e3dmzDoQ?t=206) | 3:26–14:44 | 7% | Hussein Askary, Southwest Asia Coordinator of… | `hussein-askary` |
+| ☐ | L373 | [14:45](https://youtu.be/O-6e3dmzDoQ?t=885) | 14:45–24:21 | 6% | Wang Hao, Embassy of the People's Republic of… | `wang-hao` |
+| ☐ | L374 | [24:22](https://youtu.be/O-6e3dmzDoQ?t=1462) | 24:22–38:29 | 9% | H.E. Yusuf Maitama Tuggar, Ambassador of the … | `yusuf-maitama-tuggar` |
+| ☐ | L375 | [38:30](https://youtu.be/O-6e3dmzDoQ?t=2310) | 38:30–1:01:17 | 15% | Mohammed Bila, Expert Modeler, Lake Chad Basi… | `mohammed-bila` |
+| ☐ | L376 | [1:01:18](https://youtu.be/O-6e3dmzDoQ?t=3678) | 1:01:18–1:21:11 | 13% | Amzat Boukari-Yabara, African Historian, Gene… | `amzat-boukari-yabara` |
+| ☐ | L377 | [1:21:12](https://youtu.be/O-6e3dmzDoQ?t=4872) | 1:21:12–1:40:59 | 13% | Current Situation and Challenges for Peace as… | — |
+| ☐ | L378 | [1:41:00](https://youtu.be/O-6e3dmzDoQ?t=6060) | 1:41:00–2:10:51 | 19% | Hussein Askary, Southwest Asia Coordinator of… | `hussein-askary` |
+| ☐ | L379 | [2:10:52](https://youtu.be/O-6e3dmzDoQ?t=7852) | 2:10:52–2:36:34 | 16% | Newly Appointed Undersecretary of State to th… | — |
 
