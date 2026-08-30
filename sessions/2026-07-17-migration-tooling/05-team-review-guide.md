@@ -165,11 +165,19 @@ Re-run it after any person-map change, then commit so `--baseline HEAD` stays cl
   over all 880 rows). The agenda text still saves; only the presenter link is lost. Not a reason to
   reject a row. They would gain links retroactively if those person-map rows were accepted — 192 are
   still flagged and blank.
-- **38 migrating rows have a blank `person_key` although their own speaker is named in
-  `speaker_raw` and already exists in `person-map.csv`** — for example `K4V_kTnwjfo` "Dr. Chandra
-  Muzaffar (ENGLISH)", with `chandra-muzaffar` sitting unused. Those presentations migrate with no
-  presenter for no good reason. `person_key` is a reviewer column, so this is a straightforward
-  sweep; it was found late and left rather than folded into the timestamp pass.
+- **125 migrating rows still have no presenter at all** — no `person_key` and no agenda. That is
+  down from 163: a sweep keyed the 38 rows whose own speaker was named in `speaker_raw` and already
+  existed in `person-map.csv`. What is left is rows whose speaker genuinely is not recorded anywhere
+  (a role instead of a name, an unnamed representative, a session label), which only the video can
+  settle.
+- **Three rows name two people and can link only one.** `iLE3NpFjz98`, `6jESHzDKlNE` and
+  `9Xvwg4RGYok` are Q&A sessions with two participants; a row carries one `person_key`, so the
+  first-named is linked and the other is recorded in `notes`. Same shape as the four-person panel
+  below.
+- **Russian-language rows point at the canonical Latin key.** `person-map.csv` holds separate
+  Cyrillic rows (`хелга-цепп-ларуш`, `жак-шеминад`, `дежэн-сенни`) that are flagged and blank, so
+  keying a row to them would link nothing. They are the same people; merging those rows into their
+  Latin keys would be the tidier fix, but that is a person-map decision, not a File 3 one.
 - **One row links only one of its presenters.** `3cEmeoenoaA` L53 is a four-person panel sharing a
   slot; a row carries a single `person_key`, and the other three would have to go in `agenda_json`,
   which `tools/day2-agenda-split.py` will only touch on rows that already have an agenda
