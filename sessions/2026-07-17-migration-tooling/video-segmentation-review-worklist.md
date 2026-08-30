@@ -6,7 +6,7 @@ Editable columns: `final_action`, `notes`, `reviewer`, plus the value columns yo
 
 ## ⚠ Read this first — blank does not mean accept
 
-`si-migrate.php:1986` skips a row when `final_action == 'skip'` **or** when `needs_review == '1'` and `final_action` is blank. All 11 rows in this worklist are flagged, so leaving one untouched **discards it**. To accept a row you must type a value — use `accept`; use `edit` if you also corrected cells in that row; `skip` to discard deliberately. Put your initials in `reviewer` either way.
+`si-migrate.php:1986` skips a row when `final_action == 'skip'` **or** when `needs_review == '1'` and `final_action` is blank. All 3 rows in this worklist are flagged, so leaving one untouched **discards it**. To accept a row you must type a value — use `accept`; use `edit` if you also corrected cells in that row; `skip` to discard deliberately. Put your initials in `reviewer` either way.
 
 Run `python3 tools/day2-preflight.py` at any point to see what is still outstanding.
 
@@ -14,26 +14,12 @@ Run `python3 tools/day2-preflight.py` at any point to see what is still outstand
 
 | # | Tranche | Rows | Videos | Where |
 |---|---|---:|---:|---|
-| D | case 1 + 4 + 2 | 11 | 4 | YouTube |
-| | **total** | **11** | | |
+| D | case 1 + 4 + 2 | 3 | 3 | YouTube |
+| | **total** | **3** | | |
 
 ---
 
-## D. Needs YouTube open (11)  · ~2.5 h
-
-### D1 · case 1 — segments with start times (8, 1 videos)
-
-Links jump straight to `start_seconds`. Confirm the named speaker actually starts there. Fix the number in place + `final_action=edit`.
-
-**O-6e3dmzDoQ** · `2018-june-july-conf-soden` · 8 segments — [open](https://youtu.be/O-6e3dmzDoQ)
-  - **L390** [3:26](https://youtu.be/O-6e3dmzDoQ?t=206) — Hussein Askary, Southwest Asia Coordina… · ok (unflagged)
-  - **L391** [14:45](https://youtu.be/O-6e3dmzDoQ?t=885) — Wang Hao, Embassy of the People's Repub…
-  - **L392** [24:22](https://youtu.be/O-6e3dmzDoQ?t=1462) — H.E. Yusuf Maitama Tuggar, Ambassador o…
-  - **L393** [38:30](https://youtu.be/O-6e3dmzDoQ?t=2310) — Mohammed Bila, Expert Modeler, Lake Cha…
-  - **L394** [1:01:18](https://youtu.be/O-6e3dmzDoQ?t=3678) — Amzat Boukari-Yabara, African Historian…
-  - **L395** [1:21:12](https://youtu.be/O-6e3dmzDoQ?t=4872) — Current Situation and Challenges for Pe…
-  - **L396** [1:41:00](https://youtu.be/O-6e3dmzDoQ?t=6060) — Hussein Askary, Southwest Asia Coordina… · ok (unflagged)
-  - **L397** [2:10:52](https://youtu.be/O-6e3dmzDoQ?t=7852) — Newly Appointed Undersecretary of State…
+## D. Needs YouTube open (3)  · ~2.5 h
 
 ### D2 · case 4 — no marks, no agenda (3)
 
