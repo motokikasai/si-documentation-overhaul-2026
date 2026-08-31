@@ -68,11 +68,35 @@ Local's MySQL client → `ERROR 1698`). All other `wp` commands work anywhere.
 Execute the runbook in `00-README.md` §"Execution runbook" verbatim, top to bottom,
 including the full `--post-type` list on `si:shortcodes` (added 2026-07-19).
 
+## F-bis. Known-platform gotchas (fixed in code 2026-08-31 — verify they stay fixed)
+
+These four defects were found by the si-v2 rehearsal (`08-si-v2-rehearsal-findings.md` §D)
+and are now fixed in `si-migrate.php`. Listed here because each one *looks* like a chain
+failure when it reappears, and three of them are invisible outside Windows/WPML:
+
+| Was | Symptom if it regresses | Fix in place |
+|---|---|---|
+| D1 | Translated categories (`bri-de`, `allgemein-ru`…) survive retire, keeping real content on legacy terms | retire resolves slugs via direct SQL and deletes the whole WPML **trid group**, logging each `translation sibling` it catches |
+| D2 | `leftover category` warnings naming terms that are already deleted (ghosts), each repeated once per language | the end-state audit reads the tables directly after `wp_cache_flush()` |
+| D3 | `si:transform` prints "There has been a critical error on this website" **after** its summary | `done()` nulls the log handle, so a later `log()` is a no-op |
+| D4 | `Could not open input file: C:\Program` during transform / categories retire; term counts stale | both `term recount` calls pass `'launch' => false` (in-process) |
+
+**D1 is not fully settled.** The recorded root cause ("translated slugs match no map row")
+is contradicted by the data: `category-map-draft.csv` covers all 257 census category terms
+1:1, translations included, each with a retire-queue fate — and the same run merged 44/44
+including 31 merges onto non-English survivors. The 51 reported survivors may have been D2
+ghosts. The retire fix is therefore defensive: if D1 was real it deletes the siblings and
+says so; if it was not, `retired_translation_siblings` is 0 and nothing changes. **Record
+that counter's value this run** — it is what finally settles it.
+
 ## G. Tripwires during the run (all must stay silent)
 
 - `si:transform` → `unknown term slug skipped` warnings: must be **0**
+- `si:transform` → no PHP fatal after the summary (D3)
 - `si:categories` → `merge skipped` warnings: must be **0**
 - `si:categories` retire → `leftover category` warnings: must be **0**
+  (now a trustworthy list — it reads the tables, not the cache; see F-bis D2)
+- `si:categories` retire → note `retired_translation_siblings` in the summary (see F-bis D1)
 - `si:verify` → exit 0, ALL checks PASS, including section 8 (taxonomy cleanliness:
   exact seed sets, coverage thresholds, category=si-unsorted only, post_tag=0,
   no `&amp;` names) and the shortcode probe self-test + static-leftover check

@@ -596,6 +596,28 @@ final class SI_WPML {
         $in = implode(',', array_map('intval', $term_taxonomy_ids));
         return (int) $wpdb->query('DELETE FROM ' . self::table() . " WHERE element_id IN ($in) AND element_type LIKE 'tax\_%'");
     }
+
+    /**
+     * Every term_taxonomy_id sharing this term's trid — i.e. the whole translation group
+     * (D1 hedge, 08-si-v2-rehearsal-findings.md). Returns [$ttid] unchanged when WPML is
+     * off or the term is untranslated, so callers can use it unconditionally.
+     */
+    public static function term_group(int $ttid, string $taxonomy = 'category'): array {
+        global $wpdb;
+        if (!self::active()) { return [$ttid]; }
+        $trid = $wpdb->get_var($wpdb->prepare(
+            'SELECT trid FROM ' . self::table() . ' WHERE element_id = %d AND element_type = %s',
+            $ttid, "tax_$taxonomy"
+        ));
+        if (!$trid) { return [$ttid]; }
+        $ids = $wpdb->get_col($wpdb->prepare(
+            'SELECT element_id FROM ' . self::table() . ' WHERE trid = %d AND element_type = %s',
+            $trid, "tax_$taxonomy"
+        ));
+        $ids = array_map('intval', $ids ?: []);
+        if (!in_array($ttid, $ids, true)) { $ids[] = $ttid; }
+        return $ids;
+    }
 }
 
 /** Field writes: Pods API when available (relationships!), plain meta otherwise (08 §3). */
@@ -647,12 +669,38 @@ final class SI_Migrate_Command {
     private function done(array $summary): void {
         foreach ($summary as $k => $v) { $this->log(sprintf('  %-38s %s', $k, is_scalar($v) ? $v : wp_json_encode($v))); }
         $this->log('=== done ' . gmdate('c'));
-        if ($this->log_fh) { fclose($this->log_fh); }
+        // null the handle, don't just close it: a command that log()s AFTER done() (the
+        // transform's cache-flush reminder) would otherwise fwrite() a closed resource and
+        // fatal *after* all writes had committed — D3 in 08-si-v2-rehearsal-findings.md.
+        if ($this->log_fh) { fclose($this->log_fh); $this->log_fh = null; }
     }
     private function permalink_guess(WP_Post $p): string {
         $link = get_permalink($p);
         return $link ?: '';
     }
+    /**
+     * Term lookup that bypasses every filter (WPML language scoping, object cache) by going
+     * straight to the tables. Used by the category cutover, where missing a translated term
+     * means leaving real content on a legacy category — D1/D2, 08-si-v2-rehearsal-findings.md.
+     */
+    private function term_by_slug_raw(string $slug, string $taxonomy): ?object {
+        global $wpdb;
+        $row = $wpdb->get_row($wpdb->prepare(
+            "SELECT t.term_id, t.slug, t.name, tt.term_taxonomy_id, tt.count
+             FROM {$wpdb->terms} t JOIN {$wpdb->term_taxonomy} tt ON tt.term_id = t.term_id
+             WHERE t.slug = %s AND tt.taxonomy = %s LIMIT 1", $slug, $taxonomy));
+        return $row ?: null;
+    }
+
+    private function term_by_ttid_raw(int $ttid): ?object {
+        global $wpdb;
+        $row = $wpdb->get_row($wpdb->prepare(
+            "SELECT t.term_id, t.slug, t.name, tt.term_taxonomy_id, tt.count
+             FROM {$wpdb->term_taxonomy} tt JOIN {$wpdb->terms} t ON t.term_id = tt.term_id
+             WHERE tt.term_taxonomy_id = %d LIMIT 1", $ttid));
+        return $row ?: null;
+    }
+
     /** category slugs per post, prefetched in bulk */
     private function post_terms_map(array $post_ids, string $tax = 'category'): array {
         $map = array_fill_keys($post_ids, []);
@@ -1039,7 +1087,11 @@ final class SI_Migrate_Command {
         // counts computed at assignment time miss items whose post_type changed afterwards
         // (assign runs before set_post_type) — recount now that types are final.
         if (!$this->dry) {
-            WP_CLI::runcommand('term recount si_topic si_region si_campaign si_series si_format', ['exit_error' => false]);
+            // launch=>false runs in-process: the default spawns a child `wp`, and on Local
+            // (Windows) the phar path 'C:\Program Files (x86)\…' breaks the unquoted launch
+            // ("Could not open input file: C:\Program") — D4 in 08-si-v2-rehearsal-findings.md.
+            WP_CLI::runcommand('term recount si_topic si_region si_campaign si_series si_format',
+                ['exit_error' => false, 'launch' => false]);
         }
         $this->done($n + ['rows_total' => count($rows), 'resume_offset' => $i,
             'unknown_term_slugs' => count($this->unknown_term_slugs)]);
@@ -1194,7 +1246,12 @@ final class SI_Migrate_Command {
         $report = [];
         $n = ['scanned' => count($rows), 'converted' => 0, 'flagged_dynamic' => 0, 'untouched' => 0];
 
+        // Progress every N rows: each changed post is a full wp_update_post, and with WPML +
+        // Pods + Action Scheduler live that ran ~26 min silently over 1,795 posts (D5).
+        $batch = (int) ($assoc['batch'] ?? self::DEFAULT_BATCH);
+        $seen = 0;
         foreach ($rows as $r) {
+            if (++$seen % $batch === 0) { $this->log("… row $seen/{$n['scanned']}"); }
             $res = SI_Shortcodes::convert($r->post_content);
             $content = $res['html'];
             if (isset($assoc['normalize-domains'])) {
@@ -1389,12 +1446,26 @@ final class SI_Migrate_Command {
             // allgemein LAST (05 §4)
             usort($queue, static fn($a, $b) => ($a === 'allgemein') <=> ($b === 'allgemein'));
             foreach ($queue as $slug) {
-                $term = get_term_by('slug', $slug, 'category');
+                // Language-blind lookup: get_term_by() can be filtered to the active language
+                // once WPML is loaded, which would silently skip translated terms. Direct SQL
+                // always sees them (D1 hedge, 08-si-v2-rehearsal-findings.md).
+                $term = $this->term_by_slug_raw($slug, 'category');
                 if (!$term) { continue; }   // already gone — normal on idempotent re-runs
                 $n['retired']++;
                 if ($this->dry) { continue; }
-                $n['icl_rows_cleaned'] += SI_WPML::delete_term_rows([$term->term_taxonomy_id]);
-                wp_delete_term($term->term_id, 'category');   // never deletes posts; children re-parent (08 §5)
+                // Retire the whole WPML translation group, not just the mapped term: the map
+                // keys on one slug per row, but a category carries a sibling term per language
+                // and leaving those behind strands real content on legacy categories.
+                foreach (SI_WPML::term_group((int) $term->term_taxonomy_id, 'category') as $ttid) {
+                    $sib = $this->term_by_ttid_raw((int) $ttid);
+                    if (!$sib) { continue; }
+                    if ((int) $sib->term_id !== (int) $term->term_id) {
+                        $n['retired_translation_siblings'] = ($n['retired_translation_siblings'] ?? 0) + 1;
+                        $this->log("    retire: translation sibling '{$sib->slug}' (id {$sib->term_id}) of '$slug'");
+                    }
+                    $n['icl_rows_cleaned'] += SI_WPML::delete_term_rows([(int) $sib->term_taxonomy_id]);
+                    wp_delete_term((int) $sib->term_id, 'category');   // never deletes posts; children re-parent (08 §5)
+                }
             }
 
             // tag kill (06 §1 "Tag taxonomy emptied" — spec'd but unimplemented until 2026-07-19;
@@ -1407,13 +1478,26 @@ final class SI_Migrate_Command {
                 wp_delete_term($tag->term_id, 'post_tag');
             }
 
-            if (!$this->dry) { WP_CLI::runcommand('term recount category', ['exit_error' => false]); }
+            if (!$this->dry) {   // launch=>false — see D4 note on the transform's recount
+                WP_CLI::runcommand('term recount category', ['exit_error' => false, 'launch' => false]);
+            }
 
             // end-state audit: the ONLY category left standing should be the housekeeping
             // term. Anything else (term missing from the map, empty-slug map row, failed
             // merge) is reported here instead of being discovered in wp-admin.
-            $left = get_terms(['taxonomy' => 'category', 'hide_empty' => false]);
-            foreach (is_wp_error($left) ? [] : $left as $t) {
+            //
+            // Read the tables directly. get_terms() here reported ghosts in the 2026-07-19
+            // rehearsal (D2): it served a stale object cache, naming terms this very run had
+            // already deleted, and with WPML active duplicated each row per language pairing.
+            // That made the leftover list untrustworthy in both directions — it hid the real
+            // survivors behind names that were already gone.
+            wp_cache_flush();
+            clean_term_cache([], 'category');
+            $left = $wpdb->get_results(
+                "SELECT t.term_id, t.slug, t.name, tt.count
+                 FROM {$wpdb->term_taxonomy} tt JOIN {$wpdb->terms} t ON t.term_id = tt.term_id
+                 WHERE tt.taxonomy = 'category' ORDER BY tt.count DESC");
+            foreach ($left as $t) {
                 if ($t->slug === 'si-unsorted') { continue; }
                 $n['leftover_categories'] = ($n['leftover_categories'] ?? 0) + 1;
                 WP_CLI::warning(sprintf('leftover category: "%s" (slug %s, id %d, count %d) — not covered by the map',
