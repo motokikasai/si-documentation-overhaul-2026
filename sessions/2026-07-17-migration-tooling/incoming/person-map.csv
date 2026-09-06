@@ -226,12 +226,12 @@ safieeldin-mohamed-metwally-rebuilding-egypt,Prof. Safieeldin Mohamed Metwally -
 safieeldin-mohamed-metwally,Prof. Safieeldin Mohamed Metwally,Prof.,,,speaker,Prof. Safieeldin Mohamed Metwally,portfolio:30365,1,0,,,mk
 congressman-walter-jones,Congressman Walter Jones,,,,speaker,Congressman Walter Jones,portfolio:30645,1,0,,merge:walter-jones,mk
 concluding-addresses,Concluding Addresses,,"President of Solidarité &amp; Progrès, Paris.",,speaker,Concluding Addresses,portfolio:30886,1,0,,drop,mk
-abschlußrede,Abschlußrede,,"Präsident Solidarité &amp; Progrès, Paris/Frankreich",,speaker,Abschlußrede,portfolio:30887,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
+abschlußrede,Abschlußrede,,"Präsident Solidarité &amp; Progrès, Paris/Frankreich",,speaker,Abschlußrede,portfolio:30887,1,1,non-latin key — resolve via WPML pairing to EN sibling,drop,mk
 石泽博士,石泽博士,,,,speaker,石泽博士,portfolio:31270,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 maelle-mercier,Maëlle Mercier,,,,speaker,Maëlle Mercier,portfolio:31311,1,0,,,mk
 mohqmed-metwally-博士,Mohqmed Metwally 博士,,,,speaker,Mohqmed Metwally 博士,portfolio:31350,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
 s-e-m-ali-ahani,S.E.M. Ali Ahani,,,,speaker,S.E.M. Ali Ahani,portfolio:31558,1,0,,merge:ali-ahani,mk
-alain-corvez-上校,Alain Corvez 上校,,,,speaker,Alain Corvez 上校,portfolio:31637,1,1,non-latin key — resolve via WPML pairing to EN sibling,,mk
+alain-corvez-上校,Alain Corvez 上校,,,,speaker,Alain Corvez 上校,portfolio:31637,1,1,non-latin key — resolve via WPML pairing to EN sibling,merge:alain-corvez,mk
 bouthaina-shaaban,Her Excellency Dr. Bouthaina Shaaban,Her excellency Dr.,"One of the major problems we face in our country, is that today, Western countries approach our countries with the feeling of exceptionalism or a feeling of rig",,speaker,Her Excellency Dr. Bouthaina Shaaban,portfolio:34244,1,0,,,mk
 aleppo,Aleppo,,"Throughout history, Aleppo has witnessed many moments of greatness as well as decline and turmoil, but it always arose again like the bird of the Phoenix. The p",,speaker,Aleppo,portfolio:34296,1,0,,drop,mk
 otl-a-d-ulrich-scholz,OTL a.D. Ulrich Scholz,,"Ich werde drei Metaphern verwenden, und ich werde Sie drei Fragen lehren, die man stellen muß, um zu dem Schluß zu kommen, daß der Krieg kein Mittel der Politik",,speaker,OTL a.D. Ulrich Scholz,portfolio:34904,1,0,,merge:ulrich-scholz,mk
@@ -285,7 +285,7 @@ gesang-des-gebets,Gesang des Gebets,,"überraschte. Das Gebet ist eine von vier 
 5-chen-xiaohan,5) Chen Xiaohan,,,,speaker,"5) Chen Xiaohan, Chinese People's Association for Peace and Disarmament: ""Shared Future of Mankind""",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:chen-xiaohan,mk
 5-fraydique-gaitan,5) Fraydique Gaitán,,,,speaker,"5) Fraydique Gaitán, President of the CTU USCTRAB Workers Confederation of Colombia; and Pedro Rubio, President of the A",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:fraydique-alexander-gaitan,mk
 7-p-s-raghavan,7) P.S. Raghavan,,,,speaker,"7) P.S. Raghavan, Former Indian Ambassador to Russia: ""The Indian Perspective""",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:p-s-raghavan,mk
-a-pac-ee,Али Растбеен,,,,speaker,"Али Растбеен, основатель и президент Парижской академии геополитики, Париж, Франция",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+a-pac-ee,Али Растбеен,,,,speaker,"Али Растбеен, основатель и президент Парижской академии геополитики, Париж, Франция",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:ali-rastbeen,mk
 abbey-makoe,Abbey Makoe,,,,speaker,Abbey Makoe,yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
 academy-of-social-sciences,Academy of Social Sciences (CASS),,,,speaker,"Academy of Social Sciences (CASS), China",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 achim-bonatz,Achim Bonatz,,,,speaker,Achim Bonatz,yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
@@ -345,7 +345,7 @@ cornelia-pretorius,Cornelia Pretorius,,,,speaker,Cornelia Pretorius,yt-segmentat
 costas-tsourakis,Costas Tsourakis,,,,speaker,"Costas Tsourakis, Bass",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 daniel-marmolejo,Daniel Marmolejo (Mexico),,,,speaker,Daniel Marmolejo (Mexico),yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
 daqi-fan,Daqi Fan,,,,speaker,Daqi Fan,yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
-das-phonix-projekt-aleppo,Das Phönix-Projekt – Aleppo,,,,speaker,"Das Phönix-Projekt – Aleppo, die ewige Stadt",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+das-phonix-projekt-aleppo,Das Phönix-Projekt – Aleppo,,,,speaker,"Das Phönix-Projekt – Aleppo, die ewige Stadt",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 david-t-pyne,David T. Pyne (U.S.),,,,speaker,"David T. Pyne (U.S.), Deputy Director of National Operations for the EMP Task Force on National and Homeland Security",yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
 denise-rainey,Denise Rainey (U.S.),,,,speaker,"Denise Rainey (U.S.), retired educator and principal, Rochester, N.Y.",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 dennis-speed,Dennis Speed,,,,speaker,"Dennis Speed, Schiller Institute (USA)",yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
@@ -358,7 +358,7 @@ dmitriy-polyanskiy,— Dmitriy Polyanskiy,,,,speaker,"— Dmitriy Polyanskiy, 1s
 domingo-reyes,Domingo Reyes (Dominican Republic),,,,speaker,"Domingo Reyes (Dominican Republic), former professor of Economics, Masters Degree in Higher Education",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 dr-william-happer,Dr.William Happer,,,,speaker,"Dr.William Happer, Professor Emeritus of Princeton University (who had been brought on to the National Security Council ",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:william-happer,mk
 dusko-dimitrijevic,Duško Dimitrijević,,,,speaker,"Duško Dimitrijević, Ph.D., Professorial Fellow, Institute of International Politics and Economics, Serbia",yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
-e-p-ce-y-a,Джейшри Сенгупта,,,,speaker,"Джейшри Сенгупта, старший научный сотрудник, Аналитический исследовательский фонд, Нью-Дели, Индия",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+e-p-ce-y-a,Джейшри Сенгупта,,,,speaker,"Джейшри Сенгупта, старший научный сотрудник, Аналитический исследовательский фонд, Нью-Дели, Индия",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:jayshree-sengupta,mk
 earl-rasmussen,Earl Rasmussen (U.S.),,,,speaker,"Earl Rasmussen (U.S.), The Eurasia Center",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 economic-cooperation-organisation,Economic Cooperation Organisation (BSEC),,,,speaker,Economic Cooperation Organisation (BSEC),yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 ed-calabrese,Dr. Ed Calabrese,,,,speaker,Dr. Ed Calabrese,yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
@@ -503,7 +503,7 @@ on-wednesday,On Wednesday,,,,speaker,"On Wednesday, June 12 at the National Pres
 original-german,Original German:,,,,speaker,Original German:,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 otl-a-d-ulrich-scholz-krieg,OTL a.D. Ulrich Scholz – Krieg: eine Pathologie des Westens,,,,speaker,OTL a.D. Ulrich Scholz – Krieg: eine Pathologie des Westens,yt-segmentation,1,1,added by reconcile from video-segmentation,merge:ulrich-scholz,mk
 p-a-e-xa-e,Д-р Фатиме Хашеми,,,,speaker,"Д-р Фатиме Хашеми, президент Ассоциации солидарности женщин Ирана, Тегеран, Исламская республика Иран",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-p-bo-a-e,Д-р Вольфганг Лилльге,,,,speaker,"Д-р Вольфганг Лилльге, главный редактор журнала ""Фузион"", Берлин, Германия",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+p-bo-a-e,Д-р Вольфганг Лилльге,,,,speaker,"Д-р Вольфганг Лилльге, главный редактор журнала ""Фузион"", Берлин, Германия",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:wolfgang-lillge,mk
 pakdee-tanapura,Pakdee Tanapura: Contribution from Thailand,,,,speaker,Pakdee Tanapura: Contribution from Thailand,yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
 panel-2-diplomatic-dialogue,Panel 2 Diplomatic Dialogue: Peace through Development and C,,,,speaker,Panel 2 Diplomatic Dialogue: Peace through Development and Cooperation or Annihilation?,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 par-jean-christophe-vautrin,par Jean-Christophe Vautrin,,,,speaker,"par Jean-Christophe Vautrin, Président du Club Chine EMLyon Forever",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:jean-christophe-vautrin,mk
@@ -511,7 +511,7 @@ par-jean-francois-di-meglio,Par Jean-François Di Meglio,,,,speaker,"Par Jean-Fr
 par-marco-zanni,par Marco Zanni,,,,speaker,"par Marco Zanni, député européen.",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:marco-zanni,mk
 par-moni-abdullah,par Moni Abdullah,,,,speaker,par Moni Abdullah,yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 paul-driessen,Paul Driessen,,,,speaker,Paul Driessen,yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
-pe-ma-o-ep,Рей Макговерн,,,,speaker,"Рей Макговерн, организация ""Ветераны-профессионалы разведки за здравый смысл"", США",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+pe-ma-o-ep,Рей Макговерн,,,,speaker,"Рей Макговерн, организация ""Ветераны-профессионалы разведки за здравый смысл"", США",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:raymond-mcgovern,mk
 pedro-pinho,Pedro Pinho (Brazil),,,,speaker,"Pedro Pinho (Brazil), President, Association of Petrobras Engineers (AEPET): ""Brazil Must Back its BRICS Partners to End",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 pedro-rubio,Pedro Rubio,,,,speaker,Pedro Rubio,yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
 performed-november-18,Performed November 18,,,,speaker,"Performed November 18, 2018 at St. Bartholomew's Church, NYC",yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
@@ -523,7 +523,7 @@ piano-accompaniment-by-brent-bedford,Piano Accompaniment by Brent Bedford,,,,spe
 ping-huang,Ambassador Ping Huang,,,,speaker,Ambassador Ping Huang,yt-segmentation,1,1,added by reconcile from video-segmentation,merge:huang-ping,mk
 pino-arlacchi,Pino Arlacchi (Italy),,,,speaker,"Pino Arlacchi (Italy), Sociology Professor at Sassari University, Former Executive Director of the UN Office for Drug Co",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 plo-lumumba,Prof. PLO Lumumba,,,,speaker,Prof. PLO Lumumba,yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
-po-o-c-epo,Проф. Эндзо Сивьеро,,,,speaker,"Проф. Эндзо Сивьеро, член Итальянского национального совета университетов, Венеция, Италия",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+po-o-c-epo,Проф. Эндзо Сивьеро,,,,speaker,"Проф. Эндзо Сивьеро, член Итальянского национального совета университетов, Венеция, Италия",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:enzo-siviero,mk
 po-p-ba-co,Проф. д-р У Вансо,,,,speaker,"Проф. д-р У Вансо, декан факультета ядерной науки и техники, Университет Ланьчжоу, Китай",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 pr-carl-otto-weiss,Pr Carl-Otto Weiss,,,,speaker,"Pr Carl-Otto Weiss, consultant à l'Institut européen pour le climat et l'énergie, ancien président de l'Agence nationale",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:carl-otto-weiss,mk
 pr-safieeldin-mohamed-metwally,Pr Safieeldin Mohamed Metwally,,,,speaker,"Pr Safieeldin Mohamed Metwally, Centre national de recherche sur les déserts, Le Caire, Egypte.",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:safieeldin-mohamed-metwally,mk
@@ -612,7 +612,7 @@ zepp-larouche-keynote,Zepp-LaRouche Keynote: The Coincidence of Opposites,,,,spe
 zepp-larouche-well,ZEPP-LAROUCHE: Well,,,,speaker,"ZEPP-LAROUCHE: Well, I think that the conference topics will be extremely hot, and given the fact that you have this esc",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:helga-zepp-larouche,mk
 zhang-weiwei,Prof. Zhang Weiwei,,,,speaker,"Prof. Zhang Weiwei, professor of international relations at Fudan-University, China, speaking in Berlin at a conference ",yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
 a-new-perspective-for-iran,A New Perspective For Iran,,,,speaker,A New Perspective For Iran,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
-a-oc-ka-e-oc,Панос Камменос,,,,speaker,"Панос Камменос, председатель Партии независимых греков, член парламента Греции, Афины, Греция",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+a-oc-ka-e-oc,Панос Камменос,,,,speaker,"Панос Камменос, председатель Партии независимых греков, член парламента Греции, Афины, Греция",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:panos-kammenos,mk
 address-by-ali-rastbeen,Address by Ali Rastbeen,,,,speaker,"Address by Ali Rastbeen, Founder and President of Paris Academy of Geopolitics, Paris, France.",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:ali-rastbeen,mk
 address-by-col-alain-corvez,Address by Col. (ret.) Alain Corvez,,,,speaker,"Address by Col. (ret.) Alain Corvez, Former Advisor to the General‑in‑Command of UNIFIL, Paris, France.",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:alain-corvez,mk
 address-by-jacques-cheminade,Address by Jacques Cheminade,,,,speaker,"Address by Jacques Cheminade, President of Solidarité et Progrès, Paris, France.",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:jacques-cheminade,mk
@@ -687,7 +687,7 @@ performed-by-jean-trebuchet,Performed by Jean Trébuchet.,,,,speaker,Performed b
 performer-camerata-geminiani,Performer: Camerata Geminiani,,,,speaker,Performer: Camerata Geminiani,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 plenary-session,Plenary Session,,,,speaker,Plenary Session,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 po-ep-ap,Роберт Барвик,,,,speaker,"Роберт Барвик, Совет граждан-избирателей, Австралия",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-po-p-ep-a-e,Проф. д-р Дитер Амелинг,,,,speaker,"Проф. д-р Дитер Амелинг,президент Германской федерации производителей стали (до 2008 г.), Эссен, Германия",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+po-p-ep-a-e,Проф. д-р Дитер Амелинг,,,,speaker,"Проф. д-р Дитер Амелинг,президент Германской федерации производителей стали (до 2008 г.), Эссен, Германия",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:dieter-ameling,mk
 pr-francois-gervais,Pr François Gervais,,,,speaker,"Pr François Gervais, professeur émérite à l'Université François Rabelais de Tours, rapporteur critique auprès du GIEC – ",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:francois-gervais,mk
 pr-shi-ze,Pr Shi Ze,,,,speaker,"Pr Shi Ze, chercheur et directeur des études stratégiques internationales sur les questions énergétiques à l'Institut ch",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:shi-ze,mk
 princy-mthombeni,Princy Mthombeni (South Africa),,,,speaker,"Princy Mthombeni (South Africa), Communication Specialist, Founder, Africa4Nuclear: ""Energy Security for Africa""",yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
@@ -722,7 +722,7 @@ war-must-stop,"War Must Stop: ""Get off this command and control architectur",,,
 what-italy-s-future-depends-on,What Italy's Future Depends On,,,,speaker,What Italy's Future Depends On,yt-segmentation,1,1,added by reconcile from video-segmentation,drop,mk
 will-happer,Will Happer,,,,speaker,"Will Happer, PhD · Professor Emeritus of Physics, Princeton University · ""The Inside Story of Contemporary Science""",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:william-happer,mk
 wolfgang-amadeus-mozart,Wolfgang Amadeus Mozart,,,,speaker,"Wolfgang Amadeus Mozart, motet Ave Verum corpus (Hail, true body) presentation by John Sigerson (Music Director, Schille",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
-xe-a-e-apy,Хельга Цепп-Ларуш,,,,speaker,"Хельга Цепп-Ларуш, президент Шиллеровского института",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
+xe-a-e-apy,Хельга Цепп-Ларуш,,,,speaker,"Хельга Цепп-Ларуш, президент Шиллеровского института",yt-segmentation,1,1,added by reconcile from video-segmentation,merge:helga-zepp-larouche,mk
 xu-jian,Dr. Xu Jian,,,,speaker,"Dr. Xu Jian, Vice President of China Institute of International Studies (CIIS), Director of CIIS",yt-segmentation,1,1,added by reconcile from video-segmentation,accept,mk
 yan-wang,Yan Wang,,,,speaker,"Yan Wang, PhD, ""The Chinese Economic Model""",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk
 yulin-wang-tenor,Yulin Wang (China) tenor,,,,speaker,"Yulin Wang (China) tenor, Dura Jun, piano. Confucius: ""在水一方"" (""By the Waterside"") On the Other Side of the River"" – ""O w",yt-segmentation,1,1,added by reconcile from video-segmentation,,mk

@@ -152,6 +152,15 @@ def read(path):
         return list(rdr), rdr.fieldnames
 
 
+def line_terminator(path):
+    """The file's existing line ending. These CSVs round-trip through a spreadsheet and
+    come back CRLF; writing LF would rewrite all 748 lines and bury the handful of rows
+    that actually changed under a whole-file diff."""
+    with open(path, 'rb') as fh:
+        head = fh.read(65536)
+    return '\r\n' if b'\r\n' in head else '\n'
+
+
 def is_dropped(row):
     """The migration's gating rule: flagged + undecided = silently skipped."""
     return ((row.get('needs_review') or '1').strip() == '1'
@@ -377,7 +386,7 @@ def apply_to_csv(path, fields, persons, buckets, proposal, want, reviewer):
 
     tmp = path + '.tmp'
     with open(tmp, 'w', encoding='utf-8', newline='') as fh:
-        w = csv.DictWriter(fh, fieldnames=fields, lineterminator='\n')
+        w = csv.DictWriter(fh, fieldnames=fields, lineterminator=line_terminator(path))
         w.writeheader()
         for r in persons:
             w.writerow({k: r.get(k, '') for k in fields})
