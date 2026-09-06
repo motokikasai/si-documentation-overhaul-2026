@@ -130,12 +130,90 @@ final class SI_Model {
 
     // ---------------------------------------------------------------- bootstrap
 
+    /**
+     * Vanguard tokens that must never reach a reader as literal text.
+     *
+     * Mirrors SI_Shortcodes::vanguard_tokens() in si-migrate.php. It is duplicated rather
+     * than shared because si-migrate.php returns early unless WP_CLI is defined — it does
+     * not load on a web request, which is exactly when this list matters.
+     *
+     * WP-core tags (caption/embed/video/audio/gallery/playlist) are deliberately absent:
+     * they render fine and must keep their real handlers.
+     */
+    const LEGACY_SHORTCODES = [
+        'hr', 'title_big', 'title_small', 'button', 'toggle', 'one_half', 'one_half_last',
+        'one_third', 'one_third_last', 'two_third', 'two_third_last', 'one_fourth',
+        'one_fourth_last', 'wide_bar', 'tab', 'tabs', 'call_to_action_big',
+        'call_to_action_bar', 'info_box', 'FN', 'testimonial', 'applause', 'image',
+        'blockquote', 'portfolio', 'ajax_load_more', 'frame', 'dropcap', 'space', 'clear',
+        'divider', 'icon', 'list',
+    ];
+
+    /** Tokens that stay raw in post_content on purpose — the P7 archive-rebuild list. */
+    const PENDING_REBUILD = ['portfolio', 'ajax_load_more'];
+
     public static function boot(): void {
         add_action('init', [self::class, 'register_taxonomies'], 4);   // before CPTs
         add_action('init', [self::class, 'register_post_types'], 5);
+        add_action('init', [self::class, 'register_legacy_shortcodes'], 5);
         add_action('init', [self::class, 'seed_terms'], 20);
         add_action('init', [self::class, 'register_pods_fields'], 30); // after Pods bootstrap
         add_action('save_post', [self::class, 'auto_format'], 20, 2);
+    }
+
+    // ---------------------------------------------------------------- legacy shortcodes
+
+    /**
+     * Neutralise every leftover Vanguard shortcode.
+     *
+     * WordPress renders an UNREGISTERED shortcode as literal text, so with the Vanguard theme
+     * gone any surviving token would print "[button text=…]" on the page. `si:shortcodes`
+     * converts the static ones, but two categories still reach the front end:
+     *
+     *   1. [portfolio] (59 pages) and [ajax_load_more] (31 pages) stay raw BY DESIGN — they
+     *      are the P7 archive-template rebuild list and must remain findable in post_content.
+     *   2. Anything the pass missed: a draft or revision it did not select, a term
+     *      description, a widget, an excerpt built from raw content.
+     *
+     * Registering a no-op handler covers both without touching stored content. Paired tokens
+     * return their inner text, so the wrapper disappears and the words survive; self-closing
+     * tokens vanish entirely. The two rebuild tokens leave an HTML comment instead — invisible
+     * to a reader, greppable in page source while the templates are still pending.
+     *
+     * shortcode_exists() guards against shadowing a real plugin's tag, and running at init:5
+     * means a plugin registering later (init:10 is the norm) legitimately overrides us.
+     */
+    public static function register_legacy_shortcodes(): void {
+        foreach (self::LEGACY_SHORTCODES as $tag) {
+            if (shortcode_exists($tag)) { continue; }
+            add_shortcode($tag, [self::class, 'render_legacy_shortcode']);
+        }
+    }
+
+    public static function render_legacy_shortcode($atts, $content = null, $tag = '') {
+        if (in_array($tag, self::PENDING_REBUILD, true)) {
+            return '<!-- si:legacy [' . esc_html($tag) . '] — archive template pending (P7) -->';
+        }
+        if ($content !== null && $content !== '') {
+            return $content;                       // paired: keep the words, drop the wrapper
+        }
+        // Self-closing token that carries visible words ([button text=…], [title_big title=…]).
+        // Dropping it outright would silently delete copy — and a link with it — so render the
+        // text plainly. Only reachable if si:shortcodes missed the token; verify gates on zero
+        // static leftovers, so in a clean run this never fires.
+        $atts = is_array($atts) ? $atts : [];
+        $text = '';
+        foreach (['text', 'title', 'subTitle', 'excerpt', 'alt'] as $k) {
+            if (!empty($atts[$k])) { $text = $atts[$k]; break; }
+        }
+        if ($text === '') { return ''; }
+        $url = '';
+        foreach (['url', 'buttonUrl', 'img'] as $k) {
+            if (!empty($atts[$k])) { $url = $atts[$k]; break; }
+        }
+        return $url !== ''
+            ? '<a href="' . esc_url($url) . '">' . esc_html($text) . '</a>'
+            : esc_html($text);
     }
 
     // ---------------------------------------------------------------- taxonomies

@@ -558,6 +558,29 @@ final class SI_Shortcodes {
         // stray closers of converted self-closers, minor tokens
         $html = preg_replace('/\[\/?(?:space|clear|divider|frame)[^\]]*\]/', '', $html);
 
+        // Purely decorative Vanguard tokens with no content to preserve. They were in
+        // vanguard_tokens() (so si:verify flags leftovers) but had no conversion rule, which
+        // meant they survived the pass and — with the theme gone and no handler registered —
+        // rendered as literal "[icon id=…]" text on the page.
+        //   [icon id="179" floatLeft="true" /]  16×  a Vanguard icon-set ID; meaningless now
+        //   [dropcap]                            4×  always bare in real content, never paired
+        //   [list] … [/list]                     1×  wrapper around <li>s that stand alone
+        // [list] unwraps (keeps the list items); the other two are dropped outright.
+        foreach (['icon', 'dropcap'] as $tok) {
+            $n = 0;
+            $html = preg_replace('/\[\/?' . $tok . '(?![\w-])[^\]]*\]/i', '', $html, -1, $n);
+            if ($n) { $count[$tok] = ($count[$tok] ?? 0) + $n; }
+        }
+        $n = 0;
+        $html = preg_replace('~\[list(?![\w-])[^\]]*\](.*?)\[/list\]~is', '<ul class="si-list">$1</ul>', $html, -1, $n);
+        if ($n) { $count['list'] = ($count['list'] ?? 0) + $n; }
+        // …and any unpaired [list]/[/list] left over.
+        $html = preg_replace('/\[\/?list(?![\w-])[^\]]*\]/i', '', $html);
+
+        // A stray [/tab]: real content never closes [tab] (82 occurrences, all bare), but the
+        // tabs converter splits on the opener, so a closer would ride along into a pane.
+        $html = preg_replace('~\[/tab\]~i', '', $html);
+
         return ['html' => $html, 'converted' => $count, 'flags' => $flags];
     }
 }
