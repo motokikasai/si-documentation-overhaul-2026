@@ -7,7 +7,7 @@ that names them loses its presenter link.
 To act on a row, type a value into `final_action` (`accept`, `drop`, or `merge:<key>`)
 and your initials into `reviewer`. A blank stays dropped.
 
-**151 rows**: 9 duplicate · 2 non-person · 11 check · 129 real people
+**136 rows**: 0 duplicate · 0 non-person · 7 check · 129 real people
 
 
 ---
@@ -18,26 +18,8 @@ The key generator dropped the non-Latin characters, so these rows never matched
 their Latin twin. No judgement needed: merging redirects the talks onto the record
 that is already being built.
 
-- `alain-corvez-上校` — **Alain Corvez 上校** → `merge:alain-corvez`
-- `a-pac-ee` — **Али Растбеен** → `merge:ali-rastbeen`
-- `e-p-ce-y-a` — **Джейшри Сенгупта** → `merge:jayshree-sengupta`
-- `p-bo-a-e` — **Д-р Вольфганг Лилльге** → `merge:wolfgang-lillge`
-- `pe-ma-o-ep` — **Рей Макговерн** → `merge:raymond-mcgovern`
-- `po-o-c-epo` — **Проф. Эндзо Сивьеро** → `merge:enzo-siviero`
-- `a-oc-ka-e-oc` — **Панос Камменос** → `merge:panos-kammenos`
-- `po-p-ep-a-e` — **Проф. д-р Дитер Амелинг** → `merge:dieter-ameling`
-- `xe-a-e-apy` — **Хельга Цепп-Ларуш** → `merge:helga-zepp-larouche`
+_none_
 
-
----
-
-## 1b. SAME PERSON TWICE inside this list
-
-Neither row is being built, so the duplicate check above cannot see them. Accept
-**one** of each pair and `merge:` the other into it, or you get two pages for one
-speaker.
-
-- **Проф. д-р У Вансо** — `проф-д-р-у-вансо` / `po-p-ba-co`
 
 
 ---
@@ -47,10 +29,8 @@ speaker.
 Talk titles, panel names and programme lines. Dropping these loses nothing: the
 agenda text is stored on the presentation either way.
 
-- `abschlußrede` — Abschlußrede
-        (no migrating talk references this person)
-- `das-phonix-projekt-aleppo` — Das Phönix-Projekt – Aleppo
-        (no migrating talk references this person)
+_none_
+
 
 
 ---
@@ -64,16 +44,8 @@ a few are programme lines the pattern above did not catch.
         (no migrating talk references this person)
 - `проф-д-р-у-вансо` — **Проф. д-р У Вансо**
         · Проф. д-р У Вансо - Перспективы ядерной энергетики в новой эре Ш  — 2014-frankfurt-october-2014-30th `bOq8L-BvJ2g`
-- `石泽博士` — **石泽博士**
-        (no migrating talk references this person)
 - `eric-walcott-director` — **Eric Walcott – Director**
         · The Science of Physical Economy — Panel 2  — 2021-mankind-immortal-species `U2jhXuyvQ1E`
-- `frank-mathis-performs-glinka-s` — **Frank Mathis performs Glinka's "I Remember a Wondrous Moment**
-        · Frank Mathis performs Glinka's "I Remember a Wondrous Moment" De  — 2014-england-december-2014 `VwtWi7zEWfk`
-- `h-t-burleigh` — **H.T. Burleigh**
-        · The Aesthetic Education of Man for the Beauty of the Mind and th  — 2019-presidents-national-2019 `RqtZS8odIpA`
-- `po-p-ba-co` — **Проф. д-р У Вансо**
-        · Проф. д-р У Вансо - Перспективы ядерной энергетики в новой эре Ш  — 2014-frankfurt-october-2014-30th `bOq8L-BvJ2g`
 - `soloists-gregor-kitzis` — **Soloists: Gregor Kitzis**
         · The Aesthetic Education of Man for the Beauty of the Mind and th  — 2019-presidents-national-2019 `RqtZS8odIpA`
 - `alto-mayumi-nakamura-japan` — **Alto: Mayumi Nakamura - Japan**
