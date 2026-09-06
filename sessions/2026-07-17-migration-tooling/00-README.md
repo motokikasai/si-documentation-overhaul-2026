@@ -4,6 +4,11 @@ Executable counterpart to `sessions/2026-07-16-consolidation-roadmap/` (the spec
 parallel with the Day-1 stream (classification/person/segmentation CSVs, separate session) —
 the interface between the two is **`01-csv-contracts.md`**; Day-1 outputs land in `incoming/`.
 
+> **Running a rehearsal? Start at `09-rehearsal-handoff.md`.** It covers current input state,
+> which of the three rehearsal shapes to run (structure-only / no-WPML / full), the WSL→Local
+> WP-CLI mechanics, and every gotcha earlier passes hit. The manual steps themselves stay in
+> `07-replay-preflight-checklist.md`, which wins over any other document.
+
 ## Inventory
 
 | Artifact | What it is | Status |
