@@ -91,8 +91,21 @@ final class SI_Text {
             '/^\s*(?:Moderator|Host|Chair(?:person)?|Keynote|Introduction by|Address by|Speech by|'
             . 'Presentation by|Remarks by|Welcome(?: by| remarks)?|Opening(?: remarks| by)?|'
             . 'Message from|Greetings from|Saludos de|Discurso de|Palabras de|Intervention de|'
-            . 'Rede von|Grußwort von|Vortrag von|Ansprache von|'
+            . 'Rede von|Grußwort von|Vortrag von|Ansprache von|Performed by|'
             . "Pr\xC3\xA9sent\xC3\xA9 par|Presented by|Von|par|by)\\b[\\s:.\\-\xE2\x80\x93\xE2\x80\x94]+/iu",
+            '', $s
+        );
+        // Rule A2 — concert-programme credits ("Conductor: Ingo Bathow", "Alto: Mayumi
+        // Nakamura"). Without this, Rule B ate the name and left the bare role, so the
+        // Berlin-2016 voice parts would have become person pages titled "Alto"/"Sopran"/"Baß".
+        //
+        // These REQUIRE an explicit colon, unlike Rule A's phrases: every one of them is also
+        // a real name ("Bass Reeves", "Alto Rodriguez"), and allowing a bare space separator
+        // silently deleted the first word of those. tools/test-parsers.php guards both directions.
+        $s = preg_replace(
+            '/^\s*(?:Conductor|Dirigent(?:in)?|Soloists?|Solisten|Piano|Klavier|Violin(?:e)?|'
+            . "Cello|Flute|Fl\xC3\xB6te|Organ|Orgel|Soprano?|Sopran|Alto|Alt|"
+            . "Mezzo(?:-?soprano)?|Tenor|Bariton(?:e)?|Ba\xC3\x9F|Bass)\\s*:\\s*/iu",
             '', $s
         );
         // Rule B: strip a fused ": talk title" tail (colon + space onward). Runs after Rule A.

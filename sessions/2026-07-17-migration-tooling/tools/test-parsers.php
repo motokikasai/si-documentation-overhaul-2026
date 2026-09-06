@@ -49,6 +49,21 @@ eq('Prof. Ewert', SI_Text::clean_display_name('Prof. Ewert: The Anthropogenic Cl
 eq('Stephan Ossenkopp', SI_Text::clean_display_name('Moderator: Stephan Ossenkopp (Germany)'), 'cdn prefix + name (no over-strip) + country');
 eq('Pakdee Tanapura', SI_Text::clean_display_name('Pakdee Tanapura: Contribution from Thailand'), 'cdn fused title');
 
+// Concert-programme credits (added 2026-09-06). Before these joined Rule A, Rule B ate the
+// name and left the bare role — "Conductor: Ingo Bathow" became a person page titled
+// "Conductor", and the four Berlin 2016 voice parts became "Alto"/"Sopran"/"Baß".
+eq('Ingo Bathow', SI_Text::clean_display_name('Conductor: Ingo Bathow'), 'cdn conductor prefix');
+eq('Irina Freitag', SI_Text::clean_display_name('Conductor: Irina Freitag'), 'cdn conductor prefix 2');
+eq('Gregor Kitzis', SI_Text::clean_display_name('Soloists: Gregor Kitzis'), 'cdn soloists prefix');
+eq('Mayumi Nakamura - Japan', SI_Text::clean_display_name('Alto: Mayumi Nakamura - Japan'), 'cdn alto prefix');
+eq('Sua Baek - Korea', SI_Text::clean_display_name('Sopran: Sua Baek - Korea'), 'cdn sopran prefix');
+eq('Chanyoung Lee - Korea', SI_Text::clean_display_name('Baß: Chanyoung Lee - Korea'), 'cdn Baß prefix (German)');
+eq('Jean Trébuchet.', SI_Text::clean_display_name('Performed by Jean Trébuchet.'), 'cdn performed-by prefix');
+// A real surname that collides with a voice part must survive: the \b…[\s:.\-–—]+ tail
+// requires a separator after the role word, so a bare name is never eaten.
+eq('Alto Rodriguez', SI_Text::clean_display_name('Alto Rodriguez'), 'cdn voice part NOT stripped from a bare name');
+eq('Bass Reeves', SI_Text::clean_display_name('Bass Reeves'), 'cdn "Bass" as a surname survives');
+
 // ---------------------------------------------------------------- SI_Person_Key
 echo "== SI_Person_Key\n";
 eq('donald-ramotar', SI_Person_Key::key('H.E. Donald Ramotar'), 'honorific stripped');
