@@ -79,6 +79,13 @@ Nothing else. You immediately see the finished admin structure:
 
 Needs no backup, no licence, no coordination. Use this to review the content model itself.
 
+**Verified working on `si-v3`, 2026-09-07.** Blocksy + `blocksy-child` (via
+`wp scaffold child-theme blocksy-child --parent_theme=blocksy`) + Pods, with
+`schiller-content-model-v3.php` and `si-migrate.php` in `wp-content/mu-plugins/` and
+`wpml-config.xml` in the child theme root. Result: `SI_Model::VERSION` = 3.1.0, all 7 CPTs and
+5 taxonomies registered, and every seed count matching its constant exactly —
+topic 10 · region 16 · campaign 7 · series 6 · format 7. No content and no WPML required.
+
 ### Option 2 — live restore, WPML plugin absent (~90% of the chain)
 
 Validates classify · persons · conferences · transform · presentations · transcripts ·
@@ -130,14 +137,23 @@ Local's environment. Four failure modes, all verified 2026-09-06:
    `wp eval-file`. `wp db query` additionally fails with `ERROR 1698` (socket auth), so
    `wp eval-file` is the way to run any SQL.
 
+5. **Prefix every `wp` with `call`** when a batch runs more than one. On Windows `wp` resolves
+   to `wp.bat`, and cmd's rule is that invoking a batch from a batch *without* `call` transfers
+   control and never returns — so the script silently stops after the first command with no
+   error. This looks exactly like a hang or a failed command and is easy to misdiagnose.
+
 Working shape:
 
 ```bat
 @echo off
 call "C:\Users\kmomo\AppData\Roaming\Local\ssh-entry\<id>.bat" >nul 2>&1
 cd /d "C:\Users\kmomo\Local Sites\<site>\app\public"
-wp si:verify --baseline=icl-baseline.csv
+call wp si:verify --baseline=icl-baseline.csv
+call wp term list si_topic --format=count
 ```
+
+Known shell-entry ids (they change when a site is re-created — always re-discover):
+`si-v2` = `frTVZ20Ny`, `si-v3` = `rxkZknnzV`.
 
 **Delete helper `.php` files from the site root when done.** The 2026-07-19 pass left four
 behind (`si-baseline.php`, `si-progress.php`, `si-cat-diag.php`, `si-cat-list.php`) and they
