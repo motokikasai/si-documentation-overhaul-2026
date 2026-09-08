@@ -57,10 +57,30 @@ created site has none. Build the wrapper from the site id in
 **Read the PHP and MySQL versions from that site's own `services` block** — si-v4 is PHP 8.2.29
 where si-v3 is 8.3.29, and a wrong path silently yields "`wp` is not recognized".
 
-### A4 — the `&` in `wp eval` is a cmd separator
+### A4 — cmd eats `&` and `^` in anything you pass through a batch file
 
-`wp eval "... LIKE '%&amp;%' ..."` fails with `'amp' is not recognized`. This is the same class
-as the documented nested-quote problem: **write a `.php` file and use `wp eval-file`.**
+Two separate bites in one run:
+
+- `wp eval "... LIKE '%&amp;%' ..."` fails with `'amp' is not recognized` — `&` is cmd's command
+  separator. Same class as the documented nested-quote problem: **write a `.php` file and use
+  `wp eval-file`.**
+- **`^` is cmd's escape character.** A generated admin password `H*l9*1oDvYx^j+bUG^iC5HI-` passed
+  as `--user_pass="..."` was stored as `H*l9*1oDvYxj+bUGiC5HI-` — cmd consumed both carets and
+  escaped the next character. The command reported success and the printed password simply did
+  not work.
+
+**Never pass a secret or a regex through a `.bat`.** Put the value inside a PHP file and run it
+with `wp eval-file`, then verify rather than assume:
+
+```php
+$pw = '...';
+wp_set_password($pw, $user->ID);
+printf("auth check: %s\n", wp_check_password($pw, get_user_by('login','localadmin')->user_pass,
+                                              $user->ID) ? 'PASS' : 'FAIL');
+```
+
+For generated passwords, restrict the alphabet to letters, digits and `-`. The shell-hostile set
+to avoid is `^ & % ! < > | " ' ( )`.
 
 ---
 
