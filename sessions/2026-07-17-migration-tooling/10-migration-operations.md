@@ -101,14 +101,67 @@ page would lose.
 To retire a page that has inbound links, add a rule to `redirect-patterns.csv` pointing at the
 nearest live equivalent, so the URL 301s instead of 404ing.
 
+### The `/de/` rules, and a caveat
+
+`redirect-patterns.csv` carries rules for `/de/international-conferences/` and
+`/de/the-international-larouche-youth-movement/`, pointing at the English pages.
+
+**Verify these are wanted before shipping them.** If WPML already falls back to English for a
+language whose translation is unpublished, a hard 301 is *worse* than doing nothing — it drops
+the visitor out of German context and loses the language switcher. Check the behaviour during
+the rehearsal and delete both rules if WPML handles it gracefully. They cost nothing if the URL
+never existed; they cost something if WPML was doing a better job.
+
+### ⚠️ Language-prefix check on `redirects.csv` — do this every run
+
+`si:transform` copies the CSV's `legacy_url` into `_legacy_url`, and `si:redirects` emits a 301
+whenever that differs from the live permalink. **Only 78 of 1,859 German rows in
+`classification.csv` carry a `/de/` prefix in `legacy_url`; the other 1,781 do not.**
+
+If the live site serves translations under a language directory, a German post whose
+`legacy_url` is the *unprefixed* path will produce:
+
+```
+source: /some-path/          ← which is the ENGLISH page's URL
+target: /de/some-path/       ← the German permalink
+```
+
+…a 301 that hijacks the English URL and sends every visitor to German. Two of the pages in this
+very document (`/international-conferences/`, `/the-international-larouche-youth-movement/`)
+have an English and a German row sharing one unprefixed `legacy_url`, which is what exposed it.
+Those two are safe only because the German rows are retired and retired rows emit no redirect.
+
+This has not been confirmed as a live defect — the 2026-07-18 pass produced 1,720 redirects with
+no reported breakage, and it depends on WPML's URL mode. **Check it explicitly:**
+
+```bash
+python3 - <<'EOF'
+import csv, collections
+rows = list(csv.DictReader(open('redirects.csv', encoding='utf-8-sig')))
+LANGS = ('de','fr','es','it','ru','ar','el','fa','da','zh-hans')
+bad = [r for r in rows
+       if not r['source'].startswith(tuple(f'/{l}/' for l in LANGS))
+       and r['target'].startswith(tuple(f'/{l}/' for l in LANGS))]
+print(f"{len(bad)} redirect(s) send an unprefixed URL into a language directory")
+for r in bad[:20]:
+    print(f"   {r['source']}  ->  {r['target']}")
+EOF
+```
+
+A non-zero count means English URLs are being redirected to translations. Fix by prefixing the
+affected rows' `legacy_url` in `classification.csv`, not by hand-editing `redirects.csv` — that
+file is regenerated on every run.
+
 ### Redirect gate — add to the run
 
 After `si:redirects`, before calling the run good:
 
 1. `redirects.csv` row count is in the expected range (the 2026-07-18 pass produced **1,720**
    row-301s plus the pattern rules).
-2. Every URL in the table above either appears as a redirect source or is a known-junk slug.
-3. Spot-check three 301s resolve to a real page, not to another 404.
+2. The language-prefix check above returns **0**.
+3. Every URL in the retired table above either appears as a redirect source or is a known-junk
+   slug.
+4. Spot-check three 301s resolve to a real page, not to another 404.
 
 ---
 
