@@ -42,9 +42,9 @@ and nothing can break. **69 were published.** Of those:
 | `/fr/schiller-institute-paris-conference/` | ditto, French | ✅ added |
 | `/de/schiller-institute-paris-conference/` | ditto, German | ✅ added |
 | `/de/petition-alle-nationen-…/` | duplicates post 61757 | ✅ added |
-| `/stop-green-fascism/66456-2/` | empty title | ⚠️ **undecided** |
-| `/international-conferences/` (de) | empty title | ⚠️ **undecided** |
-| `/the-international-larouche-youth-movement/` (de) | empty title | ⚠️ **undecided** |
+| ~~`/stop-green-fascism/66456-2/`~~ | **kept as `page`** 2026-09-08 | n/a — stays live |
+| ~~`/international-conferences/`~~ (de) | **kept as `page`** 2026-09-08 | n/a — stays live |
+| ~~`/the-international-larouche-youth-movement/`~~ (de) | **kept as `page`** 2026-09-08 | n/a — stays live |
 
 The four ✅ rows are in `incoming/redirect-patterns.csv`, which `si:redirects --patterns=`
 merges into `redirects.csv`. The Paris pages (trid 17337) point at the surviving conference
@@ -56,20 +56,33 @@ each language redirects to its own.
 > so creating a second one from the playlist would duplicate it. The redirect target is the
 > converted page, not a conference-map record.
 
-### The three still open
+### The three empty-title pages — resolved 2026-09-08
 
-`/stop-green-fascism/66456-2/`, `/international-conferences/`, `/the-international-larouche-youth-movement/`
-are published German pages with meaningful URLs, retired only because their title is empty.
-Decide before the production run:
+`/stop-green-fascism/66456-2/` (en), `/international-conferences/` (de) and
+`/the-international-larouche-youth-movement/` (de) were published pages with meaningful URLs,
+retired only because their `post_title` is empty. **Decision: keep them.** `final_type` changed
+from `retire` to `page`, restoring what the classifier originally proposed.
 
-- **Keep them** — change `final_type` from `retire` to `page` in `classification.csv`. They then
-  migrate normally, keep their URL, and `si:redirects` covers them automatically. Preferred if
-  the body has real content.
-- **Retire them** — add a rule to `redirect-patterns.csv` pointing at the nearest live
-  equivalent, so the URL 301s instead of 404ing.
+Two of the three were the German halves of trid groups whose English sibling was already
+`page` (trid 18397 and 85197). Keeping them therefore *repaired* two split translation groups —
+preflight's "differing only by a retired member" count dropped 8 → 6, and the
+`retire+published` review slice dropped 11 → 8.
 
-Never "recreate" a page to keep it. Changing the CSV decision before the run is cheaper and
-preserves the ID, the WPML pairing and the automatic redirect.
+Because they stay `publish`, `si:redirects` sees them and their URLs are preserved
+automatically. No pattern rule needed.
+
+**They still have no title.** Give each one an H1/`post_title` in wp-admin after the migration,
+or they will render with an empty heading.
+
+### The general rule
+
+To keep a retired page, change `final_type` from `retire` to `page` (or whatever it should be)
+in `classification.csv` **before the run**. Never "recreate" the page afterwards — editing the
+decision preserves the ID, the WPML pairing, and the automatic redirect, all of which a new
+page would lose.
+
+To retire a page that has inbound links, add a rule to `redirect-patterns.csv` pointing at the
+nearest live equivalent, so the URL 301s instead of 404ing.
 
 ### Redirect gate — add to the run
 

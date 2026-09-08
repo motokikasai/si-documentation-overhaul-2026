@@ -42,9 +42,14 @@ TOPICS = {
     'history-method', 'new-paradigm',
 }
 
+# What si:transform actually accepts in final_type, which is wider than the vocabulary
+# 05-team-review-guide.md lists. 'page' is an ordinary target — a page that stays a page, or
+# a retire decision reversed back to page — and 'ignore' is the explicit "leave this row
+# alone" verdict transform honours with a `continue`. Flagging either produced a warning that
+# was always wrong, which is worse than no warning: it teaches the reader to skip the block.
 TYPES = {
-    'post', 'si_video', 'si_presentation', 'si_conference', 'si_statement',
-    'si_coverage', 'si_document', 'retire',
+    'post', 'page', 'si_video', 'si_presentation', 'si_conference', 'si_statement',
+    'si_coverage', 'si_document', 'retire', 'ignore',
 }
 
 # columns a human reviewer is allowed to touch (05-team-review-guide.md, golden rule 2)
