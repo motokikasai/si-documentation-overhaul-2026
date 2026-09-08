@@ -32,8 +32,10 @@ defined('ABSPATH') || exit;
 
 final class SI_Model {
 
-    const VERSION = '3.1.0';            // bump to re-run term seeding (3.1.0: hierarchical
-                                        // UI flip + closed-vocabulary caps + name self-heal)
+    const VERSION = '3.1.1';            // bump to re-run term seeding (3.1.0: hierarchical
+                                        // UI flip + closed-vocabulary caps + name self-heal;
+                                        // 3.1.1: make that self-heal actually reachable —
+                                        // it never ran, so si-v4 seeded 8 "&amp;" names)
     const SEED_OPTION = 'si_model_seeded';
 
     /** post types that carry each taxonomy */
@@ -370,15 +372,40 @@ final class SI_Model {
     private static function ensure_term(string $tax, string $slug, string $label, int $parent = 0): void {
         $existing = get_term_by('slug', $slug, $tax);
         if (!$existing) {
-            wp_insert_term($label, $tax, ['slug' => $slug, 'parent' => $parent]);
+            $res = wp_insert_term($label, $tax, ['slug' => $slug, 'parent' => $parent]);
+            // Heal immediately, in the same call that created it. The encoder runs INSIDE
+            // wp_insert_term, so the name is already wrong by the time this returns — and
+            // seed_terms() short-circuits on the version option, so a later pass would never
+            // get another chance. si-v4 (2026-09-08) shipped 8 names as "Peace &amp; Strategy"
+            // for exactly this reason: the heal below existed but was unreachable.
+            if (!is_wp_error($res) && !empty($res['term_id'])) {
+                self::force_term_name((int) $res['term_id'], $tax, $label);
+            }
             return;
         }
-        // Self-heal drifted names — rehearsal 2026-07-18 left seeded names entity-encoded
-        // ("Peace &amp; Strategy"; encoder unidentified, suspected WPML insert hook).
-        // Compare decoded so an encoder that also mangles wp_update_term can't loop us.
-        if (html_entity_decode($existing->name, ENT_QUOTES) !== $label) {
-            wp_update_term($existing->term_id, $tax, ['name' => $label]);
+        // Compare RAW, not decoded. The original guard decoded first — but the stored name
+        // IS the encoded form of the label, so decoding made them equal and the heal never
+        // fired. That is why si-v4 kept 8 "&amp;" names through a reseed. The loop that
+        // guard was worried about cannot happen: force_term_name() writes past the filters.
+        self::force_term_name((int) $existing->term_id, $tax, $label);
+    }
+
+    /**
+     * Write a term name past the filter chain.
+     *
+     * Something in the term-name filters entity-encodes '&' ("Peace &amp; Strategy").
+     * wp_update_term() runs the same filters, so it cannot be trusted to undo it — the
+     * canonical name goes straight to the table, then the caches are cleared. Verified
+     * against si:verify's "si term names not entity-encoded" check.
+     */
+    private static function force_term_name(int $term_id, string $tax, string $label): void {
+        global $wpdb;
+        $current = $wpdb->get_var($wpdb->prepare("SELECT name FROM {$wpdb->terms} WHERE term_id = %d", $term_id));
+        if ($current === $label) {
+            return;
         }
+        $wpdb->update($wpdb->terms, ['name' => $label], ['term_id' => $term_id]);
+        clean_term_cache([$term_id], $tax);
     }
 
     // ---------------------------------------------------------------- auto si_format

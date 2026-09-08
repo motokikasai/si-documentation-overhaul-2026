@@ -7,3 +7,6 @@
 # Python scratch
 __pycache__/
 *.pyc
+
+# live DB dumps — never commit (hundreds of MB)
+db/

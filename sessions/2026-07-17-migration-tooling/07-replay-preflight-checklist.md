@@ -16,7 +16,7 @@ Any warning or failed check = STOP and report the exact output.
 |---|---|---|
 | A1 | Fresh content source restored | Rehearsal: Local site re-created from the live backup zip (preferred — Local redoes URL replacement identically). Staging: **fresh clone of schillerinstitute.com** (P0-b source-of-truth rule), NOT an old sandbox dump. |
 | A1b | **The site must CONTAIN the live content** | A blank "new site" in Local migrates nothing — the chain reads ~5,400 existing posts/pages/portfolio items and produces empty counts against an empty DB. Creating a new Local site is only step one; you must then restore the live backup into it. Confirm before starting: `wp post list --post_type=portfolio_cpt --format=count` ≈ **784 published**, and `wp post list --post_type=post --format=count` in the thousands. If those are 0, stop — there is nothing to rehearse. |
-| A1c | **WPML installed, activated, all live languages present** | Not optional and not substitutable. Without it `SI_WPML::active()` is false, so `rename_element_type()` no-ops, the translation-group retire (D1) never exercises, verify's WPML section silently skips, and the 61 non-English category terms the map expects do not exist. A rehearsal without WPML cannot clear the multilingual work — which is the whole reason si-v1 "passed" and si-v2 did not. |
+| A1c | **WPML — needed for the front end, NOT for the migration** | `SI_WPML::active()` tests for the `wp_icl_translations` **table**, not the plugin, and a live restore brings that table with it. si-v4 (2026-09-08) ran the whole chain with WPML uninstalled: `rename_element_type()` worked, the D1 translation-group retire removed 52 siblings, and verify's WPML section reconciled 72,781 → 72,781 icl rows with none lost. What you lose without the plugin is the language switcher, the admin language filter, `/de/` routing and the `wpml-config.xml` check in §C — front-end verification, not migration correctness. Required before staging (Option 3); not required to rehearse. |
 | A2 | Snapshot taken BEFORE anything | Local: export DB (`wp db export pre-chain.sql`) or clone the site. VPS: provider snapshot. A replay you can't re-run is not a rehearsal. |
 | A3 | WP-CLI works | `wp core version` |
 | A4 | PHP 8.x | `wp eval "echo PHP_VERSION;"` |
@@ -39,11 +39,11 @@ mu-plugins load automatically — no activation step exists or is needed.
 
 **Verify the copies by checksum, every time.** Both PHP files changed materially on
 2026-08-31 and 2026-09-06; a stale copy left in `wp-content/mu-plugins` from an earlier pass
-silently re-runs the old defects. As of 2026-09-06:
+silently re-runs the old defects. As of 2026-09-08 (both PHP files changed during the si-v4 run):
 
 ```
-e867107ccf49df9c17cd8f9fda7dffc8  schiller-content-model-v3.php
-927fe592d46d42b889472348c3770383  si-migrate.php
+c7d00e93a537ff7bac706fa5215e069f  schiller-content-model-v3.php
+1d62dfd6f076195771c2d09da4b04ddd  si-migrate.php
 63fdef80c6207a5bc109402b093ad85f  wpml-config.xml
 ```
 

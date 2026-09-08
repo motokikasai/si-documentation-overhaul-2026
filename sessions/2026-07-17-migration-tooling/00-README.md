@@ -9,6 +9,8 @@ the interface between the two is **`01-csv-contracts.md`**; Day-1 outputs land i
 > WP-CLI mechanics, and every gotcha earlier passes hit. The manual steps themselves stay in
 > `07-replay-preflight-checklist.md`, which wins over any other document.
 >
+> **si-v4 results: `11-si-v4-rehearsal-findings.md`** — first end-to-end run through si:verify.
+>
 > **Doing the real migration? Also read `10-migration-operations.md`** — retired URLs and the
 > redirects they do *not* get, how to fold a refreshed database dump into the existing reviews
 > without discarding them, and what the Blocksy child theme still owes the migrated content

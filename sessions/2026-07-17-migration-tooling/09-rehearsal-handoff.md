@@ -171,8 +171,8 @@ Follow `07-replay-preflight-checklist.md` §A–§I verbatim. The shape:
 2. **§B** — copy three files, **verify by checksum**. Both PHP files changed on 2026-08-31 and
    2026-09-06; a stale copy from an earlier pass silently re-runs closed bugs:
    ```
-   e867107ccf49df9c17cd8f9fda7dffc8  schiller-content-model-v3.php
-   927fe592d46d42b889472348c3770383  si-migrate.php
+   c7d00e93a537ff7bac706fa5215e069f  schiller-content-model-v3.php
+   1d62dfd6f076195771c2d09da4b04ddd  si-migrate.php
    63fdef80c6207a5bc109402b093ad85f  wpml-config.xml
    ```
 3. **§C** — `SI_Model::VERSION` = 3.1.0 · `si_topic` count = 10 · `wp help si:verify` resolves.

@@ -414,7 +414,7 @@ final class SI_Shortcodes {
     /** tokens whose leftovers verify() must flag */
     public static function vanguard_tokens(): array {
         return ['hr','title_big','title_small','button','toggle','one_half','one_half_last','one_third',
-            'one_third_last','two_third','two_third_last','one_fourth','one_fourth_last','wide_bar','tab','tabs',
+            'one_third_last','two_third','two_third_last','one_fourth','one_fourth_last','three_fourth','three_fourth_last','wide_bar','tab','tabs',
             'call_to_action_big','call_to_action_bar','info_box','FN','testimonial','applause','image',
             'blockquote','portfolio','ajax_load_more','frame','dropcap','space','clear','divider','icon','list'];
     }
@@ -543,8 +543,11 @@ final class SI_Shortcodes {
 
         // --- layout columns → div wrappers (visual QA flagged) ---------------
         $had_cols = false;
-        foreach (['one_half', 'one_third', 'two_third', 'one_fourth'] as $col) {
-            $frac = ['one_half' => '1-2', 'one_third' => '1-3', 'two_third' => '2-3', 'one_fourth' => '1-4'][$col];
+        // three_fourth joined the list 2026-09-08: si-v4 found it on live pages, and it was
+        // absent from both the conversion map and vanguard_tokens(), so it survived silently.
+        foreach (['one_half', 'one_third', 'two_third', 'one_fourth', 'three_fourth'] as $col) {
+            $frac = ['one_half' => '1-2', 'one_third' => '1-3', 'two_third' => '2-3',
+                     'one_fourth' => '1-4', 'three_fourth' => '3-4'][$col];
             foreach (['', '_last'] as $suffix) {
                 $tok = $col . $suffix;
                 $n = 0;
