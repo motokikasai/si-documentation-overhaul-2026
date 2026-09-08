@@ -8,6 +8,11 @@ the interface between the two is **`01-csv-contracts.md`**; Day-1 outputs land i
 > which of the three rehearsal shapes to run (structure-only / no-WPML / full), the WSL→Local
 > WP-CLI mechanics, and every gotcha earlier passes hit. The manual steps themselves stay in
 > `07-replay-preflight-checklist.md`, which wins over any other document.
+>
+> **Doing the real migration? Also read `10-migration-operations.md`** — retired URLs and the
+> redirects they do *not* get, how to fold a refreshed database dump into the existing reviews
+> without discarding them, and what the Blocksy child theme still owes the migrated content
+> (single templates first, archives second).
 
 ## Inventory
 

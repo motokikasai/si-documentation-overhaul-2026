@@ -142,6 +142,10 @@ that counter's value this run** — it is what finally settles it.
 - `si:categories` retire → `leftover category` warnings: must be **0**
   (now a trustworthy list — it reads the tables, not the cache; see F-bis D2)
 - `si:categories` retire → note `retired_translation_siblings` in the summary (see F-bis D1)
+- `si:redirects` → **retired items get no redirect** (the query filters `post_status='publish'`,
+  and retire drafts the post). Check `redirects.csv` against the retired-URL table in
+  `10-migration-operations.md` §1 before calling the run good — 69 previously-public URLs are
+  affected, 11 of them real pages.
 - `si:verify` → exit 0, ALL checks PASS, including section 8 (taxonomy cleanliness:
   exact seed sets, coverage thresholds, category=si-unsorted only, post_tag=0,
   no `&amp;` names) and the shortcode probe self-test + static-leftover check
