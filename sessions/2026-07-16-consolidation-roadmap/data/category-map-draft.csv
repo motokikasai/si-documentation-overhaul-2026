@@ -256,3 +256,7 @@ webcast-mit-helga-zepp-larouche,Webcast mit Helga Zepp-LaRouche,English (default
 wfp,WFP,English (default),WFP,3,0,2022-03-29,topic-remap,si_topic: Health & Food Security
 updates-wlb-de,World Land-Bridge updates,German,World Land-Bridge updates,16,0,2022-04-03,topic-remap,si_topic: New Silk Road & Great Projects
 youth-movement-de,Youth Movement,German,Youth Movement,4,1,2025-11-11,topic-remap,si_topic: Education & Youth
+automation,Automation,English (default),automation,0,0,,retire,"Blocksy starter-site demo content (startersites.io/blocksy/codespot), not Schiller content; no WPML row. Added 2026-09-08 from the si-v4 dump"
+development,Development,English (default),development,0,0,,retire,"Blocksy starter-site demo content (startersites.io/blocksy/codespot), not Schiller content; no WPML row. Added 2026-09-08 from the si-v4 dump"
+trends,Trends,English (default),trends,1,1,2025-09-16,retire,"Blocksy starter-site demo content (startersites.io/blocksy/codespot), not Schiller content; no WPML row. Added 2026-09-08 from the si-v4 dump; its 1 post (id 1) is the demo article — retire that in classification.csv too"
+uncategorized,Uncategorized,English (default),uncategorized,0,0,,retire,"Blocksy starter-site demo content (startersites.io/blocksy/codespot), not Schiller content; no WPML row. Added 2026-09-08 from the si-v4 dump"

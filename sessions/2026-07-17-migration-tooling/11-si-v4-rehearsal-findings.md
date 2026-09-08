@@ -4,8 +4,9 @@ Third full-chain rehearsal, and the first to run **end to end through `si:verify
 **fresh live dump** (`20260908-si-dump.sql`, 494 MB, taken from `2.schillermeet.de`) with the
 finished review CSVs.
 
-**Outcome: the chain completed. `si:verify` reports 2 failures, both understood and neither a
-code defect.** All five si-v2 defects (D1–D5) are confirmed fixed on real multilingual data.
+**Outcome: the chain completed. `si:verify` is down to 1 failure** — five malformed shortcodes
+that are a content hand-fix, not a code defect (§E1). The category failure was resolved the same
+day (§E2). All five si-v2 defects (D1–D5) are confirmed fixed on real multilingual data.
 Two new defects were found and fixed during the run.
 
 Shape: **Option 2** from `09-rehearsal-handoff.md` — live content restored, WPML plugin *not*
@@ -167,11 +168,24 @@ swallowing the rest of the page. **These five are a hand-fix, not a code change.
 and `[no_toc]`, `[accordion]`, `[M]` belong to other plugins. Nothing should touch any of them.
 The cost of the five is cosmetic: the testimonial/info-box styling is lost, the text is not.
 
-### E2 — `category taxonomy emptied — automation, development, trends, uncategorized`
+### E2 — `category taxonomy emptied` — **RESOLVED 2026-09-08**
 
-Four categories created since July, absent from `category-map-draft.csv` (which covers exactly
-the 257 that existed then; the site now has 261). **Correct behaviour flagging real drift.** Add
-the four to the map with a fate, then retire clears them.
+Four categories created since July, absent from `category-map-draft.csv` (which covered exactly
+the 257 that existed then; the site had 261). Correct behaviour flagging real drift.
+
+They are **Blocksy starter-site demo content**, not Schiller content: guid
+`https://startersites.io/blocksy/codespot/?p=1`, and none of the four has a `wp_icl_translations`
+row, so they were created outside WPML. `automation`, `development` and `uncategorized` hold 0
+posts; `trends` holds exactly one — the demo article "How AI Tools Are Transforming the Way
+Developers Write Code".
+
+Added to the map as `fate=retire` (now 261 rows, matching the site). Re-running retire removed
+all four and **`si:verify` now reports `PASS category taxonomy emptied (only si-unsorted left)`**.
+
+> **Carry this into the delta review.** Demo post id 1 is *not* in the reviewed
+> `classification.csv` — it is one of the 65 new rows, and it proposes `post` with
+> `needs_review=0`, so it would migrate as a normal published article. Set it to `retire`.
+> A classifier cannot tell starter-site filler from real content; only a human can.
 
 ---
 
@@ -199,8 +213,10 @@ defect on this data. Keep the check in the gate — it is cheap and the exposure
 
 ## H. What to do before the next run
 
-- [ ] Add `automation`, `development`, `trends`, `uncategorized` to `category-map-draft.csv`.
+- [x] ~~Add `automation`, `development`, `trends`, `uncategorized` to `category-map-draft.csv`.~~
+      Done 2026-09-08 — `fate=retire`; verify now passes the category check.
 - [ ] Review the 65 new rows in `incoming/si-v4-classification-new.csv` (5 flagged) and append.
+      **Retire post id 1** — Blocksy demo filler that classifies as a normal post (§E2).
 - [ ] Hand-fix the 5 unclosed shortcodes (E1), or accept them as a known cosmetic cost.
 - [ ] Decide the presentation orphan budget. 257 of 1,561 lack `parent_conference`; the run used
       `--orphan-budget=300` to pass. The July note budgeted 121, so this needs a real number.
