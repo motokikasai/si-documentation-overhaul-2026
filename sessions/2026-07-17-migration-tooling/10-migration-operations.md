@@ -42,9 +42,9 @@ and nothing can break. **69 were published.** Of those:
 | `/fr/schiller-institute-paris-conference/` | ditto, French | ✅ added |
 | `/de/schiller-institute-paris-conference/` | ditto, German | ✅ added |
 | `/de/petition-alle-nationen-…/` | duplicates post 61757 | ✅ added |
-| ~~`/stop-green-fascism/66456-2/`~~ | **kept as `page`** 2026-09-08 | n/a — stays live |
-| ~~`/international-conferences/`~~ (de) | **kept as `page`** 2026-09-08 | n/a — stays live |
-| ~~`/the-international-larouche-youth-movement/`~~ (de) | **kept as `page`** 2026-09-08 | n/a — stays live |
+| `/stop-green-fascism/66456-2/` | orphan: auto-slug from the post ID, no title | ✅ added → `/campaign/stop-green-fascism/` |
+| `/international-conferences/` (de) | unfilled WPML translation stub | n/a — the EN page keeps the URL |
+| `/the-international-larouche-youth-movement/` (de) | unfilled WPML translation stub | n/a — the EN page keeps the URL |
 
 The four ✅ rows are in `incoming/redirect-patterns.csv`, which `si:redirects --patterns=`
 merges into `redirects.csv`. The Paris pages (trid 17337) point at the surviving conference
@@ -56,23 +56,40 @@ each language redirects to its own.
 > so creating a second one from the playlist would duplicate it. The redirect target is the
 > converted page, not a conference-map record.
 
-### The three empty-title pages — resolved 2026-09-08
+### The three empty-title pages — resolved 2026-09-08: all retired
 
-`/stop-green-fascism/66456-2/` (en), `/international-conferences/` (de) and
-`/the-international-larouche-youth-movement/` (de) were published pages with meaningful URLs,
-retired only because their `post_title` is empty. **Decision: keep them.** `final_type` changed
-from `retire` to `page`, restoring what the classifier originally proposed.
+An empty `post_title` on a published page is worth investigating, not just waving through in
+either direction. These turned out to be two different things.
 
-Two of the three were the German halves of trid groups whose English sibling was already
-`page` (trid 18397 and 85197). Keeping them therefore *repaired* two split translation groups —
-preflight's "differing only by a retired member" count dropped 8 → 6, and the
-`retire+published` review slice dropped 11 → 8.
+**`/stop-green-fascism/66456-2/` (id 66456) — an orphan.** Slug `66456-2` is WordPress naming a
+titleless post after its own ID and then dodging a collision with `-2`. No trid siblings.
+**Retired**, with a 301 to `/campaign/stop-green-fascism/` — there is a seeded
+`stop-green-fascism` campaign term, so the campaign archive is the honest destination.
 
-Because they stay `publish`, `si:redirects` sees them and their URLs are preserved
-automatically. No pattern rule needed.
+**The other two are unfilled WPML translation stubs.** The evidence is in the row pairs:
 
-**They still have no title.** Give each one an H1/`post_title` in wp-admin after the migration,
-or they will render with an empty heading.
+| trid | English | German |
+|---|---|---|
+| 18397 | 37852 · "International Conferences" · slug `international-conferences` · 2017-02-06 | 68179 · **title empty** · **same slug** · **same date** |
+| 85197 | 68941 · "The International LaRouche Youth Movement" · same slug · 2021-02-18 | 70246 · **title empty** · **same slug** · **same date** |
+
+Identical slug and identical creation date with an empty title is what WPML leaves behind when
+someone clicks "add translation" and never writes it. **Both retired.**
+
+**The URLs were never at risk.** `/international-conferences/` and
+`/the-international-larouche-youth-movement/` belong to the *English* pages, which are `page`
+and stay published — retiring the stubs only affects the `/de/` variants. If those German paths
+had inbound links, add a rule pointing them at the English page; check WPML's own fallback
+behaviour first, since it may already handle it.
+
+Reusing either URL for a real landing page is a **content** task, not a migration decision: edit
+the English page after the run, and create a genuine German translation when someone writes one.
+
+> **Method note.** The first pass at this reversed all three to `page` on the strength of
+> preflight's "translation group differing only by a retired member" warning, reading a split
+> group as a defect. It is not — `retire` is exempt from the same-trid rule *because* standing
+> down an untranslated duplicate is the normal move, which is why the warning text says
+> "usually a stood-down duplicate". Read what the rows are before acting on that warning.
 
 ### The general rule
 
