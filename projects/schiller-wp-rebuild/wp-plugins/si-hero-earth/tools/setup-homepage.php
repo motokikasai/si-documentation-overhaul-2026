@@ -3,25 +3,39 @@
  * Create the homepage and make it the front page.
  *
  * WSL cannot run wp-cli against a Local by Flywheel site (no mysqli, no
- * socket), so this is written to be run from Local's **Open Site Shell**:
+ * socket), so run this from Local's **Open Site Shell**:
  *
  *     wp eval-file wp-content/plugins/si-hero-earth/tools/setup-homepage.php
  *
- * Idempotent: run it twice and the second run reports "already" for
- * everything. It will NOT overwrite an existing front page that it did not
- * create — it tells you and stops instead.
+ * Add `--` then `force` to overwrite our page's content after you have
+ * edited it:
  *
- * What "best practice" means here, and why each step is in the list:
- *   1. the homepage is a Page, not the blog index, so it has a URL, a
- *      revision history and an editor;
- *   2. the blog gets its own Page, so posts do not vanish when the front
- *      page stops being the post list;
- *   3. the content comes from the registered pattern, so it is ordinary
- *      editable blocks and not a template a developer has to maintain;
- *   4. Blocksy's page title is disabled — the hero carries the <h1>, and
- *      two of them is an SEO and accessibility fault;
- *   5. no sidebar, wide content, no vertical padding — otherwise the
- *      full-bleed hero sits in a boxed column with a gap above it.
+ *     wp eval-file .../setup-homepage.php force
+ *
+ * Idempotent, and it verifies its own work: it re-reads the page after
+ * writing and fails loudly if the blocks did not survive the round trip.
+ *
+ * Three things this script learned the hard way:
+ *
+ *  1. IT IDENTIFIES ITS OWN PAGE BY POST META, NOT BY SLUG. si-v4 is a
+ *     restore of the live site, which already has a page at /home/. The
+ *     first version of this script found that page, declined to touch its
+ *     content (correctly), and then made it the front page anyway
+ *     (disastrously) — giving a blank homepage with a perfect layout.
+ *     Declining to write content and still pointing the front page at it is
+ *     the one combination that must never happen.
+ *
+ *  2. IT DROPS THE KSES FILTERS AROUND THE INSERT. wp-cli runs with no
+ *     current user, so `current_user_can('unfiltered_html')` is false and
+ *     `kses_init()` installs `wp_filter_post_kses` on `content_save_pre`.
+ *     WP's kses does not delete HTML comments, but it does run wp_kses over
+ *     their interiors and collapse repeated dashes — and our block
+ *     delimiters carry JSON containing <br> and <em>. Block content must
+ *     not be laundered on the way in.
+ *
+ *  3. IT CHECKS THE RESULT. A setup script that reports success without
+ *     reading back what it wrote is how you end up debugging an empty
+ *     <div class="entry-content">.
  *
  * @package si-hero-earth
  */
@@ -32,82 +46,125 @@ if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
 	exit( "Run this through wp-cli: wp eval-file <path>\n" );
 }
 
-const SI_HOME_SLUG = 'home';
-const SI_BLOG_SLUG = 'news';
+const SI_HOME_SLUG   = 'home-v4';
+const SI_BLOG_SLUG   = 'news';
+const SI_HOME_MARKER = '_si_hero_home';
+
+$si_force = in_array( 'force', (array) ( $args ?? array() ), true );
 
 /**
- * Say something, in a way that survives Windows cmd.
+ * Log a line. Avoids & and ^, which Windows cmd eats.
  *
- * @param string $msg Message.
- * @param string $kind ok|warn|err.
+ * @param string $msg  Message.
+ * @param string $kind ok|warn.
  */
 function si_say( $msg, $kind = 'ok' ) {
-	if ( 'err' === $kind ) {
-		WP_CLI::warning( $msg );
-	} elseif ( 'warn' === $kind ) {
-		WP_CLI::log( '  ! ' . $msg );
-	} else {
-		WP_CLI::log( '  . ' . $msg );
-	}
+	WP_CLI::log( ( 'warn' === $kind ? '  ! ' : '  . ' ) . $msg );
 }
 
 /* ------------------------------------------------------------- 0. sanity */
 
 if ( ! class_exists( 'WP_Block_Type_Registry' )
 	|| ! WP_Block_Type_Registry::get_instance()->is_registered( 'si/hero-earth' ) ) {
-	WP_CLI::error( 'The si-hero-earth plugin is not active. Activate it first: wp plugin activate si-hero-earth' );
+	WP_CLI::error( 'The si-hero-earth plugin is not active. Run: wp plugin activate si-hero-earth' );
 }
-
-/* -------------------------------------------------- 1. the homepage Page */
 
 $si_pattern_file = SI_HERO_EARTH_DIR . 'patterns/homepage.php';
 if ( ! file_exists( $si_pattern_file ) ) {
 	WP_CLI::error( 'Pattern not found: ' . $si_pattern_file );
 }
 $si_pattern = require $si_pattern_file;
+$si_body    = $si_pattern['content'];
+si_say( sprintf( 'Pattern loaded: %d bytes, %d block delimiters.', strlen( $si_body ), substr_count( $si_body, '<!-- wp:' ) ) );
 
-$si_home = get_page_by_path( SI_HOME_SLUG );
+/* ---------------------------------------------- 1. find or create OUR page */
+
+$si_found = get_posts(
+	array(
+		'post_type'        => 'page',
+		'post_status'      => 'any',
+		'numberposts'      => 1,
+		'meta_key'         => SI_HOME_MARKER, // phpcs:ignore WordPress.DB.SlowDBQuery
+		'meta_value'       => '1',            // phpcs:ignore WordPress.DB.SlowDBQuery
+		'suppress_filters' => false,
+	)
+);
+$si_home = $si_found ? $si_found[0] : null;
 
 if ( $si_home ) {
-	si_say( sprintf( 'Page "%s" already exists (ID %d) — leaving its content alone.', SI_HOME_SLUG, $si_home->ID ) );
+	si_say( sprintf( 'Found our page: "%s" (ID %d).', $si_home->post_title, $si_home->ID ) );
 } else {
-	$si_home_id = wp_insert_post(
+	// Never reuse a page we did not create — a restore of the live site
+	// already has /home/, /about/ and friends, with real content in them.
+	$si_slug = SI_HOME_SLUG;
+	if ( get_page_by_path( $si_slug ) ) {
+		$si_slug .= '-' . gmdate( 'Ymd' );
+		si_say( sprintf( 'Slug "%s" is taken by an existing page; using "%s".', SI_HOME_SLUG, $si_slug ), 'warn' );
+	}
+	$si_new = wp_insert_post(
 		array(
-			'post_title'   => 'Home',
-			'post_name'    => SI_HOME_SLUG,
-			'post_status'  => 'publish',
-			'post_type'    => 'page',
-			'post_content' => $si_pattern['content'],
+			'post_title'  => 'Home (v4 hero)',
+			'post_name'   => $si_slug,
+			'post_status' => 'publish',
+			'post_type'   => 'page',
 		),
 		true
 	);
-	if ( is_wp_error( $si_home_id ) ) {
-		WP_CLI::error( 'Could not create the homepage: ' . $si_home_id->get_error_message() );
+	if ( is_wp_error( $si_new ) ) {
+		WP_CLI::error( 'Could not create the page: ' . $si_new->get_error_message() );
 	}
-	$si_home = get_post( $si_home_id );
-	si_say( sprintf( 'Created page "Home" (ID %d) from the si-hero-earth/homepage pattern.', $si_home->ID ) );
+	update_post_meta( $si_new, SI_HOME_MARKER, '1' );
+	$si_home = get_post( $si_new );
+	si_say( sprintf( 'Created page "%s" (ID %d, slug %s).', $si_home->post_title, $si_home->ID, $si_home->post_name ) );
 }
 
-/* ------------------------------------------- 2. Blocksy per-page options */
+/* -------------------------------------------------------- 2. the content */
+
+$si_has_content = '' !== trim( (string) $si_home->post_content );
+
+if ( $si_has_content && ! $si_force ) {
+	si_say( 'Page already has content — not overwriting. Re-run with: force', 'warn' );
+} else {
+	/* Block markup must reach the database byte-for-byte. See note 2 at the
+	 * top of this file for why this is necessary under wp-cli. */
+	$si_kses_was_on = has_filter( 'content_save_pre', 'wp_filter_post_kses' );
+	if ( $si_kses_was_on ) {
+		kses_remove_filters();
+		si_say( 'kses filters removed for the insert (no current user under wp-cli).' );
+	}
+
+	$si_res = wp_update_post(
+		array(
+			'ID'           => $si_home->ID,
+			'post_content' => wp_slash( $si_body ),
+		),
+		true
+	);
+
+	if ( $si_kses_was_on ) {
+		kses_init_filters();
+	}
+
+	if ( is_wp_error( $si_res ) ) {
+		WP_CLI::error( 'Could not write the content: ' . $si_res->get_error_message() );
+	}
+	si_say( $si_force && $si_has_content ? 'Content overwritten (force).' : 'Content written.' );
+}
+
+/* ------------------------------------------- 3. Blocksy per-page options */
 
 $si_meta = get_post_meta( $si_home->ID, 'blocksy_post_meta_options', true );
 if ( ! is_array( $si_meta ) ) {
 	$si_meta = array();
 }
-
 $si_want = array(
-	// The hero carries the <h1>. Blocksy's page title would add a second.
-	'has_hero_section'       => 'disabled',
-	// No sidebar.
-	'page_structure_type'    => 'type-4',
-	// Wide content area, so alignfull can actually reach the edges.
-	'content_style_source'   => 'custom',
-	'content_style'          => 'wide',
-	// No vertical padding above the hero.
+	'has_hero_section'        => 'disabled', // the hero carries the only <h1>
+	'page_structure_type'     => 'type-4',   // no sidebar
+	'content_style_source'    => 'custom',
+	'content_style'           => 'wide',     // so alignfull reaches the edges
 	'vertical_spacing_source' => 'custom',
-	'content_area_spacing'   => 'none',
+	'content_area_spacing'    => 'none',     // no gap above the hero
 );
-
 $si_changed = array();
 foreach ( $si_want as $si_k => $si_v ) {
 	if ( ! isset( $si_meta[ $si_k ] ) || $si_meta[ $si_k ] !== $si_v ) {
@@ -122,7 +179,7 @@ if ( $si_changed ) {
 	si_say( 'Blocksy page options already correct.' );
 }
 
-/* ------------------------------------------------------- 3. a blog page */
+/* --------------------------------------------------------- 4. blog page */
 
 $si_blog = get_page_by_path( SI_BLOG_SLUG );
 if ( ! $si_blog ) {
@@ -135,41 +192,73 @@ if ( ! $si_blog ) {
 		),
 		true
 	);
-	if ( is_wp_error( $si_blog_id ) ) {
-		si_say( 'Could not create the News page: ' . $si_blog_id->get_error_message(), 'warn' );
-		$si_blog = null;
-	} else {
-		$si_blog = get_post( $si_blog_id );
-		si_say( sprintf( 'Created page "News" (ID %d) to hold the post list.', $si_blog->ID ) );
+	$si_blog = is_wp_error( $si_blog_id ) ? null : get_post( $si_blog_id );
+	if ( $si_blog ) {
+		si_say( sprintf( 'Created page "News" (ID %d) for the post list.', $si_blog->ID ) );
 	}
 } else {
 	si_say( sprintf( 'Page "%s" already exists (ID %d).', SI_BLOG_SLUG, $si_blog->ID ) );
 }
 
-/* -------------------------------------------------- 4. front page wiring */
+/* --------------------------------------------------- 5. front page wiring */
 
-$si_current_front = (int) get_option( 'page_on_front' );
-
-if ( $si_current_front && $si_current_front !== $si_home->ID ) {
-	$si_other = get_post( $si_current_front );
+$si_prev = (int) get_option( 'page_on_front' );
+if ( $si_prev && $si_prev !== $si_home->ID ) {
+	$si_p = get_post( $si_prev );
 	si_say(
 		sprintf(
-			'Front page is already set to "%s" (ID %d). NOT changing it. To switch: wp option update page_on_front %d',
-			$si_other ? $si_other->post_title : '?',
-			$si_current_front,
-			$si_home->ID
+			'Previous front page was "%s" (ID %d). To put it back: wp option update page_on_front %d',
+			$si_p ? $si_p->post_title : '?',
+			$si_prev,
+			$si_prev
 		),
 		'warn'
 	);
-} else {
-	update_option( 'show_on_front', 'page' );
-	update_option( 'page_on_front', $si_home->ID );
-	if ( $si_blog ) {
-		update_option( 'page_for_posts', $si_blog->ID );
+}
+update_option( 'show_on_front', 'page' );
+update_option( 'page_on_front', $si_home->ID );
+if ( $si_blog && $si_blog->ID !== $si_home->ID ) {
+	update_option( 'page_for_posts', $si_blog->ID );
+}
+si_say( sprintf( 'Front page set to "%s" (ID %d).', $si_home->post_title, $si_home->ID ) );
+
+/* ------------------------------------------------------------- 6. verify */
+
+WP_CLI::log( '' );
+WP_CLI::log( 'Verifying...' );
+
+clean_post_cache( $si_home->ID );
+$si_check = get_post( $si_home->ID );
+$si_delims = substr_count( $si_check->post_content, '<!-- wp:' );
+si_say( sprintf( 'Stored content: %d bytes, %d block delimiters.', strlen( $si_check->post_content ), $si_delims ) );
+
+$si_blocks = parse_blocks( $si_check->post_content );
+$si_names  = array();
+foreach ( $si_blocks as $si_b ) {
+	if ( $si_b['blockName'] ) {
+		$si_names[] = $si_b['blockName'] . ' (' . count( $si_b['innerBlocks'] ) . ' inner)';
 	}
-	si_say( sprintf( 'Front page set to "Home" (ID %d).', $si_home->ID ) );
+}
+si_say( 'Parsed blocks: ' . ( $si_names ? implode( ', ', $si_names ) : 'NONE' ) );
+
+$si_html = do_blocks( $si_check->post_content );
+si_say( sprintf( 'Rendered HTML: %d bytes.', strlen( trim( $si_html ) ) ) );
+
+$si_ok = true;
+foreach ( array(
+	'si-hero markup'   => 'si-hero__pin',
+	'four acts'        => 'data-stage="3"',
+	'scene config'     => 'si-hero__config',
+	'poster image'     => 'si-hero__poster',
+) as $si_label => $si_needle ) {
+	$si_hit = false !== strpos( $si_html, $si_needle );
+	si_say( sprintf( '%-16s %s', $si_label . ':', $si_hit ? 'present' : 'MISSING' ), $si_hit ? 'ok' : 'warn' );
+	$si_ok = $si_ok && $si_hit;
 }
 
-WP_CLI::success( 'Done. Visit ' . home_url( '/' ) );
-si_say( 'Check in a browser: the hero should fill the viewport edge to edge, with no page title above it.' );
-si_say( 'To see the static hero the way most of the world will, open the page at a narrow window width, or set the block to "Never" in the sidebar.' );
+WP_CLI::log( '' );
+if ( ! $si_ok ) {
+	WP_CLI::error( 'The page was set up but the hero did not render. Run tools/diagnose.php.' );
+}
+WP_CLI::success( 'Hero renders. Visit ' . home_url( '/' ) );
+si_say( 'Narrow the window below 768px to see the static hero most of the world gets.' );

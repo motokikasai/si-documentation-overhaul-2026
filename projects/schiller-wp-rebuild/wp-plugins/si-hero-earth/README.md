@@ -213,6 +213,9 @@ open http://localhost:8750/tools/preview.html          # the scene
 open http://localhost:8750/tools/preview.html?static=1 # what most people get
 open http://localhost:8750/tools/preview.html?p=0.42   # freeze at a point in the runway
 
+# prove the blocks still emit the expected markup (no WP, no DB, no browser)
+php tools/render-test.php
+
 # rebuild generated assets (outputs are committed; this is not a deploy step)
 bash build/build.sh
 python3 build/make-poster.py   # needs the server above running
@@ -230,9 +233,30 @@ wp eval-file wp-content/plugins/si-hero-earth/tools/setup-homepage.php
 On Local by Flywheel run both from **Open Site Shell** — WSL cannot reach
 Local's database or its PHP.
 
-`tools/setup-homepage.php` is idempotent. It creates the Home page from the
-pattern, creates a News page for the post list, sets the static front page,
-and sets Blocksy's per-page options: page title disabled (the hero carries the
-`<h1>`; two is an SEO and accessibility fault), no sidebar, wide content area,
-no vertical spacing. It will not overwrite a front page it did not create — it
-tells you the command and stops.
+`tools/setup-homepage.php` is idempotent and verifies its own work — it
+re-reads the page after writing and fails if the hero did not render. It
+creates a page at `home-v4`, writes the pattern into it, creates a News page
+for the post list, sets the static front page, and sets Blocksy's per-page
+options: page title disabled (the hero carries the `<h1>`; two is an SEO and
+accessibility fault), no sidebar, wide content area, no vertical spacing.
+Re-run with `force` to overwrite the content after you have edited it.
+
+Three things it does that are not obvious, each learned by getting them wrong:
+
+- **It identifies its own page by post meta, not by slug.** si-v4 is a restore
+  of the live site, which already has a page at `/home/`. The first version
+  found that page, correctly declined to overwrite its content, and then made
+  it the front page anyway — a blank homepage with a perfect layout. Declining
+  to write content while still pointing the front page at it is the one
+  combination that must never happen.
+- **It drops the kses filters around the insert.** wp-cli runs with no current
+  user, so `kses_init()` installs `wp_filter_post_kses`. WP's kses does not
+  delete HTML comments but does run `wp_kses` over their interiors and collapse
+  repeated dashes — and our block delimiters carry JSON containing `<br>` and
+  `<em>`. Block content must not be laundered on the way in.
+- **It reads back what it wrote.** A setup script that reports success without
+  checking is how you end up debugging an empty `<div class="entry-content">`.
+
+If something is still wrong, `wp eval-file .../tools/diagnose.php` reports
+registration, front-page wiring, stored content, parsed blocks, rendered
+output and kses state in one pass.
