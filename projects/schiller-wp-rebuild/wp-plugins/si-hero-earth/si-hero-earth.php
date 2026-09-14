@@ -3,7 +3,7 @@
  * Plugin Name:       SI Hero — Earth
  * Plugin URI:        https://schillerinstitute.com/
  * Description:       The scroll-driven WebGL Earth hero from the v4 homepage draft, as a native block with translatable fields and a static-first fallback.
- * Version:           0.1.0
+ * Version:           0.1.1
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Author:            Schiller Institute site rebuild
@@ -21,7 +21,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SI_HERO_EARTH_VERSION', '0.1.0' );
+define( 'SI_HERO_EARTH_VERSION', '0.1.1' );
 define( 'SI_HERO_EARTH_FILE', __FILE__ );
 define( 'SI_HERO_EARTH_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SI_HERO_EARTH_URL', plugin_dir_url( __FILE__ ) );

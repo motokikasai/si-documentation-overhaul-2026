@@ -62,8 +62,35 @@
     }
   }
 
+  /* Read a query param without URLSearchParams, which this file cannot
+   * assume on the browsers it exists to serve. */
+  function param(name) {
+    var m = new RegExp("[?&]" + name + "=([^&#]*)").exec(
+      window.location.search
+    );
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+
+  var forced = param("si-hero");
+
+  /* Why an override exists: every check below is a property of the visitor's
+   * device, connection or OS settings, so there is no way to exercise the
+   * other branch from a developer's own machine short of changing Windows
+   * accessibility settings — which is exactly how a first run of this block
+   * came back "no animation at all" with nothing obviously wrong.
+   *
+   *   ?si-hero=live     run the scene, whatever the gate thinks
+   *   ?si-hero=static   force the static hero
+   *   ?si-hero=debug    log the decision without changing it
+   *
+   * WebGL is still probed under `live` — forcing cannot conjure a context. */
   function decide(root) {
     var d = root.dataset;
+
+    if (forced === "static") return "forced static (?si-hero=static)";
+    if (forced === "live") {
+      return hasWebGL() ? null : "no WebGL context (forced live)";
+    }
 
     if (d.siHeroMode === "static") return "author opted out";
 
@@ -190,6 +217,20 @@
 
   Array.prototype.forEach.call(roots, function (root) {
     var no = decide(root);
+    /* Quiet by default: the reason is always on the element as
+     * data-si-hero-fallback, which is enough to debug from the DOM. Only
+     * speak up when someone has asked, so a production page stays silent. */
+    if (forced && window.console && console.info) {
+      console.info(
+        "[si-hero] " +
+          (no ? "static: " + no : "running the scene") +
+          " | " + window.innerWidth + "px" +
+          " | mem " + (navigator.deviceMemory || "?") +
+          " | cores " + (navigator.hardwareConcurrency || "?") +
+          " | conn " + ((conn() || {}).effectiveType || "?") +
+          " | webp " + hasWebP()
+      );
+    }
     if (no) {
       root.dataset.siHeroFallback = no;
       return;

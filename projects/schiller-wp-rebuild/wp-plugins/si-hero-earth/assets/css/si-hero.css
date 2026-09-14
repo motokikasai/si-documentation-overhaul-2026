@@ -404,6 +404,58 @@
   }
 }
 
+/* ===========================================================================
+   THEME ARMOUR
+   ===========================================================================
+   Namespacing the classes is not enough. A theme's element selectors still
+   reach inside the block: Blocksy ships a bare `h1 { color: ... }` (0,0,1),
+   which beats an inherited colour from `.si-hero` no matter how dark the
+   hero is — the headlines came out theme-navy on a night sky, all but
+   invisible, while the kicker and lead (which carry explicit colours) were
+   fine.
+
+   So every piece of text in the hero states its own colour, at a
+   specificity that beats a bare element selector. The rule of thumb: if a
+   themeable property is load-bearing for legibility here, set it, do not
+   inherit it.
+   =========================================================================== */
+
+.si-hero__stage h1,
+.si-hero__stage h2,
+.si-hero__stage .si-hero__heading {
+  color: #fff;
+}
+.si-hero__stage h1 em,
+.si-hero__stage h2 em,
+.si-hero__stage .si-hero__heading em {
+  color: var(--si-gold-300);
+}
+.si-hero__stage p,
+.si-hero__stage .si-hero__lead {
+  color: rgba(255, 255, 255, 0.84);
+}
+.si-hero__stage .si-hero__kicker {
+  color: var(--si-gold-300);
+}
+.si-hero .si-hero__form-note {
+  color: rgba(255, 255, 255, 0.55);
+}
+.si-hero .si-hero__form input {
+  color: #fff;
+  background: transparent;
+  border: 0;
+}
+.si-hero .si-hero__form button,
+.si-hero .si-hero__button {
+  color: var(--si-navy-950);
+  background: var(--si-gold-500);
+}
+/* Deliberately NOT reset here: max-width and margins on .si-hero__stage p.
+ * The lead is meant to be a 34rem centred measure — overriding it "for
+ * safety" against a theme would break the design this block exists to
+ * reproduce. Armour the properties that carry legibility, not the ones
+ * that carry the layout. */
+
 /* --- odds and ends ----------------------------------------------------- */
 
 /* Link-shaped CTA, used when no form action is configured. */
