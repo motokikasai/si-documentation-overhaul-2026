@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "si/hero-earth",
+	"version": "0.1.0",
+	"title": "Hero — Earth",
+	"category": "design",
+	"icon": "admin-site-alt3",
+	"description": "Scroll-driven Earth hero in four acts. Renders as a complete static hero for every visitor; upgrades itself to the WebGL scene only where that is a good trade.",
+	"keywords": [ "hero", "earth", "globe", "webgl", "homepage" ],
+	"textdomain": "si-hero-earth",
+	"supports": {
+		"align": [ "full" ],
+		"anchor": true,
+		"html": false,
+		"multiple": false,
+		"reusable": false,
+		"spacing": { "margin": false, "padding": false }
+	},
+	"attributes": {
+		"align": { "type": "string", "default": "full" },
+		"mode": { "type": "string", "default": "auto" },
+		"minWidth": { "type": "number", "default": 768 },
+		"runway": { "type": "string", "default": "520vh" },
+		"posterId": { "type": "number" },
+		"posterUrl": { "type": "string" },
+		"posterAlt": { "type": "string", "default": "" }
+	},
+	"editorScript": "si-hero-earth-edit",
+	"editorStyle": "si-hero-editor",
+	"style": "si-hero",
+	"render": "file:./render.php"
+}

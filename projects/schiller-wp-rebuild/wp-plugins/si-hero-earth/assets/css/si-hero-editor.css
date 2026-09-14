@@ -1,0 +1,70 @@
+/* si/hero-earth — editor-only styles.
+ *
+ * Loaded after si-hero.css. Its job is to make the block editable rather
+ * than to make it pretty: the front-end stylesheet already does that, and
+ * anything that diverges here is a lie told to the person writing the copy.
+ */
+
+/* The editor canvas has no scroll runway, so the hero is always shown in
+ * its static form. Cap the height so the block does not swallow the screen. */
+.si-hero--editor .si-hero__pin {
+  min-height: 0;
+  padding-block: clamp(3rem, 7vw, 5rem);
+}
+
+/* RichText needs somewhere to put the caret when a field is empty. */
+.si-hero--editor .si-hero__kicker:empty::before,
+.si-hero--editor .si-hero__heading:empty::before,
+.si-hero--editor .si-hero__lead:empty::before {
+  content: "";
+  display: inline-block;
+  min-height: 1em;
+}
+
+/* The invitation is a real form on the front end. In the editor it is two
+ * editable labels, styled to look like the control they stand for so the
+ * author can judge the length of the words. */
+.si-hero--editor .si-hero__form-placeholder {
+  flex: 1;
+  min-width: 0;
+  padding: 0.65rem 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--si-hero-font-text);
+  font-size: 0.95rem;
+  text-align: left;
+}
+.si-hero--editor .si-hero__form-button {
+  flex: none;
+  border-radius: 999px;
+  padding: 0.65rem 1.5rem;
+  background: var(--si-gold-500);
+  color: var(--si-navy-950);
+  font-family: var(--si-hero-font-text);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.si-hero__editor-note {
+  position: relative;
+  z-index: 3;
+  margin: 0;
+  padding: 0.6rem var(--si-pad-x);
+  background: rgba(6, 13, 31, 0.9);
+  border-top: 1px solid rgba(212, 169, 76, 0.35);
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--si-hero-font-text);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.si-hero__help {
+  margin: 0 0 0.8rem;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: #757575;
+}
+
+/* Block-level selection outlines are hard to see on a near-black hero. */
+.si-hero--editor .block-editor-block-list__block.is-selected::after {
+  outline-color: var(--si-gold-300);
+}

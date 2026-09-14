@@ -1,0 +1,453 @@
+/* si/hero-earth — block styles.
+ *
+ * Ported from the prototype's css/styles.css (.hero block, lines 229-487),
+ * with one structural inversion that matters more than all the rest:
+ *
+ *   THE PROTOTYPE WAS ANIMATION-FIRST.  .hero-stage had `opacity: 0` and
+ *   JavaScript raised it.  No JS (or no WebGL, or a parse error, or a
+ *   blocked CDN) meant an invisible hero: four headlines and the only
+ *   conversion point on the page, rendered but unreadable.
+ *
+ *   THIS FILE IS STATIC-FIRST.  What the server renders is a complete,
+ *   legible hero on its own.  The pinned 520vh scroll runway only exists
+ *   under `.si-hero.is-live`, a class the scene module adds *after* it has
+ *   a working WebGL context.  Everything below that line is enhancement.
+ *
+ * Namespaced si-hero__* throughout so nothing collides with Blocksy.
+ * Tokens are scoped to the block rather than :root for the same reason.
+ */
+
+.si-hero {
+  /* Local tokens. Override from the theme to re-brand without touching
+   * this file; --si-hero-font-display in particular is left as a system
+   * serif stack on purpose — see README "Fonts". */
+  --si-navy-950: #060d1f;
+  --si-navy-900: #0a1428;
+  --si-gold-500: #d4a94c;
+  --si-gold-300: #e8c87e;
+  --si-pad-x: clamp(1.25rem, 4vw, 3rem);
+  --si-hero-font-display:
+    Georgia, "Times New Roman", "Noto Serif CJK SC", "Songti SC",
+    "Noto Serif CJK JP", serif;
+  --si-hero-font-text:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans",
+    sans-serif;
+
+  position: relative;
+  box-sizing: border-box;
+  background: var(--si-navy-950);
+  color: #fff;
+}
+.si-hero *,
+.si-hero *::before,
+.si-hero *::after {
+  box-sizing: border-box;
+}
+
+/* Full-bleed escape. The scene's camera aspect is measured from the pin
+ * element (not the window), so a constrained container only makes the hero
+ * narrower — it never stretches the globe. This is belt and braces. */
+.si-hero.alignfull {
+  width: 100%;
+}
+
+/* ===========================================================================
+   STATIC HERO — what every visitor gets, before and without JavaScript
+   =========================================================================== */
+
+.si-hero__pin {
+  position: relative;
+  min-height: 88svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  padding: clamp(5rem, 11vw, 8rem) var(--si-pad-x) clamp(3rem, 7vw, 5rem);
+}
+
+/* The poster is a still of the night Earth, rendered as a real <img> inside
+ * a <picture> rather than a CSS background. Three reasons, all of which
+ * matter more on a slow connection than the tidier CSS would:
+ *   - it is discoverable by the preload scanner, so it starts downloading
+ *     before the stylesheet is even parsed. It is the LCP element.
+ *   - <picture type="image/webp"> negotiates WebP in browsers that never
+ *     shipped CSS image-set() type() — which is most of the older Android
+ *     install base.
+ *   - srcset lets a 360px phone fetch the 9 KB copy, not the 32 KB one.  */
+.si-hero__fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--si-navy-950);
+}
+.si-hero__poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 62%;
+  display: block;
+}
+
+.si-hero__canvas {
+  display: none; /* no canvas work at all until .is-live */
+}
+
+.si-hero__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    rgba(6, 13, 31, 0.62),
+    rgba(6, 13, 31, 0.28) 30%,
+    rgba(6, 13, 31, 0.45) 70%,
+    rgba(6, 13, 31, 0.92)
+  );
+}
+
+.si-hero__stages {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 62rem;
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  /* statement / two supporting chapters / invitation */
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "a0 a0"
+    "a1 a2"
+    "a3 a3";
+}
+.si-hero__stage[data-stage="0"] { grid-area: a0; }
+.si-hero__stage[data-stage="1"] { grid-area: a1; }
+.si-hero__stage[data-stage="2"] { grid-area: a2; }
+.si-hero__stage[data-stage="3"] { grid-area: a3; }
+
+.si-hero__stage {
+  text-align: center;
+  min-width: 0; /* let long German compounds wrap instead of blowing the grid */
+}
+
+.si-hero__kicker {
+  font-family: var(--si-hero-font-text);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--si-gold-300);
+  margin: 0 0 0.9rem;
+}
+
+.si-hero__stage h1,
+.si-hero__stage h2 {
+  font-family: var(--si-hero-font-display);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  text-shadow: 0 2px 30px rgba(6, 13, 31, 0.8);
+  margin: 0;
+}
+.si-hero__stage h1 {
+  font-size: clamp(2rem, 5.2vw, 3.6rem);
+}
+/* Supporting chapters are quieter than the statement in static mode; in
+ * live mode each one owns the whole screen, so they scale back up. */
+.si-hero__stage h2 {
+  font-size: clamp(1.25rem, 2.6vw, 1.7rem);
+}
+.si-hero__stage[data-stage="3"] h2 {
+  font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+}
+.si-hero__stage h1 em,
+.si-hero__stage h2 em {
+  font-style: italic;
+  color: var(--si-gold-300);
+}
+.si-hero__stage p {
+  font-family: var(--si-hero-font-text);
+  margin: 1rem auto 0;
+  max-width: 34rem;
+  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.84);
+  text-shadow: 0 1px 18px rgba(6, 13, 31, 0.9);
+}
+.si-hero__stage[data-stage="1"] p,
+.si-hero__stage[data-stage="2"] p {
+  font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+}
+
+/* --- invitation / email capture --------------------------------------- */
+
+.si-hero__cta {
+  margin: 1.6rem auto 0;
+  max-width: 30rem;
+  width: 100%;
+}
+.si-hero__form {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.4rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+.si-hero__form input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: #fff;
+  font-family: var(--si-hero-font-text);
+  font-size: 1rem; /* >=16px: stops iOS Safari zooming the page on focus */
+  padding: 0.65rem 1rem;
+}
+.si-hero__form input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+.si-hero__form input:focus-visible,
+.si-hero__form button:focus-visible,
+.si-hero__chapters button:focus-visible {
+  outline: 2px solid var(--si-gold-300);
+  outline-offset: 2px;
+}
+.si-hero__form button {
+  flex: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.65rem 1.5rem;
+  background: var(--si-gold-500);
+  color: var(--si-navy-950);
+  font-family: var(--si-hero-font-text);
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.si-hero__form button:hover {
+  background: var(--si-gold-300);
+  transform: translateY(-1px);
+}
+.si-hero__form-note {
+  margin-top: 0.8rem;
+  font-family: var(--si-hero-font-text);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+@media (max-width: 480px) {
+  .si-hero__form {
+    flex-direction: column;
+    border-radius: 1.2rem;
+  }
+}
+
+/* --- chrome that only means anything once the scene is scrubbing -------- */
+
+.si-hero__scrollhint,
+.si-hero__chapters {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .si-hero__stages {
+    grid-template-columns: 1fr;
+    grid-template-areas: "a0" "a1" "a2" "a3";
+  }
+}
+
+/* ===========================================================================
+   LIVE HERO — added by si-hero-scene.js once a WebGL context exists
+   =========================================================================== */
+
+.si-hero.is-live {
+  height: var(--si-hero-runway, 520vh);
+}
+.si-hero.is-live .si-hero__pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 0;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+  display: block;
+}
+.si-hero.is-live .si-hero__canvas {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.si-hero.is-live .si-hero__fallback {
+  /* kept as the paint behind the canvas until the first textures land, so
+   * the hero is never a flat navy rectangle mid-load */
+  z-index: 0;
+}
+.si-hero.is-live .si-hero__vignette {
+  background: linear-gradient(
+    rgba(6, 13, 31, 0.55),
+    transparent 22%,
+    transparent 72%,
+    rgba(6, 13, 31, 0.9)
+  );
+}
+.si-hero.is-live .si-hero__stages {
+  display: block;
+  max-width: none;
+  height: 100%;
+}
+.si-hero.is-live .si-hero__stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--si-pad-x);
+  max-width: min(46rem, 92vw);
+  margin: 0 auto;
+  right: 0;
+  left: 0;
+  opacity: 0; /* JS writes inline opacity from the first frame onward */
+  pointer-events: none;
+  will-change: opacity, transform;
+  z-index: 2;
+}
+.si-hero.is-live .si-hero__stage.is-active {
+  pointer-events: auto;
+}
+.si-hero.is-live .si-hero__stage h2 {
+  font-size: clamp(2rem, 5.2vw, 3.6rem);
+}
+.si-hero.is-live .si-hero__stage p {
+  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+}
+.si-hero.is-live .si-hero__stage[data-stage="1"] p,
+.si-hero.is-live .si-hero__stage[data-stage="2"] p {
+  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+}
+.si-hero.is-live .si-hero__cta {
+  margin-top: 2rem;
+}
+
+.si-hero.is-live .si-hero__scrollhint {
+  position: absolute;
+  bottom: 1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--si-hero-font-text);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: opacity 0.4s;
+  z-index: 3;
+}
+.si-hero.is-live .si-hero__scrollhint::after {
+  content: "";
+  width: 1px;
+  height: 2.4rem;
+  background: linear-gradient(rgba(255, 255, 255, 0.8), transparent);
+  animation: si-hero-scrollpulse 2s ease-in-out infinite;
+}
+@keyframes si-hero-scrollpulse {
+  0%, 100% { transform: scaleY(0.4); transform-origin: top; opacity: 0.4; }
+  50%      { transform: scaleY(1); opacity: 1; }
+}
+
+.si-hero.is-live .si-hero__chapters {
+  position: absolute;
+  right: clamp(0.9rem, 2.5vw, 2rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  z-index: 5;
+}
+.si-hero.is-live .si-hero__chapters button {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s, transform 0.3s, border-color 0.3s;
+}
+.si-hero.is-live .si-hero__chapters button.is-active {
+  background: var(--si-gold-500);
+  border-color: var(--si-gold-500);
+  transform: scale(1.35);
+}
+@media (max-width: 760px) {
+  .si-hero.is-live .si-hero__chapters {
+    display: none;
+  }
+}
+
+/* Reduced motion never reaches .is-live (the boot gate stops it), so the
+ * static hero above is already the reduced-motion experience. This is the
+ * safety net for the case where the class is forced on for debugging. */
+@media (prefers-reduced-motion: reduce) {
+  .si-hero.is-live .si-hero__scrollhint::after {
+    animation: none;
+  }
+}
+
+/* --- odds and ends ----------------------------------------------------- */
+
+/* Link-shaped CTA, used when no form action is configured. */
+.si-hero__button {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.7rem 1.75rem;
+  background: var(--si-gold-500);
+  color: var(--si-navy-950);
+  font-family: var(--si-hero-font-text);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.si-hero__button:hover,
+.si-hero__button:focus {
+  background: var(--si-gold-300);
+  color: var(--si-navy-950);
+  transform: translateY(-1px);
+}
+.si-hero__form:has(> .si-hero__button) {
+  background: none;
+  border: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+/* Themes usually ship this; a block cannot assume it. */
+.si-hero .screen-reader-text {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Images inside the hero must never be constrained by a theme's img rules. */
+.si-hero picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

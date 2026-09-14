@@ -1,0 +1,31 @@
+<wpml-config>
+  <!-- si-hero-earth: declares the block's translatable fields.
+       Shipped ahead of WPML being installed — it costs nothing while WPML is
+       absent, and means the four acts are translatable the day it arrives
+       rather than after another round of debugging.
+
+       `translate="1"` fields are per-language. Everything not listed here
+       (mode, minWidth, runway, posterId) is configuration, not content, and
+       must stay identical across languages — a German hero that animates on
+       different rules than the English one is a bug, not a translation. -->
+  <gutenberg-blocks>
+    <gutenberg-block type="si/hero-act" translate="1">
+      <xpath>//p[@class="si-hero__kicker"]</xpath>
+      <xpath>//h1[@class="si-hero__heading"]</xpath>
+      <xpath>//h2[@class="si-hero__heading"]</xpath>
+      <xpath>//p[@class="si-hero__lead"]</xpath>
+    </gutenberg-block>
+    <gutenberg-block type="si/hero-act" translate="1">
+      <key name="kicker" />
+      <key name="heading" />
+      <key name="lead" />
+      <key name="ctaPlaceholder" />
+      <key name="ctaButton" />
+      <key name="ctaNote" />
+      <key name="ctaLabel" />
+    </gutenberg-block>
+    <gutenberg-block type="si/hero-earth" translate="1">
+      <key name="posterAlt" />
+    </gutenberg-block>
+  </gutenberg-blocks>
+</wpml-config>

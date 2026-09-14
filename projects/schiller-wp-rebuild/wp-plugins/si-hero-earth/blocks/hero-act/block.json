@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "si/hero-act",
+	"version": "0.1.0",
+	"title": "Hero act",
+	"category": "design",
+	"icon": "editor-alignleft",
+	"description": "One act of the Earth hero: kicker, headline, lead, and — on the last act — the invitation.",
+	"parent": [ "si/hero-earth" ],
+	"textdomain": "si-hero-earth",
+	"supports": {
+		"html": false,
+		"reusable": false,
+		"lock": false
+	},
+	"attributes": {
+		"stage": { "type": "number", "default": 0 },
+		"kicker": { "type": "string", "default": "" },
+		"heading": { "type": "string", "default": "" },
+		"lead": { "type": "string", "default": "" },
+		"ctaEnabled": { "type": "boolean", "default": false },
+		"ctaAction": { "type": "string", "default": "" },
+		"ctaField": { "type": "string", "default": "email" },
+		"ctaPlaceholder": { "type": "string", "default": "" },
+		"ctaLabel": { "type": "string", "default": "" },
+		"ctaButton": { "type": "string", "default": "" },
+		"ctaNote": { "type": "string", "default": "" },
+		"ctaLink": { "type": "string", "default": "" }
+	},
+	"editorScript": "si-hero-act-edit",
+	"editorStyle": "si-hero-editor",
+	"style": "si-hero",
+	"render": "file:./render.php"
+}
