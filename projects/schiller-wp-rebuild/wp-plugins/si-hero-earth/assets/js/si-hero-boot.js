@@ -169,14 +169,46 @@
     return webpCache;
   }
 
+  /* Record why the scene did not start, on the element and (when asked) in
+   * the console. Every failure path below used to `return` silently, which
+   * is how a broken import came back indistinguishable from a healthy page:
+   * the gate had already logged "running the scene" before any of this ran.
+   * A decision log that stops before the decisive step is worse than none. */
+  function fail(root, reason, detail) {
+    root.dataset.siHeroFallback = reason;
+    if (forced && window.console && console.error) {
+      console.error("[si-hero] scene did not start: " + reason, detail || "");
+    }
+  }
+
+  /* Under ?si-hero=..., say plainly whether the two files are reachable and
+   * being served as JavaScript. A module that 404s, or that arrives as
+   * text/html because a rewrite rule swallowed it, fails in exactly the same
+   * silent way — and the difference decides what to go and fix. */
+  function probeUrl(url) {
+    if (!window.fetch) return;
+    fetch(url, { method: "GET" })
+      .then(function (r) {
+        console.info(
+          "[si-hero] " + r.status + " " +
+            (r.headers.get("content-type") || "?") + "  " + url
+        );
+      })
+      .catch(function (e) {
+        console.error("[si-hero] could not fetch " + url, e);
+      });
+  }
+
   function upgrade(root) {
     var cfgEl = root.querySelector(".si-hero__config");
-    if (!cfgEl) return;
+    if (!cfgEl) {
+      return fail(root, "config element missing");
+    }
     var cfg;
     try {
       cfg = JSON.parse(cfgEl.textContent);
     } catch (e) {
-      return;
+      return fail(root, "config unparseable", e);
     }
 
     cfg.tex = hasWebP() ? cfg.texWebp : cfg.texJpg;
@@ -192,9 +224,7 @@
      * running from. A bare import() resolves relative URLs against the
      * importing script's base, which is the plugin's /assets/js/ directory
      * when this runs as a file and the page when it runs inlined — two
-     * different answers for the same config. WordPress passes an absolute
-     * URL and would not have noticed; the preview harness does, and so
-     * would any future move of this file. */
+     * different answers for the same config. */
     var moduleUrl = cfg.module;
     try {
       moduleUrl = new URL(cfg.module, document.baseURI).href;
@@ -202,16 +232,28 @@
       /* keep cfg.module as-is */
     }
 
+    if (forced && window.console && console.info) {
+      console.info("[si-hero] importing " + moduleUrl);
+      probeUrl(moduleUrl);
+      probeUrl(moduleUrl.replace(/\/js\/[^/?]+/, "/vendor/three-slim.js"));
+    }
+
     import(moduleUrl)
       .then(function (m) {
+        if (typeof m.initHero !== "function") {
+          return fail(root, "module has no initHero export");
+        }
         if (!m.initHero(root, cfg)) {
-          root.dataset.siHeroFallback = "context-refused";
+          return fail(root, "WebGL context refused by the scene");
+        }
+        if (forced && window.console && console.info) {
+          console.info("[si-hero] scene running");
         }
       })
-      .catch(function () {
-        /* Module blocked, 404, or a parse error on an older engine. The
-         * static hero is already on screen and stays there. */
-        root.dataset.siHeroFallback = "module-failed";
+      .catch(function (e) {
+        /* Module blocked, 404, wrong MIME type, or a parse error on an
+         * older engine. The static hero is already on screen and stays. */
+        fail(root, "module failed: " + (e && e.message ? e.message : e), e);
       });
   }
 

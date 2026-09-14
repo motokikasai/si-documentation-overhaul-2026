@@ -228,6 +228,25 @@ generated from a shared source because that would mean a build step.
 
 ---
 
+## Two traps in this build, both paid for
+
+**Never pass `--target=es5` to the boot gate's minifier.** The file is
+hand-written in ES5 *style* so old engines can parse it, but it contains one
+deliberately modern construct: `import()`. esbuild down-levels that to
+`Promise.resolve().then(function(){ return x(require(h)) })`, which throws
+`ReferenceError: require is not defined` in a browser — with **no build
+warning**. The symptom is perfect: the gate passes, logs "running the scene",
+and nothing ever loads. `build/build.sh` now greps the minified output for
+`import(` and fails the build if it is gone.
+
+**The preview harness must load the file production loads.** It used to load
+`si-hero-boot.js` while WordPress inlines `si-hero-boot.min.js` — so the
+harness exercised a file that was never shipped and passed while the site was
+broken. It now loads the minified gate.
+
+The general form of both: a verification that does not run the artefact you
+ship is not a verification.
+
 ## Working on it
 
 ```bash

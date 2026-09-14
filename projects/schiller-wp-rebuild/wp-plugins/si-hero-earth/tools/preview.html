@@ -115,6 +115,9 @@
     document.querySelector('.si-hero').dataset.siHeroMode = 'static';
   }
 </script>
-<script src="../assets/js/si-hero-boot.js"></script>
+<!-- The MINIFIED gate, because that is the file WordPress inlines. Loading
+     the readable source here instead is how a minifier bug that broke the
+     dynamic import went unnoticed: the harness passed, the site did not. -->
+<script src="../assets/js/si-hero-boot.min.js"></script>
 </body>
 </html>

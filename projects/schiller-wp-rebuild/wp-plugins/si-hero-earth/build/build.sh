@@ -13,8 +13,22 @@ npx --yes esbuild build/.entry.tmp.js \
 rm -f build/.entry.tmp.js
 
 echo "==> boot gate (minified for inlining)"
+# NO --target=es5 here, ever. The boot gate is hand-written in ES5 *style* so
+# that old engines can parse it, but it contains one deliberately modern
+# construct: import(). esbuild down-levels that to
+#   Promise.resolve().then(function(){ return x(require(h)) })
+# which throws ReferenceError in a browser, SILENTLY and with no build
+# warning — the gate logs "running the scene" and then nothing loads. That
+# cost an afternoon, so the build now proves the import survived.
 npx --yes esbuild assets/js/si-hero-boot.js \
-  --minify --target=es5 --outfile=assets/js/si-hero-boot.min.js
+  --minify --outfile=assets/js/si-hero-boot.min.js
+if ! grep -q 'import(' assets/js/si-hero-boot.min.js; then
+  echo "FATAL: dynamic import() did not survive minification." >&2
+  echo "       si-hero-boot.min.js is what production inlines; it must be" >&2
+  echo "       able to load the scene module." >&2
+  exit 1
+fi
+echo "    import() survived"
 
 echo "==> textures"
 python3 build/make-textures.py
