@@ -64,6 +64,30 @@ document.querySelector('.si-hero').dataset.siHeroFallback
 // -> "effectiveType 2g" | "no WebGL context" | "module-failed" | ...
 ```
 
+### Testing the gate
+
+Every check is a property of the visitor's device, connection or OS settings,
+so there is no way to exercise the other branch from your own machine. Use the
+override:
+
+```
+?si-hero=live     run the scene whatever the gate thinks
+?si-hero=static   force the static hero
+?si-hero=debug    log the decision without changing it
+```
+
+Any of the three prints one line — decision, width, memory, cores, connection,
+WebP — and nothing is printed without one of them, so production stays silent.
+
+**A local HTTP site under-reports who gets the static hero.**
+`navigator.deviceMemory` is gated to secure contexts, so on `http://*.local`
+it is `undefined` and the gate falls back to "capable". The low-memory branch
+therefore never fires locally, and starts firing the moment the site is on
+HTTPS — a 1 GB Android handset reports `deviceMemory: 0.5` and is refused the
+scene in production while sailing through on your machine. That is the gate
+working as intended, but do not judge the live/static split from a local HTTP
+page.
+
 ### Weight, measured
 
 | | before | after |
