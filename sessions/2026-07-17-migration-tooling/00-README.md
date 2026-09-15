@@ -4,6 +4,10 @@ Executable counterpart to `sessions/2026-07-16-consolidation-roadmap/` (the spec
 parallel with the Day-1 stream (classification/person/segmentation CSVs, separate session) —
 the interface between the two is **`01-csv-contracts.md`**; Day-1 outputs land in `incoming/`.
 
+> ## ▶ About to run a migration? **Start at `12-live-dump-to-local-handoff.md`.**
+> It is the playbook — what to prepare, the dump's three silent landmines, expected numbers
+> for every step, and the standing decisions not to re-open. It maps the other docs too.
+>
 > **Running a rehearsal? Start at `09-rehearsal-handoff.md`.** It covers current input state,
 > which of the three rehearsal shapes to run (structure-only / no-WPML / full), the WSL→Local
 > WP-CLI mechanics, and every gotcha earlier passes hit. The manual steps themselves stay in
