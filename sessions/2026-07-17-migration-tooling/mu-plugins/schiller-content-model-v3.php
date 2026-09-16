@@ -462,12 +462,38 @@ final class SI_Model {
                     ['name' => 'honorific',   'label' => 'Honorific',   'type' => 'text'],
                     ['name' => 'role',        'label' => 'Role',        'type' => 'text'],
                     ['name' => 'affiliation', 'label' => 'Affiliation', 'type' => 'text'],
+                    ['name' => 'country',     'label' => 'Country',     'type' => 'text'],
                     ['name' => 'person_type', 'label' => 'Person type', 'type' => 'pick',
                         'pick_object' => 'custom-simple', 'pick_format_type' => 'multi',
                         'pick_custom' => "founder|Founder\nleadership|Leadership\nspeaker|Speaker\nauthor|Author\nguest|Guest"],
+                    // Archive ordering. post_title stays the display name ("Helga Zepp-LaRouche");
+                    // sort_name is surname-first ("Zepp-LaRouche, Helga") and is the ONLY correct
+                    // A-Z key — it also lets non-Western name order be stated rather than guessed
+                    // (Shi Ze sorts under Shi; Zhang Weiwei under Zhang).
+                    ['name' => 'sort_name',   'label' => 'Sort name (surname, given)', 'type' => 'text'],
+                    // Native-script name, where a source gave one: "Хельга Цепп-Ларуш", "石泽".
+                    ['name' => 'name_native', 'label' => 'Name in native script', 'type' => 'text'],
                     ['name' => 'short_bio',   'label' => 'Short bio',   'type' => 'paragraph'],
+                    // 'generated' bios are rewritten by day3-person-bios.py on every run;
+                    // 'written' ones are never touched again. Blank = no bio yet.
+                    ['name' => 'bio_source',  'label' => 'Bio source'] + $select("generated|Generated from structured data\nwritten|Written by hand"),
                     // Full bio = post_content; photo = featured image.
                     ['name' => 'links',       'label' => 'Links (one per line: Label | URL)', 'type' => 'paragraph'],
+                    // Photo provenance. If a photo is attached without these three, its rights
+                    // position is unreconstructable later and a takedown becomes a site-wide
+                    // audit instead of a lookup. si:photos refuses to set a featured image
+                    // unless photo_license is non-blank.
+                    ['name' => 'photo_credit',     'label' => 'Photo credit',     'type' => 'text'],
+                    ['name' => 'photo_source_url', 'label' => 'Photo source URL', 'type' => 'website'],
+                    ['name' => 'photo_license',    'label' => 'Photo licence'] + $select(
+                        "si-own|Schiller Institute own photography\n" .
+                        "si-video-still|Still from a Schiller Institute recording\n" .
+                        "cc0|CC0 / public domain dedication\n" .
+                        "cc-by|CC BY\n" .
+                        "cc-by-sa|CC BY-SA\n" .
+                        "public-domain|Public domain\n" .
+                        "permission|Used by permission\n" .
+                        "unknown|Unknown — do NOT publish"),
                 ],
             ],
             'si_conference' => [

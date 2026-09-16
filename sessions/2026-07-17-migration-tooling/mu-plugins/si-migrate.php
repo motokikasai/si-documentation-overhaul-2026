@@ -1017,28 +1017,250 @@ final class SI_Migrate_Command {
 
     private function persons_create(array $assoc): void {
         $rows = SI_Csv::read($assoc['csv'] ?? 'person-map.csv');
-        $made = $skipped = $merged = 0;
+        $made = $skipped = $merged = $updated = 0;
         foreach ($rows as $row) {
             $action = trim($row['final_action'] ?? '');
             if ($action === 'drop' || str_starts_with($action, 'merge:')) { $merged++; continue; }
             if (($row['needs_review'] ?? '1') === '1' && $action === '') { $skipped++; continue; }
             $key = $row['person_key'];
             $existing = get_posts(['post_type' => 'si_person', 'meta_key' => '_person_key', 'meta_value' => $key, 'posts_per_page' => 1, 'fields' => 'ids', 'post_status' => 'any']);
-            if ($existing) { $skipped++; continue; }
-            if ($this->dry) { $made++; continue; }
-            $id = wp_insert_post([
-                'post_type' => 'si_person', 'post_status' => 'publish',
-                'post_title' => SI_Text::clean_display_name($row['canonical_name']), 'post_name' => $key,
-            ]);
-            if (is_wp_error($id)) { $this->log("FAIL person $key: " . $id->get_error_message()); continue; }
+            // Without --update an existing person is left alone, which is what a plain
+            // replay wants. Day-3 enrichment re-derives fields in the CSV, so --update
+            // is how those reach a site that already has the people on it.
+            if ($existing && !isset($assoc['update'])) { $skipped++; continue; }
+            // Count the dry run the way the real run will land, or the preview reports
+            // 418 creations against a site that already holds 416 of them.
+            if ($this->dry) { if ($existing) { $updated++; } else { $made++; } continue; }
+
+            if ($existing) {
+                $id = (int) $existing[0];
+                wp_update_post(['ID' => $id,
+                    'post_title' => SI_Text::clean_display_name($row['canonical_name'])]);
+                $updated++;
+            } else {
+                $id = wp_insert_post([
+                    'post_type' => 'si_person', 'post_status' => 'publish',
+                    'post_title' => SI_Text::clean_display_name($row['canonical_name']), 'post_name' => $key,
+                ]);
+                if (is_wp_error($id)) { $this->log("FAIL person $key: " . $id->get_error_message()); continue; }
+                $made++;
+            }
             update_post_meta($id, '_person_key', $key);
+
+            // A hand-written bio is never overwritten by a generated one. The CSV marks
+            // which is which in bio_source; so does the post, and the post wins.
+            $bio_source_now = get_post_meta($id, 'bio_source', true);
+            $bio  = $row['short_bio'] ?? '';
+            $bsrc = $row['bio_source'] ?? '';
+            if ($bio_source_now === 'written' && $bsrc !== 'written') { $bio = ''; $bsrc = ''; }
+
+            // array_filter drops empties on purpose: a blank column means "nothing
+            // learned", not "erase what is there".
             SI_Fields::save('si_person', $id, array_filter([
-                'honorific' => $row['honorific'], 'affiliation' => $row['affiliation'],
-                'person_type' => $row['person_type'] !== '' ? explode('|', strtolower($row['person_type'])) : null,
+                'honorific'   => $row['honorific']   ?? '',
+                'role'        => $row['role']        ?? '',
+                'affiliation' => $row['affiliation'] ?? '',
+                'country'     => $row['country']     ?? '',
+                'sort_name'   => $row['sort_name']   ?? '',
+                'name_native' => $row['name_native'] ?? '',
+                'short_bio'   => $bio,
+                'bio_source'  => $bsrc,
+                'links'       => $row['links']       ?? '',
+                'person_type' => ($row['person_type'] ?? '') !== '' ? explode('|', strtolower($row['person_type'])) : null,
             ]));
-            $made++;
         }
-        $this->done(['created' => $made, 'skipped_or_existing' => $skipped, 'merged_or_dropped' => $merged]);
+        $this->done(['created' => $made, 'updated' => $updated, 'skipped_or_existing' => $skipped, 'merged_or_dropped' => $merged]);
+    }
+
+    /**
+     * si:photos — attach profile photos and their provenance.
+     *
+     * Reads photo-map.csv (Tier 1 links SI itself made, plus any Tier 2 row a human
+     * filled in) and sets the featured image from an attachment that is ALREADY in this
+     * library — no upload, no download, no resize. Tier 2 rows are only honoured once a
+     * reviewer has put an attachment_id in the row, which is what the contact sheet is for.
+     *
+     * The licence gate is not optional: a photo with no photo_license is refused. A photo
+     * whose rights cannot be stated is a photo that cannot be defended later, and the
+     * point of the provenance triplet is that it is filled at the moment of attachment.
+     *
+     * ## OPTIONS
+     * [--csv=<path>]     : defaults to photo-map.csv
+     * [--tier=<1|2|all>] : which tiers to apply (default 1)
+     * [--overwrite]      : replace a featured image that is already set
+     * [--dry-run]
+     */
+    public function photos($args, $assoc): void {
+        $this->start($assoc, 'photos');
+        $rows = SI_Csv::read($assoc['csv'] ?? 'photo-map.csv');
+        $tier = (string) ($assoc['tier'] ?? '1');
+
+        $set = $skipped = $nolicence = $nopost = $noatt = $already = $refreshed = 0;
+
+        foreach ($rows as $row) {
+            $action = trim($row['final_action'] ?? '');
+            if ($action === 'skip' || $action === 'drop') { $skipped++; continue; }
+
+            $rowtier = trim($row['tier'] ?? '');
+            if ($tier !== 'all' && $rowtier !== $tier) { $skipped++; continue; }
+
+            $att = (int) ($row['attachment_id'] ?? 0);
+            if (!$att) { $skipped++; continue; }         // Tier 2 not yet reviewed
+
+            $licence = trim($row['photo_license'] ?? '');
+            if ($licence === '' || $licence === 'unknown') { $nolicence++; continue; }
+
+            $post_id = $this->person_post_id(trim($row['person_key'] ?? ''));
+            if (!$post_id) { $nopost++; continue; }
+
+            if (get_post_type($att) !== 'attachment') { $noatt++; continue; }
+
+            $current = (int) get_post_thumbnail_id($post_id);
+            if ($current && $current !== $att && !isset($assoc['overwrite'])) { $already++; continue; }
+
+            // The thumbnail being right already does NOT mean the provenance is right.
+            // A corrected credit or source URL has to be able to reach a record whose
+            // image never changes, so the meta is always rewritten and only the
+            // thumbnail write is conditional.
+            $same = ($current === $att);
+            if ($this->dry) { $same ? $refreshed++ : $set++; continue; }
+
+            if (!$same) { set_post_thumbnail($post_id, $att); }
+            SI_Fields::save('si_person', $post_id, array_filter([
+                'photo_license'    => $licence,
+                'photo_credit'     => trim($row['photo_credit'] ?? ''),
+                'photo_source_url' => trim($row['photo_source_url'] ?? ''),
+            ]));
+            $same ? $refreshed++ : $set++;
+        }
+
+        $this->done([
+            'photos_set'          => $set,
+            'provenance_refreshed' => $refreshed,
+            'already_had_one'     => $already,
+            'refused_no_licence'  => $nolicence,
+            'person_not_found'    => $nopost,
+            'not_an_attachment'   => $noatt,
+            'skipped'             => $skipped,
+        ]);
+    }
+
+    /**
+     * si:attached-files — normalise `_wp_attached_file` values that hold an absolute path.
+     *
+     * `_wp_attached_file` is supposed to hold an uploads-relative path (`2012/12/foo.jpg`).
+     * On this database 1,960 rows instead hold the old German host's filesystem layout:
+     *
+     *     /kunden/170065_55128/si/wordpress/wp-content/uploads/2012/12/foo.jpg
+     *
+     * That works only while the site sits on that exact machine. On a new host the
+     * directory does not exist, so those attachments break even though the FILES copied
+     * across perfectly — which makes this a cutover step, not a cleanup.
+     *
+     * Doing it in PHP rather than as one UPDATE buys the half the SQL cannot reach:
+     * `_wp_attachment_metadata` is a serialized array whose own `file` key repeats the
+     * same path. Fixing only the meta row leaves wp_get_attachment_metadata() returning a
+     * path to nowhere, so this unserializes, repairs and re-saves it in the same pass.
+     *
+     * Idempotent: a second run finds nothing. Safe to replay after a dump refresh.
+     *
+     * ## OPTIONS
+     * [--expect=<n>]  : refuse to write unless exactly <n> rows need changing. Use it to
+     *                   turn "I read the count in the handoff doc" into an assertion.
+     * [--limit=<n>]   : only process the first <n> (for a cautious first pass)
+     * [--dry-run]     : report, change nothing
+     *
+     * ## EXAMPLES
+     *     wp si:attached-files --dry-run
+     *     wp si:attached-files --expect=1960
+     */
+    public function attached_files($args, $assoc): void {
+        global $wpdb;
+        $this->start($assoc, 'attached-files');
+
+        $rows = $wpdb->get_results(
+            "SELECT meta_id, post_id, meta_value FROM {$wpdb->postmeta}
+              WHERE meta_key = '_wp_attached_file'
+                AND (meta_value LIKE '/%' OR meta_value LIKE '%://%' OR meta_value LIKE '%\\\\\\\\%')"
+        );
+
+        $fixable = $unhandled = [];
+        foreach ($rows as $r) {
+            $norm = self::normalize_attached_file($r->meta_value);
+            if ($norm === null) { $unhandled[] = $r; continue; }
+            if ($norm === $r->meta_value) { continue; }
+            $fixable[] = [$r, $norm];
+        }
+
+        $this->log(sprintf('  %-38s %d', 'rows with a non-relative path', count($rows)));
+        $this->log(sprintf('  %-38s %d', 'of those, normalisable', count($fixable)));
+        $this->log(sprintf('  %-38s %d', 'of those, NOT understood', count($unhandled)));
+
+        foreach (array_slice($fixable, 0, 3) as [$r, $norm]) {
+            $this->log('    e.g. ' . $r->meta_value);
+            $this->log('      -> ' . $norm);
+        }
+        foreach (array_slice($unhandled, 0, 5) as $r) {
+            $this->log('    UNHANDLED (left alone): ' . $r->meta_value);
+        }
+
+        if (isset($assoc['expect'])) {
+            $expect = (int) $assoc['expect'];
+            if (count($fixable) !== $expect) {
+                $this->done(['aborted' => "expected $expect fixable rows, found " . count($fixable)]);
+                WP_CLI::error("--expect=$expect did not match " . count($fixable)
+                    . ' — refusing to write. Re-check against the dump before forcing it.');
+            }
+            $this->log("  --expect=$expect matched");
+        }
+
+        if (isset($assoc['limit'])) { $fixable = array_slice($fixable, 0, (int) $assoc['limit']); }
+
+        $meta_fixed = $file_fixed = 0;
+        foreach ($fixable as [$r, $norm]) {
+            if ($this->dry) { $file_fixed++; continue; }
+
+            $wpdb->update($wpdb->postmeta, ['meta_value' => $norm], ['meta_id' => $r->meta_id]);
+            $file_fixed++;
+
+            // The serialized metadata carries the same path in its own 'file' key.
+            $md = get_post_meta((int) $r->post_id, '_wp_attachment_metadata', true);
+            if (is_array($md) && isset($md['file']) && is_string($md['file'])) {
+                $mn = self::normalize_attached_file($md['file']);
+                if ($mn !== null && $mn !== $md['file']) {
+                    $md['file'] = $mn;
+                    update_post_meta((int) $r->post_id, '_wp_attachment_metadata', $md);
+                    $meta_fixed++;
+                }
+            }
+            clean_post_cache((int) $r->post_id);
+        }
+
+        $this->done([
+            'attached_file_rows_fixed'   => $file_fixed,
+            'attachment_metadata_fixed'  => $meta_fixed,
+            'left_alone_not_understood'  => count($unhandled),
+        ]);
+    }
+
+    /**
+     * Absolute path / URL → uploads-relative. null when the shape is not recognised, which
+     * means "leave it alone": guessing at an unknown layout is how you silently detach
+     * a file that was actually fine.
+     */
+    private static function normalize_attached_file(string $path): ?string {
+        $p = trim(str_replace('\\', '/', $path));
+        if ($p === '') { return null; }
+
+        $mark = '/wp-content/uploads/';
+        $i = strpos($p, $mark);
+        if ($i !== false) {
+            $rel = ltrim(substr($p, $i + strlen($mark)), '/');
+            return $rel !== '' ? $rel : null;
+        }
+        // A bare year/month path that merely has a leading slash.
+        if (preg_match('~^/((?:19|20)\d{2}/\d{2}/.+)$~', $p, $m)) { return $m[1]; }
+        return null;
     }
 
     private function persons_reconcile(array $assoc): void {
@@ -2245,7 +2467,8 @@ WP_CLI::add_command('si', SI_Migrate_Command::class);
 // colon aliases so the documented `wp si:classify` surface works verbatim (08 §8)
 foreach (['classify', 'persons', 'transform', 'shortcodes', 'media', 'categories', 'redirects', 'verify', 'delta',
           'yt-dump' => 'yt_dump', 'yt-playlists' => 'yt_playlists', 'yt-conferences' => 'yt_conferences',
-          'yt-scan' => 'yt_scan', 'conferences', 'presentations', 'transcripts'] as $alias => $method) {
+          'yt-scan' => 'yt_scan', 'conferences', 'presentations', 'transcripts', 'photos',
+          'attached-files' => 'attached_files'] as $alias => $method) {
     if (is_int($alias)) { $alias = $method; }
     WP_CLI::add_command("si:$alias", [new SI_Migrate_Command(), str_replace('-', '_', $method)]);
 }
