@@ -1244,6 +1244,165 @@ final class SI_Migrate_Command {
     }
 
     /**
+     * si:photo-import — bring photos that are NOT yet attachments into the media library.
+     *
+     * si:photos can only attach something the library already holds. Two sources are not
+     * in it: frame grabs sit as JPEGs on the migration machine, and Wikimedia portraits
+     * are remote URLs. This sideloads them properly — a real attachment post, real
+     * metadata, real generated sizes — and then sets the featured image with provenance.
+     *
+     * NOTHING IS IMPORTED WITHOUT A HUMAN DECISION.
+     *   framegrab : only rows whose `chosen_frame` a reviewer filled from the contact sheet
+     *   wikidata  : only rows with final_action=accept. `confirmed` is NOT enough on its
+     *               own and `name-only` is never eligible — attaching the wrong face to a
+     *               named person is the worst failure this archive can produce.
+     *
+     * Idempotent: each created attachment is stamped `_si_photo_key`, so a rerun re-uses
+     * it instead of piling up duplicates of the same face.
+     *
+     * ## OPTIONS
+     * <source>          : framegrab | wikidata
+     * [--csv=<path>]    : defaults per source
+     * [--dir=<path>]    : framegrab only; where the JPEGs are (default incoming/framegrabs)
+     * [--limit=<n>]
+     * [--dry-run]
+     *
+     * ## EXAMPLES
+     *     wp si:photo-import framegrab --dry-run
+     *     wp si:photo-import framegrab
+     *     wp si:photo-import wikidata
+     */
+    public function photo_import($args, $assoc): void {
+        $source = $args[0] ?? '';
+        if (!in_array($source, ['framegrab', 'wikidata'], true)) {
+            WP_CLI::error('source must be "framegrab" or "wikidata"');
+        }
+        $this->start($assoc, "photo-import $source");
+
+        require_once ABSPATH . 'wp-admin/includes/media.php';
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+        require_once ABSPATH . 'wp-admin/includes/image.php';
+
+        $csv = $assoc['csv'] ?? ($source === 'framegrab'
+            ? 'incoming/photo-framegrab.csv' : 'incoming/photo-wikidata.csv');
+        $dir = rtrim($assoc['dir'] ?? 'incoming/framegrabs', '/');
+        $rows = SI_Csv::read($csv);
+
+        $imported = $reused = $skipped = $nopost = $failed = $noapproval = 0;
+
+        foreach ($rows as $row) {
+            if (isset($assoc['limit']) && ($imported + $reused) >= (int) $assoc['limit']) { break; }
+
+            $key = trim($row['person_key'] ?? '');
+            $action = trim($row['final_action'] ?? '');
+            if ($action === 'skip' || $action === 'drop') { $skipped++; continue; }
+
+            // ---- the approval gate, per source ----------------------------
+            if ($source === 'framegrab') {
+                $chosen = trim($row['chosen_frame'] ?? '');
+                if ($chosen === '') { $noapproval++; continue; }
+                $origin = $dir . '/' . basename($chosen);
+                if (!is_readable($origin)) {
+                    $this->log("  missing frame file: $origin");
+                    $failed++; continue;
+                }
+            } else {
+                if ($action !== 'accept') { $noapproval++; continue; }
+                $origin = trim($row['image_url'] ?? '');
+                if ($origin === '') { $failed++; continue; }
+            }
+
+            $post_id = $this->person_post_id($key);
+            if (!$post_id) { $nopost++; continue; }
+
+            $stamp = $source . ':' . $key . ':' . basename((string) $origin);
+
+            $existing = get_posts(['post_type' => 'attachment', 'post_status' => 'any',
+                'meta_key' => '_si_photo_key', 'meta_value' => $stamp,
+                'posts_per_page' => 1, 'fields' => 'ids']);
+            if ($existing) {
+                $att = (int) $existing[0];
+                $reused++;
+            } else {
+                if ($this->dry) { $imported++; continue; }
+                $att = $this->sideload($origin, $post_id, $source, $row);
+                if (!$att) { $failed++; continue; }
+                update_post_meta($att, '_si_photo_key', $stamp);
+                $imported++;
+            }
+
+            if ($this->dry) { continue; }
+
+            set_post_thumbnail($post_id, $att);
+            SI_Fields::save('si_person', $post_id, array_filter([
+                'photo_license'    => trim($row['photo_license'] ?? ($source === 'wikidata'
+                                        ? self::licence_slug($row['licence'] ?? '') : 'si-video-still')),
+                'photo_credit'     => trim($row['photo_credit'] ?? ($row['attribution'] ?? '')),
+                'photo_source_url' => trim($row['photo_source_url'] ?? ($row['commons_page'] ?? '')),
+            ]));
+            clean_post_cache($post_id);
+        }
+
+        $this->done([
+            'imported_and_attached' => $imported,
+            'reused_existing'       => $reused,
+            'awaiting_human_choice' => $noapproval,
+            'person_not_found'      => $nopost,
+            'failed'                => $failed,
+            'skipped'               => $skipped,
+        ]);
+    }
+
+    /** Local file or remote URL → a real attachment attached to $post_id. */
+    private function sideload(string $origin, int $post_id, string $source, array $row): ?int {
+        $tmp = null;
+        if (preg_match('~^https?://~i', $origin)) {
+            $tmp = download_url($origin, 60);
+            if (is_wp_error($tmp)) {
+                $this->log('  download failed: ' . $tmp->get_error_message());
+                return null;
+            }
+            $name = basename(wp_parse_url($origin, PHP_URL_PATH) ?: 'photo.jpg');
+        } else {
+            // media_handle_sideload MOVES the file, which would consume the frame we may
+            // want to re-review. Work on a copy.
+            $tmp = wp_tempnam(basename($origin));
+            if (!$tmp || !@copy($origin, $tmp)) { return null; }
+            $name = basename($origin);
+        }
+
+        $desc = trim(($row['canonical_name'] ?? '') . ' — '
+            . ($source === 'framegrab'
+                ? 'still from Schiller Institute conference recording'
+                : 'via Wikimedia Commons'));
+
+        $att = media_handle_sideload(
+            ['name' => sanitize_file_name($name), 'tmp_name' => $tmp],
+            $post_id,
+            $desc
+        );
+        if (is_wp_error($att)) {
+            @unlink($tmp);
+            $this->log('  sideload failed: ' . $att->get_error_message());
+            return null;
+        }
+
+        // Alt text matters for an archive of named people.
+        update_post_meta((int) $att, '_wp_attachment_image_alt', trim((string) ($row['canonical_name'] ?? '')));
+        return (int) $att;
+    }
+
+    /** Commons licence string → the Pod's controlled vocabulary. */
+    private static function licence_slug(string $lic): string {
+        $l = strtolower($lic);
+        if (str_contains($l, 'cc0')) { return 'cc0'; }
+        if (str_contains($l, 'public domain') || str_starts_with($l, 'pd')) { return 'public-domain'; }
+        if (str_contains($l, 'by-sa') || str_contains($l, 'by sa')) { return 'cc-by-sa'; }
+        if (str_contains($l, 'by')) { return 'cc-by'; }
+        return 'unknown';
+    }
+
+    /**
      * Absolute path / URL → uploads-relative. null when the shape is not recognised, which
      * means "leave it alone": guessing at an unknown layout is how you silently detach
      * a file that was actually fine.
@@ -2468,7 +2627,8 @@ WP_CLI::add_command('si', SI_Migrate_Command::class);
 foreach (['classify', 'persons', 'transform', 'shortcodes', 'media', 'categories', 'redirects', 'verify', 'delta',
           'yt-dump' => 'yt_dump', 'yt-playlists' => 'yt_playlists', 'yt-conferences' => 'yt_conferences',
           'yt-scan' => 'yt_scan', 'conferences', 'presentations', 'transcripts', 'photos',
-          'attached-files' => 'attached_files'] as $alias => $method) {
+          'attached-files' => 'attached_files',
+          'photo-import' => 'photo_import'] as $alias => $method) {
     if (is_int($alias)) { $alias = $method; }
     WP_CLI::add_command("si:$alias", [new SI_Migrate_Command(), str_replace('-', '_', $method)]);
 }

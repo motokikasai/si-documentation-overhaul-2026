@@ -139,16 +139,37 @@ def pick_timestamps(vid, start, end):
     return [int(lo + span * f) for f in FRACTIONS]
 
 
+# YouTube signs its media URLs with a challenge that yt-dlp must execute JavaScript to
+# solve. With no JS runtime it still returns URLs, but unsigned ones — which 403 the
+# moment ffmpeg reads them. That is a silent failure mode: extraction "works", playback
+# does not. Auto-detect a runtime rather than requiring a flag.
+JS_RUNTIMES = ('deno', 'node', 'bun')
+
+
+def js_runtime():
+    for rt in JS_RUNTIMES:
+        if shutil.which(rt):
+            return rt
+    return None
+
+
+# There is no longer a combined (muxed) progressive format on these videos — only
+# video-only and audio-only DASH streams. So 'best[height<=720]' matches NOTHING and the
+# selector has to ask for video explicitly. A still needs no audio anyway.
+VIDEO_FORMAT = 'bv*[height<=720][protocol^=http]/bv*[height<=720]/bv*/best'
+
+
 def resolve_url(vid, cache):
     """One yt-dlp call per video. Format URLs expire in hours, so never cached to disk."""
     if vid in cache:
         return cache[vid]
+    cmd = ['yt-dlp', '-f', VIDEO_FORMAT, '--get-url', '--no-warnings', '--no-playlist']
+    rt = js_runtime()
+    if rt:
+        cmd += ['--js-runtimes', rt]
+    cmd.append(f'https://www.youtube.com/watch?v={vid}')
     try:
-        r = subprocess.run(
-            ['yt-dlp', '-f', 'best[height<=720]/bestvideo[height<=720]/best',
-             '--get-url', '--no-warnings', '--no-playlist',
-             f'https://www.youtube.com/watch?v={vid}'],
-            capture_output=True, text=True, timeout=120)
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
     except (subprocess.TimeoutExpired, FileNotFoundError) as e:
         cache[vid] = None
         return None
@@ -189,6 +210,12 @@ def main():
     for tool in ('yt-dlp', 'ffmpeg'):
         if not shutil.which(tool) and not (args.plan or args.contact_sheet):
             sys.exit(f'{tool} not found on PATH')
+    if not (args.plan or args.contact_sheet):
+        rt = js_runtime()
+        if not rt:
+            sys.exit('no JavaScript runtime found (deno/node/bun). yt-dlp needs one to\n'
+                     'sign YouTube media URLs; without it every frame read returns 403.')
+        print(f'js runtime: {rt}')
 
     with open(PERSON_MAP, newline='', encoding='utf-8') as fh:
         people = {r['person_key']: r for r in csv.DictReader(fh) if is_built(r)}

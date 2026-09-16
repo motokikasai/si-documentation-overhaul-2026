@@ -13,4 +13,3 @@ db/
 
 # Day-3 photo pipeline scratch (regenerable: dump index, fetched frames)
 sessions/*/incoming/.cache/
-sessions/*/incoming/framegrabs/
