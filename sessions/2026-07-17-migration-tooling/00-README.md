@@ -52,6 +52,68 @@ the interface between the two is **`01-csv-contracts.md`**; Day-1 outputs land i
 
 Offline Day-1 toolchain (all in `tools/`): `day1-extract.py` (dump → items.jsonl signals) · `day1-classify.py` (R-rules + category map + queues) · `day1-apply-review.py` (decision merge) · `day1-persons.py` · `day1-erab.py` · `day1-yt.py` (stages B+C) · `day1-scan.php` (stage D, reuses the unit-tested SI_Parse) · `polite-fetch.sh`.
 
+### Day-3: the People pass (`si_person` content quality)
+
+Everything the profile pages need, derived offline from the dump and the existing CSVs,
+then applied with `wp si:persons --create --update` and `wp si:photos`.
+
+| Tool | What it does | Status |
+|---|---|---|
+| `tools/day3-person-enrich.py` | Re-derives `affiliation` (scored candidates, agenda-first) and splits `honorific`, `role`, `country`, `sort_name`, `name_native` out of the display name. Keeps `affiliation_raw` so every rewrite is reversible | ✅ applied; idempotent (verified: 2nd run = 0 changes) |
+| `tools/day3-photo-resolve.py` | Tier 1 = the featured image of the person's own `portfolio_cpt` item (authoritative). Tier 2 = surname vs. 66,992 attachment filenames, ranked, emitted to a contact sheet for review | ✅ 132 Tier 1, 109 Tier 2 |
+| `tools/day3-photo-wikidata.py` | Wikimedia Commons P18 for the remainder, licence and author carried through. Strict identity gate: name match alone is flagged, never applied | ✅ 18 free-licensed of 177 |
+| `tools/day3-photo-framegrab.py` | Stills from SI's own recordings at three points inside each speaker's segment | ⛔ blocked: YouTube 403s this yt-dlp build (see below) |
+| `tools/day3-person-bios.py` | Composes `short_bio` from held fields only — no outside knowledge, no pronouns, no superlatives. `bio_source` protects hand-written bios from reruns | ✅ 369 of 418 |
+
+Cutover support (not part of the People pass, but found by it):
+
+| Tool | What it does | Status |
+|---|---|---|
+| `tools/day3-media-manifest.py` | Derives the complete expected uploads file list from the dump — originals *and* generated sizes. 66,994 rows collapse to **6,812 unique files**; with derivatives, 37,553 files ≈ 6 GB. Emits `media-manifest.txt` + `media-verify.sh` | ✅ |
+| `wp si:attached-files` | Normalises the 1,960 `_wp_attached_file` rows holding the old host's absolute `/kunden/…` path, and repairs the serialized `_wp_attachment_metadata['file']` that SQL cannot reach. `--expect=<n>` asserts the count, `--dry-run` reports | ✅ applied to si-v4, idempotent |
+| `mu-plugins/si-media-proxy.php` | Lab-only: serves uploads missing on disk from the live site, so a rehearsal renders all media with nothing downloaded | ✅ deployed to si-v4 |
+
+Review surfaces these produce: `person-enrichment-worklist.md`, `person-bios-worklist.md`,
+`photo-contactsheet.html` (click a photo per person), `framegrab-contactsheet.html`.
+
+**Coverage after the pass** (418 people that will be built):
+
+| Field | Before | After |
+|---|---|---|
+| `affiliation` | 111 (27%), much of it junk | 136 (33%), junk removed |
+| `honorific` | 47 (11%) | 106 (25%) |
+| `country` | 20 (5%) | 133 (32%) |
+| `sort_name` · `short_bio` | 0 | 418 (100%) · 369 (88%) |
+| profile photo reachable | — | 222 of 418 (53%) without leaving SI's own media |
+
+**Applied to si-v4 on 2026-09-15** (`http://si-v4.local`, 416 si_person posts):
+`wp si:persons --create --update --csv=incoming/person-map.csv` → 2 created, 416 updated;
+`wp si:photos --tier=1 --csv=incoming/photo-map.csv` → 130 featured images set, 0 refused
+for missing licence, 2 people not found (the 416/418 gap). Verified in-DB, not from the
+command's own counters, with `tools/si-verify-day3.php` (copy to the site root, then
+`wp eval-file si-verify-day3.php`): sort_name 100%, short_bio 88%, affiliation 37%, country 32%,
+featured image 31%.
+
+**Never write the dump's `siteurl` into stored data.** Dumps come from the backup host
+`2.schillermeet.de`; the canonical public host is `schillerinstitute.com`, which is the
+same rule `si:shortcodes --normalize-domains` already applies to body content (V6).
+`day3-photo-resolve.py` defaults to the canonical host and `photo_source_url` is the
+direct **file** URL, not the portfolio page: both resolve live, but the legacy portfolio
+template no longer renders its featured image, so the file is the stronger evidence. The
+portfolio id stays in `notes` as the chain. `si:photos` rewrites provenance on every run
+even when the thumbnail is unchanged (`provenance_refreshed`), which is how a corrected
+URL reaches records that are otherwise already right.
+
+Note the CSVs must be copied to `si-v4/app/public/incoming/` first — wp-cli runs Windows-side
+and cannot read the WSL repo path. The mu-plugins must be copied too, and their checksums
+verified against `12-live-dump-to-local-handoff.md` §3d.
+
+**Frame grabs are blocked, not broken.** `yt-dlp 2026.07.04` resolves metadata fine but
+every media URL it returns 403s, so ffmpeg can never read a frame. `yt-dlp 2026.8.19` is
+available on PyPI and is the likely fix; the tool is finished and `--plan` already lists
+its 161 targets. Do not work around this by faking client headers — update the tool.
+
+
 ## ✅ DRESS REHEARSAL PASSED (Local `si-v1`, 2026-07-18) — `si:verify` 0 failures
 
 The full chain ran on real WP 7.0.1 + PHP 8.3 + Pods + WPML against the sandbox dump:

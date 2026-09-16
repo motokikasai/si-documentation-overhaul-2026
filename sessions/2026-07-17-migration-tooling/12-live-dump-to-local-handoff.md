@@ -179,15 +179,126 @@ mu-plugins are *files*, so they survive a DB import — but a new site has none.
 
 ### 3d. Verify the copies by checksum, every time
 
-A stale mu-plugin from an earlier pass silently re-runs closed defects. As of 2026-09-15:
+A stale mu-plugin from an earlier pass silently re-runs closed defects. As of 2026-09-15,
+**after the Day-3 People pass** (si_person gained country/sort_name/name_native/bio_source
+and the photo-provenance triplet; `si:persons` gained `--update`; `si:photos` is new):
 
 ```
-c7d00e93a537ff7bac706fa5215e069f  schiller-content-model-v3.php
-1d62dfd6f076195771c2d09da4b04ddd  si-migrate.php
+e0543175b48741aa468f83d12eee8168  schiller-content-model-v3.php
+8a2173ae449ba881758a9b8c64944520  si-migrate.php
 63fdef80c6207a5bc109402b093ad85f  wpml-config.xml
+(si-media-proxy.php is lab-only and deliberately NOT part of the production set)
 ```
+
+The two superseded sums — `c7d00e93…` and `1d62dfd6…` — are the pre-Day-3 files. A site
+still showing those will not have the new Person fields, and `wp si:photos` will not
+resolve.
 
 Then §C: `SI_Model::VERSION` ≥ 3.1.1 · `si_topic` count 10 · `wp help si:verify` resolves.
+
+---
+
+## 3e. The media: what actually has to move, and how much
+
+A dump is `wp_posts` + `wp_postmeta`. `wp-content/uploads` is **not in it**. A fresh site
+has every attachment row and no file behind any of them.
+
+**The size is much smaller than the row count suggests.** Counting rows overstates it by
+~10x, because the same file is attached many times over:
+
+| | count |
+|---|---|
+| attachment rows | 66,994 |
+| **unique files** | **6,812** |
+| generated sizes (`-150x150`, …) | 30,751 |
+| **total files to move** | **37,553  ≈ 6 GB** |
+
+`20121124-askary.jpg` alone exists as 44 separate attachment rows — WPML clones one per
+language and re-uploads add more. Do not size a transfer off `SELECT COUNT(*)`; size it
+off `media-manifest.txt`, which is the deduplicated truth (`tools/day3-media-manifest.py`).
+
+### Moving hosts, keeping the domain
+
+This is the planned cutover. The good half: **the domain does not change, so no media URL
+is rewritten.** Every `https://schillerinstitute.com/wp-content/uploads/...` stays valid —
+no search-replace, no redirects for media, and `photo_source_url` on every si_person stays
+correct permanently.
+
+The other half: the new host starts empty, so ~6 GB does have to be copied. Server to
+server, never via a laptop:
+
+```
+# on the NEW host, while the old one is still reachable
+rsync -az --info=progress2 OLD:~/path/to/wp-content/uploads/ wp-content/uploads/
+```
+
+Sequence that matters:
+
+1. **Bulk copy days before cutover**, while the old site is live. Takes as long as it
+   takes; nothing is at stake yet.
+2. **Final incremental rsync at cutover** — the same command again, which now moves only
+   what changed. This is why rsync rather than a tarball: the second pass is minutes.
+3. **Verify before DNS** with `media-verify.sh` (below). Any miss is far cheaper to fix
+   while the old host is still addressable.
+4. **Keep the old host reachable by IP or a temporary hostname for a week** after the DNS
+   flip. Once `schillerinstitute.com` points at the new server, the old files are only
+   reachable if you can still address that machine directly.
+
+### Verify the transfer, do not assume it
+
+37,553 files will not fail loudly. They fail as a handful that silently did not arrive,
+found months later as a broken image on a 2014 conference page.
+
+```
+sh media-verify.sh media-manifest.txt      # run ON the new host, inside wp-content/uploads
+```
+
+It prints expected/missing, writes `media-missing.txt`, and exits non-zero. Feed that file
+straight back to rsync:
+
+```
+rsync -av --files-from=media-missing.txt OLD:wp-content/uploads/ .
+```
+
+### Landmine: 1,960 rows store an ABSOLUTE path
+
+`_wp_attached_file` is supposed to hold `2012/12/foo.jpg`. For 1,960 rows it instead holds
+
+```
+/kunden/170065_55128/si/wordpress/wp-content/uploads/2012/12/foo.jpg
+```
+
+— the old German host's filesystem layout. **That directory will not exist on the new
+host**, so those attachments break on the move even though the files transfer fine.
+
+Fix it with the command, not a hand-written UPDATE:
+
+```
+wp si:attached-files --dry-run          # report; changes nothing
+wp si:attached-files --expect=1960      # refuses to write unless the count matches
+```
+
+`--expect` turns "the handoff doc said 1,960" into an assertion: a mismatch aborts before
+any write, which is what you want if the dump has moved on since this was measured.
+
+It is a PHP command rather than SQL because SQL cannot reach the other half.
+`_wp_attachment_metadata` is a serialized array whose own `file` key repeats the same
+path; fixing only the meta row leaves `wp_get_attachment_metadata()` pointing at nowhere.
+The command unserializes, repairs and re-saves it in the same pass. Verified on si-v4
+2026-09-16: 1,960 `_wp_attached_file` rows and 3 metadata blobs. **Those 3 are exactly
+what a raw UPDATE would have left silently broken.**
+
+A path shape it does not recognise is reported as `left_alone_not_understood` and never
+touched — guessing at an unknown layout is how you detach a file that was actually fine.
+Idempotent: the rerun finds 0 rows.
+
+### For a rehearsal site, copy nothing
+
+`mu-plugins/si-media-proxy.php` rewrites the URL of any upload missing on disk to
+`schillerinstitute.com`, leaving files that ARE present alone. Every image, thumbnail and
+PDF renders with nothing downloaded. It refuses to run unless `siteurl` is a
+`.local`/`.test`/localhost host, `define('SI_MEDIA_PROXY', false);` disables it, and it
+only rewrites URLs — no files, no DB. Lab only; deliberately not in the §3d production set.
 
 ---
 

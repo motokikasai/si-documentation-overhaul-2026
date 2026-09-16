@@ -69,6 +69,49 @@ health-food energy-environment education-youth history-method new-paradigm`.
 | `final_action` | | `needs_review=0`: blank=keep(create). `needs_review=1`: blank=**skip**(not created), `accept`=create. Both: `merge:<person_key>` (folds into that row — the target MUST itself be created, i.e. `accept` or `nr=0`) · `drop` |
 | `reviewer` | | |
 
+### 2a. Day-3 enrichment columns (written by `tools/day3-person-enrich.py`)
+
+Added by the Day-3 pass, which re-derives the fields the Day-1 harvester got wrong. The
+harvester took `affiliation` from `post_excerpt → <p class="sub-title"> → first <em>`,
+first-wins (`si-migrate.php` §persons), which is why the column arrived full of shortcode
+stubs (`[icon …]Text bald verfügbar!`), italic body words (`déjà vu`, `Zero`, `were`) and
+whole paragraphs. Day-3 scores candidates instead, preferring the conference-agenda
+affiliations already parsed into `video-segmentation.csv`.
+
+| Column | Req | Meaning |
+|---|---|---|
+| `role` | | role the programme printed before the name — `Moderator`, `Conductor`, `Alto`. Moved out of `canonical_name`, which is `post_title` |
+| `affiliation_raw` | | the Day-1 value, preserved verbatim. **Every rewrite is reversible from this column**, and the tool always re-derives from it, which is what makes reruns idempotent |
+| `affiliation_src` | | `agenda:accept` · `harvest:review` · `none` — where the current value came from and how much it is trusted |
+| `sort_name` | ✔ | surname-first (`Zepp-LaRouche, Helga`). The only correct A–Z key, and the only way to state rather than guess non-Western name order (`Shi Ze` stays `Shi Ze`) |
+| `name_native` | | native-script name recovered from `aliases` (`Хельга Цепп-Ларуш`) |
+| `short_bio` | | composed by `tools/day3-person-bios.py` from these fields only — no outside knowledge, no pronouns, no superlatives |
+| `bio_source` | | `generated` · `written`. A `written` bio is never overwritten, by the tool or by `si:persons --update` |
+| `photo_credit` / `photo_source_url` / `photo_license` | | provenance triplet; filled from `photo-map.csv` by `si:photos`, never by hand-waving. `si:photos` REFUSES a photo whose licence is blank or `unknown` |
+
+`country` was already in the contract but was 5% filled; Day-3 raises it to ~32% by
+splitting it out of the agenda affiliation (`(South Africa), former Minister of…`) and
+off the end of the display name (`Adrian Pearl (U.S.)`).
+
+## 2b. `photo-map.csv` — one row per person (consumed by `si:photos`)
+
+| Column | Req | Meaning |
+|---|---|---|
+| `person_key` | ✔ | FK → `person-map.csv` |
+| `tier` | ✔ | `1` = the featured image of a `portfolio_cpt` item this person is linked from — a link SI itself made, authoritative. `2` = surname matched against attachment filenames, a GUESS. `0` = nothing in the library |
+| `attachment_id` | | the attachment to use. Tier 1 is filled automatically; **Tier 2 is blank until a human fills it** from `photo-contactsheet.html`, and `si:photos` ignores a blank |
+| `file_path` / `width` / `height` | | uploads-relative path and dimensions, for review |
+| `photo_license` | ✔ to apply | `si-own` for Tier 1. `si:photos` refuses blank or `unknown` |
+| `photo_credit` / `photo_source_url` | | attribution and where it came from |
+| `confidence` | ✔ | `authoritative` · `needs-review` · `none` |
+| `candidates_json` | | Tier 2 only: the ranked candidates the contact sheet renders |
+| `final_action` / `reviewer` / `notes` | | `skip` excludes the row |
+
+Companion files with the same shape: `photo-wikidata.csv` (Wikimedia Commons P18, licence
+and author carried through; `confidence=confirmed` means the identity was corroborated by
+citizenship or affiliation, `name-only` means it matched on name alone and is **not** safe
+to apply unseen) and `photo-framegrab.csv` (stills from SI's own recordings).
+
 ## 3. `video-segmentation.csv` — one row per proposed Presentation (consumed by `si:presentations --source=yt`)
 
 One row per **segment**; a full-session/Case-5 video is exactly one row with `segment_index=0`
