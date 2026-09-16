@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Frame grab review</title><style>
+:root{--bg:#fbfaf8;--fg:#1a1a1a;--muted:#6b6b6b;--line:#e2ded8;--accent:#8a1c1c;--card:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#17161a;--fg:#ece9e4;--muted:#9a948c;--line:#322f36;--accent:#e0a0a0;--card:#201e24}}
+:root[data-theme=dark]{--bg:#17161a;--fg:#ece9e4;--muted:#9a948c;--line:#322f36;--accent:#e0a0a0;--card:#201e24}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:0 16px 96px}
+header{max-width:1100px;margin:0 auto;padding:32px 0 16px;border-bottom:1px solid var(--line)}
+h1{font-size:1.5rem;margin:0 0 6px}p.lede{color:var(--muted);margin:0;max-width:62ch}
+main{max-width:1100px;margin:0 auto}
+.person{padding:18px 0;border-bottom:1px solid var(--line)}
+.who{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px}
+.who b{font-size:1.05rem}.who a{color:var(--accent);font-size:.8rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+figure{margin:0;border:2px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;background:var(--card)}
+figure:hover{border-color:var(--muted)}figure.pick{border-color:var(--accent)}
+figure img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--line)}
+figcaption{padding:5px 8px;font-size:.72rem;color:var(--muted)}
+#out{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:10px 16px;max-height:32vh;overflow:auto}
+#out textarea{width:100%;height:76px;font:12px/1.4 ui-monospace,monospace;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:8px}
+button{font:inherit;padding:6px 12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);cursor:pointer}
+</style></head><body><header><h1>Frame grab review</h1>
+<p class="lede">Stills from the Schiller Institute's own recordings, at three points inside
+each speaker's segment. Pick the frame that clearly shows that person &mdash; or pick none.
+A wrong face is much worse than no face, and a monogram is a perfectly good fallback.
+The link by each name opens the video at that timestamp if you need context.</p></header><main>
+</main>
+<div id="out"><div style="display:flex;gap:8px;align-items:center;margin-bottom:6px">
+<button onclick="cp()">Copy CSV</button><span id="n" style="color:var(--muted)"></span></div>
+<textarea id="ta" readonly placeholder="person_key,chosen_frame"></textarea></div>
+<script>
+const picks=new Map();
+document.querySelectorAll('figure').forEach(f=>f.addEventListener('click',()=>{
+ const pk=f.closest('.person').dataset.pk;
+ f.closest('.grid').querySelectorAll('figure').forEach(o=>{if(o!==f)o.classList.remove('pick')});
+ if(f.classList.contains('pick')){f.classList.remove('pick');picks.delete(pk);}
+ else{f.classList.add('pick');picks.set(pk,f.dataset.file);}
+ render();}));
+function render(){const l=['person_key,chosen_frame'];
+ for(const [k,v] of picks) l.push(k+','+v);
+ document.getElementById('ta').value=l.join('\n');
+ document.getElementById('n').textContent=picks.size+' picked';}
+function cp(){const t=document.getElementById('ta');t.select();document.execCommand('copy');}
+render();
+</script></body></html>

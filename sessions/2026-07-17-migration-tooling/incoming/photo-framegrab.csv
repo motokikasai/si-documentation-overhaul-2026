@@ -1,0 +1,4 @@
+person_key,canonical_name,yt_video_id,timestamps,frame_files,photo_license,photo_credit,photo_source_url,chosen_frame,confidence,final_action,reviewer,notes
+abbey-makoe,Abbey Makoe,THWTp_W75c0,10004|10447|10890,,,,,,none,,,ffmpeg produced no usable frame
+achim-bonatz,Achim Bonatz,Gep6VAh4H9o,7417|7673|7929,,,,,,none,,,ffmpeg produced no usable frame
+adrian-pearl,Adrian Pearl,cRBXdmrBWsY,165|300|435,,,,,,none,,,ffmpeg produced no usable frame

@@ -1,0 +1,557 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Person photo contact sheet</title><style>
+:root{--bg:#fbfaf8;--fg:#1a1a1a;--muted:#6b6b6b;--line:#e2ded8;--accent:#8a1c1c;--card:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#17161a;--fg:#ece9e4;--muted:#9a948c;--line:#322f36;--accent:#e0a0a0;--card:#201e24}}
+:root[data-theme=dark]{--bg:#17161a;--fg:#ece9e4;--muted:#9a948c;--line:#322f36;--accent:#e0a0a0;--card:#201e24}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:0 16px 80px}
+header{max-width:1100px;margin:0 auto;padding:32px 0 16px;border-bottom:1px solid var(--line)}
+h1{font-size:1.5rem;margin:0 0 6px}
+p.lede{color:var(--muted);margin:0;max-width:60ch}
+main{max-width:1100px;margin:0 auto}
+.person{padding:20px 0;border-bottom:1px solid var(--line)}
+.who{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.who b{font-size:1.05rem}
+.who code{color:var(--muted);font-size:.8rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+figure{margin:0;background:var(--card);border:2px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;transition:border-color .12s}
+figure:hover{border-color:var(--muted)}
+figure.pick{border-color:var(--accent)}
+figure img{display:block;width:100%;height:150px;object-fit:cover;background:var(--line)}
+figcaption{padding:6px 8px;font-size:.7rem;color:var(--muted);word-break:break-all;line-height:1.35}
+.sc{color:var(--accent);font-weight:600}
+#out{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:10px 16px;max-height:34vh;overflow:auto}
+#out textarea{width:100%;height:80px;font:12px/1.4 ui-monospace,monospace;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:8px}
+button{font:inherit;padding:6px 12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);cursor:pointer}
+</style></head><body>
+<header><h1>Person photo contact sheet</h1>
+<p class="lede">Tier&nbsp;2 only &mdash; these are filename guesses, not links SI made.
+Click the correct photo for each person (click again to unpick). Nothing is applied until
+you paste the CSV below back into <code>incoming/photo-map.csv</code>.
+Skip anyone whose photo you are not sure of; a monogram is better than the wrong face.</p></header><main>
+<section class="person" data-pk="sam-pitroda">
+<div class="who"><b>Sam Pitroda</b><code>sam-pitroda</code></div><div class="grid">
+<figure data-id="89281" data-path="2022/07/sam-pitroda.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/07/sam-pitroda.png" alt=""><figcaption><span class="sc">34</span> &middot; 1920&times;1080<br>2022/07/sam-pitroda.png<br></figcaption></figure>
+<figure data-id="90239" data-path="2022/08/pitroda_sam_schiller_institute_6-18-22.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/pitroda_sam_schiller_institute_6-18-22.jpg" alt=""><figcaption><span class="sc">30</span> &middot; 210&times;243<br>2022/08/pitroda_sam_schiller_institute_6-18-22.jpg<br>portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="scott-ritter">
+<div class="who"><b>Scott Ritter</b><code>scott-ritter</code></div><div class="grid">
+<figure data-id="90259" data-path="2022/08/ritter_scott_2006.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/ritter_scott_2006.jpg" alt=""><figcaption><span class="sc">41</span> &middot; 200&times;229<br>2022/08/ritter_scott_2006.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="94315" data-path="2023/01/Scott_Ritter_by_David_Shankbone-e1673580454772.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2023/01/Scott_Ritter_by_David_Shankbone-e1673580454772.jpg" alt=""><figcaption><span class="sc">34</span> &middot; 640&times;609<br>2023/01/Scott_Ritter_by_David_Shankbone-e1673580454772.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="90730" data-path="2022/08/20220819-diane-ritter.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/20220819-diane-ritter.jpg" alt=""><figcaption><span class="sc">27</span> &middot; 1920&times;1080<br>2022/08/20220819-diane-ritter.jpg<br></figcaption></figure>
+<figure data-id="90741" data-path="2022/08/diane-ritter.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/diane-ritter.jpg" alt=""><figcaption><span class="sc">27</span> &middot; 1920&times;1080<br>2022/08/diane-ritter.jpg<br></figcaption></figure>
+<figure data-id="89819" data-path="2022/08/Ritter-oped-Schumer-attack-Sare.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/Ritter-oped-Schumer-attack-Sare.png" alt=""><figcaption><span class="sc">14</span> &middot; 4063&times;2140<br>2022/08/Ritter-oped-Schumer-attack-Sare.png<br></figcaption></figure>
+<figure data-id="107192" data-path="2025/02/hzl-ritter-mcgovern-podium.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2025/02/hzl-ritter-mcgovern-podium.jpg" alt=""><figcaption><span class="sc">6</span> &middot; 400&times;233<br>2025/02/hzl-ritter-mcgovern-podium.jpg<br>-podium</figcaption></figure>
+</div></section>
+<section class="person" data-pk="sebastien-drochon">
+<div class="who"><b>Sébastien Drochon</b><code>sebastien-drochon</code></div><div class="grid">
+<figure data-id="56883" data-path="2019/11/Drochon2.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/11/Drochon2.jpg" alt=""><figcaption><span class="sc">54</span> &middot; 960&times;720<br>2019/11/Drochon2.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="56893" data-path="2019/11/Drochon1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/11/Drochon1.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 850&times;531<br>2019/11/Drochon1.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="56863" data-path="2019/11/Drochon3b.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/11/Drochon3b.jpg" alt=""><figcaption><span class="sc">41</span> &middot; 1024&times;577<br>2019/11/Drochon3b.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="56873" data-path="2019/11/Drochon3a.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/11/Drochon3a.jpg" alt=""><figcaption><span class="sc">41</span> &middot; 850&times;505<br>2019/11/Drochon3a.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="56853" data-path="2019/11/Drochon4.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/11/Drochon4.jpg" alt=""><figcaption><span class="sc">26</span> &middot; 942&times;460<br>2019/11/Drochon4.jpg<br>filename is the surname, banner-shaped</figcaption></figure>
+</div></section>
+<section class="person" data-pk="joycelyn-elders">
+<div class="who"><b>Joycelyn Elders</b><code>joycelyn-elders</code></div><div class="grid">
+<figure data-id="82339" data-path="2021/11/EldersPic3.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/11/EldersPic3.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 307&times;418<br>2021/11/EldersPic3.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="82308" data-path="2021/11/Dr.-Joycelyn-Elders_pic-106_800x1100-e1637703413428.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/11/Dr.-Joycelyn-Elders_pic-106_800x1100-e1637703413428.jpg" alt=""><figcaption><span class="sc">37</span> &middot; 400&times;550<br>2021/11/Dr.-Joycelyn-Elders_pic-106_800x1100-e1637703413428.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="74935" data-path="2021/05/Joycelyn-Elderss-conf-pic-1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/05/Joycelyn-Elderss-conf-pic-1.jpg" alt=""><figcaption><span class="sc">36</span> &middot; 1042&times;1050<br>2021/05/Joycelyn-Elderss-conf-pic-1.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="74925" data-path="2021/05/Joycelyn-Elderss-conf-pic.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/05/Joycelyn-Elderss-conf-pic.jpg" alt=""><figcaption><span class="sc">30</span> &middot; 275&times;277<br>2021/05/Joycelyn-Elderss-conf-pic.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="79813" data-path="2021/09/Elders-satcher.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/09/Elders-satcher.png" alt=""><figcaption><span class="sc">24</span> &middot; 1280&times;720<br>2021/09/Elders-satcher.png<br></figcaption></figure>
+<figure data-id="74336" data-path="2021/05/Elders-HZL-DC-proj.jpg.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/05/Elders-HZL-DC-proj.jpg.png" alt=""><figcaption><span class="sc">19</span> &middot; 2000&times;1126<br>2021/05/Elders-HZL-DC-proj.jpg.png<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="state-senator-mike-thompson">
+<div class="who"><b>Mike Thompson</b><code>state-senator-mike-thompson</code></div><div class="grid">
+<figure data-id="89453" data-path="2022/07/thompson-2.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/07/thompson-2.png" alt=""><figcaption><span class="sc">46</span> &middot; 800&times;448<br>2022/07/thompson-2.png<br>filename is the surname</figcaption></figure>
+<figure data-id="89432" data-path="2022/07/thompson.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/07/thompson.png" alt=""><figcaption><span class="sc">40</span> &middot; 479&times;268<br>2022/07/thompson.png<br>filename is the surname</figcaption></figure>
+<figure data-id="89443" data-path="2022/07/thompson-1.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/07/thompson-1.png" alt=""><figcaption><span class="sc">40</span> &middot; 479&times;268<br>2022/07/thompson-1.png<br>filename is the surname</figcaption></figure>
+</div></section>
+<section class="person" data-pk="mayor-david-castro">
+<div class="who"><b>David Castro</b><code>mayor-david-castro</code></div><div class="grid">
+<figure data-id="75642" data-path="2021/06/david-castro.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/06/david-castro.png" alt=""><figcaption><span class="sc">27</span> &middot; 781&times;433<br>2021/06/david-castro.png<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="andrey-kortunov">
+<div class="who"><b>Andrey Kortunov</b><code>andrey-kortunov</code></div><div class="grid">
+<figure data-id="83775" data-path="2022/01/kortunov-interview-square.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/01/kortunov-interview-square.jpg" alt=""><figcaption><span class="sc">27</span> &middot; 831&times;720<br>2022/01/kortunov-interview-square.jpg<br></figcaption></figure>
+<figure data-id="83786" data-path="2022/01/kortunov-interview-square-2.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/01/kortunov-interview-square-2.jpg" alt=""><figcaption><span class="sc">27</span> &middot; 831&times;720<br>2022/01/kortunov-interview-square-2.jpg<br></figcaption></figure>
+<figure data-id="79584" data-path="2021/09/Kortunov_Andrey_Russian-Affaris-Council.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/09/Kortunov_Andrey_Russian-Affaris-Council.png" alt=""><figcaption><span class="sc">15</span> &middot; 1280&times;720<br>2021/09/Kortunov_Andrey_Russian-Affaris-Council.png<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="clifford-kiracofe">
+<div class="who"><b>Clifford Kiracofe</b><code>clifford-kiracofe</code></div><div class="grid">
+<figure data-id="2225" data-path="2013/02/20130126-kiracofe.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/02/20130126-kiracofe.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>2013/02/20130126-kiracofe.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+</div></section>
+<section class="person" data-pk="william-c-jones">
+<div class="who"><b>William C. Jones</b><code>william-c-jones</code></div><div class="grid">
+<figure data-id="2035" data-path="2013/02/20130126-jones.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/02/20130126-jones.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>2013/02/20130126-jones.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+<figure data-id="2525" data-path="/kunden/170065_55128/si/wordpress/wp-content/uploads/2013/02/20130126-jones.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads//kunden/170065_55128/si/wordpress/wp-content/uploads/2013/02/20130126-jones.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>/kunden/170065_55128/si/wordpress/wp-content/uploads/2013/02/20130126-jones.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+<figure data-id="32387" data-path="2015/10/bill-jones.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2015/10/bill-jones.jpg" alt=""><figcaption><span class="sc">20</span> &middot; size unknown<br>2015/10/bill-jones.jpg<br></figcaption></figure>
+<figure data-id="2806" data-path="2013/04/20130413-walter-jones.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/04/20130413-walter-jones.jpg" alt=""><figcaption><span class="sc">16</span> &middot; size unknown<br>2013/04/20130413-walter-jones.jpg<br></figcaption></figure>
+<figure data-id="3030" data-path="/kunden/170065_55128/si/wordpress/wp-content/uploads/2013/04/20130413-walter-jones.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads//kunden/170065_55128/si/wordpress/wp-content/uploads/2013/04/20130413-walter-jones.jpg" alt=""><figcaption><span class="sc">16</span> &middot; size unknown<br>/kunden/170065_55128/si/wordpress/wp-content/uploads/2013/04/20130413-walter-jones.jpg<br></figcaption></figure>
+<figure data-id="30239" data-path="2015/06/walter-jones.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2015/06/walter-jones.jpg" alt=""><figcaption><span class="sc">16</span> &middot; size unknown<br>2015/06/walter-jones.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="donald-ramotar">
+<div class="who"><b>Donald Ramotar</b><code>donald-ramotar</code></div><div class="grid">
+<figure data-id="99032" data-path="2023/09/ramotar-donald13.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2023/09/ramotar-donald13.jpg" alt=""><figcaption><span class="sc">47</span> &middot; 512&times;620<br>2023/09/ramotar-donald13.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="114598" data-path="2026/02/donald-ramotar.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2026/02/donald-ramotar.jpg" alt=""><figcaption><span class="sc">41</span> &middot; 250&times;250<br>2026/02/donald-ramotar.jpg<br>portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="raymond-mcgovern">
+<div class="who"><b>Raymond McGovern</b><code>raymond-mcgovern</code></div><div class="grid">
+<figure data-id="84043" data-path="2022/01/Ray_McGovern-e1642598304959.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/01/Ray_McGovern-e1642598304959.jpg" alt=""><figcaption><span class="sc">52</span> &middot; 600&times;750<br>2022/01/Ray_McGovern-e1642598304959.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="94431" data-path="2023/01/576px-Ray_McGovern-e1673751915919.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2023/01/576px-Ray_McGovern-e1673751915919.jpg" alt=""><figcaption><span class="sc">42</span> &middot; 300&times;375<br>2023/01/576px-Ray_McGovern-e1673751915919.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="21853" data-path="2014/10/mcgovern.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2014/10/mcgovern.jpg" alt=""><figcaption><span class="sc">38</span> &middot; size unknown<br>2014/10/mcgovern.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="94775" data-path="2023/02/ray-mcgovern.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2023/02/ray-mcgovern.jpg" alt=""><figcaption><span class="sc">35</span> &middot; 1920&times;1280<br>2023/02/ray-mcgovern.jpg<br></figcaption></figure>
+<figure data-id="94441" data-path="2023/01/576px-Ray_McGovern-1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2023/01/576px-Ray_McGovern-1.jpg" alt=""><figcaption><span class="sc">30</span> &middot; 1280&times;720<br>2023/01/576px-Ray_McGovern-1.jpg<br></figcaption></figure>
+<figure data-id="44933" data-path="2018/01/ray-mcgovern_0.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/01/ray-mcgovern_0.jpg" alt=""><figcaption><span class="sc">27</span> &middot; size unknown<br>2018/01/ray-mcgovern_0.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="akiko-mikamo">
+<div class="who"><b>Akiko Mikamo</b><code>akiko-mikamo</code></div><div class="grid">
+<figure data-id="111387" data-path="2025/08/webcast-HZL-Dr-Mikamo.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2025/08/webcast-HZL-Dr-Mikamo.jpg" alt=""><figcaption><span class="sc">19</span> &middot; 1920&times;1080<br>2025/08/webcast-HZL-Dr-Mikamo.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="vincenzo-romanello">
+<div class="who"><b>Vincenzo Romanello</b><code>vincenzo-romanello</code></div><div class="grid">
+<figure data-id="108119" data-path="2025/03/Vincenzo-Romanello.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2025/03/Vincenzo-Romanello.jpg" alt=""><figcaption><span class="sc">47</span> &middot; 1080&times;1080<br>2025/03/Vincenzo-Romanello.jpg<br>portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="adrian-pearl">
+<div class="who"><b>Adrian Pearl</b><code>adrian-pearl</code></div><div class="grid">
+<figure data-id="51800" data-path="2019/02/jen-pearl.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/02/jen-pearl.jpg" alt=""><figcaption><span class="sc">51</span> &middot; 480&times;554<br>2019/02/jen-pearl.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="51810" data-path="2019/02/jen-pearl-i.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/02/jen-pearl-i.jpg" alt=""><figcaption><span class="sc">42</span> &middot; 312&times;360<br>2019/02/jen-pearl-i.jpg<br>portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="alexander-demissie">
+<div class="who"><b>(cand.) Alexander Demissie</b><code>alexander-demissie</code></div><div class="grid">
+<figure data-id="44144" data-path="2017/12/SI-Alexander-Demissie.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2017/12/SI-Alexander-Demissie.jpg" alt=""><figcaption><span class="sc">14</span> &middot; size unknown<br>2017/12/SI-Alexander-Demissie.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="alf-schmidt">
+<div class="who"><b>Alf Schmidt</b><code>alf-schmidt</code></div><div class="grid">
+<figure data-id="89248" data-path="2022/07/Schmidt_Alf_German-Farm-leader-1.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/07/Schmidt_Alf_German-Farm-leader-1.png" alt=""><figcaption><span class="sc">24</span> &middot; 776&times;610<br>2022/07/Schmidt_Alf_German-Farm-leader-1.png<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="anastasia-battle">
+<div class="who"><b>Anastasia Battle</b><code>anastasia-battle</code></div><div class="grid">
+<figure data-id="69277" data-path="2021/02/571px-George_Washington_After_the_Battle_of_Princeton_-_Charles_Willson_Peale_-_Cleveland_Museum_of_Art_29746887513.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/02/571px-George_Washington_After_the_Battle_of_Princeton_-_Charles_Willson_Peale_-_Cleveland_Museum_of_Art_29746887513.jpg" alt=""><figcaption><span class="sc">28</span> &middot; 571&times;600<br>2021/02/571px-George_Washington_After_the_Battle_of_Princeton_-_Charles_Willson_Peale_-_Cleveland_Museum_of_Art_29746887513.jpg<br>portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="anatoly-antonov">
+<div class="who"><b>Anatoly Antonov</b><code>anatoly-antonov</code></div><div class="grid">
+<figure data-id="103512" data-path="2024/07/antonov.jpeg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2024/07/antonov.jpeg" alt=""><figcaption><span class="sc">60</span> &middot; 196&times;258<br>2024/07/antonov.jpeg<br>filename is the surname, portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="antonella-banaudi">
+<div class="who"><b>Antonella Banaudi</b><code>antonella-banaudi</code></div><div class="grid">
+<figure data-id="3155" data-path="2013/05/20130413-banaudi-1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/05/20130413-banaudi-1.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>2013/05/20130413-banaudi-1.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+<figure data-id="3159" data-path="2013/05/20130413-banaudi-2.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/05/20130413-banaudi-2.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>2013/05/20130413-banaudi-2.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+<figure data-id="3527" data-path="2013/05/20130413-banaudi-11.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/05/20130413-banaudi-11.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>2013/05/20130413-banaudi-11.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+<figure data-id="3530" data-path="2013/05/20130413-banaudi-21.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/05/20130413-banaudi-21.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>2013/05/20130413-banaudi-21.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+<figure data-id="4141" data-path="/kunden/170065_55128/si/wordpress/wp-content/uploads/2013/05/20130413-banaudi-1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads//kunden/170065_55128/si/wordpress/wp-content/uploads/2013/05/20130413-banaudi-1.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>/kunden/170065_55128/si/wordpress/wp-content/uploads/2013/05/20130413-banaudi-1.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+<figure data-id="4143" data-path="/kunden/170065_55128/si/wordpress/wp-content/uploads/2013/05/20130413-banaudi-2.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads//kunden/170065_55128/si/wordpress/wp-content/uploads/2013/05/20130413-banaudi-2.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>/kunden/170065_55128/si/wordpress/wp-content/uploads/2013/05/20130413-banaudi-2.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+</div></section>
+<section class="person" data-pk="armin-azima">
+<div class="who"><b>Armin Azima</b><code>armin-azima</code></div><div class="grid">
+<figure data-id="48069" data-path="2018/07/Azima2.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/07/Azima2.jpg" alt=""><figcaption><span class="sc">66</span> &middot; 438&times;563<br>2018/07/Azima2.jpg<br>filename is the surname, portrait/square</figcaption></figure>
+<figure data-id="48109" data-path="2018/07/Azima6.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/07/Azima6.jpg" alt=""><figcaption><span class="sc">66</span> &middot; 572&times;533<br>2018/07/Azima6.jpg<br>filename is the surname, portrait/square</figcaption></figure>
+<figure data-id="48089" data-path="2018/07/Azima4.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/07/Azima4.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 1088&times;721<br>2018/07/Azima4.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="48099" data-path="2018/07/Azima5.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/07/Azima5.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 1077&times;748<br>2018/07/Azima5.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="48079" data-path="2018/07/Azima3.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/07/Azima3.jpg" alt=""><figcaption><span class="sc">40</span> &middot; 642&times;391<br>2018/07/Azima3.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="48119" data-path="2018/07/Azima7.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/07/Azima7.jpg" alt=""><figcaption><span class="sc">20</span> &middot; 1107&times;378<br>2018/07/Azima7.jpg<br>filename is the surname, banner-shaped</figcaption></figure>
+</div></section>
+<section class="person" data-pk="augustinus-berkhout">
+<div class="who"><b>Augustinus Berkhout</b><code>augustinus-berkhout</code></div><div class="grid">
+<figure data-id="82201" data-path="2021/11/Guus-Berkhout-Cropped.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/11/Guus-Berkhout-Cropped.png" alt=""><figcaption><span class="sc">36</span> &middot; 275&times;275<br>2021/11/Guus-Berkhout-Cropped.png<br>portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="bill-bullard">
+<div class="who"><b>Bill Bullard</b><code>bill-bullard</code></div><div class="grid">
+<figure data-id="89403" data-path="2022/07/Bullard_Tractors-on-street.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/07/Bullard_Tractors-on-street.png" alt=""><figcaption><span class="sc">18</span> &middot; 4193&times;2212<br>2022/07/Bullard_Tractors-on-street.png<br></figcaption></figure>
+<figure data-id="89413" data-path="2022/07/Bullard-w-tractors-on-street.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/07/Bullard-w-tractors-on-street.png" alt=""><figcaption><span class="sc">17</span> &middot; 3851&times;2187<br>2022/07/Bullard-w-tractors-on-street.png<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="breno-hermann">
+<div class="who"><b>Breno Hermann</b><code>breno-hermann</code></div><div class="grid">
+<figure data-id="23707" data-path="2014/12/ne_si_hermann.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2014/12/ne_si_hermann.jpg" alt=""><figcaption><span class="sc">23</span> &middot; size unknown<br>2014/12/ne_si_hermann.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="bruce-director">
+<div class="who"><b>Bruce Director</b><code>bruce-director</code></div><div class="grid">
+<figure data-id="67897" data-path="2021/02/800px-Anthony_S._Fauci_M.D._NIAID_Director_49673229463.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/02/800px-Anthony_S._Fauci_M.D._NIAID_Director_49673229463.jpg" alt=""><figcaption><span class="sc">16</span> &middot; 800&times;533<br>2021/02/800px-Anthony_S._Fauci_M.D._NIAID_Director_49673229463.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="conductor-ingo-bathow">
+<div class="who"><b>Ingo Bathow</b><code>conductor-ingo-bathow</code></div><div class="grid">
+<figure data-id="36604" data-path="2016/07/BathowDirigentChina.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2016/07/BathowDirigentChina.jpg" alt=""><figcaption><span class="sc">10</span> &middot; size unknown<br>2016/07/BathowDirigentChina.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="daniel-marmolejo">
+<div class="who"><b>Daniel Marmolejo</b><code>daniel-marmolejo</code></div><div class="grid">
+<figure data-id="72104" data-path="2021/04/marmolejo_daniel_3-20-21.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/04/marmolejo_daniel_3-20-21.jpg" alt=""><figcaption><span class="sc">30</span> &middot; 1680&times;1050<br>2021/04/marmolejo_daniel_3-20-21.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="dennis-speed">
+<div class="who"><b>Dennis Speed</b><code>dennis-speed</code></div><div class="grid">
+<figure data-id="63093" data-path="2020/10/high-speed.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/10/high-speed.jpg" alt=""><figcaption><span class="sc">48</span> &middot; 631&times;930<br>2020/10/high-speed.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="62727" data-path="2020/09/china_high_speed_rail.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/09/china_high_speed_rail.jpg" alt=""><figcaption><span class="sc">17</span> &middot; 1200&times;718<br>2020/09/china_high_speed_rail.jpg<br></figcaption></figure>
+<figure data-id="44484" data-path="2017/12/SI-china-highspeedrail-construction.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2017/12/SI-china-highspeedrail-construction.jpg" alt=""><figcaption><span class="sc">12</span> &middot; 720&times;405<br>2017/12/SI-china-highspeedrail-construction.jpg<br></figcaption></figure>
+<figure data-id="65505" data-path="2020/12/Beijing–_Guangzhou–_Shenzhen–_Hong-Kong-high-speed-railway-scaled.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/12/Beijing–_Guangzhou–_Shenzhen–_Hong-Kong-high-speed-railway-scaled.jpg" alt=""><figcaption><span class="sc">9</span> &middot; 2560&times;1709<br>2020/12/Beijing–_Guangzhou–_Shenzhen–_Hong-Kong-high-speed-railway-scaled.jpg<br></figcaption></figure>
+<figure data-id="18502" data-path="2014/09/China-highspeedrail-Lars-Plougmann.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2014/09/China-highspeedrail-Lars-Plougmann.jpg" alt=""><figcaption><span class="sc">4</span> &middot; size unknown<br>2014/09/China-highspeedrail-Lars-Plougmann.jpg<br></figcaption></figure>
+<figure data-id="18540" data-path="2014/09/China-highspeedrail-Lars-Plougmann-small.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2014/09/China-highspeedrail-Lars-Plougmann-small.jpg" alt=""><figcaption><span class="sc">3</span> &middot; size unknown<br>2014/09/China-highspeedrail-Lars-Plougmann-small.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="dmitri-trenin">
+<div class="who"><b>Dmitri Trenin</b><code>dmitri-trenin</code></div><div class="grid">
+<figure data-id="114588" data-path="2026/02/dmitri-trenin.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2026/02/dmitri-trenin.jpg" alt=""><figcaption><span class="sc">40</span> &middot; 250&times;250<br>2026/02/dmitri-trenin.jpg<br>portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="dmitriy-polyanskiy">
+<div class="who"><b>Dmitriy Polyanskiy</b><code>dmitriy-polyanskiy</code></div><div class="grid">
+<figure data-id="112864" data-path="2025/11/PolyanskIY.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2025/11/PolyanskIY.png" alt=""><figcaption><span class="sc">46</span> &middot; 1366&times;768<br>2025/11/PolyanskIY.png<br>filename is the surname</figcaption></figure>
+</div></section>
+<section class="person" data-pk="domingo-reyes">
+<div class="who"><b>Domingo Reyes (Dominican Republic)</b><code>domingo-reyes</code></div><div class="grid">
+<figure data-id="51683" data-path="2019/01/Czech_Republic_Flag_01.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/01/Czech_Republic_Flag_01.jpg" alt=""><figcaption><span class="sc">24</span> &middot; 900&times;600<br>2019/01/Czech_Republic_Flag_01.jpg<br></figcaption></figure>
+<figure data-id="51693" data-path="2019/01/Czech_Republic_Flag_02.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/01/Czech_Republic_Flag_02.png" alt=""><figcaption><span class="sc">24</span> &middot; 900&times;600<br>2019/01/Czech_Republic_Flag_02.png<br></figcaption></figure>
+<figure data-id="51628" data-path="2019/01/800px-Flag_of_the_Czech_Republic_5-3.svg_.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/01/800px-Flag_of_the_Czech_Republic_5-3.svg_.png" alt=""><figcaption><span class="sc">17</span> &middot; 800&times;480<br>2019/01/800px-Flag_of_the_Czech_Republic_5-3.svg_.png<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="dusko-dimitrijevic">
+<div class="who"><b>Duško Dimitrijević</b><code>dusko-dimitrijevic</code></div><div class="grid">
+<figure data-id="48139" data-path="2018/07/dimitrijevic1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/07/dimitrijevic1.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 600&times;400<br>2018/07/dimitrijevic1.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="48149" data-path="2018/07/dimitrijevic2.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/07/dimitrijevic2.jpg" alt=""><figcaption><span class="sc">40</span> &middot; 400&times;230<br>2018/07/dimitrijevic2.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="48159" data-path="2018/07/dimitrijevic3.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/07/dimitrijevic3.jpg" alt=""><figcaption><span class="sc">20</span> &middot; 600&times;160<br>2018/07/dimitrijevic3.jpg<br>filename is the surname, banner-shaped</figcaption></figure>
+</div></section>
+<section class="person" data-pk="eric-walcott-director">
+<div class="who"><b>Eric Walcott – Director</b><code>eric-walcott-director</code></div><div class="grid">
+<figure data-id="67897" data-path="2021/02/800px-Anthony_S._Fauci_M.D._NIAID_Director_49673229463.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/02/800px-Anthony_S._Fauci_M.D._NIAID_Director_49673229463.jpg" alt=""><figcaption><span class="sc">16</span> &middot; 800&times;533<br>2021/02/800px-Anthony_S._Fauci_M.D._NIAID_Director_49673229463.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="ernest-johnson">
+<div class="who"><b>Ernest Johnson</b><code>ernest-johnson</code></div><div class="grid">
+<figure data-id="68619" data-path="2021/02/boris-johnson.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/02/boris-johnson.jpg" alt=""><figcaption><span class="sc">29</span> &middot; 1024&times;698<br>2021/02/boris-johnson.jpg<br></figcaption></figure>
+<figure data-id="87540" data-path="2022/05/Johnson_Fumio-Kishida-.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/05/Johnson_Fumio-Kishida-.jpg" alt=""><figcaption><span class="sc">20</span> &middot; 1674&times;989<br>2022/05/Johnson_Fumio-Kishida-.jpg<br></figcaption></figure>
+<figure data-id="114936" data-path="2026/02/Larry-Johnson-interview.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2026/02/Larry-Johnson-interview.jpg" alt=""><figcaption><span class="sc">19</span> &middot; 1280&times;720<br>2026/02/Larry-Johnson-interview.jpg<br></figcaption></figure>
+<figure data-id="106789" data-path="2025/02/Webcast-Feb-5-Larry-Johnson.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2025/02/Webcast-Feb-5-Larry-Johnson.jpg" alt=""><figcaption><span class="sc">18</span> &middot; 1920&times;1080<br>2025/02/Webcast-Feb-5-Larry-Johnson.jpg<br></figcaption></figure>
+<figure data-id="67715" data-path="2021/01/Dave_Johnson_coal-fired_power_plant_central_Wyoming.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/01/Dave_Johnson_coal-fired_power_plant_central_Wyoming.jpg" alt=""><figcaption><span class="sc">12</span> &middot; 1552&times;932<br>2021/01/Dave_Johnson_coal-fired_power_plant_central_Wyoming.jpg<br></figcaption></figure>
+<figure data-id="24357" data-path="2015/01/martin_luther_king_jr-_and_lyndon_johnson_large.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2015/01/martin_luther_king_jr-_and_lyndon_johnson_large.jpg" alt=""><figcaption><span class="sc">5</span> &middot; size unknown<br>2015/01/martin_luther_king_jr-_and_lyndon_johnson_large.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="fred-m-membe">
+<div class="who"><b>Fred M&#x27;membe</b><code>fred-m-membe</code></div><div class="grid">
+<figure data-id="831" data-path="2025/11/team-member-2.webp"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2025/11/team-member-2.webp" alt=""><figcaption><span class="sc">50</span> &middot; 450&times;675<br>2025/11/team-member-2.webp<br>portrait/square</figcaption></figure>
+<figure data-id="832" data-path="2025/11/team-member-3.webp"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2025/11/team-member-3.webp" alt=""><figcaption><span class="sc">50</span> &middot; 450&times;675<br>2025/11/team-member-3.webp<br>portrait/square</figcaption></figure>
+<figure data-id="834" data-path="2025/11/team-member-4.webp"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2025/11/team-member-4.webp" alt=""><figcaption><span class="sc">50</span> &middot; 450&times;675<br>2025/11/team-member-4.webp<br>portrait/square</figcaption></figure>
+<figure data-id="835" data-path="2025/11/team-member-5.webp"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2025/11/team-member-5.webp" alt=""><figcaption><span class="sc">50</span> &middot; 450&times;675<br>2025/11/team-member-5.webp<br>portrait/square</figcaption></figure>
+<figure data-id="836" data-path="2025/11/team-member-6.webp"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2025/11/team-member-6.webp" alt=""><figcaption><span class="sc">50</span> &middot; 450&times;675<br>2025/11/team-member-6.webp<br>portrait/square</figcaption></figure>
+<figure data-id="852" data-path="2025/11/team-member-1.webp"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2025/11/team-member-1.webp" alt=""><figcaption><span class="sc">50</span> &middot; 450&times;675<br>2025/11/team-member-1.webp<br>portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="geoff-young">
+<div class="who"><b>Geoff Young</b><code>geoff-young</code></div><div class="grid">
+<figure data-id="36657" data-path="2016/07/Chanyoung-Lee.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2016/07/Chanyoung-Lee.jpg" alt=""><figcaption><span class="sc">14</span> &middot; size unknown<br>2016/07/Chanyoung-Lee.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="gretchen-small">
+<div class="who"><b>Gretchen Small</b><code>gretchen-small</code></div><div class="grid">
+<figure data-id="2658" data-path="2013/03/20130323-small.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/03/20130323-small.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>2013/03/20130323-small.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+<figure data-id="3209" data-path="/kunden/170065_55128/si/wordpress/wp-content/uploads/2013/03/20130323-small.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads//kunden/170065_55128/si/wordpress/wp-content/uploads/2013/03/20130323-small.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>/kunden/170065_55128/si/wordpress/wp-content/uploads/2013/03/20130323-small.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+<figure data-id="57103" data-path="2019/11/Small1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/11/Small1.jpg" alt=""><figcaption><span class="sc">54</span> &middot; 1016&times;738<br>2019/11/Small1.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="57113" data-path="2019/11/Small2.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/11/Small2.jpg" alt=""><figcaption><span class="sc">54</span> &middot; 686&times;499<br>2019/11/Small2.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="57123" data-path="2019/11/Small3.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/11/Small3.jpg" alt=""><figcaption><span class="sc">54</span> &middot; 752&times;546<br>2019/11/Small3.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="57133" data-path="2019/11/Small4.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/11/Small4.jpg" alt=""><figcaption><span class="sc">54</span> &middot; 850&times;618<br>2019/11/Small4.jpg<br>filename is the surname</figcaption></figure>
+</div></section>
+<section class="person" data-pk="grussworte-von-lynne-speed">
+<div class="who"><b>Grußworte von Lynne Speed</b><code>grussworte-von-lynne-speed</code></div><div class="grid">
+<figure data-id="63093" data-path="2020/10/high-speed.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/10/high-speed.jpg" alt=""><figcaption><span class="sc">48</span> &middot; 631&times;930<br>2020/10/high-speed.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="62727" data-path="2020/09/china_high_speed_rail.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/09/china_high_speed_rail.jpg" alt=""><figcaption><span class="sc">17</span> &middot; 1200&times;718<br>2020/09/china_high_speed_rail.jpg<br></figcaption></figure>
+<figure data-id="44484" data-path="2017/12/SI-china-highspeedrail-construction.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2017/12/SI-china-highspeedrail-construction.jpg" alt=""><figcaption><span class="sc">12</span> &middot; 720&times;405<br>2017/12/SI-china-highspeedrail-construction.jpg<br></figcaption></figure>
+<figure data-id="65505" data-path="2020/12/Beijing–_Guangzhou–_Shenzhen–_Hong-Kong-high-speed-railway-scaled.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/12/Beijing–_Guangzhou–_Shenzhen–_Hong-Kong-high-speed-railway-scaled.jpg" alt=""><figcaption><span class="sc">9</span> &middot; 2560&times;1709<br>2020/12/Beijing–_Guangzhou–_Shenzhen–_Hong-Kong-high-speed-railway-scaled.jpg<br></figcaption></figure>
+<figure data-id="18502" data-path="2014/09/China-highspeedrail-Lars-Plougmann.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2014/09/China-highspeedrail-Lars-Plougmann.jpg" alt=""><figcaption><span class="sc">4</span> &middot; size unknown<br>2014/09/China-highspeedrail-Lars-Plougmann.jpg<br></figcaption></figure>
+<figure data-id="18540" data-path="2014/09/China-highspeedrail-Lars-Plougmann-small.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2014/09/China-highspeedrail-Lars-Plougmann-small.jpg" alt=""><figcaption><span class="sc">3</span> &middot; size unknown<br>2014/09/China-highspeedrail-Lars-Plougmann-small.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="hans-christof-von-sponeck">
+<div class="who"><b>Hans-Christof von Sponeck</b><code>hans-christof-von-sponeck</code></div><div class="grid">
+<figure data-id="114608" data-path="2026/02/hans-von-sponeck.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2026/02/hans-von-sponeck.jpg" alt=""><figcaption><span class="sc">48</span> &middot; 250&times;245<br>2026/02/hans-von-sponeck.jpg<br>portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="hans-kochler">
+<div class="who"><b>Hans Köchler</b><code>hans-kochler</code></div><div class="grid">
+<figure data-id="74108" data-path="2021/05/hans-kochler-e1620834865317.jpeg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/05/hans-kochler-e1620834865317.jpeg" alt=""><figcaption><span class="sc">23</span> &middot; 300&times;168<br>2021/05/hans-kochler-e1620834865317.jpeg<br></figcaption></figure>
+<figure data-id="74120" data-path="2021/05/hans-kochler.jpeg.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/05/hans-kochler.jpeg.jpg" alt=""><figcaption><span class="sc">18</span> &middot; 512&times;342<br>2021/05/hans-kochler.jpeg.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="hisham-sharaf">
+<div class="who"><b>Hisham Sharaf</b><code>hisham-sharaf</code></div><div class="grid">
+<figure data-id="70815" data-path="2021/03/sharaf_hisham_3-21-21.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/03/sharaf_hisham_3-21-21.jpg" alt=""><figcaption><span class="sc">26</span> &middot; 1680&times;1050<br>2021/03/sharaf_hisham_3-21-21.jpg<br></figcaption></figure>
+<figure data-id="33961" data-path="2016/03/sharaf-hussein.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2016/03/sharaf-hussein.jpg" alt=""><figcaption><span class="sc">16</span> &middot; size unknown<br>2016/03/sharaf-hussein.jpg<br></figcaption></figure>
+<figure data-id="68373" data-path="2021/02/Omran_Sharaf_at_Hope_Scientific_Mission_Announcement_Event.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/02/Omran_Sharaf_at_Hope_Scientific_Mission_Announcement_Event.jpg" alt=""><figcaption><span class="sc">10</span> &middot; 800&times;544<br>2021/02/Omran_Sharaf_at_Hope_Scientific_Mission_Announcement_Event.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="iliad-alexander-terra">
+<div class="who"><b>Iliad Alexander Terra</b><code>iliad-alexander-terra</code></div><div class="grid">
+<figure data-id="71743" data-path="2021/04/Indias-Energy-Minister-Raj-Kumar-Singh.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/04/Indias-Energy-Minister-Raj-Kumar-Singh.jpg" alt=""><figcaption><span class="sc">20</span> &middot; 1194&times;926<br>2021/04/Indias-Energy-Minister-Raj-Kumar-Singh.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="ivo-christov">
+<div class="who"><b>Ivo Christov</b><code>ivo-christov</code></div><div class="grid">
+<figure data-id="48035" data-path="2018/07/christov1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/07/christov1.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 920&times;510<br>2018/07/christov1.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="48045" data-path="2018/07/christov2.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/07/christov2.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 920&times;530<br>2018/07/christov2.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="48055" data-path="2018/07/christov3.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/07/christov3.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 920&times;545<br>2018/07/christov3.jpg<br>filename is the surname</figcaption></figure>
+</div></section>
+<section class="person" data-pk="james-george-jatras">
+<div class="who"><b>James George Jatras</b><code>james-george-jatras</code></div><div class="grid">
+<figure data-id="84115" data-path="2022/01/jatras-plain.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/01/jatras-plain.jpg" alt=""><figcaption><span class="sc">27</span> &middot; 1024&times;576<br>2022/01/jatras-plain.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="john-sigerson">
+<div class="who"><b>John Sigerson</b><code>john-sigerson</code></div><div class="grid">
+<figure data-id="2209" data-path="2013/02/20130126-sigerson.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/02/20130126-sigerson.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>2013/02/20130126-sigerson.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+<figure data-id="3135" data-path="2013/05/20130413-sigerson-adelaide.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/05/20130413-sigerson-adelaide.jpg" alt=""><figcaption><span class="sc">18</span> &middot; size unknown<br>2013/05/20130413-sigerson-adelaide.jpg<br></figcaption></figure>
+<figure data-id="3538" data-path="2013/05/20130413-sigerson-adelaide1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/05/20130413-sigerson-adelaide1.jpg" alt=""><figcaption><span class="sc">18</span> &middot; size unknown<br>2013/05/20130413-sigerson-adelaide1.jpg<br></figcaption></figure>
+<figure data-id="4133" data-path="/kunden/170065_55128/si/wordpress/wp-content/uploads/2013/05/20130413-sigerson-adelaide.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads//kunden/170065_55128/si/wordpress/wp-content/uploads/2013/05/20130413-sigerson-adelaide.jpg" alt=""><figcaption><span class="sc">18</span> &middot; size unknown<br>/kunden/170065_55128/si/wordpress/wp-content/uploads/2013/05/20130413-sigerson-adelaide.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="jozef-miklosko">
+<div class="who"><b>Jozef Mikloško (Slovak Republic)</b><code>jozef-miklosko</code></div><div class="grid">
+<figure data-id="51683" data-path="2019/01/Czech_Republic_Flag_01.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/01/Czech_Republic_Flag_01.jpg" alt=""><figcaption><span class="sc">24</span> &middot; 900&times;600<br>2019/01/Czech_Republic_Flag_01.jpg<br></figcaption></figure>
+<figure data-id="51693" data-path="2019/01/Czech_Republic_Flag_02.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/01/Czech_Republic_Flag_02.png" alt=""><figcaption><span class="sc">24</span> &middot; 900&times;600<br>2019/01/Czech_Republic_Flag_02.png<br></figcaption></figure>
+<figure data-id="51628" data-path="2019/01/800px-Flag_of_the_Czech_Republic_5-3.svg_.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/01/800px-Flag_of_the_Czech_Republic_5-3.svg_.png" alt=""><figcaption><span class="sc">17</span> &middot; 800&times;480<br>2019/01/800px-Flag_of_the_Czech_Republic_5-3.svg_.png<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="julio-de-vido">
+<div class="who"><b>Julio De Vido</b><code>julio-de-vido</code></div><div class="grid">
+<figure data-id="97632" data-path="2023/07/Julio-De-Vido-Argentia.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2023/07/Julio-De-Vido-Argentia.png" alt=""><figcaption><span class="sc">38</span> &middot; 665&times;756<br>2023/07/Julio-De-Vido-Argentia.png<br>portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="kevin-thompson">
+<div class="who"><b>Kevin Thompson</b><code>kevin-thompson</code></div><div class="grid">
+<figure data-id="89453" data-path="2022/07/thompson-2.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/07/thompson-2.png" alt=""><figcaption><span class="sc">46</span> &middot; 800&times;448<br>2022/07/thompson-2.png<br>filename is the surname</figcaption></figure>
+<figure data-id="89432" data-path="2022/07/thompson.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/07/thompson.png" alt=""><figcaption><span class="sc">40</span> &middot; 479&times;268<br>2022/07/thompson.png<br>filename is the surname</figcaption></figure>
+<figure data-id="89443" data-path="2022/07/thompson-1.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/07/thompson-1.png" alt=""><figcaption><span class="sc">40</span> &middot; 479&times;268<br>2022/07/thompson-1.png<br>filename is the surname</figcaption></figure>
+</div></section>
+<section class="person" data-pk="manuel-hassassian">
+<div class="who"><b>Manuel Hassassian</b><code>manuel-hassassian</code></div><div class="grid">
+<figure data-id="113714" data-path="2025/12/Hassassian-Copenhagen.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2025/12/Hassassian-Copenhagen.jpg" alt=""><figcaption><span class="sc">26</span> &middot; 1280&times;720<br>2025/12/Hassassian-Copenhagen.jpg<br></figcaption></figure>
+<figure data-id="101686" data-path="2024/04/botschafter-manuel-hassassian.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2024/04/botschafter-manuel-hassassian.jpg" alt=""><figcaption><span class="sc">22</span> &middot; 250&times;226<br>2024/04/botschafter-manuel-hassassian.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="meifang-zhang">
+<div class="who"><b>Meifang Zhang</b><code>meifang-zhang</code></div><div class="grid">
+<figure data-id="114567" data-path="2026/02/zhang-weiwei.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2026/02/zhang-weiwei.jpg" alt=""><figcaption><span class="sc">38</span> &middot; 250&times;250<br>2026/02/zhang-weiwei.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="41897" data-path="2017/07/Berlin-conference-prof-Zhang.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2017/07/Berlin-conference-prof-Zhang.jpg" alt=""><figcaption><span class="sc">8</span> &middot; 710&times;399<br>2017/07/Berlin-conference-prof-Zhang.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="michele-geraci">
+<div class="who"><b>Michele Geraci</b><code>michele-geraci</code></div><div class="grid">
+<figure data-id="52518" data-path="2019/03/hzl-geraci-italia.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/03/hzl-geraci-italia.jpg" alt=""><figcaption><span class="sc">22</span> &middot; 1280&times;720<br>2019/03/hzl-geraci-italia.jpg<br></figcaption></figure>
+<figure data-id="52508" data-path="2019/03/celani-geraci.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/03/celani-geraci.jpg" alt=""><figcaption><span class="sc">20</span> &middot; 640&times;360<br>2019/03/celani-geraci.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="mike-callicrate">
+<div class="who"><b>Mike Callicrate</b><code>mike-callicrate</code></div><div class="grid">
+<figure data-id="60913" data-path="2020/06/Callicrate1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/06/Callicrate1.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 950&times;535<br>2020/06/Callicrate1.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="60923" data-path="2020/06/Callicrate2.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/06/Callicrate2.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 1079&times;714<br>2020/06/Callicrate2.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="60933" data-path="2020/06/Callicrate3.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/06/Callicrate3.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 1014&times;522<br>2020/06/Callicrate3.jpg<br>filename is the surname</figcaption></figure>
+</div></section>
+<section class="person" data-pk="mike-robinson">
+<div class="who"><b>Mike Robinson</b><code>mike-robinson</code></div><div class="grid">
+<figure data-id="40730" data-path="2012/12/Renaissance-Robinson-1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2012/12/Renaissance-Robinson-1.jpg" alt=""><figcaption><span class="sc">14</span> &middot; size unknown<br>2012/12/Renaissance-Robinson-1.jpg<br></figcaption></figure>
+<figure data-id="40581" data-path="2017/04/Profile-Circle-Legacy-Page-Robinson.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2017/04/Profile-Circle-Legacy-Page-Robinson.jpg" alt=""><figcaption><span class="sc">8</span> &middot; size unknown<br>2017/04/Profile-Circle-Legacy-Page-Robinson.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="moderator-claudio-celani">
+<div class="who"><b>Claudio Celani</b><code>moderator-claudio-celani</code></div><div class="grid">
+<figure data-id="75322" data-path="2021/06/Screeshots-by-Claudio-Celani-EIRNS.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/06/Screeshots-by-Claudio-Celani-EIRNS.png" alt=""><figcaption><span class="sc">22</span> &middot; 940&times;788<br>2021/06/Screeshots-by-Claudio-Celani-EIRNS.png<br></figcaption></figure>
+<figure data-id="52508" data-path="2019/03/celani-geraci.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/03/celani-geraci.jpg" alt=""><figcaption><span class="sc">20</span> &middot; 640&times;360<br>2019/03/celani-geraci.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="naledi-pandor">
+<div class="who"><b>Naledi Pandor</b><code>naledi-pandor</code></div><div class="grid">
+<figure data-id="114557" data-path="2026/02/naledi-pandor.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2026/02/naledi-pandor.jpg" alt=""><figcaption><span class="sc">40</span> &middot; 250&times;250<br>2026/02/naledi-pandor.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="90079" data-path="2022/08/So-Africa-For-Min-Grace-Naledi-Mandisa-Pandor.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/So-Africa-For-Min-Grace-Naledi-Mandisa-Pandor.jpg" alt=""><figcaption><span class="sc">26</span> &middot; 299&times;385<br>2022/08/So-Africa-For-Min-Grace-Naledi-Mandisa-Pandor.jpg<br>portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="nicola-scafetta">
+<div class="who"><b>Nicola Scafetta</b><code>nicola-scafetta</code></div><div class="grid">
+<figure data-id="74990" data-path="2021/05/scafetta_nicola.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/05/scafetta_nicola.jpg" alt=""><figcaption><span class="sc">28</span> &middot; 1680&times;1050<br>2021/05/scafetta_nicola.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="par-moni-abdullah">
+<div class="who"><b>par Moni Abdullah</b><code>par-moni-abdullah</code></div><div class="grid">
+<figure data-id="100551" data-path="2024/01/international-court-justice_abdullah-asiran-anadolu-agency-getty-scaled-1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2024/01/international-court-justice_abdullah-asiran-anadolu-agency-getty-scaled-1.jpg" alt=""><figcaption><span class="sc">11</span> &middot; 2560&times;1707<br>2024/01/international-court-justice_abdullah-asiran-anadolu-agency-getty-scaled-1.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="paul-driessen">
+<div class="who"><b>Paul Driessen</b><code>paul-driessen</code></div><div class="grid">
+<figure data-id="66495" data-path="2021/01/driessen.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/01/driessen.png" alt=""><figcaption><span class="sc">66</span> &middot; 866&times;866<br>2021/01/driessen.png<br>filename is the surname, portrait/square</figcaption></figure>
+<figure data-id="66509" data-path="2021/01/driessen-2.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/01/driessen-2.jpg" alt=""><figcaption><span class="sc">66</span> &middot; 882&times;882<br>2021/01/driessen-2.jpg<br>filename is the surname, portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="pino-arlacchi">
+<div class="who"><b>Pino Arlacchi</b><code>pino-arlacchi</code></div><div class="grid">
+<figure data-id="78045" data-path="2021/08/Arlacchi.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/08/Arlacchi.png" alt=""><figcaption><span class="sc">46</span> &middot; 1280&times;720<br>2021/08/Arlacchi.png<br>filename is the surname</figcaption></figure>
+</div></section>
+<section class="person" data-pk="richard-freeman">
+<div class="who"><b>Richard Freeman</b><code>richard-freeman</code></div><div class="grid">
+<figure data-id="89670" data-path="2022/08/Chas_W_Freeman-1.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/Chas_W_Freeman-1.png" alt=""><figcaption><span class="sc">49</span> &middot; 1000&times;1250<br>2022/08/Chas_W_Freeman-1.png<br>portrait/square</figcaption></figure>
+<figure data-id="71039" data-path="2021/03/happer-freeman-e1616785501825.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/03/happer-freeman-e1616785501825.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 506&times;489<br>2021/03/happer-freeman-e1616785501825.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="114578" data-path="2026/02/chas-freeman.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2026/02/chas-freeman.jpg" alt=""><figcaption><span class="sc">45</span> &middot; 250&times;250<br>2026/02/chas-freeman.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="71035" data-path="2021/03/happer-freeman.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/03/happer-freeman.jpg" alt=""><figcaption><span class="sc">27</span> &middot; 986&times;495<br>2021/03/happer-freeman.jpg<br></figcaption></figure>
+<figure data-id="94661" data-path="2023/01/Chas-W.-Freeman.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2023/01/Chas-W.-Freeman.jpg" alt=""><figcaption><span class="sc">23</span> &middot; 470&times;310<br>2023/01/Chas-W.-Freeman.jpg<br></figcaption></figure>
+<figure data-id="108942" data-path="2025/04/HZl-Chas-Freeman-April-17.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2025/04/HZl-Chas-Freeman-April-17.jpg" alt=""><figcaption><span class="sc">20</span> &middot; 1280&times;720<br>2025/04/HZl-Chas-Freeman-April-17.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="roger-stone">
+<div class="who"><b>Roger Stone</b><code>roger-stone</code></div><div class="grid">
+<figure data-id="2233" data-path="2013/02/20130126-stone.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/02/20130126-stone.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>2013/02/20130126-stone.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+<figure data-id="2530" data-path="/kunden/170065_55128/si/wordpress/wp-content/uploads/2013/02/20130126-stone.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads//kunden/170065_55128/si/wordpress/wp-content/uploads/2013/02/20130126-stone.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>/kunden/170065_55128/si/wordpress/wp-content/uploads/2013/02/20130126-stone.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+</div></section>
+<section class="person" data-pk="saad-mohamed-mahmoud-elgioshy">
+<div class="who"><b>Saad Mohamed Mahmoud Elgioshy</b><code>saad-mohamed-mahmoud-elgioshy</code></div><div class="grid">
+<figure data-id="43635" data-path="2017/12/Dr-Saad-Mohamed-Mahmoud-Elgioshy.jpeg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2017/12/Dr-Saad-Mohamed-Mahmoud-Elgioshy.jpeg" alt=""><figcaption><span class="sc">17</span> &middot; 1280&times;852<br>2017/12/Dr-Saad-Mohamed-Mahmoud-Elgioshy.jpeg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="sergey-pulinets">
+<div class="who"><b>Sergey Pulinets</b><code>sergey-pulinets</code></div><div class="grid">
+<figure data-id="66462" data-path="2021/01/pulinets.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/01/pulinets.jpg" alt=""><figcaption><span class="sc">60</span> &middot; 150&times;150<br>2021/01/pulinets.jpg<br>filename is the surname, portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="shah-mehrabi">
+<div class="who"><b>Shah Mehrabi</b><code>shah-mehrabi</code></div><div class="grid">
+<figure data-id="83074" data-path="2021/12/mehrabi-pic.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/12/mehrabi-pic.jpg" alt=""><figcaption><span class="sc">34</span> &middot; 1280&times;720<br>2021/12/mehrabi-pic.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="shirley-evers-manley">
+<div class="who"><b>Shirley Evers-Manley</b><code>shirley-evers-manley</code></div><div class="grid">
+<figure data-id="71479" data-path="2021/03/evers-manley_shirley_3-21-21.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/03/evers-manley_shirley_3-21-21.jpg" alt=""><figcaption><span class="sc">30</span> &middot; 1680&times;1050<br>2021/03/evers-manley_shirley_3-21-21.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="theodore-postol">
+<div class="who"><b>Theodore Postol</b><code>theodore-postol</code></div><div class="grid">
+<figure data-id="115297" data-path="2026/03/postol-2.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2026/03/postol-2.jpg" alt=""><figcaption><span class="sc">66</span> &middot; 1086&times;1466<br>2026/03/postol-2.jpg<br>filename is the surname, portrait/square</figcaption></figure>
+<figure data-id="102664" data-path="2024/06/postol-1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2024/06/postol-1.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 1920&times;1080<br>2024/06/postol-1.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="104444" data-path="2024/09/postol-grafik.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2024/09/postol-grafik.jpg" alt=""><figcaption><span class="sc">34</span> &middot; 690&times;560<br>2024/09/postol-grafik.jpg<br></figcaption></figure>
+<figure data-id="113091" data-path="2025/11/ted-postol-ipc-deutsch.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2025/11/ted-postol-ipc-deutsch.jpg" alt=""><figcaption><span class="sc">18</span> &middot; 1280&times;720<br>2025/11/ted-postol-ipc-deutsch.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="uwe-behrens">
+<div class="who"><b>Uwe Behrens</b><code>uwe-behrens</code></div><div class="grid">
+<figure data-id="88687" data-path="2022/06/koo-wang-behrens.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/06/koo-wang-behrens.jpg" alt=""><figcaption><span class="sc">26</span> &middot; 1920&times;1080<br>2022/06/koo-wang-behrens.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="william-binney">
+<div class="who"><b>William Binney</b><code>william-binney</code></div><div class="grid">
+<figure data-id="61048" data-path="2020/07/William_Binney-IMG_9040.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/07/William_Binney-IMG_9040.jpg" alt=""><figcaption><span class="sc">41</span> &middot; 2923&times;4385<br>2020/07/William_Binney-IMG_9040.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="61060" data-path="2020/07/William_Binney-IMG_9040-1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/07/William_Binney-IMG_9040-1.jpg" alt=""><figcaption><span class="sc">41</span> &middot; 2923&times;4385<br>2020/07/William_Binney-IMG_9040-1.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="61059" data-path="2020/07/William_Binney-IMG_9040-1-e1595447164176.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/07/William_Binney-IMG_9040-1-e1595447164176.jpg" alt=""><figcaption><span class="sc">40</span> &middot; 700&times;1050<br>2020/07/William_Binney-IMG_9040-1-e1595447164176.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="61069" data-path="2020/07/William_Binney_at_CoPS2013_9336.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/07/William_Binney_at_CoPS2013_9336.jpg" alt=""><figcaption><span class="sc">38</span> &middot; 3744&times;3744<br>2020/07/William_Binney_at_CoPS2013_9336.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="52042" data-path="2019/02/russian-binney.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/02/russian-binney.jpg" alt=""><figcaption><span class="sc">32</span> &middot; 1338&times;1076<br>2019/02/russian-binney.jpg<br></figcaption></figure>
+<figure data-id="52121" data-path="2019/02/binney-russian2.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/02/binney-russian2.jpg" alt=""><figcaption><span class="sc">32</span> &middot; 1338&times;1076<br>2019/02/binney-russian2.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="william-happer">
+<div class="who"><b>William Happer</b><code>william-happer</code></div><div class="grid">
+<figure data-id="66520" data-path="2021/01/will-happer.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/01/will-happer.jpg" alt=""><figcaption><span class="sc">50</span> &middot; 500&times;500<br>2021/01/will-happer.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="71144" data-path="2021/03/happer.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/03/happer.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 1280&times;720<br>2021/03/happer.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="71039" data-path="2021/03/happer-freeman-e1616785501825.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/03/happer-freeman-e1616785501825.jpg" alt=""><figcaption><span class="sc">43</span> &middot; 506&times;489<br>2021/03/happer-freeman-e1616785501825.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="71035" data-path="2021/03/happer-freeman.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/03/happer-freeman.jpg" alt=""><figcaption><span class="sc">24</span> &middot; 986&times;495<br>2021/03/happer-freeman.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="wolfgang-bittner">
+<div class="who"><b>Wolfgang Bittner</b><code>wolfgang-bittner</code></div><div class="grid">
+<figure data-id="90199" data-path="2022/08/bittner_wolfgang_schiller_cof_6-18-22-1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/bittner_wolfgang_schiller_cof_6-18-22-1.jpg" alt=""><figcaption><span class="sc">30</span> &middot; 200&times;229<br>2022/08/bittner_wolfgang_schiller_cof_6-18-22-1.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="90654" data-path="2022/08/bittner_wolfgang_schiller_cof_6-18-22-1-1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/bittner_wolfgang_schiller_cof_6-18-22-1-1.jpg" alt=""><figcaption><span class="sc">30</span> &middot; 220&times;267<br>2022/08/bittner_wolfgang_schiller_cof_6-18-22-1-1.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="89991" data-path="2022/08/bittner_wolfgang_schiller_cof_6-18-22.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/bittner_wolfgang_schiller_cof_6-18-22.jpg" alt=""><figcaption><span class="sc">16</span> &middot; 1680&times;1050<br>2022/08/bittner_wolfgang_schiller_cof_6-18-22.jpg<br></figcaption></figure>
+<figure data-id="89995" data-path="2022/08/bittner_wolfgang_schiller_cof_6-18-22-e1660231072104.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/bittner_wolfgang_schiller_cof_6-18-22-e1660231072104.jpg" alt=""><figcaption><span class="sc">10</span> &middot; 400&times;250<br>2022/08/bittner_wolfgang_schiller_cof_6-18-22-e1660231072104.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="zaher-wahab">
+<div class="who"><b>Zaher Wahab</b><code>zaher-wahab</code></div><div class="grid">
+<figure data-id="88724" data-path="2022/06/wahab-e1656346627336.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/06/wahab-e1656346627336.jpg" alt=""><figcaption><span class="sc">53</span> &middot; 250&times;376<br>2022/06/wahab-e1656346627336.jpg<br>filename is the surname, portrait/square</figcaption></figure>
+<figure data-id="88742" data-path="2022/06/afghan-wahab.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/06/afghan-wahab.jpg" alt=""><figcaption><span class="sc">24</span> &middot; 1280&times;720<br>2022/06/afghan-wahab.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="zhang-weiwei">
+<div class="who"><b>Zhang Weiwei</b><code>zhang-weiwei</code></div><div class="grid">
+<figure data-id="114567" data-path="2026/02/zhang-weiwei.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2026/02/zhang-weiwei.jpg" alt=""><figcaption><span class="sc">41</span> &middot; 250&times;250<br>2026/02/zhang-weiwei.jpg<br>portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="alessia-ruggeri">
+<div class="who"><b>Alessia Ruggeri</b><code>alessia-ruggeri</code></div><div class="grid">
+<figure data-id="86299" data-path="2022/03/2022-03-00-Westphalia-Petition-A-Ruggeri-Database-Italia.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/03/2022-03-00-Westphalia-Petition-A-Ruggeri-Database-Italia.png" alt=""><figcaption><span class="sc">33</span> &middot; 1892&times;2298<br>2022/03/2022-03-00-Westphalia-Petition-A-Ruggeri-Database-Italia.png<br>portrait/square</figcaption></figure>
+<figure data-id="85789" data-path="2022/03/Ruggeri-CPR-800x445-1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/03/Ruggeri-CPR-800x445-1.jpg" alt=""><figcaption><span class="sc">31</span> &middot; 800&times;445<br>2022/03/Ruggeri-CPR-800x445-1.jpg<br></figcaption></figure>
+<figure data-id="86310" data-path="2022/03/2022-03-00-Westphalia-Petition-A-Ruggeri-Database-Italia-smaller-e1648304859918.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/03/2022-03-00-Westphalia-Petition-A-Ruggeri-Database-Italia-smaller-e1648304859918.png" alt=""><figcaption><span class="sc">31</span> &middot; 750&times;910<br>2022/03/2022-03-00-Westphalia-Petition-A-Ruggeri-Database-Italia-smaller-e1648304859918.png<br>portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="alto-mayumi-nakamura-japan">
+<div class="who"><b>Mayumi Nakamura - Japan</b><code>alto-mayumi-nakamura-japan</code></div><div class="grid">
+<figure data-id="44753" data-path="2018/01/japan.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/01/japan.png" alt=""><figcaption><span class="sc">46</span> &middot; 801&times;532<br>2018/01/japan.png<br>filename is the surname</figcaption></figure>
+<figure data-id="98003" data-path="2023/07/offner-Brief-aus-Japan-e1690118380500.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2023/07/offner-Brief-aus-Japan-e1690118380500.jpg" alt=""><figcaption><span class="sc">36</span> &middot; 500&times;500<br>2023/07/offner-Brief-aus-Japan-e1690118380500.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="68973" data-path="2021/02/Japan-maglev.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/02/Japan-maglev.jpg" alt=""><figcaption><span class="sc">32</span> &middot; 800&times;600<br>2021/02/Japan-maglev.jpg<br></figcaption></figure>
+<figure data-id="68982" data-path="2021/02/Japan-maglev-1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/02/Japan-maglev-1.jpg" alt=""><figcaption><span class="sc">32</span> &middot; 800&times;600<br>2021/02/Japan-maglev-1.jpg<br></figcaption></figure>
+<figure data-id="46897" data-path="2018/07/japan-compressed.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2018/07/japan-compressed.jpg" alt=""><figcaption><span class="sc">11</span> &middot; size unknown<br>2018/07/japan-compressed.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="bass-chanyoung-lee-korea">
+<div class="who"><b>Baß: Chanyoung Lee - Korea</b><code>bass-chanyoung-lee-korea</code></div><div class="grid">
+<figure data-id="93761" data-path="2022/12/Korea_Pope_Francis_Haemi_Martyrdom_Holy_Ground_09_14941920001.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/12/Korea_Pope_Francis_Haemi_Martyrdom_Holy_Ground_09_14941920001.jpg" alt=""><figcaption><span class="sc">5</span> &middot; 640&times;392<br>2022/12/Korea_Pope_Francis_Haemi_Martyrdom_Holy_Ground_09_14941920001.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="george-hillman">
+<div class="who"><b>George Hillman</b><code>george-hillman</code></div><div class="grid">
+<figure data-id="23766" data-path="2015/01/ne-si-hillman.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2015/01/ne-si-hillman.jpg" alt=""><figcaption><span class="sc">23</span> &middot; size unknown<br>2015/01/ne-si-hillman.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="gian-marco-sanna">
+<div class="who"><b>Gian Marco Sanna</b><code>gian-marco-sanna</code></div><div class="grid">
+<figure data-id="35081" data-path="2016/07/NP-Sanna.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2016/07/NP-Sanna.png" alt=""><figcaption><span class="sc">26</span> &middot; size unknown<br>2016/07/NP-Sanna.png<br></figcaption></figure>
+<figure data-id="36734" data-path="2016/07/Gian-Marco-Sanna.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2016/07/Gian-Marco-Sanna.jpg" alt=""><figcaption><span class="sc">12</span> &middot; size unknown<br>2016/07/Gian-Marco-Sanna.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="helena-chang">
+<div class="who"><b>Helena Chang</b><code>helena-chang</code></div><div class="grid">
+<figure data-id="3899" data-path="2013/11/chang.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/11/chang.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 1280&times;720<br>2013/11/chang.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="65462" data-path="2020/12/chang_e_4.jpeg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/12/chang_e_4.jpeg" alt=""><figcaption><span class="sc">39</span> &middot; 900&times;502<br>2020/12/chang_e_4.jpeg<br>filename is the surname</figcaption></figure>
+<figure data-id="66404" data-path="2021/01/climate-change-globe.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/01/climate-change-globe.jpg" alt=""><figcaption><span class="sc">37</span> &middot; 732&times;732<br>2021/01/climate-change-globe.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="19621" data-path="2014/10/Change-3.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2014/10/Change-3.png" alt=""><figcaption><span class="sc">31</span> &middot; size unknown<br>2014/10/Change-3.png<br>filename is the surname</figcaption></figure>
+<figure data-id="51225" data-path="2019/01/change-4-roll-out.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/01/change-4-roll-out.jpg" alt=""><figcaption><span class="sc">29</span> &middot; 700&times;545<br>2019/01/change-4-roll-out.jpg<br></figcaption></figure>
+<figure data-id="66389" data-path="2021/01/climate-change-5224748_1280.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/01/climate-change-5224748_1280.jpg" alt=""><figcaption><span class="sc">21</span> &middot; 1280&times;731<br>2021/01/climate-change-5224748_1280.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="jochen-heibertshausen">
+<div class="who"><b>Jochen Heibertshausen (guest artist)</b><code>jochen-heibertshausen</code></div><div class="grid">
+<figure data-id="68360" data-path="2021/02/1200px-Artistu2019s_impression_of_the_Tianwen-1_mission.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/02/1200px-Artistu2019s_impression_of_the_Tianwen-1_mission.jpg" alt=""><figcaption><span class="sc">12</span> &middot; 1200&times;675<br>2021/02/1200px-Artistu2019s_impression_of_the_Tianwen-1_mission.jpg<br></figcaption></figure>
+<figure data-id="75161" data-path="2021/06/1200px-Artistu2019s_impression_of_the_Tianwen-1_mission.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/06/1200px-Artistu2019s_impression_of_the_Tianwen-1_mission.jpg" alt=""><figcaption><span class="sc">12</span> &middot; 1200&times;675<br>2021/06/1200px-Artistu2019s_impression_of_the_Tianwen-1_mission.jpg<br></figcaption></figure>
+<figure data-id="99144" data-path="2023/09/20230918-petition-artists-slider.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2023/09/20230918-petition-artists-slider.jpg" alt=""><figcaption><span class="sc">5</span> &middot; 1920&times;1440<br>2023/09/20230918-petition-artists-slider.jpg<br>-slide</figcaption></figure>
+</div></section>
+<section class="person" data-pk="kildare-clarke">
+<div class="who"><b>Kildare Clarke</b><code>kildare-clarke</code></div><div class="grid">
+<figure data-id="72041" data-path="2021/04/Ramsey-Clark-1927-2021-e1618232475384.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/04/Ramsey-Clark-1927-2021-e1618232475384.png" alt=""><figcaption><span class="sc">25</span> &middot; 120&times;150<br>2021/04/Ramsey-Clark-1927-2021-e1618232475384.png<br>portrait/square, too small</figcaption></figure>
+</div></section>
+<section class="person" data-pk="maurizio-abbate">
+<div class="who"><b>Maurizio Abbate</b><code>maurizio-abbate</code></div><div class="grid">
+<figure data-id="97742" data-path="2023/07/abbate_maurizio__strasbourg_conf_7-8_9-23._01-scaled.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2023/07/abbate_maurizio__strasbourg_conf_7-8_9-23._01-scaled.jpg" alt=""><figcaption><span class="sc">13</span> &middot; 2560&times;1707<br>2023/07/abbate_maurizio__strasbourg_conf_7-8_9-23._01-scaled.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="moderator-jen-pearl">
+<div class="who"><b>Jen Pearl</b><code>moderator-jen-pearl</code></div><div class="grid">
+<figure data-id="51800" data-path="2019/02/jen-pearl.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/02/jen-pearl.jpg" alt=""><figcaption><span class="sc">51</span> &middot; 480&times;554<br>2019/02/jen-pearl.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="51810" data-path="2019/02/jen-pearl-i.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/02/jen-pearl-i.jpg" alt=""><figcaption><span class="sc">42</span> &middot; 312&times;360<br>2019/02/jen-pearl-i.jpg<br>portrait/square</figcaption></figure>
+</div></section>
+<section class="person" data-pk="par-dr-jasminka-simic">
+<div class="who"><b>par Dr. Jasminka SIMIC</b><code>par-dr-jasminka-simic</code></div><div class="grid">
+<figure data-id="44089" data-path="2017/12/SI-Dr.-Jasminka-Simic.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2017/12/SI-Dr.-Jasminka-Simic.jpg" alt=""><figcaption><span class="sc">9</span> &middot; size unknown<br>2017/12/SI-Dr.-Jasminka-Simic.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="robert-l-baker">
+<div class="who"><b>Robert L. Baker</b><code>robert-l-baker</code></div><div class="grid">
+<figure data-id="60881" data-path="2020/06/Baker1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/06/Baker1.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 2890&times;2003<br>2020/06/Baker1.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="60891" data-path="2020/06/Baker2.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/06/Baker2.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 1024&times;525<br>2020/06/Baker2.jpg<br>filename is the surname</figcaption></figure>
+<figure data-id="60901" data-path="2020/06/Baker3.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2020/06/Baker3.jpg" alt=""><figcaption><span class="sc">46</span> &middot; 1280&times;720<br>2020/06/Baker3.jpg<br>filename is the surname</figcaption></figure>
+</div></section>
+<section class="person" data-pk="sopran-sua-baek-korea">
+<div class="who"><b>Sua Baek - Korea</b><code>sopran-sua-baek-korea</code></div><div class="grid">
+<figure data-id="93761" data-path="2022/12/Korea_Pope_Francis_Haemi_Martyrdom_Holy_Ground_09_14941920001.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/12/Korea_Pope_Francis_Haemi_Martyrdom_Holy_Ground_09_14941920001.jpg" alt=""><figcaption><span class="sc">5</span> &middot; 640&times;392<br>2022/12/Korea_Pope_Francis_Haemi_Martyrdom_Holy_Ground_09_14941920001.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="wolfgang-amadeus-mozart">
+<div class="who"><b>Wolfgang Amadeus Mozart</b><code>wolfgang-amadeus-mozart</code></div><div class="grid">
+<figure data-id="53416" data-path="2019/04/mozart.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/04/mozart.png" alt=""><figcaption><span class="sc">66</span> &middot; 471&times;471<br>2019/04/mozart.png<br>filename is the surname, portrait/square</figcaption></figure>
+<figure data-id="3812" data-path="2013/10/Wolfgang-amadeus-mozart_1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/10/Wolfgang-amadeus-mozart_1.jpg" alt=""><figcaption><span class="sc">37</span> &middot; 2079&times;3056<br>2013/10/Wolfgang-amadeus-mozart_1.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="3955" data-path="2013/11/Wolfgang-amadeus-mozart_1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/11/Wolfgang-amadeus-mozart_1.jpg" alt=""><figcaption><span class="sc">37</span> &middot; 2079&times;3056<br>2013/11/Wolfgang-amadeus-mozart_1.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="53427" data-path="2019/04/mozart-vespers-houston.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2019/04/mozart-vespers-houston.jpg" alt=""><figcaption><span class="sc">18</span> &middot; 832&times;468<br>2019/04/mozart-vespers-houston.jpg<br></figcaption></figure>
+<figure data-id="67965" data-path="2021/02/BachMozartBeethoven.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/02/BachMozartBeethoven.png" alt=""><figcaption><span class="sc">18</span> &middot; 1873&times;1099<br>2021/02/BachMozartBeethoven.png<br></figcaption></figure>
+<figure data-id="68015" data-path="2021/02/BachMozartBeethoven-1-e1612525220180.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/02/BachMozartBeethoven-1-e1612525220180.png" alt=""><figcaption><span class="sc">18</span> &middot; 1873&times;1099<br>2021/02/BachMozartBeethoven-1-e1612525220180.png<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="elvira-o-green">
+<div class="who"><b>Elvira O. Green</b><code>elvira-o-green</code></div><div class="grid">
+<figure data-id="2222" data-path="2013/02/20130126-green.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2013/02/20130126-green.jpg" alt=""><figcaption><span class="sc">63</span> &middot; size unknown<br>2013/02/20130126-green.jpg<br>filename is the surname, date+surname convention</figcaption></figure>
+<figure data-id="90674" data-path="2022/08/greenwald_glen.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/greenwald_glen.jpg" alt=""><figcaption><span class="sc">35</span> &middot; 230&times;282<br>2022/08/greenwald_glen.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="92323" data-path="2022/10/2022-10-15-youth-conf-Defeat-Green-Fascism.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/10/2022-10-15-youth-conf-Defeat-Green-Fascism.png" alt=""><figcaption><span class="sc">21</span> &middot; 718&times;576<br>2022/10/2022-10-15-youth-conf-Defeat-Green-Fascism.png<br></figcaption></figure>
+<figure data-id="80646" data-path="2021/10/schwab-green-energy.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/10/schwab-green-energy.png" alt=""><figcaption><span class="sc">17</span> &middot; 1280&times;720<br>2021/10/schwab-green-energy.png<br></figcaption></figure>
+<figure data-id="1220" data-path="2012/12/bg-stopgreen.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2012/12/bg-stopgreen.jpg" alt=""><figcaption><span class="sc">16</span> &middot; size unknown<br>2012/12/bg-stopgreen.jpg<br></figcaption></figure>
+<figure data-id="68197" data-path="2021/02/Neon-Green-Gradient-Fitness-YouTube-Thumbnail-3.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2021/02/Neon-Green-Gradient-Fitness-YouTube-Thumbnail-3.png" alt=""><figcaption><span class="sc">11</span> &middot; 1280&times;720<br>2021/02/Neon-Green-Gradient-Fitness-YouTube-Thumbnail-3.png<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="ranjani-saigal">
+<div class="who"><b>Ranjani Saigal</b><code>ranjani-saigal</code></div><div class="grid">
+<figure data-id="23719" data-path="2014/12/ne-si-saigal.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2014/12/ne-si-saigal.jpg" alt=""><figcaption><span class="sc">22</span> &middot; size unknown<br>2014/12/ne-si-saigal.jpg<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="talal-moualla">
+<div class="who"><b>Talal Moualla</b><code>talal-moualla</code></div><div class="grid">
+<figure data-id="35214" data-path="2016/07/NP-Moualla-screenshot.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2016/07/NP-Moualla-screenshot.png" alt=""><figcaption><span class="sc">6</span> &middot; size unknown<br>2016/07/NP-Moualla-screenshot.png<br>-screenshot</figcaption></figure>
+</div></section>
+<section class="person" data-pk="mira-terada">
+<div class="who"><b>Mira Terada</b><code>mira-terada</code></div><div class="grid">
+<figure data-id="93439" data-path="2022/12/mira-terada.png"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/12/mira-terada.png" alt=""><figcaption><span class="sc">30</span> &middot; 1205&times;657<br>2022/12/mira-terada.png<br></figcaption></figure>
+</div></section>
+<section class="person" data-pk="leonidas-chrysanthopoulos">
+<div class="who"><b>Leonidas Chrysanthopoulos</b><code>leonidas-chrysanthopoulos</code></div><div class="grid">
+<figure data-id="90624" data-path="2022/08/chrysanthopoulos_leonidas_CMYK.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/chrysanthopoulos_leonidas_CMYK.jpg" alt=""><figcaption><span class="sc">42</span> &middot; 225&times;261<br>2022/08/chrysanthopoulos_leonidas_CMYK.jpg<br>portrait/square</figcaption></figure>
+<figure data-id="90003" data-path="2022/08/chrysanthopoulos_leonidas_5-scaled.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/chrysanthopoulos_leonidas_5-scaled.jpg" alt=""><figcaption><span class="sc">27</span> &middot; 2560&times;1707<br>2022/08/chrysanthopoulos_leonidas_5-scaled.jpg<br></figcaption></figure>
+<figure data-id="91439" data-path="2022/09/chrysanthopoulos_leonidas_5-scaled.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/09/chrysanthopoulos_leonidas_5-scaled.jpg" alt=""><figcaption><span class="sc">27</span> &middot; 2560&times;1707<br>2022/09/chrysanthopoulos_leonidas_5-scaled.jpg<br></figcaption></figure>
+<figure data-id="90424" data-path="2022/08/chrysanthopoulos_leonidas_5-scaled-710x473-1.jpg"><img loading="lazy" src="https://schillerinstitute.com/wp-content/uploads/2022/08/chrysanthopoulos_leonidas_5-scaled-710x473-1.jpg" alt=""><figcaption><span class="sc">26</span> &middot; 710&times;473<br>2022/08/chrysanthopoulos_leonidas_5-scaled-710x473-1.jpg<br></figcaption></figure>
+</div></section>
+</main>
+<div id="out"><div style="display:flex;gap:8px;align-items:center;margin-bottom:6px">
+<button onclick="cp()">Copy CSV</button><span id="n" style="color:var(--muted)"></span></div>
+<textarea id="ta" readonly placeholder="person_key,attachment_id,file_path"></textarea></div>
+<script>
+const picks=new Map();
+document.querySelectorAll('figure').forEach(f=>f.addEventListener('click',()=>{
+  const pk=f.closest('.person').dataset.pk;
+  f.closest('.grid').querySelectorAll('figure').forEach(o=>{if(o!==f)o.classList.remove('pick')});
+  if(f.classList.contains('pick')){f.classList.remove('pick');picks.delete(pk);}
+  else{f.classList.add('pick');picks.set(pk,[f.dataset.id,f.dataset.path]);}
+  render();
+}));
+function render(){
+  const lines=['person_key,attachment_id,file_path'];
+  for(const [pk,[id,path]] of picks) lines.push(`${pk},${id},"${path}"`);
+  document.getElementById('ta').value=lines.join('\n');
+  document.getElementById('n').textContent=picks.size+' picked';
+}
+function cp(){const t=document.getElementById('ta');t.select();document.execCommand('copy');}
+render();
+</script></body></html>
