@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>People Drafts — Schiller Institute</title>
+<meta name="description" content="The /people/ listing drafts and the Jasper design system.">
+<link rel="stylesheet" href="design-system/fonts.css">
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/blocksy-shim.css">
+<link rel="stylesheet" href="design-system/components.css">
+<link rel="icon" href="../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+<style>
+	.ix { padding-block: var(--si-space-2xl) var(--si-space-3xl); display: grid; gap: var(--si-space-xl); }
+	.ix header { display: grid; gap: var(--si-space-s); }
+	.ix .si-display { font-size: var(--si-step-5); }
+	.ix ol { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--si-space-s); }
+	.ix li a { height: 100%; display: grid; gap: var(--si-space-2xs); align-content: start; padding: var(--si-space-m); background: var(--si-card); border: var(--si-hairline); color: inherit; text-decoration: none; transition: box-shadow var(--si-dur-2) var(--si-ease), transform var(--si-dur-2) var(--si-ease); }
+	.ix li a:hover { box-shadow: var(--si-shadow-2); transform: translateY(-2px); }
+	.ix .letter { font-family: var(--si-font-serif); font-style: italic; font-weight: 300; font-size: var(--si-step-4); line-height: 1; color: var(--si-jasper-deep); }
+	.ix .title { font-family: var(--si-font-serif); font-size: var(--si-step-1); font-weight: 500; color: var(--si-ink); }
+	.ix li p { font-size: var(--si-step-n1); }
+	.ix .system a { background: var(--si-night); border-color: var(--si-night); }
+	.ix .system .letter { color: var(--si-brass-on-night); }
+	.ix .system .title { color: #fff; }
+	.ix .system p { color: var(--si-on-night-2); }
+</style>
+</head>
+<body>
+<main class="si-page ct-container ix">
+	<header>
+		<p class="si-eyebrow si-eyebrow--ruled">/people/ · si_person archive · 2026-09-17</p>
+		<h1 class="si-display">People, <em>three ways</em></h1>
+		<p class="si-lead">Three drafts of the listing page for everyone who has spoken, written or performed for the Institute, and the design system all three are built on. Real data: the 418 people the importer will create.</p>
+	</header>
+	<ol>
+		<li><a href="templates/people-register.html"><span class="letter">A</span><span class="title">The Register</span><p class="si-meta">A scholarly index of persons: surname-first, small caps, dotted leaders, a portrait loupe. The fastest way to find one person.</p></a></li>
+		<li><a href="templates/people-medallions.html"><span class="letter">B</span><span class="title">The Gallery</span><p class="si-meta">A cabinet of portrait medallions: drifting cameo banner, principal voices, paged cards, View Transitions.</p></a></li>
+		<li><a href="templates/people-chronicle.html"><span class="letter">C</span><span class="title">The Chronicle</span><p class="si-meta">Who spoke, and when: a histogram that navigates, year by year and conference by conference, scroll-driven.</p></a></li>
+		<li class="system"><a href="design-system/specimen.html"><span class="letter">J</span><span class="title">Jasper, the design system</span><p class="si-meta">Palette, type, space, motion and components, and how each one maps onto Blocksy.</p></a></li>
+	</ol>
+	<p class="si-meta">Read <a class="si-link" href="README.md">README.md</a> for the WordPress port, verification and the data findings.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+	"version": 3,
+	"title": "Jasper",
+	"settings": {
+		"typography": {
+			"fontFamilies": [
+				{ "slug": "serif", "name": "Source Serif (reading)", "fontFamily": "var(--si-font-serif)" },
+				{ "slug": "sans", "name": "Source Sans (signposting)", "fontFamily": "var(--si-font-sans)" }
+			],
+			"fontSizes": [
+				{ "slug": "small", "name": "Small · meta", "size": "var(--si-step-n1)", "fluid": false },
+				{ "slug": "medium", "name": "Medium · lead", "size": "var(--si-step-1)", "fluid": false },
+				{ "slug": "large", "name": "Large · h4", "size": "var(--si-step-2)", "fluid": false },
+				{ "slug": "x-large", "name": "Extra large · h2", "size": "var(--si-step-4)", "fluid": false },
+				{ "slug": "xx-large", "name": "Display", "size": "var(--si-step-6)", "fluid": false }
+			]
+		},
+		"spacing": {
+			"defaultSpacingSizes": false,
+			"spacingSizes": [
+				{ "slug": "20", "name": "2XS", "size": "var(--si-space-2xs)" },
+				{ "slug": "30", "name": "XS", "size": "var(--si-space-xs)" },
+				{ "slug": "40", "name": "S", "size": "var(--si-space-s)" },
+				{ "slug": "50", "name": "M", "size": "var(--si-space-m)" },
+				{ "slug": "60", "name": "L", "size": "var(--si-space-l)" },
+				{ "slug": "70", "name": "XL", "size": "var(--si-space-xl)" },
+				{ "slug": "80", "name": "2XL", "size": "var(--si-space-2xl)" }
+			]
+		}
+	}
+}

@@ -1,0 +1,166 @@
+/* DRAFT A · The Register */
+
+/* ---- banner ---------------------------------------------------------------- */
+.reg-banner {
+	padding-block: var(--si-space-2xl) var(--si-space-xl);
+	border-bottom: var(--si-hairline);
+	background: var(--si-ground);
+}
+.reg-banner__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+	gap: var(--si-space-xl);
+	align-items: end;
+}
+.reg-banner__text { display: grid; gap: var(--si-space-s); }
+.reg-banner__text .si-display { max-width: 12ch; }
+.reg-banner__aside { display: grid; gap: var(--si-space-m); justify-items: start; padding-left: var(--si-space-l); border-left: var(--si-hairline); }
+@media (max-width: 999.98px) {
+	.reg-banner__grid { grid-template-columns: 1fr; }
+	.reg-banner__aside { padding-left: 0; border-left: 0; }
+}
+
+/* the cameo stack — a few portraits, overlapped like medals in a tray */
+.reg-stack { display: flex; flex-wrap: wrap; align-items: center; row-gap: 10px; min-height: 64px; }
+@media (max-width: 689.98px) { .reg-stack__more { flex-basis: 100%; margin-left: 0 !important; } }
+.reg-stack .si-medallion { margin-left: -14px; box-shadow: 0 0 0 3px var(--si-ground), 0 0 0 4px var(--si-brass); }
+.reg-stack .si-medallion:first-child { margin-left: 0; }
+.reg-stack__more {
+	margin-left: 14px;
+	font-family: var(--si-font-serif); font-style: italic; font-size: var(--si-step-1); color: var(--si-muted);
+}
+.js .reg-stack .si-medallion { opacity: 0; transform: translateX(-10px); }
+.js .reg-stack.is-in .si-medallion {
+	opacity: 1; transform: none;
+	transition: opacity var(--si-dur-3) var(--si-ease), transform var(--si-dur-3) var(--si-ease);
+	transition-delay: calc(var(--i) * 70ms);
+}
+.reg-figures dd { font-size: var(--si-step-3); }
+
+/* ---- toolbar: alphabet row ------------------------------------------------- */
+.reg-alpha-wrap { padding-block: 0 var(--si-space-2xs); }
+.reg-alpha {
+	display: flex; gap: 1px;
+	overflow-x: auto; scrollbar-width: none;
+	mask-image: linear-gradient(to right, #000 92%, transparent);
+}
+.reg-alpha::-webkit-scrollbar { display: none; }
+@media (min-width: 1000px) { .reg-alpha { mask-image: none; justify-content: space-between; } }
+.reg-alpha a, .reg-alpha span {
+	flex: none;
+	display: grid; place-items: center;
+	min-width: 30px; height: 30px; padding: 0 4px;
+	font-family: var(--si-font-serif); font-size: 16px; line-height: 1;
+	color: var(--si-accent); text-decoration: none;
+	border-radius: var(--si-radius-1);
+	position: relative;
+}
+.reg-alpha span { color: color-mix(in srgb, var(--si-muted) 45%, transparent); }
+.reg-alpha a:hover { background: var(--si-panel); }
+.reg-alpha a[aria-current="true"] { color: var(--si-ink); }
+.reg-alpha a[aria-current="true"]::after {
+	content: ""; position: absolute; left: 25%; right: 25%; bottom: 1px; height: 1px; background: var(--si-brass);
+}
+.reg-alpha[hidden] { display: none; }
+
+/* ---- the register ---------------------------------------------------------- */
+.reg-body { padding-block: var(--si-space-l) var(--si-space-3xl); }
+.reg-loading { display: grid; gap: 14px; padding-block: var(--si-space-l); }
+
+.reg-letter {
+	display: grid;
+	grid-template-columns: clamp(3.2rem, 8vw, 7rem) minmax(0, 1fr);
+	gap: 0 var(--si-space-m);
+	padding-block: var(--si-space-m) var(--si-space-l);
+	border-top: var(--si-hairline);
+	scroll-margin-top: calc(var(--si-sticky-top) + 120px);
+	/* no content-visibility: estimated heights above a jump target resolve
+	   mid-scroll and land the reader a letter too far (measured: M -> O). */
+}
+.reg-letter:first-child { border-top: 0; }
+.reg-letter__head { position: relative; }
+.reg-letter__glyph {
+	position: sticky; top: calc(var(--si-sticky-top) + 118px);
+	display: block;
+	font-family: var(--si-font-serif);
+	font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+	font-weight: 300;
+	font-style: italic;
+	line-height: .9;
+	color: var(--si-jasper-deep);
+}
+.reg-letter__glyph small {
+	display: block; margin-top: .6rem;
+	font-family: var(--si-font-sans); font-style: normal; font-size: 12px; font-weight: 500;
+	letter-spacing: .06em; color: var(--si-muted);
+}
+@media (max-width: 689.98px) {
+	.reg-letter { grid-template-columns: 1fr; }
+	.reg-letter__glyph { position: static; font-size: 2.6rem; display: flex; align-items: baseline; gap: .6rem; margin-bottom: .4rem; }
+	.reg-letter__glyph small { margin: 0; }
+}
+
+.reg-rows { list-style: none; margin: 0; padding: 0; columns: 2 26rem; column-gap: var(--si-space-xl); }
+.reg-rows--ranked { columns: 1; counter-reset: rank; }
+.reg-row { break-inside: avoid; }
+.reg-row a {
+	display: grid;
+	grid-template-columns: auto minmax(1.5rem, 1fr) auto;
+	align-items: baseline;
+	column-gap: .5rem;
+	padding: .55rem .6rem .6rem;
+	margin-inline: -.6rem;
+	border-radius: var(--si-radius-1);
+	color: inherit; text-decoration: none;
+	transition: background-color var(--si-dur-1) var(--si-ease);
+}
+.reg-row a:hover, .reg-row a:focus-visible { background: var(--si-card); box-shadow: var(--si-shadow-1); }
+.reg-name {
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-0);
+	color: var(--si-ink);
+	line-height: 1.3;
+}
+.reg-surname { font-variant-caps: small-caps; letter-spacing: .03em; font-weight: 500; }
+.reg-given { color: var(--si-text); }
+.reg-row a:hover .reg-surname { color: var(--si-accent); }
+.reg-leader {
+	align-self: end;
+	height: .45em; margin-bottom: .32em;
+	background: radial-gradient(circle, var(--si-rule) 1px, transparent 1.3px) left center / 6px 4px repeat-x;
+}
+.reg-years { font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); white-space: nowrap; }
+.reg-years b { font-weight: 600; color: var(--si-accent); }
+.reg-desc {
+	grid-column: 1 / -1;
+	margin-top: .1rem;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); line-height: 1.35;
+	color: var(--si-muted);
+	display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
+}
+.reg-desc:empty { display: none; }
+.reg-flag { font-family: var(--si-font-sans); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--si-brass); margin-left: .5em; }
+.reg mark { background: color-mix(in srgb, var(--si-jasper) 35%, transparent); color: inherit; border-radius: 2px; padding: 0 1px; }
+
+/* ranked mode: numbered, single column, with a quiet bar for weight */
+.reg-rows--ranked .reg-row a { grid-template-columns: 2.6rem auto minmax(1.5rem, 1fr) auto; }
+.reg-rows--ranked .reg-row a::before {
+	counter-increment: rank; content: counter(rank);
+	font-family: var(--si-font-sans); font-size: 13px; color: var(--si-muted); font-variant-numeric: tabular-nums;
+}
+.reg-rows--ranked .reg-desc { grid-column: 2 / -1; }
+.reg-bar { display: inline-block; height: 3px; margin-left: .6rem; vertical-align: middle; background: var(--si-jasper); width: calc(var(--w) * 0.07rem); min-width: 2px; }
+
+.reg-note { max-width: 70ch; margin-top: var(--si-space-l); padding-top: var(--si-space-s); border-top: var(--si-hairline); font-style: normal; }
+
+/* ---- the portrait loupe (fine pointers only) ------------------------------ */
+.reg-loupe {
+	position: fixed; left: 0; top: 0; z-index: 30;
+	pointer-events: none;
+	opacity: 0;
+	transform: translate3d(var(--x, -200px), var(--y, -200px), 0);
+	transition: opacity var(--si-dur-2) var(--si-ease);
+}
+.reg-loupe.is-on { opacity: 1; }
+.reg-loupe .si-medallion { box-shadow: 0 0 0 3px var(--si-card), 0 0 0 4px var(--si-brass), var(--si-shadow-2); }
+@media (hover: none), (pointer: coarse) { .reg-loupe { display: none; } }

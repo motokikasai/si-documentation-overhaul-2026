@@ -1,0 +1,81 @@
+/* people-shared.css — what all three /people/ drafts share beyond the design
+   system: the page frame inside Blocksy's <main>, the sticky toolbar, the
+   profile sheet's interior, and the review-only draft switcher. */
+
+.si-page {
+	/* Where pinned bars sit: below the WP admin bar, Blocksy's site frame and
+	   Blocksy's sticky header — all three are variables Blocksy itself sets
+	   (--header-sticky-height only exists when the header is sticky). */
+	--si-sticky-top: calc(var(--admin-bar, 0px) + var(--theme-frame-size, 0px) + var(--header-sticky-height, 0px));
+	font-family: var(--si-font-serif);
+	color: var(--si-text);
+}
+
+/* ---- toolbar (sticky under the header) ----------------------------------- */
+.people-toolbar {
+	position: sticky;
+	top: var(--si-sticky-top);
+	z-index: 20;
+	background: var(--si-ground);
+	border-bottom: var(--si-hairline);
+	box-shadow: 0 10px 20px -18px rgb(18 26 36 / .25);
+}
+.people-toolbar .ct-container {
+	display: flex; flex-wrap: wrap; align-items: center;
+	gap: 8px 16px;
+	padding-block: 8px;   /* whole pixels: controls must not sit on sub-pixel offsets */
+}
+.people-toolbar .si-search { flex: 1 1 260px; max-width: 420px; }
+.people-toolbar .people-count { margin-left: auto; white-space: nowrap; }
+.people-toolbar select {
+	height: 40px; padding: 0 2.2em 0 .8em;
+	border: 1px solid var(--si-rule); border-radius: var(--si-radius-1);
+	background: var(--si-card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%235C6570' stroke-width='1.3'/%3E%3C/svg%3E") no-repeat right .8em center;
+	font-family: var(--si-font-sans); font-size: 15px; color: var(--si-ink);
+	-webkit-appearance: none; appearance: none;
+}
+.people-count b { font-weight: 600; color: var(--si-ink); font-variant-numeric: tabular-nums; }
+
+/* ---- profile sheet interior ---------------------------------------------- */
+.sheet-head {
+	display: grid; justify-items: start; gap: var(--si-space-2xs);
+	padding: var(--si-space-xl) var(--si-space-l) var(--si-space-m);
+	background:
+		radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--si-jasper) 22%, transparent), transparent 60%),
+		var(--si-ground);
+	border-bottom: var(--si-hairline);
+}
+.sheet-head .si-medallion { margin-bottom: var(--si-space-xs); }
+.sheet-name { font-size: var(--si-step-4); font-weight: 400; letter-spacing: -0.01em; }
+.sheet-aff { font-size: var(--si-step-0); font-style: italic; color: var(--si-text); max-width: 40ch; }
+.sheet-body { display: grid; gap: var(--si-space-s); padding: var(--si-space-m) var(--si-space-l) var(--si-space-xl); }
+.sheet-bio { font-size: var(--si-step-0); line-height: var(--si-leading-body); }
+.sheet-confs { list-style: none; padding: 0; margin: 0 0 var(--si-space-xs); border-top: var(--si-hairline); }
+.sheet-confs li {
+	display: grid; grid-template-columns: 3.4em 1fr; gap: var(--si-space-xs);
+	padding: .7em 0; border-bottom: var(--si-hairline);
+	font-size: var(--si-step-n1); line-height: 1.4;
+}
+.sheet-confs li span:first-child { font-family: var(--si-font-sans); font-weight: 600; color: var(--si-accent); }
+.sheet-cta { justify-self: start; }
+.sheet-credit { font-size: 12px; }
+
+/* Phones: a 200px sticky toolbar would take a quarter of the screen. Only the
+   second row (the alphabet / the chips) stays pinned; search and selects
+   scroll away with the banner and are one flick back up. */
+@media (max-width: 689.98px) {
+	.people-toolbar { display: contents; }
+	.people-toolbar > .ct-container:first-child { padding-block: var(--si-space-s) var(--si-space-2xs); }
+	.people-toolbar > .ct-container:first-child .si-search { flex-basis: 100%; max-width: none; }
+	.people-toolbar > .ct-container + .ct-container {
+		position: sticky; top: var(--si-sticky-top); z-index: 20;
+		width: 100%; max-width: none;
+		padding: var(--si-space-2xs) 16px;
+		background: var(--si-ground);
+		border-bottom: var(--si-hairline);
+		box-shadow: 0 10px 20px -18px rgb(18 26 36 / .25);
+	}
+}
+
+/* the second toolbar row (alphabet / chips / year dial) always spans the row */
+.people-toolbar .ct-container > :only-child { flex: 1 1 100%; min-width: 0; }

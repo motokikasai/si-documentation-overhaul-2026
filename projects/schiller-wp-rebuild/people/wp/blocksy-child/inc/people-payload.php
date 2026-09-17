@@ -1,0 +1,213 @@
+<?php
+/**
+ * The /people/ payload — the same shape as people/data/people.json in the prototypes,
+ * built from WordPress. One contract, so the templates' JS ports unchanged.
+ *
+ *   { meta: {count, countries, first_year, last_year},
+ *     people: [{key, url, name, sort, letter, native, aff, country, n, bio,
+ *               years: [int], confs: [{t, y}], photo: {src, w, h, fx?, fy?, fs?} | null, credit}] }
+ *
+ * Cost: three queries regardless of the number of people (people + meta cache,
+ * one relationship join, conferences + meta cache), cached per language in a
+ * transient that any save to a related type clears.
+ *
+ * @package blocksy-child
+ */
+
+defined('ABSPATH') || exit;
+
+const SI_PEOPLE_PAYLOAD_VERSION = 3;   // bump when the payload's shape or content rules change
+
+const SI_PEOPLE_REL_KEYS = ['presenters', 'hosts', 'authors', 'signatories_internal', 'featured_people'];
+const SI_PEOPLE_REL_TYPES = ['si_presentation', 'si_video', 'si_document', 'si_statement', 'si_coverage'];
+
+/** Keyed by language and by a generation counter: bumping the counter retires every
+ *  language's copy at once, whether transients live in wp_options or an object cache. */
+function si_people_cache_key(): string {
+	$lang = apply_filters('wpml_current_language', null);
+	return sprintf('si_people_v%d_%d_%s', SI_PEOPLE_PAYLOAD_VERSION, (int) get_option('si_people_generation', 0), $lang ?: 'all');
+}
+
+function si_people_payload(): array {
+	$cached = get_transient(si_people_cache_key());
+	if (is_array($cached)) {
+		return $cached;
+	}
+	global $wpdb;
+
+	// 1 · people (WPML: si_person is display-as-translated, so this returns the
+	//     default-language records on every language — one canonical person).
+	$ids = get_posts([
+		'post_type'        => 'si_person',
+		'post_status'      => 'publish',
+		'posts_per_page'   => -1,
+		'fields'           => 'ids',
+		'orderby'          => 'title',
+		'order'            => 'ASC',
+		'suppress_filters' => false,
+		'no_found_rows'    => true,
+	]);
+	if (!$ids) {
+		return ['meta' => ['count' => 0], 'people' => []];
+	}
+	update_meta_cache('post', $ids);
+	_prime_post_caches($ids, false, false);
+
+	// 2 · every relationship edge in one join. Pods (meta storage) writes one
+	//     postmeta row per related ID. WPML: an item and its translations carry
+	//     the same edge, so edges are de-duplicated by translation group (trid).
+	$keys  = "'" . implode("','", array_map('esc_sql', SI_PEOPLE_REL_KEYS)) . "'";
+	$types = "'" . implode("','", array_map('esc_sql', SI_PEOPLE_REL_TYPES)) . "'";
+	$wpml  = defined('ICL_SITEPRESS_VERSION');
+	$group = $wpml ? 'COALESCE(t.trid, p.ID)' : 'p.ID';
+	$join  = $wpml ? "LEFT JOIN {$wpdb->prefix}icl_translations t ON t.element_id = p.ID AND t.element_type = CONCAT('post_', p.post_type)" : '';
+	$edges = $wpdb->get_results(
+		"SELECT DISTINCT pm.meta_value AS person, {$group} AS item, p.post_date AS date, pc.meta_value AS conf
+		   FROM {$wpdb->postmeta} pm
+		   JOIN {$wpdb->posts} p ON p.ID = pm.post_id AND p.post_status = 'publish' AND p.post_type IN ({$types})
+		   LEFT JOIN {$wpdb->postmeta} pc ON pc.post_id = p.ID AND pc.meta_key = 'parent_conference'
+		   {$join}
+		  WHERE pm.meta_key IN ({$keys}) AND pm.meta_value REGEXP '^[0-9]+$'"
+	);
+
+	// 3 · the conferences those edges point at
+	$conf_ids = array_values(array_unique(array_filter(array_map('intval', wp_list_pluck($edges, 'conf')))));
+	$confs = [];
+	if ($conf_ids) {
+		update_meta_cache('post', $conf_ids);
+		foreach (get_posts(['post_type' => 'si_conference', 'post__in' => $conf_ids, 'posts_per_page' => -1, 'suppress_filters' => false]) as $c) {
+			$year = (int) substr((string) get_post_meta($c->ID, 'start_date', true), 0, 4);
+			$confs[$c->ID] = ['t' => si_people_text(get_the_title($c)), 'y' => $year ?: (int) get_the_date('Y', $c)];
+		}
+	}
+
+	$by_person = [];
+	foreach ($edges as $e) {
+		$p = (int) $e->person;
+		$by_person[$p]['items'][$e->item] = true;
+		$conf = $confs[(int) $e->conf] ?? null;
+		if ($conf) {
+			$by_person[$p]['confs'][(int) $e->conf] = $conf;
+			$by_person[$p]['years'][$conf['y']] = true;
+		} else {
+			$by_person[$p]['years'][(int) substr($e->date, 0, 4)] = true;
+		}
+	}
+
+	$people = [];
+	foreach ($ids as $id) {
+		$name = si_people_text(get_the_title($id));
+		$sort = si_people_text(get_post_meta($id, 'sort_name', true)) ?: $name;
+		$rel = $by_person[$id] ?? [];
+		$years = array_map('intval', array_keys($rel['years'] ?? []));
+		sort($years);
+		$c = array_values($rel['confs'] ?? []);
+		usort($c, static fn($a, $b) => $b['y'] <=> $a['y']);
+		$c = array_map(static fn($x) => ['t' => $x['t'], 'y' => (string) $x['y']], $c);
+
+		$people[] = [
+			'key'     => get_post_field('post_name', $id),
+			'url'     => get_permalink($id),
+			'name'    => $name,
+			'sort'    => $sort,
+			'letter'  => si_people_letter($sort),
+			'native'  => si_people_text(get_post_meta($id, 'name_native', true)),
+			'aff'     => si_people_text(get_post_meta($id, 'affiliation', true)),
+			'country' => si_people_text(get_post_meta($id, 'country', true)),
+			'n'       => max(1, count($rel['items'] ?? [])),
+			'bio'     => si_people_text(get_post_meta($id, 'short_bio', true)),
+			'years'   => $years,
+			'confs'   => $c,
+			'photo'   => si_people_photo($id),
+			'credit'  => si_people_text(get_post_meta($id, 'photo_credit', true)),
+		];
+	}
+	usort($people, static fn($a, $b) => strcoll(remove_accents($a['sort']), remove_accents($b['sort'])));
+
+	$all_years = array_merge(...array_map(static fn($p) => $p['years'], $people));
+	$payload = [
+		'meta' => [
+			'count'      => count($people),
+			'with_photo' => count(array_filter($people, static fn($p) => $p['photo'])),
+			'countries'  => count(array_unique(array_filter(wp_list_pluck($people, 'country')))),
+			'first_year' => $all_years ? min($all_years) : null,
+			'last_year'  => $all_years ? max($all_years) : null,
+		],
+		'people' => $people,
+	];
+	set_transient(si_people_cache_key(), $payload, DAY_IN_SECONDS);
+	return $payload;
+}
+
+/**
+ * Plain text for the payload. get_the_title() returns texturized HTML (&#8211;, &#8217;)
+ * and legacy meta carries &nbsp; and tags; the JS escapes whatever it prints, so the
+ * payload must hold real characters, never entities.
+ */
+function si_people_text($value): string {
+	$text = preg_replace('/&nbsp(?![;\w])/i', ' ', wp_strip_all_tags((string) $value));   // legacy "&nbsp" without its ';'
+	$text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+	return trim(preg_replace('/\s+/u', ' ', str_replace("\u{00A0}", ' ', $text)));
+}
+
+function si_people_letter(string $sort): string {
+	$first = mb_strtoupper(mb_substr(remove_accents($sort), 0, 1));
+	return preg_match('/^\p{L}$/u', $first) ? $first : '#';
+}
+
+/**
+ * Featured image + focal point. A photo is only ever shown with a licence on
+ * record — the same rule si:photos enforces when attaching.
+ * Focal point: `photo_focus` post meta, "fx,fy,fs" (percent, percent, face-height
+ * fraction) — written by the importer from build/build-people-data.py's detector,
+ * or by hand. Absent = the podium default in the JS/PHP crop.
+ */
+function si_people_photo(int $id): ?array {
+	$thumb = get_post_thumbnail_id($id);
+	$licence = (string) get_post_meta($id, 'photo_license', true);
+	if (!$thumb || $licence === '' || $licence === 'unknown') {
+		return null;
+	}
+	$img = wp_get_attachment_image_src($thumb, 'medium_large');
+	if (!$img) {
+		return null;
+	}
+	$photo = ['src' => $img[0], 'w' => (int) $img[1], 'h' => (int) $img[2]];
+	$focus = array_map('floatval', array_filter(explode(',', (string) get_post_meta($id, 'photo_focus', true)), 'strlen'));
+	if (count($focus) === 3) {
+		[$photo['fx'], $photo['fy'], $photo['fs']] = $focus;
+	}
+	return $photo;
+}
+
+/**
+ * PHP twin of focusStyle() in people-core.js — for server-rendered portraits
+ * (profile pages, the no-JS list). Keep the two in step.
+ */
+function si_people_focus_style(array $ph, float $fill = 0.42, float $box_ar = 1.0): string {
+	$ar = $ph['w'] / max(1, $ph['h']);
+	$bw = 1.0;
+	$bh = 1 / $box_ar;
+	$has = isset($ph['fs']) && $ph['fs'] > 0;
+	$fx = ($has ? $ph['fx'] : 50) / 100;
+	$fy = ($has ? $ph['fy'] : 34) / 100;
+	$h_min = max($bh, $bw / $ar);
+	$h = $has ? min($h_min * 3.2, max($h_min, $fill * $bh / $ph['fs'])) : $h_min * 1.15;
+	$w = $h * $ar;
+	$left = min(0, max($bw - $w, $bw / 2 - $fx * $w));
+	$top = min(0, max($bh - $h, $bh / 2 - $fy * $h));
+	$pc = static fn($v) => number_format($v * 100, 2, '.', '') . '%';
+	return sprintf('width:%s;height:%s;left:%s;top:%s', $pc($w / $bw), $pc($h / $bh), $pc($left / $bw), $pc($top / $bh));
+}
+
+/* Any change to a person or to anything that points at one invalidates every language. */
+add_action('save_post', static function ($post_id, $post) {
+	if (in_array($post->post_type, array_merge(['si_person', 'si_conference'], SI_PEOPLE_REL_TYPES), true)) {
+		si_people_flush();
+	}
+}, 10, 2);
+add_action('deleted_post', static fn() => si_people_flush());
+
+function si_people_flush(): void {
+	update_option('si_people_generation', (int) get_option('si_people_generation', 0) + 1, false);
+}

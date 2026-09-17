@@ -1,0 +1,162 @@
+/* ==========================================================================
+   BLOCKSY STAND-IN — PROTOTYPES ONLY. Never enqueue this in WordPress.
+   --------------------------------------------------------------------------
+   In WordPress, Blocksy prints these variables itself (dynamic CSS) from the
+   settings wp/apply-design-system.php writes. This file reproduces that
+   output — and the handful of Blocksy base rules that consume it — so a
+   static prototype renders the way the page will render inside Blocksy.
+   Anything a template needs that is NOT in this file must come from
+   tokens.css / components.css, which DO ship.
+   ========================================================================== */
+
+/* -- what Blocksy prints from `colorPalette` ------------------------------ */
+:root {
+	--theme-palette-color-1: #1F4A73;
+	--theme-palette-color-2: #163754;
+	--theme-palette-color-3: #3D4550;
+	--theme-palette-color-4: #121A24;
+	--theme-palette-color-5: #D8DDE3;
+	--theme-palette-color-6: #E9EDF1;
+	--theme-palette-color-7: #F6F6F3;
+	--theme-palette-color-8: #FFFFFF;
+
+	/* Blocksy's default role mapping onto the palette (unchanged by us) */
+	--theme-text-color: var(--theme-palette-color-3);
+	--theme-link-initial-color: var(--theme-palette-color-1);
+	--theme-link-hover-color: var(--theme-palette-color-2);
+	--theme-selection-text-color: #fff;
+	--theme-selection-background-color: var(--theme-palette-color-1);
+	--theme-border-color: var(--theme-palette-color-5);
+	--theme-headings-color: var(--theme-palette-color-4);
+	--theme-form-field-border-initial-color: var(--theme-border-color);
+	--theme-form-field-border-focus-color: var(--theme-palette-color-1);
+	--theme-form-field-background-initial-color: var(--theme-palette-color-8);
+	--theme-form-field-height: 44px;
+	--theme-form-field-border-radius: 2px;
+	--theme-button-background-initial-color: var(--theme-palette-color-1);
+	--theme-button-background-hover-color: var(--theme-palette-color-2);
+	--theme-button-text-initial-color: #fff;
+	--theme-button-text-hover-color: #fff;
+	--theme-button-border-radius: 2px;
+	--theme-button-min-height: 44px;
+	--theme-button-padding: 5px 22px;
+	--theme-transition: all 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+	/* sticky header row (Blocksy sets this when a header row is sticky) */
+	--header-sticky-height: 76px;
+
+	/* `maxSiteWidth` / `narrowContainerWidth` / `contentAreaSpacing` */
+	--theme-normal-container-max-width: 1240px;
+	--theme-narrow-container-max-width: 760px;
+	--theme-container-edge-spacing: 90vw;
+	--theme-content-vertical-spacing: 60px;
+
+	/* -- what Blocksy prints from `rootTypography` ------------------------ */
+	--theme-font-family: var(--si-font-serif);
+	--theme-font-weight: 400;
+	--theme-text-transform: none;
+	--theme-text-decoration: none;
+	--theme-font-size: var(--si-step-0);
+	--theme-line-height: 1.62;
+	--theme-letter-spacing: 0em;
+
+	/* `buttonsTypography` */
+	--theme-button-font-family: var(--si-font-sans);
+	--theme-button-font-weight: 600;
+	--theme-button-font-size: 15px;
+	--theme-button-letter-spacing: 0.02em;
+}
+
+/* -- `h1Typography` … `h6Typography` ---------------------------------------- */
+h1 { --theme-font-family: var(--si-font-serif); --theme-font-weight: 380; --theme-font-size: var(--si-step-5); --theme-line-height: 1.08; --theme-letter-spacing: -0.012em; }
+h2 { --theme-font-family: var(--si-font-serif); --theme-font-weight: 400; --theme-font-size: var(--si-step-4); --theme-line-height: 1.12; --theme-letter-spacing: -0.01em; }
+h3 { --theme-font-family: var(--si-font-serif); --theme-font-weight: 450; --theme-font-size: var(--si-step-3); --theme-line-height: 1.2; }
+h4 { --theme-font-family: var(--si-font-serif); --theme-font-weight: 500; --theme-font-size: var(--si-step-2); --theme-line-height: 1.25; }
+h5 { --theme-font-family: var(--si-font-serif); --theme-font-weight: 600; --theme-font-size: var(--si-step-1); --theme-line-height: 1.3; }
+h6 { --theme-font-family: var(--si-font-sans);  --theme-font-weight: 600; --theme-font-size: var(--si-step-n2); --theme-line-height: 1.4; --theme-letter-spacing: 0.14em; --theme-text-transform: uppercase; }
+
+/* -- Blocksy base rules that consume the variables ------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+	margin: 0;
+	overflow-x: hidden;
+	overflow-wrap: break-word;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: var(--theme-text-color);
+	background-color: var(--theme-palette-color-7);
+}
+body, h1, h2, h3, h4, h5, h6, p, label, li, figcaption, blockquote {
+	font-family: var(--theme-font-family);
+	font-size: var(--theme-font-size);
+	font-weight: var(--theme-font-weight);
+	line-height: var(--theme-line-height);
+	letter-spacing: var(--theme-letter-spacing);
+	text-transform: var(--theme-text-transform);
+}
+h1, h2, h3, h4, h5, h6 { color: var(--theme-headings-color); margin: 0 0 calc(var(--has-theme-content-spacing, 1) * (.3em + 10px)); }
+/* Blocksy's own content rhythm (main.min.css + global.css), reproduced as-is */
+:root { --theme-content-spacing: 1.5em; --theme-list-indent: 2.5em; }
+p { margin-block: 0 var(--theme-content-spacing); }
+ul, ol { padding-inline-start: var(--theme-list-indent); margin-block: 0 var(--theme-content-spacing); }
+figure { margin: 0; }
+a { color: var(--theme-link-initial-color); text-decoration: var(--theme-text-decoration); transition: var(--theme-transition); }
+a:hover { color: var(--theme-link-hover-color); }
+img { max-width: 100%; height: auto; display: block; }
+button, input, select { font: inherit; color: inherit; }
+::selection { color: var(--theme-selection-text-color); background: var(--theme-selection-background-color); }
+
+.ct-container, .ct-container-narrow { width: min(var(--theme-container-edge-spacing), 100% - 2 * 16px); margin-inline: auto; }
+.ct-container { max-width: var(--theme-normal-container-max-width); }
+.ct-container-narrow { max-width: var(--theme-narrow-container-max-width); }
+
+.ct-button, .wp-element-button {
+	display: inline-flex; align-items: center; justify-content: center; gap: .5em;
+	min-height: var(--theme-button-min-height);
+	padding: var(--theme-button-padding);
+	border: 0;
+	border-radius: var(--theme-button-border-radius);
+	color: var(--theme-button-text-initial-color);
+	background: var(--theme-button-background-initial-color);
+	font-family: var(--theme-button-font-family);
+	font-size: var(--theme-button-font-size);
+	font-weight: var(--theme-button-font-weight);
+	letter-spacing: var(--theme-button-letter-spacing);
+	text-decoration: none;
+	cursor: pointer;
+	transition: var(--theme-transition);
+}
+.ct-button:hover, .wp-element-button:hover { color: var(--theme-button-text-hover-color); background: var(--theme-button-background-hover-color); }
+
+.skip-link { position: absolute; left: -9999px; }
+.skip-link:focus { left: 16px; top: 16px; z-index: 999; padding: 8px 14px; background: #fff; }
+
+/* -- header / footer stand-ins (Blocksy header builder output, simplified) -- */
+.ct-header {
+	position: sticky; top: 0; z-index: 50;
+	background: var(--theme-palette-color-8);
+	border-bottom: 1px solid var(--theme-border-color);
+}
+.ct-header .ct-container { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 76px; }
+.ct-header .site-logo img { height: 40px; width: auto; }
+.ct-header nav ul { display: flex; gap: 26px; list-style: none; padding: 0; }
+.ct-header nav a {
+	font-family: var(--si-font-sans); font-size: 15px; font-weight: 500; letter-spacing: .01em;
+	color: var(--theme-palette-color-4); text-decoration: none; padding-block: 6px;
+	background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+	transition: background-size .25s var(--si-ease);
+}
+.ct-header nav a:hover, .ct-header nav a[aria-current] { background-size: 100% 1px; color: var(--theme-palette-color-1); }
+.ct-header .header-cta { display: flex; gap: 18px; align-items: center; }
+.ct-header .header-cta .si-link { font-family: var(--si-font-sans); font-size: 15px; font-weight: 500; }
+.ct-header .header-cta .ct-button { min-height: 38px; padding: 0 16px; font-size: 14px; }
+@media (max-width: 999.98px) { .ct-header nav { display: none; } }
+@media (max-width: 689.98px) { .ct-header .header-cta .is-secondary { display: none; } .ct-header .site-logo img { height: 32px; } }
+
+.ct-footer { margin-top: 0; background: var(--si-night); color: var(--si-on-night-2); padding-block: 56px 40px; font-family: var(--si-font-sans); font-size: 14px; }
+.ct-footer .ct-container { display: flex; flex-wrap: wrap; gap: 24px 48px; justify-content: space-between; align-items: center; }
+.ct-footer img { height: 38px; width: auto; }
+.ct-footer a { color: var(--si-on-night); }
+.ct-footer p { font-family: inherit; font-size: inherit; }
+.proto-note { font-family: var(--si-font-mono); font-size: 11px; color: var(--si-on-night-2); opacity: .8; }

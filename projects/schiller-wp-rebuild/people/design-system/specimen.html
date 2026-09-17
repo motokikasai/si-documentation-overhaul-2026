@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jasper — Design System</title>
+<meta name="description" content="The Schiller Institute design system: colour, type, space, motion and components, mapped onto Blocksy.">
+<link rel="preload" href="fonts/source-serif-4-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="blocksy-shim.css">
+<link rel="stylesheet" href="components.css">
+<link rel="icon" href="../../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+<style>
+	/* specimen-only layout */
+	.spec { padding-bottom: var(--si-space-3xl); }
+	.spec-hero { padding-block: var(--si-space-2xl) var(--si-space-xl); border-bottom: var(--si-hairline); background: var(--si-card); }
+	.spec-hero .ct-container { display: grid; gap: var(--si-space-s); }
+	.spec-hero .si-display { max-width: 14ch; }
+	.spec-nav { position: sticky; top: 0; z-index: 10; background: var(--si-ground); border-bottom: var(--si-hairline); }
+	.spec-nav .ct-container { display: flex; gap: var(--si-space-s); overflow-x: auto; padding-block: 12px; }
+	.spec-nav a { font-family: var(--si-font-sans); font-size: 14px; font-weight: 500; white-space: nowrap; color: var(--si-text); text-decoration: none; }
+	.spec-nav a:hover { color: var(--si-accent); }
+	.spec section { padding-block: var(--si-space-xl) 0; scroll-margin-top: 60px; }
+	.spec h2.si-heading { margin-bottom: var(--si-space-2xs); }
+	.spec .intro { max-width: 68ch; margin-bottom: var(--si-space-m); }
+	.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--si-space-s); list-style: none; padding: 0; counter-reset: r; }
+	.rules li { counter-increment: r; padding: var(--si-space-s); background: var(--si-card); border: var(--si-hairline); }
+	.rules li::before { content: counter(r, upper-roman); display: block; font-family: var(--si-font-serif); font-style: italic; font-size: var(--si-step-2); color: var(--si-jasper-deep); line-height: 1; margin-bottom: .4rem; }
+	.rules b { display: block; font-family: var(--si-font-serif); font-weight: 600; color: var(--si-ink); margin-bottom: .2rem; }
+	.rules span { font-size: var(--si-step-n1); }
+
+	.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: var(--si-space-s); }
+	.sw { background: var(--si-card); border: var(--si-hairline); }
+	.sw i { display: block; height: 92px; background: var(--c); border-bottom: var(--si-hairline); position: relative; }
+	.sw i::after { content: attr(data-slot); position: absolute; left: 10px; top: 8px; font: 600 11px/1 var(--si-font-sans); letter-spacing: .1em; color: var(--on, #fff); }
+	.sw div { padding: 10px 12px 12px; display: grid; gap: 2px; }
+	.sw b { font-family: var(--si-font-serif); font-weight: 600; color: var(--si-ink); }
+	.sw code { font: 12.5px var(--si-font-mono); color: var(--si-text); }
+	.sw small { font: 12.5px/1.35 var(--si-font-sans); color: var(--si-muted); }
+
+	.type-families { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--si-space-m); }
+	.fam { padding: var(--si-space-m); background: var(--si-card); border: var(--si-hairline); display: grid; gap: 6px; }
+	.fam .big { font-size: var(--si-step-5); line-height: 1; color: var(--si-ink); }
+	.fam .glyphs { font-size: var(--si-step-1); color: var(--si-text); letter-spacing: .02em; }
+	.scale { display: grid; border-top: var(--si-hairline); }
+	.scale div { display: grid; grid-template-columns: 7rem 8rem 1fr; gap: var(--si-space-s); align-items: baseline; padding: 12px 0; border-bottom: var(--si-hairline); }
+	.scale code, .scale small { font: 12.5px var(--si-font-mono); color: var(--si-muted); }
+	.scale p { color: var(--si-ink); line-height: 1.15; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+	@media (max-width: 689.98px) { .scale div { grid-template-columns: 1fr; gap: 2px; } }
+	.roles { display: grid; gap: var(--si-space-m); padding: var(--si-space-l); background: var(--si-card); border: var(--si-hairline); margin-top: var(--si-space-m); }
+	.roles > div { display: grid; grid-template-columns: 9rem 1fr; gap: var(--si-space-s); align-items: baseline; }
+	.roles > div > code { font: 12px var(--si-font-mono); color: var(--si-muted); }
+	@media (max-width: 689.98px) { .roles > div { grid-template-columns: 1fr; } }
+
+	.space { display: grid; gap: 8px; }
+	.space div { display: grid; grid-template-columns: 5rem 1fr 14rem; gap: var(--si-space-s); align-items: center; }
+	.space i { display: block; height: 14px; width: var(--w); background: var(--si-jasper); }
+	.space code, .space small { font: 12.5px var(--si-font-mono); color: var(--si-muted); }
+	@media (max-width: 689.98px) { .space div { grid-template-columns: 4rem 1fr; } .space small { display: none; } }
+
+	.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--si-space-s); }
+	.tile { padding: var(--si-space-m); background: var(--si-card); border: var(--si-hairline); display: grid; gap: var(--si-space-xs); align-content: start; }
+	.tile h3 { font-family: var(--si-font-sans); font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--si-muted); }
+	.tile code { font: 12px var(--si-font-mono); color: var(--si-muted); }
+	.row { display: flex; flex-wrap: wrap; gap: var(--si-space-s); align-items: center; }
+	.motion-demo { width: 34px; height: 34px; border-radius: 50%; background: var(--si-accent); transition: transform var(--si-dur-3) var(--si-ease); }
+	.tile:hover .motion-demo { transform: translateX(120px); }
+	.night { background: var(--si-night); color: var(--si-on-night-2); padding: var(--si-space-l); display: grid; gap: var(--si-space-2xs); }
+	.night .si-eyebrow { color: var(--si-brass-on-night); }
+	.night .si-heading { color: #fff; }
+
+	table.map { width: 100%; border-collapse: collapse; font-family: var(--si-font-sans); font-size: 14px; background: var(--si-card); }
+	.map th, .map td { text-align: left; padding: 10px 12px; border-bottom: var(--si-hairline); vertical-align: top; }
+	.map th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--si-muted); font-weight: 600; background: var(--si-panel); }
+	.map code { font: 12.5px var(--si-font-mono); color: var(--si-ink); }
+	.table-wrap { overflow-x: auto; border: var(--si-hairline); }
+</style>
+</head>
+<body>
+<main class="si-page spec">
+	<header class="spec-hero">
+		<div class="ct-container">
+			<p class="si-eyebrow si-eyebrow--ruled">Schiller Institute · Design system</p>
+			<h1 class="si-display">Jasper</h1>
+			<p class="si-lead">A limestone ground, Prussian-blue ink, pale jasper relief and one brass ring — the palette of the neoclassical portrait medallion, from the decades Schiller wrote in. Built to sit <em>inside</em> Blocksy: the palette and type are written into Blocksy’s own settings, and everything else is a thin layer of tokens that follow them.</p>
+			<p class="si-meta"><a class="si-link" href="../templates/people-register.html">A · Register</a> · <a class="si-link" href="../templates/people-medallions.html">B · Medallions</a> · <a class="si-link" href="../templates/people-chronicle.html">C · Chronicle</a> · <a class="si-link" href="../README.md">README</a></p>
+		</div>
+	</header>
+	<nav class="spec-nav" aria-label="Sections"><div class="ct-container">
+		<a href="#principles">Principles</a><a href="#colour">Colour</a><a href="#type">Type</a><a href="#space">Space</a><a href="#shape">Shape &amp; motion</a><a href="#components">Components</a><a href="#blocksy">Blocksy mapping</a>
+	</div></nav>
+
+	<div class="ct-container">
+	<section id="principles">
+		<h2 class="si-heading">Principles</h2>
+		<ol class="rules">
+			<li><b>Colour does structure.</b><span>Blue means “you can act here”. Brass marks one thing per view. Nothing is coloured to decorate.</span></li>
+			<li><b>The circle is the only curve.</b><span>Corners are 0–2px. Round is reserved for people (medallions) and for filters (chips), so a circle always means a person or a choice.</span></li>
+			<li><b>Serif reads, sans signposts.</b><span>Anything you read is Source Serif. Anything you use — nav, labels, counts, buttons — is Source Sans.</span></li>
+			<li><b>One dark band per page.</b><span>Night is an event. A page may have one; most have none.</span></li>
+			<li><b>Motion settles, never bounces.</b><span>One easing curve, three durations, all zero under reduced motion. Content is visible before any script runs.</span></li>
+			<li><b>Work with Blocksy.</b><span>Set it in the Customizer if Blocksy has a setting for it. Tokens only fill the gaps, and they alias Blocksy’s variables.</span></li>
+		</ol>
+	</section>
+
+	<section id="colour">
+		<h2 class="si-heading">Colour</h2>
+		<p class="si-lead intro">Eight slots, exactly Blocksy’s global palette, in Blocksy’s own role order. Contrast is measured against Limestone (slot 7), the site ground.</p>
+		<div class="swatches">
+			<div class="sw"><i style="--c:#1F4A73" data-slot="SLOT 1"></i><div><b>Berliner Blau</b><code>#1F4A73 · 8.5:1</code><small>Links, buttons, focus, current state</small></div></div>
+			<div class="sw"><i style="--c:#163754" data-slot="SLOT 2"></i><div><b>Berliner Blau, deep</b><code>#163754 · 11.3:1</code><small>Hover and active</small></div></div>
+			<div class="sw"><i style="--c:#3D4550" data-slot="SLOT 3"></i><div><b>Slate</b><code>#3D4550 · 9.0:1</code><small>Body text</small></div></div>
+			<div class="sw"><i style="--c:#121A24" data-slot="SLOT 4"></i><div><b>Iron-gall</b><code>#121A24 · 16.2:1</code><small>Headings, names</small></div></div>
+			<div class="sw"><i style="--c:#D8DDE3;--on:#3D4550" data-slot="SLOT 5"></i><div><b>Hairline</b><code>#D8DDE3</code><small>Rules and borders</small></div></div>
+			<div class="sw"><i style="--c:#E9EDF1;--on:#3D4550" data-slot="SLOT 6"></i><div><b>Jasper mist</b><code>#E9EDF1</code><small>Quiet panels, pressed states</small></div></div>
+			<div class="sw"><i style="--c:#F6F6F3;--on:#3D4550" data-slot="SLOT 7"></i><div><b>Limestone</b><code>#F6F6F3</code><small>Site ground</small></div></div>
+			<div class="sw"><i style="--c:#FFFFFF;--on:#3D4550" data-slot="SLOT 8"></i><div><b>Paper</b><code>#FFFFFF</code><small>Cards, fields, the header</small></div></div>
+		</div>
+		<h3 class="si-eyebrow" style="margin:var(--si-space-l) 0 var(--si-space-s)">Brand colours outside the palette (tokens.css)</h3>
+		<div class="swatches">
+			<div class="sw"><i style="--c:#5C6570" data-slot="--si-muted"></i><div><b>Muted</b><code>#5C6570 · ≥5.0:1</code><small>Secondary text on slots 6–8</small></div></div>
+			<div class="sw"><i style="--c:#8FA7BF" data-slot="--si-jasper"></i><div><b>Jasper</b><code>#8FA7BF · 2.3:1</code><small>Relief fields, bars, tints. Never text.</small></div></div>
+			<div class="sw"><i style="--c:#5E7C99" data-slot="--si-jasper-deep"></i><div><b>Jasper, deep</b><code>#5E7C99 · 4.0:1</code><small>Large ornamental letters and numerals only</small></div></div>
+			<div class="sw"><i style="--c:#A08040" data-slot="--si-brass"></i><div><b>Brass</b><code>#A08040 · 3.4:1</code><small>The medallion ring; one rule per view. Never text on light.</small></div></div>
+			<div class="sw"><i style="--c:#0F1A26" data-slot="--si-night"></i><div><b>Night</b><code>#0F1A26</code><small>The one dark band. On it: #E6EBF0 (14.6:1), brass #C9A866 (7.8:1)</small></div></div>
+		</div>
+		<div class="night" style="margin-top:var(--si-space-m)">
+			<p class="si-eyebrow">The dark band</p>
+			<p class="si-heading">Night is an event, not a theme.</p>
+			<p>Secondary text on night uses #A9BCD0 (9.0:1). There is deliberately no site-wide dark mode: Blocksy’s header and footer would stay light, and a half-dark page is worse than none.</p>
+		</div>
+	</section>
+
+	<section id="type">
+		<h2 class="si-heading">Type</h2>
+		<p class="si-lead intro">Two faces from one family of design, self-hosted (Latin, Latin Extended, Cyrillic). Source Serif 4’s optical-size axis draws a sturdy text cut at 17px and a fine, high-contrast display cut at 58px from one file.</p>
+		<div class="type-families">
+			<div class="fam">
+				<p class="si-eyebrow">Serif · reading and display</p>
+				<p class="big" style="font-family:var(--si-font-serif);font-weight:380">Source Serif <em style="font-weight:300">4</em></p>
+				<p class="glyphs" style="font-family:var(--si-font-serif)">Aa Ææ Œœ ß Ẽ Ş Ğ — Шиллер · Бетховен — 0123456789 · <span style="font-variant-caps:small-caps">Small Caps</span></p>
+			</div>
+			<div class="fam">
+				<p class="si-eyebrow">Sans · signposting</p>
+				<p class="big" style="font-family:var(--si-font-sans);font-weight:300">Source Sans <b style="font-weight:600">3</b></p>
+				<p class="glyphs" style="font-family:var(--si-font-sans)">Aa Ææ Œœ ß Ẽ Ş Ğ — Шиллер · Бетховен — <span class="si-tabular">0123456789</span></p>
+			</div>
+		</div>
+		<h3 class="si-eyebrow" style="margin:var(--si-space-l) 0 var(--si-space-s)">Fluid scale · 360px → 1280px · 1.16 → 1.25</h3>
+		<div class="scale" style="font-family:var(--si-font-serif)">
+			<div><code>--si-step-6</code><small>41 → 72px</small><p style="font-size:var(--si-step-6);font-weight:350">Banner · Die Räuber</p></div>
+			<div><code>--si-step-5</code><small>36 → 58px</small><p style="font-size:var(--si-step-5);font-weight:380">h1 · Ode an die Freude</p></div>
+			<div><code>--si-step-4</code><small>31 → 46px</small><p style="font-size:var(--si-step-4);font-weight:400">h2 · Wilhelm Tell</p></div>
+			<div><code>--si-step-3</code><small>27 → 37px</small><p style="font-size:var(--si-step-3);font-weight:450">h3 · Don Karlos, Infant von Spanien</p></div>
+			<div><code>--si-step-2</code><small>23 → 30px</small><p style="font-size:var(--si-step-2);font-weight:500">h4 · On the Aesthetic Education of Man</p></div>
+			<div><code>--si-step-1</code><small>20 → 24px</small><p style="font-size:var(--si-step-1)">Lead, names · Letters upon the Aesthetic Education</p></div>
+			<div><code>--si-step-0</code><small>17 → 19px</small><p style="font-size:var(--si-step-0)">Body · Beauty is the only possible expression of freedom in appearance.</p></div>
+			<div><code>--si-step-n1</code><small>14 → 15px</small><p style="font-size:var(--si-step-n1);font-family:var(--si-font-sans)">Meta · 18 appearances · 2012–2021 · Sweden</p></div>
+			<div><code>--si-step-n2</code><small>12.5px</small><p class="si-eyebrow" style="font-size:var(--si-step-n2)">Eyebrow · The archive · People</p></div>
+		</div>
+		<div class="roles">
+			<div><code>.si-display</code><p class="si-display" style="font-size:var(--si-step-5)">A register of <em>voices</em></p></div>
+			<div><code>.si-heading</code><p class="si-heading">Principal voices</p></div>
+			<div><code>.si-lead</code><p class="si-lead">Statesmen, scientists, economists and artists who have addressed the Institute’s conferences.</p></div>
+			<div><code>body</code><p style="max-width:var(--si-measure)">Reading text is set at 17–19px with 1.62 leading and a 66-character measure. Old-style figures belong in running text (<span class="si-oldstyle">since 1984</span>); lining tabular figures belong in tables and counts (<span class="si-tabular">1984</span>).</p></div>
+			<div><code>.si-name</code><p class="si-name" style="font-size:var(--si-step-1)">Helga Zepp-LaRouche<span class="si-name__native">Хельга Цепп-Ларуш</span></p></div>
+			<div><code>.si-meta</code><p class="si-meta">Germany · 2012–2025 · 51 appearances</p></div>
+			<div><code>.si-eyebrow</code><p class="si-eyebrow si-eyebrow--ruled">Most often heard</p></div>
+		</div>
+	</section>
+
+	<section id="space">
+		<h2 class="si-heading">Space</h2>
+		<p class="si-lead intro">One fluid scale for padding, gaps and vertical rhythm. Small steps barely move; large steps open up by a quarter on wide screens.</p>
+		<div class="space">
+			<div><code>3xs</code><i style="--w:var(--si-space-3xs)"></i><small>4 → 4.4px</small></div>
+			<div><code>2xs</code><i style="--w:var(--si-space-2xs)"></i><small>8 → 8.8px</small></div>
+			<div><code>xs</code><i style="--w:var(--si-space-xs)"></i><small>12 → 13.2px</small></div>
+			<div><code>s</code><i style="--w:var(--si-space-s)"></i><small>16 → 20px</small></div>
+			<div><code>m</code><i style="--w:var(--si-space-m)"></i><small>24 → 30px · gutter</small></div>
+			<div><code>l</code><i style="--w:var(--si-space-l)"></i><small>32 → 40px</small></div>
+			<div><code>xl</code><i style="--w:var(--si-space-xl)"></i><small>48 → 60px</small></div>
+			<div><code>2xl</code><i style="--w:var(--si-space-2xl)"></i><small>64 → 80px · section</small></div>
+			<div><code>3xl</code><i style="--w:var(--si-space-3xl)"></i><small>96 → 120px · banner</small></div>
+		</div>
+	</section>
+
+	<section id="shape">
+		<h2 class="si-heading">Shape &amp; motion</h2>
+		<div class="tiles" style="margin-top:var(--si-space-m)">
+			<div class="tile"><h3>Radius</h3><div class="row"><span style="width:56px;height:40px;border:1px solid var(--si-ink)"></span><span style="width:56px;height:40px;border:1px solid var(--si-ink);border-radius:2px"></span><span style="width:40px;height:40px;border:1px solid var(--si-brass);border-radius:50%"></span></div><code>0 · 2px · round (people, chips)</code></div>
+			<div class="tile"><h3>Depth</h3><div class="row"><span style="width:56px;height:40px;background:#fff;box-shadow:var(--si-shadow-1)"></span><span style="width:56px;height:40px;background:#fff;box-shadow:var(--si-shadow-2)"></span><span style="width:56px;height:40px;background:#fff;box-shadow:var(--si-shadow-3)"></span></div><code>rest · lifted · sheet</code></div>
+			<div class="tile"><h3>Motion — hover me</h3><span class="motion-demo"></span><code>cubic-bezier(.2,.7,.2,1) · 160 / 320 / 640ms · 0 under reduced motion</code></div>
+		</div>
+	</section>
+
+	<section id="components">
+		<h2 class="si-heading">Components</h2>
+		<p class="si-lead intro">Everything is <code>si-</code> prefixed and styles no bare element, so nothing reaches into Blocksy’s header, footer or the block editor.</p>
+		<div class="tiles">
+			<div class="tile"><h3>Medallion</h3><div class="row" data-medallions></div><code>.si-medallion · .si-medallion--monogram</code></div>
+			<div class="tile"><h3>Plate</h3><div data-plate style="max-width:160px"></div><code>.si-plate — focal-point crop</code></div>
+			<div class="tile"><h3>Buttons (Blocksy)</h3><div class="row"><a class="ct-button" href="#">Full profile →</a><a class="si-link" href="#">Quiet link</a></div><code>.ct-button · .si-link</code></div>
+			<div class="tile"><h3>Chips</h3><div class="si-chips"><button class="si-chip" aria-pressed="true">Everyone <span class="si-chip__count">418</span></button><button class="si-chip" aria-pressed="false">With portrait <span class="si-chip__count">132</span></button></div><code>.si-chip[aria-pressed]</code></div>
+			<div class="tile"><h3>Search</h3><label class="si-search"><span class="si-visually-hidden">Search</span><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M13 13l5 5" stroke="currentColor" stroke-width="1.5"/></svg><input type="search" placeholder="Search people…"><kbd>/</kbd></label><code>.si-search — uses Blocksy form tokens</code></div>
+			<div class="tile"><h3>Segmented</h3><div class="si-segmented"><button aria-pressed="true">A–Z</button><button aria-pressed="false">Most heard</button></div><code>.si-segmented</code></div>
+			<div class="tile"><h3>Figures</h3><dl class="si-figures"><div class="si-figure"><dt>People</dt><dd>418</dd></div><div class="si-figure"><dt>Countries</dt><dd>30</dd></div></dl><code>.si-figures</code></div>
+			<div class="tile"><h3>Loading</h3><div style="display:grid;gap:8px"><span class="si-skeleton" style="height:14px;width:70%"></span><span class="si-skeleton" style="height:14px;width:45%"></span></div><code>.si-skeleton</code></div>
+		</div>
+	</section>
+
+	<section id="blocksy">
+		<h2 class="si-heading">Blocksy mapping</h2>
+		<p class="si-lead intro">Where each decision lives. The first group is written into Blocksy by <code>wp/apply-design-system.php</code> and stays editable in the Customizer; the second ships as <code>tokens.css</code>, <code>components.css</code> and <code>theme.json</code> in the child theme.</p>
+		<div class="table-wrap"><table class="map">
+			<thead><tr><th>Decision</th><th>Blocksy setting (theme mod)</th><th>Blocksy prints</th><th>Jasper reads</th></tr></thead>
+			<tbody>
+				<tr><td>8 palette colours</td><td><code>colorPalette</code> color1…color8</td><td><code>--theme-palette-color-N</code></td><td><code>--si-accent</code> … <code>--si-card</code></td></tr>
+				<tr><td>Text / link / heading / border roles</td><td><em>left at Blocksy defaults</em> (they already point at slots 3, 1–2, 4, 5)</td><td><code>--theme-text-color</code> …</td><td>—</td></tr>
+				<tr><td>Body type</td><td><code>rootTypography</code> family <code>var(--si-font-serif)</code>, size <code>var(--si-step-0)</code>, lh 1.62</td><td><code>--theme-font-*</code> on <code>:root</code></td><td>—</td></tr>
+				<tr><td>Headings</td><td><code>h1Typography</code>…<code>h6Typography</code> → steps 5…−2</td><td><code>--theme-font-*</code> on <code>h1</code>…</td><td>—</td></tr>
+				<tr><td>Buttons</td><td><code>buttons</code> family <code>var(--si-font-sans)</code>, 600, 15px</td><td><code>--theme-button-font-*</code></td><td>—</td></tr>
+				<tr><td>Container</td><td><code>maxSiteWidth</code> 1240 · <code>narrowContainerWidth</code> 760</td><td><code>--theme-normal-container-max-width</code></td><td><code>--si-container</code></td></tr>
+				<tr><td>Type &amp; space scales, muted/jasper/brass/night, motion, portrait treatment</td><td colspan="2"><em>no Blocksy setting</em> → child theme <code>tokens.css</code></td><td><code>--si-*</code></td></tr>
+				<tr><td>Block editor presets</td><td colspan="2">child <code>theme.json</code>: font families, font sizes, spacing sizes (aliasing the tokens)</td><td><code>--wp--preset--*</code></td></tr>
+			</tbody>
+		</table></div>
+	</section>
+	</div>
+</main>
+<script type="module">
+	import { loadPeople, medallion, plate, settleImages } from '../templates/js/people-core.js';
+	const { people } = await loadPeople();
+	const helga = people.find(p => p.key === 'helga-zepp-larouche');
+	const askary = people.find(p => p.key === 'hussein-askary');
+	const plain = people.find(p => !p.photo && p.name.startsWith('Maurizio'));
+	document.querySelector('[data-medallions]').innerHTML =
+		medallion(helga, 72, { eager: true }) + medallion(askary, 56, { eager: true }) + medallion(plain, 72) + medallion(plain, 44);
+	document.querySelector('[data-plate]').innerHTML = plate(askary, { ar: .8, fill: .28, eager: true });
+	settleImages();
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+/* ==========================================================================
+   JASPER — the Schiller Institute design system, token layer
+   --------------------------------------------------------------------------
+   Governing image: the neoclassical portrait medallion of Schiller's own
+   decades (1780–1805) — a limestone ground, Prussian-blue ink, pale jasper
+   relief, and ONE brass ring (the ring of the locked A2 logo roundel).
+   Colour does structure, never decoration. The circle is the only curve.
+
+   HOW THIS SITS ON BLOCKSY (read before editing)
+   Blocksy already owns a token system:
+     palette   Customizer → Colors → Global palette   → --theme-palette-color-1…8
+     type      Customizer → Typography (root, h1–h6)  → --theme-font-family/-size/-weight/-line-height
+     layout    Customizer → General → Container       → --theme-normal-container-max-width …
+   Jasper does NOT redefine any --theme-* variable. The eight palette values
+   and the typography are *written into Blocksy's own settings* by
+   wp/apply-design-system.php, so every Blocksy module (header, footer,
+   buttons, forms, pagination, blocks) picks them up the way Blocksy intends,
+   and the Customizer remains the place to change them.
+
+   This file adds only what Blocksy has no knob for — the fluid type and
+   space scales, the brand's non-palette colours, motion — and names the
+   semantic roles templates use (--si-ink, --si-accent …) as ALIASES of
+   Blocksy's variables. Change a colour in the Customizer and every Jasper
+   component follows.
+
+   Literal hex values appear in the alias fallbacks only, so this sheet also
+   renders correctly outside WordPress (the prototypes, the specimen).
+   ========================================================================== */
+
+:root {
+	/* ---- 1 · Colour: semantic roles, aliased onto Blocksy's palette -------- */
+	/*   slot  name              hex       role                                    */
+	/*   1     Berliner Blau     #1F4A73   links, buttons, focus  (8.5:1 on 7)    */
+	/*   2     Berliner Blau deep#163754   hover / active         (11.3:1 on 7)   */
+	/*   3     Slate             #3D4550   body text              (9.0:1 on 7)    */
+	/*   4     Iron-gall         #121A24   headings, names        (16.2:1 on 7)   */
+	/*   5     Hairline          #D8DDE3   rules, borders                          */
+	/*   6     Jasper mist       #E9EDF1   quiet panels, chips                     */
+	/*   7     Limestone         #F6F6F3   site ground                             */
+	/*   8     Paper             #FFFFFF   cards, fields                           */
+	--si-accent:      var(--theme-palette-color-1, #1F4A73);
+	--si-accent-deep: var(--theme-palette-color-2, #163754);
+	--si-text:        var(--theme-palette-color-3, #3D4550);
+	--si-ink:         var(--theme-palette-color-4, #121A24);
+	--si-rule:        var(--theme-palette-color-5, #D8DDE3);
+	--si-panel:       var(--theme-palette-color-6, #E9EDF1);
+	--si-ground:      var(--theme-palette-color-7, #F6F6F3);
+	--si-card:        var(--theme-palette-color-8, #FFFFFF);
+
+	/* Non-palette brand colours (Blocksy has 8 slots; these are not UI colours). */
+	--si-muted:       #5C6570;  /* secondary text — ≥5.0:1 on slots 6, 7, 8        */
+	--si-jasper:      #8FA7BF;  /* relief field; decorative only (2.3:1 — never text)*/
+	--si-jasper-deep: #5E7C99;  /* large ornamental numerals only (4.0:1)           */
+	--si-brass:       #A08040;  /* the medallion ring and one rule per page; never text */
+	--si-night:       #0F1A26;  /* the one dark band a page may have                */
+	--si-night-2:     #162536;
+	--si-on-night:    #E6EBF0;  /* 14.6:1 on night */
+	--si-on-night-2:  #A9BCD0;  /*  9.0:1 on night */
+	--si-brass-on-night: #C9A866; /* 7.8:1 on night — allowed as small text there   */
+
+	--si-focus-ring:  0 0 0 2px var(--si-card), 0 0 0 4px var(--si-accent);
+	--si-scrim:       rgb(15 26 38 / 0.55);
+
+	/* ---- 2 · Type families ------------------------------------------------ */
+	/* Source Serif 4 carries reading AND display: its optical-size axis draws
+	   the sturdy text cut at 17px and the fine, high-contrast display cut at
+	   58px from one file. Source Sans 3 is its designed companion and carries
+	   everything that is navigation rather than reading. */
+	--si-font-serif: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Noto Serif', 'Times New Roman', serif;
+	--si-font-sans:  'Source Sans 3', 'Source Sans Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif;
+	--si-font-mono:  ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+	/* ---- 3 · Type scale — fluid, 360px → 1280px ---------------------------- */
+	/* body 17→19px; ratio 1.16 at 360px widening to 1.25 at 1280px, so
+	   headings open up on large screens without shouting on phones.
+	   Steps −2/−1 are near-fixed on purpose: small print must not shrink. */
+	--si-step-n2: 0.78rem;                                              /* 12.5px  caps labels   */
+	--si-step-n1: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);          /* 14–15px meta          */
+	--si-step-0:  clamp(1.062rem, 1.014rem + 0.2174vw, 1.188rem);       /* 17–19px body          */
+	--si-step-1:  clamp(1.232rem, 1.134rem + 0.438vw, 1.484rem);        /* 20–24px lead, names   */
+	--si-step-2:  clamp(1.43rem, 1.263rem + 0.7405vw, 1.855rem);        /* 23–30px h4            */
+	--si-step-3:  clamp(1.658rem, 1.4rem + 1.149vw, 2.319rem);          /* 27–37px h3            */
+	--si-step-4:  clamp(1.924rem, 1.542rem + 1.696vw, 2.899rem);        /* 31–46px h2            */
+	--si-step-5:  clamp(2.232rem, 1.687rem + 2.421vw, 3.624rem);        /* 36–58px h1            */
+	--si-step-6:  clamp(2.589rem, 1.829rem + 3.376vw, 4.53rem);         /* 41–72px banner        */
+
+	--si-leading-display: 1.08;
+	--si-leading-heading: 1.2;
+	--si-leading-body:    1.62;
+	--si-leading-meta:    1.4;
+
+	--si-weight-display: 380;   /* light-ish: the display cut's contrast does the work */
+	--si-weight-heading: 450;
+	--si-weight-body:    400;
+	--si-weight-strong:  600;
+
+	--si-track-display: -0.012em;
+	--si-track-caps:    0.14em;  /* small caps / sans labels */
+	--si-measure:       66ch;
+	--si-measure-narrow: 42ch;
+
+	/* ---- 4 · Space — one fluid scale, used for padding, gaps AND rhythm ----- */
+	--si-space-3xs: clamp(0.25rem, 0.24rem + 0.0435vw, 0.275rem);
+	--si-space-2xs: clamp(0.5rem, 0.48rem + 0.087vw, 0.55rem);
+	--si-space-xs:  clamp(0.75rem, 0.7207rem + 0.1304vw, 0.825rem);
+	--si-space-s:   clamp(1rem, 0.9022rem + 0.4348vw, 1.25rem);
+	--si-space-m:   clamp(1.5rem, 1.353rem + 0.6522vw, 1.875rem);
+	--si-space-l:   clamp(2rem, 1.804rem + 0.8696vw, 2.5rem);
+	--si-space-xl:  clamp(3rem, 2.707rem + 1.304vw, 3.75rem);
+	--si-space-2xl: clamp(4rem, 3.609rem + 1.739vw, 5rem);
+	--si-space-3xl: clamp(6rem, 5.413rem + 2.609vw, 7.5rem);
+	--si-gutter:    var(--si-space-m);
+
+	/* Width: follows Blocksy's container setting when present. */
+	--si-container: var(--theme-normal-container-max-width, 1240px);
+	--si-container-narrow: var(--theme-narrow-container-max-width, 760px);
+
+	/* ---- 5 · Shape, depth ----------------------------------------------------*/
+	--si-radius-0: 0;
+	--si-radius-1: 2px;              /* fields, buttons — near-square, deliberately */
+	--si-radius-round: 999px;        /* medallions and chips only                  */
+	--si-hairline: 1px solid var(--si-rule);
+	--si-shadow-1: 0 1px 0 rgb(18 26 36 / 0.03), 0 1px 3px rgb(18 26 36 / 0.06);
+	--si-shadow-2: 0 2px 6px rgb(18 26 36 / 0.06), 0 18px 40px -18px rgb(18 26 36 / 0.28);
+	--si-shadow-3: 0 30px 80px -20px rgb(15 26 38 / 0.45);
+
+	/* ---- 6 · Motion ----------------------------------------------------------*/
+	--si-ease:      cubic-bezier(0.2, 0.7, 0.2, 1);   /* settle, never bounce */
+	--si-ease-in:   cubic-bezier(0.5, 0, 0.75, 0);
+	--si-dur-1: 160ms;   /* hover, focus               */
+	--si-dur-2: 320ms;   /* reveal, filter             */
+	--si-dur-3: 640ms;   /* page-level, banner         */
+
+	/* ---- 7 · Portrait treatment ---------------------------------------------*/
+	/* The archive's photos are colour podium shots under every kind of light.
+	   One tonal treatment makes 132 different rooms read as one collection;
+	   full colour is the reward for attention (hover / focus / open). */
+	--si-portrait-filter: grayscale(1) contrast(1.04) brightness(1.03);
+	--si-portrait-tint: color-mix(in srgb, var(--si-jasper) 30%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:root { --si-dur-1: 0ms; --si-dur-2: 0ms; --si-dur-3: 0ms; }
+}
+
+/* Chinese-script pages (WPML zh-hans): no CJK webfont is shipped — a CJK
+   serif is 5–15 MB. Latin runs stay in Source; Han falls to the OS's own
+   Song/Hei, which every Chinese-reading device has. */
+:lang(zh) {
+	--si-font-serif: 'Source Serif 4', 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+	--si-font-sans:  'Source Sans 3', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+	--si-track-caps: 0.04em;   /* letterspacing Han is wrong */
+}

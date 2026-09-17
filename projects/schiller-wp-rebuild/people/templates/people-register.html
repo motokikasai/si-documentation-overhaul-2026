@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>People — Schiller Institute</title>
+<meta name="description" content="Every speaker, author and performer in the Schiller Institute's recorded archive, indexed by surname.">
+<!--
+	DRAFT A · "The Register"  —  /people/ (si_person archive)
+	The scholarly index of persons: surname-first, small caps, dotted leaders,
+	a sticky letter per section, and a portrait loupe that follows the pointer.
+	Built for 400+ names: the fastest way to find one person.
+	Stylesheet order is the WordPress enqueue order; blocksy-shim.css stands in
+	for Blocksy's own dynamic CSS and does not ship.
+-->
+<link rel="preload" href="../design-system/fonts/source-serif-4-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../design-system/fonts.css">
+<link rel="stylesheet" href="../design-system/tokens.css">
+<link rel="stylesheet" href="../design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../design-system/components.css">
+<link rel="stylesheet" href="css/people-shared.css">
+<link rel="stylesheet" href="css/register.css">
+<link rel="stylesheet" href="css/proto.css">
+<link rel="icon" href="../../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+</head>
+<body class="archive post-type-archive post-type-archive-si_person">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header id="header" class="ct-header">
+	<div class="ct-container">
+		<a class="site-logo" href="#"><img src="../../brand/assets/lockup/lockup-light@2x.png" alt="The International Schiller Institute" width="560" height="150"></a>
+		<nav aria-label="Primary"><ul>
+			<li><a href="#">News</a></li><li><a href="#">Conferences</a></li><li><a href="#" aria-current="page">People</a></li><li><a href="#">Library</a></li><li><a href="#">Culture</a></li><li><a href="#">About</a></li>
+		</ul></nav>
+		<div class="header-cta"><a class="si-link is-secondary" href="#">Join</a><a class="ct-button" href="#">Donate</a></div>
+	</div>
+</header>
+
+<main id="main" class="site-main si-page reg">
+
+	<section class="reg-banner" aria-labelledby="reg-title">
+		<div class="ct-container reg-banner__grid">
+			<div class="reg-banner__text">
+				<p class="si-eyebrow si-eyebrow--ruled">The archive · People</p>
+				<h1 class="si-display" id="reg-title">A register of <em>voices</em></h1>
+				<p class="si-lead">Every speaker, author and performer in the Institute’s recorded archive — statesmen and scientists, economists and musicians — indexed by surname, with the years each was heard.</p>
+			</div>
+			<aside class="reg-banner__aside" aria-label="The archive in figures">
+				<div class="reg-stack" data-stack aria-hidden="true"></div>
+				<dl class="si-figures reg-figures">
+					<div class="si-figure"><dt>People</dt><dd data-fig="count">418</dd></div>
+					<div class="si-figure"><dt>Countries named</dt><dd data-fig="countries">30</dd></div>
+					<div class="si-figure"><dt>Years recorded</dt><dd data-fig="span">2012–25</dd></div>
+				</dl>
+			</aside>
+		</div>
+	</section>
+
+	<div class="si-js-only people-toolbar reg-toolbar">
+		<div class="ct-container">
+			<label class="si-search">
+				<span class="si-visually-hidden">Search people</span>
+				<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M13 13l5 5" stroke="currentColor" stroke-width="1.5"/></svg>
+				<input type="search" placeholder="Search by name, institution, country…" autocomplete="off" data-q>
+				<kbd>/</kbd>
+			</label>
+			<div class="si-segmented" role="group" aria-label="Order">
+				<button type="button" data-sort="az" aria-pressed="true">A–Z</button>
+				<button type="button" data-sort="heard" aria-pressed="false">Most heard</button>
+				<button type="button" data-sort="recent" aria-pressed="false">Most recent</button>
+			</div>
+			<select data-country aria-label="Country"><option value="">All countries</option></select>
+			<p class="people-count si-meta" aria-live="polite" data-count></p>
+		</div>
+		<div class="ct-container reg-alpha-wrap">
+			<nav class="reg-alpha" aria-label="Jump to letter" data-alpha></nav>
+		</div>
+	</div>
+
+	<div class="ct-container reg-body">
+		<div data-register aria-busy="true">
+			<div class="reg-loading" aria-hidden="true">
+				<div class="si-skeleton" style="height:18px;width:40%"></div>
+				<div class="si-skeleton" style="height:18px;width:62%"></div>
+				<div class="si-skeleton" style="height:18px;width:54%"></div>
+			</div>
+		</div>
+		<p class="reg-note si-meta">Names are set surname-first, as in a scholarly index; where a name is not naturally written that way, the person’s own order is kept. Years are those of recordings and articles in this archive, not a full biography.</p>
+	</div>
+
+	<div class="reg-loupe" data-loupe aria-hidden="true"></div>
+</main>
+
+<footer id="footer" class="ct-footer">
+	<div class="ct-container">
+		<img src="../../brand/assets/lockup/lockup-dark@2x.png" alt="The International Schiller Institute" width="560" height="150">
+		<p>Blocksy footer (stand-in) · <span class="proto-note">prototype — data: person-map.csv build set, 418 people</span></p>
+	</div>
+</footer>
+
+<nav class="draft-strip" aria-label="Drafts">
+	<span>People drafts</span>
+	<a href="people-register.html" aria-current="page">A · Register</a>
+	<a href="people-medallions.html">B · Medallions</a>
+	<a href="people-chronicle.html">C · Chronicle</a>
+	<a href="../design-system/specimen.html">System</a>
+</nav>
+
+<script type="module" src="js/register.js"></script>
+</body>
+</html>

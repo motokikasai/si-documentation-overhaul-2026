@@ -1,0 +1,16 @@
+/* proto.css — PROTOTYPES ONLY, never shipped: the review strip that cross-links the drafts. */
+
+/* ---- review strip (prototype only: cross-links the three drafts) ---------- */
+.draft-strip {
+	position: fixed; left: 16px; bottom: 16px; z-index: 40;
+	display: flex; align-items: center; gap: 2px;
+	padding: 4px; border-radius: 999px;
+	background: var(--si-night); color: var(--si-on-night-2);
+	box-shadow: var(--si-shadow-2);
+	font-family: var(--si-font-sans); font-size: 12.5px;
+}
+.draft-strip span { padding: 0 10px 0 12px; letter-spacing: .08em; text-transform: uppercase; font-size: 11px; }
+.draft-strip a { color: var(--si-on-night); text-decoration: none; padding: 6px 12px; border-radius: 999px; }
+.draft-strip a:hover { background: var(--si-night-2); }
+.draft-strip a[aria-current] { background: var(--si-on-night); color: var(--si-night); }
+@media (max-width: 689.98px) { .draft-strip span { display: none; } .draft-strip { left: 8px; bottom: 8px; } }

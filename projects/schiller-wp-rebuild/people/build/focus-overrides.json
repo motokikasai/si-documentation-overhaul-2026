@@ -1,0 +1,7 @@
+{
+  "_comment": "Hand-set focal points where the face detector latched onto calligraphy, a poster or a scarf. fx/fy = % of frame, fs = face height / frame height. Checked against the crop contact sheet 2026-09-17.",
+  "cui-hongjian":       {"fx": 42, "fy": 32, "fs": 0.30},
+  "куи-цзянгон":        {"fx": 42, "fy": 32, "fs": 0.30},
+  "raghda-ibrahim":     {"fx": 70, "fy": 26, "fs": 0.20},
+  "marcia-merry-baker": {"fx": 74, "fy": 41, "fs": 0.08}
+}

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>People — Schiller Institute</title>
+<meta name="description" content="Who spoke, and when: the Schiller Institute's speakers, year by year and conference by conference.">
+<!--
+	DRAFT C · "The Chronicle"  —  /people/ (si_person archive)
+	Time is the organising principle: who spoke, and when. A histogram ribbon
+	(people per year) is both the banner's figure and, pinned, the page's
+	navigation; each year keeps its numeral in view while its conferences pass,
+	each conference lists its voices, and a person's first year is marked.
+	The honest remainder — people the archive cannot yet date — closes the page.
+	Scroll-driven animation (animation-timeline: view()) where supported;
+	a plain reveal elsewhere; nothing moves under prefers-reduced-motion.
+-->
+<link rel="preload" href="../design-system/fonts/source-serif-4-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../design-system/fonts.css">
+<link rel="stylesheet" href="../design-system/tokens.css">
+<link rel="stylesheet" href="../design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../design-system/components.css">
+<link rel="stylesheet" href="css/people-shared.css">
+<link rel="stylesheet" href="css/chronicle.css">
+<link rel="stylesheet" href="css/proto.css">
+<link rel="icon" href="../../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+</head>
+<body class="archive post-type-archive post-type-archive-si_person">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header id="header" class="ct-header">
+	<div class="ct-container">
+		<a class="site-logo" href="#"><img src="../../brand/assets/lockup/lockup-light@2x.png" alt="The International Schiller Institute" width="560" height="150"></a>
+		<nav aria-label="Primary"><ul>
+			<li><a href="#">News</a></li><li><a href="#">Conferences</a></li><li><a href="#" aria-current="page">People</a></li><li><a href="#">Library</a></li><li><a href="#">Culture</a></li><li><a href="#">About</a></li>
+		</ul></nav>
+		<div class="header-cta"><a class="si-link is-secondary" href="#">Join</a><a class="ct-button" href="#">Donate</a></div>
+	</div>
+</header>
+
+<main id="main" class="site-main si-page chr">
+
+	<section class="chr-banner" aria-labelledby="chr-title">
+		<div class="ct-container chr-banner__grid">
+			<div class="chr-banner__text">
+				<p class="si-eyebrow si-eyebrow--ruled">The archive · People</p>
+				<h1 class="si-display" id="chr-title"><span data-fig="years">Fourteen</span> years <em>of voices</em></h1>
+				<p class="si-lead">Who spoke, and when. The Institute’s speakers year by year and conference by conference — <span data-fig="count">418</span> people, each shown in every year the archive records them.</p>
+			</div>
+			<figure class="si-js-only chr-hist" aria-labelledby="chr-hist-cap">
+				<div class="chr-hist__bars" data-hist></div>
+				<figcaption id="chr-hist-cap" class="si-meta">People heard each year. Select a year to go to it.</figcaption>
+			</figure>
+		</div>
+	</section>
+
+	<div class="si-js-only people-toolbar chr-toolbar">
+		<div class="ct-container">
+			<label class="si-search">
+				<span class="si-visually-hidden">Search people</span>
+				<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M13 13l5 5" stroke="currentColor" stroke-width="1.5"/></svg>
+				<input type="search" placeholder="Find a name or a conference…" autocomplete="off" data-q>
+				<kbd>/</kbd>
+			</label>
+			<div class="si-segmented" role="group" aria-label="Order">
+				<button type="button" data-order="desc" aria-pressed="true">Newest first</button>
+				<button type="button" data-order="asc" aria-pressed="false">Oldest first</button>
+			</div>
+			<p class="people-count si-meta" aria-live="polite" data-count></p>
+		</div>
+		<div class="ct-container">
+			<nav class="chr-dial" aria-label="Years" data-dial></nav>
+		</div>
+	</div>
+
+	<div class="ct-container chr-body">
+		<div data-chronicle aria-busy="true">
+			<div class="chr-loading" aria-hidden="true">
+				<div class="si-skeleton" style="height:80px;width:160px"></div>
+				<div class="si-skeleton" style="height:18px;width:50%"></div>
+				<div class="si-skeleton" style="height:18px;width:70%"></div>
+			</div>
+		</div>
+		<section class="chr-undated" aria-labelledby="chr-undated-title" data-undated-wrap>
+			<p class="si-eyebrow si-eyebrow--ruled">Not yet dated</p>
+			<h2 class="si-heading" id="chr-undated-title">Also in the archive</h2>
+			<p class="si-meta chr-undated__note">These people are in the archive, but their recordings are not yet tied to a dated conference. They will take their place in the chronicle as the recordings are catalogued.</p>
+			<p class="chr-undated__list" data-undated></p>
+		</section>
+	</div>
+</main>
+
+<footer id="footer" class="ct-footer">
+	<div class="ct-container">
+		<img src="../../brand/assets/lockup/lockup-dark@2x.png" alt="The International Schiller Institute" width="560" height="150">
+		<p>Blocksy footer (stand-in) · <span class="proto-note">prototype — data: person-map.csv build set, 418 people</span></p>
+	</div>
+</footer>
+
+<nav class="draft-strip" aria-label="Drafts">
+	<span>People drafts</span>
+	<a href="people-register.html">A · Register</a>
+	<a href="people-medallions.html">B · Medallions</a>
+	<a href="people-chronicle.html" aria-current="page">C · Chronicle</a>
+	<a href="../design-system/specimen.html">System</a>
+</nav>
+
+<script type="module" src="js/chronicle.js"></script>
+</body>
+</html>
