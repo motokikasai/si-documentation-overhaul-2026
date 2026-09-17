@@ -1,0 +1,474 @@
+# Blocksy Child — Schiller Institute (text domain: si)
+msgid ""
+msgstr ""
+"Project-Id-Version: blocksy-child\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-17 15:29+0000\n"
+"X-Domain: si\n"
+
+#: inc/people-archive.php:108
+msgid "Search people"
+msgstr ""
+
+#. translators: numbered placeholders may be reordered
+#: inc/people-i18n.php:23
+#, php-format
+msgid "%1$s of %2$s"
+msgstr ""
+
+#. translators: %s is replaced as shown in the English text
+#: inc/people-i18n.php:25
+#, php-format
+msgid "No one in the register matches “%s”."
+msgstr ""
+
+#. translators: numbered placeholders may be reordered
+#: inc/people-i18n.php:27
+#, php-format
+msgid "No one in the register matches “%1$s” in %2$s."
+msgstr ""
+
+#: inc/people-i18n.php:28
+msgid "Clear the search"
+msgstr ""
+
+#: inc/people-i18n.php:29
+msgid "Most heard in the archive"
+msgstr ""
+
+#: inc/people-i18n.php:30
+msgid "Most recently heard"
+msgstr ""
+
+#: inc/people-i18n.php:31
+msgid "Close"
+msgstr ""
+
+#: inc/people-i18n.php:32
+msgid "Person"
+msgstr ""
+
+#: inc/people-i18n.php:33
+msgid "Conferences in the archive"
+msgstr ""
+
+#: inc/people-i18n.php:34
+msgid "Appearances are listed on the full profile."
+msgstr ""
+
+#: inc/people-i18n.php:35
+msgid "Full profile, talks & writings"
+msgstr ""
+
+#. translators: %s is replaced as shown in the English text
+#: inc/people-i18n.php:37
+#, php-format
+msgid "Photograph: %s"
+msgstr ""
+
+#: inc/people-i18n.php:38
+msgid "Schiller Institute"
+msgstr ""
+
+#: inc/people-i18n.php:40
+msgid "With portrait"
+msgstr ""
+
+#: inc/people-i18n.php:41
+msgid "Heard more than once"
+msgstr ""
+
+#. translators: %s is replaced as shown in the English text
+#: inc/people-i18n.php:43
+#, php-format
+msgid "The %ss"
+msgstr ""
+
+#. translators: numbered placeholders may be reordered
+#: inc/people-i18n.php:45
+#, php-format
+msgid "Showing %1$s of %2$s"
+msgstr ""
+
+#: inc/people-i18n.php:46
+msgid "No one matches these filters."
+msgstr ""
+
+#: inc/people-i18n.php:48
+msgid "the archive begins"
+msgstr ""
+
+#. translators: %s is replaced as shown in the English text
+#: inc/people-i18n.php:50
+#, php-format
+msgid "Also heard in %s"
+msgstr ""
+
+#. translators: %s is replaced as shown in the English text
+#: inc/people-i18n.php:52
+#, php-format
+msgid "Heard in %s"
+msgstr ""
+
+#: inc/people-i18n.php:53
+msgid "In articles and recordings not yet tied to a conference"
+msgstr ""
+
+#. translators: %s is replaced as shown in the English text
+#: inc/people-i18n.php:55
+#, php-format
+msgid "Nothing in the chronicle matches “%s”."
+msgstr ""
+
+#: inc/people-i18n.php:56
+msgid "first"
+msgstr ""
+
+#: inc/people-i18n.php:57
+msgid "First year in the archive"
+msgstr ""
+
+#. translators: %s is replaced as shown in the English text
+#: inc/people-i18n.php:59
+#, php-format
+msgid "Also %s"
+msgstr ""
+
+#. translators: plural forms — fill the categories your language uses (CLDR: one/few/many/other); %s is the number
+#: inc/people-i18n.php:61
+#, php-format
+msgctxt "plural: one"
+msgid "%s person"
+msgstr ""
+
+#: inc/people-i18n.php:62
+#, php-format
+msgctxt "plural: few"
+msgid "%s people"
+msgstr ""
+
+#: inc/people-i18n.php:63
+#, php-format
+msgctxt "plural: many"
+msgid "%s people"
+msgstr ""
+
+#: inc/people-i18n.php:64
+#, php-format
+msgctxt "plural: other"
+msgid "%s people"
+msgstr ""
+
+#. translators: plural forms — fill the categories your language uses (CLDR: one/few/many/other); %s is the number
+#: inc/people-i18n.php:66
+#, php-format
+msgctxt "plural: one"
+msgid "%s name"
+msgstr ""
+
+#: inc/people-i18n.php:67
+#, php-format
+msgctxt "plural: few"
+msgid "%s names"
+msgstr ""
+
+#: inc/people-i18n.php:68
+#, php-format
+msgctxt "plural: many"
+msgid "%s names"
+msgstr ""
+
+#: inc/people-i18n.php:69
+#, php-format
+msgctxt "plural: other"
+msgid "%s names"
+msgstr ""
+
+#. translators: plural forms — fill the categories your language uses (CLDR: one/few/many/other); %s is the number
+#: inc/people-i18n.php:71
+#, php-format
+msgctxt "plural: one"
+msgid "%s appearance"
+msgstr ""
+
+#: inc/people-i18n.php:72
+#, php-format
+msgctxt "plural: few"
+msgid "%s appearances"
+msgstr ""
+
+#: inc/people-i18n.php:73
+#, php-format
+msgctxt "plural: many"
+msgid "%s appearances"
+msgstr ""
+
+#: inc/people-i18n.php:74
+#, php-format
+msgctxt "plural: other"
+msgid "%s appearances"
+msgstr ""
+
+#. translators: plural forms — fill the categories your language uses (CLDR: one/few/many/other); %s is the number
+#: inc/people-i18n.php:76
+#, php-format
+msgctxt "plural: one"
+msgid "and %s more"
+msgstr ""
+
+#: inc/people-i18n.php:77
+#, php-format
+msgctxt "plural: few"
+msgid "and %s more"
+msgstr ""
+
+#: inc/people-i18n.php:78
+#, php-format
+msgctxt "plural: many"
+msgid "and %s more"
+msgstr ""
+
+#: inc/people-i18n.php:79
+#, php-format
+msgctxt "plural: other"
+msgid "and %s more"
+msgstr ""
+
+#. translators: plural forms — fill the categories your language uses (CLDR: one/few/many/other); %s is the number
+#: inc/people-i18n.php:81
+#, php-format
+msgctxt "plural: one"
+msgid "%s voice"
+msgstr ""
+
+#: inc/people-i18n.php:82
+#, php-format
+msgctxt "plural: few"
+msgid "%s voices"
+msgstr ""
+
+#: inc/people-i18n.php:83
+#, php-format
+msgctxt "plural: many"
+msgid "%s voices"
+msgstr ""
+
+#: inc/people-i18n.php:84
+#, php-format
+msgctxt "plural: other"
+msgid "%s voices"
+msgstr ""
+
+#. translators: plural forms — fill the categories your language uses (CLDR: one/few/many/other); %s is the number
+#: inc/people-i18n.php:86
+#, php-format
+msgctxt "plural: one"
+msgid "%s heard for the first time"
+msgstr ""
+
+#: inc/people-i18n.php:87
+#, php-format
+msgctxt "plural: few"
+msgid "%s heard for the first time"
+msgstr ""
+
+#: inc/people-i18n.php:88
+#, php-format
+msgctxt "plural: many"
+msgid "%s heard for the first time"
+msgstr ""
+
+#: inc/people-i18n.php:89
+#, php-format
+msgctxt "plural: other"
+msgid "%s heard for the first time"
+msgstr ""
+
+#. translators: plural forms — fill the categories your language uses (CLDR: one/few/many/other); %s is the number
+#: inc/people-i18n.php:91
+#, php-format
+msgctxt "plural: one"
+msgid "%s speaker in the archive"
+msgstr ""
+
+#: inc/people-i18n.php:92
+#, php-format
+msgctxt "plural: few"
+msgid "%s speakers in the archive"
+msgstr ""
+
+#: inc/people-i18n.php:93
+#, php-format
+msgctxt "plural: many"
+msgid "%s speakers in the archive"
+msgstr ""
+
+#: inc/people-i18n.php:94
+#, php-format
+msgctxt "plural: other"
+msgid "%s speakers in the archive"
+msgstr ""
+
+#: template-parts/people/chronicle.php:14 template-parts/people/gallery.php:16 template-parts/people/register.php:13
+msgid "The archive · People"
+msgstr ""
+
+#. translators: %s: number of years, as a word or figure
+#: template-parts/people/chronicle.php:18
+#, php-format
+msgid "%s years <em>of voices</em>"
+msgstr ""
+
+#. translators: %s: number of people
+#: template-parts/people/chronicle.php:25
+#, php-format
+msgid "Who spoke, and when. The Institute’s speakers year by year and conference by conference — %s people, each shown in every year the archive records them."
+msgstr ""
+
+#: template-parts/people/chronicle.php:32
+msgid "People heard each year. Select a year to go to it."
+msgstr ""
+
+#: template-parts/people/chronicle.php:39
+msgid "Find a name or a conference…"
+msgstr ""
+
+#: template-parts/people/chronicle.php:40 template-parts/people/gallery.php:50 template-parts/people/register.php:31
+msgid "Order"
+msgstr ""
+
+#: template-parts/people/chronicle.php:41
+msgid "Newest first"
+msgstr ""
+
+#: template-parts/people/chronicle.php:42
+msgid "Oldest first"
+msgstr ""
+
+#: template-parts/people/chronicle.php:47
+msgid "Years"
+msgstr ""
+
+#: template-parts/people/chronicle.php:54
+msgid "Not yet dated"
+msgstr ""
+
+#: template-parts/people/chronicle.php:55
+msgid "Also in the archive"
+msgstr ""
+
+#: template-parts/people/chronicle.php:56
+msgid "These people are in the archive, but their recordings are not yet tied to a dated conference. They will take their place in the chronicle as the recordings are catalogued."
+msgstr ""
+
+#: template-parts/people/gallery.php:17
+msgid "The company <em>of voices</em>"
+msgstr ""
+
+#. translators: 1: number of people, 2: number of countries
+#: template-parts/people/gallery.php:21
+#, php-format
+msgid "Statesmen, scientists, economists and artists who have addressed the Institute’s conferences — %1$s of them in the recorded archive, from %2$s named countries."
+msgstr ""
+
+#: template-parts/people/gallery.php:26
+msgid "Browse everyone"
+msgstr ""
+
+#: template-parts/people/gallery.php:34
+msgid "Most often heard"
+msgstr ""
+
+#: template-parts/people/gallery.php:35
+msgid "Principal voices"
+msgstr ""
+
+#: template-parts/people/gallery.php:38
+msgid "Previous"
+msgstr ""
+
+#: template-parts/people/gallery.php:39
+msgid "Next"
+msgstr ""
+
+#: template-parts/people/gallery.php:43
+msgid "Principal voices, scrollable"
+msgstr ""
+
+#: template-parts/people/gallery.php:48
+msgid "Search the company…"
+msgstr ""
+
+#: template-parts/people/gallery.php:49 template-parts/people/register.php:36
+msgid "Country"
+msgstr ""
+
+#: template-parts/people/gallery.php:49 template-parts/people/register.php:36
+msgid "All countries"
+msgstr ""
+
+#: template-parts/people/gallery.php:51
+msgid "A–Z by surname"
+msgstr ""
+
+#: template-parts/people/gallery.php:52 template-parts/people/register.php:33
+msgid "Most heard"
+msgstr ""
+
+#: template-parts/people/gallery.php:53 template-parts/people/register.php:34
+msgid "Most recent"
+msgstr ""
+
+#: template-parts/people/gallery.php:58
+msgid "Show"
+msgstr ""
+
+#: template-parts/people/gallery.php:62 inc/people-i18n.php:39
+msgid "Everyone"
+msgstr ""
+
+#: template-parts/people/gallery.php:67 inc/people-i18n.php:47
+msgid "Show everyone"
+msgstr ""
+
+#: template-parts/people/register.php:14
+msgid "A register of <em>voices</em>"
+msgstr ""
+
+#: template-parts/people/register.php:15
+msgid "Every speaker, author and performer in the Institute’s recorded archive — statesmen and scientists, economists and musicians — indexed by surname, with the years each was heard."
+msgstr ""
+
+#: template-parts/people/register.php:17
+msgid "The archive in figures"
+msgstr ""
+
+#: template-parts/people/register.php:20
+msgid "People"
+msgstr ""
+
+#: template-parts/people/register.php:21
+msgid "Countries named"
+msgstr ""
+
+#: template-parts/people/register.php:22
+msgid "Years recorded"
+msgstr ""
+
+#: template-parts/people/register.php:30
+msgid "Search by name, institution, country…"
+msgstr ""
+
+#: template-parts/people/register.php:32
+msgid "A–Z"
+msgstr ""
+
+#: template-parts/people/register.php:40
+msgid "Jump to letter"
+msgstr ""
+
+#: template-parts/people/register.php:46
+msgid "Names are set surname-first, as in a scholarly index; where a name is not naturally written that way, the person’s own order is kept. Years are those of recordings and articles in this archive, not a full biography."
+msgstr ""

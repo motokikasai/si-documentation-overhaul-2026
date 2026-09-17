@@ -22,6 +22,7 @@ export async function loadPeople() {
 		if (!res.ok) throw new Error(`people.json ${res.status}`);
 		data = await res.json();
 	}
+	if (data.i18n) setStrings(data.i18n);
 	for (const p of data.people) {
 		p.who = fold([p.name, p.sort, p.native, p.aff, p.country].join(' '));   // the person
 		p.hay = `${p.who} ${fold(p.confs.map(c => c.t).join(' '))}`;          // + where they spoke
@@ -67,7 +68,85 @@ export function descriptor(p, { year = true } = {}) {
  *  Cyrillic does not prove Russian, so it gets none. */
 export const scriptLang = s => /\p{Script=Han}/u.test(s) ? ' lang="zh"' : '';
 
-export const plural = (n, one, many) => `${n.toLocaleString('en')} ${n === 1 ? one : many}`;
+/* ---- i18n -------------------------------------------------------------------
+ * Every string this JS writes lives in STRINGS (English). WordPress sends the
+ * translated table as payload.i18n, built with __()/_x() in inc/people-i18n.php,
+ * so WPML String Translation and .po files translate it like any theme string.
+ * Plural keys end in .one/.two/.few/.many/.other (Intl.PluralRules categories);
+ * a missing category falls back to .other. Templates use %s / %1$s.
+ * build/render-test.php checks that the PHP table has exactly these keys and,
+ * untranslated, exactly this English. */
+export const STRINGS = {
+	'count.all.one': '%s person',
+	'count.all.other': '%s people',
+	'count.filtered': '%1$s of %2$s',
+	'names.one': '%s name',
+	'names.other': '%s names',
+	'appearances.one': '%s appearance',
+	'appearances.other': '%s appearances',
+	'more.one': 'and %s more',
+	'more.other': 'and %s more',
+	'register.empty': 'No one in the register matches “%s”.',
+	'register.empty_country': 'No one in the register matches “%1$s” in %2$s.',
+	'register.clear': 'Clear the search',
+	'register.ranked_heard': 'Most heard in the archive',
+	'register.ranked_recent': 'Most recently heard',
+	'sheet.close': 'Close',
+	'sheet.eyebrow': 'Person',
+	'sheet.conferences': 'Conferences in the archive',
+	'sheet.no_conferences': 'Appearances are listed on the full profile.',
+	'sheet.cta': 'Full profile, talks & writings',
+	'sheet.photo_credit': 'Photograph: %s',
+	'sheet.default_credit': 'Schiller Institute',
+	'gallery.everyone': 'Everyone',
+	'gallery.with_portrait': 'With portrait',
+	'gallery.returning': 'Heard more than once',
+	'gallery.decade': 'The %ss',
+	'gallery.shown': 'Showing %1$s of %2$s',
+	'gallery.empty': 'No one matches these filters.',
+	'gallery.show_everyone': 'Show everyone',
+	'chronicle.voices.one': '%s voice',
+	'chronicle.voices.other': '%s voices',
+	'chronicle.archive_begins': 'the archive begins',
+	'chronicle.debuts.one': '%s heard for the first time',
+	'chronicle.debuts.other': '%s heard for the first time',
+	'chronicle.speakers.one': '%s speaker in the archive',
+	'chronicle.speakers.other': '%s speakers in the archive',
+	'chronicle.also_heard_in': 'Also heard in %s',
+	'chronicle.heard_in': 'Heard in %s',
+	'chronicle.unlinked_note': 'In articles and recordings not yet tied to a conference',
+	'chronicle.empty': 'Nothing in the chronicle matches “%s”.',
+	'chronicle.first': 'first',
+	'chronicle.first_title': 'First year in the archive',
+	'chronicle.also_years': 'Also %s',
+};
+let dict = { ...STRINGS };
+export function setStrings(table) {
+	for (const [k, v] of Object.entries(table)) if (typeof v === 'string' && v !== '') dict[k] = v;
+}
+
+export const locale = document.documentElement.lang || 'en';
+const pluralRules = (() => { try { return new Intl.PluralRules(locale); } catch { return new Intl.PluralRules('en'); } })();
+export const num = n => { try { return Number(n).toLocaleString(locale); } catch { return String(n); } };
+
+/** Fill %s / %1$s placeholders. With html=true the template is escaped and the
+ *  arguments are inserted as given (callers pass already-safe markup). */
+function fill(template, args, html) {
+	let i = 0;
+	const text = html ? esc(template) : template;
+	return text.replace(/%(?:(\d+)\$)?s/g, (_, n) => String(args[n ? n - 1 : i++] ?? ''));
+}
+const pick = (key, n) => dict[`${key}.${pluralRules.select(n)}`] ?? dict[`${key}.other`] ?? key;
+
+/** Plain-text string (escape it where it goes into HTML). */
+export const t = (key, ...args) => fill(dict[key] ?? key, args, false);
+/** HTML-safe string; args are inserted raw. */
+export const th = (key, ...args) => fill(dict[key] ?? key, args, true);
+/** Plural, plain text: the count is the first placeholder, localised. */
+export const tn = (key, n, ...args) => fill(pick(key, n), [num(n), ...args], false);
+/** Plural, HTML-safe, with the count wrapped as given (e.g. n => `<b>${n}</b>`). */
+export const thn = (key, n, wrap, ...args) => fill(pick(key, n), [wrap(num(n)), ...args], true);
+
 
 /* ---- the medallion -------------------------------------------------------- */
 /** Focal-point crop as absolute geometry, clamped so the frame is always
@@ -214,24 +293,24 @@ export function openProfile(p, opener) {
 	sheet._opener = opener;
 	const confs = p.confs.length
 		? `<ol class="sheet-confs">${p.confs.map(c => `<li><span class="si-tabular">${esc(c.y)}</span><span>${esc(c.t)}</span></li>`).join('')}</ol>`
-		: `<p class="si-meta">Appearances are listed on the full profile.</p>`;
+		: `<p class="si-meta">${esc(t('sheet.no_conferences'))}</p>`;
 	sheet.innerHTML = `
-		<button class="si-sheet__close" type="button" aria-label="Close" autofocus>
+		<button class="si-sheet__close" type="button" aria-label="${esc(t('sheet.close'))}" autofocus>
 			<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.4"/></svg>
 		</button>
 		<div class="sheet-head">
 			${medallion(p, 148, { eager: true, fill: 0.46 }).replace('si-medallion"', 'si-medallion is-vivid"')}
-			<p class="si-eyebrow si-eyebrow--ruled">Person</p>
+			<p class="si-eyebrow si-eyebrow--ruled">${esc(t('sheet.eyebrow'))}</p>
 			<h2 class="si-name sheet-name" id="si-sheet-title">${esc(p.name)}${p.native ? `<span class="si-name__native"${scriptLang(p.native)}>${esc(p.native)}</span>` : ''}</h2>
 			${p.aff ? `<p class="sheet-aff">${esc(p.aff)}</p>` : ''}
-			<p class="si-meta">${[p.country, p.years.length ? yearSpan(p.years, false) : '', plural(p.n, 'appearance', 'appearances')].filter(Boolean).map(esc).join(' <span aria-hidden="true">·</span> ')}</p>
+			<p class="si-meta">${[p.country, p.years.length ? yearSpan(p.years, false) : '', tn('appearances', p.n)].filter(Boolean).map(esc).join(' <span aria-hidden="true">·</span> ')}</p>
 		</div>
 		<div class="sheet-body">
 			${p.bio ? `<p class="sheet-bio">${esc(p.bio)}</p>` : ''}
-			<h3 class="si-eyebrow">Conferences in the archive</h3>
+			<h3 class="si-eyebrow">${esc(t('sheet.conferences'))}</h3>
 			${confs}
-			<a class="ct-button sheet-cta" href="${href(p)}">Full profile, talks &amp; writings <span aria-hidden="true">→</span></a>
-			${p.photo ? `<p class="sheet-credit si-meta">Photograph: ${esc(p.credit || 'Schiller Institute')}</p>` : ''}
+			<a class="ct-button sheet-cta" href="${href(p)}">${esc(t('sheet.cta'))} <span aria-hidden="true">→</span></a>
+			${p.photo ? `<p class="sheet-credit si-meta">${esc(t('sheet.photo_credit', p.credit || t('sheet.default_credit')))}</p>` : ''}
 		</div>`;
 	sheet.querySelector('.si-sheet__close').onclick = () => sheet.close();
 	sheet.showModal();

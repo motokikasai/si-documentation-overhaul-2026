@@ -66,7 +66,8 @@ add_filter('blocksy:posts-listing:canvas:custom-output', static function ($outpu
 	ob_start();
 	printf(
 		'<script type="application/json" id="si-people-data">%s</script>',
-		wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP)
+		// i18n is added per request, not cached: translations can change without a content save
+		wp_json_encode($payload + ['i18n' => si_people_i18n()], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP)
 	);
 	echo '<div class="si-page si-people">';
 	get_template_part('template-parts/people/' . $view, null, ['payload' => $payload]);

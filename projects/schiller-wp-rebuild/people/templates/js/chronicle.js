@@ -1,9 +1,10 @@
 /* DRAFT C · The Chronicle */
 import {
 	loadPeople, esc, fold, medallion, settleImages, reveal,
-	bindSlash, readState, writeState, bindProfiles, plural, reduceMotion,
+	bindSlash, readState, writeState, bindProfiles, reduceMotion,
 	href,
 	pixelSnap,
+	t, th, tn, thn, num,
 } from './people-core.js';
 
 const $ = s => document.querySelector(s);
@@ -35,14 +36,14 @@ const bySort = (a, b) => a.sort.localeCompare(b.sort);
 
 // spelled out in English only; other languages keep the figure the server printed
 $('[data-fig="years"]').textContent = document.documentElement.lang.startsWith('en') ? (WORDS[years.length] ?? years.length) : years.length;
-$('[data-fig="count"]').textContent = meta.count;
+$('[data-fig="count"]').textContent = num(meta.count);
 
 /* ---- histogram ------------------------------------------------------------ */
 const hist = $('[data-hist]');
 const maxY = Math.max(...years.map(y => chron.get(y).all.size));
 hist.innerHTML = years.map((y, i) => {
 	const n = chron.get(y).all.size;
-	return `<button class="chr-hist__bar" type="button" data-year="${y}" style="--v:${(n / maxY).toFixed(3)};--i:${i}" aria-label="${y}: ${plural(n, 'person', 'people')}">
+	return `<button class="chr-hist__bar" type="button" data-year="${y}" style="--v:${(n / maxY).toFixed(3)};--i:${i}" aria-label="${y}: ${esc(tn('count.all', n))}">
 		<i></i><b>${n}</b><span>${y}</span></button>`;
 }).join('');
 hist.addEventListener('click', e => {
@@ -84,10 +85,10 @@ function mark(text, needle) {
 
 function person(p, y, needle) {
 	const first = p.years[0] === y && p.years.length > 1;
-	const sub = p.aff || p.country || (p.years.length > 1 ? `Also ${p.years.filter(x => x !== y).slice(-3).join(', ')}` : '');
+	const sub = p.aff || p.country || (p.years.length > 1 ? t('chronicle.also_years', p.years.filter(x => x !== y).slice(-3).join(', ')) : '');
 	return `<li><a href="${href(p)}" data-person="${esc(p.key)}">
 		${medallion(p, 44, { fill: .5 })}
-		<span><span class="si-name chr-person__name">${mark(p.name, needle)}${first ? '<span class="chr-first" title="First year in the archive">first</span>' : ''}</span>
+		<span><span class="si-name chr-person__name">${mark(p.name, needle)}${first ? `<span class="chr-first" title="${esc(t('chronicle.first_title'))}">${esc(t('chronicle.first'))}</span>` : ''}</span>
 		${sub ? `<span class="chr-person__sub">${mark(sub, needle)}</span>` : ''}</span>
 	</a></li>`;
 }
@@ -116,16 +117,16 @@ function render() {
 		other.forEach(p => shownKeys.add(p.key));
 		const debuts = [...new Set([...confs.flatMap(([, l]) => l), ...other])].filter(p => p.years[0] === y).length;
 		return `<section class="chr-year" id="y-${y}" aria-labelledby="yh-${y}">
-			<h2 class="chr-year__num" id="yh-${y}">${y}<small><b>${plural(n, 'voice', 'voices')}</b><br>${y === meta.first_year ? 'the archive begins' : `${debuts} heard for the first time`}</small></h2>
+			<h2 class="chr-year__num" id="yh-${y}">${y}<small><b>${esc(tn('chronicle.voices', n))}</b><br>${esc(y === meta.first_year ? t('chronicle.archive_begins') : tn('chronicle.debuts', debuts))}</small></h2>
 			<div class="chr-year__body">
 				${confs.map(([t, l]) => `<article class="chr-conf si-reveal">
 					<h3 class="chr-conf__title">${mark(t, needle)}</h3>
-					<p class="si-meta chr-conf__meta">${plural(l.length, 'speaker', 'speakers')} in the archive</p>
+					<p class="si-meta chr-conf__meta">${esc(tn('chronicle.speakers', l.length))}</p>
 					<ul class="chr-people">${l.map(p => person(p, y, needle)).join('')}</ul>
 				</article>`).join('')}
 				${other.length ? `<article class="chr-conf chr-conf--other si-reveal">
-					<h3 class="chr-conf__title">${confs.length ? `Also heard in ${y}` : `Heard in ${y}`}</h3>
-					<p class="si-meta chr-conf__meta">In articles and recordings not yet tied to a conference</p>
+					<h3 class="chr-conf__title">${esc(t(confs.length ? 'chronicle.also_heard_in' : 'chronicle.heard_in', y))}</h3>
+					<p class="si-meta chr-conf__meta">${esc(t('chronicle.unlinked_note'))}</p>
 					<ul class="chr-people">${other.map(p => person(p, y, needle)).join('')}</ul>
 				</article>` : ''}
 			</div>
@@ -138,8 +139,10 @@ function render() {
 	undatedEl.innerHTML = und.map(p => `<a href="${href(p)}" data-person="${esc(p.key)}">${mark(p.name, needle)}</a>`).join('<span class="sep" aria-hidden="true">·</span> ');
 
 	root.removeAttribute('aria-busy');
-	root.innerHTML = html || `<div class="si-empty"><p>Nothing in the chronicle matches “${esc(state.q)}”.</p></div>`;
-	$('[data-count]').innerHTML = !needle ? `<b>${people.length}</b> people` : `<b>${shownKeys.size}</b> of ${people.length}`;
+	root.innerHTML = html || `<div class="si-empty"><p>${th('chronicle.empty', esc(state.q))}</p></div>`;
+	$('[data-count]').innerHTML = !needle
+		? thn('count.all', people.length, n => `<b>${n}</b>`)
+		: th('count.filtered', `<b>${num(shownKeys.size)}</b>`, num(people.length));
 
 	dial.innerHTML = order.map(y => `<a href="#y-${y}" data-year="${y}"${root.querySelector(`#y-${y}`) ? '' : ' class="is-empty" tabindex="-1"'}>${y}</a>`).join('');
 	settleImages(root);

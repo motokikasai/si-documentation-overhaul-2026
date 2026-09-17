@@ -103,7 +103,7 @@ PW=~/.npm/_npx/<hash>/node_modules node people/build/shoot.mjs   --out <dir>   #
 PW=~/.npm/_npx/<hash>/node_modules node people/build/interact.mjs --out <dir>  # 45 behaviour checks
 ```
 
-Firefox only on this box (Chromium lacks libnspr4). Last run on 2026-09-17: 63/63 checks (dropdown and hover checks also in Chromium, with a local libnspr4 via LD_LIBRARY_PATH)
+Firefox only on this box (Chromium lacks libnspr4). Last run on 2026-09-17: 71/71 checks (dropdown and hover checks also in Chromium, with a local libnspr4 via LD_LIBRARY_PATH)
 passed; all pages clean at 1440 and 390 px; PHP and JS focal crops identical.
 
 ## Installing in WordPress
@@ -166,13 +166,38 @@ caches it per language, with a generation counter bumped on any related save.
 - **`photo_focus` is not a Pod field yet.** Add `photo_focus` (text, `"fx,fy,fs"`) to
   `si_person` and have the importer write the values from `data/people.json`. Without it,
   every portrait uses the default podium crop.
-- **JS strings are English.** The PHP partials are translatable (text domain `si`), but the
-  counts and labels the modules generate are not. For WPML, pass an `i18n` object in the
-  payload (script modules have no `wp_set_script_translations`).
 - **Verify on the site** that the page prints `--theme-palette-color-1: #1F4A73` and
   `--theme-font-family: var(--si-font-serif)`, and makes **no** request to `fonts.googleapis.com`.
   Blocksy passes `var(--…)` families through verbatim; that was read in its source, not yet
   observed on a live page.
+
+## Languages (WPML)
+
+`/people/` is the `si_person` archive, not a Page, so nothing is duplicated per language:
+WPML serves the same template at `/de/people/`, `/fr/people/` … People are
+display-as-translated (`wpml-config.xml`: `translate="2"`), so every language lists the same
+people, each in its translation where one exists.
+
+- **Page text** (PHP partials) and **text the JS writes** (counts, empty states, the profile
+  sheet) are all gettext strings in text domain `si`. The JS strings live in `STRINGS` in
+  `templates/js/people-core.js`; `build/make-i18n.py` generates `inc/people-i18n.php` from
+  them (literal `__()`/`_x()` calls, sent to the page as `payload.i18n`) and
+  `languages/si.pot` from every PHP file. Translate in **WPML → String Translation** (scan
+  the child theme) or ship `languages/{locale}.mo` — the child theme loads that directory.
+- **Plurals** are split by CLDR category (`plural: one|few|many|other` contexts); the JS picks
+  the category with `Intl.PluralRules` for `<html lang>`, and numbers are formatted for that
+  locale. English and German need *one* + *other*; Russian also *few* + *many*.
+- **Relationships under WPML:** relationship meta is copied, so it holds default-language
+  IDs. The payload maps each listed person back to its original to find their edges, shows
+  each conference in the current language when translated (falling back to the original),
+  and queries conferences with `suppress_filters` so WPML cannot drop the originals.
+  **Not yet exercised on a WPML site** — si-v4 has no WPML; test on si-v2: `/de/people/`
+  should list the same people with years and (German where translated) conference lines.
+- **Optional:** translate the archive slug per language (WPML → Settings → Slug translation);
+  decide before launch, since changing URLs later needs redirects.
+- Adding or changing a JS string: edit `STRINGS`, run `python3 people/build/make-i18n.py`;
+  `build/render-test.php` fails if the PHP table and `STRINGS` drift, and renders a mock
+  German page that `interact.mjs` checks (PHP + JS strings, plural, locale number).
 
 ## Data findings the drafts exposed (person-map.csv, not fixed here)
 

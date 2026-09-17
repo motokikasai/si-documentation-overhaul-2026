@@ -11,7 +11,7 @@ dest="${1:?usage: package-wp.sh <blocksy-child dir>}"
 mkdir -p "$dest/assets/jasper/fonts" "$dest/assets/people/css" "$dest/assets/people/js" "$dest/tools"
 
 cp "$here"/wp/blocksy-child/functions.php "$here"/wp/blocksy-child/theme.json "$dest/"
-cp -r "$here"/wp/blocksy-child/inc "$here"/wp/blocksy-child/template-parts "$dest/"
+cp -r "$here"/wp/blocksy-child/inc "$here"/wp/blocksy-child/template-parts "$here"/wp/blocksy-child/languages "$dest/"
 cp "$here"/wp/tools/apply-design-system.php "$dest/tools/"
 
 cp "$here"/design-system/{fonts.css,tokens.css,components.css} "$dest/assets/jasper/"

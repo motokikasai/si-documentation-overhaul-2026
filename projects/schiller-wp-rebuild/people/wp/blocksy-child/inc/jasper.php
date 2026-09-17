@@ -59,6 +59,12 @@ function si_jasper_palette(): array {
 	return $out;
 }
 
+/* Theme strings (text domain `si`): languages/{locale}.mo in the child theme, or
+   WPML String Translation, which filters the same gettext calls. */
+add_action('after_setup_theme', static function () {
+	load_child_theme_textdomain('si', get_stylesheet_directory() . '/languages');
+});
+
 /* Block editor: same faces and tokens, so what authors see is what readers get. */
 add_action('after_setup_theme', static function () {
 	add_editor_style([

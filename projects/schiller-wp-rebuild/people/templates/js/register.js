@@ -1,9 +1,10 @@
 /* DRAFT A · The Register */
 import {
 	loadPeople, esc, fold, splitSort, yearSpan, medallion, settleImages, reveal,
-	bindSlash, readState, writeState, bindProfiles, plural, reduceMotion,
+	bindSlash, readState, writeState, bindProfiles, reduceMotion,
 	href,
 	pixelSnap,
+	t, th, tn, thn, num,
 } from './people-core.js';
 import { enhanceSelect } from './si-select.js';
 
@@ -22,8 +23,8 @@ const bucket = p => LATIN.includes(p.letter) ? p.letter : /\p{Script=Cyrillic}/u
 const BUCKETS = [...LATIN, 'А–Я', '#'];
 
 /* ---- banner: figures + cameo stack --------------------------------------- */
-$('[data-fig="count"]').textContent = meta.count;
-$('[data-fig="countries"]').textContent = meta.countries;
+$('[data-fig="count"]').textContent = num(meta.count);
+$('[data-fig="countries"]').textContent = num(meta.countries);
 $('[data-fig="span"]').textContent = `${meta.first_year}–${String(meta.last_year).slice(2)}`;
 {
 	const stack = $('[data-stack]');
@@ -32,7 +33,7 @@ $('[data-fig="span"]').textContent = `${meta.first_year}–${String(meta.last_ye
 	const faces = withPhoto.slice(0, 7);
 	if (!faces.length) stack.hidden = true;
 	else stack.innerHTML = faces.map((p, i) => medallion(p, 58, { eager: true, fill: .5 }).replace('style="', `style="--i:${i};`)).join('')
-		+ `<span class="reg-stack__more">and ${meta.count - faces.length} more</span>`;
+		+ `<span class="reg-stack__more">${esc(tn('more', meta.count - faces.length))}</span>`;
 	requestAnimationFrame(() => requestAnimationFrame(() => stack.classList.add('is-in')));
 	settleImages(stack);
 }
@@ -98,12 +99,12 @@ function update(sortChanged = false) {
 	const shown = people.filter(p => (!needle || p.hay.includes(needle)) && (!state.country || p.country === state.country));
 
 	$('[data-count]').innerHTML = shown.length === people.length
-		? `<b>${people.length}</b> people`
-		: `<b>${shown.length}</b> of ${people.length}`;
+		? thn('count.all', people.length, n => `<b>${n}</b>`)
+		: th('count.filtered', `<b>${num(shown.length)}</b>`, num(people.length));
 
 	list.removeAttribute('aria-busy');
 	if (!shown.length) {
-		list.innerHTML = `<div class="si-empty"><p>No one in the register matches “${esc(state.q)}”${state.country ? ` in ${esc(state.country)}` : ''}.</p><p><button class="ct-button" type="button" data-reset>Clear the search</button></p></div>`;
+		list.innerHTML = `<div class="si-empty"><p>${state.country ? th('register.empty_country', esc(state.q), esc(state.country)) : th('register.empty', esc(state.q))}</p><p><button class="ct-button" type="button" data-reset>${esc(t('register.clear'))}</button></p></div>`;
 		list.querySelector('[data-reset]').onclick = () => { q.value = ''; countrySel.value = ''; state.q = ''; state.country = ''; update(); q.focus(); };
 		alpha.hidden = true;
 		return;
@@ -114,19 +115,19 @@ function update(sortChanged = false) {
 		for (const p of shown) groups.get(bucket(p)).push(p);
 		list.innerHTML = [...groups].filter(([, g]) => g.length).map(([b, g]) => `
 			<section class="reg-letter" id="letter-${encodeURIComponent(b)}" aria-labelledby="lh-${encodeURIComponent(b)}">
-				<div class="reg-letter__head"><h2 class="reg-letter__glyph" id="lh-${encodeURIComponent(b)}"${b.length > 1 ? ' data-wide' : ''}>${b}<small>${plural(g.length, 'name', 'names')}</small></h2></div>
+				<div class="reg-letter__head"><h2 class="reg-letter__glyph" id="lh-${encodeURIComponent(b)}"${b.length > 1 ? ' data-wide' : ''}>${b}<small>${esc(tn('names', g.length))}</small></h2></div>
 				<ul class="reg-rows">${g.map(p => row(p, needle)).join('')}</ul>
 			</section>`).join('');
 		alpha.hidden = false;
 		alpha.innerHTML = BUCKETS.map(b => groups.get(b).length
-			? `<a href="#letter-${encodeURIComponent(b)}" aria-label="${b}, ${plural(groups.get(b).length, 'name', 'names')}">${b}</a>`
+			? `<a href="#letter-${encodeURIComponent(b)}" aria-label="${b}, ${esc(tn('names', groups.get(b).length))}">${b}</a>`
 			: `<span aria-hidden="true">${b}</span>`).join('');
 		spy();
 	} else {
 		const ranked = [...shown].sort(state.sort === 'heard'
 			? (a, b) => b.n - a.n || a.sort.localeCompare(b.sort)
 			: (a, b) => (b.years.at(-1) ?? 0) - (a.years.at(-1) ?? 0) || b.n - a.n);
-		const heading = state.sort === 'heard' ? 'Most heard in the archive' : 'Most recently heard';
+		const heading = esc(t(state.sort === 'heard' ? 'register.ranked_heard' : 'register.ranked_recent'));
 		list.innerHTML = `<section class="reg-letter" aria-labelledby="lh-ranked">
 			<div class="reg-letter__head"><h2 class="reg-letter__glyph" id="lh-ranked">${state.sort === 'heard' ? '№' : '↓'}<small>${heading}</small></h2></div>
 			<ol class="reg-rows reg-rows--ranked">${ranked.map(p => state.sort === 'heard' ? row(p, needle, true) : row(p, needle)).join('')}</ol>

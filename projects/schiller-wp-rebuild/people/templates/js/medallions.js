@@ -1,9 +1,10 @@
 /* DRAFT B · The Gallery */
 import {
 	loadPeople, esc, fold, yearSpan, descriptor, medallion, plate, settleImages, reveal,
-	bindSlash, readState, writeState, bindProfiles, transition, plural, reduceMotion,
+	bindSlash, readState, writeState, bindProfiles, transition, reduceMotion,
 	href,
 	pixelSnap,
+	t, th, tn, thn, num,
 } from './people-core.js';
 import { enhanceSelect } from './si-select.js';
 
@@ -16,8 +17,8 @@ people.forEach((p, i) => { p.idx = i; });
 const byKey = new Map(people.map(p => [p.key, p]));
 const state = readState(DEFAULTS);
 
-$('[data-fig="count"]').textContent = meta.count;
-$('[data-fig="countries"]').textContent = meta.countries;
+$('[data-fig="count"]').textContent = num(meta.count);
+$('[data-fig="countries"]').textContent = num(meta.countries);
 
 /* ---- banner drift --------------------------------------------------------- */
 {
@@ -41,7 +42,7 @@ $('[data-fig="countries"]').textContent = meta.countries;
 			<a class="gal-plate" href="${href(p)}" data-person="${esc(p.key)}">
 				<span style="position:relative;display:block">${plate(p, { ar: 0.8, fill: 0.26, eager: i < 4 })}<span class="gal-plate__rank" aria-hidden="true">${i + 1}</span></span>
 				<span class="si-name gal-plate__name">${esc(p.name)}</span>
-				<span class="si-meta gal-plate__meta">${plural(p.n, 'appearance', 'appearances')} · ${yearSpan(p.years)}</span>
+				<span class="si-meta gal-plate__meta">${esc(tn('appearances', p.n))} · ${yearSpan(p.years)}</span>
 				${p.aff ? `<span class="gal-plate__aff">${esc(p.aff)}</span>` : ''}
 			</a>
 		</li>`).join('');
@@ -63,14 +64,14 @@ $('[data-fig="countries"]').textContent = meta.countries;
 /* ---- filters --------------------------------------------------------------- */
 const decades = [...new Set(people.flatMap(p => p.years.map(y => Math.floor(y / 10) * 10)))].sort((a, b) => b - a);
 const CHIPS = [
-	['all', 'Everyone', () => true],
-	['portrait', 'With portrait', p => !!p.photo],
-	['returning', 'Heard more than once', p => p.n > 1],
-	...decades.map(d => [`${d}s`, `The ${d}s`, p => p.years.some(y => y >= d && y < d + 10)]),
+	['all', t('gallery.everyone'), () => true],
+	['portrait', t('gallery.with_portrait'), p => !!p.photo],
+	['returning', t('gallery.returning'), p => p.n > 1],
+	...decades.map(d => [`${d}s`, t('gallery.decade', d), p => p.years.some(y => y >= d && y < d + 10)]),
 ];
 const chipsEl = $('[data-chips]');
 chipsEl.innerHTML = CHIPS.map(([id, label, test]) =>
-	`<button class="si-chip" type="button" data-show="${id}" aria-pressed="false">${label} <span class="si-chip__count">${people.filter(test).length}</span></button>`).join('');
+	`<button class="si-chip" type="button" data-show="${id}" aria-pressed="false">${esc(label)} <span class="si-chip__count">${num(people.filter(test).length)}</span></button>`).join('');
 chipsEl.addEventListener('click', e => {
 	const b = e.target.closest('[data-show]');
 	if (!b) return;
@@ -128,7 +129,7 @@ function renderMore(n = PAGE) {
 	rendered += next.length;
 	const remaining = list.length - rendered;
 	more.hidden = remaining <= 0;
-	$('[data-shown]').textContent = `Showing ${rendered} of ${list.length}`;
+	$('[data-shown]').textContent = t('gallery.shown', num(rendered), num(list.length));
 	if (remaining > 0) {
 		// ghosts hold the space the next page will fill, so the sentinel does not jump
 		grid.insertAdjacentHTML('beforeend', Array.from({ length: Math.min(4, remaining) }, () =>
@@ -151,7 +152,9 @@ function apply() {
 	if (state.sort === 'heard') list.sort((a, b) => b.n - a.n || a.sort.localeCompare(b.sort));
 	if (state.sort === 'recent') list.sort((a, b) => (b.years.at(-1) ?? 0) - (a.years.at(-1) ?? 0) || b.n - a.n);
 
-	$('[data-count]').innerHTML = list.length === people.length ? `<b>${people.length}</b> people` : `<b>${list.length}</b> of ${people.length}`;
+	$('[data-count]').innerHTML = list.length === people.length
+		? thn('count.all', people.length, n => `<b>${n}</b>`)
+		: th('count.filtered', `<b>${num(list.length)}</b>`, num(people.length));
 
 	transition(() => {
 		document.querySelector('[data-grid-baseline]')?.remove();   // WordPress's no-JS list
@@ -160,7 +163,7 @@ function apply() {
 		rendered = 0;
 		grid.innerHTML = '';
 		if (!list.length) {
-			grid.innerHTML = `<li class="si-empty" style="grid-column:1/-1"><p>No one matches these filters.</p><p><button class="ct-button" type="button" data-reset>Show everyone</button></p></li>`;
+			grid.innerHTML = `<li class="si-empty" style="grid-column:1/-1"><p>${esc(t('gallery.empty'))}</p><p><button class="ct-button" type="button" data-reset>${esc(t('gallery.show_everyone'))}</button></p></li>`;
 			grid.querySelector('[data-reset]').onclick = () => {
 				Object.assign(state, DEFAULTS); q.value = ''; countrySel.value = ''; sortSel.value = 'az'; apply();
 			};

@@ -16,7 +16,7 @@
 
 defined('ABSPATH') || exit;
 
-const SI_PEOPLE_PAYLOAD_VERSION = 3;   // bump when the payload's shape or content rules change
+const SI_PEOPLE_PAYLOAD_VERSION = 4;   // bump when the payload's shape or content rules change
 
 const SI_PEOPLE_REL_KEYS = ['presenters', 'hosts', 'authors', 'signatories_internal', 'featured_people'];
 const SI_PEOPLE_REL_TYPES = ['si_presentation', 'si_video', 'si_document', 'si_statement', 'si_coverage'];
@@ -70,20 +70,37 @@ function si_people_payload(): array {
 		  WHERE pm.meta_key IN ({$keys}) AND pm.meta_value REGEXP '^[0-9]+$'"
 	);
 
-	// 3 · the conferences those edges point at
+	// 3 · the conferences those edges point at. Relationship meta is copied verbatim
+	//     across WPML translations, so it holds default-language IDs. Show each
+	//     conference in the current language when a translation exists (falling back to
+	//     the original), and query with suppress_filters so WPML's language filter
+	//     cannot drop the originals.
 	$conf_ids = array_values(array_unique(array_filter(array_map('intval', wp_list_pluck($edges, 'conf')))));
 	$confs = [];
 	if ($conf_ids) {
-		update_meta_cache('post', $conf_ids);
-		foreach (get_posts(['post_type' => 'si_conference', 'post__in' => $conf_ids, 'posts_per_page' => -1, 'suppress_filters' => false]) as $c) {
-			$year = (int) substr((string) get_post_meta($c->ID, 'start_date', true), 0, 4);
-			$confs[$c->ID] = ['t' => si_people_text(get_the_title($c)), 'y' => $year ?: (int) get_the_date('Y', $c)];
+		$shown = [];
+		foreach ($conf_ids as $cid) {
+			$shown[$cid] = (int) apply_filters('wpml_object_id', $cid, 'si_conference', true);
+		}
+		update_meta_cache('post', array_values(array_unique(array_merge($conf_ids, $shown))));
+		$posts = [];
+		foreach (get_posts(['post_type' => 'si_conference', 'post__in' => array_values(array_unique($shown)), 'posts_per_page' => -1, 'suppress_filters' => true, 'post_status' => 'publish']) as $c) {
+			$posts[$c->ID] = $c;
+		}
+		foreach ($shown as $cid => $sid) {
+			$c = $posts[$sid] ?? null;
+			if (!$c) {
+				continue;
+			}
+			// the date is language-independent: read it from the original
+			$year = (int) substr((string) get_post_meta($cid, 'start_date', true), 0, 4);
+			$confs[$cid] = ['t' => si_people_text(get_the_title($c)), 'y' => $year ?: (int) get_the_date('Y', $c)];
 		}
 	}
 
 	$by_person = [];
 	foreach ($edges as $e) {
-		$p = (int) $e->person;
+		$p = (int) $e->person;   // a default-language person ID (meta is copied, not translated)
 		$by_person[$p]['items'][$e->item] = true;
 		$conf = $confs[(int) $e->conf] ?? null;
 		if ($conf) {
@@ -94,11 +111,15 @@ function si_people_payload(): array {
 		}
 	}
 
+	// The list itself is in the current language (display-as-translated: a German
+	// translation where one exists, else the original); edges are keyed by the original.
+	$default_lang = apply_filters('wpml_default_language', null);
 	$people = [];
 	foreach ($ids as $id) {
+		$orig = $default_lang ? (int) apply_filters('wpml_object_id', $id, 'si_person', true, $default_lang) : $id;
 		$name = si_people_text(get_the_title($id));
 		$sort = si_people_text(get_post_meta($id, 'sort_name', true)) ?: $name;
-		$rel = $by_person[$id] ?? [];
+		$rel = $by_person[$orig] ?? $by_person[$id] ?? [];
 		$years = array_map('intval', array_keys($rel['years'] ?? []));
 		sort($years);
 		$c = array_values($rel['confs'] ?? []);

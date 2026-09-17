@@ -223,6 +223,26 @@ for (const [eng, br] of engines) {
 }
 function r0(v) { return Math.round(v); }
 
+/* ---- translations reach both layers (build/out/wp-register-de.html: mock German) ---- */
+{
+  const page = await browser.newPage({ viewport: { width: 1366, height: 900 } });
+  const errors = [];
+  page.on('pageerror', e => errors.push(e.message));
+  await page.goto(new URL('../build/out/wp-register-de.html', base).href, { waitUntil: 'networkidle' });
+  await page.waitForTimeout(600);
+  const title = await page.locator('#reg-title').innerText();
+  const count = await page.locator('[data-count]').innerText();
+  const letter = await page.locator('.reg-letter__glyph small').first().innerText();
+  const seg = await page.locator('[data-sort="heard"]').innerText();
+  check('i18n: PHP strings translated (title, button)', /Register der\s+Stimmen/.test(title) && seg === 'Am häufigsten', `${title} | ${seg}`);
+  check('i18n: JS strings translated, plural + locale number', count === '418 Personen' && /Namen$/.test(letter), `${count} | ${letter}`);
+  await page.fill('[data-q]', 'zepp');
+  await page.waitForTimeout(300);
+  check('i18n: filtered count uses the translated template', /^\d+ von 418$/.test(await page.locator('[data-count]').innerText()), await page.locator('[data-count]').innerText());
+  check('i18n: no errors', !errors.length, errors.join(' | '));
+  await page.close();
+}
+
 /* ---- toolbar controls: one height, one whole-pixel top (Blocksy's label margin
    once put them on sub-pixels, which made the pressed fill look shifted) ------ */
 for (const file of ['people-register.html', 'people-medallions.html', 'people-chronicle.html', '../build/out/wp-register.html']) {

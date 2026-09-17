@@ -12,6 +12,7 @@ defined('ABSPATH') || exit;
 
 require_once __DIR__ . '/inc/jasper.php';           // design system: fonts, tokens, components, palette preset
 require_once __DIR__ . '/inc/people-payload.php';   // /people/ data contract
+require_once __DIR__ . '/inc/people-i18n.php';      // /people/ strings the JS writes (generated)
 require_once __DIR__ . '/inc/people-archive.php';   // /people/ inside Blocksy's archive canvas
 
 // Which /people/ draft is live: register | gallery | chronicle
