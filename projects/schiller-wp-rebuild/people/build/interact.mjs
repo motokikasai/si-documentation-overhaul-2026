@@ -223,6 +223,20 @@ for (const [eng, br] of engines) {
 }
 function r0(v) { return Math.round(v); }
 
+/* ---- toolbar controls: one height, one whole-pixel top (Blocksy's label margin
+   once put them on sub-pixels, which made the pressed fill look shifted) ------ */
+for (const file of ['people-register.html', 'people-medallions.html', 'people-chronicle.html', '../build/out/wp-register.html']) {
+  const page = await browser.newPage({ viewport: { width: 1366, height: 900 } });
+  await page.goto(new URL(file, base).href, { waitUntil: 'networkidle' });
+  await page.waitForTimeout(700);
+  const g = await page.evaluate(() => [...document.querySelectorAll('.people-toolbar .si-search input, .people-toolbar .si-segmented, .people-toolbar .si-select__button')]
+    .map(e => { const r = e.getBoundingClientRect(); return [r.top + scrollY, r.height]; }));
+  const whole = v => Math.abs(v - Math.round(v)) <= 1 / 32;
+  const ok = g.length >= 2 && g.every(([t, h]) => h === 40 && whole(t) && Math.abs(t - g[0][0]) < 0.02);
+  check(`toolbar controls aligned on whole pixels: ${file}`, ok, JSON.stringify(g.map(([t, h]) => [+t.toFixed(3), h])));
+  await page.close();
+}
+
 /* ---- reduced motion: content is visible without any animation ------------- */
 {
   const ctx = await browser.newContext({ reducedMotion: 'reduce', viewport: { width: 1280, height: 800 } });

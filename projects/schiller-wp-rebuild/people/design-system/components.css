@@ -209,10 +209,15 @@ html:not(.js) .si-js-only { display: none !important; }
 .si-chip__count { font-variant-numeric: tabular-nums; opacity: .66; font-weight: 400; }
 
 /* ---- search field (inherits Blocksy's form tokens) ------------------------ */
-.si-search { position: relative; display: block; }
+.si-search {
+	position: relative; display: block;
+	margin: 0;             /* Blocksy: label { margin: 0 0 .5em } — it put the whole row on sub-pixels */
+	font-size: inherit; line-height: normal;
+}
 .si-search input {
 	width: 100%;
-	height: var(--theme-form-field-height, 44px);
+	height: var(--si-control-height);
+	margin: 0;
 	padding: 0 2.6em 0 2.6em;
 	border: 1px solid var(--theme-form-field-border-initial-color, var(--si-rule));
 	border-radius: var(--theme-form-field-border-radius, var(--si-radius-1));
@@ -235,7 +240,8 @@ html:not(.js) .si-js-only { display: none !important; }
 
 /* ---- segmented control (view / sort) ------------------------------------- */
 .si-segmented {
-	display: inline-flex; padding: 3px; gap: 2px;
+	display: inline-flex; align-items: center; padding: 3px; gap: 2px;
+	box-sizing: border-box; height: var(--si-control-height);
 	border: 1px solid var(--si-rule); border-radius: var(--si-radius-1);
 	background: var(--si-card);
 }
@@ -244,7 +250,7 @@ html:not(.js) .si-js-only { display: none !important; }
 	   control, not from the inherited 1.62 body leading, so hover repaints cannot
 	   shift it by a sub-pixel. Hover changes colour only — nothing ever moves. */
 	display: inline-flex; align-items: center;
-	height: 32px; padding: 0 13px; margin: 0;
+	height: calc(var(--si-control-height) - 8px); padding: 0 13px; margin: 0;
 	border: 0; border-radius: 1px; background: transparent;
 	font-family: var(--si-font-sans); font-size: 15px; font-weight: 500; line-height: 20px;
 	color: var(--si-muted); cursor: pointer;
@@ -262,7 +268,7 @@ html:not(.js) .si-js-only { display: none !important; }
 }
 .si-select__button {
 	display: inline-flex; align-items: center; justify-content: space-between; gap: 14px;
-	height: 40px; min-width: 158px; margin: 0; padding: 0 12px 0 13px;
+	height: var(--si-control-height); min-width: 158px; margin: 0; padding: 0 12px 0 13px;
 	border: 1px solid var(--theme-form-field-border-initial-color, var(--si-rule));
 	border-radius: var(--theme-form-field-border-radius, var(--si-radius-1));
 	background: var(--theme-form-field-background-initial-color, var(--si-card));

@@ -3,6 +3,7 @@ import {
 	loadPeople, esc, fold, medallion, settleImages, reveal,
 	bindSlash, readState, writeState, bindProfiles, plural, reduceMotion,
 	href,
+	pixelSnap,
 } from './people-core.js';
 
 const $ = s => document.querySelector(s);
@@ -61,6 +62,7 @@ function goTo(y) {
 const q = $('[data-q]');
 q.value = state.q;
 bindSlash(q);
+pixelSnap(document.querySelector('.people-toolbar'));
 let debounce;
 q.addEventListener('input', () => { clearTimeout(debounce); debounce = setTimeout(() => { state.q = q.value.trim(); render(); }, 120); });
 document.querySelectorAll('[data-order]').forEach(b => b.addEventListener('click', () => { state.order = b.dataset.order; render(); }));

@@ -3,6 +3,7 @@ import {
 	loadPeople, esc, fold, splitSort, yearSpan, medallion, settleImages, reveal,
 	bindSlash, readState, writeState, bindProfiles, plural, reduceMotion,
 	href,
+	pixelSnap,
 } from './people-core.js';
 import { enhanceSelect } from './si-select.js';
 
@@ -48,6 +49,7 @@ q.value = state.q;
 countrySel.value = state.country;
 enhanceSelect(countrySel);
 bindSlash(q);
+pixelSnap(document.querySelector('.people-toolbar'));
 
 q.addEventListener('input', () => { state.q = q.value.trim(); update(); });
 countrySel.addEventListener('change', () => { state.country = countrySel.value; update(); });

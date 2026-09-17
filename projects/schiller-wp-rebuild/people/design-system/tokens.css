@@ -58,6 +58,10 @@
 	--si-on-night-2:  #A9BCD0;  /*  9.0:1 on night */
 	--si-brass-on-night: #C9A866; /* 7.8:1 on night — allowed as small text there   */
 
+	/* every form control in a row shares one height, independent of Blocksy's form
+	   settings (si-v4 leaves --theme-form-field-height undefined) */
+	--si-control-height: 40px;
+
 	--si-focus-ring:  0 0 0 2px var(--si-card), 0 0 0 4px var(--si-accent);
 	--si-scrim:       rgb(15 26 38 / 0.55);
 

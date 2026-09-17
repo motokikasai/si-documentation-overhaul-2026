@@ -128,6 +128,35 @@ export function reveal(root = document) {
 	root.querySelectorAll('.si-reveal:not(.is-in)').forEach(el => revealIO ? revealIO.observe(el) : el.classList.add('is-in'));
 }
 
+/* ---- whole-pixel toolbar ---------------------------------------------------
+ * The banner above the toolbar has a fluid height, so the toolbar lands on a
+ * fractional y (540.66px on si-v4). Chrome then snaps a control's border and its
+ * inner background independently — the pressed/hover fill looks 1px high, and a
+ * hover repaint can shift it. A sub-pixel top margin puts the toolbar on a whole
+ * pixel; everything inside it is already whole-pixel. */
+export function pixelSnap(el) {
+	if (!el) return;
+	const anchor = el.previousElementSibling;           // in normal flow even when el is stuck
+	const target = getComputedStyle(el).display === 'contents' ? el.firstElementChild : el;
+	if (!anchor || !target) return;
+	let raf = 0;
+	const fix = () => {
+		raf = 0;
+		target.style.marginTop = '';
+		const y = anchor.getBoundingClientRect().bottom + scrollY + parseFloat(getComputedStyle(target).marginTop || 0);
+		const frac = y - Math.floor(y);
+		// within 1/32 px counts as whole: Chrome lays out in 1/64 px units
+		if (frac > 1 / 32 && frac < 1 - 1 / 32) target.style.marginTop = `${(1 - frac).toFixed(3)}px`;
+	};
+	const queue = () => { if (!raf) raf = requestAnimationFrame(fix); };
+	const ro = new ResizeObserver(queue);
+	ro.observe(anchor);
+	ro.observe(document.documentElement);   // anything above the anchor can move it too
+	addEventListener('resize', queue);
+	document.fonts?.ready.then(queue);
+	fix();
+}
+
 /* ---- keyboard: "/" focuses search ---------------------------------------- */
 export function bindSlash(input) {
 	addEventListener('keydown', e => {
