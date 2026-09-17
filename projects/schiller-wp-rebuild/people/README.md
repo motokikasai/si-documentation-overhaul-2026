@@ -65,6 +65,13 @@ half-dark page is worse than none. Night (`--si-night`) is a single band a page 
 from those settings, so the drafts render as they will inside Blocksy, element-selector
 leaks included. It never ships.
 
+**Sharing the system.** `design-system/jasper-specimen.html` is the specimen as one
+self-contained file (1.25 MB: styles inlined, fonts and sample portraits embedded, no
+JavaScript, no network) — email it or put it on a shared drive. Rebuild it after any change
+with `python3 people/build/make-portable-specimen.py` (add `--artifact <file>` to also write
+the body for the private claude.ai page, published 2026-09-17 at
+https://claude.ai/artifact/LkEu9Veabmyk8j6DGExHug and shared from its own share menu).
+
 ## The three drafts
 
 All three render the same 418 people from the same payload and share the toolbar, the
