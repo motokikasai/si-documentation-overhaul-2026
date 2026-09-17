@@ -112,7 +112,7 @@ function update(sortChanged = false) {
 		for (const p of shown) groups.get(bucket(p)).push(p);
 		list.innerHTML = [...groups].filter(([, g]) => g.length).map(([b, g]) => `
 			<section class="reg-letter" id="letter-${encodeURIComponent(b)}" aria-labelledby="lh-${encodeURIComponent(b)}">
-				<div class="reg-letter__head"><h2 class="reg-letter__glyph" id="lh-${encodeURIComponent(b)}">${b}<small>${plural(g.length, 'name', 'names')}</small></h2></div>
+				<div class="reg-letter__head"><h2 class="reg-letter__glyph" id="lh-${encodeURIComponent(b)}"${b.length > 1 ? ' data-wide' : ''}>${b}<small>${plural(g.length, 'name', 'names')}</small></h2></div>
 				<ul class="reg-rows">${g.map(p => row(p, needle)).join('')}</ul>
 			</section>`).join('');
 		alpha.hidden = false;

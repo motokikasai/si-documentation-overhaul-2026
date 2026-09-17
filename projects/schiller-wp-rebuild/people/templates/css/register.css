@@ -89,6 +89,8 @@
 	line-height: .9;
 	color: var(--si-jasper-deep);
 }
+/* multi-letter buckets (А–Я) stay on one line and step down a size */
+.reg-letter__glyph[data-wide] { white-space: nowrap; font-size: clamp(2rem, 3.6vw, 3.2rem); }
 .reg-letter__glyph small {
 	display: block; margin-top: .6rem;
 	font-family: var(--si-font-sans); font-style: normal; font-size: 12px; font-weight: 500;
