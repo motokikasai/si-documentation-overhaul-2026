@@ -1,0 +1,167 @@
+/* ==========================================================================
+   E · THE CABINET — footer draft. Loads after footer-shared.css.
+
+   Two things side by side rather than three bands stacked: the Schiller line on
+   the left with the air it needs, and on the right a wall of framed portraits
+   travelling slowly past a lit centre. Neither competes, because they are given
+   different jobs — one is read once, the other is watched — and the utility
+   below them is a single thin rule's worth of links.
+
+   The plates are all the same size. What varies is distance from the centre,
+   which turns them in Y and pushes them back in Z; the one in the middle comes
+   forward, drops the archive's grey treatment and is named.
+
+   Proportions:  quote 5 : cabinet 7, then one utility rule, then the colophon.
+   Brass appears once, in the rule under the quote.
+   ========================================================================== */
+
+.cabinet-band {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--si-space-xl) var(--si-space-2xl);
+	align-items: center;
+	padding-block: var(--si-space-2xl);
+}
+
+/* ---- left · the line ------------------------------------------------------ */
+/* One step down from the Envoi's banner and one column wider than the first
+   attempt: at step-4 in a 5fr column this line broke into six, which reads as a
+   column of words rather than a sentence.
+
+   NO max-width on the <figure>. `ch` resolves against the element's OWN font, and
+   the figure inherits the footer's 15px sans — so `30ch` there was ~225px and
+   throttled the 37px serif inside it to three words a line. A measure in `ch`
+   belongs on the element whose font it is measuring. */
+.cabinet__say blockquote {
+	margin: 0;
+	max-width: 22ch;
+	font-family: var(--si-font-serif);
+	font-optical-sizing: auto;
+	font-size: var(--si-step-3);
+	font-weight: var(--si-weight-display);
+	line-height: var(--si-leading-display);
+	letter-spacing: var(--si-track-display);
+	color: var(--si-ink);
+	text-wrap: balance;
+}
+.cabinet__say blockquote em { font-style: italic; font-weight: 300; color: var(--si-text); }
+.cabinet__cite {
+	display: grid;
+	gap: var(--si-space-2xs);
+	margin-top: var(--si-space-m);
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n1);
+	font-style: normal;
+	color: var(--si-muted);
+}
+.cabinet__cite .si-orig { font-family: var(--si-font-serif); font-style: italic; }
+.cabinet__cite b { font-weight: 600; color: var(--si-text); }
+
+/* ---- right · the wall ----------------------------------------------------- */
+/* The clip lives on a box with no 3D property: `overflow` plus `preserve-3d` on
+   one element flattens the scene in WebKit. */
+.cabinet {
+	--plate: 148px;
+	position: relative;
+	overflow-x: clip;
+}
+.cabinet__stage {
+	position: relative;
+	height: calc(var(--plate) * 1.25 + 26px);
+	perspective: 1100px;
+	perspective-origin: 50% 50%;
+}
+.cabinet__track {
+	position: absolute;
+	inset: 0;
+	left: 50%;
+	transform-style: preserve-3d;
+}
+.cabinet__face {
+	position: absolute;
+	/* Blocksy gives every <a> a hover colour. These anchors wrap a portrait and a
+	   visually hidden name, so nothing is visibly tinted — but currentColor would
+	   still shift on hover, and "nothing changes on hover" should be true of the
+	   computed styles too, not just of what happens to be painted. The states are
+	   named because Blocksy's `a:hover` outranks a bare class. */
+	color: inherit;
+	top: 50%;
+	left: 0;
+	width: var(--plate);
+	margin-left: calc(var(--plate) / -2);
+	margin-top: calc((var(--plate) * 1.25) / -2);
+	line-height: 0;
+	text-decoration: none;
+	/* transform, opacity and z-index are written every frame by cabinet.js */
+	will-change: transform, opacity;
+	/* Never interpolate a per-frame transform — see the note in rotunda.css.
+	   Blocksy's `a { transition: all .12s }` would animate the loop's wrap into a
+	   flight across the strip, and make a pause jerk. The portrait's own colour
+	   transition is unaffected: it lives on `.si-medallion__img`. */
+	transition: none;
+}
+.cabinet__face:hover, .cabinet__face:focus { color: inherit; }
+.cabinet__face .si-plate {
+	width: 100%;
+	border: 1px solid var(--si-rule-strong);
+	background: var(--si-night-2);
+	transition: border-color var(--si-dur-2) var(--si-ease), box-shadow var(--si-dur-2) var(--si-ease);
+}
+/* the picture in the middle of the window is the one in colour */
+.cabinet__face.is-front .si-plate { border-color: var(--si-rule-strong); box-shadow: var(--si-shadow-3); }
+.cabinet__face.is-front .si-medallion__img { filter: none; }
+.cabinet__face.is-front .si-plate::after { opacity: 0; }
+.cabinet__face:focus-visible .si-plate { border-color: var(--si-on-night); }
+/* reduced motion: a still row of frames, evenly lit */
+.cabinet[data-still] .cabinet__face { opacity: 1 !important; }
+
+.cabinet__caption {
+	display: grid;
+	gap: 2px;
+	justify-items: center;
+	margin: var(--si-space-s) 0 0;
+	min-height: 3.2em;              /* fixed box: the rule below must not jump */
+	text-align: center;
+}
+.cabinet__caption b {
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-1);
+	font-weight: 500;
+	color: var(--si-ink);
+}
+.cabinet__caption span { font-size: var(--si-step-n1); color: var(--si-muted); }
+.cabinet__caption.is-changed b,
+.cabinet__caption.is-changed span { animation: cabinet-name var(--si-dur-3) var(--si-ease); }
+@keyframes cabinet-name { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+	.cabinet__caption.is-changed b,
+	.cabinet__caption.is-changed span { animation: none; }
+}
+
+/* ---- the utility rule ----------------------------------------------------- */
+.cabinet__utility {
+	border-top: 1px solid var(--si-rule);
+	padding-block: var(--si-space-l);
+}
+.cabinet__utility .ct-container {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+	gap: var(--si-space-m) var(--si-space-l);
+	align-items: start;
+}
+.cabinet__utility .si-lang { justify-self: end; }
+
+/* ---- responsive ----------------------------------------------------------- */
+@media (max-width: 1099.98px) {
+	.cabinet-band { grid-template-columns: 1fr; gap: var(--si-space-l); }
+	.cabinet__say blockquote { max-width: 26ch; }   /* on the blockquote: see above */
+	.cabinet__utility .ct-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.cabinet__utility .si-lang { grid-column: 1 / -1; justify-self: start; }
+}
+@media (max-width: 689.98px) {
+	.cabinet { --plate: 116px; }
+	.cabinet-band { padding-block: var(--si-space-xl); }
+}
+@media (max-width: 519.98px) {
+	.cabinet__utility .ct-container { grid-template-columns: 1fr; gap: var(--si-space-s); }
+}

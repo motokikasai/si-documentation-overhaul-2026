@@ -1,0 +1,115 @@
+/* ==========================================================================
+   F · THE QUIET — footer draft. Loads after footer-shared.css.
+
+   No portraits, no motion, almost no words: the aesthetic of the Envoi's opening
+   taken as the whole footer. One line of Schiller with the air around it that
+   makes it worth reading, a short index of what the archive holds set opposite,
+   and then a single rule with everything else on it.
+
+   Its proportions are the argument: the quote occupies roughly half the width
+   and leaves the other half empty on purpose, and the whole navigation costs
+   one band. Nothing here competes because there is almost nothing here.
+   Brass appears once, in the rule under the line.
+   ========================================================================== */
+
+.quiet-band {
+	display: grid;
+	/* 7 : 5 with a wide gutter — the empty column between them is the design */
+	grid-template-columns: 7fr 5fr;
+	gap: var(--si-space-2xl) var(--si-space-3xl);
+	padding-block: var(--si-space-3xl) var(--si-space-2xl);
+	align-items: start;
+}
+
+/* ---- the line ------------------------------------------------------------- */
+.quiet__say blockquote {
+	margin: 0;
+	max-width: 18ch;
+	font-family: var(--si-font-serif);
+	font-optical-sizing: auto;
+	font-size: var(--si-step-5);
+	font-weight: var(--si-weight-display);
+	line-height: var(--si-leading-display);
+	letter-spacing: var(--si-track-display);
+	color: var(--si-ink);
+	text-wrap: balance;
+}
+.quiet__say blockquote em { font-style: italic; font-weight: 300; color: var(--si-text); }
+.quiet__cite {
+	display: grid;
+	gap: var(--si-space-2xs);
+	margin-top: var(--si-space-m);
+	max-width: 38ch;
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n1);
+	font-style: normal;
+	color: var(--si-muted);
+}
+/* the one brass rule of this footer */
+.quiet__cite hr { border: 0; border-top: 1px solid var(--si-brass-on-night); width: 3rem; margin: 0 0 var(--si-space-2xs); }
+.quiet__cite .si-orig { font-family: var(--si-font-serif); font-style: italic; }
+.quiet__cite b { font-weight: 600; color: var(--si-text); }
+
+/* ---- the index opposite --------------------------------------------------- */
+/* A contents page, not a table: label and count on one line, hairline between,
+   no prose anywhere. */
+.quiet__index { display: grid; gap: var(--si-space-2xs); }
+.quiet__index ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.quiet__index li + li { border-top: 1px solid var(--si-rule); }
+.quiet__index a {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--si-space-s);
+	padding: .55rem 0;
+	color: var(--si-ink);
+	text-decoration: none;
+	transition: color var(--si-dur-1) var(--si-ease), padding-left var(--si-dur-2) var(--si-ease);
+}
+.quiet__index a:hover,
+.quiet__index a:focus-visible { color: #FFFFFF; padding-left: .4rem; }
+.quiet__index .si-n {
+	font-variant-numeric: lining-nums tabular-nums;
+	font-size: var(--si-step-n1);
+	color: var(--si-muted);
+}
+.quiet__index a:hover .si-n { color: var(--si-text); }
+
+/* ---- the one utility rule ------------------------------------------------- */
+.quiet__rule {
+	border-top: 1px solid var(--si-rule);
+	padding-block: var(--si-space-l);
+}
+.quiet__rule .ct-container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--si-space-s) var(--si-space-xl);
+}
+.quiet__rule img { height: 40px; width: auto; }
+.quiet__links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--si-space-2xs) var(--si-space-m);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.quiet__links a {
+	color: var(--si-ink);
+	text-decoration: none;
+	background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+	transition: background-size var(--si-dur-2) var(--si-ease);
+}
+.quiet__links a:hover,
+.quiet__links a:focus-visible { background-size: 100% 1px; }
+.quiet__rule .si-lang { margin-left: auto; }
+
+/* ---- responsive ----------------------------------------------------------- */
+@media (max-width: 899.98px) {
+	.quiet-band { grid-template-columns: 1fr; gap: var(--si-space-xl); padding-block: var(--si-space-2xl) var(--si-space-xl); }
+	.quiet__say blockquote { max-width: 22ch; }
+}
+@media (max-width: 689.98px) {
+	.quiet__rule .si-lang { margin-left: 0; }
+}

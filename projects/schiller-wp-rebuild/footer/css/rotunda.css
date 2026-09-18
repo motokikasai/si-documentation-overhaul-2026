@@ -1,0 +1,181 @@
+/* ==========================================================================
+   D · THE ROTUNDA — footer draft. Loads after footer-shared.css.
+
+   A slow right-to-left strip of portrait medallions. Every face is the same
+   size and evenly spaced; nothing rotates, scales or lifts. The line under the
+   strip names whichever face is crossing the middle — or, while you point at
+   one, that one, because pointing also stops the strip.
+
+   The only state change in the whole component is the portrait going from the
+   archive's grey treatment to colour under the pointer, which comes from
+   components.css. Borders and rings never change.
+
+   Proportions are the point of this draft. Three bands, deliberately unequal,
+   so nothing competes:
+       the ring        ~ 8 units   the thing you look at
+       the index       ~ 4 units   the thing you use
+       the colophon    ~ 1 unit    the thing you check
+   Brass appears once, in the eyebrow rule above the strip.
+   ========================================================================== */
+
+/* ---- band 1 · the ring ---------------------------------------------------- */
+.rotunda-band { padding-block: var(--si-space-2xl) var(--si-space-xl); }
+.rotunda-band .si-eyebrow { color: var(--si-muted); }
+.rotunda-band .si-eyebrow--ruled::before { background: var(--si-brass-on-night); }
+.rotunda-band__intro {
+	margin: var(--si-space-2xs) 0 0;
+	max-width: 24ch;
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-3);
+	font-weight: var(--si-weight-display);
+	line-height: var(--si-leading-display);
+	letter-spacing: var(--si-track-display);
+	color: var(--si-ink);
+	text-wrap: balance;
+}
+.rotunda-band__intro em { font-style: italic; font-weight: 300; }
+
+/* The strip. A plain marquee: one row of equal medallions travelling left.
+   `overflow-x: clip` so faces enter and leave the frame rather than the page,
+   and a mask so they fade at both edges instead of popping. */
+.rotunda {
+	--face: 76px;
+	/* Air between the faces. Generous on purpose: at a tighter pitch the strip
+	   reads as one dotted band rather than as a row of separate people. */
+	--gap: 46px;
+	position: relative;
+	margin-top: var(--si-space-l);
+	overflow-x: clip;
+	-webkit-mask-image: linear-gradient(90deg, transparent, #000 90px, #000 calc(100% - 90px), transparent);
+	        mask-image: linear-gradient(90deg, transparent, #000 90px, #000 calc(100% - 90px), transparent);
+}
+.rotunda__stage { position: relative; height: calc(var(--face) * 1.9); }
+.rotunda__track { position: absolute; inset: 0; left: 50%; }
+.rotunda__face {
+	position: absolute;
+	/* Blocksy gives every <a> a hover colour. These anchors wrap a portrait and a
+	   visually hidden name, so nothing is visibly tinted — but currentColor would
+	   still shift on hover, and "nothing changes on hover" should be true of the
+	   computed styles too, not just of what happens to be painted. The states are
+	   named because Blocksy's `a:hover` outranks a bare class. */
+	color: inherit;
+	top: 50%;
+	left: 0;
+	width: var(--face);
+	height: var(--face);
+	margin-left: calc(var(--face) / -2);
+	margin-top: calc(var(--face) / -2);
+	line-height: 0;
+	text-decoration: none;
+	/* only `transform` is written per frame */
+	will-change: transform;
+	/* Blocksy styles every <a> with `transition: all .12s`, which lands on the
+	   transform this element is given sixty times a second. Two visible bugs came
+	   out of that: when a face wrapped round the loop, its 2,376px jump was
+	   ANIMATED, so once every eight seconds one portrait flew across the strip;
+	   and because the painted position always lagged the computed one by 120ms,
+	   pausing made the whole strip jerk as it caught up. The position is the
+	   script's to set, frame by frame — nothing may interpolate it. */
+	transition: none;
+}
+/* The ring's inner gap must be the GROUND, not the card, or each circle shows a
+   faint halo where it crosses the hairline behind the strip. */
+.rotunda__face:hover, .rotunda__face:focus { color: inherit; }
+.rotunda__face .si-medallion { --si-card: var(--si-night); }
+
+/* NOTHING about the medallion changes on hover or focus — no ring, no border,
+   no lift. The single hover effect is the portrait going from the archive's
+   grey treatment to full colour, and components.css already does that for any
+   hovered link, with the transition on `.si-medallion__img`. Do not add a
+   box-shadow rule here. */
+
+/* reduced motion: the strip never moves, so it reads as a still row */
+.rotunda[data-still] .rotunda__face { opacity: 1; }
+
+/* the hairline the faces travel along */
+.rotunda__stage::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: 2px;
+	width: min(94%, 1240px);
+	height: 1px;
+	transform: translateX(-50%);
+	background: linear-gradient(90deg, transparent, var(--si-rule) 18%, var(--si-rule) 82%, transparent);
+}
+
+/* ---- the caption: whoever is passing, or whoever you point at ------------- */
+.rotunda__caption {
+	display: grid;
+	gap: 2px;
+	justify-items: center;
+	margin: var(--si-space-m) 0 0;
+	min-height: 3.2em;               /* fixed box: the line below must not jump */
+	text-align: center;
+}
+.rotunda__caption b {
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-1);
+	font-weight: 500;
+	color: var(--si-ink);
+}
+.rotunda__caption span { font-size: var(--si-step-n1); color: var(--si-muted); }
+.rotunda__caption.is-changed b,
+.rotunda__caption.is-changed span { animation: rotunda-name var(--si-dur-3) var(--si-ease); }
+@keyframes rotunda-name { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+	.rotunda__caption.is-changed b,
+	.rotunda__caption.is-changed span { animation: none; }
+}
+
+.rotunda-band__foot {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: center;
+	gap: var(--si-space-2xs) var(--si-space-m);
+	margin-top: var(--si-space-s);
+	color: var(--si-muted);
+}
+.rotunda-band__foot b {
+	font-family: var(--si-font-serif);
+	font-weight: 400;
+	font-variant-numeric: lining-nums tabular-nums;
+	color: var(--si-text);
+}
+
+/* ---- band 2 · the index --------------------------------------------------- */
+.rotunda__index {
+	border-top: 1px solid var(--si-rule);
+	padding-block: var(--si-space-xl);
+}
+.rotunda__index .ct-container {
+	display: grid;
+	grid-template-columns: minmax(14rem, 18rem) 1fr;
+	gap: var(--si-space-l) var(--si-space-2xl);
+	align-items: start;
+}
+.rotunda__mark { display: grid; gap: var(--si-space-s); align-content: start; }
+.rotunda__mark img { height: 44px; width: auto; }
+.rotunda__mark p { margin: 0; color: var(--si-muted); max-width: 26ch; }
+.rotunda__nav {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: var(--si-space-m) var(--si-space-l);
+}
+
+/* ---- band 3 · the colophon ------------------------------------------------ */
+.rotunda__colophon .ct-container { align-items: center; }
+
+/* ---- responsive ----------------------------------------------------------- */
+@media (max-width: 999.98px) {
+	.rotunda__index .ct-container { grid-template-columns: 1fr; }
+	.rotunda__nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 689.98px) {
+	.rotunda { --face: 58px; --gap: 26px; }
+	.rotunda-band { padding-block: var(--si-space-xl) var(--si-space-l); }
+}
+@media (max-width: 519.98px) {
+	.rotunda__nav { grid-template-columns: 1fr; gap: var(--si-space-s); }
+}

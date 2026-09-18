@@ -1,0 +1,333 @@
+/* ==========================================================================
+   JASPER — the site footer, shared layer. Ships in the child theme after
+   components.css. Every class is `si-` prefixed and no bare element is styled,
+   so nothing here can reach Blocksy's header, its widgets or the block editor.
+
+   THE NIGHT CONTEXT
+   -----------------
+   Jasper's rule IV says a page gets one dark band. The footer is the standing
+   exception: it is site chrome, not the page, so it is ALWAYS night and a page
+   may still spend its own band in the body (people-medallions, person-listening).
+
+   The footer does not restate dark colours component by component. It re-points
+   the semantic roles — --si-ink, --si-card, --si-rule … — onto the night
+   palette once, and every `si-` component inside it (medallion, chip, figures,
+   link, search) then renders correctly with no per-component override. It also
+   re-points the three Blocksy variables whose light-ground values are unreadable
+   here (the button fill and the form-field colours), which is the "work with
+   Blocksy" rule applied locally rather than a rule override.
+
+   Contrast, measured on Night #0F1A26 / the card #162536:
+     --si-ink   #E6EBF0  17.6:1 / 11.7:1      --si-muted #8FA2B6  6.7:1 / 5.9:1
+     --si-text  #A9BCD0   9.0:1 /  7.7:1      brass      #C9A866  7.8:1 / 6.9:1
+   Brass is the only decorative colour and appears exactly ONCE per footer.
+   ========================================================================== */
+
+.si-footer {
+	/* ---- roles, re-pointed onto night ----------------------------------- */
+	--si-ground: var(--si-night);
+	--si-card:   var(--si-night-2);
+	--si-panel:  #1C2E42;
+	--si-rule:   rgb(230 235 240 / 0.15);
+	--si-rule-strong: rgb(230 235 240 / 0.28);
+	--si-ink:    var(--si-on-night);
+	--si-text:   var(--si-on-night-2);
+	--si-muted:  #8FA2B6;
+	/* On night, light IS the action colour: a link cannot be Berliner Blau
+	   (1.9:1 here). Brass is not used for links — it marks one thing, not many. */
+	--si-accent:      var(--si-on-night);
+	--si-accent-deep: #FFFFFF;
+	--si-brass:       var(--si-brass-on-night);
+
+	/* ---- Blocksy variables whose light-ground values do not survive here -- */
+	--theme-button-background-initial-color: var(--si-on-night);
+	--theme-button-background-hover-color:   #FFFFFF;
+	--theme-button-text-initial-color:       var(--si-night);
+	--theme-button-text-hover-color:         var(--si-night);
+	--theme-form-field-background-initial-color: var(--si-night-2);
+	--theme-form-field-border-initial-color:     rgb(230 235 240 / 0.22);
+
+	/* Blocksy's content rhythm off, as .si-page does for the archive body. */
+	--has-theme-content-spacing: 0;
+	--theme-content-spacing: 0;
+	--theme-list-indent: 0;
+
+	background: var(--si-night);
+	color: var(--si-text);
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n1);
+	line-height: var(--si-leading-body);
+}
+
+.si-footer :focus-visible {
+	outline: 2px solid var(--si-on-night);
+	outline-offset: 3px;
+	border-radius: var(--si-radius-1);
+}
+
+/* ---- the one brass rule --------------------------------------------------- */
+/* Each draft uses exactly one of these. Grep for it before adding a second. */
+.si-footer__brass {
+	border: 0;
+	border-top: 1px solid var(--si-brass-on-night);
+	width: 3.5rem;
+	margin: 0;
+}
+
+/* ---- headings ------------------------------------------------------------- */
+/* Column headings are signposts, so they are sans — Jasper rule III. */
+.si-foot-h {
+	margin: 0 0 var(--si-space-xs);
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n2);
+	font-weight: 600;
+	line-height: 1.3;
+	letter-spacing: var(--si-track-caps);
+	text-transform: uppercase;
+	color: var(--si-muted);
+}
+
+/* ---- navigation lists ----------------------------------------------------- */
+.si-foot-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--si-space-3xs); }
+.si-foot-list a {
+	display: inline-flex;
+	align-items: baseline;
+	gap: .55em;
+	padding-block: 3px;
+	color: var(--si-ink);
+	text-decoration: none;
+	/* the underline is drawn in from the left on hover — nothing moves */
+	background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+	transition: background-size var(--si-dur-2) var(--si-ease), color var(--si-dur-1) var(--si-ease);
+}
+.si-foot-list a:hover,
+.si-foot-list a:focus-visible { background-size: 100% 1px; color: #FFFFFF; }
+/* the count beside a destination: how much is actually behind that link */
+.si-foot-list .si-n {
+	font-variant-numeric: tabular-nums lining-nums;
+	font-size: var(--si-step-n2);
+	color: var(--si-muted);
+}
+
+/* ---- the mission block ---------------------------------------------------- */
+.si-foot-brand { display: grid; gap: var(--si-space-s); align-content: start; }
+.si-foot-brand img { height: 46px; width: auto; }
+.si-foot-quote { margin: 0; display: grid; gap: var(--si-space-xs); }
+.si-foot-quote blockquote {
+	margin: 0;
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-1);
+	font-style: italic;
+	font-weight: 300;
+	line-height: 1.45;
+	color: var(--si-ink);
+	max-width: 34ch;
+	text-wrap: pretty;
+}
+/* The citation is the skeptic's first handhold: a real work, letter and year. */
+.si-foot-quote cite {
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n2);
+	font-style: normal;
+	letter-spacing: .04em;
+	color: var(--si-muted);
+}
+.si-foot-quote cite b { font-weight: 600; color: var(--si-text); }
+
+/* ---- language switcher ---------------------------------------------------- */
+/* Round, because in Jasper a circle means a person or a CHOICE (rule II).
+   In WordPress every item comes from the `wpml_active_languages` filter — see
+   README §5; the markup below is exactly what that partial prints. */
+.si-langs { display: grid; gap: var(--si-space-2xs); }
+.si-langs .si-chips { gap: 6px; }
+.si-footer .si-chip {
+	min-height: 32px;
+	padding: 0 .85em;
+	background: transparent;
+	border-color: var(--si-rule-strong);
+	color: var(--si-text);
+	font-size: var(--si-step-n1);
+}
+.si-footer .si-chip:hover { border-color: var(--si-on-night); color: #FFFFFF; }
+/* aria-current, not aria-pressed: the current language is a location, not a toggle */
+.si-footer .si-chip[aria-current="true"] {
+	background: var(--si-on-night);
+	border-color: var(--si-on-night);
+	color: var(--si-night);
+	font-weight: 600;
+}
+/* A language with no translation of THIS page still links — to its home page —
+   and says so, rather than vanishing (WPML skip_missing=0). Both presentations
+   are marked: chips (A) go dashed, list rows (B) go quiet. */
+.si-footer .si-chip[data-missing] { color: var(--si-muted); border-style: dashed; }
+.si-foot-list a[data-missing] { color: var(--si-muted); }
+.si-lang-note { color: var(--si-muted); font-size: var(--si-step-n2); margin: 0; }
+
+/* ---- the verify rail ------------------------------------------------------ */
+/* For the reader who does not take the Institute's word for anything: what the
+   claim is, and the primary thing they can open to check it. */
+.si-verify { display: grid; gap: var(--si-space-xs); }
+.si-verify ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--si-space-xs); }
+.si-verify li { display: grid; gap: 2px; }
+.si-verify a {
+	color: var(--si-ink);
+	font-weight: 600;
+	text-decoration: underline;
+	text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+	text-underline-offset: .22em;
+	transition: text-decoration-color var(--si-dur-1) var(--si-ease);
+}
+.si-verify a:hover { text-decoration-color: currentColor; }
+.si-verify p { margin: 0; color: var(--si-muted); font-size: var(--si-step-n2); line-height: 1.45; }
+
+/* ---- the colophon bar ----------------------------------------------------- */
+.si-colophon {
+	border-top: 1px solid var(--si-rule);
+	padding-block: var(--si-space-s);
+	color: var(--si-muted);
+	font-size: var(--si-step-n2);
+}
+.si-colophon .ct-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--si-space-2xs) var(--si-space-m);
+	align-items: baseline;
+	justify-content: space-between;
+}
+.si-colophon a { color: var(--si-text); text-decoration: none; }
+.si-colophon a:hover { color: #FFFFFF; text-decoration: underline; text-underline-offset: .2em; }
+.si-colophon ul { list-style: none; display: flex; flex-wrap: wrap; gap: var(--si-space-2xs) var(--si-space-s); margin: 0; padding: 0; }
+.si-colophon p { margin: 0; }
+
+/* ---- placeholder marker (prototype convention, carried over from ../landing) */
+/* Anything the Institute has not supplied yet is visibly marked rather than
+   invented. Nothing with this class may reach production. */
+.si-ph {
+	color: var(--si-muted);
+	border-bottom: 1px dashed var(--si-rule-strong);
+	cursor: help;
+}
+
+/* ---- portraits ------------------------------------------------------------ */
+/* components.css fades a portrait in when people-core.js adds `.is-loaded`.
+   These drafts ship no JS, so the fragments bake the class in; this rule is the
+   belt-and-braces for anything pasted without it. */
+.si-footer .si-medallion__img { opacity: 1; }
+
+/* ==========================================================================
+   Print: the footer is chrome. A printed page keeps the identity, the
+   citation and the legal line, and drops the browsing.
+   ========================================================================== */
+@media print {
+	.si-footer { background: #FFF; color: #000; }
+	.si-footer nav, .si-langs, .si-portico, .si-doors { display: none; }
+}
+
+/* ==========================================================================
+   THE COMPACT LANGUAGE SWITCHER  (drafts D, E, F)
+   --------------------------------------------------------------------------
+   Eight chips became one control. Progressive by construction: with no script
+   the markup is a plain list of links — every language reachable and crawlable
+   — and `js/langswitch.js` folds that same list into the popup. The two forms
+   are selected by `html.js`, which inc/jasper.php sets in <head> before first
+   paint, so neither flashes.
+
+   The trigger is round because in Jasper a circle means a person or a CHOICE
+   (rule II) — the same reason the chips it replaces were round. The popup is a
+   panel, and panels are square.
+
+   No flags: they were tried and dropped on review. A flag is not a language
+   anyway (Español is not Spain's), so the native name was always the real
+   label — losing them costs nothing but ornament, and the control got quieter.
+   ========================================================================== */
+
+.si-lang { position: relative; display: inline-grid; gap: var(--si-space-2xs); }
+.si-lang__label { margin: 0; }
+
+/* ---- no script: a plain list --------------------------------------------- */
+html:not(.js) .si-lang__list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2px var(--si-space-s);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+html:not(.js) .si-lang__list a { display: inline-flex; align-items: center; gap: .5em; color: var(--si-text); text-decoration: none; }
+html:not(.js) .si-lang__list a[aria-current="true"] { color: var(--si-ink); font-weight: 600; }
+html:not(.js) .si-lang__en { display: none; }
+
+/* ---- the trigger ---------------------------------------------------------- */
+.si-lang__button {
+	display: inline-flex;
+	align-items: center;
+	gap: .6em;
+	height: 36px;
+	margin: 0;
+	padding: 0 .75em 0 .7em;
+	border: 1px solid var(--si-rule-strong);
+	border-radius: var(--si-radius-round);
+	background: transparent;
+	color: var(--si-ink);
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n1);
+	font-weight: 500;
+	line-height: 1;
+	cursor: pointer;
+	transition: border-color var(--si-dur-1) var(--si-ease), background-color var(--si-dur-1) var(--si-ease);
+}
+.si-lang__button:hover { border-color: var(--si-on-night); background: rgb(230 235 240 / 0.06); }
+.si-lang.is-open .si-lang__button { border-color: var(--si-on-night); background: rgb(230 235 240 / 0.08); }
+.si-lang__chevron { color: var(--si-muted); transition: rotate var(--si-dur-2) var(--si-ease); }
+.si-lang.is-open .si-lang__chevron { rotate: 180deg; }
+
+/* ---- the popup ------------------------------------------------------------ */
+html.js .si-lang__list {
+	position: fixed;
+	z-index: 100000;
+	display: none;
+	box-sizing: border-box;
+	max-width: min(280px, calc(100vw - 24px));
+	margin: 0;
+	padding: 4px;
+	list-style: none;
+	background: var(--si-night-2);
+	border: 1px solid var(--si-rule-strong);
+	border-radius: var(--si-radius-1);
+	box-shadow: var(--si-shadow-3);
+	animation: si-lang-in var(--si-dur-1) var(--si-ease);
+}
+html.js .si-lang.is-open .si-lang__list { display: block; }
+html.js .si-lang__list[data-side="top"] { animation-name: si-lang-in-up; }
+@keyframes si-lang-in { from { opacity: 0; translate: 0 -4px; } }
+@keyframes si-lang-in-up { from { opacity: 0; translate: 0 4px; } }
+
+html.js .si-lang__list a {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: .65em;
+	min-height: 34px;
+	padding: 6px 10px 6px 22px;
+	border-radius: 1px;
+	color: var(--si-text);
+	text-decoration: none;
+	white-space: nowrap;
+}
+html.js .si-lang__list a.is-active { background: var(--si-panel); color: var(--si-ink); outline: none; }
+html.js .si-lang__list a[aria-current="true"] { color: var(--si-ink); font-weight: 600; }
+/* the brass dot marks the current language, as it marks the current option in
+   the Jasper dropdown (components.css `.si-select__list li[aria-selected]`) */
+html.js .si-lang__list a[aria-current="true"]::before {
+	content: "";
+	position: absolute;
+	left: 8px; top: 50%;
+	width: 6px; height: 6px;
+	margin-top: -3px;
+	border-radius: 50%;
+	background: var(--si-brass-on-night);
+}
+.si-lang__native { font-family: var(--si-font-sans); }
+html.js .si-lang__en { margin-left: auto; padding-left: 1.2em; color: var(--si-muted); font-size: var(--si-step-n2); }
+/* an untranslated language still links — to its own front page */
+html.js .si-lang__list a[data-missing] .si-lang__native { color: var(--si-muted); }

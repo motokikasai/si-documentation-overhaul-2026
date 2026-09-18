@@ -1,0 +1,178 @@
+/* ==========================================================================
+   B · THE LEDGER — footer draft. Loads after footer-shared.css.
+
+   The idea: the back matter of a printed volume, set on dark paper. The footer
+   opens with the archive stated as an audited table — every line a real count,
+   every count a link to the list it counts, and a dated source note under it.
+   This is the draft aimed squarely at the reader who assumes the numbers are
+   inflated: the fastest way to answer that is to let them open the list.
+
+   The dotted leader and the `auto minmax(1.5rem,1fr) auto` grid are lifted
+   verbatim from ../people/templates/css/register.css, so the two pages are
+   visibly the same house.
+
+   Structure:  ledger table + sources → subscribe + nav + languages
+               → legal identity → colophon
+   Brass appears once, on the total rule.
+   ========================================================================== */
+
+.si-ledger__head { padding-block: var(--si-space-xl) var(--si-space-m); }
+.si-ledger__head .si-eyebrow { color: var(--si-muted); }
+.si-ledger__head .si-eyebrow--ruled::before { background: var(--si-brass-on-night); }
+.si-ledger__title {
+	margin: var(--si-space-2xs) 0 0;
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-3);
+	font-weight: 380;
+	line-height: var(--si-leading-heading);
+	letter-spacing: var(--si-track-display);
+	color: var(--si-ink);
+	text-wrap: balance;
+}
+.si-ledger__title em { font-style: italic; font-weight: 300; }
+
+.si-ledger__grid {
+	display: grid;
+	grid-template-columns: 1.55fr 1fr;
+	gap: var(--si-space-xl) var(--si-space-2xl);
+	padding-bottom: var(--si-space-xl);
+	align-items: start;
+}
+
+/* ---- the table ------------------------------------------------------------ */
+.si-ledger__rows {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0 var(--si-space-xl);
+	margin: 0;
+}
+.si-ledger__row { display: block; }
+.si-ledger__row a {
+	display: grid;
+	grid-template-columns: auto minmax(1.5rem, 1fr) auto;
+	align-items: baseline;
+	column-gap: .5rem;
+	padding: .5rem .6rem;
+	margin-inline: -.6rem;
+	border-radius: var(--si-radius-1);
+	color: inherit;
+	text-decoration: none;
+	transition: background-color var(--si-dur-1) var(--si-ease);
+}
+.si-ledger__row a:hover,
+.si-ledger__row a:focus-visible { background: var(--si-night-2); }
+.si-ledger__what {
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-0);
+	color: var(--si-ink);
+	line-height: 1.3;
+}
+.si-ledger__row a:hover .si-ledger__what { color: #FFFFFF; }
+/* the leader, identical to .reg-leader on /people/ */
+.si-ledger__leader {
+	align-self: end;
+	height: .45em;
+	margin-bottom: .32em;
+	background: radial-gradient(circle, var(--si-rule-strong) 1px, transparent 1.3px) left center / 6px 4px repeat-x;
+}
+.si-ledger__n {
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-0);
+	font-weight: 600;
+	font-variant-numeric: lining-nums tabular-nums;
+	color: var(--si-ink);
+	white-space: nowrap;
+}
+
+/* the total: the one brass rule of this footer */
+.si-ledger__total {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: auto minmax(1.5rem, 1fr) auto;
+	align-items: baseline;
+	column-gap: .5rem;
+	margin-top: var(--si-space-2xs);
+	padding-top: var(--si-space-xs);
+	border-top: 1px solid var(--si-brass-on-night);
+}
+.si-ledger__total .si-ledger__what { font-style: italic; color: var(--si-brass-on-night); }
+.si-ledger__total .si-ledger__n { color: var(--si-brass-on-night); }
+.si-ledger__total .si-ledger__leader { background-image: radial-gradient(circle, color-mix(in srgb, var(--si-brass-on-night) 55%, transparent) 1px, transparent 1.3px); }
+
+/* the dated source note — without it the table is just more assertion */
+.si-ledger__source {
+	margin: var(--si-space-s) 0 0;
+	padding-top: var(--si-space-xs);
+	border-top: 1px solid var(--si-rule);
+	color: var(--si-muted);
+	font-size: var(--si-step-n2);
+	line-height: 1.5;
+	max-width: 62ch;
+}
+.si-ledger__source a { color: var(--si-text); }
+
+/* ---- primary sources panel ------------------------------------------------ */
+.si-ledger__sources {
+	background: var(--si-night-2);
+	border: 1px solid var(--si-rule);
+	border-radius: var(--si-radius-1);
+	padding: var(--si-space-m);
+}
+
+/* ---- the utility band ----------------------------------------------------- */
+.si-ledger__band {
+	border-top: 1px solid var(--si-rule);
+	padding-block: var(--si-space-l);
+}
+.si-ledger__band .ct-container {
+	display: grid;
+	grid-template-columns: 1.55fr 1fr;
+	gap: var(--si-space-l) var(--si-space-2xl);
+	align-items: start;
+}
+.si-ledger__nav {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: var(--si-space-m) var(--si-space-l);
+}
+
+/* subscribe, set as one more ledger entry rather than a shouting box */
+.si-subscribe { display: grid; gap: var(--si-space-2xs); margin-bottom: var(--si-space-m); }
+.si-subscribe__row { display: flex; flex-wrap: wrap; gap: var(--si-space-2xs); }
+.si-subscribe .si-search { flex: 1 1 15rem; }
+.si-subscribe .si-search input { padding-inline: .9em; }
+.si-subscribe .ct-button { min-height: var(--si-control-height); padding: 0 18px; }
+.si-subscribe p { margin: 0; color: var(--si-muted); font-size: var(--si-step-n2); }
+
+/* ---- legal identity ------------------------------------------------------- */
+/* Germany requires an Impressum, and a skeptic reads it first. Giving it a real
+   block in the footer — not a bare link — is the cheapest credibility on offer. */
+.si-identity {
+	border-top: 1px solid var(--si-rule);
+	padding-block: var(--si-space-l);
+}
+.si-identity .ct-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+	gap: var(--si-space-m) var(--si-space-l);
+}
+.si-identity dl { margin: 0; display: grid; gap: var(--si-space-2xs); }
+.si-identity dt {
+	font-size: var(--si-step-n2);
+	letter-spacing: var(--si-track-caps);
+	text-transform: uppercase;
+	color: var(--si-muted);
+}
+.si-identity dd { margin: 0; color: var(--si-text); }
+.si-identity dd b { font-weight: 600; color: var(--si-ink); }
+
+/* ---- responsive ----------------------------------------------------------- */
+@media (max-width: 999.98px) {
+	.si-ledger__grid,
+	.si-ledger__band .ct-container { grid-template-columns: 1fr; }
+	.si-ledger__nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 689.98px) {
+	.si-ledger__rows { grid-template-columns: 1fr; }
+	.si-ledger__nav { grid-template-columns: 1fr; gap: var(--si-space-s); }
+}

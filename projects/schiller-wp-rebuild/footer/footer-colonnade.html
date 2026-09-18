@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>Footer A · The Colonnade — Schiller Institute</title>
+<meta name="description" content="Site footer draft A: a portico of faces from the archive, four columns of navigation, and a rail for checking the Institute's claims.">
+<!--
+	DRAFT A · "The Colonnade"  —  the site footer (Blocksy, all pages)
+	A portico of twelve people from the archive opens the footer: the claim that
+	418 people have spoken here is shown rather than asserted, and every face is
+	a door into /people/. Below it, four columns of real archives, then a rail
+	that exists for the reader who does not take the Institute's word for
+	anything, then the legal line.
+	No JavaScript: this round is design only. Stylesheet order is the WordPress
+	enqueue order; blocksy-shim.css stands in for Blocksy's own dynamic CSS and
+	does not ship. proto.css is prototype-only.
+-->
+<link rel="preload" href="../people/design-system/fonts/source-serif-4-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../people/design-system/fonts.css">
+<link rel="stylesheet" href="../people/design-system/tokens.css">
+<link rel="stylesheet" href="../people/design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../people/design-system/components.css">
+<link rel="stylesheet" href="css/footer-shared.css">
+<link rel="stylesheet" href="css/colonnade.css">
+<link rel="stylesheet" href="css/proto.css">
+<link rel="icon" href="../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header id="header" class="ct-header">
+	<div class="ct-container">
+		<a class="site-logo" href="/"><img src="../brand/assets/lockup/lockup-light@2x.png" alt="The International Schiller Institute" width="560" height="150"></a>
+		<nav aria-label="Primary"><ul>
+			<li><a href="/">News</a></li><li><a href="/conferences/">Conferences</a></li><li><a href="/people/">People</a></li><li><a href="/library/">Library</a></li><li><a href="/topic/classical-culture/">Culture</a></li><li><a href="/about/">About</a></li>
+		</ul></nav>
+		<div class="header-cta"><a class="si-link is-secondary" href="/join/">Join</a><a class="ct-button" href="/donate/">Donate</a></div>
+	</div>
+</header>
+
+<!-- ============================ page stub ============================ -->
+<!-- Identical in all three drafts. It exists only so the footer is judged at
+     the end of a page, with a scroll behind it. -->
+<main id="main" class="site-main si-page stub">
+	<div class="ct-container">
+		<p class="si-eyebrow si-eyebrow--ruled">The archive · Article</p>
+		<h1 class="si-display">A page ends here</h1>
+		<p class="si-lead">Everything above this line is a stand-in for whatever the visitor was actually reading — an article, a conference record, a person. The draft begins at the footer.</p>
+		<p>Three footers are drafted against the same design system and the same content model. Each answers the same two questions in a different order: <em>what else is here</em>, and <em>why should I believe any of it</em>. Use the strip at the bottom left to switch between them without losing your place.</p>
+		<p class="stub-note"><b>Prototype.</b> No live functionality in this round: no language actually switches, no form submits, no count is queried. Every link points at the URL the content model will really serve (<code>/people/</code>, <code>/conferences/</code>, <code>/media/</code>, <code>/videos/</code>, <code>/library/</code>, <code>/statements/</code>, <code>/coverage/</code>), and every number is sourced — see the colophon.</p>
+	</div>
+</main>
+
+<!-- ============================ FOOTER A ============================= -->
+<footer id="si-footer" class="si-footer si-footer--colonnade">
+
+	<!-- The portico: twelve of the 722 people in the archive. Greyscale is the
+	     collection's one tonal treatment; colour is the reward for attention. -->
+	<section class="si-portico" aria-labelledby="portico-h">
+		<div class="ct-container">
+			<div class="si-portico__head">
+				<p class="si-eyebrow si-eyebrow--ruled" id="portico-h">Who has spoken here</p>
+				<p class="si-portico__lead">Statesmen, scientists, economists and musicians — <em>on the same programme</em>.</p>
+			</div>
+
+			<div class="si-portico__row">
+				<a class="si-portico__figure" href="/people/helga-zepp-larouche/" title="Helga Zepp-LaRouche"><span class="si-medallion" style="--size:96px"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/helga-zepp-larouche.jpg" alt="" width="420" height="236" style="width:200.39%;height:112.60%;left:-51.60%;top:-0.11%" loading="eager" decoding="async"></span><span class="si-visually-hidden">Helga Zepp-LaRouche</span></a>
+				<a class="si-portico__figure" href="/people/bouthaina-shaaban/" title="Bouthaina Shaaban"><span class="si-medallion" style="--size:72px"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/bouthaina-shaaban.jpg" alt="" width="420" height="236" style="width:205.35%;height:115.38%;left:-54.73%;top:0.00%" loading="eager" decoding="async"></span><span class="si-visually-hidden">Bouthaina Shaaban</span></a>
+				<a class="si-portico__figure" href="/people/jacques-cheminade/" title="Jacques Cheminade"><span class="si-medallion" style="--size:80px"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/jacques-cheminade.jpg" alt="" width="420" height="236" style="width:204.66%;height:115.00%;left:-52.33%;top:0.00%" loading="eager" decoding="async"></span><span class="si-visually-hidden">Jacques Cheminade</span></a>
+				<a class="si-portico__figure" href="/people/shi-ze/" title="Shi Ze"><span class="si-medallion" style="--size:64px"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/shi-ze.jpg" alt="" width="420" height="236" style="width:315.38%;height:177.22%;left:-112.11%;top:0.00%" loading="eager" decoding="async"></span><span class="si-visually-hidden">Shi Ze</span></a>
+				<a class="si-portico__figure" href="/people/jayshree-sengupta/" title="Jayshree Sengupta"><span class="si-medallion" style="--size:88px"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/jayshree-sengupta.jpg" alt="" width="420" height="236" style="width:183.65%;height:103.19%;left:-53.21%;top:0.00%" loading="eager" decoding="async"></span><span class="si-visually-hidden">Jayshree Sengupta</span></a>
+				<a class="si-portico__figure" href="/people/diogene-senny/" title="Diogène Senny"><span class="si-medallion" style="--size:64px"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/diogene-senny.jpg" alt="" width="420" height="236" style="width:204.66%;height:115.00%;left:-52.33%;top:0.00%" loading="eager" decoding="async"></span><span class="si-visually-hidden">Diogène Senny</span></a>
+				<a class="si-portico__figure" href="/people/natalia-vitrenko/" title="Natalia Vitrenko"><span class="si-medallion" style="--size:76px"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/natalia-vitrenko.jpg" alt="" width="420" height="236" style="width:191.66%;height:107.69%;left:-19.76%;top:0.00%" loading="lazy" decoding="async"></span><span class="si-visually-hidden">Natalia Vitrenko</span></a>
+				<a class="si-portico__figure" href="/people/daisuke-kotegawa/" title="Daisuke Kotegawa"><span class="si-medallion" style="--size:64px"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/daisuke-kotegawa.jpg" alt="" width="420" height="236" style="width:308.87%;height:173.55%;left:-104.12%;top:-49.27%" loading="lazy" decoding="async"></span><span class="si-visually-hidden">Daisuke Kotegawa</span></a>
+				<a class="si-portico__figure" href="/people/chandra-muzaffar/" title="Chandra Muzaffar"><span class="si-medallion" style="--size:84px"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/chandra-muzaffar.jpg" alt="" width="420" height="236" style="width:235.05%;height:132.08%;left:-87.97%;top:0.00%" loading="lazy" decoding="async"></span><span class="si-visually-hidden">Chandra Muzaffar</span></a>
+				<a class="si-portico__figure" href="/people/richard-black/" title="Richard Black"><span class="si-medallion" style="--size:64px"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/richard-black.jpg" alt="" width="420" height="228" style="width:184.21%;height:100.00%;left:-42.47%;top:0.00%" loading="lazy" decoding="async"></span><span class="si-visually-hidden">Richard Black</span></a>
+				<a class="si-portico__figure" href="/people/hussein-askary/" title="Hussein Askary"><span class="si-medallion" style="--size:72px"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/hussein-askary.jpg" alt="" width="420" height="236" style="width:200.39%;height:112.60%;left:-59.21%;top:0.00%" loading="lazy" decoding="async"></span><span class="si-visually-hidden">Hussein Askary</span></a>
+				<a class="si-portico__figure" href="/people/antonino-galloni/" title="Antonino Galloni"><span class="si-medallion" style="--size:64px"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/antonino-galloni.jpg" alt="" width="420" height="236" style="width:303.84%;height:170.73%;left:-108.30%;top:-9.07%" loading="lazy" decoding="async"></span><span class="si-visually-hidden">Antonino Galloni</span></a>
+			</div>
+
+			<div class="si-portico__foot">
+				<hr class="si-footer__brass">
+				<p class="si-portico__count"><b>722</b> people, <b>57</b> conferences, <b>2012–2025</b> on the record</p>
+				<a class="ct-button si-portico__more" href="/people/">Browse everyone</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Mission and the four archives -->
+	<div class="ct-container si-colonnade__main">
+		<div class="si-foot-brand">
+			<img src="../brand/assets/lockup/lockup-dark@2x.png" alt="The International Schiller Institute" width="560" height="150">
+			<figure class="si-foot-quote">
+				<blockquote>Live with your epoch, but be not its offspring; serve your fellow man — not with what he applauds, but with what he needs.</blockquote>
+				<cite><b>Friedrich Schiller</b>, On the Aesthetic Education of Man, Ninth Letter, 1795</cite>
+			</figure>
+			<p>Founded 1984 by Helga Zepp-LaRouche.</p>
+			<div class="si-colonnade__cta">
+				<a class="ct-button" href="/join/">Join the Institute</a>
+				<a class="si-link" href="/donate/">or support the work</a>
+			</div>
+		</div>
+
+		<nav class="si-colonnade__nav" aria-label="Footer">
+			<div>
+				<h2 class="si-foot-h">Read</h2>
+				<ul class="si-foot-list">
+					<li><a href="/">Articles <span class="si-n">2,393</span></a></li>
+					<li><a href="/statements/">Statements <span class="si-n">198</span></a></li>
+					<li><a href="/library/">Documents &amp; studies</a></li>
+					<li><a href="/coverage/">Press coverage <span class="si-n">243</span></a></li>
+				</ul>
+			</div>
+			<div>
+				<h2 class="si-foot-h">Watch &amp; listen</h2>
+				<ul class="si-foot-list">
+					<li><a href="/videos/">Recordings <span class="si-n">1,222</span></a></li>
+					<li><a href="/media/">Conference talks <span class="si-n">822</span></a></li>
+					<li><a href="/conferences/">Conferences <span class="si-n">57</span></a></li>
+					<li><a href="/series/weekly-webcast-hzl/">The weekly webcast</a></li>
+				</ul>
+			</div>
+			<div>
+				<h2 class="si-foot-h">Browse by</h2>
+				<ul class="si-foot-list">
+					<li><a href="/people/">People <span class="si-n">722</span></a></li>
+					<li><a href="/topic/">Topics <span class="si-n">10</span></a></li>
+					<li><a href="/region/">Regions <span class="si-n">16</span></a></li>
+					<li><a href="/campaign/">Campaigns <span class="si-n">7</span></a></li>
+				</ul>
+			</div>
+			<div>
+				<h2 class="si-foot-h">The Institute</h2>
+				<ul class="si-foot-list">
+					<li><a href="/about/">What it is, and is not</a></li>
+					<li><a href="/people/helga-zepp-larouche/">Helga Zepp-LaRouche</a></li>
+					<li><a href="/contact/">Offices &amp; chapters</a></li>
+					<li><a href="/contact/#press">Press enquiries</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<!-- The check rail. Its own band on purpose: a reader who mistrusts the
+	     Institute should reach "how do I verify this" without first reading
+	     navigation written by the Institute. -->
+	<section class="si-colonnade__check" aria-labelledby="check-h">
+		<div class="ct-container">
+			<div>
+				<h2 class="si-foot-h" id="check-h">Check us</h2>
+				<p class="si-colonnade__intro">Nothing on this site asks to be taken on trust. Each of these opens the primary thing, not a summary of it.</p>
+				<div class="si-langs">
+					<h3 class="si-foot-h">Language</h3>
+					<!-- In WordPress this list is the `wpml_active_languages` filter, in
+					     WPML's own order; `aria-current` marks the active one. -->
+					<ul class="si-chips">
+						<li><a class="si-chip" href="/" hreflang="en" lang="en" aria-current="true">English</a></li>
+						<li><a class="si-chip" href="/de/" hreflang="de" lang="de">Deutsch</a></li>
+						<li><a class="si-chip" href="/fr/" hreflang="fr" lang="fr">Français</a></li>
+						<li><a class="si-chip" href="/ru/" hreflang="ru" lang="ru">Русский</a></li>
+						<li><a class="si-chip" href="/es/" hreflang="es" lang="es">Español</a></li>
+						<li><a class="si-chip" href="/it/" hreflang="it" lang="it">Italiano</a></li>
+						<li><a class="si-chip" href="/el/" hreflang="el" lang="el" data-missing>Ελληνικά</a></li>
+						<li><a class="si-chip" href="/zh-hans/" hreflang="zh-Hans" lang="zh-Hans" data-missing>中文</a></li>
+					</ul>
+					<p class="si-lang-note">A dashed language has no translation of this page yet and opens its own front page.</p>
+				</div>
+			</div>
+
+			<div class="si-verify">
+				<ul>
+					<li>
+						<a href="/about/archive/">How this archive was built</a>
+						<p>Which records came across from the old site, what was reclassified, what was retired, and the date each count was taken.</p>
+					</li>
+					<li>
+						<a href="/library/">The documents themselves</a>
+						<p>Programmes, studies and proceedings as published — the PDFs, not descriptions of them.</p>
+					</li>
+					<li>
+						<a href="https://www.youtube.com/@SchillerInstitute" rel="noopener">Full, uncut recordings</a>
+						<p>Every talk in its original video. Timestamps on this site link into it at the second, so a quote can be heard in context.</p>
+					</li>
+					<li>
+						<a href="/statements/">Who signed what</a>
+						<p>Each statement lists its signatories by name and affiliation, with the count as of the date shown.</p>
+					</li>
+					<li>
+						<a href="/contact/#corrections">Corrections</a>
+						<p>Found an error? Write to us. Corrections are made on the page they affect and dated.</p>
+					</li>
+					<li>
+						<a href="/about/funding/">Who pays for this</a>
+						<p>The Institute's funding, membership and legal form, with the filings.</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<div class="si-colophon">
+		<div class="ct-container">
+			<p>© 1984–2026 <span class="si-ph" title="Placeholder: the registered legal name has not been supplied">Schiller-Institut e.V.</span> · <span class="si-ph" title="Placeholder: registered seat and register number not supplied">Wiesbaden, VR ·····</span></p>
+			<ul>
+				<li><a href="/impressum/">Impressum</a></li>
+				<li><a href="/privacy/">Privacy</a></li>
+				<li><a href="/about/archive/">Sources &amp; method</a></li>
+				<li><a href="/accessibility/">Accessibility</a></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+
+<nav class="draft-strip" aria-label="Footer drafts">
+	<span>Footer drafts</span>
+	<a href="footer-colonnade.html" aria-current="page">A · Colonnade</a>
+	<a href="footer-ledger.html">B · Ledger</a>
+	<a href="footer-envoi.html">C · Envoi</a>
+	<a href="compare.html">Compare</a>
+</nav>
+</body>
+</html>

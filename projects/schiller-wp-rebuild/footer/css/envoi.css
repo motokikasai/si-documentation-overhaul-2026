@@ -1,0 +1,176 @@
+/* ==========================================================================
+   C · THE ENVOI — footer draft. Loads after footer-shared.css.
+
+   The idea: the page does not stop, it hands over. A line of Schiller at banner
+   size, cited so it can be checked, and then three doors — read it, hear it,
+   join it — each carrying a face, because the evidence for what the Institute
+   is, is who has stood at its rostrum. Everything utilitarian is folded into
+   one slim band below, so the close stays a close.
+
+   Structure:  envoi → three doors → utility band → colophon
+   Brass appears once: the rule above the third door, which is the ask.
+   ========================================================================== */
+
+/* ---- the envoi ------------------------------------------------------------ */
+.si-envoi { padding-block: var(--si-space-2xl) var(--si-space-xl); }
+.si-envoi blockquote {
+	margin: 0;
+	max-width: 22ch;
+	font-family: var(--si-font-serif);
+	font-optical-sizing: auto;
+	font-size: var(--si-step-5);
+	font-weight: var(--si-weight-display);
+	line-height: var(--si-leading-display);
+	letter-spacing: var(--si-track-display);
+	color: var(--si-ink);
+	text-wrap: balance;
+}
+.si-envoi blockquote em { font-style: italic; font-weight: 300; color: var(--si-text); }
+.si-envoi__cite {
+	display: grid;
+	gap: var(--si-space-2xs);
+	margin-top: var(--si-space-m);
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n1);
+	font-style: normal;
+	color: var(--si-muted);
+	max-width: 44ch;
+}
+.si-envoi__cite hr { border: 0; border-top: 1px solid var(--si-rule); width: 3.5rem; margin: 0; }
+.si-envoi__cite b { font-weight: 600; color: var(--si-text); }
+/* the German original, one click away — the Institute's own namesake, quotable */
+.si-envoi__cite .si-orig { font-family: var(--si-font-serif); font-style: italic; color: var(--si-muted); }
+
+/* ---- the three doors ------------------------------------------------------ */
+.si-doors {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: var(--si-space-m);
+	padding-bottom: var(--si-space-xl);
+}
+.si-door {
+	position: relative;
+	display: grid;
+	grid-template-rows: auto 1fr;
+	background: var(--si-night-2);
+	border: 1px solid var(--si-rule);
+	border-radius: var(--si-radius-1);
+	overflow: hidden;
+	color: inherit;
+	text-decoration: none;
+	transition: border-color var(--si-dur-2) var(--si-ease),
+	            box-shadow var(--si-dur-2) var(--si-ease),
+	            transform var(--si-dur-2) var(--si-ease);
+}
+.si-door:hover,
+.si-door:focus-visible {
+	transform: translateY(-3px);
+	border-color: var(--si-rule-strong);
+	box-shadow: var(--si-shadow-3);
+}
+.si-door .si-plate { width: 100%; }
+.si-door__body {
+	display: grid;
+	gap: var(--si-space-2xs);
+	align-content: start;
+	padding: var(--si-space-m);
+}
+.si-door__eyebrow {
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n2);
+	font-weight: 600;
+	letter-spacing: var(--si-track-caps);
+	text-transform: uppercase;
+	color: var(--si-muted);
+}
+.si-door__title {
+	margin: 0;
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-2);
+	font-weight: 450;
+	line-height: var(--si-leading-heading);
+	color: var(--si-ink);
+	text-wrap: balance;
+}
+.si-door__desc { margin: 0; color: var(--si-text); font-size: var(--si-step-n1); line-height: 1.5; }
+/* what is actually behind the door, in numbers, before it is opened */
+.si-door__n {
+	margin: var(--si-space-2xs) 0 0;
+	font-size: var(--si-step-n2);
+	color: var(--si-muted);
+	font-variant-numeric: lining-nums tabular-nums;
+}
+.si-door__go {
+	margin-top: var(--si-space-xs);
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n1);
+	font-weight: 600;
+	color: var(--si-ink);
+	display: inline-flex;
+	align-items: center;
+	gap: .5em;
+}
+.si-door__go svg { transition: translate var(--si-dur-2) var(--si-ease); }
+.si-door:hover .si-door__go svg,
+.si-door:focus-visible .si-door__go svg { translate: 4px 0; }
+
+/* the third door is the ask — the only brass in this footer */
+.si-door--ask { border-top: 2px solid var(--si-brass-on-night); }
+.si-door--ask .si-door__eyebrow { color: var(--si-brass-on-night); }
+
+/* ---- utility band --------------------------------------------------------- */
+.si-envoi__utility {
+	border-top: 1px solid var(--si-rule);
+	padding-block: var(--si-space-l);
+}
+.si-envoi__utility .ct-container {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(12rem, 1fr);
+	gap: var(--si-space-m) var(--si-space-l);
+	align-items: start;
+}
+.si-envoi__utility .si-foot-list a { font-size: var(--si-step-n1); }
+.si-envoi__langs { justify-self: start; }
+/* the run of language names, set inline rather than as chips: this draft has
+   enough round shapes already (the doors' plates are the only rectangles) */
+.si-envoi__langs .si-lang-run {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2px var(--si-space-2xs);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.si-envoi__langs .si-lang-run a { color: var(--si-text); text-decoration: none; padding: 2px 0; }
+.si-envoi__langs .si-lang-run a:hover { color: #FFFFFF; text-decoration: underline; text-underline-offset: .2em; }
+.si-envoi__langs .si-lang-run [aria-current="true"] { color: var(--si-ink); font-weight: 600; }
+.si-envoi__langs .si-lang-run [data-missing] { color: var(--si-muted); }
+
+/* ---- responsive ----------------------------------------------------------- */
+@media (max-width: 999.98px) {
+	.si-envoi__utility .ct-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.si-envoi__langs { grid-column: 1 / -1; }
+}
+@media (max-width: 767.98px) {
+	.si-doors { grid-template-columns: 1fr; }
+	/* stacked, the plates would eat the screen: the door becomes a row */
+	.si-door { grid-template-rows: none; grid-template-columns: 8.5rem 1fr; }
+	.si-door .si-plate { height: 100%; aspect-ratio: auto !important; }
+	.si-door__body { padding: var(--si-space-s); }
+}
+@media (max-width: 519.98px) {
+	.si-envoi__utility .ct-container { grid-template-columns: 1fr; }
+	.si-door { grid-template-columns: 6.5rem 1fr; }
+	.si-door__n, .si-door__desc { font-size: var(--si-step-n2); }
+}
+
+/* the photo credit under a door's plate: the face is one of the 722, named —
+   the card still goes to the section, so this is a caption, not a second link */
+.si-door__who {
+	display: block;
+	margin-top: -2px;
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n2);
+	color: var(--si-muted);
+}
+.si-door__who b { font-weight: 600; color: var(--si-text); }

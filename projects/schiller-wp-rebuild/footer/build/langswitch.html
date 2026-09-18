@@ -1,0 +1,27 @@
+<!-- ===== language switcher ===== -->
+<!--
+	One compact control instead of eight chips. Without JavaScript it is a plain
+	list of links — every language reachable, crawlable, translated. `langswitch.js`
+	folds that same list into the popup and adds the trigger, so nothing is lost
+	when the module fails to load.
+
+	In WordPress the <li>s come from the `wpml_active_languages` filter with
+	`skip_missing => 0`: a language with no translation of this page stays listed,
+	links to its own front page, and carries `data-missing` (README §5).
+
+	No flags. A flag is not a language and they were dropped on review; the native
+	name is the whole label.
+-->
+<div class="si-lang si-lang--js" data-langswitch>
+	<h2 class="si-lang__label" id="lang-h">Language</h2>
+	<ul class="si-lang__list" aria-labelledby="lang-h">
+		<li><a href="/" hreflang="en" lang="en" aria-current="true"><span class="si-lang__native">English</span></a></li>
+		<li><a href="/de/" hreflang="de" lang="de"><span class="si-lang__native">Deutsch</span><span class="si-lang__en">German</span></a></li>
+		<li><a href="/fr/" hreflang="fr" lang="fr"><span class="si-lang__native">Français</span><span class="si-lang__en">French</span></a></li>
+		<li><a href="/ru/" hreflang="ru" lang="ru"><span class="si-lang__native">Русский</span><span class="si-lang__en">Russian</span></a></li>
+		<li><a href="/es/" hreflang="es" lang="es"><span class="si-lang__native">Español</span><span class="si-lang__en">Spanish</span></a></li>
+		<li><a href="/it/" hreflang="it" lang="it"><span class="si-lang__native">Italiano</span><span class="si-lang__en">Italian</span></a></li>
+		<li><a href="/el/" hreflang="el" lang="el" data-missing><span class="si-lang__native">Ελληνικά</span><span class="si-lang__en">Greek</span></a></li>
+		<li><a href="/zh-hans/" hreflang="zh-Hans" lang="zh-Hans" data-missing><span class="si-lang__native">中文</span><span class="si-lang__en">Chinese</span></a></li>
+	</ul>
+</div>

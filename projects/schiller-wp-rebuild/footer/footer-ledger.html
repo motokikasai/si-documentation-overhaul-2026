@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>Footer B · The Ledger — Schiller Institute</title>
+<meta name="description" content="Site footer draft B: the archive stated as an audited table, every count a link to the list it counts, with the primary sources and the legal identity beside it.">
+<!--
+	DRAFT B · "The Ledger"  —  the site footer (Blocksy, all pages)
+	The back matter of a printed volume, set on dark paper. It opens with the
+	archive as a table: every line a real count, every count a link to the list
+	it counts, and a dated source note under it that says what was retired and
+	what is still a draft. Aimed at the reader who assumes the numbers are
+	inflated — the fastest answer is to let them open the list.
+	The dotted leader and its grid are lifted from the /people/ Register draft,
+	so the two pages are visibly the same house.
+	No JavaScript: this round is design only. blocksy-shim.css and proto.css do
+	not ship.
+-->
+<link rel="preload" href="../people/design-system/fonts/source-serif-4-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../people/design-system/fonts.css">
+<link rel="stylesheet" href="../people/design-system/tokens.css">
+<link rel="stylesheet" href="../people/design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../people/design-system/components.css">
+<link rel="stylesheet" href="css/footer-shared.css">
+<link rel="stylesheet" href="css/ledger.css">
+<link rel="stylesheet" href="css/proto.css">
+<link rel="icon" href="../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header id="header" class="ct-header">
+	<div class="ct-container">
+		<a class="site-logo" href="/"><img src="../brand/assets/lockup/lockup-light@2x.png" alt="The International Schiller Institute" width="560" height="150"></a>
+		<nav aria-label="Primary"><ul>
+			<li><a href="/">News</a></li><li><a href="/conferences/">Conferences</a></li><li><a href="/people/">People</a></li><li><a href="/library/">Library</a></li><li><a href="/topic/classical-culture/">Culture</a></li><li><a href="/about/">About</a></li>
+		</ul></nav>
+		<div class="header-cta"><a class="si-link is-secondary" href="/join/">Join</a><a class="ct-button" href="/donate/">Donate</a></div>
+	</div>
+</header>
+
+<!-- ============================ page stub ============================ -->
+<main id="main" class="site-main si-page stub">
+	<div class="ct-container">
+		<p class="si-eyebrow si-eyebrow--ruled">The archive · Article</p>
+		<h1 class="si-display">A page ends here</h1>
+		<p class="si-lead">Everything above this line is a stand-in for whatever the visitor was actually reading — an article, a conference record, a person. The draft begins at the footer.</p>
+		<p>Three footers are drafted against the same design system and the same content model. Each answers the same two questions in a different order: <em>what else is here</em>, and <em>why should I believe any of it</em>. Use the strip at the bottom left to switch between them without losing your place.</p>
+		<p class="stub-note"><b>Prototype.</b> No live functionality in this round: no language actually switches, no form submits, no count is queried. Every link points at the URL the content model will really serve (<code>/people/</code>, <code>/conferences/</code>, <code>/media/</code>, <code>/videos/</code>, <code>/library/</code>, <code>/statements/</code>, <code>/coverage/</code>), and every number is sourced — see the note under the table.</p>
+	</div>
+</main>
+
+<!-- ============================ FOOTER B ============================= -->
+<footer id="si-footer" class="si-footer si-footer--ledger">
+
+	<div class="ct-container si-ledger__head">
+		<p class="si-eyebrow si-eyebrow--ruled">The archive, counted</p>
+		<h2 class="si-ledger__title">Everything here is <em>countable</em>, and every count opens the list.</h2>
+	</div>
+
+	<div class="ct-container si-ledger__grid">
+
+		<section aria-label="The archive in figures">
+			<h3 class="si-foot-h">Migrated from the legacy site</h3>
+			<div class="si-ledger__rows">
+				<div class="si-ledger__row"><a href="/">
+					<span class="si-ledger__what">Articles</span>
+					<span class="si-ledger__leader" aria-hidden="true"></span>
+					<span class="si-ledger__n">2,393</span>
+				</a></div>
+				<div class="si-ledger__row"><a href="/videos/">
+					<span class="si-ledger__what">Recordings</span>
+					<span class="si-ledger__leader" aria-hidden="true"></span>
+					<span class="si-ledger__n">1,222</span>
+				</a></div>
+				<div class="si-ledger__row"><a href="/media/">
+					<span class="si-ledger__what">Conference talks</span>
+					<span class="si-ledger__leader" aria-hidden="true"></span>
+					<span class="si-ledger__n">822</span>
+				</a></div>
+				<div class="si-ledger__row"><a href="/coverage/">
+					<span class="si-ledger__what">Press items</span>
+					<span class="si-ledger__leader" aria-hidden="true"></span>
+					<span class="si-ledger__n">243</span>
+				</a></div>
+				<div class="si-ledger__row"><a href="/statements/">
+					<span class="si-ledger__what">Statements</span>
+					<span class="si-ledger__leader" aria-hidden="true"></span>
+					<span class="si-ledger__n">198</span>
+				</a></div>
+				<div class="si-ledger__row"><a href="/conferences/">
+					<span class="si-ledger__what">Conference pages</span>
+					<span class="si-ledger__leader" aria-hidden="true"></span>
+					<span class="si-ledger__n">11</span>
+				</a></div>
+				<div class="si-ledger__row"><a href="/library/">
+					<span class="si-ledger__what">Documents</span>
+					<span class="si-ledger__leader" aria-hidden="true"></span>
+					<span class="si-ledger__n">7</span>
+				</a></div>
+
+				<!-- the one brass rule of this footer -->
+				<p class="si-ledger__total">
+					<span class="si-ledger__what">Published records</span>
+					<span class="si-ledger__leader" aria-hidden="true"></span>
+					<span class="si-ledger__n">4,896</span>
+				</p>
+			</div>
+
+			<h3 class="si-foot-h" style="margin-top:var(--si-space-m)">Built from those records</h3>
+			<div class="si-ledger__rows">
+				<div class="si-ledger__row"><a href="/people/">
+					<span class="si-ledger__what">People with a page</span>
+					<span class="si-ledger__leader" aria-hidden="true"></span>
+					<span class="si-ledger__n">722</span>
+				</a></div>
+				<div class="si-ledger__row"><a href="/conferences/">
+					<span class="si-ledger__what">Conferences reconstructed</span>
+					<span class="si-ledger__leader" aria-hidden="true"></span>
+					<span class="si-ledger__n">57</span>
+				</a></div>
+				<div class="si-ledger__row"><a href="/people/?portrait=1">
+					<span class="si-ledger__what">Licensed portraits</span>
+					<span class="si-ledger__leader" aria-hidden="true"></span>
+					<span class="si-ledger__n">132</span>
+				</a></div>
+				<div class="si-ledger__row"><a href="/topic/">
+					<span class="si-ledger__what">Years on the record</span>
+					<span class="si-ledger__leader" aria-hidden="true"></span>
+					<span class="si-ledger__n">2012–2025</span>
+				</a></div>
+			</div>
+
+			<!-- Without this note the table is just more assertion. -->
+			<p class="si-ledger__source">
+				Counts are the migration classification of <b>18 July 2026</b>: 5,397 legacy records
+				reviewed one by one, 4,896 published in the new model, 66 retired with a redirect from
+				their old URL, the rest unpublished drafts. Conferences are rebuilt from a separate
+				programme map (57), of which the 11 that also existed as legacy pages are already
+				counted above. Portraits are only those the Institute itself published and licensed —
+				unverified frame grabs are not used. These are build-time figures;
+				<a class="si-link" href="/about/archive/">the method, in full</a>.
+			</p>
+		</section>
+
+		<aside class="si-ledger__sources si-verify" aria-labelledby="sources-h">
+			<h3 class="si-foot-h" id="sources-h">Go to the source</h3>
+			<ul>
+				<li>
+					<a href="https://www.youtube.com/@SchillerInstitute" rel="noopener">The recordings, uncut</a>
+					<p>Every talk in its original video. A timestamp on this site opens it at the second, so a quote can be heard in context.</p>
+				</li>
+				<li>
+					<a href="/library/">The documents themselves</a>
+					<p>Programmes, studies and proceedings as published — the PDFs, not descriptions of them.</p>
+				</li>
+				<li>
+					<a href="/statements/">Who signed what</a>
+					<p>Each statement lists its signatories by name and affiliation, with the count as of the date shown.</p>
+				</li>
+				<li>
+					<a href="/contact/#corrections">Corrections</a>
+					<p>Found an error? Write. Corrections are made on the page they affect, and dated.</p>
+				</li>
+			</ul>
+		</aside>
+	</div>
+
+	<!-- The utility band -->
+	<div class="si-ledger__band">
+		<div class="ct-container">
+			<div>
+				<form class="si-subscribe" action="#" method="post">
+					<h3 class="si-foot-h">The weekly webcast, by e-mail</h3>
+					<div class="si-subscribe__row">
+						<label class="si-search">
+							<span class="si-visually-hidden">Your e-mail address</span>
+							<input type="email" name="email" placeholder="you@example.org" autocomplete="email">
+						</label>
+						<button class="ct-button" type="submit">Subscribe</button>
+					</div>
+					<p>One message a week. Unsubscribe in one click. <a class="si-link" href="/privacy/">What we do with your address</a>.</p>
+				</form>
+
+				<nav class="si-ledger__nav" aria-label="Footer">
+					<div>
+						<h3 class="si-foot-h">Read &amp; watch</h3>
+						<ul class="si-foot-list">
+							<li><a href="/">Articles</a></li>
+							<li><a href="/videos/">Recordings</a></li>
+							<li><a href="/conferences/">Conferences</a></li>
+							<li><a href="/statements/">Statements</a></li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="si-foot-h">Browse by</h3>
+						<ul class="si-foot-list">
+							<li><a href="/people/">People</a></li>
+							<li><a href="/topic/">Topics</a></li>
+							<li><a href="/region/">Regions</a></li>
+							<li><a href="/campaign/">Campaigns</a></li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="si-foot-h">The Institute</h3>
+						<ul class="si-foot-list">
+							<li><a href="/about/">What it is</a></li>
+							<li><a href="/people/helga-zepp-larouche/">Helga Zepp-LaRouche</a></li>
+							<li><a href="/contact/">Offices &amp; chapters</a></li>
+							<li><a href="/join/">Join</a></li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+
+			<div class="si-langs">
+				<h3 class="si-foot-h">Language</h3>
+				<!-- In WordPress this list is the `wpml_active_languages` filter, in WPML's
+				     own order. Set as an index column rather than chips: this draft is a
+				     table, and a table's siblings are lists. -->
+				<ul class="si-foot-list">
+					<li><a href="/" hreflang="en" lang="en" aria-current="true">English</a></li>
+					<li><a href="/de/" hreflang="de" lang="de">Deutsch</a></li>
+					<li><a href="/fr/" hreflang="fr" lang="fr">Français</a></li>
+					<li><a href="/ru/" hreflang="ru" lang="ru">Русский</a></li>
+					<li><a href="/es/" hreflang="es" lang="es">Español</a></li>
+					<li><a href="/it/" hreflang="it" lang="it">Italiano</a></li>
+					<li><a href="/el/" hreflang="el" lang="el" data-missing>Ελληνικά <span class="si-n">front page</span></a></li>
+					<li><a href="/zh-hans/" hreflang="zh-Hans" lang="zh-Hans" data-missing>中文 <span class="si-n">front page</span></a></li>
+				</ul>
+				<p class="si-lang-note">Eight languages. Where this page has no translation yet, the link opens that language's front page instead of disappearing.</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Legal identity. Germany requires an Impressum, and a skeptic reads it
+	     first: giving it a block rather than a bare link is cheap credibility. -->
+	<section class="si-identity" aria-labelledby="identity-h">
+		<div class="ct-container">
+			<div>
+				<h3 class="si-foot-h" id="identity-h">Who is responsible</h3>
+				<dl>
+					<dt>Registered name</dt>
+					<dd><b class="si-ph" title="Placeholder: the registered legal name has not been supplied">Schiller-Institut e.V.</b></dd>
+					<dt>Founded</dt>
+					<dd>1984, by Helga Zepp-LaRouche</dd>
+				</dl>
+			</div>
+			<div>
+				<dl>
+					<dt>Registered seat</dt>
+					<dd class="si-ph" title="Placeholder: address not supplied">·····, Wiesbaden, Germany</dd>
+					<dt>Register</dt>
+					<dd class="si-ph" title="Placeholder: Vereinsregister number not supplied">Amtsgericht ····· · VR ·····</dd>
+				</dl>
+			</div>
+			<div>
+				<dl>
+					<dt>Represented by</dt>
+					<dd class="si-ph" title="Placeholder: board members not supplied">the board (§ 26 BGB)</dd>
+					<dt>VAT ID</dt>
+					<dd class="si-ph" title="Placeholder: USt-IdNr. not supplied">DE ·········</dd>
+				</dl>
+			</div>
+			<div>
+				<dl>
+					<dt>Contact</dt>
+					<dd><a class="si-link" href="/contact/">Write to the Institute</a></dd>
+					<dt>Press</dt>
+					<dd><a class="si-link" href="/contact/#press">Press enquiries</a></dd>
+				</dl>
+			</div>
+		</div>
+	</section>
+
+	<div class="si-colophon">
+		<div class="ct-container">
+			<p>© 1984–2026 <span class="si-ph" title="Placeholder: the registered legal name has not been supplied">Schiller-Institut e.V.</span></p>
+			<ul>
+				<li><a href="/impressum/">Impressum</a></li>
+				<li><a href="/privacy/">Privacy</a></li>
+				<li><a href="/about/archive/">Sources &amp; method</a></li>
+				<li><a href="/accessibility/">Accessibility</a></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+
+<nav class="draft-strip" aria-label="Footer drafts">
+	<span>Footer drafts</span>
+	<a href="footer-colonnade.html">A · Colonnade</a>
+	<a href="footer-ledger.html" aria-current="page">B · Ledger</a>
+	<a href="footer-envoi.html">C · Envoi</a>
+	<a href="compare.html">Compare</a>
+</nav>
+</body>
+</html>

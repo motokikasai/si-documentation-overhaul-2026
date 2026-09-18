@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>Footer C · The Envoi — Schiller Institute</title>
+<meta name="description" content="Site footer draft C: a cited line of Schiller at banner size, then three doors — read it, hear it, come and argue — each carrying a face from the archive.">
+<!--
+	DRAFT C · "The Envoi"  —  the site footer (Blocksy, all pages)
+	The page does not stop, it hands over. A line of Schiller at banner size,
+	cited so it can be checked against the German original, and then three doors:
+	read it, hear it, come and argue. Each door carries a face, because the
+	evidence for what the Institute is, is who has stood at its rostrum, and
+	states what is behind it in numbers before it is opened. Everything
+	utilitarian is folded into one slim band, so the close stays a close.
+	No JavaScript: this round is design only. blocksy-shim.css and proto.css do
+	not ship.
+-->
+<link rel="preload" href="../people/design-system/fonts/source-serif-4-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../people/design-system/fonts.css">
+<link rel="stylesheet" href="../people/design-system/tokens.css">
+<link rel="stylesheet" href="../people/design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../people/design-system/components.css">
+<link rel="stylesheet" href="css/footer-shared.css">
+<link rel="stylesheet" href="css/envoi.css">
+<link rel="stylesheet" href="css/proto.css">
+<link rel="icon" href="../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header id="header" class="ct-header">
+	<div class="ct-container">
+		<a class="site-logo" href="/"><img src="../brand/assets/lockup/lockup-light@2x.png" alt="The International Schiller Institute" width="560" height="150"></a>
+		<nav aria-label="Primary"><ul>
+			<li><a href="/">News</a></li><li><a href="/conferences/">Conferences</a></li><li><a href="/people/">People</a></li><li><a href="/library/">Library</a></li><li><a href="/topic/classical-culture/">Culture</a></li><li><a href="/about/">About</a></li>
+		</ul></nav>
+		<div class="header-cta"><a class="si-link is-secondary" href="/join/">Join</a><a class="ct-button" href="/donate/">Donate</a></div>
+	</div>
+</header>
+
+<!-- ============================ page stub ============================ -->
+<main id="main" class="site-main si-page stub">
+	<div class="ct-container">
+		<p class="si-eyebrow si-eyebrow--ruled">The archive · Article</p>
+		<h1 class="si-display">A page ends here</h1>
+		<p class="si-lead">Everything above this line is a stand-in for whatever the visitor was actually reading — an article, a conference record, a person. The draft begins at the footer.</p>
+		<p>Three footers are drafted against the same design system and the same content model. Each answers the same two questions in a different order: <em>what else is here</em>, and <em>why should I believe any of it</em>. Use the strip at the bottom left to switch between them without losing your place.</p>
+		<p class="stub-note"><b>Prototype.</b> No live functionality in this round: no language actually switches, no form submits, no count is queried. Every link points at the URL the content model will really serve (<code>/people/</code>, <code>/conferences/</code>, <code>/media/</code>, <code>/videos/</code>, <code>/library/</code>, <code>/statements/</code>, <code>/coverage/</code>), and every number is sourced — see the colophon.</p>
+	</div>
+</main>
+
+<!-- ============================ FOOTER C ============================= -->
+<footer id="si-footer" class="si-footer si-footer--envoi">
+
+	<figure class="si-envoi ct-container">
+		<blockquote>Live with your epoch, but <em>be not its offspring</em>.</blockquote>
+		<figcaption class="si-envoi__cite">
+			<hr>
+			<p class="si-orig">„Lebe mit deinem Jahrhundert, aber sei nicht sein Geschöpf.“</p>
+			<p><b>Friedrich Schiller</b>, <a class="si-link" href="/library/aesthetic-education/">On the Aesthetic Education of Man</a>, Ninth Letter, 1795 — the sentence the Institute was founded on, in&nbsp;1984.</p>
+		</figcaption>
+	</figure>
+
+	<!-- The three doors. Each states what is behind it before it is opened. -->
+	<nav class="si-doors ct-container" aria-label="Where to go next">
+
+		<a class="si-door" href="/library/">
+			<span class="si-plate" style="aspect-ratio:0.8"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/helga-zepp-larouche.jpg" alt="" width="420" height="236" style="width:357.84%;height:160.86%;left:-131.43%;top:-21.58%" loading="lazy" decoding="async"></span>
+			<span class="si-door__body">
+				<span class="si-door__who"><b>Helga Zepp-LaRouche</b> · 51 appearances</span>
+				<span class="si-door__eyebrow">Read</span>
+				<span class="si-door__title">The argument, in full</span>
+				<span class="si-door__desc">Statements, studies and the proceedings behind them — as published, not summarised.</span>
+				<span class="si-door__n">198 statements · 2,393 articles</span>
+				<span class="si-door__go">Open the library <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
+			</span>
+		</a>
+
+		<a class="si-door" href="/videos/">
+			<span class="si-plate" style="aspect-ratio:0.8"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/richard-black.jpg" alt="" width="420" height="228" style="width:230.26%;height:100.00%;left:-65.59%;top:0.00%" loading="lazy" decoding="async"></span>
+			<span class="si-door__body">
+				<span class="si-door__who"><b>Richard Black</b> · 14 appearances</span>
+				<span class="si-door__eyebrow">Hear</span>
+				<span class="si-door__title">Judge the voices yourself</span>
+				<span class="si-door__desc">Every talk in its original recording, timestamped to the speaker and transcribed.</span>
+				<span class="si-door__n">1,222 recordings · 822 conference talks</span>
+				<span class="si-door__go">Open the recordings <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
+			</span>
+		</a>
+
+		<!-- the ask — the one brass mark in this footer -->
+		<a class="si-door si-door--ask" href="/join/">
+			<span class="si-plate" style="aspect-ratio:0.8"><img class="si-medallion__img is-loaded" data-focus src="../people/assets/portraits/jayshree-sengupta.jpg" alt="" width="420" height="236" style="width:262.36%;height:117.94%;left:-97.45%;top:-1.77%" loading="lazy" decoding="async"></span>
+			<span class="si-door__body">
+				<span class="si-door__who"><b>Jayshree Sengupta</b> · 12 appearances</span>
+				<span class="si-door__eyebrow">Take part</span>
+				<span class="si-door__title">Come and argue with us</span>
+				<span class="si-door__desc">Conferences, local chapters and the weekly webcast. Start with whichever costs you an hour.</span>
+				<span class="si-door__n">57 conferences since 1984</span>
+				<span class="si-door__go">Find your way in <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M0 5h14M10 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
+			</span>
+		</a>
+	</nav>
+
+	<!-- One slim band for everything utilitarian. -->
+	<div class="si-envoi__utility">
+		<div class="ct-container">
+			<div>
+				<h2 class="si-foot-h">Read</h2>
+				<ul class="si-foot-list">
+					<li><a href="/">Articles</a></li>
+					<li><a href="/statements/">Statements</a></li>
+					<li><a href="/library/">Documents</a></li>
+					<li><a href="/coverage/">Press coverage</a></li>
+				</ul>
+			</div>
+			<div>
+				<h2 class="si-foot-h">Watch &amp; listen</h2>
+				<ul class="si-foot-list">
+					<li><a href="/videos/">Recordings</a></li>
+					<li><a href="/media/">Conference talks</a></li>
+					<li><a href="/conferences/">Conferences</a></li>
+					<li><a href="/series/weekly-webcast-hzl/">The weekly webcast</a></li>
+				</ul>
+			</div>
+			<div>
+				<h2 class="si-foot-h">Browse by</h2>
+				<ul class="si-foot-list">
+					<li><a href="/people/">People</a></li>
+					<li><a href="/topic/">Topics</a></li>
+					<li><a href="/region/">Regions</a></li>
+					<li><a href="/campaign/">Campaigns</a></li>
+				</ul>
+			</div>
+			<div>
+				<h2 class="si-foot-h">The Institute</h2>
+				<ul class="si-foot-list">
+					<li><a href="/about/">What it is, and is not</a></li>
+					<li><a href="/people/helga-zepp-larouche/">Helga Zepp-LaRouche</a></li>
+					<li><a href="/contact/">Offices &amp; chapters</a></li>
+					<li><a href="/donate/">Support the work</a></li>
+				</ul>
+			</div>
+			<div class="si-envoi__langs">
+				<h2 class="si-foot-h">Language</h2>
+				<!-- In WordPress this run is the `wpml_active_languages` filter, in WPML's
+				     own order. Set inline, not as chips: the plates are this draft's only
+				     rectangles, and it does not need a second round shape. -->
+				<ul class="si-lang-run">
+					<li><a href="/" hreflang="en" lang="en" aria-current="true">English</a></li>
+					<li aria-hidden="true">·</li>
+					<li><a href="/de/" hreflang="de" lang="de">Deutsch</a></li>
+					<li aria-hidden="true">·</li>
+					<li><a href="/fr/" hreflang="fr" lang="fr">Français</a></li>
+					<li aria-hidden="true">·</li>
+					<li><a href="/ru/" hreflang="ru" lang="ru">Русский</a></li>
+					<li aria-hidden="true">·</li>
+					<li><a href="/es/" hreflang="es" lang="es">Español</a></li>
+					<li aria-hidden="true">·</li>
+					<li><a href="/it/" hreflang="it" lang="it">Italiano</a></li>
+					<li aria-hidden="true">·</li>
+					<li><a href="/el/" hreflang="el" lang="el" data-missing>Ελληνικά</a></li>
+					<li aria-hidden="true">·</li>
+					<li><a href="/zh-hans/" hreflang="zh-Hans" lang="zh-Hans" data-missing>中文</a></li>
+				</ul>
+				<p class="si-lang-note">Greyed: no translation of this page yet — the link opens that language's front page.</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- The colophon carries the verification links inline, so the close above
+	     stays uncluttered but nothing checkable is buried. -->
+	<div class="si-colophon">
+		<div class="ct-container">
+			<p>© 1984–2026 <span class="si-ph" title="Placeholder: the registered legal name has not been supplied">Schiller-Institut e.V.</span> · Founded 1984 by Helga Zepp-LaRouche</p>
+			<ul>
+				<li><a href="/about/archive/">Sources &amp; method</a></li>
+				<li><a href="https://www.youtube.com/@SchillerInstitute" rel="noopener">Uncut recordings</a></li>
+				<li><a href="/contact/#corrections">Corrections</a></li>
+				<li><a href="/impressum/">Impressum</a></li>
+				<li><a href="/privacy/">Privacy</a></li>
+				<li><a href="/accessibility/">Accessibility</a></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+
+<nav class="draft-strip" aria-label="Footer drafts">
+	<span>Footer drafts</span>
+	<a href="footer-colonnade.html">A · Colonnade</a>
+	<a href="footer-ledger.html">B · Ledger</a>
+	<a href="footer-envoi.html" aria-current="page">C · Envoi</a>
+	<a href="compare.html">Compare</a>
+</nav>
+</body>
+</html>

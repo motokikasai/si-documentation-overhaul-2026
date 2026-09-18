@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Footer drafts, side by side — Schiller Institute</title>
+<meta name="description" content="The six site-footer drafts stacked at full width for comparison, with what each is best and worst at.">
+<!--
+	Review page. Each frame loads the real draft at `#si-footer`, so the browser
+	scrolls it to the footer by itself — no script, and the page above the footer
+	is the real one rather than a mock-up. Stacked full width rather than placed
+	side by side, because a footer laid out for 1240px tells you nothing when it
+	is squeezed into a third of the screen.
+-->
+<link rel="stylesheet" href="../people/design-system/fonts.css">
+<link rel="stylesheet" href="../people/design-system/tokens.css">
+<link rel="stylesheet" href="../people/design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../people/design-system/components.css">
+<link rel="stylesheet" href="css/proto.css">
+<link rel="icon" href="../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<main class="si-page ct-container cmp">
+
+	<header>
+		<p class="si-eyebrow si-eyebrow--ruled">Site footer · six drafts · 2026-09-18</p>
+		<h1 class="si-display" style="font-size:var(--si-step-4)">The same footer, <em>six ways</em></h1>
+		<p class="si-lead">All six sit on Night, use only Jasper's roles and components, carry the eight WPML languages, and point at the URLs the content model will really serve. Round two — D, E and F — is the current proposal; round one is kept below for reference.</p>
+		<p class="si-meta">Each frame is the real draft, scrolled to its footer. Open one full-size: <a class="si-link" href="footer-rotunda.html#si-footer">D</a> · <a class="si-link" href="footer-cabinet.html#si-footer">E</a> · <a class="si-link" href="footer-quiet.html#si-footer">F</a> · <a class="si-link" href="footer-colonnade.html#si-footer">A</a> · <a class="si-link" href="footer-ledger.html#si-footer">B</a> · <a class="si-link" href="footer-envoi.html#si-footer">C</a>. The carousels in D and E stop when you point at them, and the only hover effect is the portrait taking its colour back.</p>
+	</header>
+
+	<section>
+		<div class="cmp-meta">
+			<h2 class="si-heading">D · The Rotunda</h2>
+			<p class="si-meta">Round two · a plain sliding strip of equal faces · 971px tall</p>
+		</div>
+		<iframe src="footer-rotunda.html#si-footer" title="Footer draft D, the Rotunda" loading="lazy"></iframe>
+	</section>
+
+	<section>
+		<div class="cmp-meta">
+			<h2 class="si-heading">E · The Cabinet</h2>
+			<p class="si-meta">Round two · the line beside a travelling wall of portraits · 798px tall</p>
+		</div>
+		<iframe src="footer-cabinet.html#si-footer" title="Footer draft E, the Cabinet" loading="lazy"></iframe>
+	</section>
+
+	<section>
+		<div class="cmp-meta">
+			<h2 class="si-heading">F · The Quiet</h2>
+			<p class="si-meta">Round two · no portraits, no motion · 854px tall</p>
+		</div>
+		<iframe src="footer-quiet.html#si-footer" title="Footer draft F, the Quiet" loading="lazy"></iframe>
+	</section>
+
+	<header>
+		<p class="si-eyebrow si-eyebrow--ruled">Round one · for reference</p>
+	</header>
+
+	<section>
+		<div class="cmp-meta">
+			<h2 class="si-heading">A · The Colonnade</h2>
+			<p class="si-meta">Faces first · check rail in its own band · language as chips</p>
+		</div>
+		<iframe src="footer-colonnade.html#si-footer" title="Footer draft A, the Colonnade" loading="lazy"></iframe>
+	</section>
+
+	<section>
+		<div class="cmp-meta">
+			<h2 class="si-heading">B · The Ledger</h2>
+			<p class="si-meta">Numbers first · every count opens its list · legal identity in full</p>
+		</div>
+		<iframe src="footer-ledger.html#si-footer" title="Footer draft B, the Ledger" loading="lazy"></iframe>
+	</section>
+
+	<section>
+		<div class="cmp-meta">
+			<h2 class="si-heading">C · The Envoi</h2>
+			<p class="si-meta">Invitation first · three doors, each with a face and a count</p>
+		</div>
+		<iframe src="footer-envoi.html#si-footer" title="Footer draft C, the Envoi" loading="lazy"></iframe>
+	</section>
+
+	<section>
+		<h2 class="si-heading">Round two, how they differ</h2>
+		<div class="table-wrap"><table>
+			<thead><tr><th>&nbsp;</th><th>D · Rotunda</th><th>E · Cabinet</th><th>F · Quiet</th></tr></thead>
+			<tbody>
+				<tr><td><b>The device</b></td><td>A plain right-to-left slide — nothing rotates or scales</td><td>A straight strip that perspective bends; the centre plate comes forward and takes its colour back</td><td>None. Type and empty space</td></tr>
+				<tr><td><b>Shape</b></td><td>Medallions — Jasper's circle for people</td><td>Plates — the rectangular portrait from the profile pages</td><td>—</td></tr>
+				<tr><td><b>Composition</b></td><td>Three stacked bands, deliberately unequal (8 : 4 : 1)</td><td>Two columns side by side, then one utility rule</td><td>Two columns with a wide empty gutter, then one rule</td></tr>
+				<tr><td><b>Height @1440</b></td><td>971px</td><td><b>798px</b> — the shortest with a picture in it</td><td>854px</td></tr>
+				<tr><td><b>Cast on screen</b></td><td>24 people cycling, ~12 visible; the one passing the middle is named, or the one you point at</td><td>24 people cycling, ~5 visible, one named</td><td>—</td></tr>
+				<tr><td><b>Best at</b></td><td>Breadth. A dozen faces at once says “many people” better than E&rsquo;s five</td><td>Balance. The line and the faces each get a half and neither shouts</td><td>Restraint. Under a long article it disappears politely and still navigates</td></tr>
+				<tr><td><b>Weak at</b></td><td>The tallest; a strip of many small faces reads more as decoration than E does</td><td>The narrowest column for the quote — long translations will wrap harder</td><td>Nothing entices; it asks the reader to already be curious</td></tr>
+				<tr><td><b>Line under the name</b></td><td colspan="2">Always a sourced job title (<code>build/titles.json</code>), never a year span</td><td>—</td></tr>
+				<tr><td><b>On hover</b></td><td colspan="2">The portrait takes its colour back. Nothing else changes — no ring, no border, no lift</td><td>—</td></tr>
+				<tr><td><b>If a portrait is missing</b></td><td>The monogram cameo carries it (68% of people have no photo)</td><td>A plate needs a real face — thin cast if the backlog is not cleared</td><td>Unaffected</td></tr>
+			</tbody>
+		</table></div>
+	</section>
+
+	<section>
+		<h2 class="si-heading">Round one, how they differ</h2>
+		<div class="table-wrap"><table>
+			<thead><tr><th>&nbsp;</th><th>A · Colonnade</th><th>B · Ledger</th><th>C · Envoi</th></tr></thead>
+			<tbody>
+				<tr><td><b>First thing you see</b></td><td>Twelve faces on a hairline</td><td>The archive as a table of counts</td><td>A cited line of Schiller, banner size</td></tr>
+				<tr><td><b>What entices</b></td><td>“Who is that?” — every face is a door</td><td>“That is more than I expected” — and the list is one click away</td><td>“Which of these am I?” — three doors, each priced in numbers</td></tr>
+				<tr><td><b>For the skeptic</b></td><td>A “Check us” rail on its own band, before any Institute-written navigation</td><td>The whole footer: dated source note, what was retired, the Impressum as a block</td><td>Verification folded into the colophon line</td></tr>
+				<tr><td><b>Conversion</b></td><td>One quiet Join beside the mission</td><td>Subscribe, set as another ledger row</td><td>The third door, the only brass in the footer</td></tr>
+				<tr><td><b>Language switcher</b></td><td>Chips (round = a choice)</td><td>An index column with “front page” fallbacks named</td><td>An inline run of names</td></tr>
+				<tr><td><b>Height at 1440px</b></td><td>Tallest — the portico costs a band</td><td>Tall — the table and the identity block</td><td>Middling</td></tr>
+				<tr><td><b>Best at</b></td><td>Making the archive feel populated; the strongest pull deeper into the site</td><td>Answering “are these numbers real?” without a word of argument</td><td>Ending a page well; the clearest single next step</td></tr>
+				<tr><td><b>Weak at</b></td><td>Needs licensed portraits — only 132 of 722 people have one</td><td>Least emotional; a wall of figures on every page</td><td>Shallowest navigation — four short columns carry everything</td></tr>
+				<tr><td><b>Editor cost</b></td><td>Portrait set is a query, not a choice — but someone must keep the counts honest</td><td>Counts must be live or dated; a stale number here is worse than none</td><td>Three doors are hand-picked copy; changes need an editor, not a query</td></tr>
+			</tbody>
+		</table></div>
+		<p class="si-meta">Read <a class="si-link" href="README.md">README.md</a> for the numbers' sources and what each draft costs to build in Blocksy.</p>
+	</section>
+</main>
+
+<nav class="draft-strip" aria-label="Footer drafts">
+	<span>Round 2</span>
+	<a href="footer-rotunda.html">D · Rotunda</a>
+	<a href="footer-cabinet.html">E · Cabinet</a>
+	<a href="footer-quiet.html">F · Quiet</a>
+	<a href="compare.html" aria-current="page">Compare</a>
+</nav>
+</body>
+</html>
