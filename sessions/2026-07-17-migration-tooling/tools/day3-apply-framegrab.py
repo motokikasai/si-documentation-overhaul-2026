@@ -25,6 +25,10 @@ ap = argparse.ArgumentParser()
 ap.add_argument('csv_path')
 ap.add_argument('decisions', nargs='+')
 ap.add_argument('--reviewer', default='mk')
+ap.add_argument('--mark-rest-reviewed', action='store_true',
+                help='after applying, record every remaining slot_source=segment row as reviewed '
+                     'and skipped — the reviewer saw those crops in the sheet and rejected them, '
+                     'so they are a decision, not a pending item')
 ap.add_argument('--dry-run', action='store_true')
 args = ap.parse_args()
 
@@ -60,11 +64,22 @@ for path in args.decisions:
             chosen += 1
         row['reviewer'] = args.reviewer
 
-print(f'{chosen} portraits chosen · {skipped} marked unusable · {unknown} unknown keys · {missing} missing crops')
+rest = 0
+if args.mark_rest_reviewed:
+    for row in rows:
+        if row.get('slot_source') == 'segment' and not row['chosen_frame'].strip() and row['final_action'].strip() != 'skip':
+            row['final_action'] = 'skip'
+            row['reviewer'] = args.reviewer
+            note = 'reviewed in the crop sheet: no usable portrait in these frames'
+            row['notes'] = (row['notes'] + ' ' if row['notes'] else '') + note
+            rest += 1
+
+print(f'{chosen} portraits chosen · {skipped} marked unusable · {rest} rejected in review · '
+      f'{unknown} unknown keys · {missing} missing crops')
 if args.dry_run:
     print('dry run — nothing written')
     sys.exit(0)
-if not (chosen or skipped):
+if not (chosen or skipped or rest):
     sys.exit('nothing to write')
 
 with open(args.csv_path, 'w', newline='', encoding='utf-8') as f:

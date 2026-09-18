@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>Person — Schiller Institute</title>
+<meta name="description" content="A person in the Schiller Institute's archive: who they are, what they said, where, and in whose company.">
+<!--
+	PROFILE DRAFT A · "The Portrait"  —  /people/{slug}/ (si_person single)
+	An editorial long-read. Credentials first (who is this, and why listen?),
+	then the voice (verified quotes that play from the exact second), the life,
+	the recordings, the writing and the press, and the company kept.
+	Stylesheet order is the WordPress enqueue order; blocksy-shim.css stands in
+	for Blocksy's own dynamic CSS and does not ship.
+-->
+<link rel="preload" href="../design-system/fonts/source-serif-4-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../design-system/fonts.css">
+<link rel="stylesheet" href="../design-system/tokens.css">
+<link rel="stylesheet" href="../design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../design-system/components.css">
+<link rel="stylesheet" href="css/person-shared.css">
+<link rel="stylesheet" href="css/person-portrait.css">
+<link rel="stylesheet" href="css/proto.css">
+<link rel="icon" href="../../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+</head>
+<body class="single single-si_person">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header id="header" class="ct-header">
+	<div class="ct-container">
+		<a class="site-logo" href="#"><img src="../../brand/assets/lockup/lockup-light@2x.png" alt="The International Schiller Institute" width="560" height="150"></a>
+		<nav aria-label="Primary"><ul>
+			<li><a href="#">News</a></li><li><a href="#">Conferences</a></li><li><a href="people-register.html" aria-current="page">People</a></li><li><a href="#">Library</a></li><li><a href="#">Culture</a></li><li><a href="#">About</a></li>
+		</ul></nav>
+		<div class="header-cta"><a class="si-link is-secondary" href="#">Join</a><a class="ct-button" href="#">Donate</a></div>
+	</div>
+</header>
+
+<main id="main" class="site-main si-page pf pa" aria-busy="true">
+	<div class="pa-progress" aria-hidden="true"></div>
+	<div class="ct-container pa-loading" aria-hidden="true">
+		<div class="si-skeleton" style="aspect-ratio:4/5;max-width:420px"></div>
+		<div style="display:grid;gap:14px;align-content:center">
+			<div class="si-skeleton" style="height:14px;width:30%"></div>
+			<div class="si-skeleton" style="height:56px;width:80%"></div>
+			<div class="si-skeleton" style="height:18px;width:60%"></div>
+		</div>
+	</div>
+</main>
+
+<footer id="footer" class="ct-footer">
+	<div class="ct-container">
+		<img src="../../brand/assets/lockup/lockup-dark@2x.png" alt="The International Schiller Institute" width="560" height="150">
+		<p>Blocksy footer (stand-in) · <span class="proto-note">prototype — data: data/profiles.json, built from the migration contracts</span></p>
+	</div>
+</footer>
+
+<script type="module" src="js/person-portrait.js"></script>
+</body>
+</html>

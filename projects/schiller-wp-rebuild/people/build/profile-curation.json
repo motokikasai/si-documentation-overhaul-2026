@@ -1,0 +1,510 @@
+{
+  "_about": "Hand-curated layer for the person-profile drafts (build-profile-data.py). Everything here is either a verbatim transcript line (checked against the captions at build time), a fact stated in the archive (a talk, a post title, a video description), or a public-record role for a co-speaker. Bios follow the Day-3 rules: no pronouns, no superlatives. Anything the build cannot verify fails the build.",
+  "order": [
+    "richard-black",
+    "jason-ross",
+    "haidar-al-fuadi-al-atabe"
+  ],
+  "people": {
+    "richard-black": {
+      "keys": [
+        "richard-black",
+        "richard-h-black",
+        "state-senator-richard-h-black",
+        "us-state-senator-richard-black",
+        "black"
+      ],
+      "name": "Richard Black",
+      "honorific": "Col. (ret.) · former Virginia State Senator",
+      "country": "United States",
+      "large_photo": {
+        "src": "assets/portraits/large/richard-black.jpg",
+        "w": 1200,
+        "h": 651,
+        "fx": 50.2,
+        "fy": 50,
+        "fs": 0.8
+      },
+      "archetype": "Statesman & soldier",
+      "standfirst": "A combat veteran and conservative Republican who has used Schiller Institute platforms to argue against war with Russia and for peace in Syria.",
+      "credentials": [
+        {
+          "org": "U.S. Marine Corps",
+          "role": "Helicopter pilot · 269 combat missions"
+        },
+        {
+          "org": "The Pentagon",
+          "role": "Chief, Criminal Law Division, U.S. Army"
+        },
+        {
+          "org": "Virginia General Assembly",
+          "role": "House and Senate · two decades"
+        }
+      ],
+      "credentials_quote": "q-uniform",
+      "bio": [
+        "Richard Black spent 32 years in uniform. As a Marine Corps helicopter pilot, Black flew 269 combat missions, then volunteered for ground combat with the 1st Marine Division and was wounded. A second career, as an Army lawyer, ended at the Pentagon as chief of the Criminal Law Division: testifying before Congress, preparing executive orders and advising the Senate Armed Services Committee. Two decades as a conservative voice in the Virginia House and Senate followed.",
+        "Since 2015 Black has spoken at Schiller Institute conferences in Paris, New York and Bad Soden and online: on the war in Syria, on sanctions, and on the danger of nuclear war. Xinhua and TASS have interviewed Black as a voice of the Institute."
+      ],
+      "bio_source": "written",
+      "themes": [
+        "War in Syria",
+        "Sanctions",
+        "Nuclear-war danger",
+        "U.S.–Russia relations",
+        "Belt and Road"
+      ],
+      "quotes": [
+        {
+          "id": "q-uniform",
+          "yt": "JD3d_guFUV4",
+          "match": "i want to start by making clear",
+          "text": "I want to start by making clear that I'm not a left-wing pacifist. I served in uniform for 32 years, loved my country, risked my life for it hundreds of times."
+        },
+        {
+          "id": "q-clark",
+          "yt": "0FNtEWfay_8",
+          "match": "i want to let you know i'm a little bit different",
+          "text": "I want to let you know I'm a little bit different than Ramsey Clark. I'm a conservative Republican, and I have very extensive combat experience.",
+          "context": "Speaking after former U.S. Attorney General Ramsey Clark"
+        },
+        {
+          "id": "q-trade",
+          "yt": "JD3d_guFUV4",
+          "match": "independent countries fear",
+          "text": "Independent countries fear the U.S., but they resent being told who they may and may not trade with."
+        },
+        {
+          "id": "q-syria",
+          "yt": "0FNtEWfay_8",
+          "match": "before the war syria was the safest",
+          "text": "Before the war, Syria was the safest of all Arab countries. There weren't any kidnappings; you could walk freely anywhere."
+        }
+      ],
+      "transcript": {
+        "yt": "JD3d_guFUV4",
+        "from": "well thanks for letting me join",
+        "max_seconds": 420
+      },
+      "talk_overrides": {
+        "_NGK2jKamDE": {
+          "title": "We need a new paradigm",
+          "lang": "fr",
+          "note": "French-language version"
+        },
+        "0FNtEWfay_8": {
+          "title": "Address to the September 11 Memorial Conference"
+        },
+        "lKrK2y1P-Mo": {
+          "title": "Welcoming address"
+        },
+        "i4SlJy4KjEI": {
+          "skip": true
+        },
+        "wj0xuNMfyPI": {
+          "skip": true
+        },
+        "aF2d8EAMQ0o": {
+          "title": "Defend the right to deliberate"
+        },
+        "VHacLTeb9r4": {
+          "title": "War with Russia and China is worse than MAD"
+        },
+        "JD3d_guFUV4": {
+          "title": "Ukraine has lost the war — but thermonuclear war still threatens",
+          "signature": true
+        },
+        "wbHLGZlKtN0": {
+          "title": "U.S. nuclear policy is no longer defensive, but offensive"
+        }
+      },
+      "talk_pages": {
+        "_NGK2jKamDE": [
+          30287,
+          30576,
+          30650
+        ],
+        "B1eaC6Iljas": [
+          71642
+        ]
+      },
+      "writing": [
+        {
+          "ids": [
+            91586,
+            91867
+          ],
+          "kind": "statement",
+          "title": "Open letter to Congress concerning Ukraine nuclear risk"
+        },
+        {
+          "ids": [
+            73175
+          ],
+          "kind": "interview",
+          "title": "Sanctions are barbaric and immoral, and must be ended"
+        },
+        {
+          "ids": [
+            78851,
+            78896
+          ],
+          "kind": "coverage",
+          "outlet": "Xinhua",
+          "title": "Xinhua interviews Richard Black on the Belt and Road and the UN Charter"
+        },
+        {
+          "ids": [
+            83771
+          ],
+          "kind": "coverage",
+          "outlet": "TASS",
+          "title": "TASS interviews Richard Black on the P5 statement “No nuclear war”"
+        },
+        {
+          "ids": [
+            94787
+          ],
+          "kind": "article",
+          "title": "“Never closer to nuclear war”"
+        },
+        {
+          "ids": [
+            94808
+          ],
+          "kind": "statement",
+          "title": "Statement on the Turkey–Syria earthquake"
+        },
+        {
+          "ids": [
+            91955,
+            91969
+          ],
+          "kind": "video",
+          "title": "Did the U.S. and NATO blow up the Nord Stream pipelines?"
+        },
+        {
+          "ids": [
+            88213
+          ],
+          "kind": "video",
+          "title": "NATO responds to Senator Richard Black and Helga Zepp-LaRouche"
+        },
+        {
+          "ids": [
+            87206,
+            87394
+          ],
+          "kind": "video",
+          "title": "U.S. leading the world to nuclear war"
+        },
+        {
+          "ids": [
+            70129,
+            70173
+          ],
+          "kind": "article",
+          "title": "Biden's Syria attacks aid ISIS, says Sen. Black"
+        },
+        {
+          "ids": [
+            102931
+          ],
+          "kind": "video",
+          "title": "Live dialogue with Helga Zepp-LaRouche, Scott Ritter and Larry Wilkerson: the danger of world war is real",
+          "with": [
+            "helga-zepp-larouche",
+            "Scott Ritter",
+            "Larry Wilkerson"
+          ]
+        },
+        {
+          "ids": [
+            5089
+          ],
+          "kind": "video",
+          "title": "Message to the Schiller Institute's 30th anniversary conference"
+        }
+      ],
+      "documents": [
+        {
+          "attachment": 102801,
+          "title": "Emergency press conference: the danger of nuclear war is real, and must be stopped",
+          "kind": "Press release",
+          "year": 2024,
+          "via": "2024-press-danger-nuclear-real"
+        }
+      ]
+    },
+    "jason-ross": {
+      "keys": [
+        "jason-ross"
+      ],
+      "extra_segments": [
+        "hwzavKGLjjY",
+        "mC_RIoCfa4k",
+        "Tp0XUrab1Ys",
+        "QL2EIvZ1GC8",
+        "iLE3NpFjz98"
+      ],
+      "name": "Jason Ross",
+      "honorific": "",
+      "country": "United States",
+      "large_photo": {
+        "src": "assets/portraits/large/jason-ross.jpg",
+        "w": 640,
+        "h": 360,
+        "fx": 49.6,
+        "fy": 42,
+        "fs": 0.394
+      },
+      "archetype": "Scientist",
+      "standfirst": "A scientist of economics: value lies in human discovery, and progress can be measured in the density of the energy a society commands.",
+      "credentials": [
+        {
+          "org": "The LaRouche Organization",
+          "role": "Secretary-Treasurer"
+        },
+        {
+          "org": "LaRouche science team",
+          "role": "Science adviser to Lyndon LaRouche"
+        },
+        {
+          "org": "21st Century Science & Technology",
+          "role": "Editor-in-chief (2017)"
+        }
+      ],
+      "credentials_quote": "q-discovery",
+      "bio": [
+        "Jason Ross works where science meets economics. As a member of Lyndon LaRouche's science research team, known as “the Basement”, Ross has worked on the history of discovery from Kepler to Gauss and Riemann; on planetary defense, fusion power and helium-3 from the Moon; and on the biosphere and noösphere of the Russian-Ukrainian scientist Vladimir Vernadsky.",
+        "Ross has spoken at Schiller Institute conferences since 2013: in Frankfurt, in New York (including a 2017 conference hosted with the NYU Tandon School of Engineering) and online. Ross is a co-author of the Schiller Institute report “Extending the New Silk Road to West Asia and Africa”."
+      ],
+      "bio_source": "written",
+      "themes": [
+        "Physical economy",
+        "Fusion & helium-3",
+        "Space exploration",
+        "Vernadsky & the noösphere",
+        "Infrastructure",
+        "Planetary defense"
+      ],
+      "quotes": [
+        {
+          "id": "q-music",
+          "yt": "7DI29EO5R3A",
+          "match": "music is conveyed with notes",
+          "text": "Music is conveyed with notes, but not contained within them. Ideas are conveyed with words, but are not purely the words themselves."
+        },
+        {
+          "id": "q-discovery",
+          "yt": "dGWPt9GW1Ug",
+          "match": "among life it is only human beings",
+          "text": "Among life, it is only human beings that change their relationship to nature over time, and we do it willfully. We do this by discovery."
+        },
+        {
+          "id": "q-value",
+          "yt": "7DI29EO5R3A",
+          "match": "the source of economic value is",
+          "text": "The source of economic value is the ability of human beings to make discoveries of universal principle, and implement those discoveries socially.",
+          "context": "On Lyndon LaRouche's idea of economic value"
+        },
+        {
+          "id": "q-night",
+          "yt": "KQcQTMHG1KM",
+          "match": "if we take a look at the world as a whole",
+          "text": "If we take a look at the world as a whole, just looking at it at night provides a very good way to get a sense of its state of economic development."
+        }
+      ],
+      "transcript": {
+        "yt": "7DI29EO5R3A",
+        "from": "there exists a profound coherence",
+        "max_seconds": 420
+      },
+      "fixes": {
+        "lavrouch": "LaRouche",
+        "larouche": "LaRouche",
+        "vernotsky": "Vernadsky",
+        "vernodsky": "Vernadsky",
+        "vernonski": "Vernadsky",
+        "vernadsky": "Vernadsky",
+        "novosphere": "noösphere",
+        "noaa sphere": "noösphere",
+        "malthusian": "Malthusian",
+        "euclidean": "Euclidean",
+        "vladimir": "Vladimir"
+      },
+      "talk_overrides": {
+        "hwzavKGLjjY": {
+          "title": "The physical profit of planetary defense"
+        },
+        "dGWPt9GW1Ug": {
+          "title": "Mining helium-3 on the Moon for a fusion-power economy and space propulsion",
+          "versions": {
+            "fr": "Tp0XUrab1Ys",
+            "de": "QL2EIvZ1GC8"
+          }
+        },
+        "Tp0XUrab1Ys": {
+          "skip": true
+        },
+        "QL2EIvZ1GC8": {
+          "skip": true
+        },
+        "mC_RIoCfa4k": {
+          "title": "New York conference remarks",
+          "place": "New York, USA"
+        },
+        "ZNs5xlAZdpU": {
+          "title": "The economic value of infrastructure"
+        },
+        "iLE3NpFjz98": {
+          "title": "Questions and answers, with Helga Zepp-LaRouche"
+        },
+        "KQcQTMHG1KM": {
+          "title": "Extending the New Silk Road to West Asia and Africa"
+        },
+        "7DI29EO5R3A": {
+          "title": "Vernadskian time — time for humanity",
+          "signature": true
+        }
+      },
+      "talk_pages": {
+        "hwzavKGLjjY": [
+          2854,
+          3304,
+          3319,
+          3449
+        ],
+        "dGWPt9GW1Ug": [
+          22819,
+          22850,
+          22851
+        ]
+      },
+      "writing": [
+        {
+          "ids": [
+            92867
+          ],
+          "kind": "article",
+          "title": "Vernadsky's economic space and time: the anti-entropy of the noösphere"
+        },
+        {
+          "ids": [
+            62475
+          ],
+          "kind": "article",
+          "title": "Menschlicher Fortschritt: die Entwicklung höherer Wissenschafts- und Technologieplattformen"
+        }
+      ],
+      "documents": [
+        {
+          "title": "Extending the New Silk Road to West Asia and Africa",
+          "kind": "Special report",
+          "role": "Co-author",
+          "year": null
+        },
+        {
+          "attachment": 20398,
+          "title": "Programme: The New Silk Road and China's lunar programme — Frankfurt, 18 October 2014",
+          "kind": "Conference programme",
+          "year": 2014,
+          "via": "2014-frankfurt-october-2014-30th",
+          "langs": {
+            "ru": 22750
+          }
+        }
+      ]
+    },
+    "haidar-al-fuadi-al-atabe": {
+      "keys": [
+        "haidar-al-fuadi-al-atabe"
+      ],
+      "name": "Haidar Al-Fuadi Al-Atabe",
+      "honorific": "",
+      "country": "Iraq",
+      "large_photo": null,
+      "archetype": "Legislator",
+      "standfirst": "An Iraqi lawmaker on what cooperation with China could rebuild: ports, railways, power and water — and work for Iraq's young.",
+      "credentials": [
+        {
+          "org": "Council of Representatives of Iraq",
+          "role": "Member"
+        }
+      ],
+      "credentials_quote": null,
+      "bio": [
+        "Haidar Al-Fuadi Al-Atabe is a member of the Council of Representatives of Iraq. In March 2021, at the Schiller Institute's online conference “World at a Crossroad”, Al-Atabe spoke on cooperation between China and Iraq for the reconstruction of Iraq."
+      ],
+      "bio_source": "generated",
+      "themes": [
+        "Iraq",
+        "China–Iraq cooperation",
+        "Reconstruction",
+        "New Silk Road"
+      ],
+      "quotes": [
+        {
+          "id": "q-key",
+          "yt": "B1eaC6Iljas",
+          "match": "china iraq agreement can be considered",
+          "text": "[The] China–Iraq agreement can be considered the key to [ridding] Iraq of many of its suffocating social and economic crises."
+        },
+        {
+          "id": "q-negotiator",
+          "yt": "B1eaC6Iljas",
+          "match": "a clever and serious iraqi negotiator",
+          "text": "A clever and serious Iraqi negotiator should make it a condition of cooperation with China to employ a major ratio of the Iraqi workers and engineers in the projects."
+        }
+      ],
+      "transcript": {
+        "yt": "B1eaC6Iljas",
+        "from": "i extend to you all our love",
+        "max_seconds": 420
+      },
+      "fixes": {
+        "helgh said laroche": "Helga Zepp-LaRouche",
+        "hussein askari": "Hussein Askary",
+        "iraqi": "Iraqi",
+        "iraq": "Iraq",
+        "chinese": "Chinese",
+        "china": "China",
+        "schiller": "Schiller"
+      },
+      "talk_overrides": {
+        "B1eaC6Iljas": {
+          "title": "The importance of China–Iraq cooperation for the reconstruction of Iraq",
+          "signature": true
+        }
+      },
+      "talk_pages": {},
+      "writing": [],
+      "documents": []
+    }
+  },
+  "roles": {
+    "_about": "Public-record roles for co-speakers whose archive affiliation is blank or holds transcript text. Only where the role at the time of the shared conference is a matter of record.",
+    "ramsey-clark": "Former U.S. Attorney General",
+    "joycelyn-elders": "Former Surgeon General of the United States",
+    "vassily-a-nebenzia": "Permanent Representative of Russia to the United Nations",
+    "petr-iliichev": "Deputy Permanent Representative of Russia to the United Nations",
+    "william-binney": "Former Technical Director, U.S. National Security Agency",
+    "walter-jones": "Member of the U.S. House of Representatives, North Carolina",
+    "hans-kochler": "President, International Progress Organization, Vienna",
+    "yusuf-maitama-tuggar": "Ambassador of Nigeria to Germany",
+    "wang-wen": "Executive Dean, Chongyang Institute for Financial Studies, Renmin University",
+    "marco-zanni": "Member of the European Parliament, Italy",
+    "jeff-steinberg": "Executive Intelligence Review",
+    "helga-zepp-larouche": "Founder and President, Schiller Institute",
+    "jacques-cheminade": "President, Solidarité et Progrès; former French presidential candidate",
+    "richard-black": "Former Virginia State Senator; Col. (ret.), U.S. Army",
+    "jason-ross": "Secretary-Treasurer, The LaRouche Organization",
+    "daisuke-kotegawa": "Former official, Japanese Ministry of Finance"
+  },
+  "stress": [
+    "metin-apti",
+    "maurizio-abbate",
+    "john-scales-avery"
+  ],
+  "_stress_about": "Stress-test people, built with NO curation: only what the archive holds. metin-apti = one timed talk without captions; maurizio-abbate = on a full-session programme, untimed; john-scales-avery = in the register with nothing linked."
+}

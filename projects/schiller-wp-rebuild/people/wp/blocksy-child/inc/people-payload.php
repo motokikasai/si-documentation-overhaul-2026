@@ -221,6 +221,18 @@ function si_people_focus_style(array $ph, float $fill = 0.42, float $box_ar = 1.
 	return sprintf('width:%s;height:%s;left:%s;top:%s', $pc($w / $bw), $pc($h / $bh), $pc($left / $bw), $pc($top / $bh));
 }
 
+/* Attaching a photo (si:photos, si:photo-import) writes meta without saving the post, so
+   the payload would keep its cached copy for a day. Watch the keys that show on the page. */
+const SI_PEOPLE_WATCHED_META = ['_thumbnail_id', 'photo_license', 'photo_credit', 'photo_focus',
+	'affiliation', 'country', 'sort_name', 'name_native', 'short_bio'];
+foreach (['added_post_meta', 'updated_post_meta', 'deleted_post_meta'] as $hook) {
+	add_action($hook, static function ($mid, $post_id, $key) {
+		if (in_array($key, SI_PEOPLE_WATCHED_META, true) && get_post_type($post_id) === 'si_person') {
+			si_people_flush();
+		}
+	}, 10, 3);
+}
+
 /* Any change to a person or to anything that points at one invalidates every language. */
 add_action('save_post', static function ($post_id, $post) {
 	if (in_array($post->post_type, array_merge(['si_person', 'si_conference'], SI_PEOPLE_REL_TYPES), true)) {

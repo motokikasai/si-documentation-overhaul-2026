@@ -34,6 +34,8 @@ python3 -m http.server 8760          # serve the PARENT: the drafts use ../../br
 # http://localhost:8760/people/templates/people-register.html
 # http://localhost:8760/people/templates/people-medallions.html
 # http://localhost:8760/people/templates/people-chronicle.html
+# http://localhost:8760/people/templates/person-portrait.html      (?p=jason-ross, ?p=haidar-al-fuadi-al-atabe)
+# http://localhost:8760/people/templates/person-listening.html
 ```
 
 ## Jasper: the design system
@@ -97,6 +99,109 @@ where one is found: 94 of 132, 4 of them corrected by hand in `build/focus-overr
 The other 38 use a podium default.
 One tonal treatment (greyscale plus a jasper cast, full colour on hover) makes 132 different
 rooms read as one collection.
+
+## The profile drafts (`/people/{slug}/`), 2026-09-18
+
+Two drafts of the single `si_person` page (A is the likely choice; C, the Constellation, was dropped on 2026-09-18), all in Jasper, all fed by one payload
+(`data/profiles.json`). Each opens on **Richard Black** (rich: 9 talks, 12 writings, press);
+the strip at the bottom switches template and person, including **Jason Ross** (a scientist)
+and **Haidar Al-Fuadi Al-Atabe**, the case that matters most: 326 of 418 people appear once,
+and 68% have no licensed portrait. Every draft has to work for that person too.
+
+**What the page is for.** A visitor who lands on a profile usually came for the person, not
+the Institute. The page has to earn a second thought about the Institute *through* the person:
+(1) establish standing before asking for attention (credentials, in the person's own words
+where possible); (2) let the visitor *hear* them, since one verified sentence at the exact
+second convinces more than any description; (3) show the room: the calibre and range of the
+people on the same programmes is the strongest evidence of what the Institute is; (4) give
+the next step (the conference, the themes, the invitation). Nothing on the page is invented:
+quotes are verified, roles of co-speakers are archive data or public record, and bios follow
+the Day-3 rules (no pronouns, no superlatives).
+
+| | A · **The Portrait** | B · **The Listening Room** |
+|---|---|---|
+| File | `person-portrait.html` | `person-listening.html` |
+| Idea | An editorial long-read | Media first: hear, then read |
+| Opens with | Full-colour portrait, a "ladder" of offices, a play link to the speaker's own account | The player (the page's one dark band), moments, and a live panel |
+| Voice | One quote at a time, big, with its timestamp as an ornament; plays in a modal | "Moments" chips; the transcript follows the video and is searchable |
+| Association | "The company kept": portrait grid, filter by conference, "Among them …" | "In the room": the co-speakers of whatever is playing |
+| Also | Sticky section nav with scroll-spy and reading progress; writing in three columns with press wordmarks; documents; a 3-way "Continue" band | Every talk on one time scale with quote markers; "Play all" queue that stops at each segment's out point; reading carousel |
+
+**Two-click video (GDPR).** Nothing is requested from YouTube or Google until the visitor
+presses play; then the `youtube-nocookie.com` embed is driven by its postMessage API (no
+YouTube script on the page). Consent lasts for the visit (`sessionStorage`).
+
+**Data: `build/build-profile-data.py` → `data/profiles.json`.** Talks from
+`video-segmentation.csv` (with `conference-map.csv` and the yt-dump metadata), posts from
+`si-v4-classification-new.csv` grouped with their translations, PDFs from
+`si-v4-document-candidates.csv`, co-speakers from the same conference programmes (portraits
+and focal points from `data/people.json`), plus the hand layer `build/profile-curation.json`
+(bios, standfirsts, credentials, themes, quotes, cleaned titles, and public-record roles for
+co-speakers whose archive affiliation is blank or junk). **Every quote is checked against the
+captions** (its words must appear in order near the matched cue; fillers may be skipped;
+`[brackets]` mark editorial words); a quote that fails fails the build. Timestamps come from
+the cue, never typed. Large portraits (`assets/portraits/large/`) are the same `si-own`
+originals, fetched at full size.
+
+**Verify:** `PW=… node people/build/profile-interact.mjs` (45 checks: consent before any
+YouTube request, quote seconds, filters, transcript search, "in the room" follows the talk,
+no errors and no horizontal overflow for every
+draft × person at 1440 and 390 px). Last run 2026-09-18: all passed (Firefox).
+
+**Updates and thin records (2026-09-18, second pass).** What a profile shows, by source:
+
+| Section | Comes from | Updates by itself in WordPress? |
+|---|---|---|
+| Talks, conferences, dates, places | `si_presentation` (`presenters`, `parent_conference`) | Yes, once the importer or an editor links the presenter |
+| Co-speakers ("company", "in the room") | everyone on the same conference's presentations | Yes |
+| Figures, years, itinerary | computed from the above | Yes |
+| Documents, statements, press, hosted videos | `si_document.authors`, `si_statement.signatories_internal`, `si_coverage.featured_people`, `si_video.hosts` | Yes, if the relationship is filled in |
+| **Articles (ordinary posts)** | nothing: posts have no person field | **No.** The drafts' "writing" list is hand-picked; the model needs a `people` relationship on posts |
+| Quotes, credentials, standfirst, themes, written bio | editorial | No. They stay until an editor changes them; quotes need a verify step at save time |
+| Portrait | featured image, `photo_license` required | When an editor attaches one |
+
+Thin records are now built with **no curation at all** (`stress` in the curation file:
+`metin-apti` = one timed talk without captions, `maurizio-abbate` = only on a full-session
+programme, `john-scales-avery` = nothing linked). Rule in all three templates: a section with
+nothing to say is not printed, a zero is never shown, an untimed session appearance is
+labelled as one ("speaker 2 of 9 on this session's programme"), and a person with nothing
+linked gets a plain statement plus a request to the editors instead of empty sections. The
+generated bio is rebuilt from facts only (`safe_bio`); the Day-3 generated bios are not used,
+because the broken affiliation text got into them ("… is with spoke passionately about the need to").
+`profile-interact.mjs` now also fails on any zero figure or a visible "null"/"undefined"/"NaN" (63 checks).
+
+**Findings from this pass:** 213 of 418 people have no keyed video segment, but **170 of them
+are named, with person key and affiliation, in a full session's `agenda_json`**, which the
+listing payload and the profile build both ignored until now (the profile build reads it now;
+`build-people-data.py` still does not). With it, Black has 14 appearances and 148 co-speakers
+(was 9 and 105). Only 43 people have nothing linked. There are also duplicate conference keys for one
+event in two languages (`2017-francais-soden` / `2017-soden-fulfilling-dream-mankind`).
+
+**Portable copies (no server):** `python3 people/build/make-portable-profiles.py` writes
+`people/portable/` — `index.html` and the three drafts as single files (~2.9 MB each: CSS,
+fonts, logos, the payload with every portrait as a data: URI, and the JS bundled into one
+inline module, the only kind a browser runs from `file://`). Double-click to open, or send the
+folder. Videos still stream from YouTube after play. `build/portable-check.mjs` opens them
+from `file://` in Firefox and Chromium: no network request at all, all passed 2026-09-18.
+The prototypes in `templates/` stay the source; rebuild after any change.
+
+**Before a WordPress port.** Server-render the page (`single-si_person` via Blocksy's hooks,
+like the archive) and print the payload inline as `si-profile-data`; `person-core.js` already
+reads it. Needs: a `si_person` → quotes store (a repeater or a small `si_quote` type with
+`yt`, `t`, `text`, verified flag), `credentials` and `standfirst` fields, and the co-speaker
+query (people sharing a `parent_conference` through `si_presentation.presenters`). The
+transcript comes from `si_presentation.transcript`.
+
+**Data findings from this pass (not fixed):**
+- Richard Black is split across **five** person keys in `video-segmentation.csv`
+  (`richard-black`, `richard-h-black`, `state-senator-richard-h-black`,
+  `us-state-senator-richard-black`, `black`); only the first is in the build set. Expect the
+  same for other titled speakers (the honorific leaks into the key).
+- Five of Jason Ross's segments have **no person key** (2013 planetary defense, the 2014
+  French and German dubs, 2017 NYC, 2018 Q&A).
+- Co-speaker affiliations often hold talk titles or moderator text ("The Schiller Institute
+  Moderator's Introduction", "Editor,&nbsp"); the build drops those, and the curation's
+  `roles` fills 16 notable ones from public record.
 
 ## Build and verify
 
@@ -235,10 +340,13 @@ people/
   index.html                     entry page
   design-system/                 tokens.css · components.css · fonts.css + fonts/ (ship)
                                  blocksy-shim.css (prototype only) · specimen.html
-  templates/                     the three drafts; css/ js/ (ship, except css/proto.css)
+  templates/                     the three listing drafts + the three profile drafts (person-*.html);
+                                 css/ js/ (ship, except css/proto.css)
   data/people.json               payload snapshot (418) · assets/portraits/ (132 thumbnails)
+  data/profiles.json             profile payload (3 people) · assets/portraits/large/ (2 originals)
   build/                         build-people-data.py · focus-overrides.json · render-test.php
                                  shoot.mjs · interact.mjs · package-wp.sh
+                                 build-profile-data.py · profile-curation.json · profile-interact.mjs
   wp/blocksy-child/              functions.php · theme.json · inc/ · template-parts/people/
   wp/tools/apply-design-system.php
 ```
