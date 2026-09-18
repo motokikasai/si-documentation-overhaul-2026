@@ -112,6 +112,29 @@ and author carried through; `confidence=confirmed` means the identity was corrob
 citizenship or affiliation, `name-only` means it matched on name alone and is **not** safe
 to apply unseen) and `photo-framegrab.csv` (stills from SI's own recordings).
 
+### 2c. `photo-framegrab.csv` — the extra columns, and the portrait crops
+
+`day3-photo-framegrab.py` writes three stills per person (`frame_files`, in
+`incoming/framegrabs/`). `day3-photo-crop.py` then detects the face in each, cuts a **4:5
+portrait from the full-resolution frame** into `incoming/framegrab-crops/<person_key>-<n>.jpg`,
+and adds:
+
+| Column | Req | Meaning |
+|---|---|---|
+| `proposed_frame` | | the crop the detector ranks first — a **proposal only**, never imported on its own |
+| `face_pct` / `sharpness` | | face height as % of frame height, and Laplacian variance of the face region. Under ~12% the portrait will be small; that is the ceiling of a 720p frame, so crop small rather than upscale |
+| `crop_note` | | why there is no proposal (`no face found in any frame`, `no frames on disk`) |
+| `candidates_json` | | every candidate with its crop, score and pixel size — what the contact sheet renders |
+| `chosen_frame` | ✔ to apply | **the gate.** A crop file name, written only by `day3-apply-framegrab.py` from a reviewer's decisions. `si:photo-import` skips every row where it is empty |
+
+Review flow: `framegrab-crops-contactsheet.html` → *Select all proposals*, correct the wrong
+ones, mark unusable ones *none* → *Copy decisions* → paste into `decisions-framegrabs.txt` →
+`python3 tools/day3-apply-framegrab.py incoming/photo-framegrab.csv decisions-framegrabs.txt`
+→ `wp si:photo-import framegrab --dir=incoming/framegrab-crops`.
+
+The crops are the artefact that travels: the same files and CSV import into si-v4 for review
+and into production at cutover. Media is never copied between sites.
+
 ## 3. `video-segmentation.csv` — one row per proposed Presentation (consumed by `si:presentations --source=yt`)
 
 One row per **segment**; a full-session/Case-5 video is exactly one row with `segment_index=0`

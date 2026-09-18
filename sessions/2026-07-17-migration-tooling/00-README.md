@@ -63,6 +63,8 @@ then applied with `wp si:persons --create --update` and `wp si:photos`.
 | `tools/day3-photo-resolve.py` | Tier 1 = the featured image of the person's own `portfolio_cpt` item (authoritative). Tier 2 = surname vs. 66,992 attachment filenames, ranked, emitted to a contact sheet for review | ✅ 132 Tier 1, 109 Tier 2 |
 | `tools/day3-photo-wikidata.py` | Wikimedia Commons P18 for the remainder, licence and author carried through. Strict identity gate: name match alone is flagged, never applied | ✅ 18 free-licensed of 177 |
 | `tools/day3-photo-framegrab.py` | Stills from SI's own recordings at three points inside each speaker's segment | ⛔ blocked: YouTube 403s this yt-dlp build (see below) |
+| `tools/day3-photo-crop.py` | Detects the face in each frame grab, scores the frames and cuts a 4:5 portrait from the full-resolution still; writes proposals + `framegrab-crops-contactsheet.html`. Picks nothing on its own | ✅ 169 of 180 people have a proposed portrait (446 crops, 13 MB) |
+| `tools/day3-apply-framegrab.py` | Writes the reviewer's choices into `chosen_frame` — the only step that opens the import gate | ⏳ awaiting review |
 | `tools/day3-person-bios.py` | Composes `short_bio` from held fields only — no outside knowledge, no pronouns, no superlatives. `bio_source` protects hand-written bios from reruns | ✅ 369 of 418 |
 
 Cutover support (not part of the People pass, but found by it):
