@@ -121,11 +121,16 @@ and adds:
 
 | Column | Req | Meaning |
 |---|---|---|
+| `slot_source` | | `segment` = the frames came from **this person's own row** in `video-segmentation.csv`, so the timestamps are their talk. `agenda-only` = the person was named in a full-session row's `agenda_json` and inherited the WHOLE session's start/end, so the frames show whoever was on camera — 101 of 180, and the reason most first proposals were the wrong face. Those rows are set `final_action=skip` and their crops deleted |
 | `proposed_frame` | | the crop the detector ranks first — a **proposal only**, never imported on its own |
 | `face_pct` / `sharpness` | | face height as % of frame height, and Laplacian variance of the face region. Under ~12% the portrait will be small; that is the ceiling of a 720p frame, so crop small rather than upscale |
 | `crop_note` | | why there is no proposal (`no face found in any frame`, `no frames on disk`) |
 | `candidates_json` | | every candidate with its crop, score and pixel size — what the contact sheet renders |
 | `chosen_frame` | ✔ to apply | **the gate.** A crop file name, written only by `day3-apply-framegrab.py` from a reviewer's decisions. `si:photo-import` skips every row where it is empty |
+
+The sheet lists only `slot_source=segment` people (79; 75 with a proposal). Even there the
+segment is a whole talk (median 13 min), so a frame can still catch the moderator, the
+audience or a slide: the detector makes the crop, the reviewer confirms the person.
 
 Review flow: `framegrab-crops-contactsheet.html` → *Select all proposals*, correct the wrong
 ones, mark unusable ones *none* → *Copy decisions* → paste into `decisions-framegrabs.txt` →

@@ -51,7 +51,29 @@ ASPECT = 0.8          # 4:5 portrait — a square medallion centre-crops out of 
 FACE_FILL = 0.36      # face height as a share of the crop height
 HEADROOM = 0.75       # space above the face box, in face heights (a clipped crown looks like a mistake)
 MIN_FACE_PCT = 5.0    # a face shorter than this % of frame height is not worth a portrait
-COLUMNS = ['proposed_frame', 'face_pct', 'sharpness', 'crop_note']
+COLUMNS = ['slot_source', 'proposed_frame', 'face_pct', 'sharpness', 'crop_note']
+SEGMENTS = os.path.join(SESSION, 'incoming/video-segmentation.csv')
+
+
+def own_segments():
+    """(person_key, video) pairs where the timestamps are THIS person's talk.
+
+    day3-photo-framegrab.py also grabbed frames for people who appear only inside a
+    full-session row's `agenda_json`; those rows carry the whole session's start/end, so
+    the frames show whoever was on camera — 101 of 180 people, and the reason most of the
+    first proposals were the wrong face. Only per-person segment rows are usable, and even
+    they span a whole talk (median 13 min), so every crop still needs a human.
+    """
+    own = {}
+    with open(SEGMENTS, newline='', encoding='utf-8') as fh:
+        for r in csv.DictReader(fh):
+            key = (r.get('person_key') or '').strip()
+            if not key:
+                continue
+            start, end = r.get('start_seconds') or '', r.get('end_seconds') or ''
+            span = (int(end) - int(start)) // 60 if start.isdigit() and end.isdigit() else ''
+            own[(key, r['yt_video_id'])] = span
+    return own
 
 
 def detectors(cv2):
@@ -120,11 +142,26 @@ def main():
         from PIL import Image
         os.makedirs(CROPS, exist_ok=True)
         dets = detectors(cv2)
-        done = 0
+        own = own_segments()
+        done = dropped = 0
         for row in rows:
             if args.limit and done >= args.limit:
                 break
             key = row['person_key']
+            if (key, row['yt_video_id']) not in own:
+                # no per-person timestamps: the frames cannot be trusted to show this person
+                row['slot_source'] = 'agenda-only'
+                row['proposed_frame'] = row['face_pct'] = row['sharpness'] = ''
+                row['candidates_json'] = ''
+                row['crop_note'] = 'timestamps cover the whole session — this person cannot be located in it'
+                if not row['final_action']:
+                    row['final_action'] = 'skip'
+                for f in os.listdir(CROPS) if os.path.isdir(CROPS) else []:
+                    if f.startswith(key + '-'):
+                        os.remove(os.path.join(CROPS, f))
+                dropped += 1
+                continue
+            row['slot_source'] = 'segment'
             cands = []
             for i, fname in enumerate([f for f in row['frame_files'].split('|') if f]):
                 path = os.path.join(FRAMES, fname)
@@ -161,13 +198,14 @@ def main():
             w.writeheader()
             w.writerows(rows)
 
-    write_sheet(rows)
+    write_sheet([r for r in rows if r.get('slot_source') == 'segment'])
     scanned = [r for r in rows if r.get('crop_note') is not None and (r.get('proposed_frame') or r.get('crop_note'))]
+    usable = [r for r in rows if r.get('slot_source') == 'segment']
     withface = [r for r in rows if r.get('proposed_frame')]
     small = [r for r in withface if float(r['face_pct'] or 0) < 12]
-    print(f'{len(scanned)} of {len(rows)} people scanned · {len(withface)} with a proposed portrait '
-          f'({len(small)} of them from a small face, <12% of frame height) · '
-          f'{len(scanned) - len(withface)} scanned with none')
+    print(f'{len(rows)} people · {len(usable)} have their own segment timestamps · '
+          f'{len(withface)} with a proposed portrait ({len(small)} from a small face, <12% of frame height) · '
+          f'{len(rows) - len(usable)} skipped as agenda-only (whole-session timestamps)')
     print(f'review: {os.path.relpath(SHEET, SESSION)}')
 
 
