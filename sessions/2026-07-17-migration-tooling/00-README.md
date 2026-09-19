@@ -65,6 +65,7 @@ then applied with `wp si:persons --create --update` and `wp si:photos`.
 | `tools/day3-photo-framegrab.py` | Stills from SI's own recordings at three points inside each speaker's segment | ⛔ blocked: YouTube 403s this yt-dlp build (see below) |
 | `tools/day3-photo-crop.py` | Detects the face in each frame grab, scores the frames and cuts a 4:5 portrait from the full-resolution still; writes proposals + `framegrab-crops-contactsheet.html`. Picks nothing on its own | ✅ **79** people whose frames came from their own segment: 75 proposals (197 crops, 6 MB). The other **101 are agenda-only** — their frames inherited a whole session's timestamps and mostly showed the wrong person, so they are `final_action=skip` and their crops deleted |
 | `tools/day3-apply-framegrab.py` | Writes the reviewer's choices into `chosen_frame` — the only step that opens the import gate | ⏳ awaiting review |
+| `tools/day3-post-bylines.py` | Reads the dump for article bylines (a line that is only "by X" in the first four lines, or a trailing signature), matches them against `person-map.csv`, and proposes accept / new-person / text-only per the 2026-09-19 decisions | ✅ 155 of 2,463 articles carry a byline → `incoming/post-byline.csv`, awaiting review |
 | `tools/day3-person-bios.py` | Composes `short_bio` from held fields only — no outside knowledge, no pronouns, no superlatives. `bio_source` protects hand-written bios from reruns | ✅ 369 of 418 |
 
 Cutover support (not part of the People pass, but found by it):

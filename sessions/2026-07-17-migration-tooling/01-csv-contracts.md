@@ -140,6 +140,33 @@ ones, mark unusable ones *none* → *Copy decisions* → paste into `decisions-f
 The crops are the artefact that travels: the same files and CSV import into si-v4 for review
 and into production at cutover. Media is never copied between sites.
 
+## 2d. `post-byline.csv` — who wrote each article (consumed by a future `si:bylines`)
+
+One row per **article with byline evidence** (`final_type=post` only — reclassified items are
+not articles). 2,463 articles scanned → 155 rows, 34 distinct names, 98 German / 53 English.
+
+| Column | Req | Meaning |
+|---|---|---|
+| `legacy_id` | ✔ | FK → `classification.csv` |
+| `language` / `trid` | | WPML: decide once per `trid`; the byline is copied to translations |
+| `date` / `slug` / `title` | | for the reviewer |
+| `evidence` | ✔ | `leading-byline` (a line that is *only* "by X" within the first four lines — 149) · `trailing-sign` ("— X" on the last line — 6). Mid-text "by Name" is deliberately **not** evidence: 844 articles contain the string and most are prose |
+| `byline_raw` | ✔ | the name(s) as printed; joint bylines keep both ("Hussein Askary and Jason Ross") |
+| `articles_by_this_name` | | how often this name signs an article — drives the proposal |
+| `match` | ✔ | `built` (a Person the importer creates) · `person-map` (a row that exists but is not built) · `partial` (joint byline, only one known) · `none` |
+| `proposed_person_key` | | pipe-separated `person_key`s for the matched names |
+| `proposed_action` | | `accept` (89) · `new-person` (43, a name with ≥3 articles: Daniel Platt 20, Kevin Gribbroek 14, Alexander Hartmann 9) · `text-only` (19, one-off names and organisations such as "EIR Staff") · blank for `partial`, where a human must choose |
+| `confidence` | | `high` · `medium` · `low` |
+| `person_hints` / `wp_author_id` | | context only. The hints are names *mentioned* in the body; the WP account is who posted, not who wrote (`madeleine` 659, `tobi` 505 are editorial logins) |
+| `snippet` | | first 200 characters, so a row can be judged without opening the post |
+| `needs_review` | ✔ | always `1` |
+| `final_action` | ✔ to apply | **the gate.** `accept` · `fix:<person_key>` · `new-person` · `text-only` · `skip`. Blank is never "accept" |
+| `reviewer` / `notes` | | |
+
+Both targets exist in the model as of `SI_Model` **3.2.0**: an Article Pod with `byline`
+(rel→`si_person`, multi) and `byline_text` (a name we deliberately do not make a Person —
+a one-off guest, or an organisation). The relationship wins when both are set.
+
 ## 3. `video-segmentation.csv` — one row per proposed Presentation (consumed by `si:presentations --source=yt`)
 
 One row per **segment**; a full-session/Case-5 video is exactly one row with `segment_index=0`

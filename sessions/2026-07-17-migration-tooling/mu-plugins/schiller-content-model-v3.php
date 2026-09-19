@@ -32,7 +32,8 @@ defined('ABSPATH') || exit;
 
 final class SI_Model {
 
-    const VERSION = '3.1.1';            // bump to re-run term seeding (3.1.0: hierarchical
+    const VERSION = '3.2.0';            // 3.2.0: Article byline + byline_text (post Pod).
+                                        // bump to re-run term seeding (3.1.0: hierarchical
                                         // UI flip + closed-vocabulary caps + name self-heal;
                                         // 3.1.1: make that self-heal actually reachable —
                                         // it never ran, so si-v4 seeded 8 "&amp;" names)
@@ -456,6 +457,17 @@ final class SI_Model {
         ];
 
         return [
+            // Articles are native `post`. The model's Person ──byline──> Article edge lives
+            // here; `byline_text` carries a name we deliberately do NOT make a Person —
+            // a one-off guest writer, or an organisation ("EIR", "EIR Staff"). Exactly one
+            // of the two is used per article; the byline relationship wins when both exist.
+            'post' => [
+                'label'  => 'Article',
+                'fields' => [
+                    ['name' => 'byline',      'label' => 'Byline (People)'] + $pick('si_person'),
+                    ['name' => 'byline_text', 'label' => 'Byline (text, when not a Person)', 'type' => 'text'],
+                ],
+            ],
             'si_person' => [
                 'label'  => 'Person',
                 'fields' => [
