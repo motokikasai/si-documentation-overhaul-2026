@@ -62,5 +62,13 @@
     <custom-field action="copy">statement_type</custom-field>
     <custom-field action="translate">external_author</custom-field>
     <custom-field action="translate">signatories_external</custom-field>
+    <!-- the profile page's own fields (blocksy-child/inc/profile-fields.php) -->
+    <custom-field action="translate">si_descriptor</custom-field>
+    <custom-field action="translate">si_introduction</custom-field>
+    <custom-field action="translate">si_offices</custom-field>
+    <custom-field action="translate">si_quote_context</custom-field>
+    <custom-field action="copy">si_quotes</custom-field>        <!-- a quote stays in the language it was spoken -->
+    <custom-field action="copy">si_notable</custom-field>
+    <custom-field action="copy">people</custom-field>           <!-- the People field on posts, when added -->
   </custom-fields>
 </wpml-config>

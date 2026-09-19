@@ -7,9 +7,10 @@
 import {
 	loadProfile, esc, medallion, heroPortrait, plate, settleImages, reveal, reduceMotion,
 	fmtDate, fmtMonth, clock, duration, LANG, LANG_NAME, KIND, plural, city, confLabel, nameHTML,
-	personHref, mountPlayer, draftStrip, companyLine,
+	personHref, mountPlayer, companyLine,
 	figure, talkLength, sessionNote, talksHeading, thinNote,
 } from './person-core.js';
+import { draftStrip } from './person-proto.js';   // prototype-only review strip
 
 const { data, p } = await loadProfile();
 const main = document.querySelector('main');
@@ -180,13 +181,8 @@ const invite = `
 	</div>
 </section>`;
 
-const sources = `
-<div class="ct-container pf-sources">
-	<p>The transcript is the recording's automatic captions, lightly cased for names and not otherwise corrected. Moments are transcribed from the same captions and verified against them word by word; words in [brackets] are editorial. Times on the scale are minutes into each talk.</p>
-	<p>Nothing loads from YouTube until you press play; after that, the privacy-enhanced player is used for this visit.</p>
-</div>`;
 
-main.innerHTML = (talks.length ? stage : silent) + reel + reading + voices + invite + sources;
+main.innerHTML = (talks.length ? stage : silent) + reel + reading + voices + invite;
 main.removeAttribute('aria-busy');
 settleImages(main);
 reveal(main);

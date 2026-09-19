@@ -5,9 +5,10 @@
 import {
 	loadProfile, esc, medallion, heroPortrait, settleImages, reveal, reduceMotion,
 	fmtDate, fmtMonth, clock, duration, LANG, LANG_NAME, KIND, plural, city,
-	personHref, playModal, draftStrip, scrollSpy, companyLine, confLabel, nameHTML,
+	personHref, playModal, scrollSpy, companyLine, confLabel, nameHTML,
 	figure, talkLength, sessionNote, talksHeading, thinNote,
 } from './person-core.js';
+import { draftStrip } from './person-proto.js';   // prototype-only review strip
 
 const { data, p } = await loadProfile();
 const main = document.querySelector('main');
@@ -250,6 +251,7 @@ const lastConf = p.conferences[p.conferences.length - 1];
 const cont = `
 <section class="pa-continue" aria-labelledby="pa-continue-h">
 	<div class="ct-container">
+		<div class="pa-continue__panel">
 		<p class="si-eyebrow" id="pa-continue-h">Continue</p>
 		<div class="pa-continue__grid">
 			${lastConf ? `<a class="pa-next" href="#">
@@ -273,16 +275,12 @@ const cont = `
 				<span class="pa-invite__done" hidden>Thank you — the next invitation will reach you.</span>
 			</form>
 		</div>
+		</div>
 	</div>
 </section>`;
 
-const sources = `
-<div class="ct-container pf-sources">
-	<p>Recordings, conferences and co-speakers come from the Institute's archive (video segmentation and conference map). Quotes are transcribed from the recordings' automatic captions and verified against them word by word at build time; each plays from the second it was said. Roles marked as public record are stated for the time of the shared conference.</p>
-	<p>Biography: ${p.bio_source === 'written' ? 'written by the editors from the speaker\'s own account in the recordings' : 'composed from structured archive data'}. Videos play from YouTube only after you press play.</p>
-</div>`;
 
-main.innerHTML = `<div class="pa-progress" aria-hidden="true"></div>${hero}${toc}${voice}${life}${recordings}${writing}${company}${documents}${cont}${sources}`;
+main.innerHTML = `<div class="pa-progress" aria-hidden="true"></div>${hero}${toc}${voice}${life}${recordings}${writing}${company}${documents}${cont}`;
 main.removeAttribute('aria-busy');
 settleImages(main);
 reveal(main);

@@ -14,6 +14,9 @@ require_once __DIR__ . '/inc/jasper.php';           // design system: fonts, tok
 require_once __DIR__ . '/inc/people-payload.php';   // /people/ data contract
 require_once __DIR__ . '/inc/people-i18n.php';      // /people/ strings the JS writes (generated)
 require_once __DIR__ . '/inc/people-archive.php';   // /people/ inside Blocksy's archive canvas
+require_once __DIR__ . '/inc/profile-data.php';     // /people/{slug}/ data: everything linked to one person
+require_once __DIR__ . '/inc/profile-fields.php';   // /people/{slug}/ editor side: Profile page box, status box, invitation pattern, guide
+require_once __DIR__ . '/inc/profile-single.php';   // /people/{slug}/ inside Blocksy's single canvas
 
 // Which /people/ draft is live: register | gallery | chronicle
 add_filter('si_people_view', static fn() => 'register');

@@ -17,11 +17,11 @@ cp "$here"/wp/tools/apply-design-system.php "$dest/tools/"
 cp "$here"/design-system/{fonts.css,tokens.css,components.css} "$dest/assets/jasper/"
 cp "$here"/design-system/fonts/* "$dest/assets/jasper/fonts/"
 
-for f in people-shared register medallions chronicle; do cp "$here/templates/css/$f.css" "$dest/assets/people/css/"; done
-for f in people-core si-select register medallions chronicle; do cp "$here/templates/js/$f.js" "$dest/assets/people/js/"; done
+for f in people-shared register medallions chronicle person-shared person-portrait; do cp "$here/templates/css/$f.css" "$dest/assets/people/css/"; done
+for f in people-core si-select register medallions chronicle person-core person-portrait-wp; do cp "$here/templates/js/$f.js" "$dest/assets/people/js/"; done
 
 # a shipped file must never reference the prototype-only layer
-if grep -rl "blocksy-shim\|proto.css\|draft-strip" "$dest/assets" "$dest/inc" "$dest/template-parts"; then
+if grep -rl "blocksy-shim\|proto.css\|draft-strip\|person-proto" "$dest/assets" "$dest/inc" "$dest/template-parts"; then
 	echo "prototype-only reference found in shipped files" >&2; exit 1
 fi
 echo "packaged into $dest"

@@ -185,6 +185,20 @@ folder. Videos still stream from YouTube after play. `build/portable-check.mjs` 
 from `file://` in Firefox and Chromium: no network request at all, all passed 2026-09-18.
 The prototypes in `templates/` stay the source; rebuild after any change.
 
+**Agreed for the WordPress build of A (2026-09-19):** the provenance note under the page is
+removed (it lives in the editor guide instead); the closing "Continue" band is an inset night
+panel on limestone with a brass keyline, so it never merges with Blocksy's night footer.
+Static copy is editable without code: the fixed invitation tile ("Be in the room") is a core
+**synced pattern** (Appearance → Patterns; si-v4 runs the free Blocksy Companion, so Blocksy
+Pro Content Blocks are not available), and its form is whatever sign-up the Institute uses
+(NationBuilder embed or shortcode) placed inside that pattern. Template labels ("Life",
+"Recordings", "Continue", …) are gettext strings in text domain `si`. WPML: people stay
+display-as-translated; the new person fields (Descriptor, Introduction, Offices held, quote
+context) are declared `translate` in `wpml-config.xml`, quote text and time `copy` (a quote
+stays in the language it was spoken); talks/conferences show their translation where one
+exists; the synced pattern is translated like any post; labels via String Translation.
+Also in the build: the four new person fields, the per-person status box, and the editor guide.
+
 **Before a WordPress port.** Server-render the page (`single-si_person` via Blocksy's hooks,
 like the archive) and print the payload inline as `si-profile-data`; `person-core.js` already
 reads it. Needs: a `si_person` → quotes store (a repeater or a small `si_quote` type with
@@ -202,6 +216,34 @@ transcript comes from `si_presentation.transcript`.
 - Co-speaker affiliations often hold talk titles or moderator text ("The Schiller Institute
   Moderator's Introduction", "Editor,&nbsp"); the build drops those, and the curation's
   `roles` fills 16 notable ones from public record.
+
+## The profile in WordPress (Template A, 2026-09-19)
+
+Built and deployed to si-v4. Files in `wp/blocksy-child/`:
+
+| File | What it does |
+|---|---|
+| `inc/profile-data.php` | `si_profile_data($id)`: everything linked to one person, in the shape of one `profiles.json` entry. Recordings from `si_presentation.presenters` + `si_video.hosts`; conferences from their `parent_conference`; the company from everyone presenting at those conferences; writing from `si_statement.signatories_internal`, `si_coverage.featured_people` and posts' `people` field (once added); documents from `si_document.authors`; themes from the `si_topic` terms of all of it. WPML: edges hold default-language IDs, items are shown in the current language. Cached per person and language on the /people/ generation counter; **bump `SI_PROFILE_VERSION` when rules change** (the cache otherwise survives a deploy). Cleans legacy junk for display: `si_profile_clean_role()` (placeholders such as "Text bald verfügbar!", moderator lines, sentences) and `si_profile_conf_title()` (strips "— November 2, 2013 • Los Angeles Conference"). Day-3 generated bios are not used; a one-liner is rebuilt from facts. |
+| `inc/profile-fields.php` | The **Profile page** box on each person (Descriptor, Introduction, Offices held, Public-figure tick, Quotes with recording + time + context + "use in the hero"); on a WPML translation only the translatable parts are editable. The **What the profile shows** status box (what is there, what is missing, with links). The **invitation**: a synced pattern "Profile page — invitation" created on the first admin visit, linking to schillerinstitute.nationbuilder.com (a NationBuilder form cannot be posted from another site without its API, so the tile links; when a conference has a Registration link and a future start date, the tile offers it automatically). The **Profile guide** page (People → Profile guide). |
+| `inc/profile-single.php` | Hooks `blocksy:single:canvas:custom-output` (Blocksy ≥ 2.1.47): Blocksy keeps header, footer and Customizer; no template override. Enqueues `person-shared.css`, `person-portrait.css` and the module `person-portrait-wp.js`. Prints schema.org `Person` JSON-LD. |
+| `template-parts/people/profile.php` | The page, rendered completely on the server (works with JS off, crawlable); same markup and classes as the prototype, so the same CSS styles both. All text through gettext (`si`). |
+| `template-parts/people/profile-guide.php` | The editor guide, including a diagram of which field fills which line of the hero. |
+| `templates/js/person-portrait-wp.js` | Behaviour only: two-click player, quote carousel, show-all, conference filter, section nav. Reads data attributes; strings come translated from the template. |
+
+New meta keys are declared in `wpml-config.xml` (sessions/…/mu-plugins, deployed to the child theme):
+`si_descriptor`, `si_introduction`, `si_offices`, `si_quote_context` translate; `si_quotes`, `si_notable`, `people` copy.
+The prototype-only review strip moved to `templates/js/person-proto.js`; `package-wp.sh` refuses to ship it.
+`build/make-i18n.py` now also collects `_n()` plurals and double-quoted strings (si.pot: 303 entries).
+
+**Verify:** `php people/build/render-profile-test.php` runs the shipped template for all six sample
+people (9 structural checks each: no zero figure, no "null", each section iff it has content, the
+thin-record note iff nothing is linked, every talk playable) and writes `build/out/wp-profile-*.html`
+for the browser. On si-v4 (2026-09-19), Michael Billington — the only person the site currently
+holds — renders with 2 recordings and 17 co-speakers, no placeholder text, nothing from YouTube
+before consent, no overflow at 1440/390, no PHP log entries. **Not yet seen in a browser: the admin
+screens** (Profile page box, status box, guide), which need a login.
+
+**Rollback on si-v4:** `backups/blocksy-child-before-profile-2026-09-19.tgz` (the child theme as it was).
 
 ## Build and verify
 

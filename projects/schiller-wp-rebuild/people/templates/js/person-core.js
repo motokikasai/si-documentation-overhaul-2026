@@ -69,6 +69,14 @@ export function heroPortrait(p, { ar = 0.8, fill = 0.34 } = {}) {
 /* ---- the player -------------------------------------------------------------
  * mount(host) returns a controller: load(yt, t) / seek(t) / play() / pause(),
  * and onTime(cb) / onState(cb) callbacks fed from the iframe's infoDelivery. */
+/* Every string the player writes. WordPress overrides them with translations
+   (setPlayerStrings, from the si-profile-strings JSON the template prints). */
+const S = {
+	close: 'Close', play: 'Play the recording', from: 'from %s', loads: 'loads the video from YouTube',
+	privacy: 'Privacy-enhanced YouTube embed', open_yt: 'open on YouTube', player: 'Video player',
+};
+export function setPlayerStrings(table) { Object.assign(S, table || {}); }
+
 let consented = false;
 try { consented = sessionStorage.getItem('si-yt-ok') === '1'; } catch { /* private mode */ }
 
@@ -87,15 +95,15 @@ export function mountPlayer(host, { poster = '', label = '' } = {}) {
 				${poster}
 				<button type="button" class="pf-player__play">
 					<span class="pf-player__disc" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
-					<span class="pf-player__label"><b>${esc(title || label || 'Play the recording')}</b>
-					<span>${t ? `from ${clock(t)} · ` : ''}loads the video from YouTube</span></span>
+					<span class="pf-player__label"><b>${esc(title || label || S.play)}</b>
+					<span>${t ? `${esc(S.from.replace('%s', clock(t)))} · ` : ''}${esc(S.loads)}</span></span>
 				</button>
 			</div>`;
 		host.querySelector('button').onclick = () => { consented = true; try { sessionStorage.setItem('si-yt-ok', '1'); } catch {} embed(yt, t); };
 	}
 	function embed(yt, t) {
 		const origin = location.origin === 'null' ? '' : `&origin=${encodeURIComponent(location.origin)}`;
-		host.innerHTML = `<iframe class="pf-player__frame" src="https://www.youtube-nocookie.com/embed/${esc(yt)}?start=${Math.floor(t)}&autoplay=1&rel=0&modestbranding=1&enablejsapi=1&playsinline=1${origin}" title="Video player" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+		host.innerHTML = `<iframe class="pf-player__frame" src="https://www.youtube-nocookie.com/embed/${esc(yt)}?start=${Math.floor(t)}&autoplay=1&rel=0&modestbranding=1&enablejsapi=1&playsinline=1${origin}" title="${esc(S.player)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
 		ctl.frame = host.querySelector('iframe');
 		ctl.frame.addEventListener('load', () => {
 			// ask the embed to start streaming infoDelivery (currentTime, playerState)
@@ -130,12 +138,12 @@ export function playModal({ yt, t = 0, title = '', meta = '', poster = '' }) {
 		modal.innerHTML = `
 			<div class="pf-modal__bar">
 				<div><p class="si-eyebrow" data-meta></p><h2 class="pf-modal__title" data-title></h2></div>
-				<button class="si-sheet__close" type="button" aria-label="Close" data-close>
+				<button class="si-sheet__close" type="button" aria-label="${esc(S.close)}" data-close>
 					<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.4"/></svg>
 				</button>
 			</div>
 			<div class="pf-player" data-host></div>
-			<p class="pf-modal__foot si-meta">Privacy-enhanced YouTube embed · <a class="si-link" data-yt target="_blank" rel="noopener">open on YouTube</a></p>`;
+			<p class="pf-modal__foot si-meta">${esc(S.privacy)} · <a class="si-link" data-yt target="_blank" rel="noopener">${esc(S.open_yt)}</a></p>`;
 		document.body.append(modal);
 		modal.querySelector('[data-close]').onclick = () => modal.close();
 		modal.addEventListener('click', e => { if (e.target === modal) modal.close(); });
@@ -151,20 +159,6 @@ export function playModal({ yt, t = 0, title = '', meta = '', poster = '' }) {
 	if (!consented) modal.querySelector('.pf-player__play')?.focus();
 }
 
-/* ---- prototype-only: switch template and person ------------------------------ */
-export function draftStrip(data, current) {
-	const nav = document.createElement('nav');
-	nav.className = 'draft-strip pf-strip';
-	nav.setAttribute('aria-label', 'Drafts');
-	const q = new URLSearchParams(location.search);
-	const p = data.people[q.get('p')] ? q.get('p') : data.meta.order[0];
-	const tpl = [['person-portrait.html', 'A · Portrait'], ['person-listening.html', 'B · Listening room']];
-	nav.innerHTML = `<span>Profile drafts</span>
-		${tpl.map(([f, l]) => `<a href="${f}?p=${p}"${f === current ? ' aria-current="page"' : ''}>${l}</a>`).join('')}
-		<i aria-hidden="true"></i>
-		${data.meta.order.map(k => `<a href="${current}?p=${k}"${k === p ? ' aria-current="true"' : ''} title="${esc(data.people[k].archetype)}">${esc(data.people[k].name.split(' ').slice(-1)[0])}</a>`).join('')}`;
-	document.body.append(nav);
-}
 
 /* ---- scroll-spy for in-page section navs ------------------------------------ */
 export function scrollSpy(nav) {

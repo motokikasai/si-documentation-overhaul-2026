@@ -198,11 +198,29 @@ button.pf-lang:hover { border-color: var(--si-accent); color: var(--si-accent); 
 .pa-doc__text b { font-family: var(--si-font-serif); font-size: var(--si-step-0); font-weight: 500; line-height: 1.35; color: var(--si-ink); }
 
 /* ---- continue: the one dark band ------------------------------------------------------------------ */
-.pa-continue { padding-block: var(--si-space-2xl); background: var(--si-night); color: var(--si-on-night); }
-.pa-continue .si-eyebrow { color: var(--si-brass-on-night); margin-bottom: var(--si-space-m); }
-.pa-continue__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: color-mix(in srgb, var(--si-on-night) 14%, transparent); }
-.pa-next { display: grid; gap: var(--si-space-xs); align-content: start; padding: var(--si-space-l) var(--si-space-m); background: var(--si-night); color: var(--si-on-night); text-decoration: none; }
-a.pa-next:hover { background: var(--si-night-2); color: #fff; }
+/* The closing band is a panel set INTO the page, not a full-width strip: Blocksy's footer is
+   the same night colour, and a full-bleed band would read as the top of the footer. A field
+   of limestone above and below, the panel's own edge and shadow, and an inset brass keyline
+   (the medallion ring, squared) make it an object on the page. */
+.pa-continue { padding-block: var(--si-space-xl) var(--si-space-2xl); background: var(--si-ground); }
+.pa-continue__panel {
+	position: relative; isolation: isolate;
+	padding: var(--si-space-l) var(--si-space-l) var(--si-space-m);
+	background:
+		radial-gradient(70% 120% at 100% 0%, color-mix(in srgb, var(--si-jasper) 12%, transparent), transparent 60%),
+		var(--si-night);
+	color: var(--si-on-night);
+	box-shadow: var(--si-shadow-3);
+}
+.pa-continue__panel::before {
+	content: ""; position: absolute; inset: 10px; z-index: -1; pointer-events: none;
+	border: 1px solid color-mix(in srgb, var(--si-brass-on-night) 40%, transparent);
+}
+.pa-continue .si-eyebrow { color: var(--si-brass-on-night); margin-bottom: var(--si-space-m); padding-inline: var(--si-space-m); }
+.pa-continue__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0; }
+.pa-next { display: grid; gap: var(--si-space-xs); align-content: start; padding: var(--si-space-m); color: var(--si-on-night); text-decoration: none; transition: background-color var(--si-dur-2) var(--si-ease); }
+.pa-next + .pa-next { border-left: 1px solid color-mix(in srgb, var(--si-on-night) 14%, transparent); }
+a.pa-next:hover { background: color-mix(in srgb, var(--si-on-night) 6%, transparent); color: #fff; }
 .pa-next__kicker { font-family: var(--si-font-sans); font-size: var(--si-step-n2); font-weight: 600; letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-on-night-2); }
 .pa-next b { font-family: var(--si-font-serif); font-size: var(--si-step-2); font-weight: 400; line-height: 1.2; color: #fff; }
 .pa-next > span:last-child { font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-on-night-2); }
@@ -215,6 +233,26 @@ a.pa-next:hover { background: var(--si-night-2); color: #fff; }
 .pa-invite__row .ct-button { background: var(--si-on-night); color: var(--si-night); }
 .pa-invite__row .ct-button:hover { background: #fff; color: var(--si-night); }
 .pa-invite__done { font-family: var(--si-font-serif); font-style: italic; color: var(--si-on-night); }
+
+/* WordPress: the tile is the synced pattern "Profile page — invitation", so it holds
+   whatever blocks editors put there. Style them here, scoped to the tile. */
+.pa-invite :is(h2, h3, h4) { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-2); font-weight: 400; line-height: 1.2; color: #fff; }
+.pa-invite p:not(.pa-next__kicker) { margin: 0; font-family: var(--si-font-sans); font-size: var(--si-step-n1); line-height: 1.5; color: var(--si-on-night-2); }
+.pa-invite p.pa-next__kicker { margin: 0; }
+.pa-invite a:not(.wp-block-button__link):not(.pa-invite__next) { color: var(--si-on-night); }
+.pa-invite .wp-block-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 0; }
+.pa-invite .wp-block-button__link {
+	display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border: 0; border-radius: 2px;
+	background: var(--si-on-night); color: var(--si-night); text-decoration: none;
+	font-family: var(--si-font-sans); font-size: 15px; font-weight: 600;
+	transition: background-color var(--si-dur-1) var(--si-ease);
+}
+.pa-invite .wp-block-button__link:hover { background: #fff; color: var(--si-night); }
+.pa-invite .is-style-outline .wp-block-button__link { background: transparent; color: var(--si-on-night); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--si-on-night) 40%, transparent); }
+/* the next conference open for registration, when there is one (from si_conference.registration_url) */
+.pa-invite__next { display: grid; gap: 4px; padding: 0 0 var(--si-space-xs); margin-bottom: var(--si-space-2xs); border-bottom: 1px solid color-mix(in srgb, var(--si-on-night) 14%, transparent); color: inherit; text-decoration: none; }
+.pa-invite__next b { font-size: var(--si-step-1); }
+.pa-invite__next:hover b { text-decoration: underline; text-underline-offset: .2em; text-decoration-thickness: 1px; }
 
 /* ---- responsive ------------------------------------------------------------------------------------ */
 @media (max-width: 899.98px) {
@@ -237,4 +275,8 @@ a.pa-next:hover { background: var(--si-night-2); color: #fff; }
 	.pa-doc-list { grid-template-columns: 1fr; }
 	.pa-toc.is-stuck .pa-toc__name { display: none; }
 	.pa-invite__row { flex-direction: column; }
+	.pa-invite__row input { flex: none; }
+	.pa-continue__panel { padding: var(--si-space-m) var(--si-space-2xs) var(--si-space-2xs); }
+	.pa-continue__panel::before { inset: 6px; }
+	.pa-next + .pa-next { border-left: 0; border-top: 1px solid color-mix(in srgb, var(--si-on-night) 14%, transparent); }
 }

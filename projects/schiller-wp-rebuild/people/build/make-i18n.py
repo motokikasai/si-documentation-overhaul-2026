@@ -87,12 +87,24 @@ function si_people_i18n(): array {{
 
 
 NOTE = re.compile(r"/\*\s*translators:((?:(?!\*/).)*)\*/", re.S)
-ANY_CALL = re.compile(r"\b(?:__|_e|esc_html__|esc_html_e|esc_attr__|esc_attr_e|_x)\(")
+ANY_CALL = re.compile(r"\b(?:__|_e|esc_html__|esc_html_e|esc_attr__|esc_attr_e|_x|_n)\(")
+# a PHP string literal, single- or double-quoted
+LIT = r"(?:'(?:[^'\\]|\\.)*'|\"(?:[^\"\\]|\\.)*\")"
 CALL = re.compile(
     r"\b(?P<fn>__|_e|esc_html__|esc_html_e|esc_attr__|esc_attr_e|_x)\(\s*"
-    r"'(?P<msg>(?:[^'\\]|\\.)*)'\s*"
-    r"(?:,\s*'(?P<ctx>(?:[^'\\]|\\.)*)'\s*)?"
+    rf"(?P<msg>{LIT})\s*"
+    rf"(?:,\s*(?P<ctx>{LIT})\s*)?"
     r",\s*'si'\s*\)", re.S)
+# plurals: _n('one', 'many', $count, 'si') — the count may itself hold parentheses
+PLURAL = re.compile(rf"\b_n\(\s*(?P<one>{LIT})\s*,\s*(?P<many>{LIT})\s*,.*?,\s*'si'\s*\)", re.S)
+
+
+def unquote(lit):
+    """A PHP literal as its runtime text: '…' keeps backslash-n; "…" expands escapes."""
+    body = lit[1:-1]
+    if lit[0] == "'":
+        return body.replace("\\'", "'").replace('\\\\', '\\')
+    return re.sub(r'\\([nt"\\$])', lambda m: {'n': '\n', 't': '\t'}.get(m.group(1), m.group(1)), body)
 
 
 def po_q(s):
@@ -117,10 +129,18 @@ def write_pot():
                 found += 1
                 if m.group('fn') != '_x' and m.group('ctx') is not None:
                     continue   # a second string arg that is not a context: not ours
-                msg = m.group('msg').replace("\\'", "'")
-                ctx = m.group('ctx').replace("\\'", "'") if m.group('ctx') else None
+                msg = unquote(m.group('msg'))
+                ctx = unquote(m.group('ctx')) if m.group('ctx') else None
                 line = src.count('\n', 0, m.start('fn')) + 1
                 e = entries.setdefault((ctx, msg), {'refs': [], 'notes': set()})
+                e['refs'].append(f'{rel}:{line}')
+                for ln in (line, line - 1):
+                    e['notes'].update(notes.get(ln, []))
+            for m in PLURAL.finditer(src):
+                found += 1
+                line = src.count('\n', 0, m.start()) + 1
+                e = entries.setdefault((None, unquote(m.group('one'))), {'refs': [], 'notes': set()})
+                e['plural'] = unquote(m.group('many'))
                 e['refs'].append(f'{rel}:{line}')
                 for ln in (line, line - 1):
                     e['notes'].update(notes.get(ln, []))
@@ -143,12 +163,15 @@ def write_pot():
         for n in sorted(e['notes']):
             out.append(f'#. translators: {n}')
         out.append('#: ' + ' '.join(e['refs']))
-        if '%' in msg:
+        if '%' in msg or '%' in e.get('plural', ''):
             out.append('#, php-format')
         if ctx:
             out.append(f'msgctxt {po_q(ctx)}')
         out.append(f'msgid {po_q(msg)}')
-        out.append('msgstr ""')
+        if e.get('plural'):
+            out += [f'msgid_plural {po_q(e["plural"])}', 'msgstr[0] ""', 'msgstr[1] ""']
+        else:
+            out.append('msgstr ""')
         out.append('')
     os.makedirs(os.path.dirname(OUT_POT), exist_ok=True)
     open(OUT_POT, 'w', encoding='utf-8').write('\n'.join(out))

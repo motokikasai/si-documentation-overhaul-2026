@@ -183,13 +183,13 @@ function si_people_letter(string $sort): string {
  * fraction) — written by the importer from build/build-people-data.py's detector,
  * or by hand. Absent = the podium default in the JS/PHP crop.
  */
-function si_people_photo(int $id): ?array {
+function si_people_photo(int $id, string $size = 'medium_large'): ?array {
 	$thumb = get_post_thumbnail_id($id);
 	$licence = (string) get_post_meta($id, 'photo_license', true);
 	if (!$thumb || $licence === '' || $licence === 'unknown') {
 		return null;
 	}
-	$img = wp_get_attachment_image_src($thumb, 'medium_large');
+	$img = wp_get_attachment_image_src($thumb, $size);
 	if (!$img) {
 		return null;
 	}
@@ -224,7 +224,9 @@ function si_people_focus_style(array $ph, float $fill = 0.42, float $box_ar = 1.
 /* Attaching a photo (si:photos, si:photo-import) writes meta without saving the post, so
    the payload would keep its cached copy for a day. Watch the keys that show on the page. */
 const SI_PEOPLE_WATCHED_META = ['_thumbnail_id', 'photo_license', 'photo_credit', 'photo_focus',
-	'affiliation', 'country', 'sort_name', 'name_native', 'short_bio'];
+	'affiliation', 'country', 'sort_name', 'name_native', 'short_bio',
+	// the profile page's own fields (inc/profile-fields.php)
+	'si_descriptor', 'si_introduction', 'si_offices', 'si_quotes', 'si_quote_context', 'si_notable'];
 foreach (['added_post_meta', 'updated_post_meta', 'deleted_post_meta'] as $hook) {
 	add_action($hook, static function ($mid, $post_id, $key) {
 		if (in_array($key, SI_PEOPLE_WATCHED_META, true) && get_post_type($post_id) === 'si_person') {
@@ -235,7 +237,8 @@ foreach (['added_post_meta', 'updated_post_meta', 'deleted_post_meta'] as $hook)
 
 /* Any change to a person or to anything that points at one invalidates every language. */
 add_action('save_post', static function ($post_id, $post) {
-	if (in_array($post->post_type, array_merge(['si_person', 'si_conference'], SI_PEOPLE_REL_TYPES), true)) {
+	// 'post': articles reach a profile through their People field; wp_block: the invitation pattern
+	if (in_array($post->post_type, array_merge(['si_person', 'si_conference', 'post', 'wp_block'], SI_PEOPLE_REL_TYPES), true)) {
 		si_people_flush();
 	}
 }, 10, 2);
