@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>Footer F · The Quiet — Schiller Institute</title>
+<meta name="description" content="Site footer draft F: one line of Schiller with the air around it, a short index of the archive opposite, and a single rule carrying everything else.">
+<!--
+	DRAFT F · "The Quiet"  —  the site footer (Blocksy, all pages)
+	No portraits, no motion, almost no words: the aesthetic of the Envoi's opening
+	taken as the whole footer. The quote holds roughly half the width and leaves
+	the other half empty on purpose; the archive is stated as a contents page
+	opposite; everything else costs one rule. Its proportions are the argument.
+	blocksy-shim.css and proto.css do not ship.
+-->
+<link rel="preload" href="../people/design-system/fonts/source-serif-4-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../people/design-system/fonts.css">
+<link rel="stylesheet" href="../people/design-system/tokens.css">
+<link rel="stylesheet" href="../people/design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../people/design-system/components.css">
+<link rel="stylesheet" href="css/footer-shared.css">
+<link rel="stylesheet" href="css/quiet.css">
+<link rel="stylesheet" href="css/proto.css">
+<link rel="icon" href="../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header id="header" class="ct-header">
+	<div class="ct-container">
+		<a class="site-logo" href="/"><img src="../brand/assets/lockup/lockup-light@2x.png" alt="The International Schiller Institute" width="560" height="150"></a>
+		<nav aria-label="Primary"><ul>
+			<li><a href="/">News</a></li><li><a href="/conferences/">Conferences</a></li><li><a href="/people/">People</a></li><li><a href="/library/">Library</a></li><li><a href="/topic/classical-culture/">Culture</a></li><li><a href="/about/">About</a></li>
+		</ul></nav>
+		<div class="header-cta"><a class="si-link is-secondary" href="/join/">Join</a><a class="ct-button" href="/donate/">Donate</a></div>
+	</div>
+</header>
+
+<!-- ============================ page stub ============================ -->
+<main id="main" class="site-main si-page stub">
+	<div class="ct-container">
+		<p class="si-eyebrow si-eyebrow--ruled">The archive · Article</p>
+		<h1 class="si-display">A page ends here</h1>
+		<p class="si-lead">Everything above this line is a stand-in for whatever the visitor was actually reading. The draft begins at the footer.</p>
+		<p class="stub-note"><b>Second round.</b> Fewer words, one compact language control instead of eight chips, and proportions that give each band a different weight. This draft spends its budget on empty space.</p>
+	</div>
+</main>
+
+<!-- ============================ FOOTER F ============================= -->
+<footer id="si-footer" class="si-footer si-footer--quiet">
+
+	<div class="ct-container quiet-band">
+
+		<figure class="quiet__say">
+			<blockquote>Live with your epoch, but <em>be not its offspring</em>.</blockquote>
+			<figcaption class="quiet__cite">
+				<hr>
+				<p class="si-orig">„Lebe mit deinem Jahrhundert, aber sei nicht sein Geschöpf.“</p>
+				<p><b>Friedrich Schiller</b>, <a class="si-link" href="/library/aesthetic-education/">On the Aesthetic Education of Man</a>, Ninth Letter, 1795 — the sentence the Institute was founded on, in&nbsp;1984.</p>
+			</figcaption>
+		</figure>
+
+		<!-- A contents page, not a table: a label, a number, a hairline. -->
+		<nav class="quiet__index" aria-labelledby="quiet-idx">
+			<h2 class="si-foot-h" id="quiet-idx">The archive</h2>
+			<ul>
+				<li><a href="/">Articles <span class="si-n">2,393</span></a></li>
+				<li><a href="/videos/">Recordings <span class="si-n">1,222</span></a></li>
+				<li><a href="/media/">Conference talks <span class="si-n">822</span></a></li>
+				<li><a href="/people/">People <span class="si-n">722</span></a></li>
+				<li><a href="/coverage/">Press <span class="si-n">243</span></a></li>
+				<li><a href="/statements/">Statements <span class="si-n">198</span></a></li>
+				<li><a href="/conferences/">Conferences <span class="si-n">57</span></a></li>
+				<li><a href="/library/">Documents <span class="si-n">7</span></a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<div class="quiet__rule">
+		<div class="ct-container">
+			<img src="../brand/assets/lockup/lockup-dark@2x.png" alt="The International Schiller Institute" width="560" height="150">
+			<ul class="quiet__links">
+				<li><a href="/about/">About</a></li>
+				<li><a href="/conferences/">Conferences</a></li>
+				<li><a href="/contact/">Contact</a></li>
+				<li><a href="/join/">Join</a></li>
+				<li><a href="/donate/">Donate</a></li>
+			</ul>
+			<!--
+				One compact control instead of eight chips. Without JavaScript it is a plain
+				list of links — every language reachable, crawlable, translated. `langswitch.js`
+				folds that same list into the popup and adds the trigger, so nothing is lost
+				when the module fails to load.
+				In WordPress the <li>s come from the `wpml_active_languages` filter with
+				`skip_missing => 0`: a language with no translation of this page stays listed,
+				links to its own front page, and carries `data-missing` (README §5).
+			-->
+			<div class="si-lang si-lang--js" data-langswitch>
+				<h2 class="si-lang__label" id="lang-h">Language</h2>
+				<ul class="si-lang__list" aria-labelledby="lang-h">
+					<li><a href="/" hreflang="en" lang="en" aria-current="true"><span class="si-lang__native">English</span></a></li>
+					<li><a href="/de/" hreflang="de" lang="de"><span class="si-lang__native">Deutsch</span><span class="si-lang__en">German</span></a></li>
+					<li><a href="/fr/" hreflang="fr" lang="fr"><span class="si-lang__native">Français</span><span class="si-lang__en">French</span></a></li>
+					<li><a href="/ru/" hreflang="ru" lang="ru"><span class="si-lang__native">Русский</span><span class="si-lang__en">Russian</span></a></li>
+					<li><a href="/es/" hreflang="es" lang="es"><span class="si-lang__native">Español</span><span class="si-lang__en">Spanish</span></a></li>
+					<li><a href="/it/" hreflang="it" lang="it"><span class="si-lang__native">Italiano</span><span class="si-lang__en">Italian</span></a></li>
+					<li><a href="/el/" hreflang="el" lang="el" data-missing><span class="si-lang__native">Ελληνικά</span><span class="si-lang__en">Greek</span></a></li>
+					<li><a href="/zh-hans/" hreflang="zh-Hans" lang="zh-Hans" data-missing><span class="si-lang__native">中文</span><span class="si-lang__en">Chinese</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="si-colophon">
+		<div class="ct-container">
+			<p>© 1984–2026 <span class="si-ph" title="Placeholder: the registered legal name has not been supplied">Schiller-Institut e.V.</span> · Founded 1984 by Helga Zepp-LaRouche</p>
+			<ul>
+				<li><a href="/impressum/">Impressum</a></li>
+				<li><a href="/privacy/">Privacy</a></li>
+				<li><a href="/about/archive/">Sources</a></li>
+				<li><a href="/contact/#corrections">Corrections</a></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+
+<nav class="draft-strip" aria-label="Footer drafts">
+	<span>Round 2</span>
+	<a href="footer-rotunda.html">D · Rotunda</a>
+	<a href="footer-cabinet.html">E · Cabinet</a>
+	<a href="footer-quiet.html" aria-current="page">F · Quiet</a>
+	<a href="compare.html">Compare</a>
+</nav>
+
+<script type="module">
+	import { initLangSwitch } from './js/langswitch.js';
+	initLangSwitch();
+</script>
+</body>
+</html>

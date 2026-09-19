@@ -1,0 +1,149 @@
+/* ==========================================================================
+   A · THE COLONNADE — footer draft. Loads after footer-shared.css.
+
+   The idea: a portico of faces. Before any navigation, the footer shows twelve
+   of the people the archive holds, strung on a hairline like beads on a wire,
+   in colour the moment the pointer reaches one. The claim "418 people have
+   spoken here" is not asserted, it is shown — and every face is a door.
+
+   Structure:  portico → mission + four columns → the check rail → colophon
+   Brass appears once, under the portico's count.
+   ========================================================================== */
+
+/* ---- the portico ---------------------------------------------------------- */
+.si-portico { padding-block: var(--si-space-xl) var(--si-space-l); }
+.si-portico__head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: var(--si-space-2xs) var(--si-space-m);
+	margin-bottom: var(--si-space-m);
+}
+.si-portico__head .si-eyebrow { color: var(--si-muted); }
+.si-portico__head .si-eyebrow--ruled::before { background: var(--si-brass-on-night); }
+.si-portico__lead {
+	margin: 0;
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-2);
+	font-weight: 380;
+	line-height: 1.2;
+	color: var(--si-ink);
+	text-wrap: balance;
+}
+.si-portico__lead em { font-style: italic; font-weight: 300; }
+
+/* the wire the faces are strung on */
+.si-portico__row {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: clamp(10px, 1.6vw, 22px);
+	padding-block: var(--si-space-2xs);
+	/* 12 medallions overflow a phone: let them scroll rather than shrink to dots */
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+	scrollbar-width: none;
+	/* Fade the RIGHT edge only. A fade means "there is more this way", and the
+	   left edge is where the list starts — fading it both clipped the first
+	   medallion and, once the row was inset to make room, overflowed the
+	   viewport by 9px on a phone. One-sided, it needs no inset at all. */
+	-webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+	        mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+	/* The wire is a background, NOT an absolutely positioned child: inside a
+	   scroll container an abspos child scrolls away with the faces, whereas a
+	   background stays put (attachment `scroll` is relative to the border box,
+	   only `local` follows the content). The mask above fades it at both ends. */
+	background-image: linear-gradient(
+		to bottom,
+		transparent calc(50% - 0.5px),
+		var(--si-rule) calc(50% - 0.5px),
+		var(--si-rule) calc(50% + 0.5px),
+		transparent calc(50% + 0.5px));
+}
+.si-portico__row::-webkit-scrollbar { display: none; }
+
+.si-portico__figure {
+	position: relative;
+	flex: none;
+	display: block;
+	line-height: 0;
+	text-decoration: none;
+	transition: transform var(--si-dur-2) var(--si-ease);
+}
+/* the ring's inner gap must be the GROUND, not the card, or each circle shows a
+   faint square-ish halo where it crosses the wire */
+.si-portico__figure .si-medallion { --si-card: var(--si-night); }
+.si-portico__figure:hover,
+.si-portico__figure:focus-visible { transform: translateY(-3px); }
+.si-portico__figure:hover .si-medallion,
+.si-portico__figure:focus-visible .si-medallion {
+	box-shadow: 0 0 0 1px var(--si-night), 0 0 0 2px var(--si-brass-on-night), var(--si-shadow-2);
+}
+
+.si-portico__foot {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--si-space-2xs) var(--si-space-s);
+	margin-top: var(--si-space-s);
+}
+/* the one brass rule of this footer */
+.si-portico__foot .si-footer__brass { width: 2.4rem; }
+.si-portico__count { margin: 0; color: var(--si-muted); }
+.si-portico__count b {
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-1);
+	font-weight: 400;
+	font-variant-numeric: lining-nums tabular-nums;
+	color: var(--si-ink);
+}
+.si-portico__more { margin-left: auto; }
+
+/* ---- mission + columns ---------------------------------------------------- */
+.si-colonnade__main {
+	display: grid;
+	grid-template-columns: minmax(16rem, 23rem) 1fr;
+	gap: var(--si-space-xl) var(--si-space-2xl);
+	padding-block: var(--si-space-l) var(--si-space-xl);
+	border-top: 1px solid var(--si-rule);
+}
+.si-colonnade__cta { display: flex; flex-wrap: wrap; gap: var(--si-space-2xs) var(--si-space-s); align-items: center; }
+.si-colonnade__cta .ct-button { min-height: 38px; padding: 0 18px; }
+
+.si-colonnade__nav {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: var(--si-space-m) var(--si-space-l);
+}
+
+/* ---- the check rail ------------------------------------------------------- */
+/* Deliberately its own band: a reader who mistrusts the Institute should find
+   the "how do I check this" block without reading the navigation first. */
+.si-colonnade__check {
+	background: var(--si-night-2);
+	border-top: 1px solid var(--si-rule);
+	padding-block: var(--si-space-l);
+}
+.si-colonnade__check .ct-container {
+	display: grid;
+	grid-template-columns: minmax(16rem, 23rem) 1fr;
+	gap: var(--si-space-l) var(--si-space-2xl);
+	align-items: start;
+}
+.si-colonnade__check .si-verify ul {
+	grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+	gap: var(--si-space-m) var(--si-space-l);
+}
+.si-colonnade__check .si-foot-h { margin-bottom: var(--si-space-2xs); }
+.si-colonnade__intro { margin: 0 0 var(--si-space-s); color: var(--si-text); max-width: 34ch; }
+
+/* ---- responsive ----------------------------------------------------------- */
+@media (max-width: 999.98px) {
+	.si-colonnade__main,
+	.si-colonnade__check .ct-container { grid-template-columns: 1fr; }
+	.si-colonnade__nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 519.98px) {
+	.si-colonnade__nav { grid-template-columns: 1fr; gap: var(--si-space-s); }
+	.si-portico__more { margin-left: 0; width: 100%; }
+}
