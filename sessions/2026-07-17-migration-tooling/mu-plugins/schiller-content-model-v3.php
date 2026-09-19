@@ -32,7 +32,8 @@ defined('ABSPATH') || exit;
 
 final class SI_Model {
 
-    const VERSION = '3.2.0';            // 3.2.0: Article byline + byline_text (post Pod).
+    const VERSION = '3.2.1';            // 3.2.1: photo_focus is an editable Person field.
+                                        // 3.2.0: Article byline + byline_text (post Pod).
                                         // bump to re-run term seeding (3.1.0: hierarchical
                                         // UI flip + closed-vocabulary caps + name self-heal;
                                         // 3.1.1: make that self-heal actually reachable —
@@ -504,6 +505,12 @@ final class SI_Model {
                     // unless photo_license is non-blank.
                     ['name' => 'photo_credit',     'label' => 'Photo credit',     'type' => 'text'],
                     ['name' => 'photo_source_url', 'label' => 'Photo source URL', 'type' => 'website'],
+                    // Where the face sits in the photo: "centre x %, centre y %, face height
+                    // as a share of the photo" — e.g. "54.5,43.2,0.373". Written by
+                    // tools/import-photo-focus.php from the detector; editable here because
+                    // a detector cannot see that a crop cuts someone off, and a hand
+                    // correction is never overwritten. Blank = a plain centred crop.
+                    ['name' => 'photo_focus',      'label' => 'Face position in the photo (x, y, size)', 'type' => 'text'],
                     ['name' => 'photo_license',    'label' => 'Photo licence'] + $select(
                         "si-own|Schiller Institute own photography\n" .
                         "si-video-still|Still from a Schiller Institute recording\n" .

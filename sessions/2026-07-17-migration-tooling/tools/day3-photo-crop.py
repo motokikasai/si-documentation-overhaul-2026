@@ -129,6 +129,10 @@ def main():
     ap.add_argument('--limit', type=int)
     ap.add_argument('--force', action='store_true')
     ap.add_argument('--sheet-only', action='store_true')
+    ap.add_argument('--focus-csv', metavar='PATH',
+                    help='merge the face position of every CHOSEN crop into that photo-focus.csv '
+                         '(person_key,"fx,fy,fs") — the profile and /people/ crop around it, so a '
+                         'pre-cropped portrait frames itself instead of taking the generic zoom')
     args = ap.parse_args()
 
     rows = list(csv.DictReader(open(CSV_PATH, newline='', encoding='utf-8')))
@@ -198,6 +202,10 @@ def main():
             w.writeheader()
             w.writerows(rows)
 
+    if args.focus_csv:
+        write_focus(rows, args.focus_csv)
+        return
+
     write_sheet([r for r in rows if r.get('slot_source') == 'segment'])
     scanned = [r for r in rows if r.get('crop_note') is not None and (r.get('proposed_frame') or r.get('crop_note'))]
     usable = [r for r in rows if r.get('slot_source') == 'segment']
@@ -207,6 +215,51 @@ def main():
           f'{len(withface)} with a proposed portrait ({len(small)} from a small face, <12% of frame height) · '
           f'{len(rows) - len(usable)} skipped as agenda-only (whole-session timestamps)')
     print(f'review: {os.path.relpath(SHEET, SESSION)}')
+
+
+def write_focus(rows, path):
+    """Face position of each chosen crop, merged into photo-focus.csv (never overwrites)."""
+    try:
+        import cv2
+    except ImportError:
+        raise SystemExit('needs opencv-python-headless 4.x on PYTHONPATH')
+    dets = detectors(cv2)
+    existing, order = {}, []
+    if os.path.exists(path):
+        with open(path, newline='', encoding='utf-8') as fh:
+            for r in csv.DictReader(fh):
+                existing[r['person_key']] = r['photo_focus']
+                order.append(r['person_key'])
+    added = kept = nofocus = 0
+    for row in rows:
+        chosen = (row.get('chosen_frame') or '').strip()
+        key = row['person_key']
+        if not chosen:
+            continue
+        if key in existing:                       # a library photo's position, or a hand correction
+            kept += 1
+            continue
+        img = cv2.imread(os.path.join(CROPS, chosen), cv2.IMREAD_GRAYSCALE)
+        if img is None:
+            continue
+        h, w = img.shape
+        face = best_face(cv2, dets, img)
+        if not face:
+            nofocus += 1
+            continue
+        # same convention as build-people-data.py: centre x, a touch below the eye line, face height share
+        fx = round((face['x'] + face['w'] / 2) / w * 100, 1)
+        fy = round((face['y'] + face['h'] * 0.58) / h * 100, 1)
+        existing[key] = f"{fx},{fy},{round(face['h'] / h, 3)}"
+        order.append(key)
+        added += 1
+    with open(path, 'w', newline='', encoding='utf-8') as fh:
+        wr = csv.writer(fh)
+        wr.writerow(['person_key', 'photo_focus'])
+        for k in order:
+            wr.writerow([k, existing[k]])
+    print(f'{added} crop positions added · {kept} already in the file · {nofocus} with no face found')
+    print(f'written: {path}')
 
 
 def write_sheet(rows):
