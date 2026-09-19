@@ -153,7 +153,7 @@ export const thn = (key, n, wrap, ...args) => fill(pick(key, n), [wrap(num(n)), 
  *  covered. `fill` = share of the frame's height the face should occupy;
  *  `boxAR` = frame width / height (1 for medallions, 0.8 for 4:5 plates).
  *  Mirrors si_people_focus_style() in the PHP payload. */
-export function focusStyle(ph, fill = 0.42, boxAR = 1) {
+export function focusStyle(ph, fill = 0.42, boxAR = 1, zoom = 1.15) {
 	const ar = ph.w / ph.h;
 	const bw = 1, bh = 1 / boxAR;                       // frame, in frame-widths
 	const hasFocus = ph.fs != null;
@@ -162,7 +162,7 @@ export function focusStyle(ph, fill = 0.42, boxAR = 1) {
 	const hMin = Math.max(bh, bw / ar);                 // image height that just covers
 	const h = hasFocus
 		? Math.min(hMin * 3.2, Math.max(hMin, fill * bh / ph.fs))
-		: hMin * 1.15;
+		: hMin * zoom;   // no detected face: see si_people_focus_style()
 	const w = h * ar;
 	const left = Math.min(0, Math.max(bw - w, bw / 2 - fx * w));
 	const top = Math.min(0, Math.max(bh - h, bh / 2 - fy * h));

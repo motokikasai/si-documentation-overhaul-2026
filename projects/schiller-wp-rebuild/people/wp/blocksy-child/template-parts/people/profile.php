@@ -90,7 +90,7 @@ $eyebrow = implode(' · ', array_filter([$p['archetype'], $p['country'], $since]
 			<figure class="pa-hero__portrait si-reveal">
 				<?php $hero_photo = $p['photo_large'] ?: $p['photo']; ?>
 				<?php if ($hero_photo): ?>
-					<span class="si-plate" style="aspect-ratio:0.8"><img class="si-medallion__img is-loaded" data-focus src="<?php echo esc_url($hero_photo['src']); ?>" alt="<?php echo esc_attr($p['name']); ?>" width="<?php echo (int) $hero_photo['w']; ?>" height="<?php echo (int) $hero_photo['h']; ?>" style="<?php echo esc_attr(si_people_focus_style($hero_photo, 0.62, 0.8)); ?>" fetchpriority="high"></span>
+					<span class="si-plate" style="aspect-ratio:0.8"><img class="si-medallion__img is-loaded" data-focus src="<?php echo esc_url($hero_photo['src']); ?>" alt="<?php echo esc_attr($p['name']); ?>" width="<?php echo (int) $hero_photo['w']; ?>" height="<?php echo (int) $hero_photo['h']; ?>" style="<?php echo esc_attr(si_people_focus_style($hero_photo, 0.62, 0.8, 1.0)); ?>" fetchpriority="high"></span>
 					<figcaption class="si-meta"><?php
 						/* translators: %s: photographer or source */
 						printf(esc_html__('Photograph: %s', 'si'), $e($p['credit'] ?: __('Schiller Institute', 'si')));

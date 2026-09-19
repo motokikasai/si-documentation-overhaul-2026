@@ -205,7 +205,7 @@ function si_people_photo(int $id, string $size = 'medium_large'): ?array {
  * PHP twin of focusStyle() in people-core.js — for server-rendered portraits
  * (profile pages, the no-JS list). Keep the two in step.
  */
-function si_people_focus_style(array $ph, float $fill = 0.42, float $box_ar = 1.0): string {
+function si_people_focus_style(array $ph, float $fill = 0.42, float $box_ar = 1.0, float $zoom = 1.15): string {
 	$ar = $ph['w'] / max(1, $ph['h']);
 	$bw = 1.0;
 	$bh = 1 / $box_ar;
@@ -213,7 +213,9 @@ function si_people_focus_style(array $ph, float $fill = 0.42, float $box_ar = 1.
 	$fx = ($has ? $ph['fx'] : 50) / 100;
 	$fy = ($has ? $ph['fy'] : 34) / 100;
 	$h_min = max($bh, $bw / $ar);
-	$h = $has ? min($h_min * 3.2, max($h_min, $fill * $bh / $ph['fs'])) : $h_min * 1.15;
+	// no detected face: $zoom past a plain cover-crop (1.15 suits wide podium shots in small medallions; a large
+	// hero portrait passes 1.0 so a close-up is never cut at the chin)
+	$h = $has ? min($h_min * 3.2, max($h_min, $fill * $bh / $ph['fs'])) : $h_min * $zoom;
 	$w = $h * $ar;
 	$left = min(0, max($bw - $w, $bw / 2 - $fx * $w));
 	$top = min(0, max($bh - $h, $bh / 2 - $fy * $h));

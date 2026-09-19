@@ -229,8 +229,8 @@ function si_profile_status_box(WP_Post $post): void {
 	$d = si_profile_build($post->ID);   // uncached: editors see the effect of their last save
 	$f = $d['figures'];
 	$yes = static fn($ok, $text, $fix = '') => sprintf(
-		'<li class="%s"><span class="dashicons dashicons-%s" aria-hidden="true"></span> %s%s</li>',
-		$ok ? 'is-ok' : 'is-gap', $ok ? 'yes-alt' : 'marker', esc_html($text), (!$ok && $fix) ? ' <span class="si-st__fix">' . $fix . '</span>' : ''
+		'<li class="%s"><span class="dashicons dashicons-%s" aria-hidden="true"></span><span class="si-st__text">%s%s</span></li>',
+		$ok ? 'is-ok' : 'is-gap', $ok ? 'yes-alt' : 'marker', esc_html($text), (!$ok && $fix) ? '<span class="si-st__fix">' . $fix . '</span>' : ''
 	);
 	$new_talk = admin_url('post-new.php?post_type=si_presentation');
 	$guide = admin_url('edit.php?post_type=si_person&page=si-profile-guide');
@@ -257,11 +257,12 @@ function si_profile_status_box(WP_Post $post): void {
 	?>
 	<style>
 		.si-st { margin: 0; }
-		.si-st li { display: flex; gap: 6px; align-items: baseline; margin: 0 0 6px; }
+		.si-st li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 6px; align-items: start; margin: 0 0 8px; }
+		.si-st__text { display: grid; gap: 1px; line-height: 1.4; }
 		.si-st .is-ok .dashicons { color: #1f7a3d; }
 		.si-st .is-gap { color: #50575e; }
 		.si-st .is-gap .dashicons { color: #a08040; }
-		.si-st__fix { margin-left: auto; font-size: 12px; white-space: nowrap; }
+		.si-st__fix { font-size: 12px; color: #646970; }
 	</style>
 	<?php
 }

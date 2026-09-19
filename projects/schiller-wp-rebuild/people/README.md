@@ -317,6 +317,10 @@ caches it per language, with a generation counter bumped on any related save.
 
 ### Before this goes live
 
+- **`photo_focus` (2026-09-19):** `wp/tools/import-photo-focus.php` writes the 94 detected face
+  positions (`wp/tools/photo-focus.csv`) onto si-v4's people (report / `apply`; never overwrites a set value).
+  Without a position the hero now uses a plain cover-crop (`si_people_focus_style(…, zoom: 1.0)`), not the
+  15% podium zoom that cut close-ups at the chin.
 - **`photo_focus` is not a Pod field yet.** Add `photo_focus` (text, `"fx,fy,fs"`) to
   `si_person` and have the importer write the values from `data/people.json`. Without it,
   every portrait uses the default podium crop.

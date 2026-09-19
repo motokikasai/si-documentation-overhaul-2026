@@ -12,7 +12,7 @@ mkdir -p "$dest/assets/jasper/fonts" "$dest/assets/people/css" "$dest/assets/peo
 
 cp "$here"/wp/blocksy-child/functions.php "$here"/wp/blocksy-child/theme.json "$dest/"
 cp -r "$here"/wp/blocksy-child/inc "$here"/wp/blocksy-child/template-parts "$here"/wp/blocksy-child/languages "$dest/"
-cp "$here"/wp/tools/apply-design-system.php "$dest/tools/"
+cp "$here"/wp/tools/apply-design-system.php "$here"/wp/tools/import-photo-focus.php "$here"/wp/tools/photo-focus.csv "$dest/tools/"
 
 cp "$here"/design-system/{fonts.css,tokens.css,components.css} "$dest/assets/jasper/"
 cp "$here"/design-system/fonts/* "$dest/assets/jasper/fonts/"
