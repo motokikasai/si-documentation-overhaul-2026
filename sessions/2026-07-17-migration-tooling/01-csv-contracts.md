@@ -163,6 +163,12 @@ not articles). 2,463 articles scanned → 155 rows, 34 distinct names, 98 German
 | `final_action` | ✔ to apply | **the gate.** `accept` · `fix:<person_key>` · `new-person` · `text-only` · `skip`. Blank is never "accept" |
 | `reviewer` / `notes` | | |
 
+Review flow: `python3 tools/day3-byline-sheet.py` → open `byline-review.html` (155 articles
+grouped under their 34 names, because "Daniel Platt wrote these 20 pieces" is one judgement,
+not twenty; a single article can still be overridden on its own row) → *Copy decisions* →
+paste into `decisions-bylines.txt` → `python3 tools/day3-apply-bylines.py
+incoming/post-byline.csv decisions-bylines.txt`.
+
 Both targets exist in the model as of `SI_Model` **3.2.0**: an Article Pod with `byline`
 (rel→`si_person`, multi) and `byline_text` (a name we deliberately do not make a Person —
 a one-off guest, or an organisation). The relationship wins when both are set.
