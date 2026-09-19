@@ -443,12 +443,19 @@ final class SI_Model {
     /** Field vocabulary: text · paragraph · wysiwyg · number · date · file · website ·
      *  boolean · pick(post_type) · pick(custom-simple). Meta keys = field names (storage=meta). */
     private static function pods_definitions(): array {
+        // Relationship UI is pinned, not left to Pods' defaults: with 418 People the
+        // "Checkboxes"/"Multi Select" formats load every record into the edit screen (Pods
+        // warns about this itself). `list` searches as you type AND keeps the chosen order,
+        // which a byline needs — the first author must stay first. Single picks stay a
+        // searchable dropdown.
         $pick = static fn(string $target, bool $multi = true) => [
             'type'             => 'pick',
             'pick_object'      => 'post_type',
             'pick_val'         => $target,
             'pick_format_type' => $multi ? 'multi' : 'single',
-        ];
+        ] + ($multi
+            ? ['pick_format_multi' => 'list', 'pick_limit' => 0]
+            : ['pick_format_single' => 'autocomplete']);
         $select = static fn(string $options) => [
             'type'             => 'pick',
             'pick_object'      => 'custom-simple',
