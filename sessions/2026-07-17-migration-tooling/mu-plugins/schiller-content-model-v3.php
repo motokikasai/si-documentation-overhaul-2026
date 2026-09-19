@@ -458,14 +458,14 @@ final class SI_Model {
 
         return [
             // Articles are native `post`. The model's Person ──byline──> Article edge lives
-            // here; `byline_text` carries a name we deliberately do NOT make a Person —
+            // here. `written_by_name` carries a name we deliberately do NOT make a Person —
             // a one-off guest writer, or an organisation ("EIR", "EIR Staff"). Exactly one
-            // of the two is used per article; the byline relationship wins when both exist.
+            // of the two is used per article; the relationship wins when both are set.
             'post' => [
                 'label'  => 'Article',
                 'fields' => [
-                    ['name' => 'byline',      'label' => 'Byline (People)'] + $pick('si_person'),
-                    ['name' => 'byline_text', 'label' => 'Byline (text, when not a Person)', 'type' => 'text'],
+                    ['name' => 'written_by',      'label' => 'Written by'] + $pick('si_person'),
+                    ['name' => 'written_by_name', 'label' => 'Written by (name only, not in People)', 'type' => 'text'],
                 ],
             ],
             'si_person' => [

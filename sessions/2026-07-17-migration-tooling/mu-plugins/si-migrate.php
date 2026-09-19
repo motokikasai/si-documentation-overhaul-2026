@@ -85,6 +85,32 @@ final class SI_Text {
      * NOTE: "Von"/"par" are the only slightly risky tokens (a surname could start with "Von");
      * in this dataset every "Von X"/"par X" is the German/French "by X". Revisit if that changes.
      */
+    /**
+     * "Alexander Hartmann" → "Hartmann, Alexander" — the surname-first key the People
+     * register sorts on. Particles travel with the surname ("von Sponeck, Hans-Christof"),
+     * suffixes stay at the end ("LaRouche, Lyndon H., Jr.").
+     *
+     * It assumes Western given-name-first order, because nothing in a Latin-script string
+     * says otherwise: "Shi Ze" comes out "Ze, Shi", which is wrong. A name that already
+     * contains a comma is taken to be surname-first already and left alone. Correct the
+     * rest by hand on the Person — sort_name exists so order can be stated, not guessed.
+     */
+    public static function sort_name(string $name): string {
+        $s = self::clean_display_name($name);
+        if (str_contains($s, ',')) { return $s; }
+        $parts = preg_split('/\s+/u', trim($s)) ?: [];
+        if (count($parts) < 2) { return $s; }
+        $suffixes = ['jr.', 'jr', 'sr.', 'sr', 'ii', 'iii', 'iv'];
+        $tail = '';
+        if (in_array(mb_strtolower(end($parts)), $suffixes, true)) { $tail = ', ' . array_pop($parts); }
+        $last = array_pop($parts);
+        $particles = ['von', 'van', 'de', 'der', 'den', 'da', 'di', 'del', 'la', 'le', 'al', 'el', 'bin', 'ibn', 'zu'];
+        while ($parts && in_array(mb_strtolower(end($parts)), $particles, true)) {
+            $last = array_pop($parts) . ' ' . $last;
+        }
+        return $parts ? $last . ', ' . implode(' ', $parts) . $tail : $s;
+    }
+
     public static function clean_display_name(string $raw): string {
         $s = self::normalize($raw);
         $s = preg_replace(
@@ -713,6 +739,29 @@ final class SI_WPML {
         ));
         $ids = array_map('intval', $ids ?: []);
         if (!in_array($ttid, $ids, true)) { $ids[] = $ttid; }
+        return $ids;
+    }
+
+    /**
+     * Every post in a translation group, including the one asked for.
+     *
+     * A byline is the same fact in every language, so it is written to the whole group —
+     * wpml-config declares it `copy`, but that only covers translations made AFTER the
+     * write. Returns just the post when WPML is off or the post is untranslated.
+     */
+    public static function post_group(int $post_id, string $post_type = 'post'): array {
+        global $wpdb;
+        if (!self::active()) { return [$post_id]; }
+        $trid = $wpdb->get_var($wpdb->prepare(
+            'SELECT trid FROM ' . self::table() . ' WHERE element_id = %d AND element_type = %s',
+            $post_id, "post_$post_type"
+        ));
+        if (!$trid) { return [$post_id]; }
+        $ids = array_map('intval', $wpdb->get_col($wpdb->prepare(
+            'SELECT element_id FROM ' . self::table() . ' WHERE trid = %d AND element_type = %s',
+            $trid, "post_$post_type"
+        )) ?: []);
+        if (!in_array($post_id, $ids, true)) { $ids[] = $post_id; }
         return $ids;
     }
 }
@@ -1412,6 +1461,129 @@ final class SI_Migrate_Command {
         ]);
     }
 
+    /**
+     * si:bylines — link each article to the person who wrote it.
+     *
+     * Reads post-byline.csv, where `final_action` is the gate a human filled from
+     * byline-review.html (day3-post-bylines.py found the evidence; it never decides):
+     *   accept       link the people named in the byline
+     *   new-person   create the ones we do not have yet, then link them all
+     *   text-only    write the name only — a one-off guest, or an organisation
+     *   skip/blank   leave the article alone
+     *
+     * A joint byline is resolved name by name, so "Christine Bierre and Alexander Hartmann"
+     * links both once Hartmann exists — which he does after the new-person rows are created,
+     * hence the two passes. Writes to every translation of the article (the byline is the
+     * same fact in German), and is idempotent: a second run reports 0 changed.
+     *
+     *   wp si:bylines --dry-run
+     *   wp si:bylines
+     *   wp si:bylines --csv=incoming/post-byline.csv --limit=20
+     */
+    public function bylines($args, $assoc): void {
+        $this->start($assoc, 'bylines');
+        $rows = SI_Csv::read($assoc['csv'] ?? 'incoming/post-byline.csv');
+
+        $created = $linked = $texted = $unchanged = $skipped = $missing = 0;
+        $unresolved = [];
+
+        // pass 1 — the people the reviewer asked for. A name only becomes a Person here,
+        // never from `accept`: that is the whole point of the two vocabularies.
+        foreach ($rows as $row) {
+            if (trim($row['final_action'] ?? '') !== 'new-person') { continue; }
+            foreach ($this->byline_names($row) as $name) {
+                $key = SI_Person_Key::key($name);
+                if ($key === '' || $this->person_post_id($key)) { continue; }
+                if ($this->dry) { $created++; continue; }
+                $id = wp_insert_post(['post_type' => 'si_person', 'post_status' => 'publish',
+                    'post_title' => SI_Text::clean_display_name($name), 'post_name' => $key]);
+                if (is_wp_error($id)) { $this->log("FAIL person $key: " . $id->get_error_message()); continue; }
+                update_post_meta($id, '_person_key', $key);
+                update_post_meta($id, '_si_person_source', 'byline');   // provenance: no talk, no photo — an author
+                SI_WPML::ensure_language((int) $id, 'si_person');
+                SI_Fields::save('si_person', (int) $id, [
+                    'sort_name'   => SI_Text::sort_name($name),
+                    'person_type' => ['author'],
+                ]);
+                $this->person_post_id_forget($key);
+                $created++;
+            }
+        }
+
+        // pass 2 — the articles
+        $n = 0;
+        foreach ($rows as $row) {
+            $action = trim($row['final_action'] ?? '');
+            if (!in_array($action, ['accept', 'new-person', 'text-only'], true)) { $skipped++; continue; }
+            if (isset($assoc['limit']) && $n >= (int) $assoc['limit']) { break; }
+            $n++;
+
+            $post_id = $this->article_post_id($row['legacy_id'] ?? '');
+            if (!$post_id) { $this->log('  article not found: ' . ($row['legacy_id'] ?? '?')); $missing++; continue; }
+
+            $names = $this->byline_names($row);
+            $ids = [];
+            foreach ($names as $name) {
+                $key = SI_Person_Key::key($name);
+                $pid = $key !== '' ? $this->person_post_id($key) : null;
+                if ($pid) { $ids[] = $pid; } elseif ($action !== 'text-only') { $unresolved[$name] = ($unresolved[$name] ?? 0) + 1; }
+            }
+
+            $group = SI_WPML::post_group($post_id, 'post');
+            $changed = false;
+            foreach ($group as $target) {
+                if ($action === 'text-only' || !$ids) {
+                    $text = trim($row['byline_raw'] ?? '');
+                    if ((string) get_post_meta($target, 'written_by_name', true) === $text) { continue; }
+                    $changed = true;
+                    if (!$this->dry) { SI_Fields::save('post', $target, ['written_by_name' => $text]); }
+                    continue;
+                }
+                $now = array_map('intval', (array) get_post_meta($target, 'written_by', false));
+                sort($now);
+                $want = $ids; sort($want);
+                if ($now === $want) { continue; }
+                $changed = true;
+                if (!$this->dry) { SI_Fields::save('post', $target, ['written_by' => $ids]); }
+            }
+            if (!$changed) { $unchanged++; continue; }
+            if ($action === 'text-only' || !$ids) { $texted++; } else { $linked++; }
+        }
+
+        if ($unresolved) {
+            $this->log('  names on accepted bylines with no Person (left to the name field): '
+                . implode(', ', array_map(fn($k, $v) => "$k ×$v", array_keys($unresolved), $unresolved)));
+        }
+        $this->done([
+            'people_created'    => $created,
+            'articles_linked'   => $linked,
+            'articles_texted'   => $texted,
+            'already_correct'   => $unchanged,
+            'article_not_found' => $missing,
+            'rows_skipped'      => $skipped,
+            'unresolved_names'  => count($unresolved),
+        ]);
+    }
+
+    /** The byline as separate names ("A and B" → [A, B]); the CSV joins them with " and ". */
+    private function byline_names(array $row): array {
+        $raw = trim($row['byline_raw'] ?? '');
+        if ($raw === '') { return []; }
+        $parts = preg_split('/\s+(?:and|und|et|y|&)\s+/iu', $raw) ?: [$raw];
+        return array_values(array_filter(array_map('trim', $parts)));
+    }
+
+    /** The article this row is about: by _legacy_id, else the post of that ID. */
+    private function article_post_id(string $legacy_id): ?int {
+        $legacy_id = trim($legacy_id);
+        if ($legacy_id === '') { return null; }
+        $found = get_posts(['post_type' => 'post', 'meta_key' => '_legacy_id', 'meta_value' => $legacy_id,
+            'posts_per_page' => 1, 'fields' => 'ids', 'post_status' => 'any']);
+        if ($found) { return (int) $found[0]; }
+        $post = get_post((int) $legacy_id);
+        return ($post && $post->post_type === 'post') ? (int) $post->ID : null;
+    }
+
     /** Local file or remote URL → a real attachment attached to $post_id. */
     private function sideload(string $origin, int $post_id, string $source, array $row): ?int {
         $tmp = null;
@@ -1594,8 +1766,16 @@ final class SI_Migrate_Command {
         return $lookup;
     }
 
+    private array $person_id_cache_bust = [];
+
+    /** Forget a cached miss after creating that person (pass 1 → pass 2 in si:bylines). */
+    private function person_post_id_forget(string $key): void {
+        $this->person_id_cache_bust[$key] = true;
+    }
+
     private function person_post_id(string $key): ?int {
         static $cache = [];
+        if (isset($this->person_id_cache_bust[$key])) { unset($cache[$key], $this->person_id_cache_bust[$key]); }
         if (!isset($cache[$key])) {
             $found = get_posts(['post_type' => 'si_person', 'meta_key' => '_person_key', 'meta_value' => $key,
                 'posts_per_page' => 1, 'fields' => 'ids', 'post_status' => 'any']);
@@ -2696,7 +2876,7 @@ foreach (['classify', 'persons', 'transform', 'shortcodes', 'media', 'categories
           'yt-dump' => 'yt_dump', 'yt-playlists' => 'yt_playlists', 'yt-conferences' => 'yt_conferences',
           'yt-scan' => 'yt_scan', 'conferences', 'presentations', 'transcripts', 'photos',
           'attached-files' => 'attached_files',
-          'photo-import' => 'photo_import'] as $alias => $method) {
+          'photo-import' => 'photo_import', 'bylines'] as $alias => $method) {
     if (is_int($alias)) { $alias = $method; }
     WP_CLI::add_command("si:$alias", [new SI_Migrate_Command(), str_replace('-', '_', $method)]);
 }

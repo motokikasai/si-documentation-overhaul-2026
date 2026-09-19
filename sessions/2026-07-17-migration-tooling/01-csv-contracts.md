@@ -155,7 +155,7 @@ not articles). 2,463 articles scanned → 155 rows, 34 distinct names, 98 German
 | `articles_by_this_name` | | how often this name signs an article — drives the proposal |
 | `match` | ✔ | `built` (a Person the importer creates) · `person-map` (a row that exists but is not built) · `partial` (joint byline, only one known) · `none` |
 | `proposed_person_key` | | pipe-separated `person_key`s for the matched names |
-| `proposed_action` | | `accept` (89) · `new-person` (43, a name with ≥3 articles: Daniel Platt 20, Kevin Gribbroek 14, Alexander Hartmann 9) · `text-only` (19, one-off names and organisations such as "EIR Staff") · blank for `partial`, where a human must choose |
+| `proposed_action` | | `accept` (89) · `new-person` (43, a name with ≥3 articles: Daniel Platt 20, Kevin Gribbroek 14, Alexander Hartmann 9) · `text-only` (19, one-off names and organisations such as "EIR Staff" → `written_by_name`) · blank for `partial`, where a human must choose |
 | `confidence` | | `high` · `medium` · `low` |
 | `person_hints` / `wp_author_id` | | context only. The hints are names *mentioned* in the body; the WP account is who posted, not who wrote (`madeleine` 659, `tobi` 505 are editorial logins) |
 | `snippet` | | first 200 characters, so a row can be judged without opening the post |
@@ -169,9 +169,16 @@ not twenty; a single article can still be overridden on its own row) → *Copy d
 paste into `decisions-bylines.txt` → `python3 tools/day3-apply-bylines.py
 incoming/post-byline.csv decisions-bylines.txt`.
 
-Both targets exist in the model as of `SI_Model` **3.2.0**: an Article Pod with `byline`
-(rel→`si_person`, multi) and `byline_text` (a name we deliberately do not make a Person —
-a one-off guest, or an organisation). The relationship wins when both are set.
+Both targets exist in the model as of `SI_Model` **3.2.0**: an Article Pod with
+**Written by** (`written_by`, rel→`si_person`, multi) and **Written by (name only, not in
+People)** (`written_by_name`) — a name we deliberately do not make a Person: a one-off guest,
+or an organisation. The relationship wins when both are set, and `wpml-config.xml` copies
+both to translations.
+
+`wp si:bylines` applies the reviewed CSV: it creates the `new-person` records first
+(`person_type=author`, `_si_person_source=byline`), then resolves every name on every row
+— so a joint byline links both authors once the new one exists — and writes to all
+translations of the article. Idempotent; `--dry-run` and `--limit` supported.
 
 ## 3. `video-segmentation.csv` — one row per proposed Presentation (consumed by `si:presentations --source=yt`)
 

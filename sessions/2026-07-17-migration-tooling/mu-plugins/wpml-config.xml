@@ -30,6 +30,8 @@
     <custom-field action="copy">authors</custom-field>
     <custom-field action="copy">signatories_internal</custom-field>
     <custom-field action="copy">featured_people</custom-field>
+    <custom-field action="copy">written_by</custom-field>
+    <custom-field action="copy">written_by_name</custom-field>
     <custom-field action="copy">start_date</custom-field>
     <custom-field action="copy">end_date</custom-field>
     <custom-field action="copy">featured_video</custom-field>
