@@ -16,10 +16,12 @@
 
 defined('ABSPATH') || exit;
 
-const SI_PEOPLE_PAYLOAD_VERSION = 4;   // bump when the payload's shape or content rules change
+const SI_PEOPLE_PAYLOAD_VERSION = 5;   // bump when the payload's shape or content rules change
 
-const SI_PEOPLE_REL_KEYS = ['presenters', 'hosts', 'authors', 'signatories_internal', 'featured_people'];
-const SI_PEOPLE_REL_TYPES = ['si_presentation', 'si_video', 'si_document', 'si_statement', 'si_coverage'];
+// `written_by` on a native post is the Article byline (si:bylines) — an article is an
+// appearance like a talk or a signature, so it counts here too.
+const SI_PEOPLE_REL_KEYS = ['presenters', 'hosts', 'authors', 'signatories_internal', 'featured_people', 'written_by'];
+const SI_PEOPLE_REL_TYPES = ['si_presentation', 'si_video', 'si_document', 'si_statement', 'si_coverage', 'post'];
 
 /** Keyed by language and by a generation counter: bumping the counter retires every
  *  language's copy at once, whether transients live in wp_options or an object cache. */

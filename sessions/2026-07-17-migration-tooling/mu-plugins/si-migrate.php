@@ -1486,6 +1486,7 @@ final class SI_Migrate_Command {
 
         $created = $linked = $texted = $unchanged = $skipped = $missing = 0;
         $unresolved = [];
+        $planned = [];      // person_key => true: created in pass 1, or would be in a dry run
 
         // pass 1 — the people the reviewer asked for. A name only becomes a Person here,
         // never from `accept`: that is the whole point of the two vocabularies.
@@ -1493,7 +1494,8 @@ final class SI_Migrate_Command {
             if (trim($row['final_action'] ?? '') !== 'new-person') { continue; }
             foreach ($this->byline_names($row) as $name) {
                 $key = SI_Person_Key::key($name);
-                if ($key === '' || $this->person_post_id($key)) { continue; }
+                if ($key === '' || $this->person_post_id($key) || isset($planned[$key])) { continue; }
+                $planned[$key] = true;   // one person, however many articles they signed
                 if ($this->dry) { $created++; continue; }
                 $id = wp_insert_post(['post_type' => 'si_person', 'post_status' => 'publish',
                     'post_title' => SI_Text::clean_display_name($name), 'post_name' => $key]);
@@ -1522,17 +1524,28 @@ final class SI_Migrate_Command {
             if (!$post_id) { $this->log('  article not found: ' . ($row['legacy_id'] ?? '?')); $missing++; continue; }
 
             $names = $this->byline_names($row);
-            $ids = [];
+            $ids = $pending = [];
             foreach ($names as $name) {
                 $key = SI_Person_Key::key($name);
                 $pid = $key !== '' ? $this->person_post_id($key) : null;
-                if ($pid) { $ids[] = $pid; } elseif ($action !== 'text-only') { $unresolved[$name] = ($unresolved[$name] ?? 0) + 1; }
+                if ($pid) {
+                    $ids[] = $pid;
+                } elseif ($this->dry && isset($planned[$key])) {
+                    // a dry run creates nobody, so pass 2 cannot look this person up —
+                    // count the link the real run will make instead of reporting a fallback
+                    $pending[] = $key;
+                } elseif ($action !== 'text-only') {
+                    $unresolved[$name] = ($unresolved[$name] ?? 0) + 1;
+                }
             }
+            $has_person = $ids || $pending;
+
+            if ($this->dry && $pending) { $linked++; continue; }   // cannot compare against a person who does not exist yet
 
             $group = SI_WPML::post_group($post_id, 'post');
             $changed = false;
             foreach ($group as $target) {
-                if ($action === 'text-only' || !$ids) {
+                if ($action === 'text-only' || !$has_person) {
                     $text = trim($row['byline_raw'] ?? '');
                     if ((string) get_post_meta($target, 'written_by_name', true) === $text) { continue; }
                     $changed = true;
@@ -1547,7 +1560,7 @@ final class SI_Migrate_Command {
                 if (!$this->dry) { SI_Fields::save('post', $target, ['written_by' => $ids]); }
             }
             if (!$changed) { $unchanged++; continue; }
-            if ($action === 'text-only' || !$ids) { $texted++; } else { $linked++; }
+            if ($action === 'text-only' || !$has_person) { $texted++; } else { $linked++; }
         }
 
         if ($unresolved) {
