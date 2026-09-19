@@ -187,6 +187,24 @@ Every command honors `--dry-run`; destructive ones default to proposing CSVs, no
 All writes are idempotent (`_legacy_id` / `_yt_video_id`+`_yt_segment_index` / `_person_key` /
 `_conference_key`) — reruns update instead of duplicating.
 
+## WPML languages on created posts (2026-09-19)
+
+`si:persons`, `si:conferences`, `si:presentations` and `si:documents` create posts with
+`wp_insert_post()`. WPML only records a post's language when the plugin is running at save time,
+and si-v4's import ran with WPML uninstalled (`SI_WPML::active()` tests the *table*, not the
+plugin), so once WPML was switched on it hid everything the importer had created: People showed
+"All (416)" but "English (1)"; 415 people, 50 conferences and 738 presentations had no language.
+
+Now every create/update path calls `SI_WPML::ensure_language()`: people and documents get the
+default language; a conference gets the `language` column of `conference-map.csv` (blank = default;
+five French/German editions filled in); a talk inherits its conference's language. It uses WPML's
+API when the plugin is loaded and writes the `wp_icl_translations` row directly when it is not;
+it never touches a post that is part of a translation group, and a rerun repairs earlier
+language-less posts. Tests: `php tools/test-wpml-language.php` (23 checks, WP-free).
+One-off repair for a site that already has language-less posts:
+`wp eval-file tools/wpml-assign-missing-language.php [apply]` (assigns the default language only;
+export the DB first).
+
 ## Known deliberate gaps (decision-complete, just not automated)
 
 - **Statement signatory parsing** — too fuzzy to script; transform sets `_signatories_need_review`.

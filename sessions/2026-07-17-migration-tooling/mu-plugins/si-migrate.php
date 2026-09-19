@@ -623,6 +623,64 @@ final class SI_WPML {
         ), ARRAY_A);
         return $row ? [$row['language_code'], $row['trid']] : ['', ''];
     }
+    /** The WPML plugin itself (not just its tables) is loaded. */
+    public static function plugin_active(): bool {
+        return defined('ICL_SITEPRESS_VERSION');
+    }
+    /** The site's default language, from WPML when loaded, else from its stored settings. */
+    public static function default_language(): string {
+        $lang = apply_filters('wpml_default_language', null);
+        if ($lang) { return (string) $lang; }
+        $settings = get_option('icl_sitepress_settings');
+        return is_array($settings) && !empty($settings['default_language']) ? (string) $settings['default_language'] : 'en';
+    }
+    /**
+     * Give a post the language it is created in — whether or not the WPML plugin is running.
+     *
+     * WPML writes a post's language only when it is active at save time. si-v4's import ran
+     * with the plugin uninstalled (active() tests the table, not the plugin), so every post
+     * created by wp_insert_post() had no wp_icl_translations row, and once WPML was switched
+     * on it hid them: "All (416)" but "English (1)" (2026-09-19). So every create/update path
+     * calls this:
+     *   - no WPML tables              → nothing to do
+     *   - no row, plugin loaded       → WPML's own API (a new original, its own trid)
+     *   - no row, plugin not loaded   → the row, written directly (a new trid)
+     *   - a row in another language   → corrected ONLY for an untranslated original (the
+     *                                   plugin tags new posts with the admin's language)
+     *   - otherwise                   → left alone (never touches a translation group)
+     * Returns what it did: 'none' | 'set' | 'corrected' | 'kept'.
+     */
+    public static function ensure_language(int $post_id, string $post_type, string $lang = ''): string {
+        global $wpdb;
+        if (!self::active()) { return 'none'; }
+        $lang = $lang !== '' ? $lang : self::default_language();
+        $type = "post_$post_type";
+        $row = $wpdb->get_row($wpdb->prepare(
+            'SELECT translation_id, trid, language_code, source_language_code FROM ' . self::table() . ' WHERE element_id = %d AND element_type = %s',
+            $post_id, $type
+        ));
+        if ($row) {
+            if ($row->language_code === $lang || $row->source_language_code !== null) { return 'kept'; }
+            $group = (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . self::table() . ' WHERE trid = %d', $row->trid));
+            if ($group > 1) { return 'kept'; }   // translated: its language is WPML's business
+            if (self::plugin_active()) {
+                do_action('wpml_set_element_language_details', ['element_id' => $post_id, 'element_type' => $type,
+                    'trid' => (int) $row->trid, 'language_code' => $lang, 'source_language_code' => null]);
+            } else {
+                $wpdb->update(self::table(), ['language_code' => $lang], ['translation_id' => (int) $row->translation_id]);
+            }
+            return 'corrected';
+        }
+        if (self::plugin_active()) {
+            do_action('wpml_set_element_language_details', ['element_id' => $post_id, 'element_type' => $type,
+                'trid' => false, 'language_code' => $lang, 'source_language_code' => null]);
+        } else {
+            $trid = (int) $wpdb->get_var('SELECT COALESCE(MAX(trid), 0) + 1 FROM ' . self::table());
+            $wpdb->insert(self::table(), ['element_type' => $type, 'element_id' => $post_id, 'trid' => $trid,
+                'language_code' => $lang, 'source_language_code' => null]);
+        }
+        return 'set';
+    }
     public static function baseline(): array {
         global $wpdb;
         if (!self::active()) { return []; }
@@ -1046,6 +1104,7 @@ final class SI_Migrate_Command {
                 $made++;
             }
             update_post_meta($id, '_person_key', $key);
+            SI_WPML::ensure_language($id, 'si_person');   // one canonical person, in the default language
 
             // A hand-written bio is never overwritten by a generated one. The CSV marks
             // which is which in bio_source; so does the post, and the post wins.
@@ -1784,6 +1843,7 @@ final class SI_Migrate_Command {
                 'post_title' => $title, 'post_date' => $row['year'] . '-01-01 00:00:00']);
             if (is_wp_error($id)) { continue; }
             update_post_meta($id, '_legacy_id', $att_id);
+            SI_WPML::ensure_language($id, 'si_document');
             SI_Fields::save('si_document', $id, ['file' => $att_id, 'doc_type' => $row['doc_type_guess'] ?: 'report']);
         }
         $this->done(['documents_created' => $made, 'skipped' => $skipped]);
@@ -2420,9 +2480,11 @@ final class SI_Migrate_Command {
             $key = $row['conference_key'];
             $existing = get_posts(['post_type' => 'si_conference', 'meta_key' => '_conference_key', 'meta_value' => $key,
                 'posts_per_page' => 1, 'fields' => 'ids', 'post_status' => 'any']);
+            $promoted = false;
             if ($existing) {
                 $conf_id = (int) $existing[0];
             } elseif ($row['action'] === 'promote' && !empty($row['wp_match_id'])) {
+                $promoted = true;   // a legacy post keeps the language (and translations) it has
                 $n['promoted']++;
                 $conf_id = (int) $row['wp_match_id'];
                 if (!$this->dry) {
@@ -2441,6 +2503,10 @@ final class SI_Migrate_Command {
             }
             if ($this->dry) { continue; }
             update_post_meta($conf_id, '_conference_key', $key);
+            if (!$promoted) {
+                $lang = SI_WPML::ensure_language($conf_id, 'si_conference', trim($row['language'] ?? ''));
+                if ($lang === 'set' || $lang === 'corrected') { $n['language_' . $lang] = ($n['language_' . $lang] ?? 0) + 1; }
+            }
             if (!empty($row['yt_playlist_id'])) { update_post_meta($conf_id, '_yt_playlist_id', $row['yt_playlist_id']); }
             SI_Fields::save('si_conference', $conf_id, array_filter([
                 'start_date' => $row['start_date'] ?? '', 'end_date' => $row['end_date'] ?? '',
@@ -2519,6 +2585,8 @@ final class SI_Migrate_Command {
             }
             update_post_meta($pid, '_yt_video_id', $vid);
             update_post_meta($pid, '_yt_segment_index', $seg);
+            // a talk is in the language of its conference (French and German editions exist)
+            SI_WPML::ensure_language($pid, 'si_presentation', SI_WPML::lang_and_trid($conf_id)[0]);
             if ($row['title_autogenerated'] === '1') { update_post_meta($pid, 'title_autogenerated', 1); }
 
             $fields = array_filter([

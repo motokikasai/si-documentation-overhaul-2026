@@ -181,6 +181,7 @@ the same `yt_video_id`, and idempotency keys `_yt_video_id`+`_yt_segment_index` 
 | `title` | ✔ | official conference title |
 | `start_date` / `end_date` | ✔/ | `YYYY-MM-DD` |
 | `location` | | “Bad Soden, Germany” / “online” |
+| `language` | | WPML language code of the conference (`fr`, `de`, …); blank = the site's default. Its talks (`si:presentations`) inherit it. Ignored for `promote` rows, which keep the language of the legacy post. Added 2026-09-19. |
 | `wp_match_type` | ✔ | `post` · `page` · `none` — existing WP record for this conference |
 | `wp_match_id` / `wp_match_url` | | the matched record |
 | `action` | ✔ | `create` (new si_conference, WP match becomes linked Article) · `promote` (transform the matched post/page itself; adds a 301) · `create_only` (no WP match) |
