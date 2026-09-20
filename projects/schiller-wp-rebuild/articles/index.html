@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>Article Drafts — Schiller Institute</title>
+<meta name="description" content="Three drafts of the single article page and three of the article collection page, on the Jasper design system.">
+<link rel="stylesheet" href="../people/design-system/fonts.css">
+<link rel="stylesheet" href="../people/design-system/tokens.css">
+<link rel="stylesheet" href="../people/design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../people/design-system/components.css">
+<link rel="icon" href="../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+<style>
+	.ix { padding-block: var(--si-space-2xl) var(--si-space-3xl); display: grid; gap: var(--si-space-xl); }
+	.ix header { display: grid; gap: var(--si-space-s); }
+	.ix .si-display { font-size: var(--si-step-5); }
+	.ix h2.si-display { font-size: var(--si-step-4); }
+	.ix ol { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--si-space-s); }
+	.ix li a { height: 100%; display: grid; gap: var(--si-space-2xs); align-content: start; padding: var(--si-space-m); background: var(--si-card); border: var(--si-hairline); color: inherit; text-decoration: none; transition: box-shadow var(--si-dur-2) var(--si-ease), transform var(--si-dur-2) var(--si-ease); }
+	.ix li a:hover { box-shadow: var(--si-shadow-2); transform: translateY(-2px); }
+	.ix .letter { font-family: var(--si-font-serif); font-style: italic; font-weight: 300; font-size: var(--si-step-4); line-height: 1; color: var(--si-jasper-deep); }
+	.ix .title { font-family: var(--si-font-serif); font-size: var(--si-step-1); font-weight: 500; color: var(--si-ink); }
+	.ix li p { font-size: var(--si-step-n1); }
+	.ix .figures { padding-block: var(--si-space-s); border-block: var(--si-hairline); }
+	.ix .system a { background: var(--si-night); border-color: var(--si-night); }
+	.ix .system .letter { color: var(--si-brass-on-night); }
+	.ix .system .title { color: #fff; }
+	.ix .system p { color: var(--si-on-night-2); }
+</style>
+</head>
+<body>
+<main class="si-page ct-container ix">
+	<header>
+		<p class="si-eyebrow si-eyebrow--ruled">Articles (posts) · 2026-09-20</p>
+		<h1 class="si-display">Articles, <em>six ways</em></h1>
+		<p class="si-lead">Three drafts of the single article page and three of the collection page that lists them, all on Jasper and all built from the real corpus — every published post in the 2026-09-08 dump, minus the ones the reviewed classification turns into videos, statements or press coverage.</p>
+		<dl class="si-figures figures">
+			<div class="si-figure"><dt>Articles</dt><dd class="si-tabular">2,463</dd></div>
+			<div class="si-figure"><dt>Years</dt><dd class="si-tabular">2012–2026</dd></div>
+			<div class="si-figure"><dt>Languages</dt><dd class="si-tabular">4</dd></div>
+			<div class="si-figure"><dt>With an image</dt><dd class="si-tabular">2,369</dd></div>
+			<div class="si-figure"><dt>With a video</dt><dd class="si-tabular">1,417</dd></div>
+		</dl>
+	</header>
+
+	<section>
+		<header style="margin-bottom:var(--si-space-s)">
+			<p class="si-eyebrow si-eyebrow--ruled">/blog/{yyyy}/{mm}/{dd}/{slug}/ · the single article</p>
+			<h2 class="si-display">One article, <em>three ways</em></h2>
+			<p class="si-lead">Reading first: the date is never missing, the rest of the apparatus is there but never in the way. Each draft opens on an 8,600-word feature; the picker in the corner switches to a 317-word news short, a German piece, a 7,300-word interview and two more.</p>
+		</header>
+		<ol>
+			<li><a href="templates/article-leaf.html"><span class="letter">A</span><span class="title">The Leaf</span><p class="si-meta">A printed page. One column on limestone, everything else — date, byline, topic, the plate — pushed into the left margin. The calmest of the three, and the only one with a drop cap.</p></a></li>
+			<li><a href="templates/article-room.html"><span class="letter">B</span><span class="title">The Reading Room</span><p class="si-meta">Reading as a session you can set: paper on limestone, a spine that shows the article's own sections and how long is left, and three remembered settings — ground (day / paper / night), size, measure.</p></a></li>
+			<li><a href="templates/article-threshold.html"><span class="letter">C</span><span class="title">The Threshold</span><p class="si-meta">The article's own image held full height as an overture, then a warm tinted field with nothing in it but the text, set larger and looser than anywhere else on the site.</p></a></li>
+		</ol>
+	</section>
+
+	<section>
+		<header style="margin-bottom:var(--si-space-s)">
+			<p class="si-eyebrow si-eyebrow--ruled">/blog/ · the collection page</p>
+			<h2 class="si-display">Three thousand articles, <em>three ways</em></h2>
+			<p class="si-lead">WordPress's own posts index, rendered into Blocksy's archive canvas. None of the three uses a card.</p>
+		</header>
+		<ol>
+			<li><a href="templates/articles-ledger.html"><span class="letter">A</span><span class="title">The Ledger</span><p class="si-meta">A finding aid: fourteen years as one month-by-month index with dotted leaders, instant search, and a loupe that raises whichever line is under the pointer.</p></a></li>
+			<li><a href="templates/articles-drift.html"><span class="letter">B</span><span class="title">The Drift</span><p class="si-meta">The decade as one current down a spine. Entries are sized by the article's own length — features open out, daily notes stay a line — with the years' density as a rail you can steer by.</p></a></li>
+			<li><a href="templates/articles-broadsheet.html"><span class="letter">C</span><span class="title">The Broadsheet</span><p class="si-meta">One month set as a front page — lead, second tier, topic columns in rules — and 134 back issues you can open. Read the front page of March 2020.</p></a></li>
+		</ol>
+	</section>
+
+	<section>
+		<ol>
+			<li class="system"><a href="../people/design-system/specimen.html"><span class="letter">J</span><span class="title">Jasper, the design system</span><p class="si-meta">Palette, type, space, motion and components — the same system the /people/ drafts use. These pages add no new colour and no new face.</p></a></li>
+			<li><a href="../people/index.html"><span class="letter">P</span><span class="title">The /people/ drafts</span><p class="si-meta">The listing and profile drafts these were built next to.</p></a></li>
+		</ol>
+	</section>
+
+	<p class="si-meta">Read <a class="si-link" href="README.md">README.md</a> for where WordPress actually keeps the posts index (it is missing on the live site), the data build, and what the drafts found in the content.</p>
+</main>
+</body>
+</html>

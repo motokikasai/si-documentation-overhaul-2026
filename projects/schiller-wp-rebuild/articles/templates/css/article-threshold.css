@@ -1,0 +1,168 @@
+/* ==========================================================================
+   DRAFT C — "The Threshold"     /blog/{yyyy}/{mm}/{dd}/{slug}/ · single post
+   --------------------------------------------------------------------------
+   An overture, then silence.
+
+   The article opens on its own image, held full height and treated the way
+   Jasper treats every photograph — greyscale under a jasper cast, so that a
+   decade of wildly different press photos read as one collection. The title
+   and the date sit on it in the night palette. Then you cross the threshold:
+   the reading field slides up over the picture and the picture never returns.
+   From that point the page has no image, no rail, no control and no card —
+   only a warm, slightly tinted ground that cools into limestone as you read,
+   and type set larger and looser than anywhere else on the site.
+
+   The whole draft is one idea: give the eye somewhere to arrive, then take
+   everything away.
+   ========================================================================== */
+
+.th-page { background: var(--si-night); }
+
+/* ---- the cover ----------------------------------------------------------- */
+.th-cover {
+	position: sticky; top: 0; z-index: 0;
+	height: 100svh; min-height: 30rem;
+	display: grid; align-items: end;
+	overflow: hidden;
+	background: var(--si-night);
+	isolation: isolate;
+}
+.th-cover__img {
+	position: absolute; inset: 0; z-index: -2;
+	width: 100%; height: 100%; object-fit: cover;
+	filter: var(--si-portrait-filter);
+	opacity: var(--cover-opacity, 1);
+	scale: var(--cover-scale, 1);
+	transform-origin: 50% 40%;
+}
+.th-cover::before {                      /* the jasper cast */
+	content: ""; position: absolute; inset: 0; z-index: -1;
+	background: var(--si-portrait-tint);
+	mix-blend-mode: multiply;
+}
+.th-cover::after {                       /* the ink the type stands on */
+	content: ""; position: absolute; inset: 0; z-index: -1;
+	/* the photographs are a decade of press pictures under every kind of light;
+	   the scrim has to hold white type over ALL of them, not over a good one */
+	background: linear-gradient(transparent 8%, rgb(15 26 38 / .38) 38%, rgb(15 26 38 / .84) 74%, rgb(15 26 38 / .95));
+}
+.th-cover--none { background: var(--si-panel); }
+.th-cover--none::after { background: linear-gradient(transparent 55%, color-mix(in srgb, var(--si-jasper) 22%, transparent)); }
+
+.th-head {
+	width: min(var(--si-container), 100%);
+	margin-inline: auto;
+	padding: 0 var(--si-gutter) clamp(var(--si-space-xl), 9vh, var(--si-space-3xl));
+}
+.th-kicker {
+	display: flex; align-items: center; gap: .8em;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2); font-weight: 600;
+	letter-spacing: var(--si-track-caps); text-transform: uppercase;
+	color: var(--si-brass-on-night);
+}
+.th-kicker::before { content: ""; width: 2.2em; height: 1px; background: currentColor; }
+.th-title {
+	margin: .45em 0 0;
+	font-family: var(--si-font-serif);
+	font-optical-sizing: auto;
+	font-size: var(--si-step-5);
+	font-weight: 300;
+	line-height: 1.07;
+	letter-spacing: var(--si-track-display);
+	color: #fff;
+	text-wrap: balance;
+	max-width: 20ch;
+}
+.th-cover--none .th-kicker { color: var(--si-jasper-deep); }
+.th-cover--none .th-title { color: var(--si-ink); }
+.th-cover--none .th-meta, .th-cover--none .th-meta a { color: var(--si-text); }
+/* Without a photograph the date becomes the picture. */
+.th-numeral {
+	position: absolute; inset: auto 0 0 0; z-index: -1;
+	font-family: var(--si-font-serif);
+	font-size: min(38vw, 30rem); line-height: .78;
+	font-weight: 300;
+	font-variant-numeric: oldstyle-nums;
+	color: color-mix(in srgb, var(--si-jasper) 34%, transparent);
+	text-align: center;
+	pointer-events: none;
+	user-select: none;
+}
+
+.th-meta {
+	margin-top: var(--si-space-m);
+	display: flex; flex-wrap: wrap; align-items: baseline; gap: .4em 1.1em;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1);
+	color: var(--si-on-night-2);
+	max-width: 60ch;
+}
+.th-meta .ar-date { color: #fff; font-size: var(--si-step-1); }
+.th-meta a { color: var(--si-brass-on-night); }
+.th-meta .sep { color: rgb(255 255 255 / .28); }
+.th-meta .ar-tag { color: var(--si-on-night-2); }
+.th-meta .ar-tag::before { color: var(--si-brass-on-night); }
+
+.th-cue {
+	position: absolute; left: 50%; bottom: var(--si-space-s); translate: -50% 0;
+	width: 1px; height: 2.6rem;
+	background: linear-gradient(var(--si-brass-on-night), transparent);
+	opacity: var(--cue, 1);
+	transition: opacity var(--si-dur-2) var(--si-ease);
+}
+@media (prefers-reduced-motion: no-preference) {
+	.th-cue { animation: th-cue 2.6s var(--si-ease) infinite; }
+	@keyframes th-cue { 0%, 100% { transform: scaleY(1); transform-origin: top; } 50% { transform: scaleY(.55); transform-origin: top; } }
+}
+
+/* ---- the field you arrive in --------------------------------------------- */
+.th-sheet {
+	position: relative; z-index: 1;
+	/* the atmosphere: a jasper tint at the threshold, cooling into limestone
+	   over the first few screens — colour doing mood, and nothing else */
+	background:
+		linear-gradient(180deg,
+			color-mix(in srgb, var(--si-jasper) 16%, var(--si-ground)) 0,
+			color-mix(in srgb, var(--si-jasper) 5%, var(--si-ground)) 28rem,
+			var(--si-ground) 60rem);
+	box-shadow: 0 -30px 60px -30px rgb(15 26 38 / .5);
+	padding: clamp(var(--si-space-2xl), 9vh, var(--si-space-3xl)) var(--si-gutter) var(--si-space-3xl);
+}
+.th-col { max-width: var(--ar-measure); margin-inline: auto; }
+
+.th-prose {
+	--ar-rhythm: 1.15em;
+	font-size: clamp(1.14rem, 1.05rem + .38vw, 1.34rem);   /* 18 → 21.5px */
+	line-height: 1.72;
+}
+/* A lede only when the article really opens with prose — many legacy bodies
+   open with their own heading, and enlarging the paragraph after it would
+   read as a mistake. */
+.th-prose > p:first-child {
+	font-size: 1.12em;
+	line-height: 1.58;
+	color: var(--si-ink);
+}
+/* A single ornament marks where the text begins — the only mark on the field. */
+.th-open {
+	display: grid; place-items: center;
+	margin-bottom: var(--si-space-xl);
+}
+.th-open::before { content: ""; width: 5rem; height: 1px; background: var(--si-brass); }
+
+.th-end {
+	margin: var(--si-space-3xl) auto var(--si-space-xl);
+	width: min(var(--ar-measure), 100%);
+	border: 0; border-top: 1px solid var(--si-brass);
+}
+.th-foot { display: grid; gap: var(--si-space-xl); max-width: var(--ar-measure); margin-inline: auto; }
+.th-foot h2 {
+	margin: 0 0 var(--si-space-s);
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2); font-weight: 600;
+	letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-muted);
+}
+
+@media (max-width: 599.98px) {
+	.th-cover { height: 86svh; }
+	.th-title { font-size: var(--si-step-4); max-width: none; }
+	.th-head { max-width: none; min-width: 0; }
+}

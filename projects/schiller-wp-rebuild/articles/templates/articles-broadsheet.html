@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>Articles — Schiller Institute</title>
+<meta name="description" content="The Schiller Institute's articles set as a front page, one edition at a time, back to 2012.">
+<!--
+	COLLECTION DRAFT C · "The Broadsheet"  —  /blog/ (the WordPress posts index)
+	One month set as a front page — lead, second tier, topic columns — and the
+	whole archive as back issues you can open. Stylesheet order is the WordPress
+	enqueue order; blocksy-shim.css stands in for Blocksy's own dynamic CSS.
+-->
+<link rel="preload" href="../../people/design-system/fonts/source-serif-4-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../people/design-system/fonts.css">
+<link rel="stylesheet" href="../../people/design-system/tokens.css">
+<link rel="stylesheet" href="../../people/design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../../people/design-system/components.css">
+<link rel="stylesheet" href="css/articles-shared.css">
+<link rel="stylesheet" href="css/articles-broadsheet.css">
+<link rel="stylesheet" href="css/proto.css">
+<link rel="icon" href="../../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+</head>
+<body class="blog archive">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header id="header" class="ct-header">
+	<div class="ct-container">
+		<a class="site-logo" href="#"><img src="../../brand/assets/lockup/lockup-light@2x.png" alt="The International Schiller Institute" width="560" height="150"></a>
+		<nav aria-label="Primary"><ul>
+			<li><a href="articles-ledger.html" aria-current="page">Articles</a></li><li><a href="#">Conferences</a></li><li><a href="../../people/templates/people-register.html">People</a></li><li><a href="#">Library</a></li><li><a href="#">Culture</a></li><li><a href="#">About</a></li>
+		</ul></nav>
+		<div class="header-cta"><a class="si-link is-secondary" href="#">Join</a><a class="ct-button" href="#">Donate</a></div>
+	</div>
+</header>
+
+<main id="main" class="site-main si-page arc" aria-busy="true">
+	<div class="ct-container" aria-hidden="true" style="display:grid;gap:14px;padding-block:48px">
+		<div class="si-skeleton" style="height:13px;width:18%"></div>
+		<div class="si-skeleton" style="height:56px;width:40%"></div>
+		<div class="si-skeleton" style="height:40px;width:100%"></div>
+		<div class="si-skeleton" style="height:420px;width:100%"></div>
+	</div>
+</main>
+
+<footer id="footer" class="ct-footer">
+	<div class="ct-container">
+		<img src="../../brand/assets/lockup/lockup-dark@2x.png" alt="The International Schiller Institute" width="560" height="150">
+		<p>Blocksy footer (stand-in) · <span class="proto-note">prototype — data: data/articles.json (2,463 articles), built from the 2026-09-08 dump</span></p>
+	</div>
+</footer>
+
+<script type="module" src="js/articles-broadsheet.js"></script>
+</body>
+</html>

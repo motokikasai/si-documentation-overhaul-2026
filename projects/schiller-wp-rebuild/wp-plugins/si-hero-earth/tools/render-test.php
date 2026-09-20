@@ -34,7 +34,29 @@ function get_block_wrapper_attributes( $extra = array() ) {
 	$s = isset( $extra['style'] ) ? ' style="' . $extra['style'] . '"' : '';
 	return 'class="' . $c . ' alignfull"' . $s;
 }
-function si_hero_earth_needs_boot( $set = null ) { static $n = false; if ( true === $set ) { $n = true; } return $n; }
+/* The gate is not echoed by the block: the block emits a marker, and a
+ * the_content filter swaps the script in at priority 99. The test does the
+ * same thing, with wptexturize's ampersand pass in between — which is the
+ * whole reason the marker exists. wptexturize rewrites a bare `&` to
+ * `&#038;` even inside a <script>, so an echoed gate reached the browser
+ * with `&#038;&#038;` where it had written `&&`, and died on a SyntaxError
+ * while the hero silently stayed static. */
+const SI_HERO_EARTH_BOOT_MARKER = '<!--si-hero-boot-->';
+function si_hero_earth_boot_marker() { return SI_HERO_EARTH_BOOT_MARKER; }
+function si_hero_earth_boot_script() {
+	/* The MINIFIED gate: that is the file production inlines. */
+	return '<script id="si-hero-boot">' . file_get_contents( SI_HERO_EARTH_DIR . 'assets/js/si-hero-boot.min.js' ) . '</script>';
+}
+function si_hero_earth_inject_boot( $content ) {
+	if ( false === strpos( $content, SI_HERO_EARTH_BOOT_MARKER ) ) { return $content; }
+	$pos = strpos( $content, SI_HERO_EARTH_BOOT_MARKER );
+	return str_replace( SI_HERO_EARTH_BOOT_MARKER, '', substr_replace( $content, si_hero_earth_boot_script(), $pos, strlen( SI_HERO_EARTH_BOOT_MARKER ) ) );
+}
+/* wp-includes/formatting.php, wptexturize(): "Replace each & with &#038;". */
+function si_hero_earth_texturize_amp( $content ) {
+	return preg_replace( '/&(?!#(?:\d+|x[a-f0-9]+);|[a-z1-4]{1,8};)/i', '&#038;', $content );
+}
+
 function si_hero_earth_tex( $name ) {
 	return array(
 		'webp' => SI_HERO_EARTH_URL . "assets/img/{$name}.webp",
@@ -69,6 +91,9 @@ ob_start();
 include SI_HERO_EARTH_DIR . 'blocks/hero-earth/render.php';
 $html = ob_get_clean();
 
+/* the_content, abbreviated to the part that has bitten us. */
+$html = si_hero_earth_inject_boot( si_hero_earth_texturize_amp( $html ) );
+
 echo $html;
 echo "\n\n===== CHECKS =====\n";
 $checks = array(
@@ -86,6 +111,10 @@ $checks = array(
 	'config json'          => 'si-hero__config',
 	'runway var'           => '--si-hero-runway:520vh',
 	'gate attrs'           => 'data-si-hero-min-width="768"',
+	'gate inlined'         => '<script id="si-hero-boot">',
+	'gate arms the layout' => '"is-live"',
+	'gate can import'      => 'import(',
+	'gate operators live'  => '&&',
 );
 $fail = 0;
 foreach ( $checks as $label => $needle ) {
@@ -99,4 +128,14 @@ preg_match( '/<script type="application\/json" class="si-hero__config">\s*(\{.*?
 $cfg = $cm ? json_decode( $cm[1], true ) : null;
 echo "  config parses: " . ( $cfg ? 'yes, keys=' . implode( ',', array_keys( $cfg ) ) : 'NO' ) . "\n";
 echo "  h1 count: " . substr_count( $html, '<h1' ) . "\n";
+
+/* The gate has to come AFTER the hero (it reads the element) and INSIDE the
+ * block's own output (so it runs before the hero is painted). Printing it in
+ * wp_footer is what made the hero visibly change shape 1.9 s in. */
+$gate_at = strpos( $html, '<script id="si-hero-boot">' );
+$end_at  = strpos( $html, '</section>' );
+$ordered = false !== $gate_at && false !== $end_at && $gate_at > $end_at;
+printf( "  %-20s %s\n", 'gate after </section>', $ordered ? 'ok' : 'FAIL' );
+if ( ! $ordered ) { $fail++; }
+
 exit( $fail ? 1 : 0 );

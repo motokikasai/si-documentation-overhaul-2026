@@ -1,17 +1,42 @@
 /* si/hero-earth — boot gate.
  *
- * This file is printed inline in the footer (it is ~2 KB) so that a visitor
- * who is never going to get the WebGL scene downloads NOTHING extra at all:
- * no module, no vendor bundle, no textures, not even this file as a request.
+ * This file is printed inline, immediately after the hero's own markup (the
+ * block emits a marker and si_hero_earth_inject_boot() swaps this in once
+ * the content filters are done), for two reasons:
+ *
+ *   - a visitor who is never going to get the WebGL scene downloads NOTHING
+ *     extra at all: no module, no vendor bundle, no textures, not even this
+ *     file as a request;
+ *   - and, decisively, IT RUNS BEFORE THE HERO IS FIRST PAINTED. The gate's
+ *     answer decides the hero's LAYOUT, so it has to be known before the
+ *     browser paints, or the visitor watches the static hero for a second
+ *     and a half and then watches it turn into something else. It used to be
+ *     printed in the footer: measured on si-v4, `is-live` landed 1.87 s after
+ *     first contentful paint and took the document from 1,743 px to 5,304 px
+ *     with it. That was the flash, and that was the layout shift.
+ *
+ * So the gate now does its work in two beats:
+ *
+ *   ARM  — synchronously, before paint: if the visitor is getting the scene,
+ *          add `.is-live` now. The first paint is then already the live
+ *          composition (pinned runway, act 0, the poster holding the frame).
+ *   LOAD — at idle, as before: import the module, hand it the textures. The
+ *          scene fades its canvas in over the poster when it has a complete
+ *          frame (`.is-scene`, added by si-hero-scene.js). Nothing moves.
+ *
+ * If the load beat fails, `fail()` disarms — the hero drops back to the
+ * static layout the server rendered. That reflow is the price of guessing
+ * early, and it is only paid on a broken page.
  *
  * It is deliberately ES5 and dependency-free. It runs on browsers that
  * cannot parse the scene module, and its whole job on those browsers is to
  * decide "no" and get out of the way.
  *
- * THE GATE. The scene costs ~433 KB (133 KB gzipped JS + ~300 KB textures)
- * and a sustained animation frame budget. That is the right trade on a
- * desktop over fibre and the wrong one on a 3G handset with 1 GB of RAM —
- * and the Schiller Institute's audience includes a great many of the latter.
+ * THE GATE. The scene costs ~464 KB (156 KB of gzipped JS and CSS, ~300 KB
+ * of textures, 9 KB of poster) and a sustained animation frame budget. That
+ * is the right trade on a desktop over fibre and the wrong one on a 3G
+ * handset with 1 GB of RAM — and the Schiller Institute's audience includes
+ * a great many of the latter.
  * So the default answer is "no" and each check has to be passed, not failed:
  *
  *   1. author opt-out on the block
@@ -20,18 +45,14 @@
  *   4. deviceMemory / hardwareConcurrency floors
  *   5. viewport floor                  — below it the globe is thumb-sized
  *      and the static hero says the same thing for 9 KB
- *   6. a real WebGL probe BEFORE the import, so we never download 133 KB to
- *      discover the context was refused
- *
- * Then, having said yes, it still waits for idle so the scene never competes
- * with the poster for LCP, and it still degrades to the static hero if the
- * import or the context fails late.
+ *   6. a real WebGL probe BEFORE arming, so we never commit the layout to a
+ *      scene the GPU is going to refuse — and never download 150 KB of
+ *      module and vendor bundle to find out. This probe is the one expensive
+ *      thing the gate does before paint, and it is why the cheap checks run
+ *      first: a refused visitor never reaches it.
  */
 (function () {
   "use strict";
-
-  var roots = document.querySelectorAll(".si-hero[data-si-hero]");
-  if (!roots.length) return;
 
   function conn() {
     return (
@@ -42,7 +63,7 @@
     );
   }
 
-  /* Why: a WebGLRenderer constructor that throws costs a 133 KB download
+  /* Why: a WebGLRenderer constructor that throws costs a 150 KB download
    * first. A throwaway 1x1 canvas costs nothing and answers the same
    * question. The context is explicitly released afterwards — some drivers
    * cap the number of live contexts at 8 or 16. */
@@ -169,13 +190,30 @@
     return webpCache;
   }
 
+  /* Commit the layout to the scene, before first paint. From here on the
+   * hero is 520vh of pinned runway showing act 0 over the poster — which is
+   * what the scene's opening frame looks like, so when the canvas dissolves
+   * in nothing on screen moves. */
+  function arm(root) {
+    root.classList.add("is-live");
+    root.dataset.siHeroArmed = "1";
+  }
+
   /* Record why the scene did not start, on the element and (when asked) in
-   * the console. Every failure path below used to `return` silently, which
-   * is how a broken import came back indistinguishable from a healthy page:
-   * the gate had already logged "running the scene" before any of this ran.
-   * A decision log that stops before the decisive step is worse than none. */
+   * the console, and give the static hero back — an armed hero with no scene
+   * shows one act out of four and pins 520vh of runway to do it, which is
+   * precisely the animation-first failure this block exists to avoid.
+   *
+   * Every failure path below used to `return` silently, which is how a
+   * broken import came back indistinguishable from a healthy page: the gate
+   * had already logged "running the scene" before any of this ran. A
+   * decision log that stops before the decisive step is worse than none. */
   function fail(root, reason, detail) {
     root.dataset.siHeroFallback = reason;
+    if (root.dataset.siHeroArmed) {
+      delete root.dataset.siHeroArmed;
+      root.classList.remove("is-live", "is-scene");
+    }
     if (forced && window.console && console.error) {
       console.error("[si-hero] scene did not start: " + reason, detail || "");
     }
@@ -238,6 +276,17 @@
       probeUrl(moduleUrl.replace(/\/js\/[^/?]+/, "/vendor/three-slim.js"));
     }
 
+    /* A request that hangs neither resolves nor rejects, and the browser's
+     * own timeout is minutes away. Since we armed the layout on a guess, we
+     * have to be able to take the guess back: if the scene is not running by
+     * then, the visitor gets the static hero. A very late success is still
+     * allowed to arm again — two reflows on a broken network beat a hero
+     * stuck at one act out of four. */
+    var started = false;
+    var watchdog = setTimeout(function () {
+      if (!started) fail(root, "scene did not start within 12s");
+    }, 12000);
+
     import(moduleUrl)
       .then(function (m) {
         if (typeof m.initHero !== "function") {
@@ -246,18 +295,26 @@
         if (!m.initHero(root, cfg)) {
           return fail(root, "WebGL context refused by the scene");
         }
+        started = true;
+        clearTimeout(watchdog);
         if (forced && window.console && console.info) {
           console.info("[si-hero] scene running");
         }
       })
       .catch(function (e) {
         /* Module blocked, 404, wrong MIME type, or a parse error on an
-         * older engine. The static hero is already on screen and stays. */
+         * older engine. Disarm: the static hero is what the server rendered
+         * and it is complete. */
         fail(root, "module failed: " + (e && e.message ? e.message : e), e);
       });
   }
 
-  Array.prototype.forEach.call(roots, function (root) {
+  function start(root) {
+    /* This file runs once per page but is printed by the first hero on it,
+     * so it also sweeps at DOMContentLoaded for any hero further down. */
+    if (root.dataset.siHeroDecided) return;
+    root.dataset.siHeroDecided = "1";
+
     var no = decide(root);
     /* Quiet by default: the reason is always on the element as
      * data-si-hero-fallback, which is enough to debug from the DOM. Only
@@ -277,10 +334,22 @@
       root.dataset.siHeroFallback = no;
       return;
     }
+
+    arm(root);
     whenNear(root, function () {
       whenIdle(function () {
         upgrade(root);
       });
     });
-  });
+  }
+
+  function boot() {
+    var roots = document.querySelectorAll(".si-hero[data-si-hero]");
+    Array.prototype.forEach.call(roots, start);
+  }
+
+  boot();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  }
 })();

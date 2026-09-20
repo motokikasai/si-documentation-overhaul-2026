@@ -260,7 +260,20 @@
 }
 
 /* ===========================================================================
-   LIVE HERO — added by si-hero-scene.js once a WebGL context exists
+   LIVE HERO — two classes, and the difference between them is the whole
+   smoothness of the thing.
+
+   .is-live   the boot gate adds it BEFORE FIRST PAINT, having decided this
+              visitor is getting the scene. It is a layout decision only: the
+              520vh runway, the pinned frame, act 0 on screen over the poster.
+              Nothing here needs WebGL, and nothing here waits for it.
+   .is-scene  si-hero-scene.js adds it when the renderer has painted a frame
+              with all four textures in it. It fades the canvas up over the
+              poster and brings in the chapter dots.
+
+   Splitting them is what removes the switch. The visitor sees one
+   composition from the first paint; the only thing that ever changes is a
+   still of the globe dissolving into a live one.
    =========================================================================== */
 
 .si-hero.is-live {
@@ -276,6 +289,10 @@
   overflow: hidden;
   display: block;
 }
+/* The canvas is in the layout from the first paint but transparent, so the
+ * poster shows through it. Until the textures land the renderer has nothing
+ * to draw but a black globe on a clear colour; showing that and then
+ * swapping is the second half of the flash this block used to have. */
 .si-hero.is-live .si-hero__canvas {
   display: block;
   position: absolute;
@@ -283,11 +300,24 @@
   width: 100%;
   height: 100%;
   z-index: 0;
+  opacity: 0;
+  transition: opacity 900ms ease-in-out;
+}
+.si-hero.is-live.is-scene .si-hero__canvas {
+  opacity: 1;
 }
 .si-hero.is-live .si-hero__fallback {
-  /* kept as the paint behind the canvas until the first textures land, so
-   * the hero is never a flat navy rectangle mid-load */
+  /* The poster holds the frame until the scene has a complete one, and then
+   * stays underneath it: it costs nothing behind an opaque canvas and it is
+   * still there if the context is lost later. */
   z-index: 0;
+}
+/* Armed, not yet painted: show the act the scene will open on. Once the
+ * scene is running it writes inline opacity on every act from the first
+ * frame, which outranks this — so the text never moves at the handoff, and
+ * scrolling during the wait is answered the moment the scene takes over. */
+.si-hero.is-live:not(.is-scene) .si-hero__stage[data-stage="0"] {
+  opacity: 1;
 }
 .si-hero.is-live .si-hero__vignette {
   background: linear-gradient(
@@ -364,6 +394,9 @@
   50%      { transform: scaleY(1); opacity: 1; }
 }
 
+/* Chapter dots are scene chrome: they scrub the runway, and nothing scrubs
+ * until the scene is running. `visibility` rather than opacity alone so the
+ * buttons are not tabbable while they are invisible. */
 .si-hero.is-live .si-hero__chapters {
   position: absolute;
   right: clamp(0.9rem, 2.5vw, 2rem);
@@ -373,6 +406,13 @@
   flex-direction: column;
   gap: 0.9rem;
   z-index: 5;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 900ms ease-in-out, visibility 900ms;
+}
+.si-hero.is-live.is-scene .si-hero__chapters {
+  opacity: 1;
+  visibility: visible;
 }
 .si-hero.is-live .si-hero__chapters button {
   width: 0.55rem;
@@ -401,6 +441,10 @@
 @media (prefers-reduced-motion: reduce) {
   .si-hero.is-live .si-hero__scrollhint::after {
     animation: none;
+  }
+  .si-hero.is-live .si-hero__canvas,
+  .si-hero.is-live .si-hero__chapters {
+    transition: none;
   }
 }
 

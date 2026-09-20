@@ -1,0 +1,388 @@
+/* ==========================================================================
+   article-shared.css — what all three single-article drafts stand on.
+
+   Two things live here:
+
+   1. THE READING COLUMN (.ar-prose). One measure, one rhythm, one set of
+      decisions about what a paragraph, a heading, a quotation and a figure do
+      inside an article body. The drafts differ in what surrounds the column;
+      none of them re-decides what a paragraph looks like.
+
+   2. THE LEGACY TOKEN STYLESHEET that
+      `03-shortcode-conversion-table.md` §5 hands to the theme: .si-btn,
+      .si-cta, .si-info-box, .si-wide-bar, .si-testimonial, .si-toggle,
+      .si-col, .si-fn — the classes the migration's shortcode conversion
+      writes into 1,788 legacy bodies. Without them those articles arrive in
+      the new theme as unstyled debris. Jasper gives each one a quiet form.
+
+   Typographic rule for the whole file: the reading size never changes because
+   of what a paragraph *is*. Emphasis is drawn with space, rule and colour —
+   never by making a run of body text bigger or bolder than its neighbours.
+   ========================================================================== */
+
+.ar {
+	--ar-rhythm: 1.05em;              /* space between paragraphs, in text ems  */
+	--ar-measure: 64ch;               /* slightly under Jasper's 66: serif at   */
+	                                  /* 19px runs ~80 characters at 66ch       */
+	--si-sticky-top: calc(var(--admin-bar, 0px) + var(--theme-frame-size, 0px) + var(--header-sticky-height, 0px));
+	font-family: var(--si-font-serif);
+	color: var(--si-text);
+}
+
+/* ---- the dateline: date first, always ------------------------------------ */
+/* Every article has a date of creation; it is the one piece of metadata the
+   page may never omit, so it is set first and in the reading face, not in the
+   sans "apparatus" voice the rest of the metadata uses. */
+.ar-dateline {
+	display: flex; flex-wrap: wrap; align-items: baseline; gap: .45em 1.1em;
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n1);
+	line-height: var(--si-leading-meta);
+	color: var(--si-muted);
+}
+.ar-date {
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-0);
+	font-variant-numeric: oldstyle-nums proportional-nums;
+	color: var(--si-ink);
+}
+.ar-dateline .sep { color: var(--si-rule); }
+.ar-byline { color: var(--si-text); }
+.ar-byline a { color: var(--si-accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
+.ar-byline a:hover { border-bottom-color: currentColor; }
+
+/* Topic / region / campaign: the quiet end of the apparatus. Never a button. */
+.ar-tags { display: flex; flex-wrap: wrap; gap: .4em .9em; }
+.ar-tag {
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n2);
+	letter-spacing: var(--si-track-caps);
+	text-transform: uppercase;
+	color: var(--si-muted);
+	text-decoration: none;
+	white-space: nowrap;
+}
+.ar-tag:hover { color: var(--si-accent); }
+.ar-tag::before { content: "·"; margin-right: .55em; color: var(--si-brass); }
+
+/* ---- the reading column -------------------------------------------------- */
+.ar-prose {
+	font-size: var(--si-step-0);
+	line-height: var(--si-leading-body);
+	max-width: var(--ar-measure);
+	color: var(--si-text);
+	text-wrap: pretty;
+	/* the 47 bodies the converter cannot rescue still arrive as loose runs;
+	   the column's own leading keeps them readable rather than jammed */
+	overflow-wrap: break-word;
+}
+/* The reset is written with :where() so it carries NO specificity: the rhythm
+   rule below must win over it, and the heading rules over that. */
+.ar-prose :where(p, figure, blockquote, ul, ol, table, pre, details, aside, div) { margin: 0; }
+.ar-prose > * + * { margin-top: var(--ar-rhythm); }
+.ar-prose > :first-child { margin-top: 0; }
+.ar-prose strong, .ar-prose b { font-weight: var(--si-weight-strong); color: var(--si-ink); }
+.ar-prose em, .ar-prose i { font-style: italic; }
+
+.ar-prose h2, .ar-prose h3, .ar-prose h4, .ar-prose h5 {
+	font-family: var(--si-font-serif);
+	font-weight: var(--si-weight-heading);
+	line-height: var(--si-leading-heading);
+	color: var(--si-ink);
+	text-wrap: balance;
+	scroll-margin-top: calc(var(--si-sticky-top) + 2rem);
+}
+.ar-prose h2 { font-size: var(--si-step-2); margin-top: 2.1em; }
+.ar-prose h3 { font-size: var(--si-step-1); margin-top: 1.9em; }
+.ar-prose h4, .ar-prose h5 { font-size: var(--si-step-0); margin-top: 1.7em; letter-spacing: .01em; }
+.ar-prose :is(h2, h3, h4, h5) + * { margin-top: .55em; }
+.ar-prose :is(h2, h3, h4, h5) b, .ar-prose :is(h2, h3, h4, h5) strong { font-weight: inherit; }
+
+.ar-prose a {
+	color: var(--si-accent);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: .19em;
+	text-decoration-color: color-mix(in srgb, currentColor 32%, transparent);
+	transition: text-decoration-color var(--si-dur-1) var(--si-ease), color var(--si-dur-1) var(--si-ease);
+}
+.ar-prose a:hover { color: var(--si-accent-deep); text-decoration-color: currentColor; }
+
+.ar-prose ul, .ar-prose ol { padding-left: 1.4em; margin-left: 0; }
+.ar-prose li + li { margin-top: .35em; }
+.ar-prose ul { list-style: none; }
+.ar-prose ul > li { position: relative; }
+.ar-prose ul > li::before {
+	content: ""; position: absolute; left: -1em; top: .72em;
+	width: 5px; height: 5px; border-radius: 50%; background: var(--si-brass);
+}
+.ar-prose ol { list-style: decimal; }
+.ar-prose ol > li::marker { color: var(--si-muted); font-variant-numeric: oldstyle-nums; }
+
+/* Quotation: indent and a brass hairline. No quote marks, no italics — the
+   legacy bodies already italicise half of their quotations. */
+.ar-prose blockquote {
+	margin-left: 0;
+	padding: .15em 0 .15em 1.4em;
+	border-left: 2px solid var(--si-brass);
+	color: var(--si-ink);
+}
+.ar-prose blockquote > * + * { margin-top: .6em; }
+.ar-prose .si-pullquote {
+	border: 0; padding: 0;
+	font-size: var(--si-step-1);
+	line-height: 1.42;
+	color: var(--si-ink);
+	text-align: center;
+	max-width: 34ch; margin-inline: auto;
+}
+.ar-prose .si-pullquote::before,
+.ar-prose .si-pullquote::after {
+	content: ""; display: block; width: 3rem; height: 1px; margin: .9em auto; background: var(--si-brass);
+}
+
+.ar-prose figure { margin: 0; }
+.ar-prose img { max-width: 100%; height: auto; display: block; }
+.ar-prose figure img { width: 100%; background: var(--si-panel); }
+.ar-prose figcaption {
+	margin-top: .6em;
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n1);
+	line-height: 1.45;
+	color: var(--si-muted);
+	border-left: 2px solid var(--si-rule);
+	padding-left: .8em;
+}
+.ar-prose hr {
+	border: 0; border-top: 1px solid var(--si-rule);
+	width: 4rem; margin-inline: auto;
+	margin-block: calc(var(--ar-rhythm) * 1.8);
+}
+.ar-prose sup, .ar-prose sub { font-size: .7em; line-height: 0; }
+.ar-prose .si-fn { color: var(--si-accent); }
+
+.ar-prose table {
+	width: 100%; border-collapse: collapse;
+	font-size: var(--si-step-n1); font-family: var(--si-font-sans);
+}
+.ar-prose :is(td, th) { border-bottom: var(--si-hairline); padding: .55em .7em; text-align: left; vertical-align: top; }
+.ar-prose th { color: var(--si-ink); font-weight: 600; }
+.ar-prose pre {
+	font-family: var(--si-font-serif); font-size: inherit; line-height: inherit;
+	white-space: pre-wrap; margin: 0;
+}
+
+/* ---- legacy shortcode vocabulary (conversion table §5) -------------------- */
+.ar-prose .si-title-big { font-size: var(--si-step-3); }
+.ar-prose .si-subtitle { color: var(--si-muted); font-size: var(--si-step-1); margin-top: .3em; }
+.ar-prose .si-title-small { font-size: var(--si-step-1); }
+
+.ar-prose .si-button { margin-top: calc(var(--ar-rhythm) * 1.3); }
+.ar-prose .si-btn {
+	display: inline-block;
+	padding: .62em 1.35em;
+	border: 1px solid var(--si-accent);
+	border-radius: var(--si-radius-1);
+	background: transparent;
+	color: var(--si-accent);
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); font-weight: 600;
+	letter-spacing: .02em;
+	text-decoration: none;
+	transition: background-color var(--si-dur-1) var(--si-ease), color var(--si-dur-1) var(--si-ease);
+}
+.ar-prose .si-btn:hover { background: var(--si-accent); color: #fff; }
+.ar-prose .si-file .si-btn::before { content: "↓"; margin-right: .6em; }
+
+.ar-prose .si-cta, .ar-prose .si-info-box, .ar-prose .si-wide-bar {
+	padding: var(--si-space-m);
+	background: var(--si-panel);
+	border-left: 2px solid var(--si-brass);
+}
+.ar-prose :is(.si-cta, .si-info-box, .si-wide-bar) > * + * { margin-top: .7em; }
+.ar-prose :is(.si-cta, .si-info-box) :is(h3, h4) { margin-top: 0; font-size: var(--si-step-1); }
+
+.ar-prose .si-testimonial { border-left: 2px solid var(--si-brass); padding-left: 1.4em; }
+.ar-prose .si-testimonial blockquote { border: 0; padding: 0; }
+.ar-prose .si-testimonial figcaption { border: 0; padding: 0; margin-top: .5em; }
+
+.ar-prose .si-toggle {
+	border-top: var(--si-hairline); border-bottom: var(--si-hairline);
+	padding: .8em 0;
+}
+.ar-prose .si-toggle + .si-toggle { border-top: 0; margin-top: 0; }
+.ar-prose .si-toggle > summary {
+	cursor: pointer; list-style: none;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); font-weight: 600;
+	color: var(--si-ink);
+	display: flex; align-items: center; gap: .6em;
+}
+.ar-prose .si-toggle > summary::-webkit-details-marker { display: none; }
+.ar-prose .si-toggle > summary::before {
+	content: "+"; color: var(--si-brass); font-size: 1.2em; line-height: 1; width: 1ch;
+}
+.ar-prose .si-toggle[open] > summary::before { content: "–"; }
+.ar-prose .si-toggle > :not(summary) { margin-top: .8em; }
+
+/* the ~890 column tokens: a flex row that collapses on a phone */
+.ar-prose .si-col { display: block; }
+@media (min-width: 720px) {
+	.ar-prose:has(.si-col) { display: flow-root; }
+	.ar-prose .si-col { float: left; padding-right: var(--si-space-m); box-sizing: border-box; }
+	.ar-prose .si-col-1-2 { width: 50%; }
+	.ar-prose .si-col-1-3 { width: 33.333%; }
+	.ar-prose .si-col-2-3 { width: 66.666%; }
+	.ar-prose .si-col-1-4 { width: 25%; }
+}
+
+/* ---- video: the facade (two-click) --------------------------------------- */
+/* 1,417 of the 4,140 articles embed a YouTube video. Nothing is requested from
+   YouTube until the reader presses play, then the privacy-enhanced
+   youtube-nocookie player is inserted — the same rule as the profile drafts,
+   and the same reason the fonts are self-hosted. */
+.ar-embed {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	background: var(--si-night);
+	border: 0;
+	display: grid; place-items: center;
+	overflow: hidden;
+	cursor: pointer;
+	width: 100%; padding: 0;
+	isolation: isolate;
+}
+.ar-embed img {
+	position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+	filter: var(--si-portrait-filter);
+	opacity: .78;
+	transition: opacity var(--si-dur-2) var(--si-ease), filter var(--si-dur-2) var(--si-ease);
+}
+.ar-embed:hover img, .ar-embed:focus-visible img { opacity: 1; filter: none; }
+.ar-embed__play {
+	position: relative; z-index: 1;
+	width: 76px; aspect-ratio: 1; border-radius: 50%;
+	display: grid; place-items: center;
+	background: color-mix(in srgb, var(--si-night) 55%, transparent);
+	box-shadow: 0 0 0 1px color-mix(in srgb, var(--si-brass-on-night) 70%, transparent);
+	backdrop-filter: blur(2px);
+	transition: background-color var(--si-dur-1) var(--si-ease), transform var(--si-dur-2) var(--si-ease);
+}
+.ar-embed:hover .ar-embed__play { background: var(--si-night); transform: scale(1.06); }
+.ar-embed__play svg { width: 22px; height: 24px; fill: var(--si-brass-on-night); margin-left: 4px; }
+.ar-embed__note {
+	position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+	padding: .7em 1em;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	letter-spacing: .04em;
+	color: var(--si-on-night-2);
+	background: linear-gradient(transparent, rgb(15 26 38 / .82));
+	text-align: center;
+}
+.ar-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* ---- footnotes ------------------------------------------------------------
+   Twelve articles in the archive carry a real note list. The marker is a
+   superscript link to the note, the note carries a link back to the marker,
+   and both ends flash briefly when they are jumped to — otherwise a reader who
+   lands at the foot of a long article has no idea which of twenty notes they
+   were sent to. */
+.ar-prose .si-fn {
+	font-size: .72em; line-height: 0; vertical-align: super;
+	font-variant-numeric: lining-nums;
+}
+.ar-prose .si-fn a {
+	color: var(--si-accent);
+	text-decoration: none;
+	padding: 0 .12em;
+	border-radius: 2px;
+}
+.ar-prose .si-fn a:hover { background: var(--si-panel); color: var(--si-accent-deep); }
+
+.ar-prose .si-notes {
+	margin-top: var(--si-space-2xl);
+	padding-top: var(--si-space-m);
+	border-top: var(--si-hairline);
+}
+.ar-prose .si-notes h2 {
+	margin: 0 0 var(--si-space-s);
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n2);
+	font-weight: 600;
+	letter-spacing: var(--si-track-caps);
+	text-transform: uppercase;
+	color: var(--si-muted);
+}
+.ar-prose .si-notes ol {
+	margin: 0; padding-left: 1.9em;
+	font-size: var(--si-step-n1);
+	line-height: 1.55;
+	color: var(--si-muted);
+}
+.ar-prose .si-notes li { margin-top: .55em; }
+.ar-prose .si-notes li::marker { color: var(--si-brass); font-variant-numeric: lining-nums; }
+.ar-prose .si-notes a { color: var(--si-accent); }
+.ar-prose .si-fn-back { text-decoration: none; color: var(--si-brass); padding-left: .2em; }
+.ar-prose .si-fn-back:hover { color: var(--si-accent); }
+
+/* Both ends of a jump are scroll-anchored clear of any sticky bar, and the
+   one you land on flashes once. */
+.ar-prose :is(.si-notes li, .si-fn) { scroll-margin-top: calc(var(--si-sticky-top) + 35vh); }
+.ar-prose .is-flash { animation: ar-flash 1.4s var(--si-ease) both; border-radius: 2px; }
+@keyframes ar-flash {
+	0%, 45% { background: color-mix(in srgb, var(--si-brass) 26%, transparent); }
+	100% { background: transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.ar-prose .is-flash { animation: none; outline: 2px solid var(--si-brass); outline-offset: 3px; }
+}
+
+/* ---- colophon: the record, at the foot ----------------------------------- */
+.ar-colophon {
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n1);
+	line-height: 1.6;
+	color: var(--si-muted);
+}
+.ar-colophon dl { display: grid; grid-template-columns: max-content 1fr; gap: .35em 1.3em; margin: 0; }
+.ar-colophon dt { font-size: var(--si-step-n2); letter-spacing: var(--si-track-caps); text-transform: uppercase; }
+.ar-colophon dd { margin: 0; color: var(--si-text); }
+.ar-colophon a { color: var(--si-accent); text-decoration: none; }
+.ar-colophon a:hover { text-decoration: underline; }
+
+/* ---- "continue": an index, not a row of cards ---------------------------- */
+.ar-continue { list-style: none; padding: 0; margin: 0; }
+.ar-continue li { border-top: var(--si-hairline); }
+.ar-continue li:last-child { border-bottom: var(--si-hairline); }
+.ar-continue a {
+	display: grid;
+	grid-template-columns: 5.4em 1fr auto;
+	align-items: baseline;
+	gap: .9em;
+	padding: .85em 0;
+	text-decoration: none; color: inherit;
+}
+.ar-continue .d {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	font-variant-numeric: tabular-nums; color: var(--si-muted); letter-spacing: .03em;
+}
+.ar-continue .t {
+	font-family: var(--si-font-serif); font-size: var(--si-step-0); color: var(--si-ink);
+	line-height: 1.32;
+	transition: color var(--si-dur-1) var(--si-ease);
+}
+.ar-continue .m { font-family: var(--si-font-sans); font-size: var(--si-step-n2); color: var(--si-muted); font-variant-numeric: tabular-nums; }
+.ar-continue a:hover .t { color: var(--si-accent); }
+
+/* ---- the top progress hairline ------------------------------------------- */
+.ar-progress {
+	position: fixed; top: var(--si-sticky-top); left: 0; right: 0; height: 2px; z-index: 30;
+	background: transparent; pointer-events: none;
+}
+.ar-progress i {
+	display: block; height: 100%; width: var(--p, 0%);
+	background: var(--si-brass);
+	transition: width 90ms linear;
+}
+@media (prefers-reduced-motion: reduce) { .ar-progress i { transition: none; } }
+
+/* ---- skip / a11y --------------------------------------------------------- */
+.ar-anchor { scroll-margin-top: calc(var(--si-sticky-top) + 1.5rem); }

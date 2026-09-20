@@ -103,11 +103,6 @@
   </script>
 </section>
 
-<div class="harness-after">
-  <p>Below the hero. In the real page this is the rest of the homepage; here it
-  exists only to prove the hero releases its pin cleanly and hands scrolling back.</p>
-</div>
-
 <script>
   // Harness only — the block does this from its own attributes.
   var q = new URLSearchParams(location.search);
@@ -115,9 +110,19 @@
     document.querySelector('.si-hero').dataset.siHeroMode = 'static';
   }
 </script>
-<!-- The MINIFIED gate, because that is the file WordPress inlines. Loading
+<!-- Right here, not at the end of the body: render.php prints the gate
+     immediately after the hero so it runs before the first paint, and a
+     harness that loads it somewhere else is testing a different page.
+
+     The MINIFIED gate, because that is the file WordPress inlines. Loading
      the readable source here instead is how a minifier bug that broke the
      dynamic import went unnoticed: the harness passed, the site did not. -->
 <script src="../assets/js/si-hero-boot.min.js"></script>
+
+<div class="harness-after">
+  <p>Below the hero. In the real page this is the rest of the homepage; here it
+  exists only to prove the hero releases its pin cleanly and hands scrolling back.</p>
+</div>
+
 </body>
 </html>

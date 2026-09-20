@@ -18,26 +18,88 @@ the JS did not run — no WebGL, blocked script, parse error on an older engine,
 a crawler — the hero rendered four headlines and the page's only conversion
 point, all invisible.
 
-Here the server renders a complete, legible hero. The scene module adds a
-single class, `.is-live`, only after it has a working WebGL context, and that
-class is what turns the block into a 520vh pinned scroll experience. Nothing
-else changes. So:
+Here the server renders a complete, legible hero, and JavaScript only ever
+changes how it is laid out. So:
 
 | | gets | pays |
 |---|---|---|
-| Fibre, desktop, WebGL | the full four-act scene | ~433 KB |
-| Phone, 3G, Save-Data, old device, reduced-motion, no JS | a complete static hero: all four acts, the invitation, a real frame of the globe behind them | **~14 KB** |
+| Fibre, desktop, WebGL | the full four-act scene | ~464 KB |
+| Phone, 3G, Save-Data, old device, reduced-motion, no JS | a complete static hero: all four acts, the invitation, a real frame of the globe behind them | **~9.8 KB** |
 
 The second row is not a degraded experience with the content stripped out. It
 is the whole hero, laid out for reading instead of for scrubbing.
 
 ---
 
+## The handoff (0.2.0)
+
+Static-first has a price, and until 0.2.0 the block was paying it in public:
+the visitor saw the static hero — four headlines over a poster — and then,
+about two seconds later, watched it turn into something else.
+
+Measured on si-v4 (Firefox, 1440×900, through the local proxy): first
+contentful paint at 1.2–2.3 s, `.is-live` at 3.2–3.4 s. **Nearly two seconds
+of one hero, then a cut to another**, and the document went from 1,743 px to
+5,304 px in the same frame. Then a second, smaller cut: the canvas appeared
+with the clear colour and an untextured black globe, and the textures landed
+50 ms after that.
+
+The cause was not the fade that was missing. It was *when the decision was
+taken*. The gate was printed in `wp_footer`, so the answer to "is this visitor
+getting the scene?" — which is a **layout** question — arrived after the page
+had been laid out and painted.
+
+So the class that was doing two jobs became two classes:
+
+| class | who sets it | when | what it means |
+|---|---|---|---|
+| `.is-live` | the boot gate | **before the first paint** | this visitor is getting the scene: pin the hero, open the 520vh runway, show act 0 |
+| `.is-scene` | `si-hero-scene.js` | after a complete textured frame | fade the canvas up over the poster, bring in the chapter dots |
+
+The first paint is therefore already the live composition — the pinned frame,
+act 0's headline where the scene will keep it, the poster holding the picture.
+Nothing about it moves again. The only thing that ever changes is the globe:
+the poster dissolves into the rendered scene over 900 ms, and because the text
+is in the same place in both, the dissolve is the only motion on screen.
+
+Now measured across three runs: `.is-live` lands 30–60 ms **before** first
+contentful paint, `.is-scene` about a second later, and the hero's height
+never changes.
+
+Two consequences worth knowing about:
+
+- **Arming is a guess.** The gate commits the layout before it knows the
+  module will load. Every failure path in the gate therefore *disarms* —
+  `fail()` removes `.is-live` and the static hero comes back — and a 12 s
+  watchdog covers a request that hangs rather than fails. A hero stuck at one
+  act out of four is the animation-first failure this block exists to avoid,
+  so it must always be recoverable. `tools/verify-handoff.mjs` blocks the
+  module and checks exactly this.
+- **The poster has to be the opening frame, p=0** (0.2.1). It was rendered at
+  p=0.28, chosen when the poster's only job was to be the static hero — and
+  the difference was plainly visible at the handoff: the globe changed size
+  and the first corridors un-grew, because at 0.28 the camera has pulled back
+  and `arcProgress` is already a quarter through. Measured as the mean
+  absolute pixel difference between the armed hero and the settled scene, same
+  viewport, text hidden: **3.98/255 at p=0.28, 0.95/255 at p=0**. What is left
+  at 0.95 is the starfield twinkling and the globe's own idle spin — the scene
+  is never quite still.
+
+  It survives the crop, too. `object-fit: cover` on an image **wider** than
+  its box scales by height, and the scene's camera has a fixed *vertical*
+  field of view, so the globe lands at exactly the same size in the poster as
+  in the canvas at every desktop viewport. Keep the poster wider than 2:1 or
+  that stops being true. (A portrait phone does scale by width — and is below
+  the gate's viewport floor, so it never sees the dissolve.)
+
+---
+
 ## Reach: what the gate actually does
 
-`assets/js/si-hero-boot.js` is printed **inline** in the footer (~1.3 KB
-gzipped), so a visitor the gate turns away makes no extra request at all — not
-even for the gate. Its default answer is "no"; each check must be passed:
+`assets/js/si-hero-boot.js` is printed **inline, immediately after the hero
+markup** (~1.7 KB gzipped), so a visitor the gate turns away makes no extra
+request at all — not even for the gate — and the decision is taken before the
+hero is painted. Its default answer is "no"; each check must be passed:
 
 1. **Author opt-out** — the block's "Animated scene: Never" setting.
 2. **`prefers-reduced-motion`** — a scrubbed camera is motion.
@@ -54,9 +116,10 @@ even for the gate. Its default answer is "no"; each check must be passed:
    logs a benign "WebGL context was lost" notice when the probe releases its
    context. That is us, on purpose.)
 
-Having said yes, it still waits for `requestIdleCallback` so the scene never
-competes with the poster for LCP, and still falls back silently if the import
-or the context fails late. `data-si-hero-fallback` on the element records why,
+Having said yes, it arms the layout at once (`.is-live`) and *then* waits for
+`requestIdleCallback`, so the scene never competes with the poster for LCP.
+If the import or the context fails late it disarms, and the static hero the
+server rendered is back on screen. `data-si-hero-fallback` on the element records why,
 which makes this debuggable in the field:
 
 ```js
@@ -94,9 +157,9 @@ page.
 |---|---|---|
 | three.js | 670 KB (166 KB gz) | **520 KB (130 KB gz)** tree-shaken to the 24 symbols used |
 | Textures (base set) | 1,690 KB JPEG | **300 KB** WebP |
-| Static-path poster | — | **7.8 KB** (phone) / 23 KB (desktop) |
-| Total, WebGL path | ~1,856 KB | **~433 KB** |
-| Total, gated path | (invisible hero) | **~14 KB** |
+| Poster | — | **3.0 KB** (phone) / 8.7 KB (desktop) |
+| Total, WebGL path | ~1,856 KB | **~464 KB** |
+| Total, gated path | (invisible hero) | **~9.8 KB** |
 
 The texture savings come from three measured decisions, all in
 `build/make-textures.py`:
@@ -199,7 +262,7 @@ and expect to make the theme's page wrapper transparent.
 si-hero-earth.php            plugin bootstrap, asset + block registration
 blocks/hero-earth/           block.json · render.php · edit.js
 blocks/hero-act/             block.json · render.php · edit.js
-assets/css/si-hero.css       static-first; .is-live adds the pinned mode
+assets/css/si-hero.css       static-first; .is-live pins, .is-scene fades in
 assets/css/si-hero-editor.css
 assets/js/si-hero-boot.js    the gate (inlined; .min.js is what ships)
 assets/js/si-hero-scene.js   the ported scene
@@ -207,6 +270,7 @@ assets/vendor/three-slim.js  tree-shaken three
 assets/img/                  webp + jpg textures and poster
 patterns/homepage.php        the homepage, as editable blocks
 tools/preview.html           the hero, without WordPress
+tools/verify-handoff.mjs     the four load paths, in a real browser
 tools/setup-homepage.php     wp eval-file: create the page, make it the front page
 build/                       build.sh, make-textures.py, make-poster.py
 ```
@@ -216,8 +280,24 @@ build/                       build.sh, make-textures.py, make-poster.py
 `assets/img/poster.*` is a **real frame of the scene**, rendered headlessly by
 `build/make-poster.py`, not a crop of the NASA source — a crop of the flat
 equirectangular map reads as a world map, which is the one thing the static
-hero most needs it to not look like. It is also *smaller* than the crop
-(24 KB vs 32 KB): space compresses better than coastlines.
+hero most needs it to not look like.
+
+It is specifically **the frame the scene opens on** (p=0), because it is also
+what the live hero dissolves out of; see "The handoff" above for the
+measurement. At 8.7 KB (3.0 KB at phone width) it is a third of what the p=0.28
+still cost, because the opening frame is mostly night side and space
+compresses better than city lights.
+
+Re-render it after any change to the camera track, the textures or the
+opening act:
+
+```bash
+python3 -m http.server 8750 --directory .   # in another shell
+python3 build/make-poster.py                # writes all four files, p=0
+```
+
+The URLs carry `?ver=`, so bump `SI_HERO_EARTH_VERSION` when you replace it or
+returning visitors keep the one their browser cached.
 
 ### Two copies of the copy
 
@@ -228,7 +308,7 @@ generated from a shared source because that would mean a build step.
 
 ---
 
-## Two traps in this build, both paid for
+## Three traps in this build, all paid for
 
 **Never pass `--target=es5` to the boot gate's minifier.** The file is
 hand-written in ES5 *style* so old engines can parse it, but it contains one
@@ -247,6 +327,24 @@ broken. It now loads the minified gate.
 The general form of both: a verification that does not run the artefact you
 ship is not a verification.
 
+**Never echo JavaScript from a block's `render.php`.** Block output is
+`the_content`, and **wptexturize replaces every bare `&` with `&#038;` even
+inside a `<script>` element** (the no-texturize branch in
+`wp-includes/formatting.php` does the ampersand pass anyway). The gate is full
+of `&&`, so what reached the browser was `if (a &#038;&#038; b)` —
+`SyntaxError: '#' not followed by identifier`, no scene, and a hero that
+looked exactly like a hero whose gate had said no. Quotes and dashes *are*
+skipped inside a script, which is what makes the damage look too selective to
+be a content filter.
+
+The block therefore emits `<!--si-hero-boot-->`, which wptexturize leaves
+alone, and `si_hero_earth_inject_boot()` swaps the real script in on
+`the_content` at priority 99. `tools/render-test.php` runs wptexturize's
+ampersand regex over the block's output and then injects, so the trap cannot
+come back unnoticed. (The config JSON in the same block has always used
+`JSON_HEX_AMP` — the same bug, found and fixed once before without the general
+lesson being written down.)
+
 ## Working on it
 
 ```bash
@@ -258,6 +356,12 @@ open http://localhost:8750/tools/preview.html?p=0.42   # freeze at a point in th
 
 # prove the blocks still emit the expected markup (no WP, no DB, no browser)
 php tools/render-test.php
+
+# the four load paths in a real browser: armed before first paint, the
+# dissolve, the gated hero, and the module failing back to static
+PW=<playwright node_modules> node tools/verify-handoff.mjs
+node ../../articles/build/local-proxy.mjs si-v4.local 8770 &   # …or against WordPress
+PW=… SI_BASE=http://127.0.0.1:8770 SI_PATH=/ node tools/verify-handoff.mjs
 
 # rebuild generated assets (outputs are committed; this is not a deploy step)
 bash build/build.sh

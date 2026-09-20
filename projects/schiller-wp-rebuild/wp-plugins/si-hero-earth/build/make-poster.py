@@ -1,10 +1,20 @@
 #!/usr/bin/env python3
 """Render the static hero's poster from the real scene.
 
-The poster is what every gated visitor sees instead of the WebGL hero, so it
-should be a frame of that hero — the globe as the camera actually frames it
-in act 0 — and not a flat equirectangular map, which is what you get if you
-just crop the NASA source.
+The poster does two jobs, and since 0.2.1 the second one sets the rules:
+
+  1. it is the whole hero for every gated visitor — phone, metered
+     connection, no WebGL — so it has to be a frame of the real scene and not
+     a flat equirectangular map, which is what you get if you crop the NASA
+     source and which reads as a world map rather than a planet;
+  2. it is what the live hero shows until the scene has a textured frame,
+     and then dissolves out of. So it must be THE OPENING FRAME — p=0 — or
+     the reader watches the globe change size and the corridors un-grow
+     during the handoff.
+
+Job 2 is why P_FREEZE is 0. It used to be 0.28, chosen for job 1 alone, and
+the difference was plainly visible: at 0.28 the camera has pulled back and
+the first wave of corridors is already a quarter drawn.
 
 Needs a local server on the plugin root and playwright's firefox:
 
@@ -26,9 +36,17 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "assets" / "img"
 URL = "http://localhost:8750/tools/preview.html"
 
-# Where in the runway to freeze. 0.05 is act 0's framing: the night Earth
-# filling the left of frame with the Moon high right.
-P_FREEZE = float(sys.argv[1]) if len(sys.argv) > 1 else 0.28  # act-0 globe, Asia lit — see README "The poster"
+# Where in the runway to freeze. 0 is the frame the scene opens on, which is
+# the frame the poster has to dissolve into. Pass another value to explore;
+# do not ship one.
+P_FREEZE = float(sys.argv[1]) if len(sys.argv) > 1 else 0.0
+# 2:1, wider than any desktop hero box. That matters: `object-fit: cover`
+# with an image wider than its box scales by HEIGHT, and the scene's camera
+# has a fixed VERTICAL field of view — so the globe lands at exactly the same
+# size in the poster as in the canvas, at every desktop viewport. A poster
+# taller than the box would be scaled by width instead and the dissolve would
+# jump. (Portrait phones do scale by width; they are also below the gate's
+# viewport floor and never see the scene.)
 W, H = 1600, 800
 SUFFIX = sys.argv[2] if len(sys.argv) > 2 else ""
 
@@ -36,9 +54,17 @@ with sync_playwright() as pw:
     b = pw.firefox.launch()
     pg = b.new_page(viewport={"width": W, "height": H})
     pg.goto(URL, wait_until="networkidle")
-    pg.wait_for_timeout(1500)
+    pg.wait_for_function(
+        "() => document.querySelector('.si-hero')?.classList.contains('is-scene')",
+        timeout=60000,
+    )
 
-    if "is-live" not in pg.eval_on_selector(".si-hero", "e => e.className"):
+    # `is-scene`, not `is-live`: since 0.2.0 the boot gate adds `is-live`
+    # before the first paint, on a guess about the device, and it means only
+    # that the pinned layout is on. The class that means "the renderer has
+    # painted a complete, textured frame" — which is the only state worth
+    # photographing — is `is-scene`.
+    if "is-scene" not in pg.eval_on_selector(".si-hero", "e => e.className"):
         print("ERROR: the scene did not start — nothing to capture.", file=sys.stderr)
         sys.exit(1)
 
@@ -53,8 +79,12 @@ with sync_playwright() as pw:
         const runway = h.offsetHeight - window.innerHeight;
         window.scrollTo(0, h.offsetTop + runway * {P_FREEZE});
     }}""")
-    # let the eased camera settle and the 2K textures finish
-    pg.wait_for_timeout(6000)
+    # The textures are in (that is what `is-scene` means). What is left is the
+    # eased camera, which only has somewhere to go if we scrolled. Keep the
+    # wait short: the globe carries a slow idle spin at the bookends, and
+    # every second of waiting is another 0.8° of rotation between this still
+    # and the frame the visitor actually sees it dissolve into.
+    pg.wait_for_timeout(3000 if P_FREEZE > 0 else 400)
     shot = pg.screenshot(clip={"x": 0, "y": 0, "width": W, "height": H})
     b.close()
 

@@ -1,0 +1,147 @@
+/* ==========================================================================
+   COLLECTION DRAFT A — "The Ledger"                       /blog/ · posts index
+   --------------------------------------------------------------------------
+   Fourteen years of articles as one continuous index: month by month, one
+   line each, dotted leaders, tabular dates. No cards, no grid, no thumbnails
+   in the flow — the page is a finding aid, and its job is to put three
+   thousand titles in front of a reader's eye at scanning speed.
+
+   The picture is not lost, it is moved: hovering or focusing a line raises
+   that article in a loupe at the right — image, standfirst, byline — so the
+   reader can browse with the eye and inspect with the pointer, instead of
+   scrolling past three thousand thumbnails.
+   ========================================================================== */
+
+.lg-body {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 20rem;
+	gap: 0 var(--si-space-xl);
+	align-items: start;
+	padding-bottom: var(--si-space-3xl);
+}
+
+/* ---- the index ----------------------------------------------------------- */
+.lg-list { margin: 0; padding: 0; list-style: none; }
+
+.lg-month {
+	position: sticky;
+	top: calc(var(--si-sticky-top) + var(--si-control-height) + 17px);
+	z-index: 10;
+	display: flex; align-items: baseline; gap: .8em;
+	margin: 0;
+	padding: var(--si-space-m) 0 .35em;
+	background: linear-gradient(var(--si-ground) 72%, transparent);
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n2);
+	font-weight: 600;
+	letter-spacing: var(--si-track-caps);
+	text-transform: uppercase;
+	color: var(--si-ink);
+}
+.lg-month::after { content: ""; flex: 1; height: 1px; background: var(--si-brass); opacity: .5; }
+.lg-month i { font-style: normal; color: var(--si-muted); font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+
+.lg-group { margin: 0; padding: 0; list-style: none; }
+/* 2,463 lines in one document: each month paints only when it is near the
+   viewport. The ledger has no in-page anchors, so the jump-overshoot that
+   content-visibility causes elsewhere cannot bite here. */
+.lg-group { content-visibility: auto; contain-intrinsic-size: auto 400px; }
+
+.lg-row { border-bottom: 1px solid color-mix(in srgb, var(--si-rule) 55%, transparent); }
+.lg-row > a {
+	display: grid;
+	grid-template-columns: 4.6em minmax(0, auto) 1fr auto auto;
+	align-items: baseline;
+	gap: 0 .7em;
+	padding: .46em 0;
+	text-decoration: none;
+	color: inherit;
+}
+.lg-row > a:hover, .lg-row > a:focus-visible { background: color-mix(in srgb, var(--si-panel) 60%, transparent); }
+.lg-row .d {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	font-variant-numeric: tabular-nums; letter-spacing: .02em;
+	color: var(--si-muted); white-space: nowrap;
+}
+.lg-row .t {
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-0);
+	line-height: 1.3;
+	color: var(--si-ink);
+	overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+	transition: color var(--si-dur-1) var(--si-ease);
+}
+.lg-row > a:hover .t, .lg-row > a:focus-visible .t { color: var(--si-accent); }
+.lg-row .lead {
+	border-bottom: 1px dotted var(--si-rule);
+	transform: translateY(-.28em);
+	min-width: 1.5em;
+}
+.lg-row .tp {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	letter-spacing: .04em; text-transform: uppercase; color: var(--si-muted);
+	white-space: nowrap;
+}
+.lg-row .m {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	font-variant-numeric: tabular-nums; color: var(--si-muted);
+	min-width: 2.6em; text-align: right;
+}
+.lg-row .arc-lang { transform: translateY(-.05em); }
+.lg-row.is-live > a { background: var(--si-panel); }
+
+/* ---- the loupe ----------------------------------------------------------- */
+.lg-loupe {
+	position: sticky;
+	top: calc(var(--si-sticky-top) + var(--si-control-height) + 34px);
+	display: grid;
+	gap: var(--si-space-s);
+	align-content: start;
+	padding: 0;
+	min-height: 22rem;
+}
+.lg-loupe[hidden] { display: none; }
+/* The picture arrives tonal, like every other photograph on the site, and
+   takes its own colours only when the pointer reaches it — colour stays the
+   reward for attention, one step further in. */
+.lg-loupe .arc-thumb { aspect-ratio: 3 / 2; }
+.lg-loupe .arc-thumb img { transition: opacity var(--si-dur-2) var(--si-ease), filter var(--si-dur-3) var(--si-ease); }
+.lg-loupe .arc-thumb::after { transition: opacity var(--si-dur-3) var(--si-ease); }
+.lg-loupe .arc-thumb:hover img { filter: none; }
+.lg-loupe .arc-thumb:hover::after { opacity: 0; }
+.lg-loupe > * { animation: lg-raise var(--si-dur-2) var(--si-ease) both; }
+@media (prefers-reduced-motion: reduce) { .lg-loupe > * { animation: none; } }
+@keyframes lg-raise { from { opacity: 0; transform: translateY(4px); } }
+.lg-loupe h2 {
+	margin: 0;
+	font-family: var(--si-font-serif); font-size: var(--si-step-1); font-weight: 500;
+	line-height: 1.24; color: var(--si-ink); text-wrap: pretty;
+}
+.lg-loupe p { margin: 0; font-size: var(--si-step-n1); line-height: 1.55; color: var(--si-text); }
+.lg-loupe .meta {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted);
+	display: flex; flex-wrap: wrap; gap: .3em .8em; align-items: baseline;
+}
+.lg-loupe .hint {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted);
+	font-style: italic;
+}
+.lg-loupe .si-rule--brass { width: 100%; }
+
+/* ---- narrow -------------------------------------------------------------- */
+@media (max-width: 899.98px) {
+	.lg-body { grid-template-columns: minmax(0, 1fr); }
+	.lg-loupe { display: none; }
+	/* An explicit template, not auto-placement: the phone row has to put the
+	   date, the title and the minutes on one line and the topic under them. */
+	.lg-row > a {
+		grid-template-columns: 4.4em minmax(0, 1fr) 2.6em;
+		grid-template-areas: "d t m" ". tp .";
+		row-gap: .1em; padding: .55em 0;
+	}
+	.lg-row .d { grid-area: d; }
+	.lg-row .t { grid-area: t; white-space: normal; }
+	.lg-row .m { grid-area: m; }
+	.lg-row .tp { grid-area: tp; font-size: 10.5px; }
+	.lg-row .lead, .lg-row .arc-lang { display: none; }
+}

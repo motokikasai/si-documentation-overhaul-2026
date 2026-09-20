@@ -3,7 +3,7 @@
  * Plugin Name:       SI Hero — Earth
  * Plugin URI:        https://schillerinstitute.com/
  * Description:       The scroll-driven WebGL Earth hero from the v4 homepage draft, as a native block with translatable fields and a static-first fallback.
- * Version:           0.1.2
+ * Version:           0.2.1
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Author:            Schiller Institute site rebuild
@@ -21,7 +21,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SI_HERO_EARTH_VERSION', '0.1.2' );
+define( 'SI_HERO_EARTH_VERSION', '0.2.1' );
 define( 'SI_HERO_EARTH_FILE', __FILE__ );
 define( 'SI_HERO_EARTH_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SI_HERO_EARTH_URL', plugin_dir_url( __FILE__ ) );
@@ -92,50 +92,139 @@ add_action( 'init', 'si_hero_earth_register' );
 /**
  * Absolute URLs for one texture, in both formats.
  *
+ * Version-stamped like the stylesheet and the module. Textures and the
+ * poster are overwritten in place by build/make-textures.py and
+ * build/make-poster.py, so without this a returning visitor keeps whatever
+ * their browser cached — which is how you re-render the poster, deploy it,
+ * and still see the old one.
+ *
  * @param string $name Base name in assets/img (without extension).
  * @return array{webp:string,jpg:string}
  */
 function si_hero_earth_tex( $name ) {
 	return array(
-		'webp' => SI_HERO_EARTH_URL . "assets/img/{$name}.webp",
-		'jpg'  => SI_HERO_EARTH_URL . "assets/img/{$name}.jpg",
+		'webp' => add_query_arg( 'ver', SI_HERO_EARTH_VERSION, SI_HERO_EARTH_URL . "assets/img/{$name}.webp" ),
+		'jpg'  => add_query_arg( 'ver', SI_HERO_EARTH_VERSION, SI_HERO_EARTH_URL . "assets/img/{$name}.jpg" ),
 	);
 }
 
 /**
- * Mark that a hero rendered on this request, so the boot gate is only
- * printed on pages that actually contain one.
+ * The boot gate: a marker in the block's output, replaced by the real script
+ * after the content filters have run.
  *
- * @param bool|null $set Pass true to set the flag.
- * @return bool
+ * WHERE, AND WHY IT IS NOT SIMPLY ECHOED
+ *
+ * The gate has to run before the hero is first painted, because its answer
+ * decides the hero's layout: a static panel, or 520vh of pinned runway.
+ * Printed in wp_footer (as it was until 0.2.0) the answer arrived after
+ * everything — measured on si-v4, the layout changed 1.87 s after first
+ * contentful paint and took the document from 1,743 px to 5,304 px with it.
+ * That was the flash the block was reported for.
+ *
+ * So it belongs immediately after the hero markup, inside the block's own
+ * output. But block output is `the_content`, and **wptexturize replaces
+ * every bare `&` with `&#038;` even inside a <script> element** (see the
+ * comment "Replace each & with &#038;" in wp-includes/formatting.php — it
+ * runs in the no-texturize branch too). The minified gate is full of `&&`,
+ * so what reached the browser was
+ *
+ *     if (a &#038;&#038; b)    →    SyntaxError: '#' not followed by identifier
+ *
+ * and the hero silently stayed static. (The config JSON in the same block
+ * has always been encoded with JSON_HEX_AMP, which is the same bug, already
+ * paid for once.)
+ *
+ * The block therefore emits an HTML comment — which wptexturize leaves
+ * alone — and this filter swaps the script in at priority 99, after every
+ * content filter has had its turn. If the marker never arrives (a hero
+ * rendered outside `the_content`, or an HTML minifier that strips comments),
+ * the footer fallback below still prints the gate: a hero that upgrades late
+ * beats a hero that never upgrades.
  */
-function si_hero_earth_needs_boot( $set = null ) {
-	static $needed = false;
-	if ( true === $set ) {
-		$needed = true;
-	}
-	return $needed;
+const SI_HERO_EARTH_BOOT_MARKER = '<!--si-hero-boot-->';
+
+/**
+ * Emitted by blocks/hero-earth/render.php, immediately after the hero.
+ *
+ * @return string
+ */
+function si_hero_earth_boot_marker() {
+	si_hero_earth_boot_state( 'needed', true );
+	return SI_HERO_EARTH_BOOT_MARKER;
 }
 
 /**
- * Print the boot gate inline in the footer.
+ * Per-request flags: whether a hero rendered, and whether the gate went in.
  *
- * Inline on purpose: it is ~1.6 KB minified, and a visitor the gate turns
- * away should not have paid for a request to find that out. See
- * assets/js/si-hero-boot.js for the commented source.
+ * @param string    $key   'needed' or 'injected'.
+ * @param bool|null $set   Pass true to set.
+ * @return bool
  */
-function si_hero_earth_print_boot() {
-	if ( ! si_hero_earth_needs_boot() ) {
-		return;
+function si_hero_earth_boot_state( $key, $set = null ) {
+	static $state = array(
+		'needed'   => false,
+		'injected' => false,
+	);
+	if ( true === $set ) {
+		$state[ $key ] = true;
 	}
+	return $state[ $key ];
+}
+
+/**
+ * The gate itself, as a script element.
+ *
+ * The minified file is what ships; the readable source is the fallback so a
+ * checkout without a build still works.
+ *
+ * @return string
+ */
+function si_hero_earth_boot_script() {
 	$min  = SI_HERO_EARTH_DIR . 'assets/js/si-hero-boot.min.js';
 	$src  = SI_HERO_EARTH_DIR . 'assets/js/si-hero-boot.js';
 	$path = file_exists( $min ) ? $min : $src;
 	$js   = file_get_contents( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 	if ( false === $js ) {
+		return '';
+	}
+	return '<script id="si-hero-boot">' . $js . '</script>';
+}
+
+/**
+ * Replace the marker with the gate, after wptexturize and friends.
+ *
+ * @param string $content Post content.
+ * @return string
+ */
+function si_hero_earth_inject_boot( $content ) {
+	if ( false === strpos( $content, SI_HERO_EARTH_BOOT_MARKER ) ) {
+		return $content;
+	}
+	$script = si_hero_earth_boot_script();
+	if ( '' === $script ) {
+		return str_replace( SI_HERO_EARTH_BOOT_MARKER, '', $content );
+	}
+	si_hero_earth_boot_state( 'injected', true );
+
+	/* One gate per page however many heroes it has: the first marker becomes
+	 * the script, the rest go away. */
+	$pos = strpos( $content, SI_HERO_EARTH_BOOT_MARKER );
+	$content = substr_replace( $content, $script, $pos, strlen( SI_HERO_EARTH_BOOT_MARKER ) );
+	return str_replace( SI_HERO_EARTH_BOOT_MARKER, '', $content );
+}
+add_filter( 'the_content', 'si_hero_earth_inject_boot', 99 );
+
+/**
+ * Fallback: print the gate in the footer if the marker never got replaced.
+ *
+ * This is the pre-0.2.0 behaviour, flash and all, and it exists only so that
+ * a hero rendered outside `the_content` still becomes the scene.
+ */
+function si_hero_earth_print_boot() {
+	if ( ! si_hero_earth_boot_state( 'needed' ) || si_hero_earth_boot_state( 'injected' ) ) {
 		return;
 	}
-	printf( "<script id=\"si-hero-boot\">%s</script>\n", $js ); // phpcs:ignore WordPress.Security.EscapeOutput
+	echo si_hero_earth_boot_script(), "\n"; // phpcs:ignore WordPress.Security.EscapeOutput
 }
 add_action( 'wp_footer', 'si_hero_earth_print_boot', 20 );
 

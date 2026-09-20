@@ -1,0 +1,164 @@
+/* ==========================================================================
+   COLLECTION DRAFT B — "The Drift"                        /blog/ · posts index
+   --------------------------------------------------------------------------
+   The archive as a river you travel down, rather than a list you page through.
+
+   A single spine runs the length of the decade. Articles hang off it in date
+   order, alternating sides, and they are NOT all the same size: a 7,000-word
+   feature gets its plate, its standfirst and room to breathe; a 200-word news
+   short gets one line. That is the real shape of this archive — a few hundred
+   substantial pieces carried along by several thousand daily notes — and the
+   page is honest about it instead of flattening everything into equal cards.
+
+   On the right, the decade's own density: fourteen bars, one per year, drawn
+   from the counts (1 article in 2012, 718 in 2021). It is a picture of the
+   Institute's publishing history and a scrubber at the same time.
+   ========================================================================== */
+
+.dr { padding-bottom: var(--si-space-3xl); }
+
+/* ---- the stream ----------------------------------------------------------
+   .dr-stream carries the room the density rail needs; .dr-inner is the box the
+   spine and the two entry columns share, so 50% means the same thing to all
+   three and the nodes sit exactly on the line. */
+.dr-stream { padding-right: 5.5rem; }
+.dr-inner { position: relative; }
+.dr-inner::before {
+	content: ""; position: absolute; top: 0; bottom: 0; left: 50%;
+	width: 1px; background: var(--si-rule);
+}
+
+.dr-year { position: relative; padding-block: var(--si-space-xl) 0; scroll-margin-top: calc(var(--si-sticky-top) + 4rem); }
+.dr-year__num {
+	position: relative; z-index: 1;
+	margin: 0 auto var(--si-space-l);
+	width: max-content;
+	padding: 0 .55em;
+	background: var(--si-ground);
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-4);
+	font-weight: 300;
+	font-variant-numeric: oldstyle-nums lining-nums;
+	line-height: 1;
+	color: var(--si-jasper-deep);
+	letter-spacing: .06em;
+}
+.dr-year__num small {
+	display: block;
+	margin-top: .55em;
+	font-family: var(--si-font-sans); font-size: 11px; font-weight: 600;
+	letter-spacing: var(--si-track-caps); text-transform: uppercase;
+	color: var(--si-muted); text-align: center;
+}
+
+.dr-entries {
+	list-style: none; margin: 0; padding: 0;
+	display: grid; grid-template-columns: 1fr 1fr;
+}
+.dr-entry { position: relative; padding-block: .55em; min-width: 0; }
+.dr-entry--l { grid-column: 1; grid-row: var(--row); padding-right: var(--si-space-l); text-align: right; }
+.dr-entry--r { grid-column: 2; grid-row: var(--row); padding-left: var(--si-space-l); }
+/* the node on the spine */
+.dr-entry::after {
+	content: ""; position: absolute; top: 1.05em;
+	width: 5px; height: 5px; border-radius: 50%;
+	background: var(--si-rule);
+	transition: background-color var(--si-dur-1) var(--si-ease), scale var(--si-dur-1) var(--si-ease);
+}
+.dr-entry--l::after { right: -3px; }
+.dr-entry--r::after { left: -3px; }
+.dr-entry:hover::after, .dr-entry:focus-within::after { background: var(--si-brass); scale: 1.8; }
+
+.dr-entry a { text-decoration: none; color: inherit; display: block; }
+.dr-entry:not(.dr-entry--feature) a { display: grid; grid-template-columns: 4.4em minmax(0, 1fr); gap: .6em; align-items: baseline; }
+.dr-entry--l:not(.dr-entry--feature) a { grid-template-columns: minmax(0, 1fr) 4.4em; }
+.dr-entry--l:not(.dr-entry--feature) .d { order: 2; }
+.dr-entry .d {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	font-variant-numeric: tabular-nums; letter-spacing: .04em;
+	color: var(--si-muted);
+}
+.dr-entry .t {
+	font-family: var(--si-font-serif); font-size: var(--si-step-0);
+	line-height: 1.3; color: var(--si-ink);
+	transition: color var(--si-dur-1) var(--si-ease);
+	text-wrap: pretty;
+}
+.dr-entry a:hover .t, .dr-entry a:focus-visible .t { color: var(--si-accent); }
+
+/* a feature: the archive's own weighting, made visible */
+.dr-entry--feature { padding-block: var(--si-space-m); }
+.dr-entry--feature .t { font-size: var(--si-step-2); line-height: 1.16; font-weight: var(--si-weight-display); }
+.dr-entry--feature .x {
+	margin: .5em 0 0; font-size: var(--si-step-n1); line-height: 1.5; color: var(--si-muted);
+	max-width: 46ch;
+}
+.dr-entry--l.dr-entry--feature .x { margin-left: auto; }
+/* The plate is an illustration, not the entry. Capped so the title still
+   leads, and pushed to the spine side so the two columns read as one river. */
+.dr-entry--feature .arc-thumb { margin-bottom: .8em; aspect-ratio: 16 / 9; max-width: 22rem; }
+.dr-entry--l.dr-entry--feature .arc-thumb { margin-left: auto; }
+.dr-entry--feature .meta {
+	margin-top: .55em; display: flex; gap: .3em .8em; flex-wrap: wrap;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	letter-spacing: .04em; text-transform: uppercase; color: var(--si-muted);
+}
+.dr-entry--l .meta { justify-content: flex-end; }
+
+.dr-year[data-filled="0"] .dr-entries { min-height: var(--h, 400px); }
+
+/* ---- the density rail ---------------------------------------------------- */
+.dr-rail {
+	position: fixed;
+	right: max(var(--si-space-2xs), calc((100vw - var(--si-container)) / 2 - 3.2rem));
+	top: 50%; translate: 0 -50%;
+	z-index: 15;
+	display: grid; gap: 3px;
+	width: 4.2rem;
+	font-family: var(--si-font-sans);
+}
+.dr-rail button {
+	display: grid; grid-template-columns: 2.1rem 1fr; align-items: center; gap: .4rem;
+	border: 0; background: none; padding: 0; cursor: pointer;
+	color: var(--si-muted);
+	font-size: 10.5px; font-variant-numeric: tabular-nums; letter-spacing: .04em;
+	text-align: right;
+}
+.dr-rail button i {
+	display: block; height: 4px; border-radius: 2px;
+	width: var(--w, 10%); min-width: 3px;
+	background: var(--si-rule);
+	transition: background-color var(--si-dur-1) var(--si-ease), height var(--si-dur-1) var(--si-ease);
+	justify-self: start;
+}
+.dr-rail button:hover { color: var(--si-ink); }
+.dr-rail button:hover i { background: var(--si-jasper); }
+.dr-rail button[aria-current="true"] { color: var(--si-ink); font-weight: 700; }
+.dr-rail button[aria-current="true"] i { background: var(--si-brass); height: 6px; }
+
+/* ---- narrow: the spine moves to the edge, the rail to the foot ----------- */
+@media (max-width: 899.98px) {
+	.dr-stream { padding-right: 0; }
+	.dr-inner { padding-left: 1.2rem; }
+	.dr-inner::before { left: 0; }
+	.dr-entries { grid-template-columns: minmax(0, 1fr); }
+	.dr-year__num { margin-left: 0; width: auto; text-align: left; background: none; padding: 0; }
+	.dr-year__num small { text-align: left; }
+	.dr-entry--l, .dr-entry--r {
+		grid-column: 1; grid-row: auto;       /* one bank: the pairing dissolves */
+		padding-left: var(--si-space-s); padding-right: 0; text-align: left;
+	}
+	.dr-entry--l::after, .dr-entry--r::after { left: calc(-1.2rem - 2px); right: auto; }
+	.dr-entry--l .meta, .dr-entry--l.dr-entry--feature .x { justify-content: flex-start; margin-left: 0; }
+	.dr-rail {
+		position: sticky; top: auto; bottom: 0; translate: none;
+		right: auto; width: auto;
+		grid-auto-flow: column; grid-auto-columns: 1fr; gap: 1px;
+		align-items: end;
+		background: var(--si-ground);
+		border-top: var(--si-hairline);
+		padding: 6px 0 4px;
+	}
+	.dr-rail button { grid-template-columns: none; grid-template-rows: 1fr auto; gap: 2px; text-align: center; font-size: 9px; }
+	.dr-rail button i { width: 100%; height: var(--hh, 4px); align-self: end; }
+}

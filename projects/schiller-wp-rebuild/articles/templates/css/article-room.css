@@ -1,0 +1,267 @@
+/* ==========================================================================
+   DRAFT B — "The Reading Room"    /blog/{yyyy}/{mm}/{dd}/{slug}/ · single post
+   --------------------------------------------------------------------------
+   Reading as a session the visitor can settle into, and set.
+
+   The text sits on a sheet of paper laid on the limestone ground. A slim rail
+   on the left is the only furniture: a spine that shows how far through the
+   article you are, the article's own sections as stations on it, and how long
+   is left. In the corner, three quiet settings — GROUND, SIZE, MEASURE —
+   remembered between articles.
+
+   The night ground is the reason this draft exists. "Not only white with black
+   text" is answered by letting the reader choose the environment: limestone by
+   day, paper for print-like contrast, and the one dark field Jasper already
+   defines (--si-night / --si-on-night / --si-brass-on-night). The switch works
+   by re-pointing Jasper's OWN semantic roles inside this page — no Blocksy
+   variable is touched, and the Customizer still owns the palette.
+   ========================================================================== */
+
+.room-page { background: var(--si-ground); transition: background-color var(--si-dur-3) var(--si-ease); }
+
+/* ---- the three grounds --------------------------------------------------- */
+.room-page[data-ground="paper"] {
+	--si-ground: var(--si-card);
+	--si-panel: #F2F4F6;
+}
+.room-page[data-ground="night"] {
+	--si-ground: var(--si-night);
+	--si-card: var(--si-night-2);
+	--si-panel: #1C2E42;
+	--si-rule: #2A3E55;
+	--si-text: var(--si-on-night-2);
+	--si-ink: var(--si-on-night);
+	--si-muted: #8EA4BA;              /* 6.2:1 on --si-night-2 */
+	--si-accent: #9BBDE2;             /* 8.1:1 on --si-night-2 */
+	--si-accent-deep: #C3D8EE;
+	--si-brass: var(--si-brass-on-night);
+	--si-shadow-1: none;
+	--si-portrait-filter: grayscale(1) contrast(.94) brightness(.86);
+	color-scheme: dark;
+}
+.room-page[data-ground="night"] .room-plate { box-shadow: 0 0 0 1px var(--si-rule); }
+.room-page[data-ground="paper"] .room-plate { box-shadow: none; border-inline: var(--si-hairline); }
+
+/* ---- reading size and measure -------------------------------------------- */
+.room-page[data-size="s"] { --room-size: 1rem; }
+.room-page[data-size="m"] { --room-size: clamp(1.09rem, 1.03rem + .27vw, 1.25rem); }
+.room-page[data-size="l"] { --room-size: clamp(1.19rem, 1.1rem + .4vw, 1.4rem); }
+.room-page[data-measure="narrow"] { --ar-measure: 54ch; }
+.room-page[data-measure="wide"]   { --ar-measure: 72ch; }
+
+/* ---- frame --------------------------------------------------------------- */
+.room {
+	display: grid;
+	grid-template-columns: [rail] 14rem [plate] minmax(0, 1fr);
+	column-gap: var(--si-space-xl);
+	align-items: start;
+	max-width: calc(var(--si-container) + 4rem);
+	margin-inline: auto;
+	padding: var(--si-space-xl) var(--si-gutter) var(--si-space-3xl);
+}
+
+/* ---- the rail ------------------------------------------------------------ */
+.room-rail {
+	grid-column: rail;
+	position: sticky;
+	top: calc(var(--si-sticky-top) + var(--si-space-l));
+	display: grid;
+	grid-template-columns: 3px 1fr;
+	column-gap: var(--si-space-s);
+	font-family: var(--si-font-sans);
+	max-height: calc(100dvh - var(--si-sticky-top) - var(--si-space-2xl));
+}
+.room-spine {
+	grid-column: 1; grid-row: 1 / span 3;
+	position: relative;
+	width: 3px;
+	background: var(--si-rule);
+	border-radius: 2px;
+	overflow: visible;
+}
+.room-spine i {
+	position: absolute; left: 0; top: 0; width: 100%; height: var(--p, 0%);
+	background: var(--si-brass);
+	border-radius: 2px;
+	transition: height 120ms linear;
+}
+.room-spine b {                       /* a station: one of the article's headings */
+	position: absolute; left: 50%; top: var(--at);
+	width: 9px; height: 9px; margin: -4px 0 0 -4.5px;
+	border-radius: 50%;
+	background: var(--si-ground);
+	box-shadow: 0 0 0 1.5px var(--si-rule);
+	transition: box-shadow var(--si-dur-2) var(--si-ease), background-color var(--si-dur-2) var(--si-ease);
+}
+.room-spine b.is-past { background: var(--si-brass); box-shadow: 0 0 0 1.5px var(--si-brass); }
+
+.room-sections { grid-column: 2; margin: 0; padding: 0; list-style: none; overflow-y: auto; scrollbar-width: thin; }
+.room-sections li + li { margin-top: .5em; }
+.room-sections a {
+	display: block;
+	font-size: var(--si-step-n1);
+	line-height: 1.32;
+	color: var(--si-muted);
+	text-decoration: none;
+	transition: color var(--si-dur-1) var(--si-ease);
+}
+.room-sections a:hover { color: var(--si-ink); }
+.room-sections a[aria-current="true"] { color: var(--si-ink); font-weight: 600; }
+.room-sections .lv3 { padding-left: .9em; font-size: var(--si-step-n2); }
+
+.room-status {
+	grid-column: 2;
+	margin: 0 0 var(--si-space-s);
+	font-size: var(--si-step-n2);
+	letter-spacing: var(--si-track-caps);
+	text-transform: uppercase;
+	color: var(--si-muted);
+	font-variant-numeric: tabular-nums;
+}
+.room-top {
+	grid-column: 2;
+	margin: var(--si-space-s) 0 0;
+	font-size: var(--si-step-n1);
+	color: var(--si-muted);
+	background: none; border: 0; padding: 0; cursor: pointer; text-align: left;
+	font-family: inherit;
+}
+.room-top:hover { color: var(--si-accent); }
+
+/* ---- the sheet ----------------------------------------------------------- */
+.room-plate {
+	grid-column: plate;
+	background: var(--si-card);
+	box-shadow: var(--si-shadow-1);
+	padding: 0 0 var(--si-space-2xl);
+	transition: background-color var(--si-dur-3) var(--si-ease);
+}
+.room-band { margin: 0; display: block; background: var(--si-panel); }
+.room-band img {
+	display: block; width: 100%; aspect-ratio: 21 / 9; max-height: 42vh; object-fit: cover;
+	filter: var(--si-portrait-filter);
+	transition: filter var(--si-dur-3) var(--si-ease);
+}
+.room-band:hover img { filter: none; }
+
+.room-inner { padding: var(--si-space-xl) clamp(var(--si-space-m), 6vw, var(--si-space-2xl)) 0; }
+.room-head { max-width: var(--ar-measure); }
+.room-kicker {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2); font-weight: 600;
+	letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-muted);
+	display: flex; align-items: center; gap: .7em;
+}
+.room-kicker::before { content: ""; width: 1.8em; height: 1px; background: var(--si-brass); }
+.room-title {
+	margin: .5em 0 0;
+	font-family: var(--si-font-serif);
+	font-optical-sizing: auto;
+	font-size: var(--si-step-4);
+	font-weight: var(--si-weight-display);
+	line-height: 1.12;
+	letter-spacing: var(--si-track-display);
+	color: var(--si-ink);
+	text-wrap: balance;
+}
+.room-standfirst { margin: .65em 0 0; font-size: var(--si-step-1); line-height: 1.5; color: var(--si-muted); font-style: italic; }
+.room-head .ar-dateline { margin-top: var(--si-space-m); padding-top: var(--si-space-2xs); border-top: var(--si-hairline); }
+.room-head .ar-tags { margin-top: .5em; }
+
+.room-prose { margin-top: var(--si-space-l); font-size: var(--room-size, clamp(1.09rem, 1.03rem + .27vw, 1.25rem)); }
+
+/* ---- the settings --------------------------------------------------------
+   They belong in the rail, with the rest of the reading furniture — a floating
+   cluster over the text would be one more thing in the reader's way. Only when
+   the rail collapses do they become a bar the thumb can reach. */
+.room-controls {
+	grid-column: 2;
+	margin-top: var(--si-space-m);
+	padding-top: var(--si-space-s);
+	border-top: var(--si-hairline);
+	display: grid; gap: var(--si-space-3xs);
+	justify-items: start;
+}
+.room-set {
+	display: flex; align-items: center; gap: 2px;
+	padding: 2px;
+	background: transparent;
+	border: 0;
+	border-radius: var(--si-radius-round);
+}
+.room-set > span {
+	padding: 0 .7em 0 .9em;
+	font-family: var(--si-font-sans); font-size: 10.5px; font-weight: 600;
+	letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-muted);
+}
+.room-set button {
+	min-width: 30px; height: 26px; padding: 0 9px; margin: 0;
+	border: 0; border-radius: var(--si-radius-round); background: transparent;
+	font-family: var(--si-font-sans); font-size: 12.5px; line-height: 26px; font-weight: 500;
+	color: var(--si-muted); cursor: pointer;
+	transition: background-color var(--si-dur-1) var(--si-ease), color var(--si-dur-1) var(--si-ease);
+}
+.room-set button:hover { color: var(--si-ink); }
+.room-set button[aria-pressed="true"] { background: var(--si-panel); color: var(--si-ink); }
+.room-page[data-ground="night"] .room-set { background: var(--si-night-2); }
+
+/* ---- the foot ------------------------------------------------------------ */
+.room-foot {
+	grid-column: plate;
+	margin-top: var(--si-space-xl);
+	display: grid; gap: var(--si-space-xl);
+	max-width: var(--si-container-narrow);
+}
+.room-foot h2 {
+	margin: 0 0 var(--si-space-s);
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2); font-weight: 600;
+	letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-muted);
+}
+
+/* ---- narrow -------------------------------------------------------------- */
+@media (max-width: 1023.98px) {
+	.room { grid-template-columns: minmax(0, 1fr); }
+	.room-plate, .room-foot { grid-column: 1; }
+	.room-rail {
+		grid-column: 1;
+		position: sticky; top: var(--si-sticky-top);
+		z-index: 18;
+		grid-template-columns: 1fr;
+		max-height: none;
+		margin-bottom: var(--si-space-s);
+		background: var(--si-ground);
+		padding-block: .5em;
+	}
+	.room-spine {
+		grid-column: 1; grid-row: auto;
+		width: 100%; height: 3px;
+	}
+	.room-spine i { width: var(--p, 0%); height: 100%; transition: width 120ms linear; }
+	.room-spine b { left: var(--at); top: 50%; margin: -4.5px 0 0 -4.5px; }
+	.room-sections { display: none; }
+	.room-status { margin: .6em 0 0; }
+	.room-top { display: none; }
+	.room-controls {
+		position: fixed; z-index: 35;
+		right: var(--si-space-s); bottom: var(--si-space-s);
+		grid-column: auto; margin: 0; padding: 4px; border: 0;
+		justify-items: end;
+		background: var(--si-card);
+		box-shadow: var(--si-shadow-2);
+		border-radius: 20px;
+	}
+	.room-page[data-ground="night"] .room-controls { background: var(--si-night-2); box-shadow: 0 0 0 1px var(--si-rule); }
+	.room-set > span { display: none; }
+}
+@media (max-width: 599.98px) {
+	.room-inner { padding-inline: var(--si-space-m); }
+	/* the settings matter MORE on a phone, not less — they move to a single
+	   row at the bottom, where a thumb reaches them */
+	.room-controls {
+		left: var(--si-space-2xs); right: var(--si-space-2xs);
+		bottom: calc(var(--si-space-s) + 44px);   /* clear of the prototype strip */
+		grid-auto-flow: column; justify-items: stretch; justify-content: center;
+		gap: var(--si-space-3xs);
+	}
+	.room-set { padding: 2px; }
+	.room-set button { min-width: 26px; padding: 0 7px; }
+}

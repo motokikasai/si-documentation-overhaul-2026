@@ -1,0 +1,704 @@
+/* si/hero-earth — JASPER.
+ *
+ * A duplicate of wp-plugins/si-hero-earth/assets/css/si-hero.css with the
+ * Jasper design system applied. Nothing in the WordPress plugin is touched;
+ * this is here to be looked at next to it.
+ *
+ * THE MARKUP IS UNCHANGED. Every selector below exists in the shipped sheet
+ * and matches the same element the block already renders. That is deliberate:
+ * if this version wins, the port is this file plus the scene's palette block,
+ * and not one line of render.php. It also keeps the comparison honest —
+ * what differs between the two heroes is the design system, not the hero.
+ *
+ * WHAT JASPER CHANGES, AND WHY
+ *
+ *   field     The hero used two invented navies (#060d1f, #0a1428) and a
+ *             clear colour of its own. There is now one field,
+ *             --si-hero-field (#04070F), used by the canvas, the poster,
+ *             the vignette, every scrim and the CSS ground. It is not a
+ *             Jasper token and the block comment on it says why.
+ *   composition  Each act is placed where the camera leaves the frame
+ *             empty — centre, left, right, centre — instead of all four
+ *             sitting in the same centred box. See COMPOSITION below; it is
+ *             the change that made the headline legible, more than any
+ *             amount of weight or shadow did.
+ *   accent    #d4a94c / #e8c87e (invented golds) → --si-brass-on-night
+ *             (#C9A866), the system's brass at the one value it is allowed
+ *             to carry small text on a dark field (7.8:1).
+ *   type      Georgia and a system sans → Source Serif 4 and Source Sans 3,
+ *             self-hosted, with Jasper's fluid steps and tracking. Headings
+ *             take --si-weight-heading (450) rather than the display 380 —
+ *             the smallest step that survives being set over a lit planet.
+ *             Source Serif's optical-size axis is the point of the family:
+ *             at --si-step-6 it draws the fine display cut the old stack
+ *             cannot, and the headline stops looking like a system font.
+ *   shape     999px pills → --si-radius-1 (2px). Jasper is near-square on
+ *             purpose; the circle is reserved (here: the chapter dots).
+ *   the rule  Jasper allows ONE brass rule per page. It is spent on the
+ *             scroll invitation, which is the only line in the hero.
+ *   motion    --si-ease and --si-dur-3 (640ms) instead of hand-picked
+ *             durations, so the hero settles like every other Jasper
+ *             component — and goes to 0ms with the rest under
+ *             prefers-reduced-motion.
+ *
+ * WHAT JASPER DOES NOT CHANGE: the static-first structure, the .is-live /
+ * .is-scene handoff, the 520vh runway, the grid of four acts. Those are
+ * architecture, not design system, and they are byte-for-byte the shipped
+ * behaviour.
+ */
+
+.si-hero {
+  /* Roles, not colours. Each one is a Jasper token; the hero names them so
+   * the scene module can be handed the same values (see the JASPER PALETTE
+   * block in js/hero-scene-jasper.js — the two must agree, because the
+   * poster, the canvas and the CSS ground all paint the same field). */
+  /* THE FIELD. Deliberately not a Jasper token.
+   *
+   * The first pass set this to --si-night (#0F1A26), reasoning that canvas,
+   * poster and CSS ground should be one colour. The consistency is right;
+   * the colour was not. --si-night is the value of a dark UI band sitting
+   * against limestone — it was never meant to be outer space, and at that
+   * value the Milky Way and the faint stars lose their contrast, the sky
+   * reads as slate, and every scrim below has to fade into a field light
+   * enough to show the scrim's own edge.
+   *
+   * So the field is night taken to space. The scene's clear colour is this
+   * exact value (hero-scene-jasper.js) and so is every scrim, vignette stop
+   * and solid fill in this sheet — one field, at its proper depth. Change
+   * it in both places, and re-render the poster after you do. */
+  --si-hero-field: #04070F;
+  --si-hero-field-rgb: 4 7 15;   /* for the scrims, so the alphas stay readable */
+
+  --si-hero-ground:   var(--si-hero-field);
+  --si-hero-ground-2: var(--si-night-2, #162536);
+  --si-hero-ink:      var(--si-on-night, #E6EBF0);
+  --si-hero-ink-2:    var(--si-on-night-2, #A9BCD0);
+  --si-hero-accent:   var(--si-brass-on-night, #C9A866);
+  --si-hero-brass:    var(--si-brass, #A08040);
+  --si-hero-hairline: color-mix(in srgb, var(--si-hero-ink) 22%, transparent);
+
+  --si-pad-x: var(--si-gutter, 1.5rem);
+  --si-hero-font-display: var(--si-font-serif);
+  --si-hero-font-text: var(--si-font-sans);
+
+  position: relative;
+  box-sizing: border-box;
+  background: var(--si-hero-ground);
+  color: var(--si-hero-ink);
+}
+.si-hero *,
+.si-hero *::before,
+.si-hero *::after {
+  box-sizing: border-box;
+}
+
+.si-hero.alignfull {
+  width: 100%;
+}
+
+/* ===========================================================================
+   STATIC HERO — what every visitor gets, before and without JavaScript
+   =========================================================================== */
+
+.si-hero__pin {
+  position: relative;
+  min-height: 88svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--si-space-xl, 3rem);
+  padding: var(--si-space-3xl, 6rem) var(--si-pad-x) var(--si-space-2xl, 4rem);
+}
+
+.si-hero__fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--si-hero-ground);
+}
+.si-hero__poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 62%;
+  display: block;
+}
+
+.si-hero__canvas {
+  display: none; /* no canvas work at all until .is-live */
+}
+
+/* The vignette is the night token at four depths — the same colour the
+ * canvas clears to, so the seam between canvas and CSS never shows. */
+.si-hero__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    rgb(var(--si-hero-field-rgb) / 0.62),
+    rgb(var(--si-hero-field-rgb) / 0.28) 30%,
+    rgb(var(--si-hero-field-rgb) / 0.45) 70%,
+    rgb(var(--si-hero-field-rgb) / 0.94)
+  );
+}
+
+.si-hero__stages {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--si-container, 1240px);
+  margin: 0 auto;
+  display: grid;
+  gap: var(--si-space-l, 2rem) var(--si-space-xl, 3rem);
+  /* statement / two supporting chapters / invitation */
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "a0 a0"
+    "a1 a2"
+    "a3 a3";
+}
+.si-hero__stage[data-stage="0"] { grid-area: a0; }
+.si-hero__stage[data-stage="1"] { grid-area: a1; }
+.si-hero__stage[data-stage="2"] { grid-area: a2; }
+.si-hero__stage[data-stage="3"] { grid-area: a3; }
+
+.si-hero__stage {
+  text-align: center;
+  min-width: 0; /* let long German compounds wrap instead of blowing the grid */
+}
+
+/* The eyebrow voice, exactly as Jasper defines it: sans, step −2, 600,
+ * 0.14em. The shipped hero tracked it at 0.34em, which is wide enough that
+ * the German kickers ("Die Neue Seidenstraße · Der Oasenplan") wrap.
+ *
+ * AND: the kicker is a <p>, so `.si-hero__stage p` (0,1,1) outranks
+ * `.si-hero__kicker` (0,1,0) and has been setting its size all along —
+ * measured at 17.28px in the shipped hero and 23.7px here, against the
+ * 11.5px and 12.5px the sheets ask for. Every `p` rule in this file is
+ * therefore written `p:not(.si-hero__kicker)`. This is the reset-outranks-
+ * sibling trap from the project's gotchas, wearing a different hat. */
+.si-hero__kicker {
+  font-family: var(--si-hero-font-text);
+  font-size: var(--si-step-n2, 0.78rem);
+  font-weight: var(--si-weight-strong, 600);
+  line-height: 1.3;
+  letter-spacing: var(--si-track-caps, 0.14em);
+  text-transform: uppercase;
+  color: var(--si-hero-accent);
+  margin: 0 0 var(--si-space-s, 1rem);
+  text-shadow: 0 0 2px rgb(var(--si-hero-field-rgb) / 0.9),
+               0 1px 4px rgb(var(--si-hero-field-rgb) / 0.85);
+}
+
+/* Display voice. font-optical-sizing is what buys Source Serif 4 its fine
+ * display cut at this size — without it the headline is the reading cut
+ * scaled up, which is the difference between a banner and a big paragraph. */
+.si-hero__stage h1,
+.si-hero__stage h2 {
+  font-family: var(--si-hero-font-display);
+  font-optical-sizing: auto;
+  /* Jasper's display weight is 380 — light, because the optical cut's own
+   * contrast is meant to do the work. That holds on a page and fails over a
+   * lit planet, where a 380 stroke is about the width of a city-light
+   * cluster and gets eaten by it. --si-weight-heading (450) is the smallest
+   * step that survives, and it is still the system's own value. */
+  font-weight: var(--si-weight-heading, 450);
+  line-height: var(--si-leading-display, 1.08);
+  letter-spacing: var(--si-track-display, -0.012em);
+  text-wrap: balance;
+  margin: 0;
+  /* A tight halo, not a soft glow. The 30px blur this replaces lifted a
+   * haze behind the letters but never gave them an edge; 2px of the field
+   * colour does, and disappears at reading distance. */
+  text-shadow: 0 0 2px rgb(var(--si-hero-field-rgb) / 0.9),
+               0 1px 3px rgb(var(--si-hero-field-rgb) / 0.8);
+}
+/* Static mode: the statement shares the screen with three other acts, so it
+ * takes Jasper's h1 step. Live mode gives it the banner step — see below. */
+.si-hero__stage h1 {
+  font-size: var(--si-step-5, 2.23rem);
+}
+/* Supporting chapters are quieter than the statement in static mode; in
+ * live mode each one owns the whole screen, so they scale back up. */
+.si-hero__stage h2 {
+  font-size: var(--si-step-3, 1.66rem);
+  line-height: var(--si-leading-heading, 1.2);
+}
+.si-hero__stage[data-stage="3"] h2 {
+  font-size: var(--si-step-4, 1.92rem);
+}
+.si-hero__stage h1 em,
+.si-hero__stage h2 em {
+  font-style: italic;
+  color: var(--si-hero-accent);
+}
+.si-hero__stage p:not(.si-hero__kicker) {
+  font-family: var(--si-hero-font-text);
+  margin: var(--si-space-s, 1rem) auto 0;
+  max-width: var(--si-measure-narrow, 42ch);
+  font-size: var(--si-step-0, 1.06rem);
+  line-height: var(--si-leading-body, 1.62);
+  color: var(--si-hero-ink-2);
+  text-shadow: 0 0 2px rgb(var(--si-hero-field-rgb) / 0.9),
+               0 1px 4px rgb(var(--si-hero-field-rgb) / 0.85);
+}
+.si-hero__stage[data-stage="1"] p:not(.si-hero__kicker),
+.si-hero__stage[data-stage="2"] p:not(.si-hero__kicker) {
+  font-size: var(--si-step-n1, 0.9rem);
+}
+
+/* --- invitation / email capture --------------------------------------- */
+
+.si-hero__cta {
+  margin: var(--si-space-m, 1.5rem) auto 0;
+  max-width: 30rem;
+  width: 100%;
+}
+/* Near-square, hairline on night: the same field treatment as the Listening
+ * Room's search. No pill — Jasper's only curve is the medallion. */
+.si-hero__form {
+  display: flex;
+  gap: var(--si-space-2xs, 0.5rem);
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  border: 0;
+}
+.si-hero__form input {
+  flex: 1;
+  min-width: 0;
+  height: var(--si-control-height, 40px);
+  background: color-mix(in srgb, var(--si-hero-ink) 6%, transparent);
+  border: 1px solid var(--si-hero-hairline);
+  border-radius: var(--si-radius-1, 2px);
+  outline: none;
+  color: #fff;
+  font-family: var(--si-hero-font-text);
+  font-size: 1rem; /* >=16px: stops iOS Safari zooming the page on focus */
+  padding: 0 var(--si-space-s, 1rem);
+}
+.si-hero__form input::placeholder {
+  color: var(--si-hero-ink-2);
+}
+.si-hero__form input:focus-visible,
+.si-hero__form button:focus-visible,
+.si-hero__chapters button:focus-visible {
+  outline: 2px solid var(--si-hero-accent);
+  outline-offset: 2px;
+}
+.si-hero__form input:focus {
+  border-color: var(--si-hero-accent);
+}
+/* Brass as a FILL, not as text: the one place the hero raises its voice,
+ * and 7.8:1 against night either way round. */
+.si-hero__form button {
+  flex: none;
+  border: 0;
+  border-radius: var(--si-radius-1, 2px);
+  height: var(--si-control-height, 40px);
+  padding: 0 var(--si-space-m, 1.5rem);
+  background: var(--si-hero-accent);
+  color: var(--si-night, #0F1A26);
+  font-family: var(--si-hero-font-text);
+  font-weight: var(--si-weight-strong, 600);
+  font-size: var(--si-step-n1, 0.92rem);
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background var(--si-dur-1, 160ms) var(--si-ease, ease);
+}
+.si-hero__form button:hover {
+  background: color-mix(in srgb, var(--si-hero-accent) 80%, #fff);
+}
+.si-hero__form-note {
+  margin-top: var(--si-space-xs, 0.75rem);
+  font-family: var(--si-hero-font-text);
+  font-size: var(--si-step-n1, 0.75rem);
+  color: var(--si-hero-ink-2);
+}
+@media (max-width: 480px) {
+  .si-hero__form {
+    flex-direction: column;
+  }
+}
+
+/* --- chrome that only means anything once the scene is scrubbing -------- */
+
+.si-hero__scrollhint,
+.si-hero__chapters {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .si-hero__stages {
+    grid-template-columns: 1fr;
+    grid-template-areas: "a0" "a1" "a2" "a3";
+  }
+}
+
+/* ===========================================================================
+   LIVE HERO — .is-live is the layout (set by the gate before the first
+   paint), .is-scene is the picture (set once the renderer has a complete
+   textured frame). Unchanged from the shipped sheet apart from the tokens.
+   =========================================================================== */
+
+.si-hero.is-live {
+  height: var(--si-hero-runway, 520vh);
+}
+.si-hero.is-live .si-hero__pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 0;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+  display: block;
+}
+.si-hero.is-live .si-hero__canvas {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity var(--si-dur-3, 640ms) var(--si-ease, ease-in-out);
+}
+.si-hero.is-live.is-scene .si-hero__canvas {
+  opacity: 1;
+}
+.si-hero.is-live .si-hero__fallback {
+  z-index: 0;
+}
+.si-hero.is-live:not(.is-scene) .si-hero__stage[data-stage="0"] {
+  opacity: 1;
+}
+.si-hero.is-live .si-hero__vignette {
+  background: linear-gradient(
+    rgb(var(--si-hero-field-rgb) / 0.55),
+    transparent 22%,
+    transparent 72%,
+    rgb(var(--si-hero-field-rgb) / 0.92)
+  );
+}
+.si-hero.is-live .si-hero__stages {
+  display: block;
+  max-width: none;
+  height: 100%;
+}
+.si-hero.is-live .si-hero__stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--si-pad-x);
+  max-width: min(46rem, 92vw);
+  margin: 0 auto;
+  right: 0;
+  left: 0;
+  opacity: 0; /* JS writes inline opacity from the first frame onward */
+  pointer-events: none;
+  will-change: opacity, transform;
+  z-index: 2;
+}
+.si-hero.is-live .si-hero__stage.is-active {
+  pointer-events: auto;
+}
+/* ---------------------------------------------------------------------------
+   COMPOSITION — the words go where the picture isn't
+
+   Each act gets its own placement, because the camera moves and the empty
+   part of the frame moves with it:
+
+     1  centre  p≈0.06  z≈2.1 — the globe fills the frame and the dark
+                        Pacific face is in the middle; the words sit in it
+     2  left    p≈0.40  z≈2.7 — lit Asia is dead centre, so the words step
+                        aside and leave the whole subject visible
+     3  right   p≈0.70  z≈4.9 — the globe has pulled back but rides high and
+                        centred, so the empty sky is to the sides, NOT below.
+                        A lower third was tried and put the kicker across the
+                        terminator and the headline across the lit limb; the
+                        mirror of act 2 keeps the corridors — the point of
+                        that moment — fully lit
+     4  centre  p≈0.975 z≈7.4 — the frame is nearly empty and the act is a
+                        form, which wants to be centred
+
+   WHY THIS IS SAFE, and the thing to check before touching STAGE_WINDOWS:
+   the acts never share the screen. The windows have gaps, not overlaps —
+   act 0 is fully out at p=0.23 and act 1 starts at 0.26; act 1 out at 0.55,
+   act 2 in at 0.58; act 2 out at 0.83, act 3 in at 0.89. Every
+   re-composition happens across an empty frame, which is what makes a
+   change of position read as intent rather than as a jump. Make those
+   windows overlap and you get two text blocks in two places at once.
+
+   THE SCRIM BELONGS TO THE ACT. It is the stage's own ::before, so it
+   inherits the inline opacity the scene writes on the stage every frame and
+   fades exactly with its act — there is no second thing to keep in time.
+   Each one fades to nothing well before the frame edge, and against a field
+   this deep you cannot see where it ends.
+   --------------------------------------------------------------------------- */
+
+.si-hero.is-live .si-hero__stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* 1 & 4 — centred */
+.si-hero.is-live .si-hero__stage[data-stage="0"]::before,
+.si-hero.is-live .si-hero__stage[data-stage="3"]::before {
+  background: radial-gradient(
+    58% 46% at 50% 46%,
+    rgb(var(--si-hero-field-rgb) / 0.62),
+    rgb(var(--si-hero-field-rgb) / 0) 74%
+  );
+}
+
+/* 2 — the column, left */
+.si-hero.is-live .si-hero__stage[data-stage="1"] {
+  align-items: flex-start;
+  text-align: left;
+  max-width: none;
+  padding: 0 0 0 clamp(2rem, 6vw, 6rem);
+}
+.si-hero.is-live .si-hero__stage[data-stage="1"] > * {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+.si-hero.is-live .si-hero__stage[data-stage="1"]::before {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--si-hero-field-rgb) / 0.88),
+    rgb(var(--si-hero-field-rgb) / 0.66) 30%,
+    rgb(var(--si-hero-field-rgb) / 0) 62%
+  );
+}
+
+/* 3 — the column, right: the mirror, so the pair reads as one move */
+.si-hero.is-live .si-hero__stage[data-stage="2"] {
+  align-items: flex-end;
+  text-align: right;
+  max-width: none;
+  /* wider than act 2's inset: the chapter dots live at the right edge,
+     vertically centred, which is exactly where this block ends */
+  padding: 0 clamp(3.5rem, 8vw, 8rem) 0 0;
+}
+.si-hero.is-live .si-hero__stage[data-stage="2"] > * {
+  text-align: right;
+  margin-left: 0;
+  margin-right: 0;
+}
+.si-hero.is-live .si-hero__stage[data-stage="2"]::before {
+  background: linear-gradient(
+    270deg,
+    rgb(var(--si-hero-field-rgb) / 0.88),
+    rgb(var(--si-hero-field-rgb) / 0.66) 30%,
+    rgb(var(--si-hero-field-rgb) / 0) 62%
+  );
+}
+
+/* Both columns: a measure, not a screen. The banner step is for an act that
+   owns the whole frame; a column that owns a third of it takes the h1 step
+   and a real measure, which is also what stops a long German compound from
+   setting the width of the block. */
+.si-hero.is-live .si-hero__stage[data-stage="1"] :is(h1, h2),
+.si-hero.is-live .si-hero__stage[data-stage="2"] :is(h1, h2) {
+  font-size: var(--si-step-5, 2.23rem);
+  max-width: 15ch;
+}
+.si-hero.is-live .si-hero__stage[data-stage="1"] p:not(.si-hero__kicker),
+.si-hero.is-live .si-hero__stage[data-stage="2"] p:not(.si-hero__kicker) {
+  max-width: 34ch;
+  font-size: var(--si-step-0, 1.06rem);
+}
+
+/* Each act owns the screen in live mode, so every headline is the banner
+   step — including the h2s, which are chapter headings in static mode. */
+.si-hero.is-live .si-hero__stage h1,
+.si-hero.is-live .si-hero__stage h2 {
+  font-size: var(--si-step-6, 2.6rem);
+  line-height: var(--si-leading-display, 1.08);
+}
+.si-hero.is-live .si-hero__stage p:not(.si-hero__kicker) {
+  font-size: var(--si-step-1, 1.23rem);
+}
+.si-hero.is-live .si-hero__stage[data-stage="1"] p:not(.si-hero__kicker),
+.si-hero.is-live .si-hero__stage[data-stage="2"] p:not(.si-hero__kicker) {
+  font-size: var(--si-step-1, 1.23rem);
+}
+.si-hero.is-live .si-hero__cta {
+  margin-top: var(--si-space-l, 2rem);
+}
+
+/* The page's ONE brass rule, spent on the invitation to scroll. */
+.si-hero.is-live .si-hero__scrollhint {
+  position: absolute;
+  bottom: var(--si-space-m, 1.6rem);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--si-hero-ink-2);
+  font-family: var(--si-hero-font-text);
+  font-size: var(--si-step-n2, 0.7rem);
+  font-weight: var(--si-weight-strong, 600);
+  letter-spacing: var(--si-track-caps, 0.14em);
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--si-space-2xs, 0.5rem);
+  transition: opacity var(--si-dur-2, 320ms) var(--si-ease, ease);
+  z-index: 3;
+}
+.si-hero.is-live .si-hero__scrollhint::after {
+  content: "";
+  width: 1px;
+  height: 2.4rem;
+  background: linear-gradient(var(--si-hero-brass), transparent);
+  animation: si-hero-scrollpulse 2s var(--si-ease, ease-in-out) infinite;
+}
+@keyframes si-hero-scrollpulse {
+  0%, 100% { transform: scaleY(0.4); transform-origin: top; opacity: 0.4; }
+  50%      { transform: scaleY(1); opacity: 1; }
+}
+
+.si-hero.is-live .si-hero__chapters {
+  position: absolute;
+  right: clamp(0.9rem, 2.5vw, 2rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--si-space-xs, 0.9rem);
+  z-index: 5;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--si-dur-3, 640ms) var(--si-ease, ease-in-out),
+              visibility var(--si-dur-3, 640ms);
+}
+.si-hero.is-live.is-scene .si-hero__chapters {
+  opacity: 1;
+  visibility: visible;
+}
+/* The one curve. */
+.si-hero.is-live .si-hero__chapters button {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  border: 1px solid var(--si-hero-hairline);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--si-dur-2, 320ms) var(--si-ease, ease),
+              transform var(--si-dur-2, 320ms) var(--si-ease, ease),
+              border-color var(--si-dur-2, 320ms) var(--si-ease, ease);
+}
+.si-hero.is-live .si-hero__chapters button.is-active {
+  background: var(--si-hero-accent);
+  border-color: var(--si-hero-accent);
+  transform: scale(1.35);
+}
+@media (max-width: 760px) {
+  .si-hero.is-live .si-hero__chapters {
+    display: none;
+  }
+}
+
+/* Reduced motion never reaches .is-live (the boot gate stops it). Jasper's
+ * own tokens already collapse to 0ms; this covers the class being forced on
+ * for debugging. */
+@media (prefers-reduced-motion: reduce) {
+  .si-hero.is-live .si-hero__scrollhint::after {
+    animation: none;
+  }
+}
+
+/* ===========================================================================
+   THEME ARMOUR
+   ===========================================================================
+   Blocksy ships a bare `h1 { color: … }` (0,0,1), which beats an inherited
+   colour on `.si-hero` however dark the hero is. Everything that carries
+   legibility states its own colour. Unchanged in substance — only the
+   values are Jasper's now.
+   =========================================================================== */
+
+.si-hero__stage h1,
+.si-hero__stage h2,
+.si-hero__stage .si-hero__heading {
+  color: #fff;
+}
+.si-hero__stage h1 em,
+.si-hero__stage h2 em,
+.si-hero__stage .si-hero__heading em {
+  color: var(--si-hero-accent);
+}
+.si-hero__stage p,
+.si-hero__stage .si-hero__lead {
+  color: var(--si-hero-ink-2);
+}
+.si-hero__stage .si-hero__kicker {
+  color: var(--si-hero-accent);
+}
+.si-hero .si-hero__form-note {
+  color: var(--si-hero-ink-2);
+}
+.si-hero .si-hero__form input {
+  color: #fff;
+  background: color-mix(in srgb, var(--si-hero-ink) 6%, transparent);
+}
+.si-hero .si-hero__form button,
+.si-hero .si-hero__button {
+  color: var(--si-night, #0F1A26);
+  background: var(--si-hero-accent);
+}
+
+/* --- odds and ends ----------------------------------------------------- */
+
+/* Link-shaped CTA, used when no form action is configured. */
+.si-hero__button {
+  display: inline-block;
+  border-radius: var(--si-radius-1, 2px);
+  padding: 0.7rem var(--si-space-m, 1.5rem);
+  background: var(--si-hero-accent);
+  color: var(--si-night, #0F1A26);
+  font-family: var(--si-hero-font-text);
+  font-weight: var(--si-weight-strong, 600);
+  font-size: var(--si-step-n1, 0.95rem);
+  text-decoration: none;
+  transition: background var(--si-dur-1, 160ms) var(--si-ease, ease);
+}
+.si-hero__button:hover,
+.si-hero__button:focus {
+  background: color-mix(in srgb, var(--si-hero-accent) 80%, #fff);
+  color: var(--si-night, #0F1A26);
+}
+.si-hero__form:has(> .si-hero__button) {
+  background: none;
+  border: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+/* Themes usually ship this; a block cannot assume it. */
+.si-hero .screen-reader-text {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Images inside the hero must never be constrained by a theme's img rules. */
+.si-hero picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

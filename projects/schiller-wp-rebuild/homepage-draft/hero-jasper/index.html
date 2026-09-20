@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>si/hero-earth — Jasper</title>
+<!--
+  THE HERO, WITH THE JASPER DESIGN SYSTEM APPLIED.
+
+  A local draft for comparison only. It changes nothing in the WordPress
+  plugin, and the WordPress plugin is what si-v4 is still serving.
+
+      python3 articles/build/serve.py 8761     # from projects/schiller-wp-rebuild/
+
+      this draft   http://127.0.0.1:8761/homepage-draft/hero-jasper/
+      what ships   http://127.0.0.1:8761/wp-plugins/si-hero-earth/tools/preview.html
+      on si-v4     http://127.0.0.1:8770/       (via build/local-proxy.mjs)
+
+  The markup below is a byte-for-byte copy of the shipped preview harness,
+  which is itself what blocks/hero-earth/render.php emits. Only three things
+  differ, all of them in the <head> and the config:
+
+    - Jasper's fonts and tokens are loaded;
+    - css/hero-jasper.css replaces assets/css/si-hero.css;
+    - the config points at js/hero-scene-jasper.js (the scene with the
+      Jasper palette) and at this draft's own poster.
+
+  The boot gate is the SHIPPED file, loaded from the plugin: the behaviour
+  under comparison must be identical, or the comparison is about something
+  else.
+
+  Query params, as in the shipped harness:
+      ?static=1   force the static hero
+      ?p=0.42     freeze the scene at a point in the runway (0..1)
+-->
+<link rel="stylesheet" href="../../people/design-system/fonts.css">
+<link rel="stylesheet" href="../../people/design-system/tokens.css">
+<link rel="stylesheet" href="css/hero-jasper.css">
+<style>
+  body { margin: 0; background: var(--si-night); }
+  .harness-after {
+    min-height: 60vh; padding: var(--si-space-2xl) var(--si-gutter);
+    color: var(--si-text); background: var(--si-ground);
+    font-family: var(--si-font-sans); font-size: var(--si-step-0); line-height: var(--si-leading-body);
+  }
+  .harness-after p { max-width: var(--si-measure); margin: 0 auto; }
+</style>
+</head>
+<body>
+
+<section class="si-hero alignfull" data-si-hero data-si-hero-mode="auto"
+         data-si-hero-min-width="768" style="--si-hero-runway:520vh">
+  <div class="si-hero__pin">
+    <div class="si-hero__fallback" aria-hidden="true">
+      <picture>
+        <source type="image/webp" srcset="assets/img/poster-sm.webp 800w, assets/img/poster.webp 1600w" sizes="100vw">
+        <img class="si-hero__poster" src="assets/img/poster.jpg"
+             srcset="assets/img/poster-sm.jpg 800w, assets/img/poster.jpg 1600w" sizes="100vw"
+             width="1600" height="800" alt="" fetchpriority="high" decoding="async">
+      </picture>
+    </div>
+    <canvas class="si-hero__canvas" aria-hidden="true"></canvas>
+    <div class="si-hero__vignette" aria-hidden="true"></div>
+
+    <div class="si-hero__stages">
+      <div class="si-hero__stage" data-stage="0">
+        <p class="si-hero__kicker">The Schiller Institute · Since 1984</p>
+        <h1 class="si-hero__heading">The old order is collapsing.<br>A new paradigm is ours to build.</h1>
+        <p class="si-hero__lead">Economic breakdown, the danger of war, a culture in decay — none of it is inevitable. Mankind is the only creative species we know of in the universe. That changes everything.</p>
+      </div>
+      <div class="si-hero__stage" data-stage="1">
+        <p class="si-hero__kicker">The New Silk Road · The Oasis Plan</p>
+        <h2 class="si-hero__heading">Build the <em>World Land-Bridge</em></h2>
+        <p class="si-hero__lead">Development corridors of rail, water and power connecting every continent — from the Bering Strait to the Gibraltar tunnel to a blooming Southwest Asia. Without the development of all nations, there can be no lasting peace.</p>
+      </div>
+      <div class="si-hero__stage" data-stage="2">
+        <p class="si-hero__kicker">Fusion · Space · The Noösphere</p>
+        <h2 class="si-hero__heading">Then upward — the <em>extraterrestrial imperative</em></h2>
+        <p class="si-hero__lead">“Lifting the human species out of its ordinary existence.” — Krafft Ehricke. Fusion power and the joint exploration of space are the common aims of mankind, and the proof that growth has no limits.</p>
+      </div>
+      <div class="si-hero__stage" data-stage="3">
+        <p class="si-hero__kicker">A Movement of World Citizens</p>
+        <h2 class="si-hero__heading">The future needs <em>you</em></h2>
+        <p class="si-hero__lead">Join a worldwide movement for peace through development and a new renaissance of classical culture.</p>
+        <div class="si-hero__cta">
+          <form class="si-hero__form" method="post" action="#">
+            <label class="screen-reader-text" for="si-hero-email-3">Email address</label>
+            <input id="si-hero-email-3" type="email" name="email" autocomplete="email" required placeholder="Your email address">
+            <button type="submit">Join the movement</button>
+          </form>
+          <p class="si-hero__form-note">Weekly ideas, webcasts &amp; invitations. Double opt-in, unsubscribe anytime.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="si-hero__scrollhint" aria-hidden="true">Scroll</p>
+    <div class="si-hero__chapters" role="group" aria-label="Hero chapters">
+      <button type="button" aria-label="The old order is collapsing. A new paradigm is ours to build." class="is-active"></button>
+      <button type="button" aria-label="Build the World Land-Bridge"></button>
+      <button type="button" aria-label="Then upward — the extraterrestrial imperative"></button>
+      <button type="button" aria-label="The future needs you"></button>
+    </div>
+  </div>
+
+  <script type="application/json" class="si-hero__config">
+  {
+    "module": "js/hero-scene-jasper.js",
+    "texWebp": {
+      "day": "../../wp-plugins/si-hero-earth/assets/img/earth-day.webp",
+      "night": "../../wp-plugins/si-hero-earth/assets/img/earth-night.webp",
+      "clouds": "../../wp-plugins/si-hero-earth/assets/img/clouds.webp",
+      "moon": "../../wp-plugins/si-hero-earth/assets/img/moon.webp",
+      "nightHi": "../../wp-plugins/si-hero-earth/assets/img/earth-night-hi.webp"
+    },
+    "texJpg": {
+      "day": "../../wp-plugins/si-hero-earth/assets/img/earth-day.jpg",
+      "night": "../../wp-plugins/si-hero-earth/assets/img/earth-night.jpg",
+      "clouds": "../../wp-plugins/si-hero-earth/assets/img/clouds.jpg",
+      "moon": "../../wp-plugins/si-hero-earth/assets/img/moon.jpg",
+      "nightHi": null
+    }
+  }
+  </script>
+</section>
+
+<script>
+  // Harness only — the block does this from its own attributes.
+  var q = new URLSearchParams(location.search);
+  if (q.get('static') === '1') {
+    document.querySelector('.si-hero').dataset.siHeroMode = 'static';
+  }
+</script>
+<!-- The shipped, minified gate, in the position render.php prints it: right
+     after the hero, so the layout decision lands before the first paint. -->
+<script src="../../wp-plugins/si-hero-earth/assets/js/si-hero-boot.min.js"></script>
+
+<div class="harness-after">
+  <p>Below the hero. In the real page this is the rest of the homepage; here it
+  exists only to prove the hero releases its pin cleanly and hands scrolling back
+  — and to show the hero's night field meeting Jasper's limestone ground.</p>
+</div>
+
+</body>
+</html>

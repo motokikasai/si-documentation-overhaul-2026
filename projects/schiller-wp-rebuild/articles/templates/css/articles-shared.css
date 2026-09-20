@@ -1,0 +1,109 @@
+/* ==========================================================================
+   articles-shared.css — what the three ARTICLE COLLECTION drafts share.
+
+   The collection page is WordPress's own posts index (the page set as
+   Settings → Reading → "Posts page"; here /blog/). Blocksy renders it through
+   template-parts/archive.php, which offers
+   `blocksy:posts-listing:canvas:custom-output` — the same seam /people/ uses —
+   so all three drafts are markup returned into Blocksy's canvas, not a theme
+   template override.
+
+   Common to all three: the toolbar (search, language, topic, span, order),
+   the count line, and the empty state. Nothing else: each draft composes the
+   2,463 articles in its own way, and none of them uses a card.
+   ========================================================================== */
+
+.arc {
+	--si-sticky-top: calc(var(--admin-bar, 0px) + var(--theme-frame-size, 0px) + var(--header-sticky-height, 0px));
+	font-family: var(--si-font-serif);
+	color: var(--si-text);
+}
+
+/* ---- the page head ------------------------------------------------------- */
+.arc-head {
+	padding-block: var(--si-space-xl) var(--si-space-m);
+}
+.arc-head .si-display { font-size: var(--si-step-5); }
+.arc-head .si-lead { margin-top: var(--si-space-s); }
+
+/* ---- toolbar ------------------------------------------------------------- */
+.arc-bar {
+	position: sticky;
+	top: var(--si-sticky-top);
+	z-index: 20;
+	background: var(--si-ground);
+	border-block: var(--si-hairline);
+	box-shadow: 0 10px 20px -18px rgb(18 26 36 / .25);
+}
+.arc-bar__in {
+	display: flex; flex-wrap: wrap; align-items: center;
+	gap: 8px 14px;
+	padding-block: 8px;          /* whole pixels: controls never sit on sub-pixels */
+}
+.arc-bar .si-search { flex: 1 1 240px; max-width: 380px; }
+.arc-bar select {
+	height: var(--si-control-height);
+	padding: 0 2.1em 0 .8em;
+	border: 1px solid var(--si-rule); border-radius: var(--si-radius-1);
+	background: var(--si-card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%235C6570' stroke-width='1.3'/%3E%3C/svg%3E") no-repeat right .8em center;
+	font-family: var(--si-font-sans); font-size: 15px; color: var(--si-ink);
+	-webkit-appearance: none; appearance: none;
+	max-width: 15rem;
+}
+.arc-count {
+	margin-left: auto;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted);
+	white-space: nowrap;
+}
+.arc-count b { color: var(--si-ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.arc-reset {
+	border: 0; background: none; padding: 0; cursor: pointer;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-accent);
+}
+.arc-reset[hidden] { display: none; }
+
+/* ---- the thumbnail plate (used by two of the three drafts) --------------- */
+/* Every image on a collection page is tonal. 2,463 press photographs from
+   fourteen years cannot be shown at full saturation next to each other and
+   still look like one publication. */
+.arc-thumb {
+	display: block; position: relative; overflow: hidden;
+	background: var(--si-panel);
+	aspect-ratio: 3 / 2;
+}
+.arc-thumb img {
+	width: 100%; height: 100%; object-fit: cover; display: block;
+	filter: var(--si-portrait-filter);
+	opacity: 0;
+	transition: opacity var(--si-dur-2) var(--si-ease), filter var(--si-dur-2) var(--si-ease);
+}
+.arc-thumb img.is-loaded { opacity: 1; }
+.arc-thumb::after {
+	content: ""; position: absolute; inset: 0;
+	background: var(--si-portrait-tint); mix-blend-mode: multiply;
+	transition: opacity var(--si-dur-2) var(--si-ease);
+}
+a:hover .arc-thumb img, a:focus-visible .arc-thumb img { filter: none; }
+a:hover .arc-thumb::after, a:focus-visible .arc-thumb::after { opacity: 0; }
+
+/* ---- the language tag ---------------------------------------------------- */
+.arc-lang {
+	font-family: var(--si-font-sans); font-size: 10.5px; font-weight: 600;
+	letter-spacing: .1em; text-transform: uppercase;
+	color: var(--si-muted);
+	border: 1px solid var(--si-rule);
+	border-radius: 2px;
+	padding: 1px 4px;
+	white-space: nowrap;
+}
+
+/* ---- empty ---------------------------------------------------------------- */
+.arc-empty { padding: var(--si-space-3xl) 0; }
+
+/* ---- the source note ------------------------------------------------------ */
+.arc-note {
+	padding-block: var(--si-space-xl) var(--si-space-2xl);
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted);
+	max-width: 70ch;
+}
+.arc-note b { color: var(--si-ink); font-weight: 600; }

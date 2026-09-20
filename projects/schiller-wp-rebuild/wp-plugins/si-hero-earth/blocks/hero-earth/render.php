@@ -2,10 +2,10 @@
 /**
  * Server render for si/hero-earth.
  *
- * Everything the visitor needs is in this markup. The scene module adds the
- * class that turns it into a scroll experience; it never adds content. That
- * is the whole reason the hero survives a blocked CDN, a WebGL-less device,
- * a text-only browser and a search-engine crawler.
+ * Everything the visitor needs is in this markup. JavaScript adds classes
+ * that change how it is laid out and lights a canvas behind it; it never
+ * adds content. That is the whole reason the hero survives a blocked CDN, a
+ * WebGL-less device, a text-only browser and a search-engine crawler.
  *
  * @var array    $attributes
  * @var string   $content    Rendered inner blocks (the four acts).
@@ -15,8 +15,6 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-
-si_hero_earth_needs_boot( true );
 
 $si_mode      = isset( $attributes['mode'] ) ? $attributes['mode'] : 'auto';
 $si_min_width = isset( $attributes['minWidth'] ) ? (int) $attributes['minWidth'] : 768;
@@ -138,3 +136,19 @@ $si_wrapper = get_block_wrapper_attributes(
 		<?php echo wp_json_encode( $si_cfg, JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_SLASHES ); ?>
 	</script>
 </section>
+<?php
+/* The boot gate goes here — right after the hero, not in the footer.
+ *
+ * It decides whether this visitor gets the scene, and that decision is a
+ * LAYOUT decision (a static panel, or 520vh of pinned runway). At this point
+ * in the document the parser is still inside the page, so the answer is
+ * known before the hero is first painted and the visitor never sees one hero
+ * turn into the other. Printed in the footer, as it was until 0.2.0, the
+ * switch landed 1.87 s after first contentful paint.
+ *
+ * What is emitted here is a marker, not the script: block output still has
+ * `the_content` filters to get through, and wptexturize rewrites every bare
+ * `&` — including inside a <script> — so the gate's `&&` would arrive as
+ * `&#038;&#038;`. si_hero_earth_inject_boot() swaps the script in at
+ * priority 99, once the filters are done. */
+echo si_hero_earth_boot_marker(); // phpcs:ignore WordPress.Security.EscapeOutput

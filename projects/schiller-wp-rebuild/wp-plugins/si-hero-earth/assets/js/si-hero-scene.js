@@ -128,9 +128,13 @@ export function initHero(root, cfg) {
   }
   if (!renderer) return false;
 
-  /* Only now does the pinned, 520vh-runway layout switch on. Until this
-   * line the hero is a normal-height static panel, which is what every
-   * visitor without WebGL keeps. */
+  /* The pinned, 520vh-runway layout. The boot gate normally put this class
+   * on before the first paint (it decides the layout, so it cannot wait for
+   * a 130 KB import), and this line is then a no-op. It stays because
+   * initHero is also called directly — by the preview harness and the
+   * poster build — and because a hero that got its context must never be
+   * left in the static layout. What it does NOT do is reveal the canvas:
+   * see reveal() below. */
   root.classList.add("is-live");
   init(renderer, ctx);
   return true;
@@ -145,16 +149,50 @@ function init(renderer, ctx) {
   const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 400);
 
   const texLoader = new THREE.TextureLoader();
-  const loadTex = (url, onLoad) => {
-    const t = texLoader.load(url, onLoad);
+  const loadTex = (url, onLoad, onError) => {
+    const t = texLoader.load(url, onLoad, undefined, onError);
     t.colorSpace = THREE.SRGBColorSpace;
     t.anisotropy = Math.min(16, renderer.capabilities.getMaxAnisotropy());
     return t;
   };
-  const dayTex = loadTex(cfg.tex.day);
-  const nightTex = loadTex(cfg.tex.night);
-  const cloudTex = loadTex(cfg.tex.clouds);
-  const moonTex = loadTex(cfg.tex.moon);
+
+  /* PORT CHANGE (the handoff). The module arrives well before its textures
+   * do, and a renderer with no textures paints a black globe on a clear
+   * colour. The canvas is therefore transparent in CSS from the moment the
+   * gate arms the layout, and the poster holds the frame; `.is-scene` fades
+   * it up, and is added only once every base texture is in, one frame has
+   * been drawn with them, and that frame has been composited — hence the
+   * double rAF. The prototype had no equivalent because it faded in the
+   * whole hero from black and could not tell the two apart.
+   *
+   * A texture error counts as settled: a scene short one map is worse, but
+   * it is not a reason to leave the hero showing a still for ever. The
+   * timeout covers the load event that never comes at all. */
+  let pendingTex = 0;
+  let revealed = false;
+  let revealTimer = null;
+  function reveal() {
+    if (revealed) return;
+    revealed = true;
+    clearTimeout(revealTimer);
+    kick();
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => heroEl.classList.add("is-scene"))
+    );
+  }
+  const texSettled = () => {
+    if (--pendingTex === 0) reveal();
+  };
+  const baseTex = (url) => {
+    pendingTex++;
+    return loadTex(url, texSettled, texSettled);
+  };
+  revealTimer = setTimeout(reveal, 5000);
+
+  const dayTex = baseTex(cfg.tex.day);
+  const nightTex = baseTex(cfg.tex.night);
+  const cloudTex = baseTex(cfg.tex.clouds);
+  const moonTex = baseTex(cfg.tex.moon);
 
   /* ----- Earth ----- */
 
@@ -1272,6 +1310,13 @@ function init(renderer, ctx) {
   });
 
   readScroll();
+  /* Start where the page already is, rather than easing there from act 0.
+   * The scene can now start several seconds after the runway became
+   * scrollable (the gate arms the layout before first paint and imports at
+   * idle), and on a reload the browser restores the old scroll position, so
+   * "the camera rushes from the opening frame to wherever you are" is a
+   * thing that would otherwise be seen. */
+  if (!prefersReducedMotion) displayP = targetP;
   resize();
 
   /* Progressive detail: the 2K night map paints instantly; the 4K version

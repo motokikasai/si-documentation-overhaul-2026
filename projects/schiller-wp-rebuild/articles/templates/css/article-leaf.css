@@ -1,0 +1,164 @@
+/* ==========================================================================
+   DRAFT A — "The Leaf"        /blog/{yyyy}/{mm}/{dd}/{slug}/  · single post
+   --------------------------------------------------------------------------
+   The article as a printed leaf. One column of type on limestone, centred,
+   and around it nothing at all: no rails, no cards, no controls, no panels.
+   Everything that is not the text is pushed into the LEFT MARGIN as an
+   apparatus — the date, the byline, the topic, the plate — the way a
+   monograph carries its notes. The reader's eye has exactly one place to go.
+
+   Colour does structure only: limestone ground, iron-gall type, one brass
+   hairline under the title and one at the end. That is the whole palette.
+   ========================================================================== */
+
+.leaf-page { background: var(--si-ground); }
+
+.leaf {
+	display: grid;
+	grid-template-columns:
+		[m] minmax(0, 15rem)
+		[t] min(var(--ar-measure), 100%)
+		[r] minmax(0, 15rem);
+	justify-content: center;
+	column-gap: var(--si-space-xl);
+	padding-inline: var(--si-gutter);
+	padding-block: var(--si-space-2xl) var(--si-space-3xl);
+}
+.leaf > * { grid-column: t; min-width: 0; }
+
+/* ---- the title block ----------------------------------------------------- */
+.leaf-head { text-align: left; }
+.leaf-kicker {
+	display: flex; align-items: center; gap: .8em;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	font-weight: 600; letter-spacing: var(--si-track-caps); text-transform: uppercase;
+	color: var(--si-muted);
+}
+.leaf-kicker::after { content: ""; flex: 1; height: 1px; background: var(--si-rule); }
+
+.leaf-title {
+	margin: .55em 0 0;
+	font-family: var(--si-font-serif);
+	font-optical-sizing: auto;
+	font-size: var(--si-step-5);
+	font-weight: var(--si-weight-display);
+	line-height: 1.1;
+	letter-spacing: var(--si-track-display);
+	color: var(--si-ink);
+	text-wrap: balance;
+	hyphens: manual;
+}
+.leaf-standfirst {
+	margin: .7em 0 0;
+	font-size: var(--si-step-1);
+	line-height: 1.48;
+	color: var(--si-muted);
+	font-style: italic;
+	max-width: 52ch;
+}
+.leaf-ornament {
+	margin: var(--si-space-l) 0 var(--si-space-m);
+	border: 0; border-top: 1px solid var(--si-brass);
+	width: 100%;
+}
+
+/* ---- the margin apparatus ------------------------------------------------ */
+.leaf-margin {
+	grid-column: m;
+	grid-row: 1 / span 3;
+	align-self: start;
+	position: sticky;
+	top: calc(var(--si-sticky-top) + var(--si-space-xl));
+	text-align: right;
+	display: grid;
+	gap: var(--si-space-s);
+	padding-top: .45em;         /* optical: aligns with the kicker's cap height */
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n1);
+	color: var(--si-muted);
+}
+.leaf-margin .ar-dateline { flex-direction: column; align-items: flex-end; gap: .3em; }
+.leaf-margin .ar-dateline .sep { display: none; }
+.leaf-margin .ar-date { font-size: var(--si-step-1); line-height: 1.15; display: block; }
+.leaf-margin .ar-tags { justify-content: flex-end; }
+.leaf-margin .ar-tag::before { display: none; }
+.leaf-margin .ar-tag::after { content: ""; display: block; }
+.leaf-note {
+	border-top: var(--si-hairline);
+	padding-top: var(--si-space-2xs);
+	line-height: 1.45;
+}
+.leaf-note b { display: block; font-weight: 600; color: var(--si-ink); font-size: var(--si-step-n2); letter-spacing: var(--si-track-caps); text-transform: uppercase; margin-bottom: .25em; }
+
+/* The plate: the featured image lives HERE, small and tonal, so it informs
+   without ever standing between the reader and the first sentence. */
+.leaf-plate { display: block; width: 100%; }
+.leaf-plate img {
+	width: 100%; height: auto; display: block;
+	filter: var(--si-portrait-filter);
+	transition: filter var(--si-dur-2) var(--si-ease);
+}
+.leaf-plate:hover img { filter: none; }
+.leaf-plate figcaption {
+	margin-top: .45em; font-size: var(--si-step-n2); line-height: 1.4; color: var(--si-muted);
+}
+
+/* ---- the text ------------------------------------------------------------ */
+.leaf-prose { font-size: clamp(1.09rem, 1.03rem + .27vw, 1.25rem); }   /* 17.5 → 20px */
+.leaf-prose.has-drop > p:first-of-type::first-letter {
+	float: left;
+	font-family: var(--si-font-serif);
+	font-optical-sizing: auto;
+	font-size: 3.5em;
+	line-height: .8;
+	font-weight: 380;
+	color: var(--si-ink);
+	padding: .06em .09em 0 0;
+}
+.leaf-prose.has-drop > p:first-of-type::first-line {
+	font-variant-caps: small-caps;
+	letter-spacing: .04em;
+}
+
+/* ---- the end ------------------------------------------------------------- */
+.leaf-end {
+	margin: var(--si-space-2xl) 0 var(--si-space-xl);
+	display: grid; place-items: center;
+}
+.leaf-end::before {
+	content: ""; width: 7px; height: 7px; rotate: 45deg;
+	border: 1px solid var(--si-brass);
+}
+.leaf-foot { display: grid; gap: var(--si-space-xl); }
+.leaf-foot h2 {
+	margin: 0 0 var(--si-space-s);
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2); font-weight: 600;
+	letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-muted);
+}
+
+/* ---- narrow: the apparatus folds under the title ------------------------- */
+@media (max-width: 1099.98px) {
+	.leaf {
+		grid-template-columns: min(var(--ar-measure), 100%);
+		justify-content: center;
+		/* stacked, the margin apparatus becomes a band above the text and needs
+		   the space the column gap was giving it */
+		row-gap: var(--si-space-l);
+	}
+	.leaf > * { grid-column: 1; }
+	.leaf-margin {
+		grid-row: auto; position: static; text-align: left;
+		padding-top: 0; margin-top: var(--si-space-s);
+		grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+		align-items: start;
+	}
+	.leaf-margin .ar-dateline { flex-direction: row; align-items: baseline; gap: .45em 1.1em; }
+	.leaf-margin .ar-dateline .sep { display: inline; }
+	.leaf-margin .ar-date { display: inline; font-size: var(--si-step-0); }
+	.leaf-margin .ar-tags { justify-content: flex-start; }
+	.leaf-margin .ar-tag::before { display: inline; }
+	.leaf-plate { max-width: 320px; }
+}
+@media (max-width: 599.98px) {
+	.leaf-prose.has-drop > p:first-of-type::first-letter { font-size: 2.9em; }
+}
