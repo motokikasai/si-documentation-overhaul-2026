@@ -107,6 +107,16 @@ wp si:verify --baseline=icl-baseline.csv
   `incoming/*.csv` and `../data/category-map-draft.csv` exactly as the runbook's
   flags expect — check every `--csv=`/`--apply=` path resolves before starting.
 - The approved CSVs are the ONLY judgment inputs. Never regenerate them mid-run.
+- **`python3 tools/day2-preflight.py` must exit 0** (run it in WSL, against `incoming/`,
+  before any WP-CLI). Five files are checked; **FILE 5** — `conference-post-candidates.csv`
+  — fails while any conference-post candidate is undecided, while an `attach:` key names a
+  conference that is not in `conference-map.csv`, or while a decision has not been folded
+  into `classification.csv`. `si:transform` reads `classification.csv`, not the candidates
+  file, so an unfolded decision is a decision that does not happen.
+- **`python3 tools/day3-conference-posts.py --check` must exit 0** — it re-derives the
+  candidates from the dump and fails if the CSV is missing any. Run it whenever the dump
+  changes: posts published since the last sweep can be new conferences. Runbook:
+  `13-conference-post-review.md`.
 
 ## F. Run the chain
 

@@ -212,6 +212,42 @@ Topic slugs you can use in `final_topics` (separate two with `|`):
 `peace-strategy` · `physical-economy` · `great-projects` · `classical-culture` · `science-space` ·
 `health-food` · `energy-environment` · `education-youth` · `history-method` · `new-paradigm`
 
+## File 5 — `conference-post-candidates.csv` · 207 rows · **reviewed in a web page, not a spreadsheet**
+
+Blog posts that are really conference records. R4 only ever looked at pages and portfolios,
+so a conference published to `/blog/` matched no rule and would migrate as a plain Article —
+panel videos and a printed speaker list filed next to opinion pieces. **155 of the 207 are
+heading that way right now.**
+
+**Do not open this CSV.** Everything is done in a generated web page:
+
+```bash
+python3 tools/day3-conference-sheet.py        # builds conference-review.html
+```
+
+Open `conference-review.html` from disk, decide, press *Download .txt*, then:
+
+```bash
+python3 tools/day3-apply-conference.py \
+    incoming/conference-post-candidates.csv decisions-conference.txt --reviewer <you>
+```
+
+One card is **one translation group** — the German and English landing pages of a
+conference are decided together, because a translation group has to end on one type. Each
+card shows the videos as thumbnails, the `Panel 1` headings verbatim and the speaker-line
+count, so most rows can be judged without opening the post.
+
+Five choices: `conference` (this post IS the event) · `attach` (the Conference already
+exists; this is its landing page — also pick the key) · `presentation` (one talk) ·
+`video` (one recording) · `skip` (it really is an article — a report *about* an event).
+
+Nothing is pre-selected. The machine's proposal is marked `·proposed` in dashed blue; the
+toolbar accepts a whole tier in one click when you are ready. Start with tier A (28 rows —
+the conference already exists, you are only deciding whether this post is its landing page
+or a report about it), then tier B (107 — the real work), then C and D (mostly `skip`).
+
+Full runbook, including what happens after: **`13-conference-post-review.md`**.
+
 ## FYI — no action needed
 
 - `playlist-classification.csv` — fully reviewed already; read if curious.

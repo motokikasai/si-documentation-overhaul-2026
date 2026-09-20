@@ -69,6 +69,43 @@ then applied with `wp si:persons --create --update` and `wp si:photos`.
 | `tools/day3-byline-sheet.py` · `tools/day3-apply-bylines.py` | The review page for `post-byline.csv` (grouped by name) and the applier that writes `final_action` — the gate before any byline reaches WordPress | ✅ built, awaiting review |
 | `tools/day3-person-bios.py` | Composes `short_bio` from held fields only — no outside knowledge, no pronouns, no superlatives. `bio_source` protects hand-written bios from reruns | ✅ 369 of 418 |
 
+### Day-3: the conference-post sweep (a hole in R4)
+
+R4 only ever tested `post_type = page` OR portfolio, and R8 — the `post` default — excludes
+only R3/R5/R5.1/R5.2. A conference whose landing page was published as a **blog post** could
+therefore match no rule and fell to R9 default-keep, ending up as a plain Article: a page of
+panel videos and a printed speaker list filed next to opinion pieces, off `/conferences/`,
+unreachable from the event it records. Ruleset entry: `03-classification-ruleset.md` **R4.2**.
+
+| Tool | What it does | Status |
+|---|---|---|
+| `tools/day3-conference-posts.py` | Scans the bodies of all 4,140 published posts for event evidence — embedded videos (anchors excluded), `Panel n` / agenda headings, printed `Name, Affiliation` speaker lines, event titles — and cross-references `conference-map.csv` and `video-segmentation.csv`. Writes `incoming/conference-post-candidates.csv` (contract `01` §5b) and `conference-post-worklist.md`. Reruns carry every reviewer decision across; `--check` exits 1 if the CSV is missing a candidate | ✅ 650 candidates; **207 queued**, 155 of them would otherwise migrate as plain Articles |
+| `tools/day3-conference-sheet.py` | The review worksheet, `conference-review.html` — one card per **WPML translation group**, with the embedded videos as thumbnails, the Panel/agenda headings verbatim, the speaker-line count and the segmentation coverage. Pre-selects **nothing**: "Accept the machine proposal for tier A/B/C" is a deliberate click | ✅ 207 rows in 179 decision groups |
+| `tools/day3-apply-conference.py` | Writes the reviewer's decisions into `final_action` — the gate. Refuses an `attach:` key that is not in `conference-map.csv`, and refuses a decision that would split a WPML group across two live types | ✅ built, awaiting review |
+| `tools/day2-preflight.py` **FILE 5** | The guardrail. ERRORs on: the sweep never run · a queued candidate with no `final_action` · an unknown `attach:` key · a decision that never reached `classification.csv` · a split translation group. WARNs on videos the segmentation pass has never seen | ✅ currently failing on the 207 undecided rows, as it should |
+
+Step-by-step: **`13-conference-post-review.md`**.
+
+
+Measured on the 2026-09-08 dump:
+
+- **28 posts are named in the reviewed `conference-map.csv` as a conference's WP match** —
+  24 of them are classified `post`/R9 today and will migrate as Articles anyway. The
+  conference-map match is itself fuzzy (some rows scored 1), so each is a judgement, not
+  an auto-accept.
+- **107 tier-B rows**: 66 currently staying Articles, 40 currently becoming a single
+  `si_video` — a whole conference collapsed into one recording.
+- **64 tier-A/B/C rows embed videos that `video-segmentation.csv` has never seen**
+  (`seg_covered = 0/n`). Those recordings exist nowhere but inside a post body — no Video,
+  no Presentation, nothing under the conference. The worst is id 58317 with 33 embeds.
+- **61 tier-A/B/C rows have no conference record at all** — neither `conference-map.csv`
+  nor `video-segmentation.csv` knows them. `conference-map.csv` holds 55 conferences and
+  was built from YouTube **playlists**, so any event SI never made a playlist for is
+  missing from `/conferences/` entirely. 23 of the 61 are German — the DE side is the
+  least playlisted.
+- **122 rows have a WPML sibling that is not itself a candidate.** Same-trid rows need one
+  `final_type` (trap 2), so the decision is per `trid`, not per row.
+
 Cutover support (not part of the People pass, but found by it):
 
 | Tool | What it does | Status |

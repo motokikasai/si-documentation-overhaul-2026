@@ -62,6 +62,7 @@ EDITABLE = {
     'video-segmentation.csv':  {'final_action', 'notes', 'reviewer',
                                 'speaker_raw', 'person_key', 'talk_title', 'panel_title',
                                 'start_seconds', 'end_seconds', 'country', 'affiliation'},
+    'conference-post-candidates.csv': {'final_action', 'notes', 'reviewer'},
 }
 
 # Natural key per file: the columns that identify a row regardless of where it sits.
@@ -73,6 +74,7 @@ ROW_KEY = {
     'person-map.csv':          ('person_key',),
     'conference-map.csv':      ('conference_key',),
     'video-segmentation.csv':  ('yt_video_id', 'segment_index'),
+    'conference-post-candidates.csv': ('legacy_id',),
 }
 
 # final_action vocabularies. '' is handled separately (it is the silent-skip case).
@@ -80,6 +82,15 @@ ACTIONS = {
     'person-map.csv':         {'drop', 'accept'},          # plus merge:<key>
     'conference-map.csv':     {'skip', 'edit', 'accept'},
     'video-segmentation.csv': {'skip', 'edit', 'accept'},
+    # plus attach:<conference_key>
+    'conference-post-candidates.csv': {'conference', 'presentation', 'video', 'skip'},
+}
+
+# What each conference-post decision means for the type the row ends on. `attach` and
+# `skip` both leave the post an Article, so they never conflict inside a WPML group.
+CONF_POST_TYPE = {
+    'conference': 'si_conference', 'presentation': 'si_presentation',
+    'video': 'si_video', 'attach': 'post', 'skip': 'post',
 }
 
 
@@ -534,6 +545,100 @@ def check_classification(path, rev, quiet):
     return rep
 
 
+
+def check_conference_posts(path, class_path, confs, rev, quiet):
+    """FILE 5 — Articles that are really Conference records (01 §5b).
+
+    This check exists because R4 only ever tested `post_type = page` OR portfolio, so a
+    conference published as a blog post matched no rule and fell to R9 default-keep. The
+    sweep that finds them is only worth anything if a decision cannot be forgotten
+    between the sheet and `si:transform`, which reads classification.csv, not this file.
+    So the hard errors here are: a strong candidate nobody judged, and a judgement that
+    never reached classification.csv.
+    """
+    rep = Report('conference-post-candidates.csv  (FILE 5)')
+    rows, fields, line_of = read(path)
+
+    queued = [(i, r) for i, r in enumerate(rows) if r.get('action_needed') == '1']
+    decided = [(i, r) for i, r in queued if (r.get('final_action') or '').strip()]
+    rep.note(f"{len(rows)} candidates · {len(queued)} queued for a decision · "
+             f"{len(decided)} decided")
+
+    # 1. the silent one: a strong candidate nobody judged still migrates as whatever
+    #    classification.csv says, which for 155 of them is a plain Article.
+    blank = [f"{loc(line_of, i, r['legacy_id'])} tier {r['tier']} "
+             f"now->{r['current_type']} {r['title'][:52]}"
+             for i, r in queued if not (r.get('final_action') or '').strip()]
+    if blank:
+        rep.error(f"{len(blank)} queued candidate(s) with no final_action — each one "
+                  "migrates as whatever classification.csv says, unreviewed", blank)
+
+    # 2. attach:<key> must name a conference that exists
+    if confs is not None:
+        badkey = [f"{loc(line_of, i, r['legacy_id'])} {r['final_action']}"
+                  for i, r in decided
+                  if r['final_action'].startswith('attach:')
+                  and r['final_action'][7:].strip() not in confs]
+        if badkey:
+            rep.error(f"{len(badkey)} attach decision(s) naming a conference_key that is "
+                      "not in conference-map.csv", badkey)
+
+    # 3. the decision has to reach the file si:transform reads
+    if os.path.exists(class_path):
+        cls = {r['legacy_id']: r for r in csv.DictReader(
+            open(class_path, newline='', encoding='utf-8'))}
+        unfolded = []
+        for i, r in decided:
+            act = r['final_action'].split(':')[0]
+            want = CONF_POST_TYPE.get(act)
+            if not want or want == 'post':
+                continue                      # attach/skip leave the Article alone
+            c = cls.get(r['legacy_id'])
+            if not c:
+                unfolded.append(f"{loc(line_of, i, r['legacy_id'])} not in classification.csv")
+                continue
+            have = (c.get('final_type') or '').strip() or (
+                c.get('proposed_type', '') if c.get('needs_review') == '0' else '')
+            if have != want:
+                unfolded.append(f"{loc(line_of, i, r['legacy_id'])} decided {act} -> "
+                                f"expects final_type={want}, classification.csv has "
+                                f"{have or '(blank)'!r}")
+        if unfolded:
+            rep.error(f"{len(unfolded)} decision(s) not folded into classification.csv — "
+                      "si:transform reads that file, not this one", unfolded)
+
+    # 4. WPML: same trid, one live type
+    bytrid = collections.defaultdict(list)
+    for i, r in enumerate(rows):
+        if (r.get('trid') or '').strip():
+            bytrid[r['trid']].append((i, r))
+    split = []
+    for t, group in bytrid.items():
+        kinds = {CONF_POST_TYPE[r['final_action'].split(':')[0]]
+                 for _, r in group if (r.get('final_action') or '').strip()}
+        if len(kinds) > 1:
+            split.append(f"trid {t}: " + ' / '.join(
+                f"{loc(line_of, i)} {r['language']}={r['final_action']}" for i, r in group))
+    if split:
+        rep.error(f"{len(split)} translation group(s) decided onto two different live types "
+                  "— WPML expects one element_type per trid", split)
+
+    # 5. recordings that exist nowhere but inside a post body
+    orphan = [f"{loc(line_of, i, r['legacy_id'])} {r['seg_covered']} {r['title'][:46]}"
+              for i, r in queued
+              if r['tier'] in 'ABC' and r['seg_covered'].startswith('0/')
+              and not r['seg_covered'].endswith('/0')]
+    if orphan:
+        rep.warn(f"{len(orphan)} candidate(s) embed videos video-segmentation.csv has never "
+                 "seen — those recordings get no Video and no Presentation", orphan)
+
+    if rev:
+        baseline_check(rep, path, rows, fields, line_of, rev,
+                       EDITABLE['conference-post-candidates.csv'])
+    rep.print(quiet)
+    return rep
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--dir', default='incoming')
@@ -564,6 +669,18 @@ def main():
     p = os.path.join(d, 'classification.csv')
     if os.path.exists(p):
         reports.append(check_classification(p, rev, args.quiet))
+
+    p = os.path.join(d, 'conference-post-candidates.csv')
+    if os.path.exists(p):
+        reports.append(check_conference_posts(
+            p, os.path.join(d, 'classification.csv'), confs, rev, args.quiet))
+    else:
+        rep = Report('conference-post-candidates.csv  (FILE 5)')
+        rep.error("missing — the conference-post sweep has never been run. "
+                  "Conferences published as blog posts would migrate as Articles. "
+                  "Run: python3 tools/day3-conference-posts.py")
+        rep.print(args.quiet)
+        reports.append(rep)
 
     e = sum(len(r.errors) for r in reports)
     w = sum(len(r.warns) for r in reports)

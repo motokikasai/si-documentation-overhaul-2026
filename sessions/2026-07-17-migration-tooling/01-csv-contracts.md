@@ -238,6 +238,51 @@ the same `yt_video_id`, and idempotency keys `_yt_video_id`+`_yt_segment_index` 
 | `target` | conference_key, `si_series` slug, or blank |
 | `needs_review`, `notes`, `final_action`, `reviewer` | |
 
+## 5b. `conference-post-candidates.csv` — Articles that are really event records (produced by `tools/day3-conference-posts.py`)
+
+R4 only ever looked at `post_type = page` OR portfolio, so a conference whose landing
+page was published as a **blog post** could not match it and fell through to R9
+default-keep. This pass scans the bodies of all 4,140 published posts instead. 650 rows
+carry event evidence; **207 still need a decision**, of which **155 would otherwise
+migrate as plain Articles** — including 24 posts that `conference-map.csv` itself names
+as a conference's WordPress match.
+
+One row per candidate post. Evidence columns are measured from the body, never from the
+title alone.
+
+| Column | Req | Meaning |
+|---|---|---|
+| `legacy_id` | ✔ | FK → `classification.csv` |
+| `tier` | ✔ | `A` conference-map already names this post as a conference's WP match · `B` multi-video record with programme structure, or embeds a video the segmentation pass files under a conference · `C` ≥3 embedded videos, or event title + body structure · `D` thin evidence, mostly reports *about* an event |
+| `language` / `trid` | | WPML. A translation group must end on one type — see `notes` |
+| `date` / `slug` / `title` / `legacy_url` / `words` | | for the reviewer |
+| `current_rule` / `current_type` | ✔ | what `classification.csv` will do with it today (`(unreviewed)` = `needs_review=1` with no `final_type`) |
+| `yt_embeds` / `yt_embed_ids` | ✔ | distinct YouTube ids **embedded** — wp:embed, iframe, `[embed]`, bare auto-embed URL. Ids inside an `<a>…</a>` are counted separately in `yt_links`: a post that merely cites six talks is not a conference record |
+| `panel_headings` / `agenda_headings` | | the matched headings verbatim (`Panel 1`, `Q&A`, `Moderator`) — the evidence, not a score |
+| `speaker_lines` | | bullets shaped `Name, Affiliation (Country)` — a printed programme |
+| `title_event` / `event_markers` | | title says conference/seminar/…; body says register/livestream/EDT/… |
+| `conference_key` / `conf_source` | | the conference this belongs to, and whether that came from `conference-map` or `video-segmentation` |
+| `conf_match_note` | | conference-map's own note for that match, **including its match score** — several are score-1 guesses and must not be trusted unseen |
+| `seg_covered` | ✔ | `<known>/<embedded>`: how many of the post's videos `video-segmentation.csv` already knows. **`0/n` means those recordings exist nowhere but inside this body** |
+| `evidence` | ✔ | why the tier fired, in words |
+| `action_needed` | ✔ | `1` = queued for a human. `0` = a tier-D row already reclassified as something other than an Article; recorded, not queued |
+| `needs_review` | ✔ | always `1` |
+| `proposed_action` | | proposal only |
+| `final_action` | ✔ to apply | **the gate.** `conference` · `attach:<conference_key>` · `presentation` · `video` · `skip`. Blank is never accept |
+| `reviewer` / `notes` | | `notes` is machine-written when the row's WPML siblings are **not** candidates — decide the whole `trid` group or the translation splits (122 rows) |
+
+Review flow (full runbook: `13-conference-post-review.md`):
+`python3 tools/day3-conference-posts.py` → `python3 tools/day3-conference-sheet.py` → open
+`conference-review.html` from disk (one card per **trid**, evidence and video thumbnails
+inline, nothing pre-selected) → *Download .txt* → `python3 tools/day3-apply-conference.py
+incoming/conference-post-candidates.csv decisions-conference.txt --reviewer <you>` → fold
+the results into `classification.csv` (`final_type`) and `conference-map.csv` →
+`python3 tools/day2-preflight.py` (FILE 5) must be clean before `si:transform` runs.
+
+Reruns of the sweep carry `final_action`, `reviewer` and hand-written `notes` across, and
+`--check` exits 1 if a candidate is missing from the CSV — so a fresh dump cannot
+reintroduce the gap silently.
+
 ## 6. `document-candidates.csv` — produced HERE by `si:media --rank` (team reviews, `si:media --promote` consumes)
 
 `attachment_id, filename, title, mime, parent_id, parent_type, parent_title, year, filesize,
