@@ -1,0 +1,35 @@
+{
+ "meta": {
+  "built": "2026-09-21",
+  "sources": [
+   "incoming/conference-map.csv (reviewed)",
+   "YouTube channel audit 2026-07-16 (playlist + video descriptions)",
+   "people.json (418 si_person records, 2026-09-08 dump)"
+  ],
+  "note": "Every name, affiliation, talk title and timestamp below is parsed from the descriptions the Institute published with the videos. Fields the source does not carry are absent."
+ },
+ "key": "2023-strasbourg",
+ "short": "Strasbourg 2023",
+ "title": "On the Verge of a New World War: \"European Nations Must Cooperate with the Global South!\"",
+ "start": "2023-07-08",
+ "end": "2023-07-09",
+ "location": "Strasbourg, France",
+ "playlist": null,
+ "state": "past",
+ "dials": {
+  "ground": "limestone",
+  "hero": "typographic"
+ },
+ "sessions": [],
+ "clips": [],
+ "speakers": [],
+ "tally": {
+  "sessions": 0,
+  "talks": 0,
+  "speakers": 0,
+  "runtime": 0,
+  "videos": 0,
+  "with_portrait": 0,
+  "on_people": 0
+ }
+}

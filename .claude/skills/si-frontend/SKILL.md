@@ -39,6 +39,13 @@ people-specific. `tokens.css` is the authority; read its header before changing 
 | `/people/{slug}/` | Portrait · Listening Room | Portrait | `people/wp/` |
 | `/blog/{y}/{m}/{d}/{slug}/` | Leaf · Reading Room · Threshold | **Leaf** | `articles/wp/` |
 | `/blog/` | Ledger · Drift · Broadsheet | **Ledger** (titled *Articles*) | `articles/wp/` |
+| `/conferences/{slug}/` | Proceedings · Marquee · Rostrum · Thread · Atrium | — | not yet ported |
+| `/conferences/` (archive) | Gallery · Firmament · Programme | — | `landing/` (pre-Jasper) |
+
+`conferences/README.md` is the one to read before touching a conference page: it carries
+the four shapes the archive's conference records come in, the dials that let one template
+dress fifty conferences without a large photograph, and what the published YouTube
+descriptions turn out to contain (rosters, affiliations, timestamps, concert programmes).
 
 Each project has a README that is the real documentation — `articles/README.md` covers where
 WordPress keeps the posts index, what is automatic versus editor-set, the structure and

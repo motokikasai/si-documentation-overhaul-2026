@@ -1,0 +1,767 @@
+{
+ "meta": {
+  "built": "2026-09-21",
+  "sources": [
+   "incoming/conference-map.csv (reviewed)",
+   "YouTube channel audit 2026-07-16 (playlist + video descriptions)",
+   "people.json (418 si_person records, 2026-09-08 dump)"
+  ],
+  "note": "Every name, affiliation, talk title and timestamp below is parsed from the descriptions the Institute published with the videos. Fields the source does not carry are absent."
+ },
+ "key": "2024-beethoven",
+ "short": "Schiller & Beethoven 2024",
+ "title": "In the Spirit of Schiller and Beethoven: All Men Become Brethren!",
+ "start": "2024-12-07",
+ "end": "2024-12-08",
+ "location": "online",
+ "playlist": "PLoHwt4KyUk5BuFCwNp09wFxSsuN1HZbrp",
+ "state": "past",
+ "dials": {
+  "ground": "night",
+  "hero": "typographic"
+ },
+ "sessions": [
+  {
+   "kind": "panel",
+   "video": "pPRUHXXnyIQ",
+   "title": "The Strategic Crisis: New and Final World War, or a New Paradigm of the One Humanity?",
+   "duration": 12109,
+   "day": 1,
+   "evidence": "named 'Panel 1' in the descriptions of clips i0QnKEVUHlw and SaaUj4uIAoE",
+   "n": 1,
+   "talks": [
+    {
+     "name": "Dennis Speed",
+     "role": "Moderator",
+     "country": "USA",
+     "aff": "Schiller Institute"
+    },
+    {
+     "name": "Helga Zepp-LaRouche",
+     "role": "Keynote",
+     "country": "Germany",
+     "aff": "Founder of the Schiller Institute"
+    },
+    {
+     "name": "H.E. Naledi Pandor",
+     "country": "South Africa",
+     "aff": "former Minister of International Relations and Cooperation, South Africa",
+     "title": "How Should the South Respond?"
+    },
+    {
+     "name": "Dmitri Trenin",
+     "country": "Russia",
+     "aff": "Professor, Academic Supervisor of the Institute of World Military Economy and Strategy at the Higher School of Economics University (Moscow)"
+    },
+    {
+     "name": "H.E. Donald Ramotar",
+     "country": "Guyana",
+     "aff": "former President of Guyana"
+    },
+    {
+     "name": "H.E. Ján Čarnogurský",
+     "country": "Slovakia",
+     "aff": "former Prime Minister of Slovakia"
+    },
+    {
+     "name": "Ambassador Chas W. Freeman, Jr",
+     "country": "USA",
+     "aff": "former U.S. Assistant Secretary of Defense for International Security Affairs, 1993-1994"
+    },
+    {
+     "name": "Former U.S. State Department Official",
+     "country": "USA"
+    }
+   ]
+  },
+  {
+   "kind": "panel",
+   "video": "3cEmeoenoaA",
+   "title": "The Great Projects To Overcome the Migrant Crisis",
+   "duration": 11236,
+   "day": 1,
+   "evidence": "uploaded 2024-12-08 with panel 1; panels 1–2 fall on day 1 (Dec 7)",
+   "n": 2,
+   "talks": [
+    {
+     "name": "Stephan Ossenkopp",
+     "role": "Moderator",
+     "country": "Germany",
+     "aff": "Schiller Institute"
+    },
+    {
+     "name": "Dennis Small",
+     "role": "Keynote",
+     "country": "USA",
+     "aff": "head of the Ibero-America desk, Schiller Institute"
+    },
+    {
+     "name": "Chinese Economist",
+     "country": "China"
+    },
+    {
+     "name": "H.E. Prof. Dr. Manuel Hassassian",
+     "country": "Palestine",
+     "aff": "Palestinian Ambassador to Denmark"
+    },
+    {
+     "name": "Alexander K. Bobrov",
+     "country": "Russia",
+     "aff": "Associate Professor at the Department of Diplomacy, MGIMO University, Moscow"
+    },
+    {
+     "name": "Chandra Muzaffar",
+     "country": "Malaysia",
+     "aff": "Founder and President of the International Movement for a Just World (JUST)"
+    },
+    {
+     "name": "Glenn Diesen",
+     "country": "Norway",
+     "aff": "Professor and Author"
+    },
+    {
+     "name": "German Economist",
+     "country": "Germany"
+    },
+    {
+     "name": "Bob Baker",
+     "country": "USA",
+     "aff": "Schiller Institute and U.S. Farm leaders (U.S.)"
+    }
+   ]
+  },
+  {
+   "kind": "panel",
+   "video": "S9ltnjy5W4Q",
+   "title": "The Science Drivers of Physical Economy Today",
+   "duration": 10755,
+   "day": 2,
+   "evidence": "named 'Panel 3' in the description of clip FuS2MyfbC7Q",
+   "n": 3,
+   "talks": [
+    {
+     "name": "Jason Ross",
+     "role": "Moderator",
+     "country": "USA",
+     "aff": "Science Advisor to the Schiller Institute"
+    },
+    {
+     "name": "Jacques Cheminade",
+     "role": "Keynote",
+     "country": "France",
+     "aff": "Former Presidential Candidate, President of Solidarité et Progrès"
+    },
+    {
+     "name": "Theodore Postol",
+     "country": "USA",
+     "aff": "Professor Emeritus of Science, Technology and National Security at the Massachusetts Institute of Technology"
+    },
+    {
+     "name": "Michael Limburg",
+     "country": "Germany",
+     "aff": "Master in Engineering, Vice President EIKE (European Institute for Climate and Energy)"
+    },
+    {
+     "name": "Michele Geraci",
+     "country": "Italy",
+     "aff": "Former Under Secretary of State, Ministry of Economic Development"
+    },
+    {
+     "name": "Chinese Expert",
+     "country": "China"
+    },
+    {
+     "name": "Sergey Pulinets",
+     "country": "Russia",
+     "aff": "Principal Research Scientist, Space Research Institute, Russian Academy of Sciences, Moscow"
+    },
+    {
+     "name": "Jürgen Schöttle",
+     "country": "Germany",
+     "aff": "Master in Engineering, Power Plant Construction"
+    },
+    {
+     "name": "Space Historian",
+     "country": "Europe"
+    }
+   ]
+  },
+  {
+   "kind": "panel",
+   "video": "Hi2cUOmeveQ",
+   "title": "The Beauty of the Cultures of the World: A Dialogue Among Civilizations",
+   "duration": 11588,
+   "day": 2,
+   "evidence": "uploaded 2024-12-09 with panel 3; the cultural panel closes the conference",
+   "n": 4,
+   "cultural": true,
+   "talks": [
+    {
+     "name": "Harley Schlanger",
+     "role": "Moderator"
+    },
+    {
+     "name": "Diane Sare",
+     "role": "Keynote",
+     "country": "USA",
+     "aff": "former candidate for U.S. Senate from New York, President of The LaRouche Organization"
+    },
+    {
+     "name": "Helga Zepp-LaRouche",
+     "country": "Germany",
+     "aff": "Founder, Schiller Institute"
+    },
+    {
+     "name": "William Ferguson",
+     "country": "USA",
+     "aff": "Schiller Institute"
+    },
+    {
+     "name": "Paul Gallagher",
+     "country": "USA",
+     "aff": "Schiller Institute"
+    },
+    {
+     "name": "John Sigerson",
+     "country": "USA",
+     "aff": "Musical Director, Schiller Institute"
+    },
+    {
+     "name": "Liliana Gorini",
+     "country": "Italy",
+     "aff": "Chairwoman of Movisol, and Sebastiano Brusco (Italy), Pianist"
+    },
+    {
+     "name": "Nader Majd",
+     "country": "Iran / USA",
+     "aff": "President and Director, Center for Persian Classical Music, Vienna, VA"
+    }
+   ]
+  }
+ ],
+ "clips": [
+  {
+   "video": "SaaUj4uIAoE",
+   "title": "The Next Several Weeks Until the 20th of January Are the Most Dangerous Ones Ever",
+   "duration": 1465
+  },
+  {
+   "video": "i0QnKEVUHlw",
+   "title": "A U.S./Russia Nuclear Conflict Is Not Just a Possibility, but Increasingly Becoming a Probability",
+   "duration": 791
+  },
+  {
+   "video": "FuS2MyfbC7Q",
+   "title": "How Should the Global South Respond?—H.E. Naledi Pandor with Helga Zepp-LaRouche & Jacques Cheminade",
+   "duration": 1854
+  },
+  {
+   "video": "pzTKt1M_Q-U",
+   "title": "Why a Classical Renaissance Is Needed to End Imperial Wars",
+   "duration": 1351
+  }
+ ],
+ "speakers": [
+  {
+   "name": "Dennis Speed",
+   "order": 1,
+   "in": [
+    {
+     "session": 1,
+     "video": "pPRUHXXnyIQ"
+    }
+   ],
+   "country": "USA",
+   "aff": "Schiller Institute",
+   "role": "Moderator",
+   "person": "dennis-speed"
+  },
+  {
+   "name": "Helga Zepp-LaRouche",
+   "order": 2,
+   "in": [
+    {
+     "session": 1,
+     "video": "pPRUHXXnyIQ"
+    },
+    {
+     "session": 4,
+     "video": "Hi2cUOmeveQ"
+    }
+   ],
+   "country": "Germany",
+   "aff": "Founder of the Schiller Institute",
+   "role": "Keynote",
+   "person": "helga-zepp-larouche",
+   "photo": {
+    "src": "assets/portraits/helga-zepp-larouche.jpg",
+    "w": 420,
+    "h": 236,
+    "fx": 50.7,
+    "fy": 44.5,
+    "fs": 0.373
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "H.E. Naledi Pandor",
+   "order": 3,
+   "in": [
+    {
+     "session": 1,
+     "title": "How Should the South Respond?",
+     "video": "pPRUHXXnyIQ"
+    }
+   ],
+   "country": "South Africa",
+   "aff": "former Minister of International Relations and Cooperation, South Africa",
+   "person": "naledi-pandor"
+  },
+  {
+   "name": "Dmitri Trenin",
+   "order": 4,
+   "in": [
+    {
+     "session": 1,
+     "video": "pPRUHXXnyIQ"
+    }
+   ],
+   "country": "Russia",
+   "aff": "Professor, Academic Supervisor of the Institute of World Military Economy and Strategy at the Higher School of Economics University (Moscow)",
+   "person": "dmitri-trenin"
+  },
+  {
+   "name": "H.E. Donald Ramotar",
+   "order": 5,
+   "in": [
+    {
+     "session": 1,
+     "video": "pPRUHXXnyIQ"
+    }
+   ],
+   "country": "Guyana",
+   "aff": "former President of Guyana",
+   "person": "donald-ramotar"
+  },
+  {
+   "name": "H.E. Ján Čarnogurský",
+   "order": 6,
+   "in": [
+    {
+     "session": 1,
+     "video": "pPRUHXXnyIQ"
+    }
+   ],
+   "country": "Slovakia",
+   "aff": "former Prime Minister of Slovakia",
+   "person": "jan-carnogursky"
+  },
+  {
+   "name": "Ambassador Chas W. Freeman, Jr",
+   "order": 7,
+   "in": [
+    {
+     "session": 1,
+     "video": "pPRUHXXnyIQ"
+    }
+   ],
+   "country": "USA",
+   "aff": "former U.S. Assistant Secretary of Defense for International Security Affairs, 1993-1994"
+  },
+  {
+   "name": "Former U.S. State Department Official",
+   "order": 8,
+   "in": [
+    {
+     "session": 1,
+     "video": "pPRUHXXnyIQ"
+    }
+   ],
+   "country": "USA"
+  },
+  {
+   "name": "Stephan Ossenkopp",
+   "order": 9,
+   "in": [
+    {
+     "session": 2,
+     "video": "3cEmeoenoaA"
+    }
+   ],
+   "country": "Germany",
+   "aff": "Schiller Institute",
+   "role": "Moderator",
+   "person": "moderator-stephan-ossenkopp"
+  },
+  {
+   "name": "Dennis Small",
+   "order": 10,
+   "in": [
+    {
+     "session": 2,
+     "video": "3cEmeoenoaA"
+    }
+   ],
+   "country": "USA",
+   "aff": "head of the Ibero-America desk, Schiller Institute",
+   "role": "Keynote",
+   "person": "dennis-small",
+   "photo": {
+    "src": "assets/portraits/dennis-small.jpg",
+    "w": 420,
+    "h": 236,
+    "fx": 48.6,
+    "fy": 42.0,
+    "fs": 0.373
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Chinese Economist",
+   "order": 11,
+   "in": [
+    {
+     "session": 2,
+     "video": "3cEmeoenoaA"
+    }
+   ],
+   "country": "China"
+  },
+  {
+   "name": "H.E. Prof. Dr. Manuel Hassassian",
+   "order": 12,
+   "in": [
+    {
+     "session": 2,
+     "video": "3cEmeoenoaA"
+    }
+   ],
+   "country": "Palestine",
+   "aff": "Palestinian Ambassador to Denmark",
+   "person": "manuel-hassassian"
+  },
+  {
+   "name": "Alexander K. Bobrov",
+   "order": 13,
+   "in": [
+    {
+     "session": 2,
+     "video": "3cEmeoenoaA"
+    }
+   ],
+   "country": "Russia",
+   "aff": "Associate Professor at the Department of Diplomacy, MGIMO University, Moscow",
+   "person": "alexander-k-bobrov"
+  },
+  {
+   "name": "Chandra Muzaffar",
+   "order": 14,
+   "in": [
+    {
+     "session": 2,
+     "video": "3cEmeoenoaA"
+    }
+   ],
+   "country": "Malaysia",
+   "aff": "Founder and President of the International Movement for a Just World (JUST)",
+   "person": "chandra-muzaffar",
+   "photo": {
+    "src": "assets/portraits/chandra-muzaffar.jpg",
+    "w": 420,
+    "h": 236,
+    "fx": 58.7,
+    "fy": 27.3,
+    "fs": 0.318
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Glenn Diesen",
+   "order": 15,
+   "in": [
+    {
+     "session": 2,
+     "video": "3cEmeoenoaA"
+    }
+   ],
+   "country": "Norway",
+   "aff": "Professor and Author",
+   "person": "glenn-diesen"
+  },
+  {
+   "name": "German Economist",
+   "order": 16,
+   "in": [
+    {
+     "session": 2,
+     "video": "3cEmeoenoaA"
+    }
+   ],
+   "country": "Germany"
+  },
+  {
+   "name": "Bob Baker",
+   "order": 17,
+   "in": [
+    {
+     "session": 2,
+     "video": "3cEmeoenoaA"
+    }
+   ],
+   "country": "USA",
+   "aff": "Schiller Institute and U.S. Farm leaders (U.S.)"
+  },
+  {
+   "name": "Jason Ross",
+   "order": 18,
+   "in": [
+    {
+     "session": 3,
+     "video": "S9ltnjy5W4Q"
+    }
+   ],
+   "country": "USA",
+   "aff": "Science Advisor to the Schiller Institute",
+   "role": "Moderator",
+   "person": "jason-ross",
+   "photo": {
+    "src": "assets/portraits/jason-ross.jpg",
+    "w": 420,
+    "h": 236,
+    "fx": 49.6,
+    "fy": 47.0,
+    "fs": 0.394
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Jacques Cheminade",
+   "order": 19,
+   "in": [
+    {
+     "session": 3,
+     "video": "S9ltnjy5W4Q"
+    }
+   ],
+   "country": "France",
+   "aff": "Former Presidential Candidate, President of Solidarité et Progrès",
+   "role": "Keynote",
+   "person": "jacques-cheminade",
+   "photo": {
+    "src": "assets/portraits/jacques-cheminade.jpg",
+    "w": 420,
+    "h": 236
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Theodore Postol",
+   "order": 20,
+   "in": [
+    {
+     "session": 3,
+     "video": "S9ltnjy5W4Q"
+    }
+   ],
+   "country": "USA",
+   "aff": "Professor Emeritus of Science, Technology and National Security at the Massachusetts Institute of Technology",
+   "person": "theodore-postol"
+  },
+  {
+   "name": "Michael Limburg",
+   "order": 21,
+   "in": [
+    {
+     "session": 3,
+     "video": "S9ltnjy5W4Q"
+    }
+   ],
+   "country": "Germany",
+   "aff": "Master in Engineering, Vice President EIKE (European Institute for Climate and Energy)",
+   "person": "michael-limburg"
+  },
+  {
+   "name": "Michele Geraci",
+   "order": 22,
+   "in": [
+    {
+     "session": 3,
+     "video": "S9ltnjy5W4Q"
+    }
+   ],
+   "country": "Italy",
+   "aff": "Former Under Secretary of State, Ministry of Economic Development",
+   "person": "michele-geraci"
+  },
+  {
+   "name": "Chinese Expert",
+   "order": 23,
+   "in": [
+    {
+     "session": 3,
+     "video": "S9ltnjy5W4Q"
+    }
+   ],
+   "country": "China"
+  },
+  {
+   "name": "Sergey Pulinets",
+   "order": 24,
+   "in": [
+    {
+     "session": 3,
+     "video": "S9ltnjy5W4Q"
+    }
+   ],
+   "country": "Russia",
+   "aff": "Principal Research Scientist, Space Research Institute, Russian Academy of Sciences, Moscow",
+   "person": "sergey-pulinets"
+  },
+  {
+   "name": "Jürgen Schöttle",
+   "order": 25,
+   "in": [
+    {
+     "session": 3,
+     "video": "S9ltnjy5W4Q"
+    }
+   ],
+   "country": "Germany",
+   "aff": "Master in Engineering, Power Plant Construction",
+   "person": "jurgen-schottle"
+  },
+  {
+   "name": "Space Historian",
+   "order": 26,
+   "in": [
+    {
+     "session": 3,
+     "video": "S9ltnjy5W4Q"
+    }
+   ],
+   "country": "Europe"
+  },
+  {
+   "name": "Harley Schlanger",
+   "order": 27,
+   "in": [
+    {
+     "session": 4,
+     "video": "Hi2cUOmeveQ"
+    }
+   ],
+   "role": "Moderator",
+   "person": "harley-schlanger",
+   "photo": {
+    "src": "assets/portraits/harley-schlanger.jpg",
+    "w": 420,
+    "h": 236
+   },
+   "credit": "Schiller Institute",
+   "aff": "The Schiller Institute Moderator’s Introduction"
+  },
+  {
+   "name": "Diane Sare",
+   "order": 28,
+   "in": [
+    {
+     "session": 4,
+     "video": "Hi2cUOmeveQ"
+    }
+   ],
+   "country": "USA",
+   "aff": "former candidate for U.S. Senate from New York, President of The LaRouche Organization",
+   "role": "Keynote",
+   "person": "diane-sare",
+   "photo": {
+    "src": "assets/portraits/diane-sare.jpg",
+    "w": 420,
+    "h": 236
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "William Ferguson",
+   "order": 29,
+   "in": [
+    {
+     "session": 4,
+     "video": "Hi2cUOmeveQ"
+    }
+   ],
+   "country": "USA",
+   "aff": "Schiller Institute",
+   "person": "william-ferguson"
+  },
+  {
+   "name": "Paul Gallagher",
+   "order": 30,
+   "in": [
+    {
+     "session": 4,
+     "video": "Hi2cUOmeveQ"
+    }
+   ],
+   "country": "USA",
+   "aff": "Schiller Institute",
+   "person": "paul-gallagher",
+   "photo": {
+    "src": "assets/portraits/paul-gallagher.jpg",
+    "w": 420,
+    "h": 236,
+    "fx": 52.0,
+    "fy": 44.2,
+    "fs": 0.411
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "John Sigerson",
+   "order": 31,
+   "in": [
+    {
+     "session": 4,
+     "video": "Hi2cUOmeveQ"
+    }
+   ],
+   "country": "USA",
+   "aff": "Musical Director, Schiller Institute",
+   "person": "john-sigerson"
+  },
+  {
+   "name": "Liliana Gorini",
+   "order": 32,
+   "in": [
+    {
+     "session": 4,
+     "video": "Hi2cUOmeveQ"
+    }
+   ],
+   "country": "Italy",
+   "aff": "Chairwoman of Movisol, and Sebastiano Brusco (Italy), Pianist",
+   "person": "liliana-gorini"
+  },
+  {
+   "name": "Nader Majd",
+   "order": 33,
+   "in": [
+    {
+     "session": 4,
+     "video": "Hi2cUOmeveQ"
+    }
+   ],
+   "country": "Iran / USA",
+   "aff": "President and Director, Center for Persian Classical Music, Vienna, VA",
+   "person": "nader-majd"
+  }
+ ],
+ "tally": {
+  "sessions": 4,
+  "talks": 34,
+  "speakers": 33,
+  "runtime": 45688,
+  "videos": 8,
+  "with_portrait": 8,
+  "on_people": 26
+ }
+}

@@ -1,0 +1,141 @@
+/* ==========================================================================
+   DRAFT C · "THE ROSTRUM" — the conference told by its voices
+   --------------------------------------------------------------------------
+   Paper ground, portraits at the scale the archive's photographs can carry
+   (a 420px press picture is sharp at 92–260px and nowhere else), and the
+   affiliation set as content. Faces rest in Jasper's tonal treatment and earn
+   their colour on hover, focus or play.
+   ========================================================================== */
+
+/* ---- 1 · the curtain call ------------------------------------------------- */
+.ro-hero { padding-top: var(--si-space-2xl); }
+.ro-hero__grid {
+	display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--si-space-l);
+	align-items: start;
+}
+@media (min-width: 900px) { .ro-hero__grid { grid-template-columns: minmax(0, 1fr) auto; gap: var(--si-space-2xl); } }
+.ro-hero__text { display: grid; gap: var(--si-space-s); }
+.ro-title { font-size: var(--si-step-5); margin: 0; max-width: 20ch; text-wrap: balance; }
+.ro-title.is-long { font-size: var(--si-step-4); max-width: 26ch; }
+.ro-lead { max-width: 54ch; }
+.ro-hero__seal { justify-self: start; }
+@media (min-width: 900px) { .ro-hero__seal { justify-self: end; } }
+
+/* the company, ranged along the foot of the hero like a curtain call */
+.ro-call {
+	list-style: none; margin: var(--si-space-xl) 0 0; padding: 0 var(--si-gutter);
+	display: flex; flex-wrap: wrap; justify-content: center;
+	gap: var(--si-space-2xs);
+}
+.ro-call li { margin-inline: -14px; }
+.ro-call .si-medallion { box-shadow: 0 0 0 3px var(--si-ground), 0 0 0 4px var(--si-brass); }
+@media (prefers-reduced-motion: no-preference) {
+	.js .ro-call li { opacity: 0; animation: ro-call-in var(--si-dur-3) var(--si-ease) forwards; animation-delay: calc(var(--i) * 55ms); }
+	@keyframes ro-call-in { from { opacity: 0; transform: translateY(10px) scale(.94); } to { opacity: 1; transform: none; } }
+}
+
+/* ---- 2 · heads + filter --------------------------------------------------- */
+.ro-head { display: grid; gap: var(--si-space-2xs); margin-bottom: var(--si-space-l); max-width: var(--si-measure); }
+.ro-head .si-display { font-size: var(--si-step-4); margin: 0; }
+.ro-filter { margin-bottom: var(--si-space-l); }
+
+/* ---- 3 · the cards -------------------------------------------------------- */
+.ro-roster { padding-block: var(--si-space-2xl); }
+.ro-cards {
+	list-style: none; margin: 0; padding: 0;
+	display: grid; gap: var(--si-space-l);
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+}
+.ro-card { display: grid; gap: var(--si-space-s); align-content: start; }
+/* `display: grid` on the card outranks the UA's [hidden] rule, so the filter
+   would set the attribute and nothing would happen. */
+.ro-card[hidden] { display: none; }
+.ro-card__media {
+	position: relative;
+	background: var(--si-panel);
+	aspect-ratio: 1;
+	overflow: hidden;
+}
+.ro-card__media .si-plate { display: block; width: 100%; height: 100%; }
+.ro-card__mono { width: 100%; height: 100%; border-radius: 0; box-shadow: none; }
+.ro-card__media .si-conf-embed { aspect-ratio: 1; }
+
+.ro-card__play {
+	position: absolute; left: 0; bottom: 0; z-index: 2;
+	display: inline-flex; align-items: center; gap: .55em;
+	padding: .6em .95em;
+	border: 0; cursor: pointer;
+	background: color-mix(in srgb, var(--si-night) 82%, transparent);
+	color: var(--si-brass-on-night);
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	letter-spacing: .06em; font-variant-numeric: tabular-nums;
+	transition: background-color var(--si-dur-1) var(--si-ease), color var(--si-dur-1) var(--si-ease);
+}
+.ro-card__play svg { width: 9px; height: 10px; fill: currentColor; }
+.ro-card:is(:hover, :focus-within) .ro-card__play { background: var(--si-night); color: #fff; }
+
+/* colour is the reward for attention (Jasper) */
+.ro-card:is(:hover, :focus-within) .si-medallion__img { filter: none; }
+.ro-card__media .si-plate::after { transition: opacity var(--si-dur-2) var(--si-ease); }
+.ro-card:is(:hover, :focus-within) .si-plate::after { opacity: 0; }
+
+.ro-card__body { display: grid; gap: .15em; }
+.ro-card__body .si-conf-speaker__name { font-size: var(--si-step-1); line-height: var(--si-leading-heading); }
+.ro-card__body .si-conf-speaker__aff { font-size: var(--si-step-n1); color: var(--si-text); }
+.ro-card__talks {
+	list-style: none; margin: .5em 0 0; padding: 0; display: grid; gap: .35em;
+	font-family: var(--si-font-serif); font-size: var(--si-step-n1);
+}
+.ro-card__talks li { display: grid; gap: .1em; justify-items: start; }
+.ro-card__talks a { color: var(--si-ink); text-decoration: none; border-bottom: 1px solid var(--si-rule); }
+.ro-card__talks a:is(:hover, :focus-visible) { color: var(--si-accent); border-bottom-color: currentColor; }
+.ro-card__in { color: var(--si-muted); font-style: italic; }
+.ro-card__more { font-family: var(--si-font-sans); font-size: var(--si-step-n2); margin-top: .35em; justify-self: start; }
+
+/* ---- 4 · the programme in brief ------------------------------------------- */
+.ro-programme { padding-block: var(--si-space-2xl); border-top: var(--si-hairline); background: var(--si-ground); }
+.ro-sessions { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--si-space-xl); }
+.ro-session {
+	display: grid; gap: var(--si-space-s);
+	padding-top: var(--si-space-l); border-top: var(--si-hairline);
+}
+.ro-session:first-child { border-top: 0; padding-top: 0; }
+.ro-session__head { display: grid; gap: .2em; }
+.ro-session__head .si-heading { font-size: var(--si-step-2); margin: 0; max-width: 38ch; }
+.ro-session .si-conf-embed { max-width: 460px; width: 100%; }
+@media (min-width: 900px) {
+	.ro-session { grid-template-columns: minmax(240px, 30%) minmax(0, 1fr); column-gap: var(--si-space-l); align-items: start; }
+	.ro-session__head { grid-column: 1; }
+	.ro-session .si-conf-embed { grid-column: 1; }
+	.ro-session__names, .ro-session .si-conf-works { grid-column: 2; grid-row: 1 / span 2; }
+}
+.ro-session__names { list-style: none; margin: 0; padding: 0; display: grid; }
+.ro-session__names li {
+	display: flex; flex-wrap: wrap; align-items: baseline; gap: .2em .7em;
+	padding-block: .55em; border-top: var(--si-hairline);
+}
+.ro-session__names li:last-child { border-bottom: var(--si-hairline); }
+.ro-at { font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); font-variant-numeric: tabular-nums; min-width: 4.4rem; }
+.ro-who { font-family: var(--si-font-serif); font-size: var(--si-step-0); color: var(--si-ink); }
+.ro-what { font-family: var(--si-font-serif); font-style: italic; color: var(--si-muted); flex: 1 1 14ch; }
+.ro-session--culture .ro-session__head .si-heading { font-style: italic; font-weight: 300; }
+
+/* ---- 5 · afterwards ------------------------------------------------------- */
+.ro-after { padding-block: var(--si-space-2xl) var(--si-space-3xl); border-top: var(--si-hairline); }
+.ro-after .si-conf-clips {
+	list-style: none; margin: 0 0 var(--si-space-xl); padding: 0;
+	display: grid; gap: var(--si-space-m);
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+}
+.ro-after .si-conf-clip__title { margin: .6em 0 0; font-family: var(--si-font-serif); font-size: var(--si-step-0); color: var(--si-ink); line-height: var(--si-leading-heading); }
+.ro-watch { margin: 0 0 var(--si-space-2xl); }
+.ro-after .si-conf-colophon {
+	display: grid; grid-template-columns: minmax(0, 1fr); gap: .2em var(--si-space-m);
+	margin: 0; font-family: var(--si-font-sans); font-size: var(--si-step-n1); max-width: 80ch;
+}
+@media (min-width: 620px) { .ro-after .si-conf-colophon { grid-template-columns: 12rem minmax(0, 1fr); } }
+.ro-after .si-conf-colophon dt { color: var(--si-muted); letter-spacing: var(--si-track-caps); text-transform: uppercase; font-size: var(--si-step-n2); padding-top: .55em; border-top: var(--si-hairline); }
+.ro-after .si-conf-colophon dd { margin: 0; padding-top: .55em; border-top: var(--si-hairline); }
+@media (max-width: 619px) { .ro-after .si-conf-colophon dd { border-top: 0; padding-top: 0; padding-bottom: .5em; } }
+
+.ro-loading { display: grid; }

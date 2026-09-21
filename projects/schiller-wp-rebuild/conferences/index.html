@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>Conference Drafts — Schiller Institute</title>
+<meta name="description" content="Five drafts of one universal conference landing page, on the Jasper design system, each dressed with four real records from the archive.">
+<link rel="stylesheet" href="../people/design-system/fonts.css">
+<link rel="stylesheet" href="../people/design-system/tokens.css">
+<link rel="stylesheet" href="../people/design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../people/design-system/components.css">
+<link rel="icon" href="../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+<style>
+	.ix { padding-block: var(--si-space-2xl) var(--si-space-3xl); display: grid; gap: var(--si-space-2xl); }
+	.ix header { display: grid; gap: var(--si-space-s); }
+	.ix .si-display { font-size: var(--si-step-5); }
+	.ix h2.si-display { font-size: var(--si-step-4); }
+	.ix section { display: grid; gap: var(--si-space-m); }
+	.ix .lede { max-width: var(--si-measure); }
+
+	.drafts { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--si-space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+	.drafts li > a { height: 100%; display: grid; gap: var(--si-space-2xs); align-content: start; padding: var(--si-space-m); background: var(--si-card); border: var(--si-hairline); color: inherit; text-decoration: none; transition: box-shadow var(--si-dur-2) var(--si-ease), transform var(--si-dur-2) var(--si-ease); }
+	.drafts li > a:hover { box-shadow: var(--si-shadow-2); transform: translateY(-2px); }
+	.drafts .letter { font-family: var(--si-font-serif); font-style: italic; font-weight: 300; font-size: var(--si-step-4); line-height: 1; color: var(--si-jasper-deep); }
+	.drafts .title { font-family: var(--si-font-serif); font-size: var(--si-step-2); font-weight: 500; color: var(--si-ink); }
+	.drafts .dial { font-family: var(--si-font-sans); font-size: var(--si-step-n2); letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-brass); }
+	.drafts p { font-size: var(--si-step-n1); margin: 0; }
+	.drafts .also { display: flex; flex-wrap: wrap; gap: .4em .7em; margin-top: var(--si-space-2xs); font-family: var(--si-font-sans); font-size: var(--si-step-n2); }
+	.drafts .also a { color: var(--si-accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
+	.drafts .also a:hover { border-bottom-color: currentColor; }
+	.drafts .night > a { background: var(--si-night); border-color: var(--si-night); }
+	.drafts .night .title { color: #fff; }
+	.drafts .night p { color: var(--si-on-night-2); }
+	.drafts .night .letter { color: var(--si-brass-on-night); }
+	.drafts .night .dial { color: var(--si-brass-on-night); }
+
+	.recs { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--si-space-s); }
+	.recs li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .2em var(--si-space-m); align-items: baseline; padding-top: var(--si-space-2xs); border-top: var(--si-hairline); }
+	.recs .t { font-family: var(--si-font-serif); font-size: var(--si-step-1); color: var(--si-ink); }
+	.recs .m { font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); }
+	.recs .shape { grid-column: 1 / -1; font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-text); max-width: var(--si-measure); }
+
+	table.dials { border-collapse: collapse; font-size: var(--si-step-n1); }
+	table.dials :is(th, td) { text-align: left; padding: .5em var(--si-space-s) .5em 0; border-top: var(--si-hairline); vertical-align: top; }
+	table.dials th { font-family: var(--si-font-sans); font-weight: 600; color: var(--si-ink); }
+	table.dials code { font-family: var(--si-font-mono); font-size: .92em; color: var(--si-accent-deep); }
+
+	.archive { display: grid; gap: var(--si-space-s); }
+	.archive ol { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: var(--si-space-xl); font-family: var(--si-font-sans); font-size: var(--si-step-n1); }
+	.archive li { break-inside: avoid; padding-block: .3em; color: var(--si-muted); }
+	.archive li b { font-weight: 400; color: var(--si-ink); font-family: var(--si-font-serif); }
+	@media (max-width: 700px) { .archive ol { columns: 1; } }
+</style>
+</head>
+<body>
+<main class="si-page ct-container ix">
+	<header>
+		<p class="si-eyebrow si-eyebrow--ruled">/conferences/{slug}/ · the individual conference · 2026-09-21</p>
+		<h1 class="si-display">One conference page, <em>five ways</em></h1>
+		<p class="si-lead lede">Five drafts of the template every past and future Schiller conference will be
+			published on. One content spine, one set of dials, and five genuinely different rooms — because a
+			template that cannot hold forty years of very differently-documented conferences is not a template,
+			it is a design for one page.</p>
+		<dl class="si-figures">
+			<div class="si-figure"><dt>Conferences in the reviewed map</dt><dd class="si-tabular">50</dd></div>
+			<div class="si-figure"><dt>Worked records</dt><dd class="si-tabular">4</dd></div>
+			<div class="si-figure"><dt>Talks parsed from the sources</dt><dd class="si-tabular">90</dd></div>
+			<div class="si-figure"><dt>Speakers, 80 on /people/</dt><dd class="si-tabular">89</dd></div>
+			<div class="si-figure"><dt>Conference on film</dt><dd class="si-tabular">33 hr 43</dd></div>
+		</dl>
+	</header>
+
+	<section>
+		<header>
+			<p class="si-eyebrow si-eyebrow--ruled">The drafts</p>
+			<h2 class="si-display">Five rooms, one spine</h2>
+			<p class="lede">Each draft renders the same record. Switch the record with the strip at the foot of
+				every page: <em>Berlin 2025</em> (panels, deep-linked by the second), <em>Beethoven 2024</em>
+				(four panels, a cultural one among them), <em>Berlin 2016</em> (one film per speech, plus a
+				nine-work concert) and <em>Strasbourg 2023</em> (a title, two dates and a city — nothing else).</p>
+		</header>
+		<ol class="drafts">
+			<li>
+				<a href="templates/conference-proceedings.html">
+					<span class="letter">A</span>
+					<span class="title">The Proceedings</span>
+					<span class="dial">limestone · the default</span>
+					<p>The record, walkable. A sticky programme rail, the sessions unrolled, every talk a row that
+						plays the tape at its own second. The aesthetically safe base the other four diverge from.</p>
+				</a>
+				<p class="also"><a href="templates/conference-proceedings.html?c=2016-berlin">Berlin 2016</a>
+					<a href="templates/conference-proceedings.html?c=2023-strasbourg">the empty record</a></p>
+			</li>
+			<li class="night">
+				<a href="templates/conference-marquee.html">
+					<span class="letter">B</span>
+					<span class="title">The Marquee</span>
+					<span class="dial">night · no photographs at all</span>
+					<p>The playbill: the title at poster scale, the sessions as sheets under a running numeral, the
+						company as a ribbon of names, the concert as the finale. The answer to a conference with no
+						usable image — which is most of them.</p>
+				</a>
+				<p class="also"><a href="templates/conference-marquee.html?c=2016-berlin">the nine-work concert</a></p>
+			</li>
+			<li>
+				<a href="templates/conference-rostrum.html">
+					<span class="letter">C</span>
+					<span class="title">The Rostrum</span>
+					<span class="dial">paper · people first</span>
+					<p>The conference told by its voices: every speaker a card with the house they speak from, and a
+						portrait you press to hear them begin. Panels become filters. For the records where the
+						roster is the strongest thing the archive holds.</p>
+				</a>
+				<p class="also"><a href="templates/conference-rostrum.html?c=2016-berlin">18 of 20 with a portrait</a></p>
+			</li>
+			<li>
+				<a href="templates/conference-thread.html">
+					<span class="letter">D</span>
+					<span class="title">The Thread</span>
+					<span class="dial">limestone · scroll-driven</span>
+					<p>The conference as the time it took. Each session a band as long as it ran, each talk a mark at
+						the minute it began, and a playhead that names whatever is under your eye and plays from
+						exactly there.</p>
+				</a>
+				<p class="also"><a href="templates/conference-thread.html?c=2024-beethoven">untimed sessions say so</a></p>
+			</li>
+			<li>
+				<a href="templates/conference-atrium.html">
+					<span class="letter">E</span>
+					<span class="title">The Atrium</span>
+					<span class="dial">limestone · the densest</span>
+					<p>The room with doors: a sticky sub-navigation over overview, programme, speakers, culture and
+						recordings. The draft that carries a conference which has not happened yet — registration
+						where the recordings will later sit.</p>
+				</a>
+				<p class="also"><a href="templates/conference-atrium.html?c=2025-berlin&amp;state=upcoming">the upcoming state</a>
+					<a href="templates/conference-atrium.html?c=2023-strasbourg">the empty record</a></p>
+			</li>
+		</ol>
+	</section>
+
+	<section>
+		<header>
+			<p class="si-eyebrow si-eyebrow--ruled">The problem the dials solve</p>
+			<h2 class="si-display">One template, and no two conferences alike</h2>
+			<p class="lede">Every conference must feel like itself without an editor touching CSS, and without the
+				large photographs the archive does not have. Five things carry the difference, all of them set in
+				the record:</p>
+		</header>
+		<table class="dials">
+			<tbody>
+				<tr><th><code>ground</code></th><td>limestone · paper · night — which Jasper surface the page sits on. A night page carries no second field.</td></tr>
+				<tr><th>the seal</th><td>A medallion cut from a hash of the conference key: its ring count, tick count and phase are the conference's own. Drawn, never photographed — so every conference has a device and nobody has to find an image.</td></tr>
+				<tr><th>the title</th><td>Set to the paper: the more lines the record's own title needs, the smaller the cut. Nothing is ever truncated.</td></tr>
+				<tr><th>the tape's stills</th><td>YouTube's own frames, used small and tonal — the one image every filmed conference in this archive is guaranteed to have.</td></tr>
+				<tr><th>the shape of the record</th><td>Panels deep-linked by the second, one film per speech, a concert programme, or nothing at all: the adapter normalises all four and each draft is built to be complete with an empty programme.</td></tr>
+			</tbody>
+		</table>
+	</section>
+
+	<section>
+		<header>
+			<p class="si-eyebrow si-eyebrow--ruled">The four records</p>
+			<h2 class="si-display">Built from the archive, not from a mock-up</h2>
+			<p class="lede">Every name, affiliation, talk title, timestamp, composer and conductor below was parsed
+				from the descriptions the Institute published with its own videos
+				(<code>build/build-conference-data.py</code>). Fields the source does not carry are absent from the
+				payload, and therefore absent from the page.</p>
+		</header>
+		<ul class="recs" id="recs"></ul>
+	</section>
+
+	<section class="archive">
+		<header>
+			<p class="si-eyebrow si-eyebrow--ruled">The rest of the wing</p>
+			<h2 class="si-display">Fifty conferences waiting for this template</h2>
+			<p class="lede">From the reviewed <code>conference-map.csv</code>. The four drafted above are marked; the
+				others are what the same template will have to carry.</p>
+		</header>
+		<ol id="archive"></ol>
+	</section>
+</main>
+
+<script type="module">
+	import { loadIndex, fmtRange, human, esc } from './templates/js/conference-core.js';
+
+	const SHAPES = {
+		'2025-berlin': 'Panels filmed whole, every speaker timestamped in the description — the shape the last five years are in.',
+		'2024-beethoven': 'Four panels with clean rosters, one of them the cultural panel; no timestamps, so the drafts show running order and say so.',
+		'2016-berlin': 'One film per speech, panels named inside the descriptions, and a separate nine-work concert with performers and conductors.',
+		'2023-strasbourg': 'A reviewed title, two dates and a city. No programme, no roster, no tape — the degradation test.',
+	};
+
+	const recs = document.getElementById('recs');
+	for (const key of Object.keys(SHAPES)) {
+		const r = await (await fetch(`data/conf-${key}.json`)).json();
+		const bits = [
+			`${r.tally.sessions || 0} sessions`,
+			r.tally.talks ? `${r.tally.talks} talks` : '',
+			r.tally.speakers ? `${r.tally.speakers} speakers` : '',
+			r.tally.runtime ? human(r.tally.runtime) : '',
+		].filter(Boolean);
+		const li = document.createElement('li');
+		li.innerHTML = `<span class="t">${esc(r.title)}</span>
+			<span class="m">${esc(fmtRange(r.start, r.end))}${r.location ? ` · ${esc(r.location)}` : ''}</span>
+			<span class="shape">${esc(SHAPES[key])} <b class="m">${esc(bits.join(' · '))}</b></span>`;
+		recs.appendChild(li);
+	}
+
+	const idx = await loadIndex();
+	const list = document.getElementById('archive');
+	for (const c of idx.conferences) {
+		const li = document.createElement('li');
+		li.innerHTML = `<b>${esc(c.title.length > 72 ? c.title.slice(0, 70) + '…' : c.title)}</b> — `
+			+ `${esc(String(c.start).slice(0, 4))}${c.location ? ` · ${esc(c.location)}` : ''}`
+			+ (c.videos ? ` · ${c.videos} videos` : ' · no tape')
+			+ (c.drafted ? ' · <b>drafted</b>' : '');
+		list.appendChild(li);
+	}
+</script>
+</body>
+</html>

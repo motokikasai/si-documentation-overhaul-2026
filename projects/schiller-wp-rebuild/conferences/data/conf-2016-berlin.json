@@ -1,0 +1,767 @@
+{
+ "meta": {
+  "built": "2026-09-21",
+  "sources": [
+   "incoming/conference-map.csv (reviewed)",
+   "YouTube channel audit 2026-07-16 (playlist + video descriptions)",
+   "people.json (418 si_person records, 2026-09-08 dump)"
+  ],
+  "note": "Every name, affiliation, talk title and timestamp below is parsed from the descriptions the Institute published with the videos. Fields the source does not carry are absent."
+ },
+ "key": "2016-berlin",
+ "short": "Berlin 2016",
+ "title": "Creating A Common Future For Mankind And A Renaissance Of Classical Culture — June 25-26, 2016 • Berlin Conference",
+ "start": "2016-06-25",
+ "end": "2016-06-26",
+ "location": "Berlin, Germany",
+ "playlist": "PLoHwt4KyUk5DQMi_zX-35YR5AcB5P4-dX",
+ "state": "past",
+ "dials": {
+  "ground": "paper",
+  "hero": "portrait"
+ },
+ "sessions": [
+  {
+   "kind": "speech",
+   "panel": "Panel I: The strategic crisis is “more dangerous than at the height of the Cold War”",
+   "video": "N1JijKS1Tfs",
+   "duration": 2635,
+   "title": "The Future of Mankind Will Be Beautiful: Provided …",
+   "talks": [
+    {
+     "name": "Helga Zepp-LaRouche"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "Panel I: The strategic crisis is “more dangerous than at the height of the Cold War”",
+   "video": "zjL7rwSDrgo",
+   "duration": 1554,
+   "title": "Things Fall Apart: America, Europe, and Asia in the New World Disorder",
+   "talks": [
+    {
+     "name": "Chas Freeman",
+     "aff": "former U.S. ambassador to Saudi Arabia and main interpreter for Richard Nixon during his 1972 trip to China"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "2HnTVRt_6DQ",
+   "duration": 1728,
+   "title": "Will the American hubris come to an end...",
+   "talks": [
+    {
+     "name": "Col. (ret.) Alain Corvez"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "Panel I: The strategic crisis is “more dangerous than at the height of the Cold War”",
+   "video": "yCTsup-KCgw",
+   "duration": 794,
+   "title": "War: a pathology of the West",
+   "talks": [
+    {
+     "name": "Lt. Col. (ret.) Ulrich Scholz",
+     "aff": "former fighter pilot, NATO planner and lecturer on air warfare"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "no8mDD25euw",
+   "duration": 1565,
+   "title": "The LaRouche method of physical economy",
+   "talks": [
+    {
+     "name": "Jacques Cheminade",
+     "aff": "candidate to the French presidential elections"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "ef8lNa71AN0",
+   "duration": 1103,
+   "title": "The collapse of the European financial system and the failure of the Banking Union",
+   "talks": [
+    {
+     "name": "Marco Zanni",
+     "aff": "Head of M5S delegation in the Economic and onetary Affairs Committee of the European Parliament"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "gUOMh2lh1pU",
+   "duration": 1140,
+   "title": "Japans Haltung zur eurasischen Kooperation",
+   "talks": [
+    {
+     "name": "Daisuke Kotegawa",
+     "aff": "Canon Institute, Japan, ehem. Vertreter Japan beim Weltwährungsfonds"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "LRTSpOvWI9k",
+   "duration": 1250,
+   "title": "Global Crisis: Proposals for Solution",
+   "talks": [
+    {
+     "name": "Leonidas Chrysantopoulos",
+     "aff": "former Ambassador to Poland, Canada and Armenia, former Secretary General of the Black Sea Economic Cooperation Organisation (BSEC)"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "bHu-A86esrk",
+   "duration": 1150,
+   "title": "The New Silk Road win-win perspective",
+   "talks": [
+    {
+     "name": "Ren Lin",
+     "aff": "Researcher on the One Belt One Road Policy at Chinese Academy of Social Sciences (CASS), China"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "vk1x_hWgHc4",
+   "duration": 558,
+   "title": "Greeting",
+   "talks": [
+    {
+     "name": "H.E. Hamid Sidig",
+     "aff": "Ambassador and Extraordinary Representative of the Islamic Republic of Afghanistan to Germany"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "P3XwRJZAYUI",
+   "duration": 1100,
+   "title": "International networking in the economy: Practical experience",
+   "talks": [
+    {
+     "name": "Egbert Drews",
+     "aff": "Board member of Marwiko AG, Berlin"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "NbNEDMblLhc",
+   "duration": 1722,
+   "title": "In Syria and elsewhere, against the war party and the law of the jungle, ...",
+   "talks": [
+    {
+     "name": "Michel Raimbaud"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "rVfEA3ZZFPg",
+   "duration": 828,
+   "title": "Reconstruction with Syrian characteristics...",
+   "talks": [
+    {
+     "name": "Her Excellency Dr. Bouthaina Shaaban"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "VRM2T8cF6Po",
+   "duration": 1366,
+   "title": "Project Phoenix—Aleppo: The Eternal City",
+   "talks": []
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "evWFKeHkqHw",
+   "duration": 718,
+   "title": "Repositioning of the cultural variable: Towards a new modern cultural approach",
+   "talks": [
+    {
+     "name": "Talal Moualla",
+     "aff": "Board of Trustees, The Syria Trust for Development, Executive director of “Syrian Cultural Heritage Transformation” project – Ministry of Culture, Syria"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "ZRDgTc2vHg4",
+   "duration": 576,
+   "title": "Confronting the Aggressor with Hope for the Future",
+   "talks": [
+    {
+     "name": "Fouad Al-Ghaffari",
+     "aff": "chairman of the Advisory Office for Coordination with the BRICS, Yemen"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "pVP4ktJ54S8",
+   "duration": 1218,
+   "title": "A win-win cooperation with Africa",
+   "talks": [
+    {
+     "name": "Bereket Simon",
+     "aff": "chairman of the Commercial Bank of Ethiopia and advisor to the Prime Minister"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "iKX5fp2jjP8",
+   "duration": 1359,
+   "title": "How new space technologies can change the groundwater geopolitical balance...",
+   "talks": [
+    {
+     "name": "Alain Gachet"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "NAz6zxqpTdg",
+   "duration": 1103,
+   "title": "Towards a New Era of International Space Cooperation",
+   "talks": [
+    {
+     "name": "Rainer Sandau",
+     "aff": "Technical Director, Satellites and Space Applications of the International Academy of Astronautics (IAA)"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "HzT-a5JVJA4",
+   "duration": 1397,
+   "title": "The Verdi tuning: a demonstration",
+   "talks": [
+    {
+     "name": "Gian Marco Sanna",
+     "aff": "Violinist, Founder and artistic director of The Geminiani Project, London"
+    }
+   ]
+  },
+  {
+   "kind": "speech",
+   "panel": "",
+   "video": "hy5iuKO5sOU",
+   "duration": 832,
+   "title": "Beauty of the Islamic Renaissance: the elephant clock",
+   "talks": [
+    {
+     "name": "Hussein Askary",
+     "aff": "EIR’s Southwest Asia specialist and Arabic editor, Hussein Askary, delivered this presentation at the June 25-26 Schiller Insitute conference on June 26."
+    }
+   ]
+  },
+  {
+   "kind": "concert",
+   "title": "A Musical Dialogue of Cultures",
+   "playlist": "PLoHwt4KyUk5B54ewD08Z4ZUH-D3WkPgBq",
+   "works": [
+    {
+     "video": "C9O6AsUyKPU",
+     "duration": 333,
+     "composer": "Ludwig van Beethoven",
+     "work": "Die Himmel rühmen des Ewigen Ehre",
+     "performer": "Schiller Institute Chorus, Camerata Geminiani Orchester and Friends",
+     "conductor": "Ingo Bathow"
+    },
+    {
+     "video": "L-p_F0dC3Y0",
+     "duration": 460,
+     "composer": "Mykola Leontovych",
+     "work": "Schdryk",
+     "performer": "Russian Children's Chorus, Schostakowitsch-Musikschule Berlin-Lichtenberg",
+     "conductor": "Irina Freitag"
+    },
+    {
+     "video": "PYL3X2E0H-g",
+     "duration": 441,
+     "work": "Berlin Chinese Academicians' Chorus — June 25, 2016",
+     "soloist": "Changbo Wang",
+     "conductor": "Ya-ou Xie",
+     "accompanist": "Benjamin Lylloff",
+     "movements": [
+      {
+       "start": 0,
+       "label": "Kang ding Love Song"
+      },
+      {
+       "start": 161,
+       "label": "Zai na yao yuan de di fang"
+      },
+      {
+       "start": 323,
+       "label": "A la mu han"
+      }
+     ]
+    },
+    {
+     "video": "gR4Wu39Vlvw",
+     "duration": 437,
+     "composer": "Peter Tchaikovsky",
+     "work": "Andante Cantabile",
+     "performer": "Camerata Geminiani"
+    },
+    {
+     "video": "GbQeiVwtYFc",
+     "duration": 602,
+     "composer": "Antonio Vivaldi",
+     "work": "Concerto in A-major RV 158"
+    },
+    {
+     "video": "gX0YPLuXtfc",
+     "duration": 1085,
+     "composer": "Johann Sebastian Bach",
+     "work": "Double Violin Concerto in D minor for Two Violin BWV 1043"
+    },
+    {
+     "video": "nGPss-yMUSU",
+     "duration": 1727,
+     "composer": "Wolfgang Amadeus Mozart",
+     "work": "Mass in C „Coronation“, KV 317"
+    },
+    {
+     "video": "gUZL0FU1cmY",
+     "duration": 295,
+     "composer": "Giuseppe Verdi",
+     "work": "Va, pensiero",
+     "performer": "The Schiller Institute Chorus, Camerata Geminiani",
+     "conductor": "Ingo Bathow"
+    },
+    {
+     "video": "0CP16D2enXg",
+     "duration": 222,
+     "composer": "Giuseppe Verdi",
+     "work": "Va, pensiero (Encore)",
+     "performer": "The Schiller Institute Chorus, Camerata Geminiani, Russian Children's Chorus and the audiences.",
+     "conductor": "Ingo Bathow"
+    }
+   ]
+  }
+ ],
+ "clips": [],
+ "speakers": [
+  {
+   "name": "Helga Zepp-LaRouche",
+   "order": 1,
+   "in": [
+    {
+     "session": "The Future of Mankind Will Be Beautiful: Provided …",
+     "video": "N1JijKS1Tfs"
+    }
+   ],
+   "person": "helga-zepp-larouche",
+   "photo": {
+    "src": "assets/portraits/helga-zepp-larouche.jpg",
+    "w": 420,
+    "h": 236,
+    "fx": 50.7,
+    "fy": 44.5,
+    "fs": 0.373
+   },
+   "credit": "Schiller Institute",
+   "aff": "President of the international Schiller Institute"
+  },
+  {
+   "name": "Chas Freeman",
+   "order": 2,
+   "in": [
+    {
+     "session": "Things Fall Apart: America, Europe, and Asia in the New World Disorder",
+     "video": "zjL7rwSDrgo"
+    }
+   ],
+   "aff": "former U.S. ambassador to Saudi Arabia and main interpreter for Richard Nixon during his 1972 trip to China",
+   "person": "chas-freeman",
+   "photo": {
+    "src": "assets/portraits/chas-freeman.jpg",
+    "w": 420,
+    "h": 280
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Col. (ret.) Alain Corvez",
+   "order": 3,
+   "in": [
+    {
+     "session": "Will the American hubris come to an end...",
+     "video": "2HnTVRt_6DQ"
+    }
+   ],
+   "person": "alain-corvez",
+   "photo": {
+    "src": "assets/portraits/alain-corvez.jpg",
+    "w": 420,
+    "h": 280,
+    "fx": 51.0,
+    "fy": 34.6,
+    "fs": 0.257
+   },
+   "credit": "Schiller Institute",
+   "aff": "former advisor to the General-in-Command of UNIFIL (United Nations Interim Force in Lebanon), former international relations advisor to the French Foreign Minis"
+  },
+  {
+   "name": "Lt. Col. (ret.) Ulrich Scholz",
+   "order": 4,
+   "in": [
+    {
+     "session": "War: a pathology of the West",
+     "video": "yCTsup-KCgw"
+    }
+   ],
+   "aff": "former fighter pilot, NATO planner and lecturer on air warfare",
+   "person": "ulrich-scholz",
+   "photo": {
+    "src": "assets/portraits/ulrich-scholz.jpg",
+    "w": 420,
+    "h": 280,
+    "fx": 49.2,
+    "fy": 37.0,
+    "fs": 0.311
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Jacques Cheminade",
+   "order": 5,
+   "in": [
+    {
+     "session": "The LaRouche method of physical economy",
+     "video": "no8mDD25euw"
+    }
+   ],
+   "aff": "candidate to the French presidential elections",
+   "person": "jacques-cheminade",
+   "photo": {
+    "src": "assets/portraits/jacques-cheminade.jpg",
+    "w": 420,
+    "h": 236
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Marco Zanni",
+   "order": 6,
+   "in": [
+    {
+     "session": "The collapse of the European financial system and the failure of the Banking Union",
+     "video": "ef8lNa71AN0"
+    }
+   ],
+   "aff": "Head of M5S delegation in the Economic and onetary Affairs Committee of the European Parliament",
+   "person": "marco-zanni",
+   "photo": {
+    "src": "assets/portraits/marco-zanni.jpg",
+    "w": 420,
+    "h": 280,
+    "fx": 40.4,
+    "fy": 31.9,
+    "fs": 0.211
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Daisuke Kotegawa",
+   "order": 7,
+   "in": [
+    {
+     "session": "Japans Haltung zur eurasischen Kooperation",
+     "video": "gUOMh2lh1pU"
+    }
+   ],
+   "aff": "Canon Institute, Japan, ehem. Vertreter Japan beim Weltwährungsfonds",
+   "person": "daisuke-kotegawa",
+   "photo": {
+    "src": "assets/portraits/daisuke-kotegawa.jpg",
+    "w": 420,
+    "h": 236,
+    "fx": 49.9,
+    "fy": 57.2,
+    "fs": 0.242
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Leonidas Chrysantopoulos",
+   "order": 8,
+   "in": [
+    {
+     "session": "Global Crisis: Proposals for Solution",
+     "video": "LRTSpOvWI9k"
+    }
+   ],
+   "aff": "former Ambassador to Poland, Canada and Armenia, former Secretary General of the Black Sea Economic Cooperation Organisation (BSEC)",
+   "person": "leonidas-chrysantopoulos",
+   "photo": {
+    "src": "assets/portraits/leonidas-chrysantopoulos.jpg",
+    "w": 420,
+    "h": 280,
+    "fx": 46.4,
+    "fy": 38.9,
+    "fs": 0.314
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Ren Lin",
+   "order": 9,
+   "in": [
+    {
+     "session": "The New Silk Road win-win perspective",
+     "video": "bHu-A86esrk"
+    }
+   ],
+   "aff": "Researcher on the One Belt One Road Policy at Chinese Academy of Social Sciences (CASS), China",
+   "person": "ren-lin",
+   "photo": {
+    "src": "assets/portraits/ren-lin.jpg",
+    "w": 420,
+    "h": 280,
+    "fx": 46.8,
+    "fy": 39.0,
+    "fs": 0.204
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "H.E. Hamid Sidig",
+   "order": 10,
+   "in": [
+    {
+     "session": "Greeting",
+     "video": "vk1x_hWgHc4"
+    }
+   ],
+   "aff": "Ambassador and Extraordinary Representative of the Islamic Republic of Afghanistan to Germany",
+   "person": "hamid-sidig",
+   "photo": {
+    "src": "assets/portraits/hamid-sidig.jpg",
+    "w": 420,
+    "h": 280,
+    "fx": 36.8,
+    "fy": 34.4,
+    "fs": 0.311
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Egbert Drews",
+   "order": 11,
+   "in": [
+    {
+     "session": "International networking in the economy: Practical experience",
+     "video": "P3XwRJZAYUI"
+    }
+   ],
+   "aff": "Board member of Marwiko AG, Berlin",
+   "person": "egbert-drews",
+   "photo": {
+    "src": "assets/portraits/egbert-drews.jpg",
+    "w": 420,
+    "h": 280
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Michel Raimbaud",
+   "order": 12,
+   "in": [
+    {
+     "session": "In Syria and elsewhere, against the war party and the law of the jungle, ...",
+     "video": "NbNEDMblLhc"
+    }
+   ],
+   "person": "michel-raimbaud",
+   "photo": {
+    "src": "assets/portraits/michel-raimbaud.jpg",
+    "w": 420,
+    "h": 280
+   },
+   "credit": "Schiller Institute",
+   "aff": "former French Ambassador to Arab, African, and Latin American Countries; former director of the French Office of the Protection of Refugees and Stateless"
+  },
+  {
+   "name": "Her Excellency Dr. Bouthaina Shaaban",
+   "order": 13,
+   "in": [
+    {
+     "session": "Reconstruction with Syrian characteristics...",
+     "video": "rVfEA3ZZFPg"
+    }
+   ],
+   "person": "bouthaina-shaaban",
+   "photo": {
+    "src": "assets/portraits/bouthaina-shaaban.jpg",
+    "w": 420,
+    "h": 236,
+    "fx": 51.0,
+    "fy": 39.8,
+    "fs": 0.364
+   },
+   "credit": "Schiller Institute",
+   "aff": "Political and Media Advisor to the Syrian Presidency"
+  },
+  {
+   "name": "Talal Moualla",
+   "order": 14,
+   "in": [
+    {
+     "session": "Repositioning of the cultural variable: Towards a new modern cultural approach",
+     "video": "evWFKeHkqHw"
+    }
+   ],
+   "aff": "Board of Trustees, The Syria Trust for Development, Executive director of “Syrian Cultural Heritage Transformation” project – Ministry of Culture, Syria",
+   "person": "talal-moualla"
+  },
+  {
+   "name": "Fouad Al-Ghaffari",
+   "order": 15,
+   "in": [
+    {
+     "session": "Confronting the Aggressor with Hope for the Future",
+     "video": "ZRDgTc2vHg4"
+    }
+   ],
+   "aff": "chairman of the Advisory Office for Coordination with the BRICS, Yemen",
+   "person": "fouad-al-ghaffari",
+   "photo": {
+    "src": "assets/portraits/fouad-al-ghaffari.jpg",
+    "w": 420,
+    "h": 236,
+    "fx": 53.1,
+    "fy": 31.7,
+    "fs": 0.314
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Bereket Simon",
+   "order": 16,
+   "in": [
+    {
+     "session": "A win-win cooperation with Africa",
+     "video": "pVP4ktJ54S8"
+    }
+   ],
+   "aff": "chairman of the Commercial Bank of Ethiopia and advisor to the Prime Minister",
+   "person": "bereket-simon",
+   "photo": {
+    "src": "assets/portraits/bereket-simon.jpg",
+    "w": 420,
+    "h": 280
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Alain Gachet",
+   "order": 17,
+   "in": [
+    {
+     "session": "How new space technologies can change the groundwater geopolitical balance...",
+     "video": "iKX5fp2jjP8"
+    }
+   ],
+   "person": "alain-gachet",
+   "photo": {
+    "src": "assets/portraits/alain-gachet.jpg",
+    "w": 420,
+    "h": 280
+   },
+   "credit": "Schiller Institute",
+   "aff": "Humanity has been developing on lakes and rivers mainly, but the real bulk of fresh water is below the surface of the Earth, is underground. And it is 33 times"
+  },
+  {
+   "name": "Rainer Sandau",
+   "order": 18,
+   "in": [
+    {
+     "session": "Towards a New Era of International Space Cooperation",
+     "video": "NAz6zxqpTdg"
+    }
+   ],
+   "aff": "Technical Director, Satellites and Space Applications of the International Academy of Astronautics (IAA)",
+   "person": "rainer-sandau",
+   "photo": {
+    "src": "assets/portraits/rainer-sandau.jpg",
+    "w": 420,
+    "h": 280
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Gian Marco Sanna",
+   "order": 19,
+   "in": [
+    {
+     "session": "The Verdi tuning: a demonstration",
+     "video": "HzT-a5JVJA4"
+    }
+   ],
+   "aff": "Violinist, Founder and artistic director of The Geminiani Project, London",
+   "person": "gian-marco-sanna"
+  },
+  {
+   "name": "Hussein Askary",
+   "order": 20,
+   "in": [
+    {
+     "session": "Beauty of the Islamic Renaissance: the elephant clock",
+     "video": "hy5iuKO5sOU"
+    }
+   ],
+   "aff": "EIR’s Southwest Asia specialist and Arabic editor, Hussein Askary, delivered this presentation at the June 25-26 Schiller Insitute conference on June 26.",
+   "person": "hussein-askary",
+   "photo": {
+    "src": "assets/portraits/hussein-askary.jpg",
+    "w": 420,
+    "h": 236,
+    "fx": 54.5,
+    "fy": 43.2,
+    "fs": 0.373
+   },
+   "credit": "Schiller Institute"
+  }
+ ],
+ "tally": {
+  "sessions": 2,
+  "talks": 20,
+  "speakers": 20,
+  "runtime": 31298,
+  "videos": 22,
+  "with_portrait": 18,
+  "on_people": 20
+ }
+}

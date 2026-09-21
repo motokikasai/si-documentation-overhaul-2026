@@ -1,0 +1,883 @@
+{
+ "meta": {
+  "built": "2026-09-21",
+  "sources": [
+   "incoming/conference-map.csv (reviewed)",
+   "YouTube channel audit 2026-07-16 (playlist + video descriptions)",
+   "people.json (418 si_person records, 2026-09-08 dump)"
+  ],
+  "note": "Every name, affiliation, talk title and timestamp below is parsed from the descriptions the Institute published with the videos. Fields the source does not carry are absent."
+ },
+ "key": "2025-berlin",
+ "short": "Berlin 2025",
+ "title": "“Man Is Not a Wolf to Man” - For a New Paradigm in International Relations! — Berlin Conference",
+ "start": "2025-07-12",
+ "end": "2025-07-13",
+ "location": "Berlin, Germany",
+ "playlist": "PLoHwt4KyUk5AQSojSSwzrmY0iiKsy-9SU",
+ "state": "past",
+ "dials": {
+  "ground": "limestone",
+  "hero": "mosaic"
+ },
+ "sessions": [
+  {
+   "kind": "panel",
+   "video": "THWTp_W75c0",
+   "title": "Cooperation between the BRICS and Europe to Implement the Oasis Plan and the Agenda 2063 for Africa",
+   "duration": 11363,
+   "day": 1,
+   "evidence": "live upload 2025-07-12 (day 1); the 07-22 edit carries the timestamped roster",
+   "n": 1,
+   "also_live": "kwFJdmWeCEo",
+   "talks": [
+    {
+     "name": "Helga Zepp-LaRouche",
+     "country": "Germany",
+     "aff": "Founder and Chair of the Schiller Institute",
+     "title": "World War III or a New Global Security and Development Architecture?",
+     "start": 294
+    },
+    {
+     "name": "Prof. Zhang Weiwei",
+     "country": "China",
+     "aff": "Fudan University",
+     "title": "A Harmonious Development of All Nations",
+     "start": 2246
+    },
+    {
+     "name": "Dr. Naledi Pandor",
+     "country": "South Africa",
+     "aff": "former Minister of International Relations and Cooperation of the Republic of South Africa",
+     "title": "The Voice of the Global Majority",
+     "start": 3270
+    },
+    {
+     "name": "Hans-Christof von Sponeck",
+     "country": "Germany",
+     "aff": "former UN Humanitarian Coordinator in Iraq",
+     "title": "The Strategic Challenges and the Emerging New Order",
+     "start": 4106
+    },
+    {
+     "name": "Prof. Dmitri Trenin",
+     "country": "Russia",
+     "aff": "Academic Director of the Institute for Military World Economy and Strategy at the Higher School of Economics University in Moscow, Russia",
+     "title": "A New Global Security System",
+     "start": 4908
+    },
+    {
+     "name": "Daqi Fan",
+     "country": "China",
+     "aff": "Vice President of the Academy of Contemporary China and World Studies (ACCWS)",
+     "start": 5824
+    },
+    {
+     "name": "Ray McGovern",
+     "country": "USA",
+     "aff": "former senior CIA analyst, co-founder of the Veteran Intelligence Professionals for Sanity (VIPS)",
+     "start": 6254
+    },
+    {
+     "name": "Prof. PLO Lumumba",
+     "country": "Kenya",
+     "aff": "former Director and Executive Director of the Kenya School of Law, Former Secretary of the Constitution of Kenya Review Commission and Former Director of the Kenya Anti-Corruption Commission (KACC)",
+     "start": 7077
+    },
+    {
+     "name": "Abbey Makoe",
+     "country": "South Africa",
+     "aff": "Founder & Editor of the Global South Media Network",
+     "title": "The Spectre of Embedded Media in a Unipolar World",
+     "start": 9531
+    }
+   ]
+  },
+  {
+   "kind": "panel",
+   "video": "Gep6VAh4H9o",
+   "title": "Strategic Challenges and the Emerging New Order from an International Perspective",
+   "duration": 13455,
+   "day": 1,
+   "evidence": "live upload 2025-07-12 (day 1); opens with a musical offering",
+   "n": 2,
+   "also_live": "3XDdpfbdLrg",
+   "talks": [
+    {
+     "name": "John Sigerson",
+     "role": "Musical offering",
+     "start": 0
+    },
+    {
+     "name": "Jacques Cheminade",
+     "country": "France",
+     "aff": "President of Solidarité et Progrès",
+     "start": 741
+    },
+    {
+     "name": "Elisabeth Murray",
+     "country": "USA",
+     "aff": "former CIA Deputy National Intelligence Officer for Middle East, From Intel Officer to Peace Activist",
+     "start": 2795
+    },
+    {
+     "name": "Ali Rastbeen",
+     "country": "France",
+     "aff": "Président, Académie de Géopolitique de Paris",
+     "start": 3448
+    },
+    {
+     "name": "Donald Ramotar",
+     "country": "Guyana",
+     "aff": "former President of Guyana",
+     "start": 4426
+    },
+    {
+     "name": "Alessia Ruggeri",
+     "country": "Italy",
+     "aff": "trade unionist",
+     "start": 5305
+    },
+    {
+     "name": "Diane Sare",
+     "country": "USA",
+     "aff": "President of The LaRouche Organization, former Independent Senate Candidate",
+     "start": 5512
+    },
+    {
+     "name": "Dr. Jérôme Ravenet",
+     "country": "France",
+     "aff": "Philosophy Professor and Sinologist",
+     "start": 6240
+    },
+    {
+     "name": "Achim Bonatz",
+     "country": "Germany",
+     "aff": "Vice President, East German Board of Trustees of Associations (Ostdeutsches Kuratorium von Verbänden e.V.), 5% of GDP for the Defense Industry",
+     "title": "A Redistribution of National Wealth – An Over-Demand on Society",
+     "start": 7131
+    },
+    {
+     "name": "Cornelia Pretorius",
+     "country": "Germany",
+     "aff": "Mothers against War",
+     "start": 8217
+    },
+    {
+     "name": "Wolfgang Effenberger",
+     "country": "Germany",
+     "aff": "Officer of the Bundeswehr (ret.) and Author",
+     "title": "The Foundations of International Law",
+     "start": 8939
+    },
+    {
+     "name": "Major Florian D. Pfaff (ret.)",
+     "country": "Germany",
+     "aff": "Speaker of the Working Group “Darmstädter Signal”",
+     "title": "Peace and Security – Why We Need a Different Policy",
+     "start": 9821
+    },
+    {
+     "name": "Colonel (ret.) Jacques Hogard",
+     "country": "France",
+     "aff": "former Officer of the Foreign Legion and Special Forces",
+     "title": "Words from a Concerned Soldier",
+     "start": 10492
+    }
+   ]
+  },
+  {
+   "kind": "panel",
+   "video": "zs9bsTyYMxo",
+   "title": "The Scientific Challenges in the New Paradigm",
+   "duration": 8573,
+   "day": 2,
+   "evidence": "live upload 2025-07-13 (day 2)",
+   "n": 3,
+   "also_live": "93OEDJweiX4",
+   "talks": [
+    {
+     "name": "Jason Ross",
+     "country": "USA",
+     "aff": "Scientific Advisor of the Schiller Institute"
+    },
+    {
+     "name": "Prof. Franco Battaglia",
+     "country": "Italy",
+     "aff": "Professor of Physical Chemistry, Modena University"
+    },
+    {
+     "name": "Prof. Dr. Carl-Otto Weiss",
+     "country": "Germany",
+     "aff": "Professor and Director, German Federal Institute of Metrology, Braunschweig",
+     "title": "The Cyclical Climate and the False Concepts behind the Presentation of Climate Change"
+    },
+    {
+     "name": "Robert Lechner-Schobel",
+     "country": "Germany",
+     "aff": "Business Consultant",
+     "title": "From Thermonuclear Fusion to Transmutation"
+    },
+    {
+     "name": "Dennis Small",
+     "country": "USA",
+     "aff": "Director of the Latin American Desk of EIR",
+     "title": "Why Lyndon LaRouche’s Economic Forecasts Are Correct"
+    }
+   ]
+  },
+  {
+   "kind": "panel",
+   "video": "eth7wIYEBb4",
+   "title": "The Beauty of the Diversity of Cultures & Role of Young People in Shaping the Earth’s Next 50 Years",
+   "duration": 10813,
+   "day": 2,
+   "evidence": "live upload 2025-07-14 (day 2, posted the following day)",
+   "n": 4,
+   "also_live": "DLZcMkedZ50",
+   "talks": [
+    {
+     "name": "Harley Schlanger",
+     "country": "USA",
+     "aff": "Vice President of the Schiller Institute"
+    },
+    {
+     "name": "Maurizio Abbate",
+     "country": "Italy",
+     "aff": "President of the National Institute for Cultural Activities (ENAC)"
+    },
+    {
+     "name": "Helena Chang",
+     "country": "China / Austria",
+     "aff": "Columnist"
+    },
+    {
+     "name": "Anastasia Battle",
+     "aff": "Co-Initiator, International Peace Coalition, Editor-in-Chief, Leonore Magazine"
+    },
+    {
+     "name": "Carolina Dominguez",
+     "country": "Mexico",
+     "aff": "Schiller Institute"
+    },
+    {
+     "name": "Kynan Thistlethwaite",
+     "country": "USA",
+     "aff": "Schiller Institute"
+    },
+    {
+     "name": "Ashley Tran",
+     "country": "USA",
+     "aff": "Schiller Institute"
+    },
+    {
+     "name": "Chérine Sultan",
+     "country": "France",
+     "aff": "Institut Schiller"
+    },
+    {
+     "name": "Daniel Burke",
+     "country": "USA",
+     "aff": "Schiller Institute"
+    }
+   ]
+  },
+  {
+   "kind": "concert",
+   "video": "BWIof_dJIXU",
+   "title": "Concert: A Dialogue of Classical Cultures",
+   "duration": 195,
+   "day": 2,
+   "evidence": "playlist title: 'Concert: A Dialogue of Classical Cultures'"
+  }
+ ],
+ "clips": [
+  {
+   "video": "hhdocM6T7cg",
+   "title": "Ray McGovern — Invoke the Noah Principle",
+   "duration": 730
+  },
+  {
+   "video": "53PJFyf4ovw",
+   "title": "Prof. Zhang Weiwei —Unite and Prosper NOT Divide and Ruin",
+   "duration": 934
+  },
+  {
+   "video": "EyhLk_2i82I",
+   "title": "Prof. Dmitri Trenin “Unlike in 1962...the new nuclear crisis will not happen over there”",
+   "duration": 822
+  },
+  {
+   "video": "LpElI9n-GZk",
+   "title": "Dr. Naledi Pandor — \"Bringing the voice of freedom, justice, peace, and security to Berlin\"",
+   "duration": 758
+  }
+ ],
+ "speakers": [
+  {
+   "name": "Helga Zepp-LaRouche",
+   "order": 1,
+   "in": [
+    {
+     "session": 1,
+     "title": "World War III or a New Global Security and Development Architecture?",
+     "start": 294,
+     "video": "THWTp_W75c0"
+    }
+   ],
+   "country": "Germany",
+   "aff": "Founder and Chair of the Schiller Institute",
+   "person": "helga-zepp-larouche",
+   "photo": {
+    "src": "assets/portraits/helga-zepp-larouche.jpg",
+    "w": 420,
+    "h": 236,
+    "fx": 50.7,
+    "fy": 44.5,
+    "fs": 0.373
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Prof. Zhang Weiwei",
+   "order": 2,
+   "in": [
+    {
+     "session": 1,
+     "title": "A Harmonious Development of All Nations",
+     "start": 2246,
+     "video": "THWTp_W75c0"
+    }
+   ],
+   "country": "China",
+   "aff": "Fudan University",
+   "person": "zhang-weiwei"
+  },
+  {
+   "name": "Dr. Naledi Pandor",
+   "order": 3,
+   "in": [
+    {
+     "session": 1,
+     "title": "The Voice of the Global Majority",
+     "start": 3270,
+     "video": "THWTp_W75c0"
+    }
+   ],
+   "country": "South Africa",
+   "aff": "former Minister of International Relations and Cooperation of the Republic of South Africa",
+   "person": "naledi-pandor"
+  },
+  {
+   "name": "Hans-Christof von Sponeck",
+   "order": 4,
+   "in": [
+    {
+     "session": 1,
+     "title": "The Strategic Challenges and the Emerging New Order",
+     "start": 4106,
+     "video": "THWTp_W75c0"
+    }
+   ],
+   "country": "Germany",
+   "aff": "former UN Humanitarian Coordinator in Iraq",
+   "person": "hans-christof-von-sponeck"
+  },
+  {
+   "name": "Prof. Dmitri Trenin",
+   "order": 5,
+   "in": [
+    {
+     "session": 1,
+     "title": "A New Global Security System",
+     "start": 4908,
+     "video": "THWTp_W75c0"
+    }
+   ],
+   "country": "Russia",
+   "aff": "Academic Director of the Institute for Military World Economy and Strategy at the Higher School of Economics University in Moscow, Russia",
+   "person": "dmitri-trenin"
+  },
+  {
+   "name": "Daqi Fan",
+   "order": 6,
+   "in": [
+    {
+     "session": 1,
+     "start": 5824,
+     "video": "THWTp_W75c0"
+    }
+   ],
+   "country": "China",
+   "aff": "Vice President of the Academy of Contemporary China and World Studies (ACCWS)",
+   "person": "daqi-fan"
+  },
+  {
+   "name": "Ray McGovern",
+   "order": 7,
+   "in": [
+    {
+     "session": 1,
+     "start": 6254,
+     "video": "THWTp_W75c0"
+    }
+   ],
+   "country": "USA",
+   "aff": "former senior CIA analyst, co-founder of the Veteran Intelligence Professionals for Sanity (VIPS)"
+  },
+  {
+   "name": "Prof. PLO Lumumba",
+   "order": 8,
+   "in": [
+    {
+     "session": 1,
+     "start": 7077,
+     "video": "THWTp_W75c0"
+    }
+   ],
+   "country": "Kenya",
+   "aff": "former Director and Executive Director of the Kenya School of Law, Former Secretary of the Constitution of Kenya Review Commission and Former Director of the Kenya Anti-Corruption Commission (KACC)",
+   "person": "plo-lumumba"
+  },
+  {
+   "name": "Abbey Makoe",
+   "order": 9,
+   "in": [
+    {
+     "session": 1,
+     "title": "The Spectre of Embedded Media in a Unipolar World",
+     "start": 9531,
+     "video": "THWTp_W75c0"
+    }
+   ],
+   "country": "South Africa",
+   "aff": "Founder & Editor of the Global South Media Network",
+   "person": "abbey-makoe"
+  },
+  {
+   "name": "John Sigerson",
+   "order": 10,
+   "in": [
+    {
+     "session": 2,
+     "start": 0,
+     "video": "Gep6VAh4H9o"
+    }
+   ],
+   "person": "john-sigerson",
+   "aff": "Advisory Committee, LaRouche Legacy Foundation"
+  },
+  {
+   "name": "Jacques Cheminade",
+   "order": 11,
+   "in": [
+    {
+     "session": 2,
+     "start": 741,
+     "video": "Gep6VAh4H9o"
+    }
+   ],
+   "country": "France",
+   "aff": "President of Solidarité et Progrès",
+   "person": "jacques-cheminade",
+   "photo": {
+    "src": "assets/portraits/jacques-cheminade.jpg",
+    "w": 420,
+    "h": 236
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Elisabeth Murray",
+   "order": 12,
+   "in": [
+    {
+     "session": 2,
+     "start": 2795,
+     "video": "Gep6VAh4H9o"
+    }
+   ],
+   "country": "USA",
+   "aff": "former CIA Deputy National Intelligence Officer for Middle East, From Intel Officer to Peace Activist",
+   "person": "elisabeth-murray"
+  },
+  {
+   "name": "Ali Rastbeen",
+   "order": 13,
+   "in": [
+    {
+     "session": 2,
+     "start": 3448,
+     "video": "Gep6VAh4H9o"
+    }
+   ],
+   "country": "France",
+   "aff": "Président, Académie de Géopolitique de Paris",
+   "person": "ali-rastbeen",
+   "photo": {
+    "src": "assets/portraits/ali-rastbeen.jpg",
+    "w": 420,
+    "h": 236
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Donald Ramotar",
+   "order": 14,
+   "in": [
+    {
+     "session": 2,
+     "start": 4426,
+     "video": "Gep6VAh4H9o"
+    }
+   ],
+   "country": "Guyana",
+   "aff": "former President of Guyana",
+   "person": "donald-ramotar"
+  },
+  {
+   "name": "Alessia Ruggeri",
+   "order": 15,
+   "in": [
+    {
+     "session": 2,
+     "start": 5305,
+     "video": "Gep6VAh4H9o"
+    }
+   ],
+   "country": "Italy",
+   "aff": "trade unionist",
+   "person": "alessia-ruggeri"
+  },
+  {
+   "name": "Diane Sare",
+   "order": 16,
+   "in": [
+    {
+     "session": 2,
+     "start": 5512,
+     "video": "Gep6VAh4H9o"
+    }
+   ],
+   "country": "USA",
+   "aff": "President of The LaRouche Organization, former Independent Senate Candidate",
+   "person": "diane-sare",
+   "photo": {
+    "src": "assets/portraits/diane-sare.jpg",
+    "w": 420,
+    "h": 236
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Dr. Jérôme Ravenet",
+   "order": 17,
+   "in": [
+    {
+     "session": 2,
+     "start": 6240,
+     "video": "Gep6VAh4H9o"
+    }
+   ],
+   "country": "France",
+   "aff": "Philosophy Professor and Sinologist",
+   "person": "jerome-ravenet"
+  },
+  {
+   "name": "Achim Bonatz",
+   "order": 18,
+   "in": [
+    {
+     "session": 2,
+     "title": "A Redistribution of National Wealth – An Over-Demand on Society",
+     "start": 7131,
+     "video": "Gep6VAh4H9o"
+    }
+   ],
+   "country": "Germany",
+   "aff": "Vice President, East German Board of Trustees of Associations (Ostdeutsches Kuratorium von Verbänden e.V.), 5% of GDP for the Defense Industry",
+   "person": "achim-bonatz"
+  },
+  {
+   "name": "Cornelia Pretorius",
+   "order": 19,
+   "in": [
+    {
+     "session": 2,
+     "start": 8217,
+     "video": "Gep6VAh4H9o"
+    }
+   ],
+   "country": "Germany",
+   "aff": "Mothers against War",
+   "person": "cornelia-pretorius"
+  },
+  {
+   "name": "Wolfgang Effenberger",
+   "order": 20,
+   "in": [
+    {
+     "session": 2,
+     "title": "The Foundations of International Law",
+     "start": 8939,
+     "video": "Gep6VAh4H9o"
+    }
+   ],
+   "country": "Germany",
+   "aff": "Officer of the Bundeswehr (ret.) and Author",
+   "person": "wolfgang-effenberger"
+  },
+  {
+   "name": "Major Florian D. Pfaff (ret.)",
+   "order": 21,
+   "in": [
+    {
+     "session": 2,
+     "title": "Peace and Security – Why We Need a Different Policy",
+     "start": 9821,
+     "video": "Gep6VAh4H9o"
+    }
+   ],
+   "country": "Germany",
+   "aff": "Speaker of the Working Group “Darmstädter Signal”",
+   "person": "major-florian-d-pfaff"
+  },
+  {
+   "name": "Colonel (ret.) Jacques Hogard",
+   "order": 22,
+   "in": [
+    {
+     "session": 2,
+     "title": "Words from a Concerned Soldier",
+     "start": 10492,
+     "video": "Gep6VAh4H9o"
+    }
+   ],
+   "country": "France",
+   "aff": "former Officer of the Foreign Legion and Special Forces",
+   "person": "jacques-hogard"
+  },
+  {
+   "name": "Jason Ross",
+   "order": 23,
+   "in": [
+    {
+     "session": 3,
+     "video": "zs9bsTyYMxo"
+    }
+   ],
+   "country": "USA",
+   "aff": "Scientific Advisor of the Schiller Institute",
+   "person": "jason-ross",
+   "photo": {
+    "src": "assets/portraits/jason-ross.jpg",
+    "w": 420,
+    "h": 236,
+    "fx": 49.6,
+    "fy": 47.0,
+    "fs": 0.394
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Prof. Franco Battaglia",
+   "order": 24,
+   "in": [
+    {
+     "session": 3,
+     "video": "zs9bsTyYMxo"
+    }
+   ],
+   "country": "Italy",
+   "aff": "Professor of Physical Chemistry, Modena University",
+   "person": "franco-battaglia"
+  },
+  {
+   "name": "Prof. Dr. Carl-Otto Weiss",
+   "order": 25,
+   "in": [
+    {
+     "session": 3,
+     "title": "The Cyclical Climate and the False Concepts behind the Presentation of Climate Change",
+     "video": "zs9bsTyYMxo"
+    }
+   ],
+   "country": "Germany",
+   "aff": "Professor and Director, German Federal Institute of Metrology, Braunschweig",
+   "person": "carl-otto-weiss",
+   "photo": {
+    "src": "assets/portraits/carl-otto-weiss.jpg",
+    "w": 420,
+    "h": 236
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Robert Lechner-Schobel",
+   "order": 26,
+   "in": [
+    {
+     "session": 3,
+     "title": "From Thermonuclear Fusion to Transmutation",
+     "video": "zs9bsTyYMxo"
+    }
+   ],
+   "country": "Germany",
+   "aff": "Business Consultant",
+   "person": "robert-lechner-schobel"
+  },
+  {
+   "name": "Dennis Small",
+   "order": 27,
+   "in": [
+    {
+     "session": 3,
+     "title": "Why Lyndon LaRouche’s Economic Forecasts Are Correct",
+     "video": "zs9bsTyYMxo"
+    }
+   ],
+   "country": "USA",
+   "aff": "Director of the Latin American Desk of EIR",
+   "person": "dennis-small",
+   "photo": {
+    "src": "assets/portraits/dennis-small.jpg",
+    "w": 420,
+    "h": 236,
+    "fx": 48.6,
+    "fy": 42.0,
+    "fs": 0.373
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Harley Schlanger",
+   "order": 28,
+   "in": [
+    {
+     "session": 4,
+     "video": "eth7wIYEBb4"
+    }
+   ],
+   "country": "USA",
+   "aff": "Vice President of the Schiller Institute",
+   "person": "harley-schlanger",
+   "photo": {
+    "src": "assets/portraits/harley-schlanger.jpg",
+    "w": 420,
+    "h": 236
+   },
+   "credit": "Schiller Institute"
+  },
+  {
+   "name": "Maurizio Abbate",
+   "order": 29,
+   "in": [
+    {
+     "session": 4,
+     "video": "eth7wIYEBb4"
+    }
+   ],
+   "country": "Italy",
+   "aff": "President of the National Institute for Cultural Activities (ENAC)",
+   "person": "maurizio-abbate"
+  },
+  {
+   "name": "Helena Chang",
+   "order": 30,
+   "in": [
+    {
+     "session": 4,
+     "video": "eth7wIYEBb4"
+    }
+   ],
+   "country": "China / Austria",
+   "aff": "Columnist",
+   "person": "helena-chang"
+  },
+  {
+   "name": "Anastasia Battle",
+   "order": 31,
+   "in": [
+    {
+     "session": 4,
+     "video": "eth7wIYEBb4"
+    }
+   ],
+   "aff": "Co-Initiator, International Peace Coalition, Editor-in-Chief, Leonore Magazine",
+   "person": "anastasia-battle"
+  },
+  {
+   "name": "Carolina Dominguez",
+   "order": 32,
+   "in": [
+    {
+     "session": 4,
+     "video": "eth7wIYEBb4"
+    }
+   ],
+   "country": "Mexico",
+   "aff": "Schiller Institute"
+  },
+  {
+   "name": "Kynan Thistlethwaite",
+   "order": 33,
+   "in": [
+    {
+     "session": 4,
+     "video": "eth7wIYEBb4"
+    }
+   ],
+   "country": "USA",
+   "aff": "Schiller Institute",
+   "person": "kynan-thistlethwaite"
+  },
+  {
+   "name": "Ashley Tran",
+   "order": 34,
+   "in": [
+    {
+     "session": 4,
+     "video": "eth7wIYEBb4"
+    }
+   ],
+   "country": "USA",
+   "aff": "Schiller Institute",
+   "person": "ashley-tran"
+  },
+  {
+   "name": "Chérine Sultan",
+   "order": 35,
+   "in": [
+    {
+     "session": 4,
+     "video": "eth7wIYEBb4"
+    }
+   ],
+   "country": "France",
+   "aff": "Institut Schiller",
+   "person": "cherine-sultan"
+  },
+  {
+   "name": "Daniel Burke",
+   "order": 36,
+   "in": [
+    {
+     "session": 4,
+     "video": "eth7wIYEBb4"
+    }
+   ],
+   "country": "USA",
+   "aff": "Schiller Institute",
+   "person": "daniel-burke"
+  }
+ ],
+ "tally": {
+  "sessions": 5,
+  "talks": 36,
+  "speakers": 36,
+  "runtime": 44399,
+  "videos": 13,
+  "with_portrait": 8,
+  "on_people": 34
+ }
+}

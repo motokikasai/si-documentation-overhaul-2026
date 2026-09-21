@@ -1,0 +1,345 @@
+/* ==========================================================================
+   CONFERENCE — the shared layer behind the five /conferences/{slug}/ drafts
+   --------------------------------------------------------------------------
+   Loaded after Jasper (tokens + components) and before each draft's own
+   sheet. Everything here is the vocabulary all five share: the ground dial,
+   the seal, the video facade, the talk row, the speaker line, the culture
+   card. A draft may restyle any of it inside its own scope; none of it
+   styles a bare element, and no rule here redefines a --theme-* variable.
+
+   THE DIALS  (data-* on <body class="si-conf">)
+     data-ground  limestone | paper | night   which Jasper surface the page sits on
+     data-hero    typographic | mosaic | portrait | poster
+   They are set from the record, so one template dresses four very different
+   conferences without a line of bespoke CSS — see README §"one template,
+   many rooms".
+   ========================================================================== */
+
+/* ---- 1 · the ground dial --------------------------------------------------
+   Jasper's rule: a page may re-point the --si-* ROLES inside its own scope,
+   never the --theme-* variables. Night is the one field where that is worth
+   doing, and a night page carries no second field: no white cards, no second
+   dark band, nothing to break the room. */
+.si-conf { background: var(--si-ground); color: var(--si-text); }
+
+.si-conf[data-ground="paper"] {
+	--si-ground: var(--si-card);
+	--si-panel: color-mix(in srgb, var(--si-jasper) 10%, var(--si-card));
+}
+.si-conf[data-ground="night"] {
+	--si-ground: var(--si-night);
+	--si-card: var(--si-night-2);
+	--si-panel: #1B2C3F;
+	--si-ink: var(--si-on-night);
+	--si-text: var(--si-on-night-2);
+	--si-muted: #92A7BC;              /* 6.2:1 on night */
+	--si-rule: #27394D;
+	--si-accent: var(--si-brass-on-night);
+	--si-accent-deep: #E0C48B;
+	--si-jasper-deep: #6E8CAB;
+	--si-shadow-1: none;
+	--si-shadow-2: 0 24px 60px -30px #000;
+	--si-focus-ring: 0 0 0 2px var(--si-night), 0 0 0 4px var(--si-brass-on-night);
+	--si-portrait-tint: color-mix(in srgb, #1F4A73 42%, transparent);
+	color-scheme: dark;
+}
+
+/* ---- 2 · page furniture --------------------------------------------------- */
+.si-conf .si-wrap {
+	width: min(100% - (2 * var(--si-gutter)), var(--si-container));
+	margin-inline: auto;
+}
+.si-conf .si-wrap--narrow { width: min(100% - (2 * var(--si-gutter)), 74ch); }
+.si-conf :where(section) { position: relative; }
+
+.si-conf-band { padding-block: var(--si-space-2xl); }
+.si-conf-band + .si-conf-band { border-top: var(--si-hairline); }
+.si-conf-band__head { display: grid; gap: var(--si-space-2xs); margin-bottom: var(--si-space-l); }
+.si-conf-band__head .si-display { font-size: var(--si-step-4); }
+
+/* the one night band a light page is allowed */
+.si-conf-band--night {
+	background: var(--si-night);
+	--si-ink: var(--si-on-night);
+	--si-text: var(--si-on-night-2);
+	--si-muted: #92A7BC;
+	--si-rule: #27394D;
+	--si-card: var(--si-night-2);
+	--si-accent: var(--si-brass-on-night);
+	color: var(--si-text);
+	border-top: 0;
+}
+
+/* ---- 3 · the dateline ----------------------------------------------------- */
+.si-conf-meta {
+	display: flex; flex-wrap: wrap; align-items: center;
+	gap: var(--si-space-2xs) var(--si-space-s);
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n1);
+	color: var(--si-muted);
+}
+.si-conf-meta b { font-weight: 600; color: var(--si-ink); font-variant-numeric: tabular-nums; }
+.si-conf-meta .sep { color: var(--si-rule); }
+
+.si-conf-status {
+	display: inline-flex; align-items: center; gap: .5em;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	letter-spacing: var(--si-track-caps); text-transform: uppercase;
+	padding: .35em .8em;
+	border: 1px solid var(--si-rule);
+	border-radius: var(--si-radius-round);
+	color: var(--si-muted);
+}
+.si-conf-status::before {
+	content: ""; width: 6px; height: 6px; border-radius: 50%;
+	background: var(--si-muted);
+}
+.si-conf-status[data-state="upcoming"] { color: var(--si-accent); border-color: var(--si-accent); }
+.si-conf-status[data-state="upcoming"]::before { background: var(--si-accent); }
+
+.si-conf-countdown {
+	font-family: var(--si-font-sans); font-size: var(--si-step-1);
+	color: var(--si-ink); margin: 0;
+}
+.si-conf-countdown .si-tabular { font-family: var(--si-font-serif); font-size: 1.3em; font-weight: 300; }
+.si-conf-countdown span span { color: var(--si-muted); font-size: var(--si-step-n1); }
+
+/* ---- 4 · the seal ---------------------------------------------------------
+   Drawn, not photographed: the ring count, the tick count and the phase are a
+   hash of the conference key (conference-core.js · sealSVG). Every conference
+   gets a device that is provably its own, and no one has to find an image. */
+.si-seal { display: block; overflow: visible; }
+.si-seal__ring { fill: none; stroke: var(--si-brass); stroke-width: .5; opacity: .55; }
+.si-seal__ticks { stroke: var(--si-brass); stroke-width: .7; opacity: .75; }
+.si-seal__field { fill: none; stroke: var(--si-rule); stroke-width: .5; }
+.si-seal__label {
+	font-family: var(--si-font-serif); font-size: 17px; font-weight: 300;
+	font-variant-numeric: lining-nums tabular-nums;
+	fill: var(--si-ink); letter-spacing: .02em;
+}
+.si-conf[data-ground="night"] .si-seal__ring,
+.si-conf[data-ground="night"] .si-seal__ticks { stroke: var(--si-brass-on-night); }
+.si-conf[data-ground="night"] .si-seal__label { fill: var(--si-on-night); }
+
+@media (prefers-reduced-motion: no-preference) {
+	.js .si-seal { animation: si-seal-in var(--si-dur-3) var(--si-ease) both; }
+	@keyframes si-seal-in { from { opacity: 0; rotate: -14deg; scale: .94; } }
+}
+
+/* ---- 5 · video: the two-click facade --------------------------------------
+   Nothing is requested from YouTube until the reader presses play; then the
+   nocookie player is inserted, deep-linked to the talk's own second. The
+   poster is YouTube's own still — the one image every conference in this
+   archive is guaranteed to have, which is why none of these drafts needs a
+   full-bleed photograph. */
+.si-conf-embed {
+	position: relative; margin: 0;
+	aspect-ratio: 16 / 9;
+	background: var(--si-night);
+	overflow: hidden;
+	isolation: isolate;
+}
+.si-conf-embed__btn {
+	position: absolute; inset: 0;
+	width: 100%; height: 100%; padding: 0;
+	border: 0; background: none; cursor: pointer;
+	display: grid; place-items: center;
+	text-decoration: none; color: inherit;
+}
+.si-conf-embed img {
+	position: absolute; inset: 0; width: 100%; height: 100%;
+	object-fit: cover;
+	filter: var(--si-portrait-filter);
+	opacity: .8;
+	transition: opacity var(--si-dur-2) var(--si-ease), filter var(--si-dur-2) var(--si-ease),
+		scale var(--si-dur-3) var(--si-ease);
+}
+.si-conf-embed__btn:is(:hover, :focus-visible) img { opacity: 1; filter: none; scale: 1.02; }
+.si-conf-embed__play {
+	position: relative; z-index: 1;
+	width: clamp(54px, 7vw, 76px); aspect-ratio: 1; border-radius: 50%;
+	display: grid; place-items: center;
+	background: color-mix(in srgb, var(--si-night) 58%, transparent);
+	box-shadow: 0 0 0 1px color-mix(in srgb, var(--si-brass-on-night) 72%, transparent);
+	backdrop-filter: blur(2px);
+	transition: background-color var(--si-dur-1) var(--si-ease), scale var(--si-dur-2) var(--si-ease);
+}
+.si-conf-embed__btn:is(:hover, :focus-visible) .si-conf-embed__play { background: var(--si-night); scale: 1.06; }
+.si-conf-embed__play svg { width: 20px; height: 22px; fill: var(--si-brass-on-night); margin-left: 3px; }
+.si-conf-embed__note {
+	position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+	padding: .75em 1em;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	letter-spacing: .03em; color: var(--si-on-night-2);
+	background: linear-gradient(transparent, rgb(15 26 38 / .86));
+	text-align: left;
+}
+.si-conf-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* the inline "watch this talk" control */
+.si-conf-watch {
+	display: inline-flex; align-items: center; gap: .5em;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1);
+	font-variant-numeric: tabular-nums;
+	color: var(--si-accent); text-decoration: none;
+	padding: .25em .6em .25em .3em;
+	border: 1px solid transparent;
+	border-radius: var(--si-radius-round);
+	transition: border-color var(--si-dur-1) var(--si-ease), background-color var(--si-dur-1) var(--si-ease);
+	white-space: nowrap;
+}
+.si-conf-watch:is(:hover, :focus-visible) { border-color: var(--si-accent); background: color-mix(in srgb, var(--si-accent) 7%, transparent); }
+.si-conf-watch__i {
+	width: 1.5em; aspect-ratio: 1; border-radius: 50%; flex: none;
+	display: grid; place-items: center;
+	border: 1px solid color-mix(in srgb, var(--si-accent) 45%, transparent);
+}
+.si-conf-watch__i svg { width: 7px; height: 8px; fill: currentColor; margin-left: 1px; }
+
+/* ---- 6 · tiles: the mosaic that stands in for a hero photograph ----------- */
+.si-conf-tiles { display: flex; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.si-conf-tiles li { flex: 1 1 0; min-width: 0; }
+.si-conf-tile {
+	display: block; position: relative; overflow: hidden;
+	aspect-ratio: 4 / 3; background: var(--si-panel);
+}
+.si-conf-tile img {
+	width: 100%; height: 100%; object-fit: cover; display: block;
+	filter: var(--si-portrait-filter);
+	transition: filter var(--si-dur-2) var(--si-ease), scale var(--si-dur-3) var(--si-ease);
+}
+.si-conf-tile::after {
+	content: ""; position: absolute; inset: 0;
+	background: var(--si-portrait-tint); mix-blend-mode: multiply;
+	transition: opacity var(--si-dur-2) var(--si-ease);
+}
+a.si-conf-tile:is(:hover, :focus-visible) img { filter: none; scale: 1.04; }
+a.si-conf-tile:is(:hover, :focus-visible)::after { opacity: 0; }
+
+/* ---- 7 · the talk row -----------------------------------------------------
+   One talk by one voice: the time it starts, who spoke, where they speak
+   from, what they called it, and the way in. Any of the five may be missing
+   — the row simply has fewer parts; nothing is filled in. */
+.si-conf-talks { list-style: none; margin: 0; padding: 0; display: grid; }
+.si-conf-talk {
+	display: grid;
+	grid-template-columns: 5.5rem 1fr auto;
+	gap: var(--si-space-2xs) var(--si-space-s);
+	align-items: baseline;
+	padding-block: var(--si-space-s);
+	border-top: var(--si-hairline);
+}
+.si-conf-talk:last-child { border-bottom: var(--si-hairline); }
+.si-conf-talk__at {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1);
+	font-variant-numeric: tabular-nums;
+	color: var(--si-muted);
+}
+.si-conf-talk__body { display: grid; gap: .25em; min-width: 0; }
+.si-conf-talk__title {
+	font-family: var(--si-font-serif); font-size: var(--si-step-1);
+	font-weight: 400; line-height: var(--si-leading-heading); color: var(--si-ink);
+	margin: 0;
+}
+.si-conf-talk__title a { color: inherit; text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size var(--si-dur-2) var(--si-ease); }
+.si-conf-talk__title a:is(:hover, :focus-visible) { background-size: 100% 1px; }
+.si-conf-talk__who { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1em .6em; }
+.si-conf-talk__end { justify-self: end; display: grid; gap: .3em; justify-items: end; }
+@media (max-width: 720px) {
+	.si-conf-talk { grid-template-columns: 1fr; }
+	.si-conf-talk__end { justify-self: start; }
+}
+
+.si-conf-speaker__name { font-size: var(--si-step-0); color: var(--si-ink); }
+.si-conf-speaker__name a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 28%, transparent); text-underline-offset: .2em; }
+.si-conf-speaker__name a:is(:hover, :focus-visible) { color: var(--si-accent); text-decoration-color: currentColor; }
+.si-conf-speaker__aff {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1);
+	color: var(--si-muted); line-height: var(--si-leading-meta);
+}
+.si-conf-speaker__country {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	letter-spacing: var(--si-track-caps); text-transform: uppercase;
+	color: var(--si-jasper-deep); white-space: nowrap;
+}
+.si-conf-role {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	letter-spacing: var(--si-track-caps); text-transform: uppercase;
+	color: var(--si-brass);
+}
+.si-conf[data-ground="night"] .si-conf-role { color: var(--si-brass-on-night); }
+/* a seat the published roster holds without naming anyone */
+.si-conf-anon { color: var(--si-muted); font-style: italic; }
+
+/* ---- 8 · the culture card -------------------------------------------------
+   A concert is not a panel with music in it. Composer and work are set as a
+   programme is set — the work in italic serif, the composer above it, the
+   performers and the conductor underneath, in the order a printed programme
+   would give them. */
+.si-conf-works { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--si-space-s); }
+.si-conf-work {
+	display: grid; gap: .3em;
+	padding: var(--si-space-s) 0;
+	border-top: var(--si-hairline);
+}
+.si-conf-work__composer {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	letter-spacing: var(--si-track-caps); text-transform: uppercase;
+	color: var(--si-muted);
+}
+.si-conf-work__title {
+	font-family: var(--si-font-serif); font-style: italic; font-weight: 400;
+	font-size: var(--si-step-2); line-height: var(--si-leading-heading);
+	color: var(--si-ink); margin: 0;
+}
+.si-conf-work__cast {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted);
+	display: grid; gap: .1em;
+}
+.si-conf-work__cast b { font-weight: 600; color: var(--si-text); }
+.si-conf-work__movements {
+	list-style: none; margin: .3em 0 0; padding: 0;
+	display: flex; flex-wrap: wrap; gap: .3em var(--si-space-s);
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted);
+}
+
+/* ---- 9 · figures, notes, empties ------------------------------------------ */
+.si-conf-tally { gap: var(--si-space-s) var(--si-space-l); }
+.si-conf-tally .si-figure dd { font-size: var(--si-step-3); }
+
+.si-conf-empty {
+	padding: var(--si-space-xl) 0;
+	font-family: var(--si-font-serif); font-style: italic;
+	font-size: var(--si-step-1); color: var(--si-muted);
+	max-width: var(--si-measure-narrow);
+}
+
+/* The prototype's own voice — never shipped, always visible while reviewing. */
+.si-conf-note {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	color: var(--si-muted); border-left: 2px solid var(--si-brass);
+	padding: .3em 0 .3em .8em; margin: var(--si-space-s) 0 0;
+	max-width: 62ch;
+}
+
+/* ---- 10 · the rule that carries the brass --------------------------------- */
+/* One brass rule per page (Jasper): every draft spends it on the line that
+   separates the conference from its programme. */
+.si-conf-brassrule { border: 0; border-top: 1px solid var(--si-brass); width: 3.5rem; margin: 0; }
+
+/* ---- 11 · review furniture (prototype only) ------------------------------- */
+.si-draft-strip {
+	position: fixed; inset-block-end: 0; inset-inline: 0; z-index: 90;
+	display: flex; flex-wrap: wrap; align-items: center; gap: .1em .75em;
+	padding: .5em var(--si-space-s);
+	background: color-mix(in srgb, var(--si-night) 94%, transparent);
+	color: #9FB3C7;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	letter-spacing: .02em;
+	backdrop-filter: blur(6px);
+}
+.si-draft-strip a { color: #D8E2EC; text-decoration: none; border-bottom: 1px solid transparent; }
+.si-draft-strip a:hover { border-bottom-color: currentColor; }
+.si-draft-strip b { color: var(--si-brass-on-night); font-weight: 600; }
+.si-draft-strip .sep { width: 1px; height: 1em; background: #35485E; }
+@media print { .si-draft-strip { display: none; } }

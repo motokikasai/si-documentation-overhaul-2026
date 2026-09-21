@@ -1,0 +1,202 @@
+/* ==========================================================================
+   DRAFT A · "THE PROCEEDINGS" — the record, walkable
+   --------------------------------------------------------------------------
+   The default template: an editorial page that carries a 36-talk conference
+   and an empty one equally well. Nothing here styles a bare element; every
+   rule is under .pr-page.
+   ========================================================================== */
+
+/* ---- hero ---------------------------------------------------------------- */
+.pr-hero { padding-top: var(--si-space-2xl); }
+.pr-hero__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: var(--si-space-l);
+	align-items: start;
+}
+@media (min-width: 900px) {
+	.pr-hero__grid { grid-template-columns: minmax(0, 1fr) auto; gap: var(--si-space-2xl); }
+}
+.pr-hero__text { display: grid; gap: var(--si-space-s); max-width: 62ch; }
+.pr-title {
+	font-size: var(--si-step-5);
+	max-width: 22ch;
+	margin: 0;
+	text-wrap: balance;
+}
+.pr-title.is-long { font-size: var(--si-step-4); max-width: 26ch; }
+.pr-brass { margin-block: var(--si-space-2xs); }
+.pr-hero__seal { justify-self: start; }
+@media (min-width: 900px) { .pr-hero__seal { justify-self: end; } }
+
+.pr-cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--si-space-s); margin-top: var(--si-space-2xs); }
+.pr-cta__alt { font-size: var(--si-step-n1); }
+
+.pr-tiles { margin-top: var(--si-space-xl); }
+.pr-tiles .si-conf-tile { aspect-ratio: 16 / 10; }
+.pr-tile__label {
+	position: absolute; inset: auto 0 0 0; z-index: 1;
+	display: grid; gap: .15em;
+	padding: var(--si-space-s) var(--si-space-xs) var(--si-space-xs);
+	background: linear-gradient(transparent, rgb(15 26 38 / .9));
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	color: var(--si-on-night-2); line-height: 1.25;
+}
+.pr-tile__label b {
+	font-weight: 600; letter-spacing: var(--si-track-caps); text-transform: uppercase;
+	color: var(--si-brass-on-night);
+}
+.pr-tile__label > span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pr-tiles li:nth-child(n+5) { display: none; }
+@media (min-width: 760px) { .pr-tiles li:nth-child(n+5) { display: block; } }
+
+/* ---- body: rail + content ------------------------------------------------- */
+.pr-body {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: var(--si-space-xl);
+	padding-block: var(--si-space-2xl);
+}
+@media (min-width: 1080px) {
+	.pr-body { grid-template-columns: 14rem minmax(0, 1fr); gap: var(--si-space-2xl); }
+}
+
+.pr-rail { display: none; }
+@media (min-width: 1080px) {
+	.pr-rail {
+		display: block;
+		position: sticky; top: var(--si-space-m);
+		align-self: start;
+		max-height: calc(100vh - 2 * var(--si-space-m));
+		overflow: auto;
+		padding-right: var(--si-space-s);
+	}
+	.pr-rail ol { list-style: none; margin: var(--si-space-s) 0 0; padding: 0; display: grid; }
+	.pr-rail a {
+		display: grid; gap: .1em;
+		padding: .5em 0 .5em .9em;
+		border-left: 1px solid var(--si-rule);
+		text-decoration: none; color: var(--si-muted);
+		transition: border-color var(--si-dur-1) var(--si-ease), color var(--si-dur-1) var(--si-ease);
+	}
+	.pr-rail a:hover { color: var(--si-ink); border-left-color: var(--si-jasper); }
+	.pr-rail a[aria-current] { color: var(--si-ink); border-left-color: var(--si-brass); }
+	.pr-rail__label { font-family: var(--si-font-sans); font-size: var(--si-step-n1); font-weight: 600; }
+	.pr-rail__sub {
+		font-family: var(--si-font-serif); font-size: var(--si-step-n1);
+		color: var(--si-muted);
+		display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+	}
+	.pr-rail a[aria-current] .pr-rail__sub { color: var(--si-text); }
+	.pr-rail__bar { position: absolute; inset-block: 0; left: 0; width: 1px; }
+	.pr-rail__bar span {
+		display: block; height: 100%; background: var(--si-brass);
+		transform-origin: top; transform: scaleY(0);
+	}
+}
+
+/* ---- programme ------------------------------------------------------------ */
+.pr-programme__head { display: grid; gap: var(--si-space-2xs); margin-bottom: var(--si-space-l); max-width: var(--si-measure); }
+.pr-programme__head .si-display { font-size: var(--si-step-4); margin: 0; }
+
+.pr-day {
+	display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--si-space-s);
+	margin: var(--si-space-2xl) 0 var(--si-space-m);
+	padding-bottom: var(--si-space-2xs);
+	border-bottom: 3px double var(--si-rule);
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	letter-spacing: var(--si-track-caps); text-transform: uppercase;
+	color: var(--si-ink);
+}
+.pr-day__date { color: var(--si-muted); letter-spacing: .06em; }
+
+.pr-session {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: var(--si-space-m);
+	padding-block: var(--si-space-xl);
+	border-top: var(--si-hairline);
+	scroll-margin-top: 5.5rem;
+}
+.pr-session:first-of-type { border-top: 0; padding-top: 0; }
+@media (min-width: 880px) {
+	.pr-session {
+		grid-template-columns: minmax(260px, 33%) minmax(0, 1fr);
+		column-gap: var(--si-space-l);
+		align-items: start;
+	}
+	.pr-session__head { grid-column: 1 / -1; }
+	.pr-session__media { position: sticky; top: var(--si-space-m); }
+}
+.pr-session__head { display: grid; gap: .3em; margin-bottom: var(--si-space-2xs); }
+.pr-session__title { font-size: var(--si-step-3); margin: 0; max-width: 34ch; text-wrap: balance; }
+.pr-session__cap {
+	margin: var(--si-space-xs) 0 0;
+	display: grid; gap: .35em;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1);
+	color: var(--si-muted);
+}
+
+.pr-session--culture .pr-session__title { font-style: italic; font-weight: 300; }
+.pr-session--culture .pr-session__head::after {
+	content: ""; display: block; width: 100%; height: 1px;
+	background: linear-gradient(90deg, var(--si-brass), transparent 62%);
+	margin-top: var(--si-space-2xs);
+}
+
+.pr-playlist {
+	display: block; padding: var(--si-space-m);
+	border: var(--si-hairline); background: var(--si-card);
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1);
+	color: var(--si-accent); text-decoration: none;
+}
+.pr-playlist:hover { border-color: var(--si-accent); }
+
+/* ---- voices --------------------------------------------------------------- */
+.pr-voices { padding-top: var(--si-space-2xl); border-top: var(--si-hairline); }
+.pr-roster {
+	list-style: none; margin: 0; padding: 0;
+	display: grid; gap: var(--si-space-m);
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+}
+.pr-speaker { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--si-space-s); align-items: start; }
+.pr-speaker__body { display: grid; gap: .2em; min-width: 0; }
+.pr-speaker__talks {
+	list-style: none; margin: .4em 0 0; padding: 0;
+	display: grid; gap: .3em;
+	font-family: var(--si-font-serif); font-size: var(--si-step-n1);
+}
+.pr-speaker__talks li { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4em; }
+.pr-speaker__talks a { color: var(--si-ink); text-decoration: none; border-bottom: 1px solid var(--si-rule); }
+.pr-speaker__talks a:hover { border-bottom-color: var(--si-accent); color: var(--si-accent); }
+
+/* ---- clips (the one night band on a limestone page) ----------------------- */
+.pr-clips { padding-block: var(--si-space-2xl); margin-top: var(--si-space-2xl); }
+.si-conf-clips {
+	list-style: none; margin: 0; padding: 0;
+	display: grid; gap: var(--si-space-m);
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+}
+.si-conf-clip__title {
+	margin: .6em 0 0; font-family: var(--si-font-serif); font-size: var(--si-step-0);
+	color: var(--si-ink); line-height: var(--si-leading-heading);
+}
+
+/* ---- the record ----------------------------------------------------------- */
+.pr-record { padding-block: var(--si-space-2xl); }
+.si-conf-colophon {
+	display: grid; grid-template-columns: minmax(0, 1fr);
+	gap: .2em var(--si-space-m); margin: 0;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1);
+	max-width: 80ch;
+}
+@media (min-width: 620px) { .si-conf-colophon { grid-template-columns: 12rem minmax(0, 1fr); } }
+.si-conf-colophon dt {
+	color: var(--si-muted); letter-spacing: var(--si-track-caps);
+	text-transform: uppercase; font-size: var(--si-step-n2);
+	padding-top: .55em; border-top: var(--si-hairline);
+}
+.si-conf-colophon dd { margin: 0; color: var(--si-text); padding-top: .55em; border-top: var(--si-hairline); }
+@media (max-width: 619px) { .si-conf-colophon dd { border-top: 0; padding-top: 0; padding-bottom: .5em; } }
+
+.pr-loading { display: grid; }

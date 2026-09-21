@@ -1,0 +1,184 @@
+/* ==========================================================================
+   DRAFT E · "THE ATRIUM" — the room with doors
+   --------------------------------------------------------------------------
+   The dense one. A sticky sub-navigation, compact sections, accordions for a
+   long programme, and one night band for the recordings — Jasper's single
+   dark field, spent where it does the most work.
+   ========================================================================== */
+
+/* ---- 1 · hero ------------------------------------------------------------- */
+.at-hero { padding-block: var(--si-space-2xl) var(--si-space-l); }
+.at-hero__grid { display: grid; gap: var(--si-space-l); align-items: start; }
+@media (min-width: 900px) { .at-hero__grid { grid-template-columns: minmax(0, 1fr) 17rem; gap: var(--si-space-2xl); } }
+.at-hero__text { display: grid; gap: var(--si-space-s); }
+.at-title { font-size: var(--si-step-5); margin: 0; max-width: 20ch; text-wrap: balance; }
+.at-title.is-long { font-size: var(--si-step-4); max-width: 26ch; }
+
+.at-facts {
+	display: flex; flex-wrap: wrap; gap: var(--si-space-s) var(--si-space-l);
+	margin: 0; padding-block: var(--si-space-xs);
+	border-block: var(--si-hairline);
+}
+.at-facts div { display: grid; gap: .1em; }
+.at-facts dt {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-muted);
+}
+.at-facts dd { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-1); color: var(--si-ink); }
+
+.at-hero__cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--si-space-s) var(--si-space-m); }
+.at-hero__card {
+	display: grid; justify-items: center; gap: var(--si-space-xs);
+	padding: var(--si-space-m);
+	background: var(--si-panel); border: var(--si-hairline);
+	text-align: center;
+}
+.at-hero__stat { margin: 0; display: grid; gap: .1em; }
+.at-hero__stat b { font-family: var(--si-font-serif); font-weight: 300; font-size: var(--si-step-2); color: var(--si-ink); }
+.at-hero__stat span { font-family: var(--si-font-sans); font-size: var(--si-step-n2); color: var(--si-muted); }
+
+/* ---- 2 · the doors -------------------------------------------------------- */
+.at-doors {
+	position: sticky; top: 0; z-index: 5;
+	background: var(--si-ground);
+	border-block: var(--si-hairline);
+	transition: box-shadow var(--si-dur-2) var(--si-ease);
+}
+.at-doors.is-stuck { box-shadow: var(--si-shadow-1); }
+.at-doors ul {
+	list-style: none; margin: 0; padding: 0;
+	display: flex; gap: var(--si-space-m);
+	overflow-x: auto; scrollbar-width: none;
+}
+.at-doors ul::-webkit-scrollbar { display: none; }
+.at-doors a {
+	display: block; padding: .9em 0;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1);
+	color: var(--si-muted); text-decoration: none; white-space: nowrap;
+	border-bottom: 2px solid transparent;
+	transition: color var(--si-dur-1) var(--si-ease), border-color var(--si-dur-1) var(--si-ease);
+}
+.at-doors a:hover { color: var(--si-ink); }
+.at-doors a[aria-current] { color: var(--si-ink); border-bottom-color: var(--si-brass); }
+
+/* ---- 3 · sections --------------------------------------------------------- */
+.at-section { padding-block: var(--si-space-2xl); scroll-margin-top: 4rem; }
+.at-section--tint { background: var(--si-panel); }
+.si-conf[data-ground="night"] .at-section--tint { background: var(--si-night-2); }
+.at-head { display: grid; gap: var(--si-space-2xs); margin-bottom: var(--si-space-l); max-width: var(--si-measure); }
+.at-head .si-display { font-size: var(--si-step-4); margin: 0; }
+
+.at-overview { display: grid; gap: var(--si-space-l); }
+@media (min-width: 940px) { .at-overview { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--si-space-2xl); } }
+.at-caption { margin: .6em 0 0; font-family: var(--si-font-serif); font-size: var(--si-step-0); color: var(--si-ink); }
+.at-nofilm { display: grid; place-items: center; min-height: 220px; border: 1px dashed var(--si-rule); padding: var(--si-space-m); }
+.at-nofilm .si-conf-empty { padding: 0; text-align: center; }
+
+.at-overview__days { display: grid; gap: var(--si-space-m); align-content: start; }
+.at-day { display: grid; gap: .3em; padding-top: var(--si-space-2xs); border-top: 2px solid var(--si-ink); }
+.at-day__date { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-1); color: var(--si-ink); font-weight: 400; }
+.at-day__list { list-style: none; margin: .4em 0 0; padding: 0; display: grid; }
+.at-day__list a {
+	display: grid; grid-template-columns: auto minmax(0, 1fr) auto;
+	gap: .2em var(--si-space-s); align-items: baseline;
+	padding-block: .5em; border-top: var(--si-hairline);
+	text-decoration: none; color: inherit;
+}
+.at-day__list a:hover .at-day__title { color: var(--si-accent); }
+.at-day__kind {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	letter-spacing: .06em; text-transform: uppercase; color: var(--si-brass);
+	min-width: 5.2rem;
+}
+.at-day__title { font-family: var(--si-font-serif); font-size: var(--si-step-0); color: var(--si-ink); }
+.at-day__len { font-family: var(--si-font-sans); font-size: var(--si-step-n2); color: var(--si-muted); }
+@media (max-width: 560px) {
+	.at-day__list a { grid-template-columns: minmax(0, 1fr) auto; }
+	.at-day__kind { grid-column: 1 / -1; }
+}
+
+/* ---- 4 · accordions ------------------------------------------------------- */
+.at-acc { border-top: var(--si-hairline); }
+.at-acc:last-of-type { border-bottom: var(--si-hairline); }
+.at-acc summary {
+	display: grid; grid-template-columns: 2.6rem minmax(0, 1fr) 1.5rem;
+	gap: var(--si-space-s); align-items: center;
+	padding-block: var(--si-space-s);
+	cursor: pointer; list-style: none;
+}
+.at-acc summary::-webkit-details-marker { display: none; }
+.at-acc summary:hover .at-acc__title { color: var(--si-accent); }
+.at-acc__n { font-family: var(--si-font-serif); font-size: var(--si-step-1); font-weight: 300; color: var(--si-jasper-deep); }
+.at-acc__text { display: grid; gap: .1em; min-width: 0; }
+.at-acc__title { font-family: var(--si-font-serif); font-size: var(--si-step-2); color: var(--si-ink); line-height: var(--si-leading-heading); }
+.at-acc__meta { font-family: var(--si-font-sans); font-size: var(--si-step-n2); letter-spacing: .06em; text-transform: uppercase; color: var(--si-muted); }
+.at-acc--culture .at-acc__title { font-style: italic; font-weight: 300; }
+.at-acc__chev {
+	justify-self: end; width: 10px; height: 10px;
+	border-right: 1px solid var(--si-muted); border-bottom: 1px solid var(--si-muted);
+	rotate: 45deg; transition: rotate var(--si-dur-2) var(--si-ease);
+}
+.at-acc[open] .at-acc__chev { rotate: 225deg; }
+.at-acc__body { display: grid; gap: var(--si-space-m); padding-bottom: var(--si-space-l); }
+@media (min-width: 900px) {
+	.at-acc__body { grid-template-columns: minmax(260px, 30%) minmax(0, 1fr); column-gap: var(--si-space-l); align-items: start; }
+}
+.at-acc__media { position: sticky; top: 4.5rem; }
+
+.at-talks { list-style: none; margin: 0; padding: 0; display: grid; }
+.at-talks li {
+	display: grid; grid-template-columns: 4.6rem minmax(0, 1fr) auto;
+	gap: .2em var(--si-space-s); align-items: baseline;
+	padding-block: var(--si-space-xs); border-top: var(--si-hairline);
+}
+.at-talks li:last-child { border-bottom: var(--si-hairline); }
+.at-talks__at { font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); }
+.at-talks__body { display: grid; gap: .1em; min-width: 0; }
+.at-talks__title { font-family: var(--si-font-serif); font-size: var(--si-step-1); color: var(--si-ink); text-decoration: none; }
+.at-talks__title:hover { color: var(--si-accent); }
+.at-talks__who { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1em .6em; }
+@media (max-width: 680px) {
+	.at-talks li { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- 5 · voices ----------------------------------------------------------- */
+.at-voices {
+	list-style: none; margin: 0; padding: 0;
+	display: grid; gap: var(--si-space-s) var(--si-space-m);
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+.at-voices li {
+	display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--si-space-xs);
+	align-items: center; padding-block: var(--si-space-2xs); border-top: var(--si-hairline);
+}
+.at-voices__body { display: grid; gap: .05em; min-width: 0; }
+
+/* ---- 6 · culture ---------------------------------------------------------- */
+.at-culture { display: grid; gap: var(--si-space-l); }
+@media (min-width: 900px) { .at-culture { grid-template-columns: minmax(280px, 38%) minmax(0, 1fr); column-gap: var(--si-space-2xl); align-items: start; } }
+.at-culture + .at-culture { margin-top: var(--si-space-2xl); }
+.at-culture__body { display: grid; gap: var(--si-space-s); }
+.at-culture .si-conf-embed { position: sticky; top: 4.5rem; }
+
+/* ---- 7 · watch (the night band) ------------------------------------------- */
+#watch .si-conf-clips {
+	list-style: none; margin: 0; padding: 0;
+	display: grid; gap: var(--si-space-m);
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+}
+#watch .si-conf-clip__title { margin: .6em 0 0; font-family: var(--si-font-serif); font-size: var(--si-step-0); color: var(--si-ink); }
+.at-watch__cta { margin: var(--si-space-xl) 0 0; }
+
+/* ---- 8 · register / record ------------------------------------------------ */
+.at-register { display: grid; gap: var(--si-space-xl); }
+@media (min-width: 900px) { .at-register { grid-template-columns: minmax(0, 1fr) 20rem; gap: var(--si-space-2xl); } }
+.at-register .si-conf-colophon { align-content: start; }
+.si-conf-colophon {
+	display: grid; grid-template-columns: minmax(0, 1fr); gap: .2em var(--si-space-m);
+	margin: 0; font-family: var(--si-font-sans); font-size: var(--si-step-n1); max-width: 80ch;
+}
+@media (min-width: 620px) { #record .si-conf-colophon { grid-template-columns: 12rem minmax(0, 1fr); } }
+.si-conf-colophon dt { color: var(--si-muted); letter-spacing: var(--si-track-caps); text-transform: uppercase; font-size: var(--si-step-n2); padding-top: .55em; border-top: var(--si-hairline); }
+.si-conf-colophon dd { margin: 0; padding-top: .55em; border-top: var(--si-hairline); }
+
+.at-loading { display: grid; }

@@ -1,0 +1,511 @@
+{
+ "meta": {
+  "built": "2026-09-21",
+  "source": "incoming/conference-map.csv (reviewed) + the 2026-07-16 YouTube channel audit",
+  "rows": 55,
+  "listed": 50,
+  "note": "5 of the 55 rows are duplicate-language playlists marked `skip` by the reviewer and are not listed."
+ },
+ "conferences": [
+  {
+   "key": "2025-berlin-wolf-paradigm-relations",
+   "title": "“Man Is Not a Wolf to Man” - For a New Paradigm in International Relations! — Berlin Conference",
+   "start": "2025-07-12",
+   "end": "2025-07-13",
+   "location": "Berlin, Germany",
+   "playlist": "PLoHwt4KyUk5AQSojSSwzrmY0iiKsy-9SU",
+   "videos": 13,
+   "drafted": true
+  },
+  {
+   "key": "2025-2025-memorial-weekend-beautiful",
+   "title": "A Beautiful Vision for Humanity in Times of Great Turbulence! — Memorial Day Weekend Conference",
+   "start": "2025-05-24",
+   "end": "2025-05-25",
+   "location": "New York, USA",
+   "playlist": "PLoHwt4KyUk5CoOZjiQx8ZzJUx9crewBuB",
+   "videos": 7,
+   "drafted": false
+  },
+  {
+   "key": "2024-spirit-beethoven-become-brethren",
+   "title": "In the Spirit of Schiller and Beethoven: All Men Become Brethren!",
+   "start": "2024-12-07",
+   "end": "2024-12-08",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5BuFCwNp09wFxSsuN1HZbrp",
+   "videos": 8,
+   "drafted": true
+  },
+  {
+   "key": "2024-press-danger-nuclear-real",
+   "title": "The Danger of Nuclear War Is Real, and Must Be Stopped — Press Conference",
+   "start": "2024-06-12",
+   "end": "2024-06-12",
+   "location": "Washington, D.C., USA",
+   "playlist": "PLoHwt4KyUk5ChmKI_mz2IhgGLpKvQrovy",
+   "videos": 9,
+   "drafted": false
+  },
+  {
+   "key": "2023-strategic-situation-after-historic",
+   "title": "The Strategic Situation After the Historic BRICS Summit — Panel 1",
+   "start": "2023-09-09",
+   "end": "2023-09-09",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5A6e8qKmpq9qQfQhl938kpr",
+   "videos": 4,
+   "drafted": false
+  },
+  {
+   "key": "2023-join-hands-global-majority",
+   "title": "Let us Join Hands with the Global Majority To Create a New Chapter in World History!",
+   "start": "2023-09-09",
+   "end": "2023-09-09",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5Cw0AyJkn5PjjWLC9_akeMK",
+   "videos": 7,
+   "drafted": false
+  },
+  {
+   "key": "2023-07-08-strasbourg-european-conference",
+   "title": "On the Verge of a New World War: \"European Nations Must Cooperate with the Global South!\"",
+   "start": "2023-07-08",
+   "end": "2023-07-09",
+   "location": "Strasbourg, France",
+   "playlist": null,
+   "videos": 0,
+   "drafted": true
+  },
+  {
+   "key": "2023-without-development-nations-there",
+   "title": "Without the Development of All Nations, There Can Be No Lasting Peace for the Planet",
+   "start": "2023-04-15",
+   "end": "2023-04-16",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5DIAI7N5K8YvBmoEdKcvmSG",
+   "videos": 4,
+   "drafted": false
+  },
+  {
+   "key": "2023-february-reason-annihilation-humanity",
+   "title": "The Age of Reason or the Annihilation of Humanity?",
+   "start": "2023-02-04",
+   "end": "2023-02-04",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5Dffz7jVAihCnoXT2RCUBRs",
+   "videos": 9,
+   "drafted": false
+  },
+  {
+   "key": "2023-january-stop-nato-world",
+   "title": "Stop NATO's World War and Dismantle the 'International Assassination Bureau'",
+   "start": "2023-01-14",
+   "end": "2023-01-14",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5BI_QxL_lMYxjK-L9D6pwIf",
+   "videos": 3,
+   "drafted": false
+  },
+  {
+   "key": "2022-2022-stop-danger-nuclear",
+   "title": "Stop the Danger of Nuclear War Now",
+   "start": "2022-11-22",
+   "end": "2022-11-22",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5D1_Z7Zi02Q9kn0Jf7HxdBO",
+   "videos": 1,
+   "drafted": false
+  },
+  {
+   "key": "2022-inspiring-humanity-survive-greatest",
+   "title": "Inspiring Humanity to Survive the Greatest Crisis in World History",
+   "start": "2022-09-10",
+   "end": "2022-09-11",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5DPZ02tyaNkMYYrfNE1VphU",
+   "videos": 6,
+   "drafted": false
+  },
+  {
+   "key": "2022-there-peace-without-bankruptcy",
+   "title": "There Can Be No Peace Without the Bankruptcy Reorganization of the Dying Trans-Atlantic Financial System",
+   "start": "2022-06-18",
+   "end": "2022-06-18",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5DkW-buoxyXM6laxEB0lICI",
+   "videos": 16,
+   "drafted": false
+  },
+  {
+   "key": "2022-april-2022-establish-security",
+   "title": "For a Conference to Establish a New Security and Development Architecture for All Nations",
+   "start": "2022-04-09",
+   "end": "2022-04-09",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5ATvAWizEGiwjFxfmuPUOB1",
+   "videos": 10,
+   "drafted": false
+  },
+  {
+   "key": "2021-mankind-immortal-species",
+   "title": "Mankind Must Be the Immortal Species",
+   "start": "2021-11-13",
+   "end": "2021-11-14",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5AOO0AlzyiRtLNaJrWIvQjw",
+   "videos": 8,
+   "drafted": false
+  },
+  {
+   "key": "2021-june",
+   "title": "Schiller Institute conference — June 26-27, 2021",
+   "start": "2021-06-26",
+   "end": "2021-06-27",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5AM0515zChBYV0dUgTKbyZQ",
+   "videos": 9,
+   "drafted": false
+  },
+  {
+   "key": "2021-march-world-crossroad-months",
+   "title": "WORLD AT A CROSSROAD: Two Months into the New Administration",
+   "start": "2021-03-20",
+   "end": "2021-03-21",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5C3NYhozFTLmO4xjBhbr8SU",
+   "videos": 11,
+   "drafted": false
+  },
+  {
+   "key": "2020-december-2020-world-after",
+   "title": "The World after the U.S. Election Creating A World Based on Reason",
+   "start": "2020-12-12",
+   "end": "2020-12-12",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5AGynJ1XR-cp5ZMydgLtyZX",
+   "videos": 4,
+   "drafted": false
+  },
+  {
+   "key": "2020-september-2020-youth-world",
+   "title": "The World Has a Choice: Extinction, or Era of LaRouche — Youth Conference",
+   "start": "2020-09-26",
+   "end": "2020-09-26",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5Bs6Bvy1BfO4fDVTqdcccI2",
+   "videos": 2,
+   "drafted": false
+  },
+  {
+   "key": "2020-june-2020-humanity-prosper",
+   "title": "Will Humanity Prosper, or Perish?",
+   "start": "2020-06-27",
+   "end": "2020-06-27",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5DWhMYHEidLO0zeIhq4uzfw",
+   "videos": 3,
+   "drafted": false
+  },
+  {
+   "key": "2020-april-2020",
+   "title": "Schiller Institute Conference — April 25-26, 2020",
+   "start": "2020-04-25",
+   "end": "2020-04-26",
+   "location": "online",
+   "playlist": "PLoHwt4KyUk5BLyjo-lYI1akY_m95R12QD",
+   "videos": 19,
+   "drafted": false
+  },
+  {
+   "key": "2019-november-2019-soden",
+   "title": "Schiller Institute Conference — November 16-17, 2019 • Bad Soden Conference",
+   "start": "2019-11-16",
+   "end": "2019-11-17",
+   "location": "Bad Soden, Germany",
+   "playlist": "PLoHwt4KyUk5DwvYfiV1GzQRoWSdQcxcg8",
+   "videos": 8,
+   "drafted": false
+  },
+  {
+   "key": "2019-presidents-national-2019",
+   "title": "Create a New Epoch for Mankind — Presidents' Day National Conference",
+   "start": "2019-02-16",
+   "end": "2019-02-16",
+   "location": "New Jersey, USA",
+   "playlist": "PLoHwt4KyUk5BkTXvZW6BQzXUop4HiJyrA",
+   "videos": 3,
+   "drafted": false
+  },
+  {
+   "key": "2018-paris-november-2018",
+   "title": "Schiller Institute Conference — November 6, 2018 • Paris Conference",
+   "start": "2018-11-06",
+   "end": "2018-11-06",
+   "location": "Paris, France",
+   "playlist": "PLoHwt4KyUk5B2iUesv6EBeBrj6aDYdtbN",
+   "videos": 8,
+   "drafted": false
+  },
+  {
+   "key": "2018-sept-2018",
+   "title": "Schiller Institute Conference — Sept. 13, 2018 • NYC conference",
+   "start": "2018-09-13",
+   "end": "2018-09-13",
+   "location": "New York, USA",
+   "playlist": "PLoHwt4KyUk5AqCLdZY4emKBztbJdUfZvj",
+   "videos": 12,
+   "drafted": false
+  },
+  {
+   "key": "2018-june-july-conf-soden",
+   "title": "Schiller Institute Conference — June 30-July 1, 2018 • Bad Soden Conference",
+   "start": "2018-06-30",
+   "end": "2018-07-01",
+   "location": "Bad Soden, Germany",
+   "playlist": "PLoHwt4KyUk5AJ48ftO4TDRM1GLZ4YmAIe",
+   "videos": 8,
+   "drafted": false
+  },
+  {
+   "key": "2018-april-manhattan-dialogue-three",
+   "title": "A Dialogue of Three Presidencies — April 7, 2018 • Manhattan Conference",
+   "start": "2018-04-07",
+   "end": "2018-04-07",
+   "location": "New York, USA",
+   "playlist": "PLoHwt4KyUk5Azhj6f0_f7M1o3W2o-et59",
+   "videos": 2,
+   "drafted": false
+  },
+  {
+   "key": "2017-soden-fulfilling-dream-mankind",
+   "title": "Fulfilling the Dream of Mankind - November 25-26, 2017 • Bad Soden Conference",
+   "start": "2017-11-25",
+   "end": "2017-11-26",
+   "location": "Bad Soden, Germany",
+   "playlist": "PLoHwt4KyUk5Diy9gwbA5IL5J4q6SRtEhC",
+   "videos": 9,
+   "drafted": false
+  },
+  {
+   "key": "2017-paris-octobre-2017",
+   "title": "Schiller Institute Conference — October 24, 2017 • Paris Conference",
+   "start": "2017-10-24",
+   "end": "2017-10-24",
+   "location": "Paris, France",
+   "playlist": "PLoHwt4KyUk5Bo6n8EQg2RwP0vBHfLJnS-",
+   "videos": 12,
+   "drafted": false
+  },
+  {
+   "key": "2017-symposium-aesthetic-education-humanity",
+   "title": "Symposium: \"The Aesthetic Education of Humanity Through Music\" - Concluding Event of Two Day Tribute to Sylvia Olden Lee",
+   "start": "2017-06-30",
+   "end": "2017-06-30",
+   "location": "New York, USA",
+   "playlist": "PLoHwt4KyUk5Ai3BFCvdyEX__n7Ir0qrQF",
+   "videos": 11,
+   "drafted": false
+  },
+  {
+   "key": "2017-york-april-2017-china",
+   "title": "US-China Cooperation on the Belt and Road Initiative — April 13-14, 2017 • New York Conference",
+   "start": "2017-04-13",
+   "end": "2017-04-13",
+   "location": "New York, USA",
+   "playlist": "PLoHwt4KyUk5CfL_UCuxSmmr0hyQNZlZjL",
+   "videos": 11,
+   "drafted": false
+  },
+  {
+   "key": "2017-april-2017-silk-road",
+   "title": "The New Silk Road: A Global Engineering Renaissance",
+   "start": "2017-04-07",
+   "end": "2017-04-07",
+   "location": "New York, USA",
+   "playlist": "PLoHwt4KyUk5BwAqPwhIq7fOManzE1tOlx",
+   "videos": 8,
+   "drafted": false
+  },
+  {
+   "key": "2016-lyon",
+   "title": "Schiller Institute Conference — October 19, 2016 • Lyon conference",
+   "start": "2016-10-19",
+   "end": "2016-10-19",
+   "location": "Lyon, France",
+   "playlist": "PLoHwt4KyUk5B9vdWLhwX2Xhvz6EzpdUti",
+   "videos": 9,
+   "drafted": false
+  },
+  {
+   "key": "2016-york-september-2016-memorial",
+   "title": "9/11 Memorial Conference — September 10, 2016 • New York Conference",
+   "start": "2016-09-10",
+   "end": "2016-09-10",
+   "location": "New York, USA",
+   "playlist": "PLoHwt4KyUk5AvXR3_tS4UPU23Or57yXQ5",
+   "videos": 6,
+   "drafted": false
+  },
+  {
+   "key": "2016-musical-dialogue-cultures-berlin",
+   "title": "A Musical Dialogue of Cultures — June 25, 2016 • Berlin Conference",
+   "start": "2016-06-25",
+   "end": "2016-06-25",
+   "location": "Berlin, Germany",
+   "playlist": "PLoHwt4KyUk5B54ewD08Z4ZUH-D3WkPgBq",
+   "videos": 9,
+   "drafted": false
+  },
+  {
+   "key": "2016-berlin-june-2016-creating",
+   "title": "Creating A Common Future For Mankind And A Renaissance Of Classical Culture — June 25-26, 2016 • Berlin Conference",
+   "start": "2016-06-25",
+   "end": "2016-06-26",
+   "location": "Berlin, Germany",
+   "playlist": "PLoHwt4KyUk5DQMi_zX-35YR5AcB5P4-dX",
+   "videos": 22,
+   "drafted": true
+  },
+  {
+   "key": "2016-francisco-june-2016-strategic",
+   "title": "Schiller Institute Strategic Seminar: \"Will the U.S. Join the New Silk Road?\" — June 8, 2016 • San Francisco Conference",
+   "start": "2016-06-08",
+   "end": "2016-06-08",
+   "location": "San Francisco, USA",
+   "playlist": "PLoHwt4KyUk5Cf8zmKh6qanOqoFeXDf0T1",
+   "videos": 5,
+   "drafted": false
+  },
+  {
+   "key": "2016-building-world-land-bridge",
+   "title": "Building a World Land-Bridge: Realizing Mankind's True Humanity — April 2016 • New York",
+   "start": "2016-04-21",
+   "end": "2016-04-21",
+   "location": "New York, USA",
+   "playlist": "PLoHwt4KyUk5C3-7hLu5IC0PZq3-ec2Kka",
+   "videos": 3,
+   "drafted": false
+  },
+  {
+   "key": "2015-neue-seidenstra-beginn-einer",
+   "title": "\"Die Neue Seidenstraße - Beginn einer weltweiten Renaissance\" -- Konferenz in Berlin am 28. März 2015",
+   "start": "2015-03-28",
+   "end": "2015-03-28",
+   "location": "Berlin, Germany",
+   "playlist": "PLoHwt4KyUk5D5QI_eADJoeof22QCELv7e",
+   "videos": 6,
+   "drafted": false
+  },
+  {
+   "key": "2014-england-december-2014",
+   "title": "Schiller Institute Conference — December 7, 2014 • New England Conference",
+   "start": "2014-12-07",
+   "end": "2014-12-07",
+   "location": "Quincy, USA",
+   "playlist": "PLoHwt4KyUk5DnGSoabI7MQJKrqjbe2nce",
+   "videos": 21,
+   "drafted": false
+  },
+  {
+   "key": "2014-frankfurt-october-2014-30th",
+   "title": "30th Anniversary of Schiller Institute - The New Silk Road and China's Lunar Program —  October 18, 2014 • Frankfurt  Conference",
+   "start": "2014-10-18",
+   "end": "2014-10-19",
+   "location": "Frankfurt, Germany",
+   "playlist": "PLoHwt4KyUk5BFurDWz5mCHy8kU83q-dyN",
+   "videos": 74,
+   "drafted": false
+  },
+  {
+   "key": "2014-new-york-30th-anniversary",
+   "title": "30th Anniversary Conference: \"It's Time to Create a World without War\" — June 15, 2014 • New York Conference",
+   "start": "2014-06-15",
+   "end": "2014-06-15",
+   "location": "New York, USA",
+   "playlist": null,
+   "videos": 0,
+   "drafted": false
+  },
+  {
+   "key": "2013-angeles-november-2013-second",
+   "title": "The Second American Revolution - Developing the Pacific and Ending the Grip of Empire — November 2, 2013 • Los Angeles Conference",
+   "start": "2013-11-02",
+   "end": "2013-11-02",
+   "location": "Los Angeles, USA",
+   "playlist": "PLoHwt4KyUk5DHRySGYxUgYPDBeSf4zhd0",
+   "videos": 21,
+   "drafted": false
+  },
+  {
+   "key": "2013-rescuing-civilization-brink",
+   "title": "Rescuing Civilization from the Brink",
+   "start": "2013-07-02",
+   "end": "2013-07-03",
+   "location": "Rüsselsheim, Germany",
+   "playlist": "PLoHwt4KyUk5AsnNx7nycEuDeZdk_M8QjU",
+   "videos": 19,
+   "drafted": false
+  },
+  {
+   "key": "2013-san-francisco-june",
+   "title": "San Francisco Conference 2013",
+   "start": "2013-06-29",
+   "end": "2013-06-29",
+   "location": "San Francisco, USA",
+   "playlist": null,
+   "videos": 0,
+   "drafted": false
+  },
+  {
+   "key": "2013-frankfurt-april-2013-attaining",
+   "title": "Attaining Freedom through Necessity - The Last Chance for Humanity — April 13-14, 2013 • Frankfurt Conference",
+   "start": "2013-04-13",
+   "end": "2013-04-14",
+   "location": "Frankfurt, Germany",
+   "playlist": "PLoHwt4KyUk5BNBJ_NtTruKKOFuDWjMgRl",
+   "videos": 44,
+   "drafted": false
+  },
+  {
+   "key": "2013-virginia-march-2013-30th",
+   "title": "30th Anniversary of SDI & Strategic Defense of Earth — March 23, 2013 • Virginia Conference",
+   "start": "2013-03-23",
+   "end": "2013-03-23",
+   "location": "Virginia, USA",
+   "playlist": "PLoHwt4KyUk5AEE8jRv1D5RymHH7pe1NLz",
+   "videos": 19,
+   "drafted": false
+  },
+  {
+   "key": "2013-york-january-2013-paradigm",
+   "title": "A New Paradigm to Save Mankind — January 26, 2013 • New York Conference",
+   "start": "2013-01-26",
+   "end": "2013-01-26",
+   "location": "New York, USA",
+   "playlist": "PLoHwt4KyUk5BJEpEMcQhl4UitRFQW36nR",
+   "videos": 17,
+   "drafted": false
+  },
+  {
+   "key": "2012-interviews-2012-germany",
+   "title": "\"Interviews\" - Schiller Institute Conference — November 24, 2012 • Flörsheim Conference",
+   "start": "2012-11-24",
+   "end": "2012-11-24",
+   "location": "Flörsheim, Germany",
+   "playlist": "PLoHwt4KyUk5BfvfBdUdrOsCoh8iPsNd-s",
+   "videos": 5,
+   "drafted": false
+  },
+  {
+   "key": "2012-11-24-floersheim-intl-conference",
+   "title": "A New Paradigm for the Survival of Civilization — November 24-25, 2012 • Flörsheim Conference",
+   "start": "2012-11-24",
+   "end": "2012-11-25",
+   "location": "Flörsheim, Germany",
+   "playlist": "PLoHwt4KyUk5B24XjIcpmjlkX9UyhKjfN-",
+   "videos": 6,
+   "drafted": false
+  }
+ ]
+}
