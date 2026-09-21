@@ -9,7 +9,7 @@
 /* ---- 1 · hero ------------------------------------------------------------- */
 .at-hero { padding-block: var(--si-space-2xl) var(--si-space-l); }
 .at-hero__grid { display: grid; gap: var(--si-space-l); align-items: start; }
-@media (min-width: 900px) { .at-hero__grid { grid-template-columns: minmax(0, 1fr) 17rem; gap: var(--si-space-2xl); } }
+@media (min-width: 900px) { .at-hero__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 30rem); gap: var(--si-space-xl); align-items: center; } }
 .at-hero__text { display: grid; gap: var(--si-space-s); }
 .at-title { font-size: var(--si-step-5); margin: 0; max-width: 20ch; text-wrap: balance; }
 .at-title.is-long { font-size: var(--si-step-4); max-width: 26ch; }
@@ -27,39 +27,54 @@
 .at-facts dd { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-1); color: var(--si-ink); }
 
 .at-hero__cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--si-space-s) var(--si-space-m); }
-.at-hero__card {
-	display: grid; justify-items: center; gap: var(--si-space-xs);
-	padding: var(--si-space-m);
-	background: var(--si-panel); border: var(--si-hairline);
-	text-align: center;
+/* the gathering: where the conference met and where its voices came from */
+.at-gather { margin: 0; display: grid; gap: var(--si-space-2xs); align-content: start; }
+.at-gather.has-globe { justify-items: center; }
+.si-globe {
+	display: block; width: 100%; max-width: 460px; aspect-ratio: 1;
+	cursor: grab; touch-action: pan-y;
 }
-.at-hero__stat { margin: 0; display: grid; gap: .1em; }
-.at-hero__stat b { font-family: var(--si-font-serif); font-weight: 300; font-size: var(--si-step-2); color: var(--si-ink); }
-.at-hero__stat span { font-family: var(--si-font-sans); font-size: var(--si-step-n2); color: var(--si-muted); }
+.si-globe.is-dragging { cursor: grabbing; }
+.at-gather figcaption {
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1);
+	color: var(--si-muted); text-align: right;
+}
+@media (max-width: 899px) { .at-gather.has-globe { justify-items: center; }
+.si-globe {
+	display: block; width: 100%; max-width: 460px; aspect-ratio: 1;
+	cursor: grab; touch-action: pan-y;
+}
+.si-globe.is-dragging { cursor: grabbing; }
+.at-gather figcaption { text-align: left; } }
 
-/* ---- 2 · the doors -------------------------------------------------------- */
+/* ---- 2 · the doors --------------------------------------------------------
+   Whole pixels throughout: the bar is snapped onto one by pixelSnap(), and
+   every size inside it is a px value, so Chrome has nothing to round
+   differently between the resting and the hovered paint. Hover changes
+   colour only — no transition, no border, nothing that moves. */
 .at-doors {
 	position: sticky; top: 0; z-index: 5;
 	background: var(--si-ground);
-	border-block: var(--si-hairline);
-	transition: box-shadow var(--si-dur-2) var(--si-ease);
+	border-block: 1px solid var(--si-rule);
 }
-.at-doors.is-stuck { box-shadow: var(--si-shadow-1); }
+.at-doors.is-stuck { box-shadow: 0 1px 0 var(--si-rule), 0 6px 14px -12px rgb(18 26 36 / .35); }
 .at-doors ul {
 	list-style: none; margin: 0; padding: 0;
-	display: flex; gap: var(--si-space-m);
+	display: flex; gap: 28px;
+	height: 52px;
 	overflow-x: auto; scrollbar-width: none;
 }
 .at-doors ul::-webkit-scrollbar { display: none; }
+.at-doors li { display: flex; }
 .at-doors a {
-	display: block; padding: .9em 0;
-	font-family: var(--si-font-sans); font-size: var(--si-step-n1);
+	display: block;
+	height: 52px; line-height: 52px; padding: 0;
+	font-family: var(--si-font-sans); font-size: 15px;
 	color: var(--si-muted); text-decoration: none; white-space: nowrap;
-	border-bottom: 2px solid transparent;
-	transition: color var(--si-dur-1) var(--si-ease), border-color var(--si-dur-1) var(--si-ease);
+	transition: none;
 }
 .at-doors a:hover { color: var(--si-ink); }
-.at-doors a[aria-current] { color: var(--si-ink); border-bottom-color: var(--si-brass); }
+.at-doors a[aria-current] { color: var(--si-ink); box-shadow: inset 0 -2px 0 var(--si-brass); }
 
 /* ---- 3 · sections --------------------------------------------------------- */
 .at-section { padding-block: var(--si-space-2xl); scroll-margin-top: 4rem; }
@@ -125,20 +140,38 @@
 }
 .at-acc__media { position: sticky; top: 4.5rem; }
 
+/* A talk row leads with its place in the order, not with a time: the grid
+   has no column that only exists when the recording is timestamped. */
 .at-talks { list-style: none; margin: 0; padding: 0; display: grid; }
-.at-talks li {
-	display: grid; grid-template-columns: 4.6rem minmax(0, 1fr) auto;
+.at-talk {
+	display: grid;
+	grid-template-columns: 2.4rem minmax(0, 1fr) auto;
+	grid-template-areas: "n body go";
 	gap: .2em var(--si-space-s); align-items: baseline;
 	padding-block: var(--si-space-xs); border-top: var(--si-hairline);
 }
-.at-talks li:last-child { border-bottom: var(--si-hairline); }
-.at-talks__at { font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); }
-.at-talks__body { display: grid; gap: .1em; min-width: 0; }
-.at-talks__title { font-family: var(--si-font-serif); font-size: var(--si-step-1); color: var(--si-ink); text-decoration: none; }
-.at-talks__title:hover { color: var(--si-accent); }
-.at-talks__who { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1em .6em; }
+.at-talk:last-child { border-bottom: var(--si-hairline); }
+.at-talk__n {
+	grid-area: n;
+	font-family: var(--si-font-serif); font-size: var(--si-step-0); font-weight: 300;
+	color: var(--si-jasper-deep);
+}
+.at-talk__body { grid-area: body; display: grid; gap: .15em; min-width: 0; }
+.at-talk__go { grid-area: go; }
+.at-talk__title {
+	font-family: var(--si-font-serif); font-size: var(--si-step-1); line-height: var(--si-leading-heading);
+	color: var(--si-ink); text-decoration: none; text-wrap: pretty;
+}
+.at-talk__title:hover { color: var(--si-accent); }
+.at-talk__who { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1em .6em; }
 @media (max-width: 680px) {
-	.at-talks li { grid-template-columns: minmax(0, 1fr); }
+	.at-talk { grid-template-columns: 2rem minmax(0, 1fr); grid-template-areas: "n body" ". go"; }
+	.at-talk__go { justify-self: start; }
+}
+.at-untimed {
+	margin: var(--si-space-s) 0 0; max-width: 60ch;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted);
+	padding-left: .8em; border-left: 2px solid var(--si-rule);
 }
 
 /* ---- 5 · voices ----------------------------------------------------------- */
@@ -147,17 +180,28 @@
 	display: grid; gap: var(--si-space-s) var(--si-space-m);
 	grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
 }
-.at-voices li {
+.at-voices li { display: grid; }
+/* the whole card is the link: white ground and the portrait's own colour on
+   hover or focus; nothing moves */
+.at-voice {
 	display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--si-space-xs);
-	align-items: center; padding-block: var(--si-space-2xs); border-top: var(--si-hairline);
+	align-items: center;
+	padding: var(--si-space-2xs) var(--si-space-2xs);
+	border-top: var(--si-hairline);
+	color: inherit; text-decoration: none;
+	transition: background-color var(--si-dur-1) var(--si-ease);
 }
+a.at-voice:is(:hover, :focus-visible) { background: var(--si-card); }
+a.at-voice:is(:hover, :focus-visible) .si-conf-speaker__name { color: var(--si-accent); }
+a.at-voice:focus-visible { outline: none; box-shadow: var(--si-focus-ring); }
 .at-voices__body { display: grid; gap: .05em; min-width: 0; }
 
 /* ---- 6 · culture ---------------------------------------------------------- */
 .at-culture { display: grid; gap: var(--si-space-l); }
 @media (min-width: 900px) { .at-culture { grid-template-columns: minmax(280px, 38%) minmax(0, 1fr); column-gap: var(--si-space-2xl); align-items: start; } }
 .at-culture + .at-culture { margin-top: var(--si-space-2xl); }
-.at-culture__body { display: grid; gap: var(--si-space-s); }
+.at-culture__body { display: grid; gap: var(--si-space-s); align-content: start; }
+.at-culture__form { color: var(--si-brass); }
 .at-culture .si-conf-embed { position: sticky; top: 4.5rem; }
 
 /* ---- 7 · watch (the night band) ------------------------------------------- */

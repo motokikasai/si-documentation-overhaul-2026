@@ -286,6 +286,7 @@
   },
   {
    "kind": "concert",
+   "form": "music",
    "title": "A Musical Dialogue of Cultures",
    "playlist": "PLoHwt4KyUk5B54ewD08Z4ZUH-D3WkPgBq",
    "works": [
@@ -392,7 +393,9 @@
     "fs": 0.373
    },
    "credit": "Schiller Institute",
-   "aff": "President of the international Schiller Institute"
+   "aff": "President of the international Schiller Institute",
+   "country": "Germany",
+   "country_from": "person record"
   },
   {
    "name": "Chas Freeman",
@@ -410,7 +413,9 @@
     "w": 420,
     "h": 280
    },
-   "credit": "Schiller Institute"
+   "credit": "Schiller Institute",
+   "country": "USA",
+   "country_from": "person record"
   },
   {
    "name": "Col. (ret.) Alain Corvez",
@@ -431,7 +436,9 @@
     "fs": 0.257
    },
    "credit": "Schiller Institute",
-   "aff": "former advisor to the General-in-Command of UNIFIL (United Nations Interim Force in Lebanon), former international relations advisor to the French Foreign Minis"
+   "aff": "former advisor to the General-in-Command of UNIFIL (United Nations Interim Force in Lebanon), former international relations advisor to the French Foreign Minis",
+   "country": "Lebanon",
+   "country_from": "person record"
   },
   {
    "name": "Lt. Col. (ret.) Ulrich Scholz",
@@ -470,7 +477,9 @@
     "w": 420,
     "h": 236
    },
-   "credit": "Schiller Institute"
+   "credit": "Schiller Institute",
+   "country": "France",
+   "country_from": "person record"
   },
   {
    "name": "Marco Zanni",
@@ -752,9 +761,56 @@
     "fy": 43.2,
     "fs": 0.373
    },
-   "credit": "Schiller Institute"
+   "credit": "Schiller Institute",
+   "country": "Sweden",
+   "country_from": "person record"
   }
  ],
+ "geo": {
+  "online": false,
+  "venue": {
+   "name": "Berlin",
+   "lat": 52.52,
+   "lon": 13.41
+  },
+  "countries": [
+   {
+    "name": "Germany",
+    "iso": "DE",
+    "n": 1,
+    "lat": 52.52,
+    "lon": 13.41
+   },
+   {
+    "name": "USA",
+    "iso": "US",
+    "n": 1,
+    "lat": 38.9,
+    "lon": -77.04
+   },
+   {
+    "name": "Lebanon",
+    "iso": "LB",
+    "n": 1,
+    "lat": 33.89,
+    "lon": 35.5
+   },
+   {
+    "name": "France",
+    "iso": "FR",
+    "n": 1,
+    "lat": 48.85,
+    "lon": 2.35
+   },
+   {
+    "name": "Sweden",
+    "iso": "SE",
+    "n": 1,
+    "lat": 59.33,
+    "lon": 18.07
+   }
+  ]
+ },
  "tally": {
   "sessions": 2,
   "talks": 20,

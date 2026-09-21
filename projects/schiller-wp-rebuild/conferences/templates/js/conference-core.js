@@ -83,11 +83,27 @@ export function normalise(rec) {
 	}
 	rec.programme = sessions;
 	rec.days = [...new Set(sessions.map(s => s.day).filter(Boolean))].sort();
-	rec.cultural = sessions.filter(s => s.kind === 'concert' || s.cultural);
+	rec.cultural = sessions.filter(isCulture);
 	rec.hasVideo = sessions.some(s => s.video || s.works?.length ||
 		s.talks?.some(t => t.video)) || !!rec.playlist;
 	return rec;
 }
+
+/* ---- the cultural strand -------------------------------------------------
+ * Every Schiller conference carries one, and it is not always music: a
+ * concert, a recitation of classical poetry, a dramatic reading, a cultural
+ * presentation. The form is a reviewed field on the record (never inferred
+ * from a YouTube title — one 2025 title says "Concert:" over a presentation).
+ * With no reviewed form the strand is named for what it is: culture.
+ */
+export const isCulture = s => s.kind === 'concert' || s.kind === 'cultural' || !!s.cultural;
+const FORM = {
+	music: 'Musical performance',
+	poetry: 'Poetry recitation',
+	drama: 'Dramatic reading',
+	presentation: 'Cultural presentation',
+};
+export const formLabel = s => FORM[s.form] || (s.cultural && s.n ? 'Cultural panel' : 'Cultural programme');
 
 /** Every talk in the programme, flat, in running order. */
 export const allTalks = rec => rec.programme.flatMap(
@@ -373,12 +389,10 @@ export function colophonHTML(rec) {
 		['Sessions', rec.tally.sessions || ''],
 		['Talks on record', rec.tally.talks || ''],
 		['Speakers', rec.tally.speakers || ''],
-		['Recordings', rec.tally.videos ? `${rec.tally.videos} videos · ${human(rec.tally.runtime)}` : ''],
-		['Playlist', rec.playlist
-			? `<a class="si-link" href="https://www.youtube.com/playlist?list=${esc(rec.playlist)}">the conference playlist</a>` : ''],
-		['Speakers on /people/', rec.tally.on_people
-			? `${rec.tally.on_people} of ${rec.tally.speakers} matched a person record` : ''],
-		['Source', esc(rec.meta.sources.join(' · '))],
+		['Recordings', rec.tally.videos
+			? `${rec.tally.videos} videos on YouTube · ${human(rec.tally.runtime)}` : ''],
+		['YouTube playlist', rec.playlist
+			? `<a class="si-link" href="https://www.youtube.com/playlist?list=${esc(rec.playlist)}">The conference on the Institute's YouTube channel</a>` : ''],
 	].filter(([, v]) => v !== '' && v != null);
 	return `<dl class="si-conf-colophon">${rows.map(([k, v]) =>
 		`<dt>${esc(k)}</dt><dd>${v}</dd>`).join('')}</dl>`;
@@ -387,7 +401,7 @@ export function colophonHTML(rec) {
 /** The line under the title: what this session is, how long, which day. */
 export function sessionMeta(rec, s) {
 	const bits = [];
-	if (s.kind === 'concert') bits.push('Concert');
+	if (s.kind === 'concert' || s.kind === 'cultural') bits.push(formLabel(s));
 	else if (s.n) bits.push(`Panel ${s.n}`);
 	else if (s.cultural) bits.push('Cultural session');
 	if (s.day && rec.days.length > 1) bits.push(`Day ${s.day}`);
@@ -395,13 +409,112 @@ export function sessionMeta(rec, s) {
 		|| (s.talks || []).reduce((n, t) => n + (t.duration || 0), 0);
 	if (secs) bits.push(human(secs));
 	const n = (s.talks || s.works || []).length;
-	if (n) bits.push(s.kind === 'concert' ? `${n} works` : `${n} speakers`);
+	if (n) bits.push(s.works?.length ? `${n} works` : `${n} speakers`);
 	return bits;
 }
 
 /** The record's own one-line self-description, never an invented strapline. */
 export function whereWhen(rec) {
 	return [fmtRange(rec.start, rec.end), rec.location].filter(Boolean);
+}
+
+/* ---- 6c · whole pixels ------------------------------------------------------
+ * A bar that sits under fluid content lands on a fractional y (606.55px here).
+ * Chrome then snaps its text, border and fill independently, and a hover
+ * repaint can draw the link a pixel off — the "moves on hover" the People
+ * toolbar had (debef2c). A sub-pixel top margin puts the bar on a whole pixel;
+ * everything inside it is sized in whole pixels. Same helper as
+ * people-core.js · pixelSnap(), kept local so the series stay independent. */
+export function pixelSnap(el) {
+	if (!el) return;
+	const anchor = el.previousElementSibling;
+	if (!anchor) return;
+	let raf = 0;
+	const fix = () => {
+		raf = 0;
+		el.style.marginTop = '';
+		const y = anchor.getBoundingClientRect().bottom + scrollY + parseFloat(getComputedStyle(el).marginTop || 0);
+		const frac = y - Math.floor(y);
+		if (frac > 1 / 32 && frac < 1 - 1 / 32) el.style.marginTop = `${(1 - frac).toFixed(3)}px`;
+	};
+	const queue = () => { if (!raf) raf = requestAnimationFrame(fix); };
+	const ro = new ResizeObserver(queue);
+	ro.observe(anchor);
+	ro.observe(document.documentElement);
+	addEventListener('resize', queue);
+	document.fonts?.ready.then(queue);
+	fix();
+}
+
+/* ---- 6d · the gathering ----------------------------------------------------
+ * Where the conference met and where its voices came from, on a dot-matrix
+ * world. It needs no photograph and no editor, and no two conferences draw
+ * it alike: the map is centred on the venue's own meridian, the lit dots are
+ * the countries on the record, and the arcs converge on the city that held
+ * it. An online conference has no venue, so its voices are drawn as a ring
+ * of pulses with no centre. Only countries the record states are plotted.
+ *
+ * land: data/land.json (built from the homepage globe's own texture).
+ */
+export async function loadLand() {
+	const res = await fetch(new URL('../../data/land.json', import.meta.url));
+	return res.ok ? res.json() : null;
+}
+
+export function gatheringSVG(rec, land, { w = 520, h = 300 } = {}) {
+	if (!land) return '';
+	const g = rec.geo || { countries: [], venue: null, online: false };
+	// the venue's meridian; online, the voices' own centre of gravity (a
+	// circular mean, weighted by how many spoke from each country)
+	const centre = g.venue ? g.venue.lon : (() => {
+		let x = 0, y = 0;
+		for (const c of g.countries) { x += c.n * Math.cos(c.lon * Math.PI / 180); y += c.n * Math.sin(c.lon * Math.PI / 180); }
+		return g.countries.length ? Math.atan2(y, x) * 180 / Math.PI : 10;
+	})();
+	const step = land.step;
+	const cols = land.rows[0].length, rowsN = land.rows.length;
+	// equirectangular, cropped to 66°N–50°S (the Arctic ice reads as noise), rotated to the venue's meridian
+	const top = 66, bottom = -50;
+	const X = lon => { let d = ((lon - centre + 540) % 360) - 180; return (d + 180) / 360 * w; };
+	const Y = lat => (top - lat) / (top - bottom) * h;
+	const r = Math.max(0.9, (w / cols) * 0.3);
+	let dots = '';
+	land.rows.forEach((row, ri) => {
+		const lat = land.north - step / 2 - ri * step;
+		if (lat > top || lat < bottom) return;
+		for (let ci = 0; ci < cols; ci++) {
+			if (row[ci] !== '1') continue;
+			const lon = land.west + step / 2 + ci * step;
+			dots += `<circle cx="${X(lon).toFixed(1)}" cy="${Y(lat).toFixed(1)}" r="${r.toFixed(2)}"/>`;
+		}
+	});
+	const max = Math.max(1, ...g.countries.map(c => c.n));
+	const v = g.venue ? { x: X(g.venue.lon), y: Y(g.venue.lat) } : null;
+	const arcs = v ? g.countries.map((c, i) => {
+		const x = X(c.lon), y = Y(c.lat);
+		if (Math.hypot(x - v.x, y - v.y) < 4) return '';
+		const mx = (x + v.x) / 2, my = (y + v.y) / 2 - Math.min(90, Math.hypot(x - v.x, y - v.y) * 0.32);
+		return `<path class="si-gather__arc" style="--i:${i}" pathLength="1" d="M${x.toFixed(1)} ${y.toFixed(1)} Q${mx.toFixed(1)} ${my.toFixed(1)} ${v.x.toFixed(1)} ${v.y.toFixed(1)}"/>`;
+	}).join('') : '';
+	const origins = g.countries.map((c, i) => {
+		const rr = 2.4 + 3.2 * Math.sqrt(c.n / max);
+		return `<g class="si-gather__origin" style="--i:${i}"><circle class="si-gather__halo" cx="${X(c.lon).toFixed(1)}" cy="${Y(c.lat).toFixed(1)}" r="${(rr * 2.4).toFixed(1)}"/>`
+			+ `<circle cx="${X(c.lon).toFixed(1)}" cy="${Y(c.lat).toFixed(1)}" r="${rr.toFixed(1)}"><title>${esc(c.name)} · ${c.n}</title></circle></g>`;
+	}).join('');
+	const venue = v ? `<g class="si-gather__venue"><circle class="si-gather__ring" cx="${v.x.toFixed(1)}" cy="${v.y.toFixed(1)}" r="9"/>`
+		+ `<circle cx="${v.x.toFixed(1)}" cy="${v.y.toFixed(1)}" r="3.4"/>`
+		+ `<text x="${(v.x + 12).toFixed(1)}" y="${(v.y + 4).toFixed(1)}">${esc(g.venue.name)}</text></g>` : '';
+	const placed = g.countries.reduce((n, c) => n + c.n, 0);
+	const label = [
+		g.countries.length ? `${placed} voices from ${g.countries.length} ${g.countries.length === 1 ? 'country' : 'countries'}` : '',
+		g.venue ? `gathered in ${g.venue.name}` : (g.online ? 'gathered online' : ''),
+	].filter(Boolean).join(', ');
+	return `<svg class="si-gather${g.online ? ' is-online' : ''}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(label || rec.location || 'World map')}">
+		<g class="si-gather__land">${dots}</g>
+		<g class="si-gather__arcs">${arcs}</g>
+		<g class="si-gather__origins">${origins}</g>
+		${venue}
+	</svg>`;
 }
 
 /* ---- 7 · reveal ----------------------------------------------------------- */

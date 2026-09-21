@@ -216,3 +216,112 @@ photograph as blank.
 - **Languages.** Every worked record is English. The German and French conference
   playlists in `conference-map.csv` (the five `skip` rows are their duplicates) will need
   the same WPML treatment the article wing documents.
+
+---
+
+## 9. The Atrium is the candidate (2026-09-21)
+
+Chosen for further development. Per the house rule, it is refined from here on and the
+other four drafts are left as they are. The first round of review changed:
+
+- **The sub-nav doesn't move on hover.** Fluid content above it put the bar at y = 606.55px,
+  so Chrome rounded its text, underline and fill independently and a hover repaint could
+  draw a link a pixel off. This is the same bug the People toolbar had (debef2c) and it
+  has the same fix. `pixelSnap()` puts the bar on a whole pixel, and everything inside it
+  is sized in px. The current-section underline is an inset box-shadow, not a border, and
+  hover changes colour only, with no transition. `interact.mjs` asserts the bar's top and
+  height are whole pixels on all four records.
+- **The overview is titled by the conference's own shape**, e.g. "Two days in Berlin" or
+  "Two days, online", derived from the dates and the venue. It replaces "What happened".
+- **Order first, time if known.** A talk row leads with its place in the running order.
+  A timestamp is only a detail inside the row, never a grid column the layout depends on
+  (that dependency is what broke Panel 3's rows, where no timings were published). The
+  way into a talk is shown only when it is real: its own second on the panel tape, or its
+  own film. A session published without timings lists its speakers in order and offers
+  **one** way in, the whole session tape, with a line saying the talks are not marked.
+  Otherwise there would be a dozen "Play" buttons that all start at 0:00.
+- **The cultural strand is named for what it is.** It can be a concert, a poetry
+  recitation, a dramatic reading or a cultural presentation. `form` is a *reviewed*
+  field (`music · poetry · drama · presentation`) and is never inferred from a YouTube
+  title. Without a form the label is "Cultural programme". The Culture band is headed by
+  the strand's own title, e.g. *A Dialogue of Classical Cultures*.
+  **Data correction:** Berlin 2025's `BWIof_dJIXU` is titled "Concert: …" on YouTube,
+  but on review it is a presentation. It is now `kind: cultural, form: presentation`,
+  and the "Concert:" prefix is dropped from its title. The video's own YouTube still
+  still says CONCERT, and only a custom poster would change that.
+- **YouTube is named** wherever a link or a count points there ("13 videos on YouTube",
+  "Open the full playlist on YouTube"). The record section no longer prints the
+  *Speakers on /people/* and *Source* rows. The provenance stays in the payload and in
+  this README. This is a change to the shared `colophonHTML()`, so it applies to all
+  five drafts.
+- **The seal is replaced by the gathering**: a dot-matrix world centred on the venue's
+  own meridian, with the speakers' countries lit in brass and sized by how many spoke,
+  and arcs converging on the host city (`gatheringSVG()`). An online conference is
+  centred on its voices' circular mean and pulses with no centre. It draws itself in on
+  arrival. It needs no photograph, and no two conferences draw it alike. The land mask
+  is built from the homepage globe's own texture (`data/land.json`). Countries are
+  capital coordinates rounded to the degree, and only countries on the record are
+  plotted. A region ("Europe", from an unnamed seat) is never plotted. When some
+  speakers have no country, the caption drops the speaker count and says only "Voices
+  from N countries". A speaker's country falls back to their person record when the
+  roster line has none, which gives Berlin 2016 five countries instead of one.
+
+### Round 2 (2026-09-21)
+
+- **Speaker cards are whole links** to `/people/{slug}/`. There is one link per card,
+  never a link inside a link. On hover or focus the card turns white and the portrait
+  takes its own colour; nothing moves. A speaker with no person record gets a card that
+  isn't a link.
+- **No separate Culture band.** The cultural strand stays in the programme, labelled by
+  its reviewed form, as one session among the others.
+- **The gathering is a turning globe** (`templates/js/conference-globe.js`, canvas 2D, no
+  library). Land is an even Fibonacci lattice masked by `data/land.json`. The speakers'
+  countries are lit in brass, great-circle arcs rise from each and land on the host city,
+  and then a small light travels each arc. It turns about once every 86 s, tilted toward
+  the city, and can be dragged; it resumes turning on its own afterwards. It pauses when
+  off-screen. With reduced motion it stays still, facing the city with every arc drawn.
+  An online conference is centred on where its voices came from, and they pulse with no
+  arcs. The flat SVG map stays in the markup as the fallback when no canvas is available.
+- **It configures itself.** The venue and every country now resolve from a GeoNames
+  gazetteer (CC BY 4.0), with no hand-kept list of places. `build/geo/make-geo.py` derives
+  `build/geo/cities.tsv` (34,146 places of 15,000+ inhabitants) and
+  `build/geo/countries.tsv` (244 countries at their capital, or at the largest city where
+  GeoNames marks no capital). A record whose location reads "Cape Town, South Africa",
+  "Los Angeles, USA" or "Tokyo, Japan", with speakers from any country, draws its own
+  globe. Tested with 16 locations, including every venue in the conference map. A name
+  also matches the first words of an official name ("Frankfurt" → "Frankfurt am Main",
+  "New York" → "New York City"). Two venues the record names only by region (Virginia,
+  New Jersey) are placed at the region's centre and flagged `approx`.
+  What a new conference needs: its location written as *City, Country*, and speakers with
+  a country on their roster line or on their person record. Speakers with no known country
+  are simply not plotted, and the caption then stops quoting a headcount. In WordPress the
+  same lookup runs once when the conference is saved (`inc/conference-geo.php`, reading
+  the same two TSVs), so page views never touch a gazetteer.
+  A shared country on a roster line ("China / Austria") counts under its first name, so
+  Berlin 2025 reads 10 countries, not 11.
+
+### Round 3 (2026-09-21)
+
+- **Speakers match the reviewed person-map merges.** "Ray McGovern" had no link because
+  his record is *Raymond McGovern*, and the matcher compared exact names only. It now also
+  reads every `merge:<key>` the reviewer set in `incoming/person-map.csv` (118 alternative
+  spellings), and it ignores a generational suffix ("Chas W. Freeman, Jr"). Only explicit
+  merges count; a blank is not an accept. Berlin 2025 now links 36 of 36 speakers,
+  Beethoven 2024 28 of 33. The five unlinked are the seats the published roster never
+  named ("Chinese Expert", "Space Historian" and so on).
+- **Nothing moves after a hover.** The video thumbnails and their play buttons jumped 1–2px
+  as the hover wore off. Chrome promoted them to their own compositing layer while the
+  scale animated, then demoted and re-rasterised them on a differently rounded pixel, and
+  the backdrop blur on the button was re-rendered with every repaint. Both now stay on a
+  permanent layer (`will-change: transform`), animate only `transform`, and the blur is
+  gone. `build/hover-settle.mjs` (Chromium) checks that the sub-nav, the thumbnails and
+  the speaker cards settle pixel-identical to their untouched state at 100 %, 125 % and
+  150 % scaling.
+
+- **The globe no longer freezes after a tab switch.** It stopped when the tab was hidden
+  and left restarting to the IntersectionObserver, which never fires on returning to a
+  tab because the globe never left the viewport. It now runs exactly while it is on screen
+  *and* the tab is visible, and it re-decides whenever either changes (plus `pageshow`,
+  for pages restored from the back/forward cache). A drag now redraws directly, so the
+  globe answers the pointer even while the loop is paused. `interact.mjs` covers all
+  three: it rests while hidden, turns again on return, and follows a paused drag.

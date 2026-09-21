@@ -161,6 +161,87 @@ console.log('\nbehaviours');
 	ok('the sub-nav marks the section in view', cur === '#voices' || cur === '#programme', cur || 'none');
 	await page.close();
 }
+{	/* atrium: the sub-nav sits on a whole pixel with a whole-pixel height, so
+	   Chrome has nothing to round differently on hover (the People toolbar bug) */
+	const page = await ctx.newPage();
+	for (const r of RECORDS) {
+		await page.goto(`${BASE}templates/conference-atrium.html?c=${r}`, { waitUntil: 'networkidle' });
+		await page.waitForTimeout(250);
+		const [top, h] = await page.evaluate(() => {
+			const b = document.querySelector('.at-doors').getBoundingClientRect();
+			return [b.top + scrollY, b.height];
+		});
+		const whole = v => Math.abs(v - Math.round(v)) <= 1 / 32;
+		ok(`atrium doors on whole pixels · ${r} (${top.toFixed(3)}, ${h})`, whole(top) && whole(h));
+	}
+	/* atrium: a session published without timings offers ONE way in, not a
+	   "Play" per talk that would all start at 0:00 */
+	await page.goto(`${BASE}templates/conference-atrium.html?c=2025-berlin`, { waitUntil: 'networkidle' });
+	const untimed = await page.evaluate(() => {
+		const acc = [...document.querySelectorAll('.at-acc')].find(d => d.querySelector('.at-untimed'));
+		return acc ? { rows: acc.querySelectorAll('.at-talk').length, plays: acc.querySelectorAll('.at-talk .si-conf-watch').length } : null;
+	});
+	ok('untimed session: talks listed, no per-talk play', !!untimed && untimed.rows > 0 && untimed.plays === 0, JSON.stringify(untimed));
+	/* atrium: the cultural strand is named by its reviewed form, never "Concert" by default */
+	const form = await page.locator('.at-acc--culture .at-acc__meta').first().textContent();
+	ok(`culture labelled by its form, inside the programme (${form.trim()})`,
+		/Cultural presentation/.test(form) && !/Concert/.test(form));
+	ok('no separate culture band', await page.locator('#culture').count() === 0);
+	/* atrium: the whole speaker card is the link to the person */
+	const cards = await page.evaluate(() => ({
+		links: document.querySelectorAll('.at-voices a.at-voice').length,
+		nested: document.querySelectorAll('.at-voices a.at-voice a').length,
+	}));
+	ok(`speaker cards are whole links (${cards.links}), none nested`,
+		cards.links === data['2025-berlin'].tally.on_people && cards.nested === 0);
+	/* atrium: the globe replaces the flat map, which stays in the markup as
+	   the no-canvas fallback and plots exactly the countries on record */
+	ok('the globe is mounted', await page.locator('.at-gather canvas.si-globe').count() === 1);
+	await page.evaluate(() => document.querySelector('.si-globe').scrollIntoView({ behavior: 'instant', block: 'center' }));
+	const frameA = await page.evaluate(() => document.querySelector('.si-globe').toDataURL().length + ':' + document.querySelector('.si-globe').toDataURL().slice(-400));
+	await page.waitForTimeout(1500);
+	const frameB = await page.evaluate(() => document.querySelector('.si-globe').toDataURL().length + ':' + document.querySelector('.si-globe').toDataURL().slice(-400));
+	ok('the globe turns', frameA !== frameB);
+	/* leaving the tab and coming back must not freeze it (it used to, until the
+	   globe was scrolled out of view and back) */
+	const frame = () => page.evaluate(() => document.querySelector('.si-globe').toDataURL().slice(-600));
+	const setHidden = h => page.evaluate(h => {
+		Object.defineProperty(document, 'hidden', { configurable: true, get: () => h });
+		Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => (h ? 'hidden' : 'visible') });
+		document.dispatchEvent(new Event('visibilitychange'));
+	}, h);
+	await setHidden(true);
+	await page.waitForTimeout(200);
+	const h1 = await frame(); await page.waitForTimeout(800); const h2 = await frame();
+	ok('the globe rests while the tab is hidden', h1 === h2);
+	await setHidden(false);
+	const v1 = await frame(); await page.waitForTimeout(800); const v2 = await frame();
+	ok('the globe turns again on returning to the tab', v1 !== v2);
+	/* and a drag answers even when the loop is not running */
+	await setHidden(true);
+	const d1 = await frame();
+	const gb = await page.locator('.si-globe').boundingBox();
+	await page.mouse.move(gb.x + gb.width / 2, gb.y + gb.height / 2);
+	await page.mouse.down();
+	await page.mouse.move(gb.x + gb.width / 2 + 80, gb.y + gb.height / 2, { steps: 6 });
+	await page.mouse.up();
+	ok('a drag turns the globe even while it is paused', d1 !== await frame());
+	await setHidden(false);
+	const flat = await page.evaluate(async () => {
+		const core = await import('./js/conference-core.js');
+		const rec = core.normalise(await (await fetch('../data/conf-2025-berlin.json')).json());
+		const land = await core.loadLand();
+		const div = document.createElement('div');
+		div.innerHTML = core.gatheringSVG(rec, land);
+		return div.querySelectorAll('.si-gather__origin').length;
+	});
+	ok(`flat fallback plots the record's countries (${flat})`, flat === data['2025-berlin'].geo.countries.length);
+	/* atrium: the record names YouTube and carries no provenance rows */
+	const rec = await page.locator('#record .si-conf-colophon').textContent();
+	ok('the record names YouTube, drops the provenance rows',
+		/YouTube/.test(rec) && !/Source|on \/people\//.test(rec));
+	await page.close();
+}
 {	/* the upcoming state fixture rewrites the spine, not the content */
 	const page = await ctx.newPage();
 	await page.goto(`${BASE}templates/conference-atrium.html?c=2025-berlin&state=upcoming`, { waitUntil: 'networkidle' });

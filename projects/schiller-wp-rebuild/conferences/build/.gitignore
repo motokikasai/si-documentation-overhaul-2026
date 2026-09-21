@@ -1,3 +1,4 @@
 # screenshots are regenerable (shoot.mjs / peek.mjs)
 out/
 __pycache__/
+.cache/

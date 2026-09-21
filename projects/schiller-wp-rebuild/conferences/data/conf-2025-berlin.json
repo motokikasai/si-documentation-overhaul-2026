@@ -283,12 +283,13 @@
    ]
   },
   {
-   "kind": "concert",
+   "kind": "cultural",
    "video": "BWIof_dJIXU",
-   "title": "Concert: A Dialogue of Classical Cultures",
+   "title": "A Dialogue of Classical Cultures",
    "duration": 195,
    "day": 2,
-   "evidence": "playlist title: 'Concert: A Dialogue of Classical Cultures'"
+   "evidence": "the cultural strand of the conference. The YouTube title says 'Concert:', but on review (2026-09-21) the video is a presentation, not a musical performance — so the title's claim is dropped",
+   "form": "presentation"
   }
  ],
  "clips": [
@@ -423,7 +424,8 @@
     }
    ],
    "country": "USA",
-   "aff": "former senior CIA analyst, co-founder of the Veteran Intelligence Professionals for Sanity (VIPS)"
+   "aff": "former senior CIA analyst, co-founder of the Veteran Intelligence Professionals for Sanity (VIPS)",
+   "person": "raymond-mcgovern"
   },
   {
    "name": "Prof. PLO Lumumba",
@@ -465,7 +467,9 @@
     }
    ],
    "person": "john-sigerson",
-   "aff": "Advisory Committee, LaRouche Legacy Foundation"
+   "aff": "Advisory Committee, LaRouche Legacy Foundation",
+   "country": "USA",
+   "country_from": "person record"
   },
   {
    "name": "Jacques Cheminade",
@@ -804,7 +808,9 @@
     }
    ],
    "aff": "Co-Initiator, International Peace Coalition, Editor-in-Chief, Leonore Magazine",
-   "person": "anastasia-battle"
+   "person": "anastasia-battle",
+   "country": "USA",
+   "country_from": "person record"
   },
   {
    "name": "Carolina Dominguez",
@@ -816,7 +822,8 @@
     }
    ],
    "country": "Mexico",
-   "aff": "Schiller Institute"
+   "aff": "Schiller Institute",
+   "person": "carolina-dominguez-cisneros"
   },
   {
    "name": "Kynan Thistlethwaite",
@@ -871,6 +878,86 @@
    "person": "daniel-burke"
   }
  ],
+ "geo": {
+  "online": false,
+  "venue": {
+   "name": "Berlin",
+   "lat": 52.52,
+   "lon": 13.41
+  },
+  "countries": [
+   {
+    "name": "USA",
+    "iso": "US",
+    "n": 11,
+    "lat": 38.9,
+    "lon": -77.04
+   },
+   {
+    "name": "Germany",
+    "iso": "DE",
+    "n": 8,
+    "lat": 52.52,
+    "lon": 13.41
+   },
+   {
+    "name": "France",
+    "iso": "FR",
+    "n": 5,
+    "lat": 48.85,
+    "lon": 2.35
+   },
+   {
+    "name": "China",
+    "iso": "CN",
+    "n": 3,
+    "lat": 39.91,
+    "lon": 116.4
+   },
+   {
+    "name": "Italy",
+    "iso": "IT",
+    "n": 3,
+    "lat": 41.89,
+    "lon": 12.51
+   },
+   {
+    "name": "South Africa",
+    "iso": "ZA",
+    "n": 2,
+    "lat": -25.74,
+    "lon": 28.19
+   },
+   {
+    "name": "Russia",
+    "iso": "RU",
+    "n": 1,
+    "lat": 55.75,
+    "lon": 37.62
+   },
+   {
+    "name": "Kenya",
+    "iso": "KE",
+    "n": 1,
+    "lat": -1.28,
+    "lon": 36.82
+   },
+   {
+    "name": "Guyana",
+    "iso": "GY",
+    "n": 1,
+    "lat": 6.8,
+    "lon": -58.16
+   },
+   {
+    "name": "Mexico",
+    "iso": "MX",
+    "n": 1,
+    "lat": 19.43,
+    "lon": -99.13
+   }
+  ]
+ },
  "tally": {
   "sessions": 5,
   "talks": 36,
@@ -878,6 +965,6 @@
   "runtime": 44399,
   "videos": 13,
   "with_portrait": 8,
-  "on_people": 34
+  "on_people": 36
  }
 }

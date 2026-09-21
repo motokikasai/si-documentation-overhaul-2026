@@ -38,6 +38,7 @@ ROOT = REBUILD.parent.parent                        # repo root
 YT = ROOT / "sessions/2026-07-16-consolidation-roadmap/work/yt"
 MAP_CSV = ROOT / "sessions/2026-07-17-migration-tooling/incoming/conference-map.csv"
 PEOPLE = REBUILD / "people/data/people.json"
+PERSON_MAP = ROOT / "sessions/2026-07-17-migration-tooling/incoming/person-map.csv"
 OUT = WING / "data"
 
 BUILT = date.today().isoformat()
@@ -70,8 +71,12 @@ RECORDS = [
             {"video": "eth7wIYEBb4", "kind": "panel", "n": 4, "day": 2,
              "also_live": "DLZcMkedZ50",
              "evidence": "live upload 2025-07-14 (day 2, posted the following day)"},
-            {"video": "BWIof_dJIXU", "kind": "concert", "day": 2,
-             "evidence": "playlist title: 'Concert: A Dialogue of Classical Cultures'"},
+            {"video": "BWIof_dJIXU", "kind": "cultural", "day": 2,
+             "title": "A Dialogue of Classical Cultures",
+             "form": "presentation",
+             "evidence": "the cultural strand of the conference. The YouTube title says "
+                         "'Concert:', but on review (2026-09-21) the video is a presentation, "
+                         "not a musical performance — so the title's claim is dropped"},
         ],
         # short speaker excerpts published from the conference
         "clips": ["hhdocM6T7cg", "53PJFyf4ovw", "EyhLk_2i82I", "LpElI9n-GZk"],
@@ -141,7 +146,142 @@ COUNTRIES = {
     "greece": "Greece", "afghanistan": "Afghanistan", "europe": "Europe",
     "china/austria": "China / Austria", "iran/u.s.": "Iran / USA",
     "sweden": "Sweden", "belgium": "Belgium", "canada": "Canada",
+    "united states of america": "USA", "argentina": "Argentina", "pakistan": "Pakistan",
+    "australia": "Australia", "haiti": "Haiti", "brazil": "Brazil", "iraq": "Iraq",
+    "lebanon": "Lebanon", "colombia": "Colombia", "ireland": "Ireland",
+    "uganda": "Uganda", "spain": "Spain", "egypt": "Egypt", "sudan": "Sudan",
+    "switzerland": "Switzerland", "netherlands": "Netherlands", "poland": "Poland",
+    "hungary": "Hungary", "serbia": "Serbia", "turkey": "Turkey", "nigeria": "Nigeria",
+    "peru": "Peru", "chile": "Chile", "bolivia": "Bolivia", "venezuela": "Venezuela",
+    "cuba": "Cuba", "indonesia": "Indonesia", "philippines": "Philippines",
+    "south korea": "South Korea", "vietnam": "Vietnam", "ukraine": "Ukraine",
+    "belarus": "Belarus", "kazakhstan": "Kazakhstan", "saudi arabia": "Saudi Arabia",
+    "united kingdom": "United Kingdom", "uk": "United Kingdom",
+    "tanzania": "Tanzania", "ghana": "Ghana", "senegal": "Senegal", "portugal": "Portugal",
+    "czech republic": "Czech Republic", "austria/china": "China / Austria",
 }
+
+# ---- geography (the "gathering" globe in the Atrium) --------------------------
+# Nothing here is a hand-kept list of places. Cities and countries resolve from
+# the GeoNames gazetteer derived by build/geo/make-geo.py (CC BY 4.0): 34,146
+# places of 15,000+ inhabitants and 241 countries with their capitals. A new
+# conference in Cape Town, or a speaker from Bolivia, places itself.
+GEO = HERE / "geo"
+# The roster's own spellings that are not GeoNames country names.
+COUNTRY_ALIAS = {
+    "USA": "US", "United States": "US", "Russia": "RU", "United Kingdom": "GB",
+    "Palestine": "PS", "South Korea": "KR", "Czech Republic": "CZ", "Vietnam": "VN",
+    "Syria": "SY", "Iran": "IR", "China / Austria": "CN", "Iran / USA": "IR",
+}
+# Venues the record names only by region. Placed at the region's centre and
+# flagged approximate; everything else is a real city from the gazetteer.
+VENUE_REGION = {"virginia": (37.5, -78.9), "new jersey": (40.1, -74.5)}
+
+
+def load_gazetteer():
+    countries, by_name = {}, {}
+    for line in (GEO / "countries.tsv").read_text(encoding="utf8").splitlines():
+        if line.startswith("#"):
+            continue
+        iso, name, lat, lon = line.split("\t")
+        countries[iso] = (name, float(lat), float(lon))
+        by_name[name.lower()] = iso
+    cities = []
+    for line in (GEO / "cities.tsv").read_text(encoding="utf8").splitlines():
+        if line.startswith("#"):
+            continue
+        name, iso, lat, lon, pop, _cap = line.split("\t")
+        cities.append((name, name.lower(), iso, float(lat), float(lon), int(pop)))
+    return countries, by_name, cities
+
+
+GAZ_COUNTRIES, GAZ_BY_NAME, GAZ_CITIES = load_gazetteer()
+# every GeoNames country name is recognisable in a roster line, too
+for _n in GAZ_BY_NAME:
+    COUNTRIES.setdefault(_n, next(v[0] for k, v in GAZ_COUNTRIES.items() if v[0].lower() == _n))
+
+
+def country_iso(display):
+    if not display:
+        return None
+    return COUNTRY_ALIAS.get(display) or GAZ_BY_NAME.get(display.lower())
+
+
+def resolve_venue(location):
+    """'Cape Town, South Africa' -> the most populous gazetteer place of that
+    name in that country. A name also matches as the first words of a longer
+    official name ('Frankfurt' -> 'Frankfurt am Main', 'New York' -> 'New York
+    City'). None when the record's place is not a city we can find."""
+    loc = (location or "").strip()
+    if not loc or loc.lower() == "online":
+        return None
+    parts = [x.strip() for x in loc.split(",") if x.strip()]
+    city = parts[0].lower()
+    iso = None
+    if len(parts) > 1:
+        tail = parts[-1]
+        iso = country_iso(COUNTRIES.get(tail.lower().strip("."), tail))
+    if city in VENUE_REGION:
+        la, lo = VENUE_REGION[city]
+        return {"name": parts[0], "lat": la, "lon": lo, "approx": True}
+    best = None
+    for name, low, ciso, la, lo, pop in GAZ_CITIES:
+        if iso and ciso != iso:
+            continue
+        if low == city or low.startswith(city + " ") or low.startswith(city + ","):
+            if not best or pop > best[3]:
+                best = (parts[0], la, lo, pop)
+    if not best:
+        return None
+    return {"name": best[0], "lat": best[1], "lon": best[2]}
+
+
+def geo(location, speakers):
+    """Where the conference met, and where its voices came from. Only
+    countries the record (or the speaker's person record) states are placed,
+    at their capital. A region ("Europe", from an unnamed seat) is not a
+    place and is never plotted."""
+    loc = (location or "").strip()
+    venue = resolve_venue(loc)
+    counts, label = {}, {}
+    for sp in speakers:
+        c = sp.get("country")
+        iso = country_iso(c)
+        if iso and iso in GAZ_COUNTRIES:
+            counts[iso] = counts.get(iso, 0) + 1
+            # a shared country ("China / Austria") counts under its first name
+            if "/" not in (c or ""):
+                label.setdefault(iso, c)
+    countries = []
+    for iso, n in sorted(counts.items(), key=lambda kv: -kv[1]):
+        name, la, lo = GAZ_COUNTRIES[iso]
+        countries.append({"name": label.get(iso, name), "iso": iso, "n": n, "lat": la, "lon": lo})
+    return {"online": loc.lower() == "online", "venue": venue, "countries": countries}
+
+
+def land_mask(step=2):
+    """A dot-resolution land mask from the equirectangular texture the homepage
+    globe already ships (si-hero-earth/assets/img/earth-day.jpg). Ocean in that
+    texture is a dark navy; everything else is land or ice. Antarctica (south
+    of 60°S) is left out — no conference has a voice from there."""
+    from PIL import Image
+    src = REBUILD / "wp-plugins/si-hero-earth/assets/img/earth-day.jpg"
+    im = Image.open(src).convert("RGB")
+    W, H = im.size
+    rows = []
+    lat = 90 - step / 2
+    while lat > -60:
+        row = ""
+        lon = -180 + step / 2
+        while lon < 180:
+            r, g, b = im.getpixel((int((lon + 180) / 360 * W) % W, int((90 - lat) / 180 * H)))
+            ocean = b > r + 8 and b >= g and (r + g + b) < 190
+            row += "0" if ocean else "1"
+            lon += step
+        rows.append(row)
+        lat -= step
+    return {"step": step, "north": 90, "west": -180, "rows": rows,
+            "source": "wp-plugins/si-hero-earth/assets/img/earth-day.jpg"}
 
 TS = re.compile(r"^\s*(?:(\d{1,2}):)?(\d{1,2}):(\d{2})\s*")
 QUOTED = re.compile(r"[“\"]([^”\"]{4,})[”\"]")
@@ -337,16 +477,36 @@ def norm_person(name: str) -> str:
     s = re.sub(r"\([^)]*\)", " ", s)
     s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode()
     s = re.sub(r"[^a-zA-Z ]", " ", s).lower()
-    return " ".join(s.split())
+    words = s.split()
+    # a generational suffix is part of the style, not the name ("…, Jr")
+    while words and words[-1] in ("jr", "sr", "ii", "iii"):
+        words.pop()
+    return " ".join(words)
 
 
 def load_people():
+    """Name -> person record. Exact names first; then every spelling the
+    person-map reviewer MERGED into a record ("Ray McGovern" ->
+    raymond-mcgovern). Only an explicit `merge:<key>` in final_action counts —
+    blank is not accept (see the CSV review rule)."""
     people = json.loads(PEOPLE.read_text())["people"]
-    by = {}
+    by, by_key = {}, {p["key"]: p for p in people}
     for p in people:
         k = norm_person(p["name"])
         if k and k not in by:
             by[k] = p
+    merged = 0
+    with PERSON_MAP.open(encoding="utf8") as f:
+        for row in csv.DictReader(f):
+            act = (row.get("final_action") or "").strip()
+            if not act.startswith("merge:"):
+                continue
+            target = by_key.get(act.split(":", 1)[1].strip())
+            k = norm_person(row.get("canonical_name") or "")
+            if target and k and k not in by:
+                by[k] = target
+                merged += 1
+    print(f"people: {len(people)} records, {merged} reviewed alternative spellings")
     return by
 
 
@@ -372,6 +532,8 @@ def main():
             p = YT / f"v-{v}.json"
             videos[v] = json.loads(p.read_text()) if p.exists() else {"id": v}
         return videos[v]
+
+    (OUT / "land.json").write_text(json.dumps(land_mask(), separators=(",", ":")))
 
     # ---- the light index: every reviewed conference row --------------------
     index = []
@@ -496,6 +658,7 @@ def main():
                     works.append(w)
                 sessions.append({
                     "kind": "concert",
+                    "form": "music",
                     "title": rec["concert_title"],
                     "playlist": rec["concert_playlist"],
                     "works": works,
@@ -508,7 +671,7 @@ def main():
                 sess = {
                     "kind": s["kind"],
                     "video": s["video"],
-                    "title": v.get("title") or e.get("title", ""),
+                    "title": s.get("title") or v.get("title") or e.get("title", ""),
                     "duration": int(v.get("duration") or e.get("duration") or 0) or None,
                     "day": s.get("day"),
                     "evidence": s["evidence"],
@@ -519,7 +682,9 @@ def main():
                     sess["also_live"] = s["also_live"]
                 if s.get("cultural"):
                     sess["cultural"] = True
-                talks = parse_roster(desc) if s["kind"] != "concert" else []
+                if s.get("form"):
+                    sess["form"] = s["form"]
+                talks = parse_roster(desc) if s["kind"] not in ("concert", "cultural") else []
                 # source order is the running order except where the published
                 # timestamps disagree with it; when every talk carries one, the
                 # timestamps win (they are the tape).
@@ -527,7 +692,7 @@ def main():
                     talks.sort(key=lambda t: t["start"])
                 if talks:
                     sess["talks"] = talks
-                if s["kind"] == "concert":
+                if s["kind"] in ("concert", "cultural"):
                     perf = parse_performers(desc)
                     if perf:
                         sess["performers"] = perf
@@ -577,7 +742,12 @@ def main():
                         sp["credit"] = p["credit"]
                 if p.get("aff") and not sp.get("aff"):
                     sp["aff"] = p["aff"]
+                pc = COUNTRIES.get((p.get("country") or "").strip().lower())
+                if pc and not sp.get("country"):
+                    sp["country"] = pc
+                    sp["country_from"] = "person record"
         out["speakers"] = sorted(roster.values(), key=lambda s: s["order"])
+        out["geo"] = geo(r["location"], out["speakers"])
 
         # A record filmed one-speech-per-video has as many "sessions" as the
         # descriptions name panels (plus the concert); a record filmed

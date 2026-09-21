@@ -366,7 +366,14 @@
     }
    ],
    "country": "USA",
-   "aff": "former U.S. Assistant Secretary of Defense for International Security Affairs, 1993-1994"
+   "aff": "former U.S. Assistant Secretary of Defense for International Security Affairs, 1993-1994",
+   "person": "chas-freeman",
+   "photo": {
+    "src": "assets/portraits/chas-freeman.jpg",
+    "w": 420,
+    "h": 280
+   },
+   "credit": "Schiller Institute"
   },
   {
    "name": "Former U.S. State Department Official",
@@ -509,7 +516,8 @@
     }
    ],
    "country": "USA",
-   "aff": "Schiller Institute and U.S. Farm leaders (U.S.)"
+   "aff": "Schiller Institute and U.S. Farm leaders (U.S.)",
+   "person": "robert-l-baker"
   },
   {
    "name": "Jason Ross",
@@ -755,13 +763,110 @@
    "person": "nader-majd"
   }
  ],
+ "geo": {
+  "online": true,
+  "venue": null,
+  "countries": [
+   {
+    "name": "USA",
+    "iso": "US",
+    "n": 11,
+    "lat": 38.9,
+    "lon": -77.04
+   },
+   {
+    "name": "Germany",
+    "iso": "DE",
+    "n": 5,
+    "lat": 52.52,
+    "lon": 13.41
+   },
+   {
+    "name": "Russia",
+    "iso": "RU",
+    "n": 3,
+    "lat": 55.75,
+    "lon": 37.62
+   },
+   {
+    "name": "China",
+    "iso": "CN",
+    "n": 2,
+    "lat": 39.91,
+    "lon": 116.4
+   },
+   {
+    "name": "Italy",
+    "iso": "IT",
+    "n": 2,
+    "lat": 41.89,
+    "lon": 12.51
+   },
+   {
+    "name": "South Africa",
+    "iso": "ZA",
+    "n": 1,
+    "lat": -25.74,
+    "lon": 28.19
+   },
+   {
+    "name": "Guyana",
+    "iso": "GY",
+    "n": 1,
+    "lat": 6.8,
+    "lon": -58.16
+   },
+   {
+    "name": "Slovakia",
+    "iso": "SK",
+    "n": 1,
+    "lat": 48.15,
+    "lon": 17.11
+   },
+   {
+    "name": "Palestine",
+    "iso": "PS",
+    "n": 1,
+    "lat": 31.78,
+    "lon": 35.23
+   },
+   {
+    "name": "Malaysia",
+    "iso": "MY",
+    "n": 1,
+    "lat": 3.14,
+    "lon": 101.69
+   },
+   {
+    "name": "Norway",
+    "iso": "NO",
+    "n": 1,
+    "lat": 59.91,
+    "lon": 10.75
+   },
+   {
+    "name": "France",
+    "iso": "FR",
+    "n": 1,
+    "lat": 48.85,
+    "lon": 2.35
+   },
+   {
+    "name": "Iran",
+    "iso": "IR",
+    "n": 1,
+    "lat": 35.69,
+    "lon": 51.42
+   }
+  ]
+ },
  "tally": {
   "sessions": 4,
   "talks": 34,
   "speakers": 33,
   "runtime": 45688,
   "videos": 8,
-  "with_portrait": 8,
-  "on_people": 26
+  "with_portrait": 9,
+  "on_people": 28
  }
 }
