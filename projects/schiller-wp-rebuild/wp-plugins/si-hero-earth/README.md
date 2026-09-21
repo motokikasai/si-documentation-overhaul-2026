@@ -92,6 +92,56 @@ Two consequences worth knowing about:
   that stops being true. (A portrait phone does scale by width — and is below
   the gate's viewport floor, so it never sees the dissolve.)
 
+## Jasper (0.3.0, 2026-09-21)
+
+The hero is now set in Jasper. It was designed as a side-by-side draft in
+`homepage-draft/hero-jasper/` — read its README for the reasoning — and
+ported as three things, with **no change to markup or PHP**:
+
+- `assets/css/si-hero.css` ← the draft's `css/hero-jasper.css`: one field
+  (`--si-hero-field` `#04070F`), acts placed centre · left · right · centre,
+  Source Serif 4 / Source Sans 3 on Jasper's steps, brass-on-night accent,
+  Jasper's radii and motion tokens. Also fixes the kicker specificity bug
+  (`.si-hero__stage p` outranked `.si-hero__kicker`; measured on si-v4 after
+  deploy: 12.48px, as specified, where 0.2.1 rendered 17.28px).
+- `assets/js/si-hero-scene.js` ← the draft's palette block only: corridors
+  jasper → brass, brass city nodes. Physical light is untouched.
+- `assets/img/poster*` ← re-rendered from the Jasper scene at p=0, so the
+  handoff still dissolves one identical frame into another.
+
+### 0.3.1 — the hold, the release, the chapter dots (2026-09-21)
+
+- **The hold.** Act 4 reached full opacity at p=0.975, i.e. ~10vh of scroll
+  before the pin released, against 46–63vh for acts 1–3. The hero is now
+  `--si-hero-runway` (the choreography, 520vh) **plus `--si-hero-hold`
+  (60vh)**; `readScroll()` measures p over the choreography only, so acts 1–3
+  keep exactly their old scroll and act 4 gets ~70vh at full opacity, the
+  globe on its idle spin. Change the hold in the CSS only — the scene reads it.
+- **The release** — see "The parallax handoff" below.
+- **The chapter dots** are beads on a hairline thread that fills with brass as
+  you scroll (`--si-hero-chapter`, written by `updateStages()`, piecewise over
+  `STAGE_CENTERS` so the fill touches a dot exactly when its act is centred).
+  Passed dots stay dim brass; the current one is brass with a soft glow and a
+  single ring that breathes outward every 3.2s. The target is 1.25rem; the
+  bead is `::before`, the ring `::after`. A field-coloured collar to part the
+  thread was tried and dropped — off the pure field it reads as a dark disc.
+
+### 0.3.2 — no opt-in note without a form
+
+Act 4's note ("Weekly ideas… Double opt-in, unsubscribe anytime") describes
+the form, so `hero-act/render.php` now prints it only when the form renders
+(`ctaAction` set). With a `ctaLink` instead, the act shows the button and no
+note; with neither, no `.si-hero__cta` at all. si-v4 has neither set, so its
+act 4 is kicker, heading and lead until a newsletter endpoint exists — then
+it is one block setting. `tools/render-test.php` covers all three shapes.
+
+**Dependency:** the type and spacing come from Jasper's tokens, which the child
+theme enqueues on every page (`inc/jasper.php`); the plugin ships no webfont.
+The `--si-hero-*` roles have literal fallbacks, so without the theme the hero
+stays legible but falls back to system faces. `tools/preview.html` therefore
+loads `people/design-system/{fonts,tokens}.css` and must be served from
+`projects/schiller-wp-rebuild/`, not from the plugin folder.
+
 ---
 
 ## Reach: what the gate actually does
@@ -247,12 +297,19 @@ lines listed here. `diff` it if you like; that was the point.
 | `updateStages()` sets `inert` + `aria-hidden` on faded-out acts | Without it the email field in act 3 is reachable by Tab and readable by a screen reader while invisible, and all four headlines are announced at once. Only *fully* invisible acts are removed — mid-crossfade both are legitimately on screen. |
 | The 4K night swap is `if (cfg.tex.nightHi)` | So the gate can withhold it. |
 
-**Deliberately not ported:** the v3/v4 "parallax handoff", where the scene
-layers were `position: fixed; z-index: -1` so the frozen scene stayed visible
-behind later sections. Inside an unknown theme that is a stacking-context
-fight with the page background, and losing it costs one transition. The hero
-now ends cleanly at its own boundary. To revisit, start with `.si-hero__pin`
-and expect to make the theme's page wrapper transparent.
+**The parallax handoff — dropped in 0.2.0, back in 0.3.1 by another route.**
+The v3/v4 prototype made the scene layers `position: fixed; z-index: -1`, which
+needs every theme wrapper above the hero to be transparent and free of
+stacking contexts — a fight with a theme the block does not own, so 0.2.0
+ended the hero at its own boundary instead. 0.3.1 gets the same picture from
+inside the block: `.si-hero.is-live { clip-path: inset(0) }` and the canvas,
+poster and vignette `position: fixed`. The clip is the fixed scene's window,
+so when the pin lets go the words scroll away, the globe stays put (still
+spinning), and the next section rises over it. No z-index, no theme change.
+Its one requirement: **no ancestor may carry a `transform`, `filter`,
+`perspective`, `contain` or `will-change`** — any of them captures a fixed
+child and the scene would scroll with the page. None does on si-v4
+(2026-09-21); `verify-handoff.mjs` checks the whole ancestor chain every run.
 
 ---
 
@@ -348,18 +405,19 @@ lesson being written down.)
 ## Working on it
 
 ```bash
-# the hero, with no WordPress involved
-python3 -m http.server 8750 --directory .
-open http://localhost:8750/tools/preview.html          # the scene
-open http://localhost:8750/tools/preview.html?static=1 # what most people get
-open http://localhost:8750/tools/preview.html?p=0.42   # freeze at a point in the runway
+# the hero, with no WordPress involved — serve from projects/schiller-wp-rebuild/
+# (the harness loads Jasper from people/design-system/)
+python3 articles/build/serve.py 8761
+open http://127.0.0.1:8761/wp-plugins/si-hero-earth/tools/preview.html          # the scene
+open http://127.0.0.1:8761/wp-plugins/si-hero-earth/tools/preview.html?static=1 # what most people get
+open http://127.0.0.1:8761/wp-plugins/si-hero-earth/tools/preview.html?p=0.42   # freeze at a point in the runway
 
 # prove the blocks still emit the expected markup (no WP, no DB, no browser)
 php tools/render-test.php
 
 # the four load paths in a real browser: armed before first paint, the
 # dissolve, the gated hero, and the module failing back to static
-PW=<playwright node_modules> node tools/verify-handoff.mjs
+PW=<playwright node_modules> SI_BASE=http://127.0.0.1:8761 SI_PATH=/wp-plugins/si-hero-earth/tools/preview.html node tools/verify-handoff.mjs
 node ../../articles/build/local-proxy.mjs si-v4.local 8770 &   # …or against WordPress
 PW=… SI_BASE=http://127.0.0.1:8770 SI_PATH=/ node tools/verify-handoff.mjs
 

@@ -1,9 +1,14 @@
 # The hero, in Jasper
 
 A local duplicate of the WordPress hero (`wp-plugins/si-hero-earth`) with the
-**Jasper** design system applied, made to be looked at next to the one that is
-running. **Nothing here is deployed and nothing in the plugin was changed.**
-si-v4 is still serving 0.2.1 exactly as before.
+**Jasper** design system applied, made to be looked at next to the one that was
+running.
+
+> **Chosen and shipped, 2026-09-21.** Ported into the plugin as **0.3.0**
+> (stylesheet, scene palette, poster — no markup or PHP) and deployed to si-v4;
+> `verify-handoff.mjs` passes on the site. The plugin is now the source of
+> truth; this folder is the record of how it was designed. Where this README
+> says "the shipped plugin" or "0.2.1", read "0.2.1, before the port".
 
 ## Look at both
 

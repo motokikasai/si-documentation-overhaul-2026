@@ -18,8 +18,11 @@ the first wave of corridors is already a quarter drawn.
 
 Needs a local server on the plugin root and playwright's firefox:
 
-    python3 -m http.server 8750 --directory .
-    python3 build/make-poster.py
+    python3 articles/build/serve.py 8761     # from projects/schiller-wp-rebuild/
+    python3 wp-plugins/si-hero-earth/build/make-poster.py
+
+(Since 0.3.0 the harness loads Jasper's fonts and tokens from people/design-system/,
+so it has to be served from the prototype root, not from the plugin.)
 
 Headless firefox renders this with a software rasteriser, which is slower but
 pixel-correct for our purposes; the starfield comes out very slightly fainter
@@ -34,7 +37,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "assets" / "img"
-URL = "http://localhost:8750/tools/preview.html"
+URL = "http://localhost:8761/wp-plugins/si-hero-earth/tools/preview.html"
 
 # Where in the runway to freeze. 0 is the frame the scene opens on, which is
 # the frame the poster has to dissolve into. Pass another value to explore;

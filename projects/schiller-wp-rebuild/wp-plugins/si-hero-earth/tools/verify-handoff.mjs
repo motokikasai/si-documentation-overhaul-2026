@@ -1,7 +1,7 @@
 /* verify-handoff.mjs — the hero's four load paths, measured in a real browser.
  *
  *   # against the preview harness
- *   python3 -m http.server 8750 --directory <plugin root>
+ *   python3 articles/build/serve.py 8761   (from projects/schiller-wp-rebuild/)
  *   PW=<playwright node_modules> node tools/verify-handoff.mjs
  *
  *   # against WordPress (si-v4, through the Host-header proxy)
@@ -31,8 +31,8 @@ import { createRequire } from 'node:module';
 const require = createRequire(process.env.PW ? process.env.PW + '/' : import.meta.url);
 const { firefox } = require('playwright');
 
-const BASE = process.env.SI_BASE || 'http://127.0.0.1:8750';
-const PATH = process.env.SI_PATH || '/tools/preview.html';
+const BASE = process.env.SI_BASE || 'http://127.0.0.1:8761';
+const PATH = process.env.SI_PATH || '/wp-plugins/si-hero-earth/tools/preview.html';
 const url = (q = '') => BASE + PATH + q;
 
 const browser = await firefox.launch();
@@ -120,6 +120,67 @@ console.log('\nlive path (desktop, WebGL)');
 	check('poster still behind it', s.posterPresent);
 	check('one act on screen', s.visibleStages === 1, `${s.visibleStages}/${s.stageCount}`);
 	check('pinned runway', s.heroH > s.viewportH * 3, `${s.heroH}px`);
+	await page.close();
+}
+
+/* --- 1b: the hold, the release, the chapter dots (0.3.1) ----------------- */
+console.log('\nhold and release (desktop, WebGL)');
+{
+	const page = await open();
+	await page.waitForFunction(() => document.querySelector('.si-hero')?.classList.contains('is-scene'), null, { timeout: 40000 })
+		.catch(() => {});
+	const geo = await page.evaluate(() => {
+		const el = document.querySelector('.si-hero');
+		const vh = window.innerHeight;
+		const v = getComputedStyle(el).getPropertyValue('--si-hero-hold').trim();
+		const hold = v.endsWith('px') ? parseFloat(v) : parseFloat(v) / 100 * vh;
+		const top = el.getBoundingClientRect().top + window.scrollY;
+		/* Every ancestor that would capture a position:fixed child. */
+		const traps = [];
+		for (let a = el.parentElement; a; a = a.parentElement) {
+			const c = getComputedStyle(a);
+			if (c.transform !== 'none' || c.filter !== 'none' || c.perspective !== 'none'
+				|| (c.contain && c.contain !== 'none') || /transform|filter|perspective/.test(c.willChange)
+				|| (c.backdropFilter && c.backdropFilter !== 'none'))
+				traps.push(a.tagName.toLowerCase() + (a.id ? '#' + a.id : '') + '.' + a.className);
+		}
+		return { vh, hold, top, h: el.offsetHeight, clip: getComputedStyle(el).clipPath, traps };
+	});
+	const sceneEnd = geo.top + geo.h - geo.vh - geo.hold;
+	const release = geo.top + geo.h - geo.vh;
+	const at = async (y) => {
+		await page.evaluate((y) => window.scrollTo({ top: y, behavior: 'instant' }), y);
+		await page.waitForTimeout(1800); /* the scene eases into position */
+		return page.evaluate(() => {
+			const el = document.querySelector('.si-hero');
+			const stages = Array.from(el.querySelectorAll('.si-hero__stage'));
+			const chapters = el.querySelector('.si-hero__chapters');
+			const active = chapters && chapters.querySelector('button.is-active');
+			return {
+				op: stages.map((s) => +parseFloat(getComputedStyle(s).opacity).toFixed(2)),
+				pinTop: Math.round(el.querySelector('.si-hero__pin').getBoundingClientRect().top),
+				canvasTop: Math.round(el.querySelector('.si-hero__canvas').getBoundingClientRect().top),
+				canvasPos: getComputedStyle(el.querySelector('.si-hero__canvas')).position,
+				stage3Top: Math.round(stages[3].getBoundingClientRect().top),
+				chapter: chapters && chapters.style.getPropertyValue('--si-hero-chapter'),
+				activeIdx: active ? Array.from(chapters.children).indexOf(active) : -1,
+				pulse: active ? getComputedStyle(active, '::after').animationName : '',
+			};
+		});
+	};
+
+	check('hold added to the runway', Math.abs(geo.h - (geo.hold + 5.2 * geo.vh)) < 4, `${geo.h}px = 520vh + ${Math.round(geo.hold)}px hold`);
+	const mid = await at(Math.round(sceneEnd + geo.hold / 2));
+	check('act 4 held at full opacity mid-hold', mid.op[3] > 0.95 && mid.op.slice(0, 3).every((o) => o === 0), mid.op.join(' '));
+	check('still pinned mid-hold', mid.pinTop === 0, `pin top ${mid.pinTop}px`);
+	check('thread full, last dot active', mid.chapter === '1.0000' && mid.activeIdx === 3, `--si-hero-chapter ${mid.chapter}, dot ${mid.activeIdx}`);
+	check('active dot breathes', mid.pulse === 'si-hero-chapter-breathe', mid.pulse || 'none');
+
+	const rel = await at(Math.round(release + 300));
+	check('clipped to its own box', /inset/.test(geo.clip), geo.clip);
+	check('no ancestor captures the fixed scene', geo.traps.length === 0, geo.traps.join(', ') || 'none');
+	check('scene stays put after release', rel.canvasPos === 'fixed' && rel.canvasTop === 0, `canvas ${rel.canvasPos}, top ${rel.canvasTop}px`);
+	check('words scroll away with the page', rel.pinTop <= -290 && rel.pinTop >= -310, `pin top ${rel.pinTop}px`);
 	await page.close();
 }
 

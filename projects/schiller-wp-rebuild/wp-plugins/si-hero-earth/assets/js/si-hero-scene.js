@@ -1,3 +1,48 @@
+/* si/hero-earth — the scene, JASPER (0.3.0).
+ * ===========================================================================
+ * Ported from homepage-draft/hero-jasper/js/hero-scene-jasper.js. Against
+ * 0.2.x the choreography, the shaders, the corridor data and the handoff are
+ * unchanged. Only the palette below is different, and it is the same set of
+ * tokens assets/css/si-hero.css uses, because the canvas,
+ * the poster and the CSS ground are one field and must agree.
+ *
+ *   JASPER PALETTE — every change made to this file
+ *
+ *   space (clear colour)   0x04070f          → unchanged (see below)
+ *   corridors, planned     0xb5a486 warm grey→ --si-jasper       0x8FA7BF
+ *   corridors, operational 0xe8c87e gold     → --si-brass-on-night 0xC9A866
+ *   corridors, second wave 0xcfb684 gold     → --si-brass        0xA08040
+ *   city nodes             warm white-gold   → brass, two values
+ *
+ * That is the whole list, and the line it is drawn along is the system's own
+ * rule — "colour does structure, never decoration":
+ *
+ *   BRAND COLOUR governs what the hero asserts — the network that carries
+ *   the argument. Planned corridors are jasper, operational ones brass, so
+ *   the wave of completion now reads as jasper → brass: a colour change
+ *   that means something, where the gold-to-gold gradient could only hint
+ *   at it.
+ *
+ *   THE FIELD stayed where it was, and that is a correction. The first pass
+ *   set the clear colour to --si-night (0x0F1A26), arguing that canvas,
+ *   poster and CSS ground should be one colour. The consistency is right —
+ *   they are still one colour — but --si-night is the value of a dark UI
+ *   band against limestone, not of space. At that value the Milky Way and
+ *   the faint stars lose their contrast and the sky reads as slate; every
+ *   scrim in the stylesheet then has to fade into a field light enough to
+ *   show the scrim's own edge, so the act columns read as panels. So the
+ *   field is night taken to space: 0x04070F here and --si-hero-field in
+ *   assets/css/si-hero.css. The two must stay equal, and the poster must be
+ *   re-rendered whenever they change.
+ *
+ *   PHYSICAL LIGHT is left alone — sunlight, dawn, the specular on the
+ *   ocean, the atmosphere's rim, the moon, and the star colours. A star's
+ *   colour is its temperature and the sky is blue because of Rayleigh
+ *   scattering; a design system has no opinion about either, and the first
+ *   pass at this file, which gave the atmosphere a jasper halo, only proved
+ *   it — the Earth stopped looking lit and started looking tinted.
+ * ===========================================================================
+ */
 /* Schiller Institute homepage draft — hero v4 (scroll-driven WebGL).
  *
  * Changes vs. hero-v3.js (v3 kept intact):
@@ -143,7 +188,7 @@ export function initHero(root, cfg) {
 function init(renderer, ctx) {
   const { heroEl, stages, scrollHint, chapterBtns, cfg } = ctx;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
-  renderer.setClearColor(0x04070f, 1);
+  renderer.setClearColor(0x04070f, 1); /* JASPER --si-hero-field — see the palette note */
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 400);
@@ -475,6 +520,8 @@ function init(renderer, ctx) {
   const bandN = new THREE.Vector3(0.42, 0.86, 0.28).normalize();
   const bandU = new THREE.Vector3().crossVectors(bandN, new THREE.Vector3(0, 1, 0)).normalize();
   const bandV = new THREE.Vector3().crossVectors(bandN, bandU);
+  /* JASPER: deliberately UNCHANGED. A star's colour is its temperature.
+   * See the palette note at the top of this file. */
   const STAR_PALETTE = [
     [0.78, 0.84, 1.0],   // cool white-blue (most)
     [0.92, 0.94, 1.0],   // near white
@@ -880,11 +927,11 @@ function init(renderer, ctx) {
   /* Feeders mature from pale (planned) to trunk gold (operational).
    * Hex values are kept raw (no linear conversion): the corridor shader
    * below outputs them unencoded, same as the glow-point shader. */
-  const FEEDER_COLD = new THREE.Color().setHex(0xb5a486, THREE.LinearSRGBColorSpace);
-  const TRUNK_GOLD = new THREE.Color().setHex(0xe8c87e, THREE.LinearSRGBColorSpace);
+  const FEEDER_COLD = new THREE.Color().setHex(0x8fa7bf, THREE.LinearSRGBColorSpace); /* JASPER --si-jasper: planned */
+  const TRUNK_GOLD = new THREE.Color().setHex(0xc9a866, THREE.LinearSRGBColorSpace); /* JASPER --si-brass-on-night: operational */
   /* Tier-2 branches: dimmer, slightly desaturated gold — reads thinner
    * (WebGL line width is fixed at 1px, so "thin" = quiet, not narrow) */
-  const BRANCH_GOLD = new THREE.Color().setHex(0xcfb684, THREE.LinearSRGBColorSpace);
+  const BRANCH_GOLD = new THREE.Color().setHex(0xa08040, THREE.LinearSRGBColorSpace); /* JASPER --si-brass: second wave */
 
   /* Corridor line material with day-side masking: additive gold over
    * bright daylight reads as noise, so lines dim toward uDayDim past the
@@ -1007,7 +1054,8 @@ function init(renderer, ctx) {
       const v = latLon(lat, lon, EARTH_R + 0.008);
       pos.set([v.x, v.y, v.z], i * 3);
       size[i] = hub ? 0.16 + Math.random() * 0.05 : 0.09 + Math.random() * 0.04;
-      col.set(hub ? [1.0, 0.85, 0.5] : [1.0, 0.9, 0.65], i * 3);
+      /* JASPER: brass, two values — hubs brighter. */
+      col.set(hub ? [1.0, 0.84, 0.52] : [0.92, 0.80, 0.56], i * 3);
       alp[i] = hub ? 1.0 : 0.8;
       pha[i] = Math.random() * Math.PI * 2;
       rch[i] = cityReach[key] ?? -1;
@@ -1136,11 +1184,29 @@ function init(renderer, ctx) {
   let heroVisible = true;
   let rafId = null;
 
+  /* THE HOLD (0.3.1). The choreography runs over the runway (the block's
+   * `runway` attribute, --si-hero-runway); the hero is then --si-hero-hold
+   * taller, and over that last stretch p stays at 1 — the finished frame,
+   * act 4 at full opacity, the globe still on its idle spin. Without it the
+   * finale reached full opacity ~10vh before the pin released, against
+   * 46–63vh for the other three acts. p is measured over the scene's range
+   * only, so acts 1–3 keep exactly the scroll they had. */
+  function holdPx() {
+    const v = getComputedStyle(heroEl).getPropertyValue("--si-hero-hold").trim();
+    const n = parseFloat(v);
+    if (!Number.isFinite(n)) return 0.6 * window.innerHeight;
+    if (v.endsWith("px")) return n;
+    return (n / 100) * window.innerHeight; /* vh / svh / dvh */
+  }
+  function sceneRange() {
+    return heroEl.offsetHeight - window.innerHeight - holdPx();
+  }
+
   function readScroll() {
     if (debugP !== null) { targetP = debugP; return; }
     const rect = heroEl.getBoundingClientRect();
-    const runway = rect.height - window.innerHeight;
-    targetP = runway > 0 ? clamp01(-rect.top / runway) : 0;
+    const range = sceneRange();
+    targetP = range > 0 ? clamp01(-rect.top / range) : 0;
   }
 
   function updateStages(p) {
@@ -1167,7 +1233,24 @@ function init(renderer, ctx) {
     for (let i = 0; i < STAGE_CENTERS.length; i++) {
       if (Math.abs(p - STAGE_CENTERS[i]) < Math.abs(p - STAGE_CENTERS[chapter])) chapter = i;
     }
-    chapterBtns.forEach((b, i) => b.classList.toggle("is-active", i === chapter));
+    chapterBtns.forEach((b, i) => {
+      b.classList.toggle("is-active", i === chapter);
+      b.classList.toggle("is-past", i < chapter);
+    });
+    /* The thread between the dots fills with the scroll. Piecewise over
+     * STAGE_CENTERS, not linear in p, because the acts are not evenly
+     * spaced: the fill touches a dot exactly when its act is centred. */
+    if (chapterBtns.length) {
+      let f = 0;
+      const c = STAGE_CENTERS;
+      if (p >= c[c.length - 1]) f = c.length - 1;
+      else if (p > c[0]) {
+        for (let i = 0; i < c.length - 1; i++) {
+          if (p <= c[i + 1]) { f = i + (p - c[i]) / (c[i + 1] - c[i]); break; }
+        }
+      }
+      chapterBtns[0].parentElement.style.setProperty("--si-hero-chapter", (f / (c.length - 1)).toFixed(4));
+    }
   }
 
   const clock = new THREE.Clock();
@@ -1271,12 +1354,11 @@ function init(renderer, ctx) {
   }
 
   function resize() {
-    /* PORT CHANGE: the prototype sized to the window, because its canvas was
-     * viewport-fixed for the parallax handoff. Here the canvas is absolutely
-     * positioned inside the pin, so we measure the pin itself. That keeps the
-     * camera aspect correct no matter what container the theme wraps the block
-     * in — a narrow column makes the hero narrower, never the globe an ellipse.
-     * It is also what makes the block safe to drop into an unknown theme. */
+    /* PORT CHANGE: measure the canvas element, not the window. Since 0.3.1
+     * the canvas is viewport-fixed again (the parallax release, clipped to
+     * the hero — see RELEASE in si-hero.css), so on si-v4 the two agree;
+     * measuring the element keeps the camera aspect right if a theme ever
+     * gives it some other box. */
     const w = ctx.canvas.clientWidth || window.innerWidth;
     const h = ctx.canvas.clientHeight || window.innerHeight;
     /* pixel ratio changes when the window moves between displays; the
@@ -1303,8 +1385,8 @@ function init(renderer, ctx) {
 
   chapterBtns.forEach((btn, i) => {
     btn.addEventListener("click", () => {
-      const runway = heroEl.offsetHeight - window.innerHeight;
-      const top = heroEl.offsetTop + runway * STAGE_CENTERS[i];
+      /* the finale's dot lands at the start of the hold, not part way in */
+      const top = heroEl.offsetTop + sceneRange() * (i === STAGE_CENTERS.length - 1 ? 1 : STAGE_CENTERS[i]);
       window.scrollTo({ top, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
   });

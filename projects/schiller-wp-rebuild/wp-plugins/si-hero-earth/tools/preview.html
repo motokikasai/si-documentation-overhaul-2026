@@ -16,9 +16,13 @@
       ?static=1   force the static hero
       ?p=0.42     freeze the scene at a point in the runway (0..1)
 -->
+<!-- On the site the child theme supplies Jasper's fonts and tokens; here the
+     design-system source stands in for it (serve from projects/schiller-wp-rebuild). -->
+<link rel="stylesheet" href="../../../people/design-system/fonts.css">
+<link rel="stylesheet" href="../../../people/design-system/tokens.css">
 <link rel="stylesheet" href="../assets/css/si-hero.css">
 <style>
-  body { margin: 0; background: #0a1428; }
+  body { margin: 0; background: var(--si-night); }
   .harness-after {
     min-height: 60vh; padding: 4rem 1.5rem; color: #16202e; background: #faf7f0;
     font: 16px/1.6 system-ui, sans-serif;

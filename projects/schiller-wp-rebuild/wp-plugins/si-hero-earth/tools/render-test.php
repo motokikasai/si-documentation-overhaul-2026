@@ -129,6 +129,29 @@ $cfg = $cm ? json_decode( $cm[1], true ) : null;
 echo "  config parses: " . ( $cfg ? 'yes, keys=' . implode( ',', array_keys( $cfg ) ) : 'NO' ) . "\n";
 echo "  h1 count: " . substr_count( $html, '<h1' ) . "\n";
 
+/* The invitation's other two shapes: the opt-in note describes the form, so
+   it must not render without one (si-v4 had no endpoint set and showed the
+   note on its own). */
+$si_cta_shape = function ( $extra ) use ( $acts ) {
+	$attributes = array_merge( $acts[3], array( 'ctaAction' => '', 'ctaLink' => '' ), $extra );
+	$content = ''; $block = null;
+	ob_start();
+	include SI_HERO_EARTH_DIR . 'blocks/hero-act/render.php';
+	return ob_get_clean();
+};
+$no_cta = $si_cta_shape( array() );
+$link   = $si_cta_shape( array( 'ctaLink' => 'https://example.org/join' ) );
+foreach ( array(
+	'no endpoint: no note'   => false === strpos( $no_cta, 'si-hero__form-note' ),
+	'no endpoint: no cta box'=> false === strpos( $no_cta, 'si-hero__cta' ),
+	'link only: button'      => false !== strpos( $link, 'href="https://example.org/join"' ),
+	'link only: no note'     => false === strpos( $link, 'si-hero__form-note' ),
+	'form: note'             => false !== strpos( $html, 'si-hero__form-note' ),
+) as $label => $ok ) {
+	printf( "  %-20s %s\n", $label, $ok ? 'ok' : 'FAIL' );
+	if ( ! $ok ) { $fail++; }
+}
+
 /* The gate has to come AFTER the hero (it reads the element) and INSIDE the
  * block's own output (so it runs before the hero is painted). Printing it in
  * wp_footer is what made the hero visibly change shape 1.9 s in. */

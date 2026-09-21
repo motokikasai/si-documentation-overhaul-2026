@@ -36,6 +36,13 @@ $si_cta_enabled = ! empty( $attributes['ctaEnabled'] );
 $si_action      = isset( $attributes['ctaAction'] ) ? trim( $attributes['ctaAction'] ) : '';
 $si_button      = isset( $attributes['ctaButton'] ) ? $attributes['ctaButton'] : '';
 $si_note        = isset( $attributes['ctaNote'] ) ? $attributes['ctaNote'] : '';
+$si_link        = ! empty( $attributes['ctaLink'] ) ? $attributes['ctaLink'] : '';
+
+/* The note ("Double opt-in, unsubscribe anytime") describes the form, so it
+ * renders only with the form. With neither a form nor a link there is no
+ * call to action at all, and no empty .si-hero__cta box either. */
+$si_has_form = '' !== $si_action;
+$si_has_cta  = $si_cta_enabled && ( $si_has_form || '' !== $si_link );
 ?>
 <div <?php echo $si_wrapper; // phpcs:ignore WordPress.Security.EscapeOutput ?> data-stage="<?php echo esc_attr( (string) $si_stage ); ?>">
 	<?php if ( '' !== $si_kicker ) : ?>
@@ -50,9 +57,9 @@ $si_note        = isset( $attributes['ctaNote'] ) ? $attributes['ctaNote'] : '';
 		<p class="si-hero__lead"><?php echo wp_kses_post( $si_lead ); ?></p>
 	<?php endif; ?>
 
-	<?php if ( $si_cta_enabled ) : ?>
+	<?php if ( $si_has_cta ) : ?>
 		<div class="si-hero__cta">
-			<?php if ( '' !== $si_action ) : ?>
+			<?php if ( $si_has_form ) : ?>
 				<?php
 				$si_field = isset( $attributes['ctaField'] ) && '' !== $attributes['ctaField']
 					? $attributes['ctaField'] : 'email';
@@ -74,15 +81,15 @@ $si_note        = isset( $attributes['ctaNote'] ) ? $attributes['ctaNote'] : '';
 					/>
 					<button type="submit"><?php echo wp_kses_post( $si_button ); ?></button>
 				</form>
-			<?php elseif ( ! empty( $attributes['ctaLink'] ) ) : ?>
+			<?php else : ?>
 				<p class="si-hero__form">
-					<a class="si-hero__button" href="<?php echo esc_url( $attributes['ctaLink'] ); ?>">
+					<a class="si-hero__button" href="<?php echo esc_url( $si_link ); ?>">
 						<?php echo wp_kses_post( $si_button ); ?>
 					</a>
 				</p>
 			<?php endif; ?>
 
-			<?php if ( '' !== $si_note ) : ?>
+			<?php if ( $si_has_form && '' !== $si_note ) : ?>
 				<p class="si-hero__form-note"><?php echo wp_kses_post( $si_note ); ?></p>
 			<?php endif; ?>
 		</div>
