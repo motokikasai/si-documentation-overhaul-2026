@@ -1,0 +1,178 @@
+{
+ "key": "bare",
+ "why": "shape d — the oldest kind: a title, a date, an embed and a line of text",
+ "built": "2026-09-21",
+ "id": 47718,
+ "title": "Webcast: The Time Has Come to End the Russiagate Fraud!",
+ "date": "2018-08-10",
+ "lang": "en",
+ "slug": "webcast-the-time-has-come-to-end-the-russiagate-fraud",
+ "url": "/videos/webcast-the-time-has-come-to-end-the-russiagate-fraud/",
+ "legacy_url": "/blog/2018/08/10/webcast-the-time-has-come-to-end-the-russiagate-fraud/",
+ "yt": "h-jP8RK6VgM",
+ "duration": null,
+ "uploaded": null,
+ "editor": "David Dobrodt",
+ "series": {
+  "slug": "weekly-webcast-hzl",
+  "label": "Weekly dialogue with Helga Zepp-LaRouche",
+  "ep": 49,
+  "of": 384,
+  "first": "2015-06-18",
+  "last": "2026-06-23",
+  "prev": {
+   "id": 47594,
+   "title": "Webcast: Dialogue, Not War!",
+   "date": "2018-08-02",
+   "yt": "iQBwPZgOlDQ",
+   "slug": "webcast-dialogue-not-war"
+  },
+  "next": {
+   "id": 47803,
+   "title": "Webcast: As Financial System Teeters, a New Bretton Woods is the Solution",
+   "date": "2018-08-17",
+   "yt": "K5103qe33mo",
+   "slug": "webcast-as-financial-system-teeters-a-new-bretton-woods-is-the-solution"
+  },
+  "host": "helga-zepp-larouche",
+  "how": "classification.csv proposed_series, numbered by date within the series and language"
+ },
+ "topics": [],
+ "body": [
+  "Helga Zepp-LaRouche discusses the growing (though futile) efforts by the British Empire to derail the momentum of the New Paradigm."
+ ],
+ "description": "",
+ "chapters": [],
+ "channel": null,
+ "translations": [],
+ "people": [
+  {
+   "key": "helga-zepp-larouche",
+   "name": "Helga Zepp-LaRouche",
+   "photo": {
+    "src": "assets/portraits/helga-zepp-larouche.jpg",
+    "w": 420,
+    "h": 236,
+    "fx": 50.7,
+    "fy": 44.5,
+    "fs": 0.373
+   },
+   "where": "body",
+   "evidence": "Helga Zepp-LaRouche",
+   "at": [],
+   "url": "/people/helga-zepp-larouche/",
+   "role": "host"
+  }
+ ],
+ "people_how": "full name, or a surname no other of the 418 people shares preceded by a first name; matched in the title, body, YouTube description and captions",
+ "places": [
+  {
+   "name": "United Kingdom",
+   "lat": 51.5,
+   "lon": -0.1,
+   "n": 1,
+   "at": []
+  }
+ ],
+ "week": [
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Uruguay to Announce Formal Entry into Belt and Road Initiative",
+   "date": "2018-08-06",
+   "lang": "en",
+   "url": "/blog/2018/08/06/uruguay-to-announce-formal-entry-into-belt-and-road-initiative/",
+   "dd": -4,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Noch schlimmer als „Fake News“: die Zensur der gleichgeschalteten Medien!",
+   "date": "2018-08-06",
+   "lang": "de",
+   "url": "/blog/2018/08/06/noch-schlimmer-als-fake-news-die-zensur-der-gleichgeschalteten-medien/",
+   "dd": -4,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "DER GEIST DER NEUEN SEIDENSTRASSE BEWIRKT POLITISCHE STABILISIERUNG",
+   "date": "2018-08-08",
+   "lang": "de",
+   "url": "/blog/2018/08/08/der-geist-der-neuen-seidenstrasse-bewirkt-politische-stabilisierung/",
+   "dd": -2,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "WEBCAST MIT HELGA ZEPP-LAROUCHE – 8. AUGUST 2018",
+   "date": "2018-08-11",
+   "lang": "de",
+   "url": "/videos/webcast-mit-helga-zepp-larouche-8-august-2018/",
+   "dd": 1,
+   "yt": "WiY3qNNKeeE",
+   "series": "weekly-webcast-hzl"
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Abkommen über Nutzung des Kaspischen Meeres",
+   "date": "2018-08-15",
+   "lang": "de",
+   "url": "/blog/2018/08/15/abkommen-uber-nutzung-des-kaspischen-meeres/",
+   "dd": 5,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Caspian Sea Agreement Enhances Belt and Road Initiative",
+   "date": "2018-08-15",
+   "lang": "en",
+   "url": "/blog/2018/08/15/abkommen-uber-nutzung-des-kaspischen-meeres/",
+   "dd": 5,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Webcast: As Financial System Teeters, a New Bretton Woods is the Solution",
+   "date": "2018-08-17",
+   "lang": "en",
+   "url": "/videos/webcast-as-financial-system-teeters-a-new-bretton-woods-is-the-solution/",
+   "dd": 7,
+   "yt": "K5103qe33mo",
+   "series": "weekly-webcast-hzl"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "WEBCAST MIT HELGA ZEPP-LAROUCHE – 15. AUGUST 2018",
+   "date": "2018-08-17",
+   "lang": "de",
+   "url": "/videos/webcast-mit-helga-zepp-larouche-15-august-2018/",
+   "dd": 7,
+   "yt": "tertMf7r8UI",
+   "series": "weekly-webcast-hzl"
+  }
+ ],
+ "topic_near": [],
+ "record": {
+  "captions": false,
+  "chapters": 0,
+  "description": false,
+  "body_words": 21,
+  "topics": 0,
+  "people": 1,
+  "translations": 0,
+  "featured_image": true
+ }
+}

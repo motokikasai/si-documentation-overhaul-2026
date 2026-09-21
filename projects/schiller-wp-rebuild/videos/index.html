@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>Video Drafts — Schiller Institute</title>
+<meta name="description" content="Five drafts of the individual video page, /videos/{slug}/, on the Jasper design system, each dressed with four real records from the archive.">
+<link rel="stylesheet" href="../people/design-system/fonts.css">
+<link rel="stylesheet" href="../people/design-system/tokens.css">
+<link rel="stylesheet" href="../people/design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../people/design-system/components.css">
+<link rel="icon" href="../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+<style>
+	.ix { padding-block: var(--si-space-2xl) var(--si-space-3xl); display: grid; gap: var(--si-space-2xl); }
+	.ix header, .ix section { display: grid; gap: var(--si-space-s); }
+	.ix .si-display { font-size: var(--si-step-5); }
+	.ix h2.si-display { font-size: var(--si-step-4); }
+	.ix .lede, .ix section > p { max-width: var(--si-measure); margin: 0; }
+	.drafts { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--si-space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+	.drafts li { display: grid; gap: var(--si-space-2xs); align-content: start; padding: var(--si-space-m); background: var(--si-card); border: var(--si-hairline); }
+	.drafts .letter { font-family: var(--si-font-serif); font-style: italic; font-weight: 300; font-size: var(--si-step-4); line-height: 1; color: var(--si-jasper-deep); }
+	.drafts .title { font-family: var(--si-font-serif); font-size: var(--si-step-2); font-weight: 500; color: var(--si-ink); text-decoration: none; }
+	.drafts .title:hover { color: var(--si-accent); }
+	.drafts .dial { font-family: var(--si-font-sans); font-size: var(--si-step-n2); letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-brass); }
+	.drafts p { font-size: var(--si-step-n1); margin: 0; }
+	.drafts .also { display: flex; flex-wrap: wrap; gap: .3em .7em; margin-top: var(--si-space-2xs); font-family: var(--si-font-sans); font-size: var(--si-step-n2); }
+	.drafts .also a { color: var(--si-accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
+	.drafts .night { background: var(--si-night); border-color: var(--si-night); }
+	.drafts .night .title { color: #fff; } .drafts .night p { color: var(--si-on-night-2); }
+	.drafts .night .letter, .drafts .night .dial { color: var(--si-brass-on-night); }
+	.drafts .night .also a { color: #D8E2EC; }
+	table.t { border-collapse: collapse; font-size: var(--si-step-n1); max-width: 980px; }
+	table.t :is(th, td) { text-align: left; padding: .5em var(--si-space-s) .5em 0; border-top: var(--si-hairline); vertical-align: top; }
+	table.t th { font-family: var(--si-font-sans); font-weight: 600; color: var(--si-ink); }
+	table.t td.n { font-variant-numeric: tabular-nums; text-align: right; }
+	.cta-case { padding: var(--si-space-m); border-left: 2px solid var(--si-brass); background: var(--si-card); max-width: 76ch; }
+	.cta-case p { margin: 0 0 .8em; } .cta-case p:last-child { margin: 0; }
+	@media (max-width: 640px) { table.t { display: block; overflow-x: auto; } }
+</style>
+</head>
+<body>
+<main class="si-page ct-container ix">
+	<header>
+		<p class="si-eyebrow si-eyebrow--ruled">/videos/{slug}/ · the individual video · 2026-09-21</p>
+		<h1 class="si-display">A reason to come <em>here</em> rather than to YouTube</h1>
+		<p class="si-lead lede">Five drafts of the page every one of the archive’s 1,212 videos will be published on. YouTube already
+			shows the tape. These pages show what YouTube cannot: what was said, to the second and searchable; who and where
+			it speaks of; the series it belongs to and the week it was made in; and where else in fourteen years the same
+			words were said.</p>
+		<dl class="si-figures">
+			<div class="si-figure"><dt>Videos after the reviewed classification</dt><dd class="si-tabular">1,212</dd></div>
+			<div class="si-figure"><dt>with English captions</dt><dd class="si-tabular">207</dd></div>
+			<div class="si-figure"><dt>with published chapters</dt><dd class="si-tabular">159</dd></div>
+			<div class="si-figure"><dt>with an EN/DE twin in WPML</dt><dd class="si-tabular">571</dd></div>
+			<div class="si-figure"><dt>words of captions, searchable</dt><dd class="si-tabular">1.0 M</dd></div>
+		</dl>
+	</header>
+
+	<section>
+		<p class="si-eyebrow si-eyebrow--ruled">The drafts</p>
+		<h2 class="si-display">Five directions, one record</h2>
+		<p>Each draft renders the same payload. The strip at the foot of every page switches draft and record.</p>
+		<ul class="drafts" role="list">
+			<li><span class="letter">A</span><a class="title" href="templates/video-programme.html">The Programme</a><span class="dial">limestone · the base</span>
+				<p>The tape with its published chapters beside it, the captions to read along and search, who and where it names, and everything around it: series, language, the fortnight, the broadcasts that said the same things.</p>
+				<span class="also"><a href="templates/video-programme.html?v=webcast">weekly dialogue</a><a href="templates/video-programme.html?v=interview">interview</a><a href="templates/video-programme.html?v=beethoven">Daily Beethoven</a><a href="templates/video-programme.html?v=bare">2018 webcast</a></span></li>
+			<li><span class="letter">B</span><a class="title" href="templates/video-reading.html?v=interview">The Reading Desk</a><span class="dial">paper · for readers</span>
+				<p>The captions are the page, set like an article, with the people and places named in the margin beside the paragraph where they are said. The tape is a cameo that follows you down it. Select any words to cite that moment, to the second.</p>
+				<span class="also"><a href="templates/video-reading.html?v=webcast">weekly dialogue</a><a href="templates/video-reading.html?v=interview">interview</a><a href="templates/video-reading.html?v=beethoven">Daily Beethoven</a><a href="templates/video-reading.html?v=bare">2018 webcast</a></span></li>
+			<li class="night"><span class="letter">C</span><a class="title" href="templates/video-echo.html">The Echo</a><span class="dial">night · words through time</span>
+				<p>The words this broadcast leaned on — measured, not chosen — each traced across every captioned broadcast since 2017 and playable where it was said. Then a search over one million words of speech.</p>
+				<span class="also"><a href="templates/video-echo.html?v=webcast">weekly dialogue</a><a href="templates/video-echo.html?v=interview">interview</a><a href="templates/video-echo.html?v=beethoven">Daily Beethoven</a><a href="templates/video-echo.html?v=bare">2018 webcast</a></span></li>
+			<li><span class="letter">D</span><a class="title" href="templates/video-constellation.html">The Constellation</a><span class="dial">limestone · relations</span>
+				<p>The broadcast at the centre of everything the record can prove it is connected to. Every line in the sky carries its reason, and the same sky is given as a list.</p>
+				<span class="also"><a href="templates/video-constellation.html?v=webcast">weekly dialogue</a><a href="templates/video-constellation.html?v=interview">interview</a><a href="templates/video-constellation.html?v=beethoven">Daily Beethoven</a><a href="templates/video-constellation.html?v=bare">2018 webcast</a></span></li>
+			<li><span class="letter">E</span><a class="title" href="templates/video-almanac.html">The Almanac</a><span class="dial">paper · time</span>
+				<p>Every episode of the series as a calendar wall, this one ringed; the fortnight around it as a day-strip of everything the Institute published; the series’ rhythm, measured.</p>
+				<span class="also"><a href="templates/video-almanac.html?v=webcast">weekly dialogue</a><a href="templates/video-almanac.html?v=interview">interview</a><a href="templates/video-almanac.html?v=beethoven">Daily Beethoven</a><a href="templates/video-almanac.html?v=bare">2018 webcast</a></span></li>
+		</ul>
+	</section>
+
+	<section>
+		<p class="si-eyebrow si-eyebrow--ruled">The four worked records</p>
+		<h2 class="si-display">The shapes a video record comes in</h2>
+		<table class="t">
+			<thead><tr><th>Record</th><th>Shape</th><th>What it holds</th><th class="n">In the archive</th></tr></thead>
+			<tbody>
+				<tr><td>Weekly dialogue, 8 Oct 2024</td><td>a</td><td>captions (unpunctuated) · 20 chapters · long description · DE twin · an invitation to send questions</td><td class="n">207 captioned</td></tr>
+				<tr><td>Ted Postol interview, 27 May 2025</td><td>a</td><td>punctuated captions · 17 chapters · 83 minutes · a guest on /people/</td><td class="n">20 punctuated</td></tr>
+				<tr><td>Daily Beethoven No. 31, 4 Feb 2021</td><td>c</td><td>no YouTube metadata · the body names composers and works · a title it shares, letter for letter, with 20 other episodes</td><td class="n">~870 body-only</td></tr>
+				<tr><td>Webcast No. 49, 10 Aug 2018</td><td>d</td><td>a title, a date, an embed and 21 words</td><td class="n">the older half</td></tr>
+			</tbody>
+		</table>
+	</section>
+
+	<section>
+		<p class="si-eyebrow si-eyebrow--ruled">Is a call to action appropriate here?</p>
+		<h2 class="si-display">Only the one the video itself makes</h2>
+		<div class="cta-case">
+			<p><b>Yes — but not a donation box, and not on every video.</b> The weekly dialogue is a <em>live</em> broadcast
+				with a question-and-answer, and its own YouTube description invites viewers in: “Send your questions,
+				thoughts and reports to questions@schillerinstitute.org or ask them in the live stream.” Someone who has
+				just watched 39 minutes of it is the most likely person on the whole site to take part in the next one.
+				So the drafts turn that sentence — quoted, never rewritten — into the page’s one call to action, with the
+				weekday the series has actually aired on (measured: a Tuesday in 42 of the 51 weeks before this episode).</p>
+			<p>Where the record carries no invitation, the next step is the next episode: a finished series such as
+				Daily Beethoven is best watched in order, so it offers No. 32. Where there is neither, there is no call to
+				action at all. Registration, donation and membership stay in the header, where Blocksy puts them.</p>
+		</div>
+	</section>
+</main>
+</body>
+</html>

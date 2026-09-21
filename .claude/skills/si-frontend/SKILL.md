@@ -40,7 +40,13 @@ people-specific. `tokens.css` is the authority; read its header before changing 
 | `/blog/{y}/{m}/{d}/{slug}/` | Leaf · Reading Room · Threshold | **Leaf** | `articles/wp/` |
 | `/blog/` | Ledger · Drift · Broadsheet | **Ledger** (titled *Articles*) | `articles/wp/` |
 | `/conferences/{slug}/` | Proceedings · Marquee · Rostrum · Thread · Atrium | — | not yet ported |
+| `/videos/{slug}/` | Programme · Reading Desk · Echo · Constellation · Almanac | — | not yet ported |
 | `/conferences/` (archive) | Gallery · Firmament · Programme | — | `landing/` (pre-Jasper) |
+
+`videos/README.md` is the one to read before touching a video page: the four shapes a
+video record comes in (only 207 of 1,212 have captions), the time bridge to the
+youtube-nocookie player, and why its one call to action is the one the video's own
+description makes.
 
 `conferences/README.md` is the one to read before touching a conference page: it carries
 the four shapes the archive's conference records come in, the dials that let one template

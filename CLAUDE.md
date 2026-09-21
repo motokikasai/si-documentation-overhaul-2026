@@ -21,6 +21,7 @@ and the mistakes; this file is only the map and the environment.
 | `projects/schiller-wp-rebuild/people/` | Jasper, the `/people/` drafts, the person profile, and the shipped child-theme kit |
 | `projects/schiller-wp-rebuild/articles/` | the Article drafts (`/blog/` and the single) and their kit |
 | `projects/schiller-wp-rebuild/conferences/` | the five `/conferences/{slug}/` drafts, their payload builder and four worked records |
+| `projects/schiller-wp-rebuild/videos/` | the five `/videos/{slug}/` drafts, the caption corpus, their payload builder and four worked records |
 | `projects/schiller-wp-rebuild/*.md` | the original specs: data model, migration outline, classification ruleset, backend runbook |
 
 Decisions live in the docs, not in chat. When something is decided, write it into the

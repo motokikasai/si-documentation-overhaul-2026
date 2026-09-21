@@ -1,0 +1,77 @@
+/* VIDEO DRAFT E · THE ALMANAC --------------------------------------------- */
+.al-head { display: grid; gap: var(--si-space-xl); grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); padding-block: var(--si-space-2xl) var(--si-space-xl); align-items: start; }
+.al-head__text { display: grid; gap: var(--si-space-s); align-content: start; }
+.al-head .si-vid-title { font-size: var(--si-step-4); }
+.al-date { margin: 0; font-family: var(--si-font-serif); line-height: 1.1; color: var(--si-ink); }
+.al-date__wd { display: block; font-style: italic; font-weight: 300; font-size: var(--si-step-3); color: var(--si-jasper-deep); }
+.al-date__d { font-size: var(--si-step-2); font-variant-numeric: lining-nums; }
+.al-figs { gap: var(--si-space-s) var(--si-space-l); padding-top: var(--si-space-s); border-top: 1px solid var(--si-brass); }
+.al-figs .si-figure dd { font-size: var(--si-step-3); }
+.al-cad { margin: 0; font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); max-width: 44ch; }
+.al-cad b { color: var(--si-ink); font-weight: 600; }
+.al-head__tape { display: grid; gap: var(--si-space-2xs); }
+.al-head__tape .si-vid-embed { box-shadow: var(--si-shadow-2); }
+.al-ch summary { cursor: pointer; font-family: var(--si-font-sans); font-size: var(--si-step-n1); font-weight: 600; color: var(--si-ink); padding: .4em 0; }
+.al-ch .si-vid-chapters { max-height: 20rem; overflow-y: auto; }
+
+.al-wall { background: var(--si-ground); border-top: var(--si-hairline); position: relative; }
+.al-wall__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: var(--si-space-s); margin-bottom: var(--si-space-m); }
+.al-wall__head .si-vid-band__head { margin-bottom: 0; }
+.al-cal { overflow-x: auto; padding-block: 4px 10px; scrollbar-width: thin; }
+.al-grid { display: grid; grid-template-columns: 3.4em repeat(var(--cols), minmax(9px, 1fr)); gap: 3px; min-width: max-content; align-items: center; }
+.al-grid--years { min-width: 720px; }
+.al-grid--days { grid-template-columns: 3em repeat(var(--cols), 22px); gap: 4px; }
+.al-grid__months { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; font-family: var(--si-font-sans); font-size: 11px; color: var(--si-muted); height: 16px; white-space: nowrap; }
+.al-grid__row { font-family: var(--si-font-sans); font-size: 11px; color: var(--si-muted); }
+.al-e, .al-c { display: block; aspect-ratio: 1; border-radius: 2px; }
+.al-e { background: color-mix(in srgb, var(--si-jasper) 9%, transparent); }
+.al-c { background: color-mix(in srgb, var(--si-jasper) 48%, transparent); transition: transform var(--si-dur-1) var(--si-ease), background var(--si-dur-1) var(--si-ease); position: relative; }
+.al-c.is-cc { background: var(--si-accent); }
+.al-c.is-heat { background: color-mix(in srgb, var(--si-accent) calc(18% + var(--k) * 82%), transparent); }
+.al-c:hover, .al-c:focus-visible { transform: scale(1.6); z-index: 2; background: var(--si-brass); outline: none; }
+.al-c.is-self { background: var(--si-brass); box-shadow: 0 0 0 2px var(--si-card), 0 0 0 4px var(--si-brass); z-index: 1; }
+.al-legend { display: flex; flex-wrap: wrap; align-items: center; gap: .4em .6em; margin-top: var(--si-space-2xs); }
+.al-key { display: inline-block; width: 11px; height: 11px; border-radius: 2px; background: color-mix(in srgb, var(--si-jasper) 48%, transparent); margin-left: .6em; }
+.al-key--cc { background: var(--si-accent); margin-left: 0; }
+.al-key--self { background: var(--si-brass); box-shadow: 0 0 0 1px var(--si-card), 0 0 0 2px var(--si-brass); }
+.al-grid.is-heat ~ .al-legend, .al-cal:has(.is-heat) + .al-legend { display: none; }
+
+.al-tip[hidden] { display: none; }
+.al-tip {
+	position: absolute; z-index: 30; width: 290px; display: grid; gap: .3em; padding: 10px;
+	background: var(--si-ink); color: var(--si-card); box-shadow: var(--si-shadow-2);
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2); line-height: 1.4; pointer-events: none;
+}
+.al-tip img { width: 100%; aspect-ratio: 16/9; object-fit: cover; filter: grayscale(.6); }
+.al-tip__d { color: #C9A866; font-weight: 600; letter-spacing: .04em; }
+.al-tip__t { font-family: var(--si-font-serif); font-size: var(--si-step-n1); color: #fff; }
+.al-tip__l { color: #A9BCD0; }
+
+/* the fortnight */
+.al-strip { overflow-x: auto; scrollbar-width: thin; padding-bottom: 8px; }
+.al-days { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(15, minmax(118px, 1fr)); gap: 0; min-width: 1500px; }
+.al-day { border-left: 1px solid var(--si-rule); padding: 0 6px var(--si-space-s); min-height: 180px; }
+.al-day.is-weekend { background: color-mix(in srgb, var(--si-jasper) 6%, transparent); }
+.al-day.is-self { background: var(--si-card); box-shadow: inset 0 3px 0 var(--si-brass); }
+.al-day__d { margin: 0 0 8px; padding-top: 8px; font-family: var(--si-font-sans); font-size: var(--si-step-n2); color: var(--si-muted); display: flex; align-items: baseline; gap: .45em; }
+.al-day__d b { font-size: var(--si-step-1); font-weight: 300; font-family: var(--si-font-serif); color: var(--si-ink); }
+.al-day ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.al-item a, .al-item--self { display: grid; gap: 3px; padding: 6px 7px; text-decoration: none; background: var(--si-card); border: 1px solid var(--si-rule); border-top: 2px solid var(--c, var(--si-jasper)); }
+.al-item a:hover { border-color: var(--si-accent); }
+.al-item[data-t="video"] { --c: var(--si-accent); }
+.al-item[data-t="article"] { --c: var(--si-jasper); }
+.al-item[data-t="statement"], .al-item[data-t="conference"] { --c: var(--si-brass); }
+.al-item__k { font-family: var(--si-font-sans); font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--si-muted); }
+.al-item__t { font-family: var(--si-font-serif); font-size: 13.5px; line-height: 1.3; color: var(--si-ink); display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.al-item--self { border-top-color: var(--si-brass); background: var(--si-panel); }
+.al-item--self img { width: 100%; aspect-ratio: 16/9; object-fit: cover; filter: var(--si-portrait-filter); }
+.al-item[hidden] { display: none; }
+
+.al-about .si-vid-body { max-width: 68ch; }
+.al-cta { padding-block: var(--si-space-2xl); }
+.al-record { padding-bottom: var(--si-space-3xl); }
+
+@media (max-width: 960px) {
+	.al-head { grid-template-columns: minmax(0, 1fr); }
+	.al-head__tape { order: -1; }
+}

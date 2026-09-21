@@ -1,0 +1,785 @@
+{
+ "key": "beethoven",
+ "why": "shape c — Daily Beethoven: no captions, no YouTube metadata; the body names the works",
+ "built": "2026-09-21",
+ "id": 67963,
+ "title": "Beethoven: Sparks of Joy",
+ "date": "2021-02-04",
+ "lang": "en",
+ "slug": "beethoven-sparks-of-joy-5",
+ "url": "/videos/beethoven-sparks-of-joy-5/",
+ "legacy_url": "/blog/2021/02/04/beethoven-sparks-of-joy-5/",
+ "yt": "UmmHlTZBw1A",
+ "duration": null,
+ "uploaded": null,
+ "editor": "Mary Jane Freeman",
+ "series": {
+  "slug": "daily-beethoven",
+  "label": "Daily Beethoven",
+  "ep": 31,
+  "of": 81,
+  "first": "2020-11-02",
+  "last": "2021-05-23",
+  "prev": {
+   "id": 67947,
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-03",
+   "yt": "POWVTXuB68I",
+   "slug": "beethoven-sparks-of-joy-4"
+  },
+  "next": {
+   "id": 68028,
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-05",
+   "yt": "geQy17YKDjk",
+   "slug": "beethoven-sparks-of-joy-6"
+  },
+  "host": null,
+  "how": "classification.csv proposed_series, numbered by date within the series and language"
+ },
+ "topics": [
+  {
+   "slug": "classical-culture",
+   "label": "Classical Culture"
+  }
+ ],
+ "body": [
+  "Beethoven, Mozart, Bach: A musical dialogue.",
+  "Any discussion of musical masters in dialogue must acknowledge the towering figure of Johann Sebastian Bach. The C-minor series we are about to explore had as its genesis Bach’s Musical Offering – a set of pieces based on a theme proposed to him in 1747 by Frederick II, King of Prussia. Today we will hear the three-voice “Ricercar” from Bach’s Musical Offering, followed by Mozart’s Fantasy K.475, composed as a prelude to his Sonata K.457 (we will visit the Sonata tomorrow). [Notes by Margaret Scialdone.]",
+  "Here, Bach’s “Ricercar à 3” is beautifully performed by Ji-Hyang Gwak:",
+  "And now listen to Mozart’s treatment of the theme in the Fantasy K.475, performed here by Mitsuko Uchida:",
+  "Those who are interested can find an in-depth analysis of Mozart’s compositional breakthrough in this article by John Sigerson of the Schiller Institute: https://archive.schillerinstitute.com/fid_97-01/984_sub_moral_appen_PDFs/chapter-5.PDF"
+ ],
+ "description": "",
+ "chapters": [],
+ "channel": null,
+ "translations": [],
+ "people": [
+  {
+   "key": "john-sigerson",
+   "name": "John Sigerson",
+   "photo": null,
+   "where": "body",
+   "evidence": "John Sigerson",
+   "at": [],
+   "url": "/people/john-sigerson/",
+   "role": null
+  }
+ ],
+ "people_how": "full name, or a surname no other of the 418 people shares preceded by a first name; matched in the title, body, YouTube description and captions",
+ "places": [],
+ "works": [
+  {
+   "composer": "Mozart",
+   "cat": "K. 475",
+   "evidence": "Today we will hear the three-voice “Ricercar” from Bach’s Musical Offering, followed by Mozart’s Fantasy K.475, composed as a prelude to his Sonata K.457 (we will visit the Sonata tomorrow).",
+   "also": []
+  },
+  {
+   "composer": "Mozart",
+   "cat": "K. 457",
+   "evidence": "Today we will hear the three-voice “Ricercar” from Bach’s Musical Offering, followed by Mozart’s Fantasy K.475, composed as a prelude to his Sonata K.457 (we will visit the Sonata tomorrow).",
+   "also": [
+    {
+     "id": 68028,
+     "title": "Beethoven: Sparks of Joy",
+     "date": "2021-02-05",
+     "slug": "beethoven-sparks-of-joy-6",
+     "yt": "geQy17YKDjk",
+     "ep": 32
+    }
+   ]
+  }
+ ],
+ "composers": [
+  {
+   "name": "Mozart",
+   "episodes": 18
+  },
+  {
+   "name": "Bach",
+   "episodes": 5
+  },
+  {
+   "name": "Beethoven",
+   "episodes": 81
+  }
+ ],
+ "works_how": "catalogue numbers (K., Op., BWV, WoO, Hob.) read from the post body; Op. numbers only when a composer is named earlier in the same sentence",
+ "week": [
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Putin Speech at Davos: The 1930s Led to World War; Will Conflict Be Avoided Today?",
+   "date": "2021-01-28",
+   "lang": "en",
+   "url": "/blog/2021/01/28/putin-speech-at-davos-the-1930s-led-to-world-war-will-conflict-be-avoided-today/",
+   "dd": -7,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Putin-Rede in Davos: Die Katastrophe der 1930er Jahre und heute",
+   "date": "2021-01-28",
+   "lang": "de",
+   "url": "/blog/2021/01/28/putin-speech-at-davos-the-1930s-led-to-world-war-will-conflict-be-avoided-today/",
+   "dd": -7,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Harley Schlanger Morning Update: The Unilateral World Order of the Davos \"Elites\" Is NOT a Done Deal!",
+   "date": "2021-01-28",
+   "lang": "en",
+   "url": "/videos/harley-schlanger-morning-update-the-unilateral-world-order-of-the-davos-elites-is-not-a-done-deal/",
+   "dd": -7,
+   "yt": "an2KeXO7a-g",
+   "series": "schlanger-daily-update"
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Xi Jinping spricht auf dem Weltwirtschaftsforum in Davos",
+   "date": "2021-01-29",
+   "lang": "de",
+   "url": "/blog/2021/01/29/xi-jinping-spricht-auf-dem-weltwirtschaftsforum-in-davos/",
+   "dd": -6,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Beethoven: Sparks of Joy — Mozart-Beethoven, a musical dialogue",
+   "date": "2021-01-29",
+   "lang": "en",
+   "url": "/videos/beethoven-sparks-of-joy-mozart-beethoven-a-musical-dialogue/",
+   "dd": -6,
+   "yt": "EZsBi50VbXw",
+   "series": "daily-beethoven"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Harley Schlanger Morning Update: Turning Davos on its Head — How an Alliance of Sovereign Nation States Can Defeat the Global Banker's Dictatorship",
+   "date": "2021-01-29",
+   "lang": "en",
+   "url": "/videos/harley-schlanger-morning-update-turning-davos-on-its-head-how-an-alliance-of-sovereign-nation-states-can-defeat-the-global-bankers-dictatorship/",
+   "dd": -6,
+   "yt": "KbrhMEJy2A4",
+   "series": "schlanger-daily-update"
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "NASA-Rover steuert auf herausfordernde Marslandung zu",
+   "date": "2021-01-31",
+   "lang": "de",
+   "url": "/blog/2021/01/31/nasa-rover-steuert-auf-herausfordernde-marslandung-zu/",
+   "dd": -4,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Beethoven: Sparks of Joy — Mozart, Beethoven dialogue continued",
+   "date": "2021-01-31",
+   "lang": "en",
+   "url": "/videos/beethoven-sparks-of-joy-2/",
+   "dd": -4,
+   "yt": "AOLnRcovLaA",
+   "series": "daily-beethoven"
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Fauci, CDC Warn That the U.S. Is Unprepared for New Virus Strains",
+   "date": "2021-02-01",
+   "lang": "en",
+   "url": "/blog/2021/02/01/fauci-cdc-warn-that-the-u-s-is-unprepared-for-new-virus-strains/",
+   "dd": -3,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "NASA Rover Heading Towards a Challenging Landing on Mars",
+   "date": "2021-02-01",
+   "lang": "en",
+   "url": "/blog/2021/02/01/nasa-rover-heading-towards-a-challenging-landing-on-mars/",
+   "dd": -3,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Atlantic Council Puts Out Anonymous Document Calling for Overthrow of Xi",
+   "date": "2021-02-01",
+   "lang": "en",
+   "url": "/blog/2021/02/01/atlantic-council-puts-out-anonymous-document-calling-for-overthrow-of-xi/",
+   "dd": -3,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Anonymes Dokument des Atlantic Council ruft zum Sturz von Xi auf",
+   "date": "2021-02-01",
+   "lang": "de",
+   "url": "/blog/2021/02/01/atlantic-council-puts-out-anonymous-document-calling-for-overthrow-of-xi/",
+   "dd": -3,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Harley Schlanger Morning Update: Wall Street Financial Swindlers Are Bankrupt, and They Expect You to Pay for a New, Bigger Bail Out",
+   "date": "2021-02-01",
+   "lang": "en",
+   "url": "/videos/harley-schlanger-morning-update-wall-street-financial-swindlers-are-bankrupt-and-they-expect-you-to-pay-for-a-new-bigger-bail-out/",
+   "dd": -3,
+   "yt": "kKLkOdF9chY",
+   "series": "schlanger-daily-update"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-02",
+   "lang": "en",
+   "url": "/videos/beethoven-sparks-of-joy-3/",
+   "dd": -2,
+   "yt": "yhqTSEacnQM",
+   "series": "daily-beethoven"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Harley Schlanger Morning Update — Biden's Team Races Toward War and Banker's Dictatorship",
+   "date": "2021-02-02",
+   "lang": "en",
+   "url": "/videos/harley-schlanger-morning-update-bidens-team-races-toward-war-and-bankers-dictatorship/",
+   "dd": -2,
+   "yt": "CwJg2d6gHUI",
+   "series": "schlanger-daily-update"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-03",
+   "lang": "en",
+   "url": "/videos/beethoven-sparks-of-joy-4/",
+   "dd": -1,
+   "yt": "POWVTXuB68I",
+   "series": "daily-beethoven"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Harley Schlanger Morning Update — Those Who Toppled Trump Escalate Regime Change Coups Versus Putin and Xi",
+   "date": "2021-02-03",
+   "lang": "en",
+   "url": "/videos/harley-schlanger-morning-update-those-who-toppled-trump-escalate-regime-change-coups-versus-putin-and-xi/",
+   "dd": -1,
+   "yt": "k92mXj4mIPk",
+   "series": "schlanger-daily-update"
+  },
+  {
+   "type": "si_coverage",
+   "type_label": "Press coverage",
+   "title": "Helga Zepp-LaRouche im Interview mit China Radio International",
+   "date": "2021-02-04",
+   "lang": "de",
+   "url": "/coverage/helga-zepp-larouche-im-interview-mit-china-radio-international/",
+   "dd": 0,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Harley Schlanger Morning Update: Who Is Behind the Desperate Drive for the Senate to Convict Donald Trump?",
+   "date": "2021-02-04",
+   "lang": "en",
+   "url": "/videos/harley-schlanger-morning-update-who-is-behind-the-desperate-drive-for-the-senate-to-convict-donald-trump/",
+   "dd": 0,
+   "yt": "0NRiZrJtzIs",
+   "series": "schlanger-daily-update"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Webcast: Cooperation Against the COVID Pandemic and in Space Move Humanity Toward Anti-Davos New Paradigm",
+   "date": "2021-02-04",
+   "lang": "en",
+   "url": "/videos/webcast-cooperation-against-the-covid-pandemic-and-in-space-move-humanity-toward-anti-davos-new-paradigm/",
+   "dd": 0,
+   "yt": "GLw8DyyQlmk",
+   "series": "weekly-webcast-hzl"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Webcast: Positiver Sputnikschock für die EU?",
+   "date": "2021-02-04",
+   "lang": "de",
+   "url": "/videos/webcast-cooperation-against-the-covid-pandemic-and-in-space-move-humanity-toward-anti-davos-new-paradigm/",
+   "dd": 0,
+   "yt": "LpjqNi5QUn4",
+   "series": "weekly-webcast-hzl"
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Internetseminar: „Mit dem ,Great Reset’ in den wirtschaftlichen Niedergang? Oder ein Neues Paradigma für Kooperation?“",
+   "date": "2021-02-05",
+   "lang": "de",
+   "url": "/blog/2021/02/05/internetseminar-mit-dem-great-reset-in-den-wirtschaftlichen-niedergang-oder-ein-neues-paradigma-fuer-kooperation/",
+   "dd": 1,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "„Auf Kohlenwasserstoffe verzichten“: Biden will den Green Deal in Syrien testen",
+   "date": "2021-02-05",
+   "lang": "de",
+   "url": "/blog/2021/02/05/auf-kohlenwasserstoffe-verzichten-biden-will-den-green-deal-in-syrien-testen/",
+   "dd": 1,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-05",
+   "lang": "en",
+   "url": "/videos/beethoven-sparks-of-joy-6/",
+   "dd": 1,
+   "yt": "geQy17YKDjk",
+   "series": "daily-beethoven"
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Die Botschaft der Biden-Aministration: „Nuklearkrieg ist eine reale Möglichkeit“",
+   "date": "2021-02-06",
+   "lang": "de",
+   "url": "/blog/2021/02/06/die-botschaft-der-biden-aministration-nuklearkrieg-ist-eine-reale-moeglichkeit/",
+   "dd": 2,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-06",
+   "lang": "en",
+   "url": "/videos/beethoven-sparks-of-joy-7/",
+   "dd": 2,
+   "yt": "N2wDGtbXynQ",
+   "series": "daily-beethoven"
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "No Substitute for Nuclear Power, For Europe",
+   "date": "2021-02-07",
+   "lang": "en",
+   "url": "/blog/2021/02/07/no-substitute-for-nuclear-power-for-europe/",
+   "dd": 3,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Europa: Kein Ersatz für Kernkraft",
+   "date": "2021-02-07",
+   "lang": "de",
+   "url": "/blog/2021/02/07/no-substitute-for-nuclear-power-for-europe/",
+   "dd": 3,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Fauci and Tedros: the Pandemic Must Be Stopped Everywhere Or It Will Remain a Threat to All",
+   "date": "2021-02-07",
+   "lang": "en",
+   "url": "/blog/2021/02/07/fauci-and-tedros-the-pandemic-must-be-stopped-everywhere-or-it-will-remain-a-threat-to-all/",
+   "dd": 3,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Fauci und Tedros: Die Pandemie überall stoppen, oder sie wird eine Bedrohung für alle bleiben",
+   "date": "2021-02-07",
+   "lang": "de",
+   "url": "/blog/2021/02/07/fauci-and-tedros-the-pandemic-must-be-stopped-everywhere-or-it-will-remain-a-threat-to-all/",
+   "dd": 3,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-08",
+   "lang": "en",
+   "url": "/videos/beethoven-sparks-of-joy-8/",
+   "dd": 4,
+   "yt": "g-NKOqFzNgA",
+   "series": "daily-beethoven"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Harley Schlanger Morning Update: George Shultz Has Died: May the \"Free Market\" Economic System He Imposed Be Buried with Him",
+   "date": "2021-02-08",
+   "lang": "en",
+   "url": "/videos/harley-schlanger-morning-update-george-shultz-has-died-may-the-free-market-economic-system-he-imposed-be-buried-with-him/",
+   "dd": 4,
+   "yt": "Fwthvdv4AVY",
+   "series": "schlanger-daily-update"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-09",
+   "lang": "en",
+   "url": "/videos/beethoven-sparks-of-joy-9/",
+   "dd": 5,
+   "yt": "7jERzknwKes",
+   "series": "daily-beethoven"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Harley Schlanger Morning Update: Dialogue Urgently Needed to Address Ominous Signs of Turbulence to Come",
+   "date": "2021-02-09",
+   "lang": "en",
+   "url": "/videos/harley-schlanger-morning-update-dialogue-urgently-needed-to-address-ominous-signs-of-turbulence-to-come/",
+   "dd": 5,
+   "yt": "-wdGm-Dg55o",
+   "series": "schlanger-daily-update"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Live Event: Worsening U.S.-Russian Relations — Reverse Them with New Paradigm, or Face Nuclear War",
+   "date": "2021-02-09",
+   "lang": "en",
+   "url": "/videos/live-event-worsening-u-s-russian-relations-reverse-them-with-new-paradigm-or-face-nuclear-war/",
+   "dd": 5,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "World Land-bridge: Creating a Human Future",
+   "date": "2021-02-10",
+   "lang": "en",
+   "url": "/blog/2021/02/10/world-land-bridge-creating-a-human-future/",
+   "dd": 6,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-10",
+   "lang": "en",
+   "url": "/videos/beethoven-sparks-of-joy-10/",
+   "dd": 6,
+   "yt": "tiJjoFQtMvg",
+   "series": "daily-beethoven"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Harley Schlanger Morning Update — Human Rights Mafia Escalates Against Trump and Putin",
+   "date": "2021-02-10",
+   "lang": "en",
+   "url": "/videos/harley-schlanger-morning-update-human-rights-mafia-escalates-against-trump-and-putin/",
+   "dd": 6,
+   "yt": "Oves7WnI6Zs",
+   "series": "schlanger-daily-update"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Webcast: \"We Have So Much to Discover\" About Our Universe",
+   "date": "2021-02-10",
+   "lang": "en",
+   "url": "/videos/webcast-we-have-so-much-to-discover-about-our-universe/",
+   "dd": 6,
+   "yt": "FcA53VObyWg",
+   "series": "weekly-webcast-hzl"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Webcast: Wir haben so viel in unserem Universum zu entdecken",
+   "date": "2021-02-10",
+   "lang": "de",
+   "url": "/videos/webcast-we-have-so-much-to-discover-about-our-universe/",
+   "dd": 6,
+   "yt": "uoRHQxbxedU",
+   "series": "weekly-webcast-hzl"
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Tianwen Is in Mars Orbit",
+   "date": "2021-02-11",
+   "lang": "en",
+   "url": "/blog/2021/02/11/tianwen-is-in-mars-orbit/",
+   "dd": 7,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Tianwen-1 ist in der Marsumlaufbahn",
+   "date": "2021-02-11",
+   "lang": "de",
+   "url": "/blog/2021/02/11/tianwen-is-in-mars-orbit/",
+   "dd": 7,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "UAE’s Hope Mission: Mars Is “a Collaborative Project for the Entire Human Race”",
+   "date": "2021-02-11",
+   "lang": "en",
+   "url": "/blog/2021/02/11/uaes-hope-mission-mars-is-a-collaborative-project-for-the-entire-human-race/",
+   "dd": 7,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "post",
+   "type_label": "Article",
+   "title": "Die Hope-Mission der VAE: Der Mars ist „ein Gemeinschaftsprojekt für die gesamte Menschheit“",
+   "date": "2021-02-11",
+   "lang": "de",
+   "url": "/blog/2021/02/11/uaes-hope-mission-mars-is-a-collaborative-project-for-the-entire-human-race/",
+   "dd": 7,
+   "yt": null,
+   "series": null
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-11",
+   "lang": "en",
+   "url": "/videos/beethoven-sparks-of-joy-11/",
+   "dd": 7,
+   "yt": "Pz9UHnHyk4Y",
+   "series": "daily-beethoven"
+  },
+  {
+   "type": "si_video",
+   "type_label": "Video",
+   "title": "Harley Schlanger Morning Update: Something to Celebrate: Preparing for Manned Missions to Mars",
+   "date": "2021-02-11",
+   "lang": "en",
+   "url": "/videos/harley-schlanger-morning-update-something-to-celebrate-preparing-for-manned-missions-to-mars/",
+   "dd": 7,
+   "yt": "gdEZ4AXTc3s",
+   "series": "schlanger-daily-update"
+  }
+ ],
+ "topic_near": [
+  {
+   "id": 67947,
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-03",
+   "yt": "POWVTXuB68I",
+   "slug": "beethoven-sparks-of-joy-4",
+   "lang": "en",
+   "series": "daily-beethoven",
+   "shared": [
+    "classical-culture"
+   ],
+   "dd": -1
+  },
+  {
+   "id": 68028,
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-05",
+   "yt": "geQy17YKDjk",
+   "slug": "beethoven-sparks-of-joy-6",
+   "lang": "en",
+   "series": "daily-beethoven",
+   "shared": [
+    "classical-culture"
+   ],
+   "dd": 1
+  },
+  {
+   "id": 67933,
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-02",
+   "yt": "yhqTSEacnQM",
+   "slug": "beethoven-sparks-of-joy-3",
+   "lang": "en",
+   "series": "daily-beethoven",
+   "shared": [
+    "classical-culture"
+   ],
+   "dd": -2
+  },
+  {
+   "id": 68106,
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-06",
+   "yt": "N2wDGtbXynQ",
+   "slug": "beethoven-sparks-of-joy-7",
+   "lang": "en",
+   "series": "daily-beethoven",
+   "shared": [
+    "classical-culture"
+   ],
+   "dd": 2
+  },
+  {
+   "id": 67882,
+   "title": "Beethoven: Sparks of Joy — Mozart, Beethoven dialogue continued",
+   "date": "2021-01-31",
+   "yt": "AOLnRcovLaA",
+   "slug": "beethoven-sparks-of-joy-2",
+   "lang": "en",
+   "series": "daily-beethoven",
+   "shared": [
+    "classical-culture"
+   ],
+   "dd": -4
+  },
+  {
+   "id": 68136,
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-08",
+   "yt": "g-NKOqFzNgA",
+   "slug": "beethoven-sparks-of-joy-8",
+   "lang": "en",
+   "series": "daily-beethoven",
+   "shared": [
+    "classical-culture"
+   ],
+   "dd": 4
+  },
+  {
+   "id": 68164,
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-09",
+   "yt": "7jERzknwKes",
+   "slug": "beethoven-sparks-of-joy-9",
+   "lang": "en",
+   "series": "daily-beethoven",
+   "shared": [
+    "classical-culture"
+   ],
+   "dd": 5
+  },
+  {
+   "id": 67838,
+   "title": "Beethoven: Sparks of Joy — Mozart-Beethoven, a musical dialogue",
+   "date": "2021-01-29",
+   "yt": "EZsBi50VbXw",
+   "slug": "beethoven-sparks-of-joy-mozart-beethoven-a-musical-dialogue",
+   "lang": "en",
+   "series": "daily-beethoven",
+   "shared": [
+    "classical-culture"
+   ],
+   "dd": -6
+  },
+  {
+   "id": 68267,
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-10",
+   "yt": "tiJjoFQtMvg",
+   "slug": "beethoven-sparks-of-joy-10",
+   "lang": "en",
+   "series": "daily-beethoven",
+   "shared": [
+    "classical-culture"
+   ],
+   "dd": 6
+  },
+  {
+   "id": 68355,
+   "title": "Beethoven: Sparks of Joy",
+   "date": "2021-02-11",
+   "yt": "Pz9UHnHyk4Y",
+   "slug": "beethoven-sparks-of-joy-11",
+   "lang": "en",
+   "series": "daily-beethoven",
+   "shared": [
+    "classical-culture"
+   ],
+   "dd": 7
+  },
+  {
+   "id": 67740,
+   "title": "Beethoven: Sparks of Joy — The Diabelli Variations",
+   "date": "2021-01-27",
+   "yt": "XPYjqz7nToY",
+   "slug": "beethoven-sparks-of-joy-the-diabelli-variations",
+   "lang": "en",
+   "series": "daily-beethoven",
+   "shared": [
+    "classical-culture"
+   ],
+   "dd": -8
+  },
+  {
+   "id": 67788,
+   "title": "Beethoven: Sparks of Joy — Mozart's birthday; Beethoven's regard for him",
+   "date": "2021-01-27",
+   "yt": "4oxPR1d6ONE",
+   "slug": "musical-sparks-of-joy",
+   "lang": "en",
+   "series": "daily-beethoven",
+   "shared": [
+    "classical-culture"
+   ],
+   "dd": -8
+  }
+ ],
+ "record": {
+  "captions": false,
+  "chapters": 0,
+  "description": false,
+  "body_words": 142,
+  "topics": 1,
+  "people": 1,
+  "translations": 0,
+  "featured_image": true
+ }
+}

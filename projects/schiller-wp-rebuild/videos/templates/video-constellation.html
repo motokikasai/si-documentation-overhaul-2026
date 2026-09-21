@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>Video — the Constellation — Schiller Institute</title>
+<meta name="description" content="One broadcast at the centre of everything the archive can prove it is connected to — people, places, series, languages, the same week, the same words.">
+<!--
+	VIDEO DRAFT D · THE CONSTELLATION — the relations the archive never showed. The broadcast at the
+	centre, and around it every person, place, series, language, week-mate and kindred
+	broadcast the record can prove — each line labelled with the reason it exists.
+	Stylesheet order is the WordPress enqueue order; blocksy-shim.css stands in for
+	Blocksy's own dynamic CSS and does not ship.
+-->
+<link rel="preload" href="../../people/design-system/fonts/source-serif-4-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../people/design-system/fonts.css">
+<link rel="stylesheet" href="../../people/design-system/tokens.css">
+<link rel="stylesheet" href="../../people/design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../../people/design-system/components.css">
+<link rel="stylesheet" href="css/video-shared.css">
+<link rel="stylesheet" href="css/video-constellation.css">
+<link rel="icon" href="../../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+</head>
+<body class="single single-si_video si-vid vd-constellation" data-ground="limestone">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header id="header" class="ct-header">
+	<div class="ct-container">
+		<a class="site-logo" href="#"><img src="../../brand/assets/lockup/lockup-light@2x.png" alt="The International Schiller Institute" width="560" height="150"></a>
+		<nav aria-label="Primary"><ul>
+			<li><a href="../../articles/templates/articles-ledger.html">Articles</a></li><li><a href="#" aria-current="page">Videos</a></li><li><a href="../../conferences/templates/conference-proceedings.html">Conferences</a></li><li><a href="../../people/templates/people-register.html">People</a></li><li><a href="#">Library</a></li><li><a href="#">About</a></li>
+		</ul></nav>
+		<div class="header-cta"><a class="si-link is-secondary" href="#">Join</a><a class="ct-button" href="#">Donate</a></div>
+	</div>
+</header>
+
+<main id="main" class="site-main si-page" aria-busy="true">
+	<div class="si-wrap si-vid-loading" aria-hidden="true">
+		<div class="si-skeleton" style="height:13px;width:22%"></div>
+		<div class="si-skeleton" style="height:64px;width:70%"></div>
+		<div class="si-skeleton" style="aspect-ratio:16/9;width:100%;max-height:60vh"></div>
+	</div>
+</main>
+
+<footer id="footer" class="ct-footer">
+	<div class="ct-container">
+		<img src="../../brand/assets/lockup/lockup-dark@2x.png" alt="The International Schiller Institute" width="560" height="150">
+		<p>Blocksy footer (stand-in) · <span class="proto-note">prototype — data: videos/data/video-*.json, built from the 2026-09-08 dump, the reviewed classification and the 2026-07 YouTube audit</span></p>
+	</div>
+</footer>
+
+<script type="module" src="js/video-constellation.js"></script>
+</body>
+</html>
