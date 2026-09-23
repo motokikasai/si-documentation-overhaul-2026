@@ -5,9 +5,15 @@ description: The Schiller Institute front end — the Jasper design system, the 
 
 # The Schiller Institute front end
 
-Jasper is the design system; the drafts are prototypes that ship their own CSS and JS into a
-Blocksy child theme. **Nothing overrides a Blocksy template anywhere in this project**, and
-nothing should start to.
+Jasper is the design system; the drafts are prototypes. **Nothing overrides a Blocksy
+template anywhere in this project**, and nothing should start to.
+
+How a draft ships depends on its kind (`docs/block-conventions.md` §3, adopted 2026-09-23):
+- **data-driven views** (`/people/`, `/blog/`, the Article single, conferences, videos) ship
+  their own `si-` CSS and JS into the child theme through Blocksy's canvas filters;
+- **editor-authored pages** (Tier-1, Page template, Home below the hero) ship as core-block
+  patterns in the `schiller-editorial` plugin, with looks as block style variations — no page CSS.
+Existing kits keep working until their item in `docs/refactor-plan.md` comes up.
 
 ## 1 · Jasper
 
@@ -102,4 +108,8 @@ PW=… node articles/build/shoot-wp.mjs
   `youtube-nocookie`. Fonts are self-hosted for the same reason.
 - Never invent content: no generated captions, no guessed bylines, no empty sections. A
   record with nothing in a field shows nothing.
+- Literal hex/px values live only in the token layer (`tokens.css`, Blocksy's palette,
+  `theme.json`); block markup uses presets — Blocksy's palette is `palette-color-1…8`.
+- New content structure (fields, patterns, block styles, blocks, `wpml-config.xml`) goes in
+  a plugin, never the child theme. Blocksy is a classic theme: no FSE templates or parts.
 - `references/gotchas.md` has the specific CSS/JS traps this codebase has hit.
