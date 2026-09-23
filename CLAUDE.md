@@ -55,7 +55,9 @@ relevant numbered doc or the project README, not only into a commit message.
   is the rehearsal clone, **`si-v4` is the current working site**.
 - **WSL cannot reach Local's MySQL.** Anything needing the database — WP-CLI, `wp eval-file`,
   `wp db export` — the user runs in Local's **"Open Site Shell"**. Write the script, hand
-  over the command.
+  over the command. The Site Shell is Windows **cmd**: single quotes are not quotes, so a
+  `wp eval '…'` one-liner fails ("Too many positional arguments"). Always hand over
+  `wp eval-file <script>.php` instead.
 - **HTTP to a Local site from WSL** works at the Windows default-route IP with a Host header:
   `curl -H "Host: si-v4.local" http://$(ip route | awk '/^default/{print $3}')/…`
 - **A browser cannot send that Host header** and `/etc/hosts` needs root, so use

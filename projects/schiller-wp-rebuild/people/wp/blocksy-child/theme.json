@@ -3,7 +3,11 @@
 	"version": 3,
 	"title": "Jasper",
 	"settings": {
+		"color": {
+			"custom": false
+		},
 		"typography": {
+			"customFontSize": false,
 			"fontFamilies": [
 				{ "slug": "serif", "name": "Source Serif (reading)", "fontFamily": "var(--si-font-serif)" },
 				{ "slug": "sans", "name": "Source Sans (signposting)", "fontFamily": "var(--si-font-sans)" }

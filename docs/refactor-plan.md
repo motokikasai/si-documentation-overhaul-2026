@@ -61,7 +61,7 @@ Low risk and high reuse first; each item is independent unless noted.
 
 | Step | Item(s) | Why now | Risk |
 |---|---|---|---|
-| R1 | 2 — `custom: false` for colours and font sizes in child `theme.json` | Every pattern after this relies on editors seeing presets only | Low |
+| R1 **done 2026-09-23** | 2 — `custom: false` for colours and font sizes in child `theme.json` | Every pattern after this relies on editors seeing presets only | Low |
 | R2 | 3 — create `schiller-editorial` (skeleton), copy `wpml-config.xml` into it, verify WPML reads it, **then** delete the theme copy | Home for all new work; unblocks R4–R7 | Medium (WPML) |
 | R3 | 6 — `contentOnly` Group around the homepage pattern | Tiny, and sets the pattern for all patterns | Low |
 | R4 | first block style variations the Tier-1 pages need (buttons, quote, a `si-` tile for the invitation) | New work; every page pattern reuses them | Low |
@@ -72,3 +72,25 @@ Low risk and high reuse first; each item is independent unless noted.
 | R9 | 13 — one-shot tools to `schiller-editorial/tools/` | Housekeeping | Low |
 | R10 | 7 — hero editor script to `@wordpress/scripts` | Only when the hero next needs real editor work | Medium (validation) |
 | — | 8–11, 14–16 | Already where the conventions want them | — |
+
+## Log
+
+**R1 — 2026-09-23, done.** Deployed to si-v4; editor check passed (`Success: R1 is in effect.` — both switches `false`, palette `palette-color-1…8`, sizes `small … xx-large`).
+`"color": {"custom": false}` and `"typography": {"customFontSize": false}` added to
+`people/wp/blocksy-child/theme.json`; only that file copied to si-v4 (not the whole people
+kit). Backup: `si-v4/backups/blocksy-child-before-r1-theme-json-20260923.tgz`.
+Front end verified unchanged: `/`, `/people/`, a profile, `/blog/`, an Article, each in EN
+and DE — the only differences are Blocksy's per-request search-form IDs.
+Editor side — run in Local's Site Shell (a file, because the Windows shell is cmd and
+breaks `wp eval '…'` one-liners at the spaces):
+
+    wp eval-file wp-content/themes/blocksy-child/tools/check-editor-presets.php
+
+It prints the two switches (want `false`), the palette presets (want `palette-color-1…8`)
+and ends with `Success: R1 is in effect.`
+
+Found on the way (for R6, not caused by R1): an Article's **first, uncached** render loads
+the core block stylesheets its content uses (5 on a fresh DE article) and `wp-embed.js`;
+every **cached** render loads 1. The formatter's transient skips `do_blocks`, so nothing
+enqueues them. Harmless today — the formatter strips `wp-block-*` classes from the body —
+but it will matter once posts are written in blocks.
