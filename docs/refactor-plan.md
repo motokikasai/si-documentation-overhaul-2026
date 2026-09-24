@@ -68,7 +68,7 @@ Low risk and high reuse first; each item is independent unless noted.
 | R5 **done 2026-09-24** | 5 — move the invitation's creator to `schiller-editorial`, same option key, same `wp_block`; plus the invitation's `si-` block style (night ground), deferred from R4 | First theme-held structure out; small | Medium (WPML) |
 | R6 **done 2026-09-24** | 12 — measure the formatter on a block-authored post; then skip or narrow it for block content, facade via `render_block` on `core/embed` | Must land before editors write new posts in blocks | Medium (live Articles) |
 | R7 **done 2026-09-24** (colours, exact-token lengths) | 1 — literal-value audit of view CSS; move literals into tokens | Makes the token rule true | Low |
-| R7b | type and spacing onto Jasper's scales: **58 absolute font sizes** in the views — 14 distinct sizes between 9.5 and 17px, where Jasper has 3 steps — and **108 px spacings** (padding/gap/margin) | Consistency. It **changes how pages look**, so screenshots before/after per view and the user's approval first | Medium (visual) |
+| R7b **done 2026-09-24** (display sizes kept) | type and spacing onto Jasper's scales: **58 absolute font sizes** in the views — 14 distinct sizes between 9.5 and 17px, where Jasper has 3 steps — and **108 px spacings** (padding/gap/margin) | Consistency. It **changes how pages look**, so screenshots before/after per view and the user's approval first | Medium (visual) |
 | R8 | 4 — profile field registration and meta boxes to `schiller-editorial` (same keys); Pods + bindings where the field is plain | Largest theme-held structure; do after R2 and R5 have proven the path | Medium–high (editor UI, WPML) |
 | R9 | 13 — one-shot tools to `schiller-editorial/tools/` | Housekeeping | Low |
 | R10 | 7 — hero editor script to `@wordpress/scripts` | Only when the hero next needs real editor work | Medium (validation) |
@@ -294,3 +294,21 @@ onto the scales changes how pages look. 169 more px are geometry (icon sizes, of
 transforms, max-widths) with no token to match. Backups:
 `blocksy-child-before-r7-literals-20260924.tgz`,
 `si-hero-earth-0.3.3-before-r7-literals-20260924.tgz`.
+
+**R7b — 2026-09-24, done (Jasper 1.0.3, Articles CSS 1.0.4).** Shown to the user first as
+a before/after page (private Artifact "Jasper Scale Review",
+https://claude.ai/artifact/E1HqzEH4aFgJWxv59NBgje). The proposal was captured on the live
+views with the proposed CSS swapped in by the browser, so nothing was deployed. Decision:
+**small sizes and spacing approved; display sizes kept as designed.** Applied with
+`people/build/apply-scales.py --keep-display --out repo`:
+- 36 small text sizes in the live views go onto `--si-step-n2/n1/0`; the two 16px text
+  fields go to `--si-input-size`;
+- 65 spacings go onto `--si-space-*`;
+- the same rules reach the shipped but unused Gallery and Chronicle CSS.
+The audit goes from 58 absolute font sizes to **15** (the 9 display sizes kept, and the
+hero plugin's 5) and from 277 lengths to **193** (geometry: icons, offsets, transforms,
+max-widths). Verified on si-v4: the deployed pages match the repo CSS served directly
+(0–0.5% of pixels, photos loading at different moments). Against the morning's
+screenshots, People changes 4.6% / 5.5% (desktop / phone), Profile 2.4% / 1.9%, Articles
+index 2.6% / 0.3%, Article 0.0% (its large change was the reading size, which was kept).
+No view scrolls sideways at 390px. Backup: `blocksy-child-before-r7b-scales-20260924.tgz`.

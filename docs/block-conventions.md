@@ -45,6 +45,13 @@ Blocksy puts its eight palette slots into the editor as `palette-color-1 … pal
 - Colour roles added in R7, each with the exact value it replaced: `--si-on-accent` (type on
   an accent fill = Paper), `--si-on-night-hi` (`#FFFFFF`, the brightest type on night and
   on photographs), `--si-scrim-player`, `--si-shadow-lift`, `--si-shadow-text-photo`.
+- **Type and spacing are on the scales (R7b, approved 2026-09-24).** Small text uses
+  `--si-step-n2` (9.5–13px → 12.5px), `--si-step-n1` (14–15px) and `--si-step-0`
+  (16–17px); spacing ≥4px uses the nearest `--si-space-*`. Text fields use `--si-input-size`
+  (16px: below it an iPhone zooms in on focus). **Display sizes stay as designed**, by
+  decision. Each was drawn for its own place, so the Register's letters, the Portrait's
+  quote and stamp, and Leaf's reading size keep their own `clamp()`s. The audit reports
+  them; they are not a defect. `people/build/apply-scales.py` holds the rules.
 - Jasper never redefines a `--theme-*` variable. A view may re-point `--si-*` roles inside its
   own scope, never `--theme-*`.
 

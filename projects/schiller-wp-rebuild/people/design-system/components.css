@@ -224,7 +224,7 @@ html:not(.js) .si-js-only { display: none !important; }
 	background: var(--theme-form-field-background-initial-color, var(--si-card));
 	color: var(--si-ink);
 	font-family: var(--si-font-sans);
-	font-size: 16px;   /* ≥16px: iOS does not zoom */
+	font-size: var(--si-input-size);   /* ≥16px: iOS does not zoom */
 	transition: border-color var(--si-dur-1) var(--si-ease), box-shadow var(--si-dur-1) var(--si-ease);
 	-webkit-appearance: none; appearance: none;
 }
@@ -233,8 +233,8 @@ html:not(.js) .si-js-only { display: none !important; }
 .si-search svg { position: absolute; left: .9em; top: 50%; width: 1.05em; height: 1.05em; transform: translateY(-50%); color: var(--si-muted); pointer-events: none; }
 .si-search kbd {
 	position: absolute; right: .7em; top: 50%; transform: translateY(-50%);
-	font-family: var(--si-font-sans); font-size: 12px; color: var(--si-muted);
-	border: 1px solid var(--si-rule); border-radius: 4px; padding: 1px 6px; background: var(--si-ground);
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2); color: var(--si-muted);
+	border: 1px solid var(--si-rule); border-radius: 4px; padding: 1px var(--si-space-3xs); background: var(--si-ground);
 }
 .si-search input:focus ~ kbd, .si-search input:not(:placeholder-shown) ~ kbd { display: none; }
 
@@ -250,9 +250,9 @@ html:not(.js) .si-js-only { display: none !important; }
 	   control, not from the inherited 1.62 body leading, so hover repaints cannot
 	   shift it by a sub-pixel. Hover changes colour only — nothing ever moves. */
 	display: inline-flex; align-items: center;
-	height: calc(var(--si-control-height) - 8px); padding: 0 13px; margin: 0;
+	height: calc(var(--si-control-height) - 8px); padding: 0 var(--si-space-xs); margin: 0;
 	border: 0; border-radius: 1px; background: transparent;
-	font-family: var(--si-font-sans); font-size: 15px; font-weight: 500; line-height: 20px;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); font-weight: 500; line-height: 20px;
 	color: var(--si-muted); cursor: pointer;
 	transform: none;
 	transition: background-color var(--si-dur-1) var(--si-ease), color var(--si-dur-1) var(--si-ease);
@@ -267,13 +267,13 @@ html:not(.js) .si-js-only { display: none !important; }
 	opacity: 0; pointer-events: none;
 }
 .si-select__button {
-	display: inline-flex; align-items: center; justify-content: space-between; gap: 14px;
-	height: var(--si-control-height); min-width: 158px; margin: 0; padding: 0 12px 0 13px;
+	display: inline-flex; align-items: center; justify-content: space-between; gap: var(--si-space-xs);
+	height: var(--si-control-height); min-width: 158px; margin: 0; padding: 0 var(--si-space-xs) 0 var(--si-space-xs);
 	border: 1px solid var(--theme-form-field-border-initial-color, var(--si-rule));
 	border-radius: var(--theme-form-field-border-radius, var(--si-radius-1));
 	background: var(--theme-form-field-background-initial-color, var(--si-card));
 	color: var(--si-ink);
-	font-family: var(--si-font-sans); font-size: 15px; font-weight: 400; line-height: 20px;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); font-weight: 400; line-height: 20px;
 	text-align: left; cursor: pointer;
 	transform: none;
 	transition: border-color var(--si-dur-1) var(--si-ease), box-shadow var(--si-dur-1) var(--si-ease);
@@ -287,14 +287,14 @@ html:not(.js) .si-js-only { display: none !important; }
 	position: fixed; z-index: 100000;
 	box-sizing: border-box;
 	max-width: min(340px, calc(100vw - 24px));
-	margin: 0; padding: 4px;
+	margin: 0; padding: var(--si-space-3xs);
 	list-style: none;
 	overflow-y: auto; overscroll-behavior: contain;
 	background: var(--si-card);
 	border: 1px solid var(--si-rule);
 	border-radius: var(--si-radius-1);
 	box-shadow: var(--si-shadow-2);
-	font-family: var(--si-font-sans); font-size: 15px; line-height: 20px;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); line-height: 20px;
 	color: var(--si-text);
 	scrollbar-width: thin; scrollbar-color: var(--si-rule) transparent;
 	animation: si-select-in var(--si-dur-1) var(--si-ease);
@@ -305,8 +305,8 @@ html:not(.js) .si-js-only { display: none !important; }
 @keyframes si-select-in { from { opacity: 0; translate: 0 -4px; } }
 @keyframes si-select-in-up { from { opacity: 0; translate: 0 4px; } }
 .si-select__list li {
-	display: flex; align-items: center; gap: 8px;
-	min-height: 34px; padding: 7px 10px 7px 26px;
+	display: flex; align-items: center; gap: var(--si-space-2xs);
+	min-height: 34px; padding: var(--si-space-2xs) var(--si-space-2xs) var(--si-space-2xs) var(--si-space-m);
 	border-radius: 1px; cursor: pointer;
 	font-family: inherit; font-size: inherit; line-height: inherit; letter-spacing: 0; text-transform: none;
 	white-space: nowrap;

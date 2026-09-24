@@ -16,7 +16,7 @@
 
 defined('ABSPATH') || exit;
 
-const SI_JASPER_VERSION = '1.0.2';   // 1.0.2: literals → tokens (R7); 1.0.1: invitation tile styles the Eyebrow block style (R5)
+const SI_JASPER_VERSION = '1.0.3';   // 1.0.3: small type + spacing on the scales (R7b); 1.0.2: literals → tokens (R7); 1.0.1: invitation tile styles the Eyebrow block style (R5)
 
 function si_jasper_uri(string $path): string {
 	return get_stylesheet_directory_uri() . '/assets/jasper/' . ltrim($path, '/');

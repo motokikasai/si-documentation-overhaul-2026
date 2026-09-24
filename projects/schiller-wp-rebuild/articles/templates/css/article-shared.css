@@ -270,7 +270,7 @@
 	transition: background-color var(--si-dur-1) var(--si-ease), transform var(--si-dur-2) var(--si-ease);
 }
 .ar-embed:hover .ar-embed__play { background: var(--si-night); transform: scale(1.06); }
-.ar-embed__play svg { width: 22px; height: 24px; fill: var(--si-brass-on-night); margin-left: 4px; }
+.ar-embed__play svg { width: 22px; height: 24px; fill: var(--si-brass-on-night); margin-left: var(--si-space-3xs); }
 .ar-embed__note {
 	position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
 	padding: .7em 1em;

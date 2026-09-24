@@ -142,6 +142,6 @@
 	.lg-row .d { grid-area: d; }
 	.lg-row .t { grid-area: t; white-space: normal; }
 	.lg-row .m { grid-area: m; }
-	.lg-row .tp { grid-area: tp; font-size: 10.5px; }
+	.lg-row .tp { grid-area: tp; font-size: var(--si-step-n2); }
 	.lg-row .lead, .lg-row .arc-lang { display: none; }
 }
