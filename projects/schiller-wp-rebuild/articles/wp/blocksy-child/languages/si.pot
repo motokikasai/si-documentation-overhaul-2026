@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"POT-Creation-Date: 2026-09-24 20:16+0000\n"
+"POT-Creation-Date: 2026-09-24 21:30+0000\n"
 "X-Domain: si\n"
 
 #: inc/people-archive.php:108
@@ -369,167 +369,62 @@ msgstr ""
 msgid "Online"
 msgstr ""
 
-#: inc/profile-data.php:436
+#: inc/profile-data.php:440
 msgid "Report"
 msgstr ""
 
-#: inc/profile-data.php:436
+#: inc/profile-data.php:440
 msgid "Study"
 msgstr ""
 
-#: inc/profile-data.php:436
+#: inc/profile-data.php:440
 msgid "Conference programme"
 msgstr ""
 
-#: inc/profile-data.php:437
+#: inc/profile-data.php:441
 msgid "Pamphlet"
 msgstr ""
 
-#: inc/profile-data.php:437
+#: inc/profile-data.php:441
 msgid "Memorandum"
 msgstr ""
 
-#: inc/profile-data.php:438
+#: inc/profile-data.php:442
 msgid "Document"
 msgstr ""
 
 #. translators: 1: person, 2: conference title, 3: city, 4: month and year
-#: inc/profile-data.php:463
+#: inc/profile-data.php:467
 #, php-format
 msgid "%1$s spoke at the Schiller Institute conference “%2$s” in %3$s, %4$s."
 msgstr ""
 
 #. translators: 1: person, 2: conference title, 3: month and year
-#: inc/profile-data.php:465
+#: inc/profile-data.php:469
 #, php-format
 msgid "%1$s spoke at the Schiller Institute conference “%2$s”, %3$s."
 msgstr ""
 
 #. translators: 1: person, 2: number of conferences, 3: first year, 4: last year
-#: inc/profile-data.php:468
+#: inc/profile-data.php:472
 #, php-format
 msgid "%1$s spoke at %2$d Schiller Institute conferences between %3$s and %4$s."
 msgstr ""
 
-#: inc/profile-fields.php:64
-msgid "Profile page"
-msgstr ""
-
-#: inc/profile-fields.php:65
+#: inc/profile-fields.php:28
 msgid "What the profile shows"
 msgstr ""
 
-#. translators: %s: link to the profile guide
-#: inc/profile-fields.php:81
-#, php-format
-msgid "These fields fill the top of the public profile. Every one is optional: an empty field simply does not appear. %s"
-msgstr ""
-
-#. translators: %s: link to the profile guide
-#: inc/profile-fields.php:82
-msgid "Which field fills which line →"
-msgstr ""
-
-#. translators: %s: link to the profile guide
-#: inc/profile-fields.php:86
-#: inc/profile-fields.php:246
-msgid "Descriptor"
-msgstr ""
-
-#: inc/profile-fields.php:87
-msgid "e.g. Statesman & soldier · Scientist · Composer"
-msgstr ""
-
-#: inc/profile-fields.php:88
-msgid "Two or three words, shown in small capitals above the name."
-msgstr ""
-
-#: inc/profile-fields.php:92
-#: inc/profile-fields.php:247
-#: template-parts/people/profile-guide.php:62
-msgid "Introduction"
-msgstr ""
-
-#: inc/profile-fields.php:93
-msgid "One sentence: who this person is and why their voice matters."
-msgstr ""
-
-#: inc/profile-fields.php:94
-msgid "One sentence, no pronouns needed. Shown large under the name."
-msgstr ""
-
-#: inc/profile-fields.php:98
-msgid "Offices held"
-msgstr ""
-
-#: inc/profile-fields.php:99
-msgid "U.S. Marine Corps | Helicopter pilot · 269 combat missions\nThe Pentagon | Chief, Criminal Law Division"
-msgstr ""
-
-#: inc/profile-fields.php:100
-msgid "One per line: Organisation | Role. Up to three read best. Empty: the Affiliation field is shown instead."
-msgstr ""
-
-#: inc/profile-fields.php:105
-msgid "Public figure — name this person in the “Among them …” line on the profiles of people who shared a conference with them"
-msgstr ""
-
-#: inc/profile-fields.php:108
-#: template-parts/people/profile.php:179
-msgid "Quotes"
-msgstr ""
-
-#: inc/profile-fields.php:110
-msgid "Quotes are added on the original-language record and stay in the language they were spoken. Translate the context lines here, one per quote, in the same order:"
-msgstr ""
-
-#: inc/profile-fields.php:114
-msgid "Quotes need a recording. Link this person to a talk first (Presentation → Presenter(s)), then come back."
-msgstr ""
-
-#: inc/profile-fields.php:116
-msgid "On youtube.com, open the talk, click “…more” → “Show transcript”, copy a sentence and the time beside it. Fix capitals and punctuation; mark any word you change in [brackets]."
-msgstr ""
-
-#: inc/profile-fields.php:120
-msgid "The sentence, as spoken"
-msgstr ""
-
-#: inc/profile-fields.php:122
-#: template-parts/people/profile.php:125
-msgid "Recording"
-msgstr ""
-
-#: inc/profile-fields.php:128
-msgid "Time in the video"
-msgstr ""
-
-#: inc/profile-fields.php:130
-msgid "Use in the hero"
-msgstr ""
-
-#: inc/profile-fields.php:131
-msgid "Remove"
-msgstr ""
-
-#: inc/profile-fields.php:133
-msgid "Context (optional), e.g. Speaking after former U.S. Attorney General Ramsey Clark"
-msgstr ""
-
-#: inc/profile-fields.php:137
-msgid "Add a quote"
-msgstr ""
-
-#: inc/profile-fields.php:226
+#: inc/profile-fields.php:37
 msgid "Save the person first."
 msgstr ""
 
-#: inc/profile-fields.php:237
+#: inc/profile-fields.php:48
 msgid "add"
 msgstr ""
 
 #. translators: %d: number of recordings
-#: inc/profile-fields.php:240
+#: inc/profile-fields.php:51
 #, php-format
 msgid "%d recording"
 msgid_plural "%d recordings"
@@ -537,84 +432,96 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of recordings
-#: inc/profile-fields.php:240
+#: inc/profile-fields.php:51
 msgid "No recording linked"
 msgstr ""
 
 #. translators: %d: number of recordings
-#: inc/profile-fields.php:241
+#: inc/profile-fields.php:52
 msgid "add a talk"
 msgstr ""
 
 #. translators: 1: fellow speakers, 2: conferences
-#: inc/profile-fields.php:243
+#: inc/profile-fields.php:54
 #, php-format
 msgid "%1$d fellow speakers at %2$d conferences"
 msgstr ""
 
 #. translators: 1: fellow speakers, 2: conferences
-#: inc/profile-fields.php:243
+#: inc/profile-fields.php:54
 msgid "No conference programme"
 msgstr ""
 
 #. translators: 1: fellow speakers, 2: conferences
-#: inc/profile-fields.php:244
+#: inc/profile-fields.php:55
 msgid "set the talk’s Conference"
 msgstr ""
 
 #. translators: 1: fellow speakers, 2: conferences
-#: inc/profile-fields.php:245
-#: template-parts/people/profile-guide.php:58
+#: inc/profile-fields.php:56
+#: schiller-editorial/templates/profile-guide.php:58
 msgid "Portrait"
 msgstr ""
 
 #. translators: 1: fellow speakers, 2: conferences
-#: inc/profile-fields.php:245
+#: inc/profile-fields.php:56
 msgid "No portrait"
 msgstr ""
 
 #. translators: 1: fellow speakers, 2: conferences
-#: inc/profile-fields.php:245
+#: inc/profile-fields.php:56
 msgid "featured image + Photo licence"
 msgstr ""
 
-#: inc/profile-fields.php:246
+#. translators: %s: link to the profile guide
+#: inc/profile-fields.php:57
+#: schiller-editorial/inc/profile-fields.php:160
+msgid "Descriptor"
+msgstr ""
+
+#: inc/profile-fields.php:57
 msgid "No descriptor"
 msgstr ""
 
-#: inc/profile-fields.php:247
+#: inc/profile-fields.php:58
+#: schiller-editorial/inc/profile-fields.php:166
+#: schiller-editorial/templates/profile-guide.php:62
+msgid "Introduction"
+msgstr ""
+
+#: inc/profile-fields.php:58
 msgid "No introduction"
 msgstr ""
 
-#: inc/profile-fields.php:248
+#: inc/profile-fields.php:59
 #, php-format
 msgid "%d office"
 msgid_plural "%d offices"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/profile-fields.php:248
+#: inc/profile-fields.php:59
 msgid "No offices or affiliation"
 msgstr ""
 
-#: inc/profile-fields.php:249
+#: inc/profile-fields.php:60
 msgid "Written biography"
 msgstr ""
 
-#: inc/profile-fields.php:249
+#: inc/profile-fields.php:60
 msgid "Biography generated from the archive"
 msgstr ""
 
-#: inc/profile-fields.php:249
+#: inc/profile-fields.php:60
 msgid "No biography"
 msgstr ""
 
-#: inc/profile-fields.php:250
+#: inc/profile-fields.php:61
 msgid "write it in the main text"
 msgstr ""
 
 #. translators: %d: number of quotes
-#: inc/profile-fields.php:252
+#: inc/profile-fields.php:63
 #, php-format
 msgid "%d quote"
 msgid_plural "%d quotes"
@@ -622,12 +529,12 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of quotes
-#: inc/profile-fields.php:252
+#: inc/profile-fields.php:63
 msgid "No quotes"
 msgstr ""
 
 #. translators: %d: number of articles, statements or press items
-#: inc/profile-fields.php:254
+#: inc/profile-fields.php:65
 #, php-format
 msgid "%d article or press item"
 msgid_plural "%d articles or press items"
@@ -635,18 +542,18 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: number of articles, statements or press items
-#: inc/profile-fields.php:254
+#: inc/profile-fields.php:65
 msgid "No writing or press linked"
 msgstr ""
 
-#: inc/profile-fields.php:256
+#: inc/profile-fields.php:67
 msgid "View profile"
 msgstr ""
 
-#: inc/profile-fields.php:256
-#: inc/profile-fields.php:281
-#: inc/profile-fields.php:281
-#: template-parts/people/profile-guide.php:17
+#: inc/profile-fields.php:67
+#: schiller-editorial/inc/profile-fields.php:100
+#: schiller-editorial/inc/profile-fields.php:100
+#: schiller-editorial/templates/profile-guide.php:17
 msgid "Profile guide"
 msgstr ""
 
@@ -773,282 +680,6 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
-#: template-parts/people/profile-guide.php:18
-msgid "Every person has a public profile page. The layout never needs changing: it fills itself from records you already keep, and each part appears only when there is something to show. This page explains what fills what."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:22
-msgid "Filled in automatically"
-msgstr ""
-
-#. translators: 1: "5 talks", 2: "2 h 35 min"
-#: template-parts/people/profile-guide.php:24
-#: template-parts/people/profile.php:125
-#: template-parts/people/profile.php:140
-#: template-parts/people/profile.php:250
-msgid "Recordings"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:24
-msgid "every Presentation and Video that names the person as presenter or host."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:25
-msgid "Conferences, “In the archive since”, the figures"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:25
-msgid "from those recordings."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:26
-#: template-parts/people/profile.php:356
-msgid "The company kept"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:26
-msgid "everyone else presenting at the same conferences."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:27
-msgid "Writing & press, documents"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:27
-msgid "statements they signed, coverage that features them, documents they wrote."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:28
-#: template-parts/people/profile.php:224
-msgid "Themes"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:28
-msgid "the Topics of all of the above."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:29
-msgid "A one-line biography"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:29
-msgid "written from those facts until someone writes a real one."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:33
-msgid "Written by editors (all optional)"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:35
-msgid "Descriptor, Introduction, Offices held, Quotes — in the “Profile page” box on the person."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:36
-msgid "The biography — the person’s main text."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:37
-msgid "The portrait — featured image, with Photo licence filled in (without a licence it is never shown)."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:39
-msgid "The “What the profile shows” box beside each person lists what is there and what is missing."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:43
-msgid "The top of the page, line by line"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:44
-msgid "Diagram: which field fills which line"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:45
-msgid "Featured image"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:56
-#: template-parts/people/profile.php:305
-msgid "On the page"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:56
-msgid "Where to enter it"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:58
-msgid "Featured image + Photo licence (+ Photo credit). No licence, no photo: a monogram is shown instead."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:59
-msgid "Small capitals above the name"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:59
-msgid "Descriptor · Country · the year of the earliest linked talk (automatic)"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:60
-msgid "Name"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:60
-msgid "The title of the person entry (+ Name in native script, shown under it)"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:61
-msgid "Italic line"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:61
-msgid "Honorific"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:62
-msgid "Large sentence"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:63
-msgid "Offices"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:63
-msgid "Offices held, one per line: Organisation | Role. Empty: the Affiliation field is shown."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:64
-msgid "Play link"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:64
-msgid "A quote with “Use in the hero” ticked"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:70
-msgid "Adding a talk"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:72
-msgid "Presentations → Add New"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:72
-msgid "(for a standalone webcast or interview: Videos → Add New, and use Host / speakers)."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:73
-msgid "Title: the talk’s title."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:74
-msgid "YouTube video ID: the part after “watch?v=”."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:75
-msgid "Presenter(s): pick the person."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:76
-msgid "Conference: pick it, if the talk was given at one — this is what fills “The company kept”."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:77
-msgid "Optional: Start and End (in seconds) when the talk is part of a longer recording."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:79
-msgid "Publish. The person’s profile — and the profile of everyone at the same conference — updates by itself."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:82
-msgid "Adding a quote"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:84
-msgid "Open the talk on youtube.com; under the video click “…more”, then “Show transcript”."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:85
-msgid "Find a sentence (the transcript can be searched). Copy it, and note the time beside it, e.g. 1:07:12."
-msgstr ""
-
-#. translators: %s: link to People
-#: template-parts/people/profile-guide.php:88
-#, php-format
-msgid "Open the person in %s → “Profile page” box → Add a quote: paste the sentence, choose the recording, type the time."
-msgstr ""
-
-#. translators: %s: link to People
-#: template-parts/people/profile-guide.php:89
-#: template-parts/people/register.php:20
-msgid "People"
-msgstr ""
-
-#. translators: %s: link to People
-#: template-parts/people/profile-guide.php:90
-msgid "Fix capitals and punctuation (automatic captions have none). If you change a word, put it in [brackets]."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:91
-msgid "Optional: a context line, and “Use in the hero” for the one quote that introduces the person."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:93
-msgid "About 5–10 minutes a quote. Quotes are worth it for the most prominent people; the page is complete without them."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:96
-msgid "Linking writing, press and documents"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:98
-msgid "A statement they signed: Statement → Signatories (SI people)."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:99
-msgid "Press about them: Coverage → Featured SI people (and Outlet, which shows as a wordmark)."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:100
-msgid "A document they wrote: Document → Authors."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:101
-msgid "An article they wrote: the People field on the post, once it is added."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:105
-msgid "The invitation at the bottom"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:106
-msgid "The “Be in the room” tile is one shared pattern: change it once and every profile changes."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:107
-msgid "Edit the invitation"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:108
-msgid "Its button links to NationBuilder; set it to the sign-up page you want. When a conference has a Registration link and a start date in the future, the tile also offers it automatically."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:111
-msgid "Other languages"
-msgstr ""
-
-#: template-parts/people/profile-guide.php:113
-msgid "Every language shows the same people. Descriptor, Introduction, Offices held, the biography and quote context lines are translated per language in WPML; until they are, the original shows."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:114
-msgid "Quotes stay in the language they were spoken. Add them on the original-language person."
-msgstr ""
-
-#: template-parts/people/profile-guide.php:115
-msgid "Section names (“Life”, “Recordings” …) are translated in WPML → String Translation, text domain “si”. The invitation pattern is translated like any page."
-msgstr ""
-
 #. translators: %d: minutes
 #: template-parts/people/profile.php:34
 #, php-format
@@ -1073,6 +704,19 @@ msgstr ""
 
 #: template-parts/people/profile.php:116
 msgid "In the speaker’s own words"
+msgstr ""
+
+#: template-parts/people/profile.php:125
+#: schiller-editorial/inc/profile-fields.php:198
+msgid "Recording"
+msgstr ""
+
+#. translators: 1: "5 talks", 2: "2 h 35 min"
+#: template-parts/people/profile.php:125
+#: template-parts/people/profile.php:140
+#: template-parts/people/profile.php:250
+#: schiller-editorial/templates/profile-guide.php:24
+msgid "Recordings"
 msgstr ""
 
 #. translators: %s: a list of people with their roles
@@ -1160,6 +804,11 @@ msgstr ""
 msgid "Hear it"
 msgstr ""
 
+#: template-parts/people/profile.php:179
+#: schiller-editorial/inc/profile-fields.php:182
+msgid "Quotes"
+msgstr ""
+
 #: template-parts/people/profile.php:180
 msgid "Previous quote"
 msgstr ""
@@ -1213,6 +862,11 @@ msgstr ""
 #: template-parts/people/profile.php:220
 #: template-parts/people/profile.php:221
 msgid "At a glance"
+msgstr ""
+
+#: template-parts/people/profile.php:224
+#: schiller-editorial/templates/profile-guide.php:28
+msgid "Themes"
 msgstr ""
 
 #. translators: %s: number of talks
@@ -1288,6 +942,11 @@ msgstr ""
 msgid "Articles & video"
 msgstr ""
 
+#: template-parts/people/profile.php:305
+#: schiller-editorial/templates/profile-guide.php:56
+msgid "On the page"
+msgstr ""
+
 #: template-parts/people/profile.php:308
 msgid "Interviewed by"
 msgstr ""
@@ -1300,6 +959,11 @@ msgstr ""
 #: template-parts/people/profile.php:347
 #, php-format
 msgid "%1$d conferences together, %2$s"
+msgstr ""
+
+#: template-parts/people/profile.php:356
+#: schiller-editorial/templates/profile-guide.php:26
+msgid "The company kept"
 msgstr ""
 
 #. translators: %s: number of people
@@ -1436,6 +1100,12 @@ msgstr ""
 
 #: template-parts/people/register.php:17
 msgid "The archive in figures"
+msgstr ""
+
+#. translators: %s: link to People
+#: template-parts/people/register.php:20
+#: schiller-editorial/templates/profile-guide.php:89
+msgid "People"
 msgstr ""
 
 #: template-parts/people/register.php:21
@@ -1615,6 +1285,93 @@ msgstr ""
 msgid "Ghost"
 msgstr ""
 
+#: schiller-editorial/inc/profile-fields.php:57
+msgid "Profile page"
+msgstr ""
+
+#. translators: %s: link to the profile guide
+#: schiller-editorial/inc/profile-fields.php:155
+#, php-format
+msgid "These fields fill the top of the public profile. Every one is optional: an empty field simply does not appear. %s"
+msgstr ""
+
+#. translators: %s: link to the profile guide
+#: schiller-editorial/inc/profile-fields.php:156
+msgid "Which field fills which line →"
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:161
+msgid "e.g. Statesman & soldier · Scientist · Composer"
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:162
+msgid "Two or three words, shown in small capitals above the name."
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:167
+msgid "One sentence: who this person is and why their voice matters."
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:168
+msgid "One sentence, no pronouns needed. Shown large under the name."
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:172
+msgid "Offices held"
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:173
+msgid "U.S. Marine Corps | Helicopter pilot · 269 combat missions\nThe Pentagon | Chief, Criminal Law Division"
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:174
+msgid "One per line: Organisation | Role. Up to three read best. Empty: the Affiliation field is shown instead."
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:179
+msgid "Public figure — name this person in the “Among them …” line on the profiles of people who shared a conference with them"
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:184
+msgid "Quotes are added on the original-language record and stay in the language they were spoken. Translate the context lines here, one per quote, in the same order:"
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:188
+msgid "The list of recordings comes from the site theme’s profile view, which is not active. Quotes can be edited again once it is."
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:190
+msgid "Quotes need a recording. Link this person to a talk first (Presentation → Presenter(s)), then come back."
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:192
+msgid "On youtube.com, open the talk, click “…more” → “Show transcript”, copy a sentence and the time beside it. Fix capitals and punctuation; mark any word you change in [brackets]."
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:196
+msgid "The sentence, as spoken"
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:204
+msgid "Time in the video"
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:206
+msgid "Use in the hero"
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:207
+msgid "Remove"
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:209
+msgid "Context (optional), e.g. Speaking after former U.S. Attorney General Ramsey Clark"
+msgstr ""
+
+#: schiller-editorial/inc/profile-fields.php:213
+msgid "Add a quote"
+msgstr ""
+
 #: schiller-editorial/inc/profile-invitation.php:32
 msgid "Be in the room"
 msgstr ""
@@ -1633,5 +1390,252 @@ msgstr ""
 
 #: schiller-editorial/inc/profile-invitation.php:51
 msgid "Profile page — invitation"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:18
+msgid "Every person has a public profile page. The layout never needs changing: it fills itself from records you already keep, and each part appears only when there is something to show. This page explains what fills what."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:22
+msgid "Filled in automatically"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:24
+msgid "every Presentation and Video that names the person as presenter or host."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:25
+msgid "Conferences, “In the archive since”, the figures"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:25
+msgid "from those recordings."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:26
+msgid "everyone else presenting at the same conferences."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:27
+msgid "Writing & press, documents"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:27
+msgid "statements they signed, coverage that features them, documents they wrote."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:28
+msgid "the Topics of all of the above."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:29
+msgid "A one-line biography"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:29
+msgid "written from those facts until someone writes a real one."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:33
+msgid "Written by editors (all optional)"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:35
+msgid "Descriptor, Introduction, Offices held, Quotes — in the “Profile page” box on the person."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:36
+msgid "The biography — the person’s main text."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:37
+msgid "The portrait — featured image, with Photo licence filled in (without a licence it is never shown)."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:39
+msgid "The “What the profile shows” box beside each person lists what is there and what is missing."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:43
+msgid "The top of the page, line by line"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:44
+msgid "Diagram: which field fills which line"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:45
+msgid "Featured image"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:56
+msgid "Where to enter it"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:58
+msgid "Featured image + Photo licence (+ Photo credit). No licence, no photo: a monogram is shown instead."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:59
+msgid "Small capitals above the name"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:59
+msgid "Descriptor · Country · the year of the earliest linked talk (automatic)"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:60
+msgid "Name"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:60
+msgid "The title of the person entry (+ Name in native script, shown under it)"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:61
+msgid "Italic line"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:61
+msgid "Honorific"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:62
+msgid "Large sentence"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:63
+msgid "Offices"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:63
+msgid "Offices held, one per line: Organisation | Role. Empty: the Affiliation field is shown."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:64
+msgid "Play link"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:64
+msgid "A quote with “Use in the hero” ticked"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:70
+msgid "Adding a talk"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:72
+msgid "Presentations → Add New"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:72
+msgid "(for a standalone webcast or interview: Videos → Add New, and use Host / speakers)."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:73
+msgid "Title: the talk’s title."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:74
+msgid "YouTube video ID: the part after “watch?v=”."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:75
+msgid "Presenter(s): pick the person."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:76
+msgid "Conference: pick it, if the talk was given at one — this is what fills “The company kept”."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:77
+msgid "Optional: Start and End (in seconds) when the talk is part of a longer recording."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:79
+msgid "Publish. The person’s profile — and the profile of everyone at the same conference — updates by itself."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:82
+msgid "Adding a quote"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:84
+msgid "Open the talk on youtube.com; under the video click “…more”, then “Show transcript”."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:85
+msgid "Find a sentence (the transcript can be searched). Copy it, and note the time beside it, e.g. 1:07:12."
+msgstr ""
+
+#. translators: %s: link to People
+#: schiller-editorial/templates/profile-guide.php:88
+#, php-format
+msgid "Open the person in %s → “Profile page” box → Add a quote: paste the sentence, choose the recording, type the time."
+msgstr ""
+
+#. translators: %s: link to People
+#: schiller-editorial/templates/profile-guide.php:90
+msgid "Fix capitals and punctuation (automatic captions have none). If you change a word, put it in [brackets]."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:91
+msgid "Optional: a context line, and “Use in the hero” for the one quote that introduces the person."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:93
+msgid "About 5–10 minutes a quote. Quotes are worth it for the most prominent people; the page is complete without them."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:96
+msgid "Linking writing, press and documents"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:98
+msgid "A statement they signed: Statement → Signatories (SI people)."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:99
+msgid "Press about them: Coverage → Featured SI people (and Outlet, which shows as a wordmark)."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:100
+msgid "A document they wrote: Document → Authors."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:101
+msgid "An article they wrote: the People field on the post, once it is added."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:105
+msgid "The invitation at the bottom"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:106
+msgid "The “Be in the room” tile is one shared pattern: change it once and every profile changes."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:107
+msgid "Edit the invitation"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:108
+msgid "Its button links to NationBuilder; set it to the sign-up page you want. When a conference has a Registration link and a start date in the future, the tile also offers it automatically."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:111
+msgid "Other languages"
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:113
+msgid "Every language shows the same people. Descriptor, Introduction, Offices held, the biography and quote context lines are translated per language in WPML; until they are, the original shows."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:114
+msgid "Quotes stay in the language they were spoken. Add them on the original-language person."
+msgstr ""
+
+#: schiller-editorial/templates/profile-guide.php:115
+msgid "Section names (“Life”, “Recordings” …) are translated in WPML → String Translation, text domain “si”. The invitation pattern is translated like any page."
 msgstr ""
 

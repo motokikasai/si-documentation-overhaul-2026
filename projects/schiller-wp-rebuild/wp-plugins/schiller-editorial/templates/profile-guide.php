@@ -1,9 +1,9 @@
 <?php
 /**
- * People → Profile guide: the one-page editor guide for /people/{slug}/.
+ * People → Profile guide: the one-page editor guide for /people/{slug}/ (in the plugin since R8).
  * Plain admin markup (WordPress's own styles), no assets.
  *
- * @package blocksy-child
+ * @package schiller-editorial
  */
 
 defined('ABSPATH') || exit;

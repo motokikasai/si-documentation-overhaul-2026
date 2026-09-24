@@ -31,7 +31,7 @@ filter), **C1–C6** content ladder (style variation → block variation → pat
 | 1 | Jasper tokens, fonts, components | custom CSS; palette via Blocksy filter + `apply-design-system.php` | child theme | T | stays in child theme | Low. Literal values outside `tokens.css` (e.g. `color: #fff` in `person-portrait.css`) — audit, don't guess |
 | 2 | Child `theme.json` | type + spacing presets aliasing `--si-*`; no `custom: false` | child theme | T | stays | Low. Editor UI only; existing custom values still render |
 | 3 | Content-model WPML config | `wpml-config.xml`, ~50 fields, 7 types, 5 taxonomies | ~~child theme~~ → `schiller-editorial` (R2, done) | — | `schiller-editorial` root | **WPML**: a changed `translate`/`action` value re-classifies fields; a missing file un-declares them. Duplicate first, compare, then remove |
-| 4 | Profile fields (6 meta keys), meta boxes, status box, Profile guide | `register_post_meta` + custom meta-box PHP | **child theme** | C4 where possible (Pods fields + bindings); the JSON `si_quotes` stays custom (Pods free has no repeater — D2) | `schiller-editorial` | **Content structure in the theme.** Same keys, so no data moves; risk is double registration during the move and the WPML declarations (item 3) |
+| 4 | Profile fields (6 meta keys), meta boxes, status box, Profile guide | `register_post_meta` + custom meta-box PHP | ~~child theme~~ → `schiller-editorial` (R8, done; status box stays with the view) | C4 where possible (Pods fields + bindings); the JSON `si_quotes` stays custom (Pods free has no repeater — D2) | `schiller-editorial` | **Content structure in the theme.** Same keys, so no data moves; risk is double registration during the move and the WPML declarations (item 3) |
 | 5 | Profile invitation tile | synced pattern (`wp_block`) of core blocks, created on `admin_init`, ID in an option | creator in **child theme**; content in DB | C3 (synced pattern) — already there | creator → `schiller-editorial` (R5, done) | **WPML**: keep the same `wp_block` post and option key, or translations detach. Classes `pa-next__kicker`, `pa-invite__title` are saved in the block content: keep them styled; offer a `si-` block style for new copies |
 | 6 | Homepage pattern | serialized blocks; not locked | `si-hero-earth/patterns/` | C3 | stays | Low. Adding the `contentOnly` Group affects new inserts only; the live homepage is not rewritten. Copy is mirrored in `hero-earth/edit.js` — change both |
 | 7 | `si/hero-earth`, `si/hero-act` | dynamic blocks, `block.json` + `render.php`; hand-written `window.wp` editor script | `si-hero-earth` | C6 (a real gap) | stays | **Validation**: `hero-earth` saves `InnerBlocks.Content`, `hero-act` saves `null` — a build migration must keep both byte-identical. Never rename attributes. **WPML**: the `<xpath>` entries match elements that are never saved (dynamic) — harmless, drop when touched |
@@ -69,7 +69,7 @@ Low risk and high reuse first; each item is independent unless noted.
 | R6 **done 2026-09-24** | 12 — measure the formatter on a block-authored post; then skip or narrow it for block content, facade via `render_block` on `core/embed` | Must land before editors write new posts in blocks | Medium (live Articles) |
 | R7 **done 2026-09-24** (colours, exact-token lengths) | 1 — literal-value audit of view CSS; move literals into tokens | Makes the token rule true | Low |
 | R7b **done 2026-09-24** (display sizes kept) | type and spacing onto Jasper's scales: **58 absolute font sizes** in the views — 14 distinct sizes between 9.5 and 17px, where Jasper has 3 steps — and **108 px spacings** (padding/gap/margin) | Consistency. It **changes how pages look**, so screenshots before/after per view and the user's approval first | Medium (visual) |
-| R8 | 4 — profile field registration and meta boxes to `schiller-editorial` (same keys); Pods + bindings where the field is plain | Largest theme-held structure; do after R2 and R5 have proven the path | Medium–high (editor UI, WPML) |
+| R8 **done 2026-09-24** | 4 — profile field registration and meta boxes to `schiller-editorial` (same keys); Pods + bindings where the field is plain | Largest theme-held structure; do after R2 and R5 have proven the path | Medium–high (editor UI, WPML) |
 | R9 | 13 — one-shot tools to `schiller-editorial/tools/` | Housekeeping | Low |
 | R10 | 7 — hero editor script to `@wordpress/scripts` | Only when the hero next needs real editor work | Medium (validation) |
 | R6b **done 2026-09-24** | Leaf: third-party `<iframe>`s lose their `src` and render as **empty boxes** — 64 in 56 posts (SoundCloud 33, Brevo/Sendinblue forms 25, Google Docs, Rumble, schillermeet) | Visible defect today; needs a decision — remove, or a two-click facade like YouTube's | Low (render only) |
@@ -312,3 +312,29 @@ max-widths). Verified on si-v4: the deployed pages match the repo CSS served dir
 screenshots, People changes 4.6% / 5.5% (desktop / phone), Profile 2.4% / 1.9%, Articles
 index 2.6% / 0.3%, Article 0.0% (its large change was the reading size, which was kept).
 No view scrolls sideways at 390px. Backup: `blocksy-child-before-r7b-scales-20260924.tgz`.
+
+**R8 — 2026-09-24, done (schiller-editorial 0.4.0).** The profile page's six fields
+(`si_descriptor`, `si_introduction`, `si_offices`, `si_quotes`, `si_quote_context`,
+`si_notable`) moved from `blocksy-child/inc/profile-fields.php` to
+`schiller-editorial/inc/profile-fields.php`: their registration, the "Profile page" box and
+its save, and People → Profile guide (`templates/profile-guide.php`). The markup, form field
+names, nonce, meta keys and admin slug are character for character the same; only the
+helpers were renamed (`si_editorial_profile_*`), so no function name can exist twice.
+**The split, and the dependency direction.** The "What the profile shows" status box and
+`si_profile_clock()` stay in the theme: they preview and format the theme's own view. The
+plugin never calls the theme. The one thing its box needs from the view, the person's
+recordings for the quote picker, arrives through the `si_profile_talks` filter, which
+`profile-data.php` answers. With no provider, the box says so instead of failing.
+**The handover.** The plugin's module registers in `after_setup_theme` and stands aside while
+the theme still defines `si_profile_fields_box()`. Deploy 1, the plugin: nothing changed
+(profiles byte-identical but `?ver=`). Deploy 2, the theme copy removed: the plugin took
+over on the next request, so there was never a duplicate box and never a missing one.
+`tools/check-profile-fields.php` before / after / after a real Save of the one person with
+fields (#119939 Richard Black): 419 people, 3 values, fingerprint `aeb8bba9…` in all three
+runs. The wiring moved from theme to plugin; `add_meta_boxes_si_person` shows the theme's
+status box and the plugin's fields box, one each. Public profiles EN and DE are unchanged.
+**Not done, on purpose: Pods fields with Block Bindings** (rung C4 in the table). The profile
+is a server-rendered view, not block content, so a binding has nothing to bind, and the
+quotes need their own editor. Revisit if the profile is ever rebuilt from blocks.
+Backups: `schiller-editorial-0.3.0-before-r8-profile-fields-20260924.tgz`,
+`blocksy-child-before-r8-profile-fields-20260924.tgz`.

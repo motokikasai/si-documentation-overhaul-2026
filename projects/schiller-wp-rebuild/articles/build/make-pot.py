@@ -28,7 +28,7 @@ SOURCES = [
     ('people/wp/blocksy-child', ('inc', 'template-parts')),
     ('articles/wp/blocksy-child', ('inc', 'template-parts')),
     # same text domain `si`: the invitation (moved here in R5) and the block style labels
-    ('wp-plugins/schiller-editorial', ('inc',)),
+    ('wp-plugins/schiller-editorial', ('inc', 'templates')),
 ]
 
 # __( 'x', 'si' ) · _e · esc_html__ · esc_attr_e · _x( 'x', 'ctx', 'si' )

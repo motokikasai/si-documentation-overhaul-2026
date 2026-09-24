@@ -10,6 +10,7 @@ Rules: `docs/block-conventions.md`. Order of work: `docs/refactor-plan.md`.
 | `wpml-config.xml` — the content model's translation settings (types, taxonomies, ~50 fields) | 0.1.0 (R2) |
 | block style variations — `inc/block-styles.php` + `assets/css/block-styles.css` (below) | 0.2.0 (R4) |
 | the profile invitation — synced pattern "Profile page — invitation": created once, rendered per language (`inc/profile-invitation.php`; the theme only displays it) | 0.3.0 (R5) |
+| the profile page's six fields — registration, the "Profile page" box and its save, People → Profile guide (`inc/profile-fields.php`, `templates/profile-guide.php`). Recordings for the quote picker come from the theme through the `si_profile_talks` filter; with no provider the box says so instead of failing | 0.4.0 (R8) |
 | page patterns (`patterns/`), bindings, new blocks | planned |
 | one-shot Site-Shell tools (`tools/`) | 0.1.0 |
 
@@ -59,5 +60,6 @@ Run in Local → Open Site Shell, from the site root (the shell is cmd — use `
 | Command | What |
 |---|---|
 | `PW=… node wp-plugins/schiller-editorial/tools/compare.mjs` (WSL, from `projects/schiller-wp-rebuild/`, with `serve.py 8761` and `local-proxy.mjs si-v4.local 8770` running) | dev only, not deployed: each block style beside the draft it comes from — the draft's own CSS on the left, Blocksy's real CSS from si-v4 plus `block-styles.css` on the right — with a computed-style diff, the hover state, and a screenshot. |
+| `wp eval-file wp-content/plugins/schiller-editorial/tools/check-profile-fields.php [label]` | read-only: every `si_person`'s six fields as counts and one fingerprint (unchanged fingerprint = no value changed), the people who have any, and which file registers the meta and hooks the box, the save and the guide. |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/check-invitation.php [label]` | read-only: the option → the invitation pattern (type, status, content hash), its WPML translations, how many copies exist (must be 1), and whether the theme or the plugin defines the functions. With a label, saves `backups/invitation-check-<label>.txt`. |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/check-wpml-config.php [label]` | read-only: for every type, taxonomy and field declared in `wpml-config.xml`, the mode WPML has stored and whether it is locked by a config file; the config files WPML would read. With a label, saves `backups/wpml-config-check-<label>.txt`. |

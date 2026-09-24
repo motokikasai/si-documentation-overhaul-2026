@@ -397,6 +397,10 @@ function si_profile_conf_title(string $t): string {
 }
 
 /** Quotes as stored by the Profile page box: [{text, talk, t, hero, verified}], on the original. */
+/* For the schiller-editorial plugin's "Profile page" box: which recordings are this person's,
+   in the same order and shape as the view uses (R8). The plugin asks; the theme answers. */
+add_filter('si_profile_talks', static fn($talks, int $person_id) => si_profile_build($person_id)['talks'], 10, 2);
+
 function si_profile_quotes(int $orig): array {
 	$raw = json_decode((string) get_post_meta($orig, 'si_quotes', true), true);
 	return array_values(array_filter(is_array($raw) ? $raw : [], static fn($q) => is_array($q) && trim($q['text'] ?? '') !== '' && !empty($q['talk'])));
