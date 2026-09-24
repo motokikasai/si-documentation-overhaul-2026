@@ -19,7 +19,7 @@ defined('ABSPATH') || exit;
    a fix here can be shipped without touching the /people/ kit — and so that a
    browser actually fetches it. A stale `?ver=` is indistinguishable from a
    broken fix; this is the second time that cost a round trip. */
-const SI_ARTICLES_VERSION = '1.0.1';
+const SI_ARTICLES_VERSION = '1.0.2';   // 1.0.2: Eyebrow → heading rhythm (R6)
 
 require_once __DIR__ . '/article-format.php';
 require_once __DIR__ . '/article-data.php';

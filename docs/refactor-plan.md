@@ -42,7 +42,7 @@ filter), **C1–C6** content ladder (style variation → block variation → pat
 | 12 | Article formatter (`article-format.php`) | render-time rewrite of the filtered `the_content` string: tag allow-list unwrap, heading repair, footnotes, YouTube facade | child theme | classic archive: stays; block-authored posts: C5 (`render_block` on `core/embed` for the facade; core Footnotes for notes) | stays in theme (presentation) | **Block content**: it runs on *every* post's filtered content, so a post written in blocks would have its classes/wrappers unwrapped and headings renumbered. Measure on a block-authored test post before anyone writes one |
 | 13 | `tools/*.php` (create-blog-page, post-languages, photo-focus) | one-shot Site-Shell scripts | child theme | — | `schiller-editorial/tools/` (apply-design-system stays: it is design) | Low. They are run by hand; paths in docs must follow |
 | 14 | Content model (types, taxonomies, Pods fields, legacy-shortcode no-ops) | core APIs + Pods extend | mu-plugin | — | stays (D1) | None — already outside the theme. Pods 3.3.9.2 registers a Block Bindings source, so C4 is available |
-| 15 | Migrated archive (4,140 posts) | classic HTML with `si-*` markup | DB | — | stays classic | Converting to blocks would touch ~120k rows and every WPML pair — out of scope |
+| 15 | Migrated archive (4,140 posts) | **3,089 with block markup, 1,051 classic HTML** (corrected in R6) | DB | — | stays as stored; normalised at render by the Article formatter | Converting would touch ~120k rows and every WPML pair — out of scope |
 | 16 | `si-media-proxy.php` | lab-only URL rewrite | mu-plugin | — | lab only | Must never reach production (it refuses non-local hosts) |
 
 **Not yet shipped** (prototypes; built under the new rules from the start):
@@ -66,11 +66,13 @@ Low risk and high reuse first; each item is independent unless noted.
 | R3 **done 2026-09-24** | 6 — `contentOnly` Group around the homepage pattern | Tiny, and sets the pattern for all patterns | Low |
 | R4 **done 2026-09-24** | first block style variations the Tier-1 pages need (buttons, quote, a `si-` tile for the invitation) | New work; every page pattern reuses them | Low |
 | R5 **done 2026-09-24** | 5 — move the invitation's creator to `schiller-editorial`, same option key, same `wp_block`; plus the invitation's `si-` block style (night ground), deferred from R4 | First theme-held structure out; small | Medium (WPML) |
-| R6 | 12 — measure the formatter on a block-authored post; then skip or narrow it for block content, facade via `render_block` on `core/embed` | Must land before editors write new posts in blocks | Medium (live Articles) |
+| R6 **done 2026-09-24** | 12 — measure the formatter on a block-authored post; then skip or narrow it for block content, facade via `render_block` on `core/embed` | Must land before editors write new posts in blocks | Medium (live Articles) |
 | R7 | 1 — literal-value audit of view CSS; move literals into tokens | Makes the token rule true | Low |
 | R8 | 4 — profile field registration and meta boxes to `schiller-editorial` (same keys); Pods + bindings where the field is plain | Largest theme-held structure; do after R2 and R5 have proven the path | Medium–high (editor UI, WPML) |
 | R9 | 13 — one-shot tools to `schiller-editorial/tools/` | Housekeeping | Low |
 | R10 | 7 — hero editor script to `@wordpress/scripts` | Only when the hero next needs real editor work | Medium (validation) |
+| R6b | Leaf: third-party `<iframe>`s lose their `src` and render as **empty boxes** — 64 in 56 posts (SoundCloud 33, Brevo/Sendinblue forms 25, Google Docs, Rumble, schillermeet) | Visible defect today; needs a decision — remove, or a two-click facade like YouTube's | Low (render only) |
+| R6c | Leaf: bold/italic left **open across a block's end** — 21 in 15 posts; the browser carries it forward (2 sampled pages: the footer ends up inside `<b>`) | Visible defect today | Low (render only) |
 | — | 8–11, 14–16 | Already where the conventions want them | — |
 
 ## Log
@@ -204,3 +206,35 @@ Backups: `blocksy-child-before-r5-invitation-20260924.tgz`,
 Found on the way: the invitation has **no German translation** on si-v4. `/de/` profiles
 show the English tile (WPML falls back to the original). It is a content task: translate
 the pattern in WPML. It needs no code.
+
+**R6 — 2026-09-24, done (Article formatter v4, Articles CSS 1.0.2).** Measured first, and
+the plan's premise was wrong: **3,089 of the 4,140 posts already contain block markup**
+(2020 on), 1,779 with editor-set styling (red text in 134, cyan backgrounds in 82,
+centring in 272). The formatter stripping that is Leaf's design, so "skip the formatter
+for block content" was dropped. Decided with the user: **buttons → Leaf buttons; the R4
+styles → Leaf's look.** Four changes to `article-format.php`:
+1. **Buttons.** Every button block becomes `<p class="si-button"><a class="si-btn">`, the
+   shape the migration already writes for `[button]`. It restores 137 calls to action in
+   105 posts (sign, register, join). 6 buttons with no destination are left alone.
+2. **Eyebrow and Source are kept** (`KEEP_STYLES`). No legacy post has any `is-style-si-*`.
+   Quotes keep Leaf's quote; the Ghost becomes a Leaf button. Leaf CSS: an Eyebrow sits
+   `.55em` above its heading.
+3. **`</div>` paired with its opening.** Hygiene dropped a wrapper's `<div>` but kept its
+   `</div>`: 1,555 posts had surplus closings, which closed the reading column and then
+   Blocksy's containers.
+4. **`balance_p` decides tag vs text by position.** It tested the first character, so a
+   paragraph opening with `<strong>`, `<em>` or `<a>` was closed empty before its own
+   text. That touched **2,587 posts** and broke every legacy and new button.
+Measured with `articles/build/format-harness.php` (the real class over all 4,140 bodies,
+WordPress stubbed): 4,080 posts keep identical text; 102 **regain** 5,820 words the old
+passes deleted (post 61700 rendered empty; 61296 went from 1,088 to 4,014 words; 96288's
+speaker list came back). The one "loss" is post 32438's `[1]` markers, which became linked
+footnotes. No post keeps a surplus `</div>`.
+Live, on 217 pages (all 105 button posts, the 72 others changed, 40 random; 118 are Leaf
+pages on si-v4), before → after: paragraphs outside the reading column **4,140 → 0**;
+pages with the footer pushed out of Blocksy's container **73 → 2** (the two are R6c);
+Leaf buttons **0 → 187** (legacy `[button]` shortcodes were broken the same way); the 26
+random Leaf pages that were fine are identical. Words dropped only where the colophon had
+been swallowed into the column and now sits outside it again. The R1 finding (cached
+renders skip core block CSS) needs nothing: the formatter strips the classes that CSS
+would style. Backup: `blocksy-child-before-r6-formatter-20260924.tgz`.

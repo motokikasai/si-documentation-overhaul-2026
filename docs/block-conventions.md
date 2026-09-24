@@ -64,9 +64,13 @@ Blocksy puts its eight palette slots into the editor as `palette-color-1 … pal
 - A field that exists only for one view is still content structure: it is registered in a
   plugin, not in the theme.
 
-The migrated archive (4,140 posts) is classic HTML with `si-*` markup from
-`SI_Shortcodes::convert`. It stays classic; the Article formatter renders it. The "real
-blocks" and "Code Editor" rules apply to content written from now on.
+The migrated archive is mixed: **3,089 of 4,140 posts already contain block markup** (from
+2020 on), the rest is classic HTML with `si-*` markup from `SI_Shortcodes::convert`. Neither
+is converted. In Articles, Leaf's formatter normalises both into one reading column: it
+drops the legacy blocks' ad-hoc styling (1,779 posts carry some — red text, cyan boxes,
+centring), turns every button into Leaf's button, keeps the Eyebrow and Source styles, and
+gives every quote Leaf's quote (R6). The "real blocks" and "Code Editor" rules apply to
+content written from now on. (Corrected 2026-09-24: this said "the archive is classic HTML".)
 
 ## 4 · The ladders
 
@@ -126,7 +130,7 @@ blocks" and "Code Editor" rules apply to content written from now on.
 | 5 | Every section a core-block pattern | Views are PHP template parts | Split editor-authored vs data-driven (§3) |
 | 6 | Patterns in `/patterns/`, blocks in "the site plugin" | No site plugin; model in a mu-plugin; some structure in the theme | New plugin `schiller-editorial`; model stays in its mu-plugin (D1); theme-held structure moves out one item at a time |
 | 7 | Header/footer as template parts | No FSE; Blocksy builder | Blocksy builder; footer hosting = ask first |
-| 8 | All text in core blocks | Archive is classic HTML | Rule applies to new content; archive stays classic |
+| 8 | All text in core blocks | Archive is mixed: 3,089 block, 1,051 classic (corrected in R6) | Rule applies to new content; the archive is normalised at render, never converted |
 | 9 | Blocks built with `@wordpress/scripts` | Hero is unbuilt | New blocks built; hero migrates when next reworked |
 | 10 | Stop and ask; no improvised code | Formatter and payload PHP exist | Rule governs new work; existing code refactored per the plan |
 | 11 | One extension ladder | "Blocksy filters before templates" | Two ladders: frame and content (§4) |

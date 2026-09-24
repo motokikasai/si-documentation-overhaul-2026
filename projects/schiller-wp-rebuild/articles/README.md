@@ -206,6 +206,26 @@ the words in one, and nothing touches capitalisation — the obvious "fix the
 ALL-CAPS headings" pass matches every Cyrillic heading in the archive, which is
 why it was measured and then dropped.
 
+### Block content, buttons, and two repairs (R6, 2026-09-24)
+
+**3,089 of the 4,140 posts contain block markup**, not only the classic ones. The
+normalisation above applies to both, and it is what removes the block posts' ad-hoc styling
+(1,779 carry some). Since R6, `article-format.php` also:
+
+| Pass | What | Posts |
+|---|---|---|
+| `buttons()` | a button block becomes Leaf's button, `<p class="si-button"><a class="si-btn">` — the migration's `[button]` shape. Buttons with no destination are left alone | 137 buttons in 105 posts |
+| `KEEP_STYLES` | keeps the Eyebrow and Source block styles (schiller-editorial). Quotes keep Leaf's quote; any button is Leaf's button | new content only — 0 legacy posts |
+| hygiene `$divs` | a `</div>` is kept only if its `<div>` was — a surplus one closed the reading column | 1,555 |
+| `balance_p` | tag vs text by **position** in the split, not by first character — a paragraph opening with `<strong>`/`<em>`/`<a>` was closed empty | 2,587 |
+
+To measure a rule change before shipping it, run both versions over every body:
+`php articles/build/format-harness.php <article-format.php> <out.json>` (with
+`SI_DUMP=<ids> SI_DUMP_DIR=<dir>` to write the HTML of chosen posts), then diff the JSON:
+output hash, text-only hash, words, paragraphs, buttons, surplus `</div>`. Still open:
+empty third-party `<iframe>` boxes (R6b) and bold/italic left open across a block (R6c) —
+`docs/refactor-plan.md`.
+
 ### Footnotes
 
 Twelve articles carry a real note list with **69 notes between them**; the

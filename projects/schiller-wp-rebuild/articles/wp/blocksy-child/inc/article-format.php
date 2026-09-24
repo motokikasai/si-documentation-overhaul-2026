@@ -29,13 +29,20 @@
 
 defined('ABSPATH') || exit;
 
-const SI_ARTICLE_FORMAT_VERSION = 2;   // bump on EVERY rule change: the cache key does not know the rules changed
+const SI_ARTICLE_FORMAT_VERSION = 4;   // bump on EVERY rule change: the cache key does not know the rules changed
+                                       // 3: button blocks → Leaf buttons; Eyebrow/Source kept; </div> paired (R6)
+                                       // 4: balance_p decides tag vs text by position, not first character (R6)
 const SI_ARTICLE_WPM = 220;      // the reading rate the prototypes' figures were built at
 
 final class SI_Article_Format {
 
 	/** Tags a reading column may contain. Everything else is unwrapped. */
 	private const KEEP = 'p|br|em|i|strong|b|a|h2|h3|h4|h5|blockquote|ul|ol|li|figure|figcaption|img|hr|sup|sub|table|thead|tbody|tr|td|th|details|summary|aside|pre|section|cite|small|mark|del|ins|code|iframe|div|span';
+
+	/** Editor-chosen block styles a reading column keeps (schiller-editorial, R4). Only the
+	 *  text-level ones: a quote renders as Leaf's quote and a button as Leaf's button,
+	 *  whatever style the editor picked. No legacy post carries any is-style-si-* class. */
+	private const KEEP_STYLES = '/^is-style-si-(?:eyebrow|eyebrow-ruled|source)$/';
 
 	private const NOTE_LABEL = '/^\s*(notes?|foot\s?notes?|end\s?notes?|anmerkungen|fu[sß]{1,2}noten|references?|quellen|sources?)\s*[:.\x{2014}-]*\s*$/iu';
 
@@ -69,6 +76,7 @@ final class SI_Article_Format {
 		$html = str_replace(']]>', ']]&gt;', $html);
 
 		$html = self::video($html);
+		$html = self::buttons($html);
 		$html = self::hygiene($html);
 		$html = self::lift_byline($html, $byline);
 		[$html, $deck] = self::structure($html, $post->post_title);
@@ -102,13 +110,38 @@ final class SI_Article_Format {
 		return preg_replace('#<figure[^>]*\bwp-block-embed\b[^>]*>\s*(<div[^>]*>)?\s*(<figure class="si-embed"[^>]*></figure>)\s*(</div>)?\s*(<figcaption[^>]*>.*?</figcaption>)?\s*</figure>#is', '$2$4', $s);
 	}
 
+	/* -------------------------------------------------------------- buttons */
+	/** Button blocks become Leaf's own button — the exact shape the migration writes for
+	 *  the legacy [button] shortcode (03-shortcode-conversion-table): one
+	 *  <p class="si-button"><a class="si-btn"> per button. Measured on the dump: 143 button
+	 *  links in 110 articles, nearly all calls to action (sign, register, join). A button
+	 *  with no destination is left alone: a button that goes nowhere would be invented. */
+	private static function buttons(string $s): string {
+		return preg_replace_callback(
+			'#<a\b([^>]*\bclass="[^"]*\bwp-block-button__link\b[^"]*"[^>]*)>(.*?)</a>#is',
+			static function ($m) {
+				if (!preg_match('/\bhref="\s*([^"#\s][^"]*)"/i', $m[1]) || trim(strip_tags($m[2])) === '') {
+					return $m[0];
+				}
+				$attrs = preg_replace('/\sclass="[^"]*"/i', ' class="si-btn"', $m[1]);
+				return '<p class="si-button"><a' . $attrs . '>' . $m[2] . '</a></p>';
+			},
+			$s
+		);
+	}
+
 	/* -------------------------------------------------------------- hygiene */
 	private static function hygiene(string $s): string {
 		$s = preg_replace('#<(script|style|noscript|form)\b.*?</\1\s*>#is', '', $s);
 		$s = preg_replace('/<!--.*?-->/s', '', $s);
 
-		// unwrap tags that are not in the reading vocabulary
-		$s = preg_replace_callback('#<(/?)([a-z0-9]+)((?:\s[^>]*)?)/?>#i', static function ($m) {
+		/* Unwrap tags that are not in the reading vocabulary. A <div> is kept only for its si-
+		   classes, so its </div> must follow its opening tag: a </div> left behind when the
+		   opening was dropped closes the NEAREST open div in the browser — the reading column
+		   itself, then Blocksy's containers (seen live: 2014-02-03 "Unsterblichkeit im
+		   Präsidentenamt", six blocks and the footer pushed out). $divs pairs them. */
+		$divs = [];
+		$s = preg_replace_callback('#<(/?)([a-z0-9]+)((?:\s[^>]*)?)/?>#i', static function ($m) use (&$divs) {
 			$name = strtolower($m[2]);
 			if (!preg_match('/^(?:' . self::KEEP . ')$/', $name)) {
 				return '';
@@ -117,8 +150,12 @@ final class SI_Article_Format {
 				return '';                                   // never carries meaning here
 			}
 			if ($name === 'div') {
+				if ($m[1]) {
+					return array_pop($divs) ? '</div>' : '';   // dropped opening, or none at all
+				}
 				$keep = self::si_classes($m[3]);
-				return $m[1] ? '</div>' : ($keep ? '<div class="' . esc_attr($keep) . '">' : '');
+				$divs[] = $keep !== '';
+				return $keep ? '<div class="' . esc_attr($keep) . '">' : '';
 			}
 			if ($m[1]) {
 				return '</' . $name . '>';
@@ -152,8 +189,12 @@ final class SI_Article_Format {
 		$parts = preg_split('#(</?p\b[^>]*>)#i', $s, -1, PREG_SPLIT_DELIM_CAPTURE);
 		$out = '';
 		$depth = 0;
-		foreach ($parts as $part) {
-			if ($part === '' || $part[0] !== '<') {
+		/* With DELIM_CAPTURE the pieces alternate text, tag, text, tag … — so it is the
+		   POSITION that says which is a <p> tag. Testing the first character took a paragraph
+		   that opens with <strong>, <em> or <a> for a tag and closed it empty before its own
+		   text (R6: "<p></p><strong>…"; every Leaf button broke the same way). */
+		foreach ($parts as $i => $part) {
+			if ($i % 2 === 0) {
 				$out .= $part;
 				continue;
 			}
@@ -202,7 +243,7 @@ final class SI_Article_Format {
 			return '';
 		}
 		$keep = array_filter(preg_split('/\s+/', $m[1]), static fn($c) =>
-			str_starts_with($c, 'si-') || str_starts_with($c, 'call-to-action'));
+			str_starts_with($c, 'si-') || str_starts_with($c, 'call-to-action') || preg_match(self::KEEP_STYLES, $c));
 		return implode(' ', $keep);
 	}
 

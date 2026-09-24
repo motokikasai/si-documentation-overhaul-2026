@@ -39,8 +39,9 @@ relevant numbered doc or the project README, not only into a commit message.
   header/footer builder. Page and post *bodies* are the block editor.
 - **Content model:** 7 `si_*` post types + 5 taxonomies registered with core APIs in the
   mu-plugin `schiller-content-model-v3.php` (decision D1: always present, even for WP-CLI);
-  **Pods** extends them with the fields. The migrated archive (4,140 posts) is **classic
-  HTML**, not block markup.
+  **Pods** extends them with the fields. Of the migrated archive's 4,140 posts, **3,089
+  already contain block markup** (every year from 2020; the other 1,051 are classic HTML).
+  Leaf's Article formatter normalises both into one reading column; nothing is converted.
 - **Translation: WPML** (core, String Translation, Media). WPML reads `wpml-config.xml`
   from the root of an active plugin or theme, and from `mu-plugins/<name>/` — **never from
   `mu-plugins/` itself**.
@@ -127,7 +128,8 @@ Full detail, with the reasoning behind each resolution: @docs/block-conventions.
 - **New work follows the conventions above immediately.**
 - **Existing components keep working until they are refactored.** Grandfathered today:
   the PHP views and their CSS, the profile fields registered in the theme,
-  `si-hero-earth`'s unbuilt editor script, the classic-HTML archive.
+  `si-hero-earth`'s unbuilt editor script, the archive's own markup (normalised at render
+  by the Article formatter, never converted).
 - **Refactor one component at a time, never breaking live content.** Each step: back up,
   change one thing, verify on si-v4 in every language (EN and DE at least), then the next.
   Stored data (post meta, `wp_block` posts, block attributes) is never renamed in place.
