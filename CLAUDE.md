@@ -23,6 +23,7 @@ and the mistakes; this file is only the map, the environment and the conventions
 | `projects/schiller-wp-rebuild/conferences/` | the five `/conferences/{slug}/` drafts, their payload builder and four worked records |
 | `projects/schiller-wp-rebuild/videos/` | the five `/videos/{slug}/` drafts, the caption corpus, their payload builder and four worked records |
 | `projects/schiller-wp-rebuild/wp-plugins/si-hero-earth/` | the homepage hero as two dynamic blocks + the homepage pattern |
+| `projects/schiller-wp-rebuild/wp-plugins/schiller-editorial/` | the site plugin: `wpml-config.xml` now; patterns, block styles, bindings next |
 | `projects/schiller-wp-rebuild/*.md` | the original specs: data model, migration outline, classification ruleset, backend runbook |
 | `docs/` | the block conventions and the refactor plan (below) |
 
@@ -40,12 +41,14 @@ relevant numbered doc or the project README, not only into a commit message.
   **Pods** extends them with the fields. The migrated archive (4,140 posts) is **classic
   HTML**, not block markup.
 - **Translation: WPML** (core, String Translation, Media). WPML reads `wpml-config.xml`
-  from a theme or plugin root, **not reliably from mu-plugins**.
+  from the root of an active plugin or theme, and from `mu-plugins/<name>/` — **never from
+  `mu-plugins/` itself**.
 - **Plugins of ours:** `si-hero-earth` (regular plugin). The site plugin **`schiller-editorial`**
   ("Schiller Institute — Editorial Toolkit": how editors write and present content, beside
-  `schiller-content-model`, which says what the content is) is decided but not yet created —
-  see the refactor plan. Inside it, code keeps the `si` prefix: patterns `si/…`, block
-  styles `is-style-si-…`, text domain `si`.
+  `schiller-content-model`, which says what the content is) is live on si-v4 (0.1.0,
+  2026-09-24) and carries `wpml-config.xml` — **keep it active**. See the refactor plan.
+  Inside it, code keeps the `si` prefix: patterns `si/…`, block styles `is-style-si-…`,
+  text domain `si`.
 - **Design system: Jasper** — tokens, fonts, components in `blocksy-child/assets/jasper/`.
 
 ## The environment (this box)
@@ -122,8 +125,8 @@ Full detail, with the reasoning behind each resolution: @docs/block-conventions.
 
 - **New work follows the conventions above immediately.**
 - **Existing components keep working until they are refactored.** Grandfathered today:
-  the PHP views and their CSS, the profile fields registered in the theme, the theme's
-  `wpml-config.xml`, `si-hero-earth`'s unbuilt editor script, the classic-HTML archive.
+  the PHP views and their CSS, the profile fields registered in the theme,
+  `si-hero-earth`'s unbuilt editor script, the classic-HTML archive.
 - **Refactor one component at a time, never breaking live content.** Each step: back up,
   change one thing, verify on si-v4 in every language (EN and DE at least), then the next.
   Stored data (post meta, `wp_block` posts, block attributes) is never renamed in place.

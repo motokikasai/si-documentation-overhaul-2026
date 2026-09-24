@@ -1,7 +1,9 @@
 <wpml-config>
-  <!-- Content-model v3 WPML declaration (06 §6). INSTALL: copy into the Blocksy CHILD THEME
-       root (wp-content/themes/blocksy-child/wpml-config.xml) — WPML does not read mu-plugin
-       directories reliably. Person is display-as-translated (same canonical people on /de/). -->
+  <!-- Content-model v3 WPML declaration (06 §6). Lives at the root of the schiller-editorial
+       plugin, which must stay ACTIVE: WPML reads wpml-config.xml from active plugins and
+       themes (and from mu-plugins/<name>/wpml-config.xml only, never mu-plugins/ itself).
+       Moved here from the child theme in refactor plan R2 (2026-09-24).
+       Person is display-as-translated (same canonical people on /de/). -->
   <custom-types>
     <custom-type translate="2">si_person</custom-type>
     <custom-type translate="1">si_conference</custom-type>

@@ -230,7 +230,7 @@ Built and deployed to si-v4. Files in `wp/blocksy-child/`:
 | `template-parts/people/profile-guide.php` | The editor guide, including a diagram of which field fills which line of the hero. |
 | `templates/js/person-portrait-wp.js` | Behaviour only: two-click player, quote carousel, show-all, conference filter, section nav. Reads data attributes; strings come translated from the template. |
 
-New meta keys are declared in `wpml-config.xml` (sessions/…/mu-plugins, deployed to the child theme):
+New meta keys are declared in `wpml-config.xml` (in the `schiller-editorial` plugin since 2026-09-24; it was in the child theme):
 `si_descriptor`, `si_introduction`, `si_offices`, `si_quote_context` translate; `si_quotes`, `si_notable`, `people` copy.
 The prototype-only review strip moved to `templates/js/person-proto.js`; `package-wp.sh` refuses to ship it.
 `build/make-i18n.py` now also collects `_n()` plurals and double-quoted strings (si.pot: 303 entries).
@@ -294,7 +294,7 @@ people/build/package-wp.sh "/mnt/c/Users/kmomo/Local Sites/si-v4/app/public/wp-c
 
 This copies `functions.php` (**replaces** the stub; diff it first), `theme.json`, `inc/`,
 `template-parts/people/`, `tools/`, and the shipping CSS/JS/fonts into `assets/`. It leaves
-`style.css` and `wpml-config.xml` alone, and refuses to ship anything that references the
+`style.css` alone (the WPML config lives in the `schiller-editorial` plugin), and refuses to ship anything that references the
 prototype layer. Then, in Local → Open Site Shell:
 
 ```sh

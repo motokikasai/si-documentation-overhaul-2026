@@ -30,7 +30,7 @@ filter), **C1–C6** content ladder (style variation → block variation → pat
 |---|---|---|---|---|---|---|
 | 1 | Jasper tokens, fonts, components | custom CSS; palette via Blocksy filter + `apply-design-system.php` | child theme | T | stays in child theme | Low. Literal values outside `tokens.css` (e.g. `color: #fff` in `person-portrait.css`) — audit, don't guess |
 | 2 | Child `theme.json` | type + spacing presets aliasing `--si-*`; no `custom: false` | child theme | T | stays | Low. Editor UI only; existing custom values still render |
-| 3 | Content-model WPML config | `wpml-config.xml`, ~50 fields, 7 types, 5 taxonomies | **child theme** | — | `schiller-editorial` root | **WPML**: a changed `translate`/`action` value re-classifies fields; a missing file un-declares them. Duplicate first, compare, then remove |
+| 3 | Content-model WPML config | `wpml-config.xml`, ~50 fields, 7 types, 5 taxonomies | ~~child theme~~ → `schiller-editorial` (R2, done) | — | `schiller-editorial` root | **WPML**: a changed `translate`/`action` value re-classifies fields; a missing file un-declares them. Duplicate first, compare, then remove |
 | 4 | Profile fields (6 meta keys), meta boxes, status box, Profile guide | `register_post_meta` + custom meta-box PHP | **child theme** | C4 where possible (Pods fields + bindings); the JSON `si_quotes` stays custom (Pods free has no repeater — D2) | `schiller-editorial` | **Content structure in the theme.** Same keys, so no data moves; risk is double registration during the move and the WPML declarations (item 3) |
 | 5 | Profile invitation tile | synced pattern (`wp_block`) of core blocks, created on `admin_init`, ID in an option | creator in **child theme**; content in DB | C3 (synced pattern) — already there | creator → `schiller-editorial` | **WPML**: keep the same `wp_block` post and option key, or translations detach. Classes `pa-next__kicker`, `pa-invite__title` are saved in the block content: keep them styled; offer a `si-` block style for new copies |
 | 6 | Homepage pattern | serialized blocks; not locked | `si-hero-earth/patterns/` | C3 | stays | Low. Adding the `contentOnly` Group affects new inserts only; the live homepage is not rewritten. Copy is mirrored in `hero-earth/edit.js` — change both |
@@ -62,7 +62,7 @@ Low risk and high reuse first; each item is independent unless noted.
 | Step | Item(s) | Why now | Risk |
 |---|---|---|---|
 | R1 **done 2026-09-23** | 2 — `custom: false` for colours and font sizes in child `theme.json` | Every pattern after this relies on editors seeing presets only | Low |
-| R2 | 3 — create `schiller-editorial` (skeleton), copy `wpml-config.xml` into it, verify WPML reads it, **then** delete the theme copy | Home for all new work; unblocks R4–R7 | Medium (WPML) |
+| R2 **done 2026-09-24** | 3 — create `schiller-editorial` (skeleton), copy `wpml-config.xml` into it, verify WPML reads it, **then** delete the theme copy | Home for all new work; unblocks R4–R7 | Medium (WPML) |
 | R3 | 6 — `contentOnly` Group around the homepage pattern | Tiny, and sets the pattern for all patterns | Low |
 | R4 | first block style variations the Tier-1 pages need (buttons, quote, a `si-` tile for the invitation) | New work; every page pattern reuses them | Low |
 | R5 | 5 — move the invitation's creator to `schiller-editorial`, same option key, same `wp_block` | First theme-held structure out; small | Medium (WPML) |
@@ -94,3 +94,32 @@ the core block stylesheets its content uses (5 on a fresh DE article) and `wp-em
 every **cached** render loads 1. The formatter's transient skips `do_blocks`, so nothing
 enqueues them. Harmless today — the formatter strips `wp-block-*` classes from the body —
 but it will matter once posts are written in blocks.
+
+**R2 — 2026-09-24, done.** `schiller-editorial` 0.1.0 created
+(`projects/schiller-wp-rebuild/wp-plugins/schiller-editorial/`) carrying `wpml-config.xml`,
+identical to the theme's apart from its comment; the session copy in
+`sessions/…/mu-plugins/` removed, so the plugin is the one source. Backups: DB
+`si-v4-before-r2-20260924.sql`, theme `blocksy-child-before-r2-wpml-config-20260924.tgz`.
+Checked with the new read-only `tools/check-wpml-config.php` (72 declared items: 7 types,
+5 taxonomies, 60 fields — stored mode + config lock), each run after loading wp-admin →
+Plugins, where WPML re-reads config files:
+
+| Stage | Files WPML reads (ours) | 72 items |
+|---|---|---|
+| before | theme | all ok, locked |
+| plugin activated, both present | plugin + theme | identical |
+| theme copy deleted | plugin | identical |
+
+Front end re-checked on the nine R1 pages: unchanged. The only difference is Blocksy's
+`global.css?ver=`, which is the file's mtime — Blocksy regenerates the file whenever the
+Plugins screen loads after an activation; the eight palette slots in it are unchanged.
+
+Found on the way:
+- WPML 4.8.4 reads `wpml-config.xml` from `mu-plugins/<name>/`, never from `mu-plugins/`
+  itself (`WPML_Config::load_plugins_wpml_config`). The copy that sat in `sessions/…/mu-plugins/`
+  was never meant to be read there — the docs already said so — and now no longer exists.
+- WPML re-reads config files only on a short list of admin pages (Plugins, Themes, WPML →
+  Languages / Theme localization / Settings, String Translation), never on the front end or
+  WP-CLI. A config change is invisible until one of them loads.
+- Deactivating `schiller-editorial` would un-declare every `si_*` type, taxonomy and field at
+  the next such page load (they would come back unlocked, modes kept). Keep it active.

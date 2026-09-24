@@ -105,7 +105,10 @@ URLs from the crawl). Two rules, both learned the hard way:
 ## 5 · Running things
 
 - WP-CLI and anything touching the database run in Local's **"Open Site Shell"**, not WSL.
-  `wp db export` there needs `--host=127.0.0.1 --port=10047 --user=root --pass=root`.
+  `wp db export` there needs `--host=127.0.0.1 --port=10047 --user=root --pass=root`. It
+  prints two warnings — `'grep' is not recognized` and `Access denied for user
+  'root'@'localhost'` — from WP-CLI's charset probe, which ignores those flags. Harmless: the
+  dump is complete if it ends `-- Dump completed on …` (checked 2026-09-24, 95 tables, utf8mb4).
 - Take a backup before every apply: the site DB, and a `.tgz` of the child theme.
   `/mnt/c/Users/kmomo/Local Sites/si-v4/backups/` is where the previous ones are.
 - The importer is idempotent by key (`_person_key` and friends); a dry run reports what it

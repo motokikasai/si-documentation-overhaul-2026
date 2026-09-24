@@ -34,6 +34,11 @@ has been verified.
 ## P1 · Plugins and the content model
 
 - [ ] Pods, WPML (CMS + String Translation + Media), Blocksy + blocksy-child.
+- [ ] Plugin `schiller-editorial` (`projects/schiller-wp-rebuild/wp-plugins/schiller-editorial/`
+      → `wp-content/plugins/`), **activated**. It carries `wpml-config.xml` — the translation
+      settings of every `si_*` type, taxonomy and field — and must stay active. Load wp-admin →
+      Plugins once (WPML re-reads config files only there), then
+      `wp eval-file wp-content/plugins/schiller-editorial/tools/check-wpml-config.php` → `Success`.
 - [ ] `mu-plugins/schiller-content-model-v3.php` — registers the seven CPTs, the five
       taxonomies and the Pods fields. Verify `/people/`, `/conferences/`, `/media/`,
       `/videos/`, `/library/`, `/statements/`, `/coverage/` all resolve before importing.

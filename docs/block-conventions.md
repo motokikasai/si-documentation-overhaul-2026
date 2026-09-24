@@ -14,7 +14,7 @@ keeps every older rule it touched. `CLAUDE.md` carries the short form.
 | Content model | 7 `si_*` types, 5 taxonomies (core APIs) + Pods fields | mu-plugin `schiller-content-model-v3.php` |
 | Importer, lab proxy | `si-migrate.php`, `si-media-proxy.php` (lab only, refuses non-local hosts) | mu-plugins |
 | Hero | `si/hero-earth` + `si/hero-act`, dynamic blocks; homepage pattern | plugin `si-hero-earth` |
-| Site plugin | patterns, block styles/variations, bindings, new blocks, `wpml-config.xml` | plugin `schiller-editorial`, shown as "Schiller Institute — Editorial Toolkit" — **decided 2026-09-23, not yet created**. Code inside keeps the `si` prefix (`si/…` patterns, `is-style-si-…`, text domain `si`) |
+| Site plugin | patterns, block styles/variations, bindings, new blocks, `wpml-config.xml` | plugin `schiller-editorial`, shown as "Schiller Institute — Editorial Toolkit" — **0.1.0 live since 2026-09-24 (R2)**, carrying `wpml-config.xml`. Code inside keeps the `si` prefix (`si/…` patterns, `is-style-si-…`, text domain `si`) |
 | Translation | WPML core + String Translation + Media | plugins |
 
 Blocksy puts its eight palette slots into the editor as `palette-color-1 … palette-color-8`

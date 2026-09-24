@@ -33,7 +33,7 @@ Source folder (in the repo): `sessions/2026-07-17-migration-tooling/mu-plugins/`
 |---|---|---|
 | `schiller-content-model-v3.php` | `wp-content/mu-plugins/` | create the `mu-plugins` folder if missing |
 | `si-migrate.php` | `wp-content/mu-plugins/` | same folder |
-| `wpml-config.xml` | `wp-content/themes/<ACTIVE THEME>/` | NOT mu-plugins. Find theme: `wp theme list --status=active` |
+| `wpml-config.xml` | ships in the `schiller-editorial` plugin: copy `projects/schiller-wp-rebuild/wp-plugins/schiller-editorial/` to `wp-content/plugins/` and **activate** it | not the theme, not mu-plugins (refactor plan R2, 2026-09-24) |
 
 mu-plugins load automatically — no activation step exists or is needed.
 
@@ -44,11 +44,11 @@ silently re-runs the old defects. As of 2026-09-08 (both PHP files changed durin
 ```
 c7d00e93a537ff7bac706fa5215e069f  schiller-content-model-v3.php
 1d62dfd6f076195771c2d09da4b04ddd  si-migrate.php
-63fdef80c6207a5bc109402b093ad85f  wpml-config.xml
+f235293df25079e1718cacaa79ed68a5  schiller-editorial/wpml-config.xml   (2026-09-24)
 ```
 
 The active theme must be a **Blocksy child**. A plain Local restore activates the parent
-`blocksy`; `wpml-config.xml` dropped into the parent is lost on the next theme update. If the
+`blocksy`, and the Jasper kits only ship into the child. If the
 child is missing, create `wp-content/themes/blocksy-child/` with a `style.css`
 (`Template: blocksy`) plus an empty `functions.php`, then `wp theme activate blocksy-child`.
 
@@ -61,7 +61,9 @@ wp help si:verify                           # must show the command (si-migrate.
 ```
 
 Plus one browser check: WPML → Settings → Post Types Translation lists the si_* types
-(proves wpml-config.xml was found in the active theme).
+(proves the plugin's wpml-config.xml was read). Stronger, from the Site Shell after loading
+wp-admin → Plugins once: `wp eval-file wp-content/plugins/schiller-editorial/tools/check-wpml-config.php`
+must end in `Success`.
 
 ## D. Baseline capture (required by `si:verify` at the end)
 

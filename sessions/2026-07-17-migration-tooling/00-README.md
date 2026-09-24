@@ -30,7 +30,7 @@ the interface between the two is **`01-csv-contracts.md`**; Day-1 outputs land i
 | `04-redirect-rules.md` | Pattern rules + row-level 301 sources; feeds `wp si:redirects` | ✅ draft (finalize at P5 with the crawl) |
 | `mu-plugins/schiller-content-model-v3.php` | 7 CPTs + 5 taxonomies + seed terms + auto-si_format; WP-core registration, Pods extends fields. Design decisions D1–D4 in header (line-format pseudo-repeaters!) | ✅ php -l clean; **round-trip each field type on ONE sample record on Local before bulk runs** (playbook 08 §3) |
 | `mu-plugins/si-migrate.php` | The full `wp si:*` surface: classify · persons(+--create/--reconcile) · transform · shortcodes · media(--rank/--promote) · categories(prep/merge/retire) · redirects · verify · delta · yt-dump · yt-playlists · yt-conferences · yt-scan · conferences · presentations · transcripts | ✅ php -l clean; parsers 71/71 tests green |
-| `mu-plugins/wpml-config.xml` | v3 translatability declaration — **copy into the Blocksy child-theme root**, not mu-plugins | ✅ |
+| ~~`mu-plugins/wpml-config.xml`~~ | **Moved 2026-09-24 (refactor plan R2)** to `projects/schiller-wp-rebuild/wp-plugins/schiller-editorial/wpml-config.xml`: install and activate that plugin. WPML never read the copy that sat in `mu-plugins/` (it looks only in `mu-plugins/<name>/`). | ✅ |
 | `tools/dump-census.py` | Streaming SQL-dump census (no MySQL); reusable on the fresh live clone for the divergence check | ✅ validated against 8 known counts |
 | `tools/test-parsers.php` | 71 unit tests over the parser matrix, fixtures verbatim from the audits. `php tools/test-parsers.php` | ✅ green |
 | `tools/yt-dump.sh` | Standalone dump (same layout `si:yt-*` consumes) for no-WP machines; skip if Day-1 already dumped | ✅ |
