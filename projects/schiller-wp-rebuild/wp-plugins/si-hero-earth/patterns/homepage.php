@@ -10,6 +10,24 @@
  * The hero's copy is mirrored in blocks/hero-earth/edit.js (the insert
  * template). If you change one, change the other.
  *
+ * LOCKING (0.3.3, refactor plan R3). Each core-block section is a Group with
+ * templateLock "contentOnly": editors change words, links and images, not the
+ * structure (docs/block-conventions.md §3). The hero is NOT inside such a
+ * Group, on purpose: it locks its own structure (its four acts are
+ * templateLock "all", and it allows one instance per page), and a
+ * contentOnly ancestor would hide its settings panel and — since its
+ * attributes carry no "content" role — its act text too. A new core-block
+ * section added here gets its own contentOnly Group.
+ *
+ * THE PAGE IT GOES ON needs four Blocksy page settings (sidebar → Blocksy's
+ * page settings), or Blocksy frames it with its own title band — a second
+ * <h1> above the hero's. setup-homepage.php writes them for the front page;
+ * on any other page an editor sets them:
+ *   Page Title                      → Disabled      (has_hero_section)
+ *   Page Structure                  → no sidebar    (page_structure_type type-4)
+ *   Content Area Style              → Custom, Wide  (content_style)
+ *   Content Area Vertical Spacing   → Custom, None  (content_area_spacing)
+ *
  * @package si-hero-earth
  */
 
@@ -23,7 +41,7 @@ $si_content = <<<'HTML'
 <!-- wp:si/hero-act {"stage":3,"kicker":"A Movement of World Citizens","heading":"The future needs <em>you</em>","lead":"Join a worldwide movement for peace through development and a new renaissance of classical culture.","ctaEnabled":true,"ctaPlaceholder":"Your email address","ctaButton":"Join the movement","ctaNote":"Weekly ideas, webcasts &amp; invitations. Double opt-in, unsubscribe anytime."} /-->
 <!-- /wp:si/hero-earth -->
 
-<!-- wp:group {"tagName":"section","align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|80","bottom":"var:preset|spacing|80"}}},"layout":{"type":"constrained"}} -->
+<!-- wp:group {"tagName":"section","align":"full","templateLock":"contentOnly","style":{"spacing":{"padding":{"top":"var:preset|spacing|80","bottom":"var:preset|spacing|80"}}},"layout":{"type":"constrained"}} -->
 <section class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)">
 <!-- wp:heading {"textAlign":"center","level":2} -->
 <h2 class="wp-block-heading has-text-align-center">Four ideas, one method</h2>

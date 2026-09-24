@@ -91,6 +91,9 @@ PW=… node articles/build/shoot-wp.mjs
 ```
 
 - The packager refuses to ship a file that *loads* anything from the prototype layer.
+- **Fetch twice after a deploy.** Local's opcache revalidates PHP on a timer, so the first
+  request after a copy can still run the old file (seen 2026-09-24: `?ver=` stayed at the
+  old version on the first fetch, correct on the second).
 - **Bump the `*_VERSION` constant for any rule you changed.** The transient key knows the
   content changed, not that the rules did. Three correct fixes once looked like no-ops.
 - Anything needing the database (`wp eval-file`, `wp db export`) runs in Local's

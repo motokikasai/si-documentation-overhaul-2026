@@ -135,6 +135,27 @@ note; with neither, no `.si-hero__cta` at all. si-v4 has neither set, so its
 act 4 is kicker, heading and lead until a newsletter endpoint exists — then
 it is one block setting. `tools/render-test.php` covers all three shapes.
 
+### 0.3.3 — the homepage pattern's section is content-only (2026-09-24)
+
+Refactor plan R3. The "Four ideas, one method" Group in `patterns/homepage.php` carries
+`"templateLock":"contentOnly"`: editors change its words and links, and cannot move,
+delete or add blocks inside it. The hero stays outside any contentOnly Group on purpose —
+it already locks its own structure (acts `templateLock: 'all'`, `multiple: false`), and a
+contentOnly ancestor would hide its settings panel and, since `si/hero-act`'s attributes
+carry no `"role": "content"`, its act text as well. Only new inserts of the pattern are
+affected: `setup-homepage.php` never rewrites the live homepage without `force`.
+Proved with WordPress's own block parser: the same 25 blocks, the same HTML and
+attributes, plus the one lock.
+
+Checked in the editor on si-v4: act text and the hero's settings panel editable, the
+section's words and links editable, its blocks not movable or removable, no validation
+warning after save and reload. One thing the check surfaced, which is not the pattern's
+doing: **on any page other than the front page, Blocksy adds its own title band** (a second
+`<h1>` above the hero's). The page needs Blocksy's per-page settings — Page Title
+*Disabled*, no sidebar, Content Area Style *Wide*, Vertical Spacing *None* — which
+`setup-homepage.php` writes for the front page and an editor sets by hand anywhere else.
+The list is in the pattern's header.
+
 **Dependency:** the type and spacing come from Jasper's tokens, which the child
 theme enqueues on every page (`inc/jasper.php`); the plugin ships no webfont.
 The `--si-hero-*` roles have literal fallbacks, so without the theme the hero

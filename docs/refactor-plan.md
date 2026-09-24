@@ -63,7 +63,7 @@ Low risk and high reuse first; each item is independent unless noted.
 |---|---|---|---|
 | R1 **done 2026-09-23** | 2 — `custom: false` for colours and font sizes in child `theme.json` | Every pattern after this relies on editors seeing presets only | Low |
 | R2 **done 2026-09-24** | 3 — create `schiller-editorial` (skeleton), copy `wpml-config.xml` into it, verify WPML reads it, **then** delete the theme copy | Home for all new work; unblocks R4–R7 | Medium (WPML) |
-| R3 | 6 — `contentOnly` Group around the homepage pattern | Tiny, and sets the pattern for all patterns | Low |
+| R3 **done 2026-09-24** | 6 — `contentOnly` Group around the homepage pattern | Tiny, and sets the pattern for all patterns | Low |
 | R4 | first block style variations the Tier-1 pages need (buttons, quote, a `si-` tile for the invitation) | New work; every page pattern reuses them | Low |
 | R5 | 5 — move the invitation's creator to `schiller-editorial`, same option key, same `wp_block` | First theme-held structure out; small | Medium (WPML) |
 | R6 | 12 — measure the formatter on a block-authored post; then skip or narrow it for block content, facade via `render_block` on `core/embed` | Must land before editors write new posts in blocks | Medium (live Articles) |
@@ -123,3 +123,30 @@ Found on the way:
   WP-CLI. A config change is invisible until one of them loads.
 - Deactivating `schiller-editorial` would un-declare every `si_*` type, taxonomy and field at
   the next such page load (they would come back unlocked, modes kept). Keep it active.
+
+**R3 — 2026-09-24, done (si-hero-earth 0.3.3).** Editor check passed on si-v4: hero act text
+and settings editable; the section's words and links editable, its blocks locked; no
+validation warning after save and reload.
+`"templateLock":"contentOnly"` on the "Four ideas, one method" Group of
+`patterns/homepage.php`. **Deliberately not an outer Group around the whole pattern:** the
+hero locks its own structure (acts `templateLock: 'all'`, `multiple: false`); a contentOnly
+ancestor would hide its settings panel and, because `si/hero-act`'s attributes carry no
+`"role": "content"`, make its act text uneditable; and a wrapper `<div>` around the sticky
+520vh runway is a layout risk for nothing. Rule, written into the pattern's header: each
+core-block section gets its own contentOnly Group; a custom block locks itself.
+Proved with WordPress's own `WP_Block_Parser` (from si-v4, run in WSL): the same 25 blocks,
+the same HTML and attributes, plus the one lock; `tools/render-test.php` green. Backup:
+`si-hero-earth-0.3.2-before-r3-contentonly-20260924.tgz`. Only new inserts are affected —
+`setup-homepage.php` never rewrites the live homepage without `force`. Live homepage
+re-fetched: identical apart from `?ver=0.3.2` → `0.3.3`.
+
+Found on the way: right after a copy, si-v4 can still run the old PHP for a request or two
+(opcache revalidates on a timer), so the first fetch after a deploy may show the previous
+version. Fetch twice before believing a "no change".
+
+Also surfaced by the R3 editor check: a page built from the homepage pattern shows
+**Blocksy's title band** unless its per-page Blocksy settings switch it off (Page Title →
+Disabled; plus no sidebar, Content Area Style Wide, Vertical Spacing None). That is frame
+ladder rung F1 — an editor setting, no code. `setup-homepage.php` sets it for the front
+page; the list is in the pattern's header. If editors keep forgetting it, rung F2 would be a
+Blocksy filter keyed on the page containing `si/hero-earth` — not built; ask first.
