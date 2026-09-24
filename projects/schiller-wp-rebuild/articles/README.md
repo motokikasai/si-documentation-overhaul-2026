@@ -218,13 +218,15 @@ normalisation above applies to both, and it is what removes the block posts' ad-
 | `KEEP_STYLES` | keeps the Eyebrow and Source block styles (schiller-editorial). Quotes keep Leaf's quote; any button is Leaf's button | new content only — 0 legacy posts |
 | hygiene `$divs` | a `</div>` is kept only if its `<div>` was — a surplus one closed the reading column | 1,555 |
 | `balance_p` | tag vs text by **position** in the split, not by first character — a paragraph opening with `<strong>`/`<em>`/`<a>` was closed empty | 2,587 |
+| `embeds()` | third-party `<iframe>` (not YouTube): dropped in posts published before `SI_ARTICLE_EMBED_CUTOFF` (2021-09-24); after it, a Leaf button to the embedded page; a WordPress post embed's hidden iframe dropped (its blockquote links the post) | 64 empty boxes in 56 posts (R6b) |
+| `balance_inline()` | bold/italic closed at the end of their block; closing tags that close nothing dropped | 21 in 15 posts (R6c) |
 
 To measure a rule change before shipping it, run both versions over every body:
 `php articles/build/format-harness.php <article-format.php> <out.json>` (with
 `SI_DUMP=<ids> SI_DUMP_DIR=<dir>` to write the HTML of chosen posts), then diff the JSON:
-output hash, text-only hash, words, paragraphs, buttons, surplus `</div>`. Still open:
-empty third-party `<iframe>` boxes (R6b) and bold/italic left open across a block (R6c) —
-`docs/refactor-plan.md`.
+output hash, text-only hash, words, paragraphs, buttons, surplus `</div>`, empty iframes,
+bold/italic open across a block. **Bump `SI_ARTICLE_FORMAT_VERSION` with every rule change**
+— the first R6b deploy showed nothing because it was not bumped.
 
 ### Footnotes
 

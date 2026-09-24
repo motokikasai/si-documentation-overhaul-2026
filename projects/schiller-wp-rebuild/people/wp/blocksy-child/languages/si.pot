@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"POT-Creation-Date: 2026-09-20 12:04+0000\n"
+"POT-Creation-Date: 2026-09-24 20:16+0000\n"
 "X-Domain: si\n"
 
 #: inc/people-archive.php:108
@@ -644,30 +644,10 @@ msgid "View profile"
 msgstr ""
 
 #: inc/profile-fields.php:256
-#: inc/profile-fields.php:329
-#: inc/profile-fields.php:329
+#: inc/profile-fields.php:281
+#: inc/profile-fields.php:281
 #: template-parts/people/profile-guide.php:17
 msgid "Profile guide"
-msgstr ""
-
-#: inc/profile-fields.php:278
-msgid "Be in the room"
-msgstr ""
-
-#: inc/profile-fields.php:279
-msgid "Get the invitation to the next conference"
-msgstr ""
-
-#: inc/profile-fields.php:280
-msgid "Our conferences are open to the public, online and in the room."
-msgstr ""
-
-#: inc/profile-fields.php:281
-msgid "Invite me"
-msgstr ""
-
-#: inc/profile-fields.php:296
-msgid "Profile page — invitation"
 msgstr ""
 
 #: template-parts/people/chronicle.php:14
@@ -1482,11 +1462,24 @@ msgstr ""
 msgid "Names are set surname-first, as in a scholarly index; where a name is not naturally written that way, the person’s own order is kept. Years are those of recordings and articles in this archive, not a full biography."
 msgstr ""
 
-#: inc/article-format.php:336
+#: inc/article-format.php:136
+msgid "Open the sign-up form"
+msgstr ""
+
+#: inc/article-format.php:137
+msgid "Watch on Rumble"
+msgstr ""
+
+#: inc/article-format.php:138
+#, php-format
+msgid "Open on %s"
+msgstr ""
+
+#: inc/article-format.php:451
 msgid "Back to the text"
 msgstr ""
 
-#: inc/article-format.php:339
+#: inc/article-format.php:454
 msgid "Notes"
 msgstr ""
 
@@ -1600,5 +1593,45 @@ msgstr[1] ""
 
 #: template-parts/articles/ledger.php:133
 msgid "Point at a line — or move through them with ↑ and ↓ — to raise it here."
+msgstr ""
+
+#: schiller-editorial/inc/block-styles.php:29
+msgid "Eyebrow"
+msgstr ""
+
+#: schiller-editorial/inc/block-styles.php:30
+msgid "Eyebrow, ruled"
+msgstr ""
+
+#: schiller-editorial/inc/block-styles.php:31
+msgid "Source"
+msgstr ""
+
+#: schiller-editorial/inc/block-styles.php:34
+msgid "Jasper quote"
+msgstr ""
+
+#: schiller-editorial/inc/block-styles.php:37
+msgid "Ghost"
+msgstr ""
+
+#: schiller-editorial/inc/profile-invitation.php:32
+msgid "Be in the room"
+msgstr ""
+
+#: schiller-editorial/inc/profile-invitation.php:33
+msgid "Get the invitation to the next conference"
+msgstr ""
+
+#: schiller-editorial/inc/profile-invitation.php:34
+msgid "Our conferences are open to the public, online and in the room."
+msgstr ""
+
+#: schiller-editorial/inc/profile-invitation.php:35
+msgid "Invite me"
+msgstr ""
+
+#: schiller-editorial/inc/profile-invitation.php:51
+msgid "Profile page — invitation"
 msgstr ""
 

@@ -71,8 +71,8 @@ Low risk and high reuse first; each item is independent unless noted.
 | R8 | 4 — profile field registration and meta boxes to `schiller-editorial` (same keys); Pods + bindings where the field is plain | Largest theme-held structure; do after R2 and R5 have proven the path | Medium–high (editor UI, WPML) |
 | R9 | 13 — one-shot tools to `schiller-editorial/tools/` | Housekeeping | Low |
 | R10 | 7 — hero editor script to `@wordpress/scripts` | Only when the hero next needs real editor work | Medium (validation) |
-| R6b | Leaf: third-party `<iframe>`s lose their `src` and render as **empty boxes** — 64 in 56 posts (SoundCloud 33, Brevo/Sendinblue forms 25, Google Docs, Rumble, schillermeet) | Visible defect today; needs a decision — remove, or a two-click facade like YouTube's | Low (render only) |
-| R6c | Leaf: bold/italic left **open across a block's end** — 21 in 15 posts; the browser carries it forward (2 sampled pages: the footer ends up inside `<b>`) | Visible defect today | Low (render only) |
+| R6b **done 2026-09-24** | Leaf: third-party `<iframe>`s lose their `src` and render as **empty boxes** — 64 in 56 posts (SoundCloud 33, Brevo/Sendinblue forms 25, Google Docs, Rumble, schillermeet) | Visible defect today; needs a decision — remove, or a two-click facade like YouTube's | Low (render only) |
+| R6c **done 2026-09-24** | Leaf: bold/italic left **open across a block's end** — 21 in 15 posts; the browser carries it forward (2 sampled pages: the footer ends up inside `<b>`) | Visible defect today | Low (render only) |
 | — | 8–11, 14–16 | Already where the conventions want them | — |
 
 ## Log
@@ -238,3 +238,30 @@ random Leaf pages that were fine are identical. Words dropped only where the col
 been swallowed into the column and now sits outside it again. The R1 finding (cached
 renders skip core block CSS) needs nothing: the formatter strips the classes that CSS
 would style. Backup: `blocksy-child-before-r6-formatter-20260924.tgz`.
+
+**R6b + R6c — 2026-09-24, done (Article formatter v5).**
+*R6b, third-party embeds.* Measured by source and post date. SoundCloud (33 embeds,
+2015-08 → 2020-09) and Google Docs (2, 2013–14) are all older than five years; Brevo
+sign-up forms (25, 2021-10 → 2026-08), Rumble (2, 2024) and schillermeet.de (2, 2026) are
+all newer. Decided by the user: drop the older ones. For the newer ones, a Leaf button to
+the embedded page (the two-click rule forbids loading them, and an empty box is the worst
+outcome): "Open the sign-up form", "Watch on Rumble", otherwise "Open on {host}". A
+WordPress post embed's hidden iframe is dropped, since its blockquote already links the
+post. The rule keys on `SI_ARTICLE_EMBED_CUTOFF = '2021-09-24'`, the decision date, not
+on "five years ago": a rolling window would delete more every year (CLAUDE.md, living
+numbers).
+*R6c, bold and italic.* `balance_inline()` closes `strong/b/em/i` at the end of their
+block and drops closing tags that close nothing. Words are untouched.
+Harness over all 4,140: empty iframe boxes **64 → 0**, bold/italic open across a block
+**21 → 0**, Leaf buttons 137 → 164; the only word changes are the 27 new button labels
+and three `II :` → `II:` tokenisations. Live, 129 pages (all 109 changed plus 20 random,
+50 of them Leaf): empty iframes **24 → 0**, footer inside `<b>`/`<strong>` **12 → 0**,
+footers in their container 29 → 41 of 41, random pages identical. The one page "losing a
+word" (31700) lost the SoundCloud player between a quote and the next paragraph.
+**A slip worth recording:** the first deploy changed nothing, because I added the "5:"
+comment but left `SI_ARTICLE_FORMAT_VERSION = 4` and the cache served v4. That is the
+trap the si-frontend skill warns about. The live before/after snapshot caught it.
+Also: `make-pot.py` now scans `wp-plugins/schiller-editorial/inc` (same `si` domain).
+Since R5 the invitation's five strings had been about to drop out of `si.pot`, and the
+block-style labels were never in it. 336 strings. Backup:
+`blocksy-child-before-r6bc-embeds-inline-20260924.tgz`.

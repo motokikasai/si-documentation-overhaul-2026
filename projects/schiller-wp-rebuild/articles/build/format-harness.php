@@ -18,7 +18,7 @@ error_reporting(E_ALL & ~E_DEPRECATED);
 define('ABSPATH', '/tmp/');
 define('WEEK_IN_SECONDS', 604800);
 
-final class WP_Post { public $ID; public $post_title; public $post_content; public $post_modified_gmt = ''; }
+final class WP_Post { public $ID; public $post_title; public $post_content; public $post_date = ''; public $post_modified_gmt = ''; }
 function __($s, $d = null) { return $s; }
 function esc_attr($s) { return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8'); }
 function esc_attr__($s, $d = null) { return esc_attr($s); }
@@ -51,6 +51,7 @@ foreach ($posts as $p) {
 	$post->ID = (int) $p['id'];
 	$post->post_title = (string) $p['title'];
 	$post->post_content = (string) $p['html'];
+	$post->post_date = (string) $p['date'];
 	$r = $build->invoke(null, $post, []);
 	$h = $r['html'];
 	if (getenv('SI_DUMP') && in_array((string) $p['id'], explode(',', getenv('SI_DUMP')), true)) {

@@ -29,9 +29,17 @@
 
 defined('ABSPATH') || exit;
 
-const SI_ARTICLE_FORMAT_VERSION = 4;   // bump on EVERY rule change: the cache key does not know the rules changed
+const SI_ARTICLE_FORMAT_VERSION = 5;   // bump on EVERY rule change: the cache key does not know the rules changed
                                        // 3: button blocks → Leaf buttons; Eyebrow/Source kept; </div> paired (R6)
                                        // 4: balance_p decides tag vs text by position, not first character (R6)
+                                       // 5: third-party embeds — old ones dropped, recent ones a Leaf button (R6b);
+                                       //    bold/italic closed at the end of their block (R6c)
+
+/* Third-party <iframe>s (not YouTube) in posts published BEFORE this date are dropped;
+   later ones become a link. Decided 2026-09-24 (R6b), when every such embed before it was
+   SoundCloud or Google Docs and every one after it a Brevo form, Rumble or a WordPress post
+   embed. A fixed date, not "five years ago": a rolling window would delete more every year. */
+const SI_ARTICLE_EMBED_CUTOFF = '2021-09-24';
 const SI_ARTICLE_WPM = 220;      // the reading rate the prototypes' figures were built at
 
 final class SI_Article_Format {
@@ -76,6 +84,7 @@ final class SI_Article_Format {
 		$html = str_replace(']]>', ']]&gt;', $html);
 
 		$html = self::video($html);
+		$html = self::embeds($html, (string) $post->post_date);
 		$html = self::buttons($html);
 		$html = self::hygiene($html);
 		$html = self::lift_byline($html, $byline);
@@ -108,6 +117,29 @@ final class SI_Article_Format {
 			static fn($m) => sprintf('<figure class="si-embed" data-yt="%s"></figure>', esc_attr($m[1])), $s);
 		// the wrapper figure WordPress puts round an embed is now empty of use
 		return preg_replace('#<figure[^>]*\bwp-block-embed\b[^>]*>\s*(<div[^>]*>)?\s*(<figure class="si-embed"[^>]*></figure>)\s*(</div>)?\s*(<figcaption[^>]*>.*?</figcaption>)?\s*</figure>#is', '$2$4', $s);
+	}
+
+	/* --------------------------------------------------------------- embeds */
+	/** Every <iframe> still here after video() is a third party's. The reading column never
+	 *  loads one (the two-click rule), and hygiene strips its src, which used to leave an
+	 *  empty 300×150 box — 64 in 56 posts. Now: a WordPress post embed's hidden iframe goes
+	 *  (its blockquote already links the post); before SI_ARTICLE_EMBED_CUTOFF the embed
+	 *  goes; after it, a Leaf button to the embedded page — nothing loads until clicked. */
+	private static function embeds(string $s, string $published): string {
+		$old = $published !== '' && substr($published, 0, 10) < SI_ARTICLE_EMBED_CUTOFF;
+		$s = preg_replace_callback('#<iframe\b([^>]*)>.*?</iframe>#is', static function ($m) use ($old) {
+			if ($old || preg_match('/\bwp-embedded-content\b/', $m[1])
+				|| !preg_match('#\bsrc="(https?://[^"]+)"#i', $m[1], $src)) {
+				return '';
+			}
+			$host = strtolower((string) parse_url(html_entity_decode($src[1]), PHP_URL_HOST));
+			$label = str_ends_with($host, 'sibforms.com') ? __('Open the sign-up form', 'si')
+				: (str_ends_with($host, 'rumble.com') ? __('Watch on Rumble', 'si')
+				: sprintf(__('Open on %s', 'si'), preg_replace('/^www\./', '', $host)));
+			return '<p class="si-button"><a class="si-btn" href="' . esc_attr(html_entity_decode($src[1])) . '" rel="noopener" target="_blank">' . esc_html($label) . '</a></p>';
+		}, $s);
+		// the embed block's own wrapper, now holding nothing or just the button
+		return preg_replace('#<figure[^>]*\bwp-block-embed\b[^>]*>\s*(?:<div[^>]*>)?\s*(<p class="si-button">.*?</p>)?\s*(?:</div>)?\s*(<figcaption[^>]*>.*?</figcaption>)?\s*</figure>#is', '$1$2', $s);
 	}
 
 	/* -------------------------------------------------------------- buttons */
@@ -181,7 +213,49 @@ final class SI_Article_Format {
 	 *  behind. Running this at the end is the only order that holds. */
 	private static function tidy_final(string $s): string {
 		$s = preg_replace('#<p[^>]*>(\s|&nbsp;|\x{00a0}|<br\s*/?>)*</p>#iu', '', $s);
-		return trim(self::balance_p($s));
+		return trim(self::balance_inline(self::balance_p($s)));
+	}
+
+	/** Bold and italic end with their block (R6c). A <strong> still open when its paragraph
+	 *  closes is carried forward by the browser into every later block — measured: 21 in 15
+	 *  posts; on two, the site footer rendered inside <b>. Open ones are closed at the block
+	 *  boundary; a closing tag with nothing to close is dropped. Words are never touched. */
+	private static function balance_inline(string $s): string {
+		$parts = preg_split('#(</?(?:strong|b|em|i)\b[^>]*>|</?(?:p|h[2-6]|li|ul|ol|blockquote|figure|figcaption|table|tr|td|th|div|section|aside|details|summary|pre)\b[^>]*>)#i',
+			$s, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$out = '';
+		$open = [];
+		$close_all = static function () use (&$open): string {
+			$c = '';
+			while ($open) {
+				$c .= '</' . array_pop($open) . '>';
+			}
+			return $c;
+		};
+		foreach ($parts as $i => $part) {
+			if ($i % 2 === 0) {
+				$out .= $part;
+				continue;
+			}
+			if (!preg_match('#^<(/?)(strong|b|em|i)\b#i', $part, $m)) {
+				$out .= $close_all() . $part;               // a block boundary
+				continue;
+			}
+			$tag = strtolower($m[2]);
+			if ($m[1] === '') {
+				$open[] = $tag;
+				$out .= $part;
+				continue;
+			}
+			$at = array_search($tag, $open, true);
+			if ($at === false) {
+				continue;                                   // closes nothing: drop it
+			}
+			while (count($open) > $at) {
+				$out .= '</' . array_pop($open) . '>';
+			}
+		}
+		return $out . $close_all();
 	}
 
 	/** Drop orphan `</p>`, close what is still open. */

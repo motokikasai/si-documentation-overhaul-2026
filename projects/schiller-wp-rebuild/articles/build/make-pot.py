@@ -27,6 +27,8 @@ OUTS = [
 SOURCES = [
     ('people/wp/blocksy-child', ('inc', 'template-parts')),
     ('articles/wp/blocksy-child', ('inc', 'template-parts')),
+    # same text domain `si`: the invitation (moved here in R5) and the block style labels
+    ('wp-plugins/schiller-editorial', ('inc',)),
 ]
 
 # __( 'x', 'si' ) · _e · esc_html__ · esc_attr_e · _x( 'x', 'ctx', 'si' )
@@ -106,6 +108,8 @@ def main():
                         continue
                     path = os.path.join(dirpath, name)
                     rel = os.path.relpath(path, root)
+                    if base.startswith('wp-plugins/'):
+                        rel = os.path.join(os.path.basename(base), rel)   # not the theme's inc/
                     for e in scan(path, rel):
                         key = (e['ctx'], e['msgid'], e['plural'])
                         entries.setdefault(key, {'refs': [], 'note': None, **e})['refs'].append(
