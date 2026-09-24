@@ -33,7 +33,7 @@
 	z-index: 20;
 	background: var(--si-ground);
 	border-block: var(--si-hairline);
-	box-shadow: 0 10px 20px -18px rgb(18 26 36 / .25);
+	box-shadow: var(--si-shadow-lift);
 }
 .arc-bar__in {
 	display: flex; flex-wrap: wrap; align-items: center;
@@ -92,7 +92,7 @@ a:hover .arc-thumb::after, a:focus-visible .arc-thumb::after { opacity: 0; }
 	letter-spacing: .1em; text-transform: uppercase;
 	color: var(--si-muted);
 	border: 1px solid var(--si-rule);
-	border-radius: 2px;
+	border-radius: var(--si-radius-1);
 	padding: 1px 4px;
 	white-space: nowrap;
 }

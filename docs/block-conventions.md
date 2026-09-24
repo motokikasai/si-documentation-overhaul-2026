@@ -36,7 +36,15 @@ Blocksy puts its eight palette slots into the editor as `palette-color-1 … pal
   so editors cannot pick a colour or size outside the presets. Content that already carries
   a custom value still renders; the control only disappears from the editor.
 - Literal hex/px/rem values are allowed **only in the token layer**. Component CSS, view CSS
-  and block markup use tokens and presets.
+  and block markup use tokens and presets. Measured by
+  `projects/schiller-wp-rebuild/people/build/audit-literals.py` over the CSS that ships.
+  **Allowed outside the token layer:** a 1px hairline anywhere and a 2px border/outline; px in
+  an `@media`/`@container` query (custom properties cannot go there); a literal *fallback*
+  inside `var(--x, fallback)` (the hero keeps these so it reads without Jasper); colours in
+  `mask-image` (alpha only).
+- Colour roles added in R7, each with the exact value it replaced: `--si-on-accent` (type on
+  an accent fill = Paper), `--si-on-night-hi` (`#FFFFFF`, the brightest type on night and
+  on photographs), `--si-scrim-player`, `--si-shadow-lift`, `--si-shadow-text-photo`.
 - Jasper never redefines a `--theme-*` variable. A view may re-point `--si-*` roles inside its
   own scope, never `--theme-*`.
 

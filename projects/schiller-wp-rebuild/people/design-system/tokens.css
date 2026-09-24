@@ -46,6 +46,7 @@
 	--si-panel:       var(--theme-palette-color-6, #E9EDF1);
 	--si-ground:      var(--theme-palette-color-7, #F6F6F3);
 	--si-card:        var(--theme-palette-color-8, #FFFFFF);
+	--si-on-accent:   var(--si-card);  /* type on an accent fill: Paper, so it follows the Customizer (R7) */
 
 	/* Non-palette brand colours (Blocksy has 8 slots; these are not UI colours). */
 	--si-muted:       #5C6570;  /* secondary text — ≥5.0:1 on slots 6, 7, 8        */
@@ -56,6 +57,7 @@
 	--si-night-2:     #162536;
 	--si-on-night:    #E6EBF0;  /* 14.6:1 on night */
 	--si-on-night-2:  #A9BCD0;  /*  9.0:1 on night */
+	--si-on-night-hi: #FFFFFF;  /* headings and hover on night and on photographs (R7)      */
 	--si-brass-on-night: #C9A866; /* 7.8:1 on night — allowed as small text there   */
 
 	/* every form control in a row shares one height, independent of Blocksy's form
@@ -64,6 +66,7 @@
 
 	--si-focus-ring:  0 0 0 2px var(--si-card), 0 0 0 4px var(--si-accent);
 	--si-scrim:       rgb(15 26 38 / 0.55);
+	--si-scrim-player: rgb(8 14 21 / 0.78);   /* behind the video player (R7) */
 
 	/* ---- 2 · Type families ------------------------------------------------ */
 	/* Source Serif 4 carries reading AND display: its optical-size axis draws
@@ -127,6 +130,8 @@
 	--si-shadow-1: 0 1px 0 rgb(18 26 36 / 0.03), 0 1px 3px rgb(18 26 36 / 0.06);
 	--si-shadow-2: 0 2px 6px rgb(18 26 36 / 0.06), 0 18px 40px -18px rgb(18 26 36 / 0.28);
 	--si-shadow-3: 0 30px 80px -20px rgb(15 26 38 / 0.45);
+	--si-shadow-lift: 0 10px 20px -18px rgb(18 26 36 / 0.25);   /* a card lifting on hover (R7) */
+	--si-shadow-text-photo: 0 1px 12px rgb(0 0 0 / 0.45);      /* type set on a photograph (R7) */
 
 	/* ---- 6 · Motion ----------------------------------------------------------*/
 	--si-ease:      cubic-bezier(0.2, 0.7, 0.2, 1);   /* settle, never bounce */

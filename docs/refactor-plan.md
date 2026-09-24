@@ -67,7 +67,8 @@ Low risk and high reuse first; each item is independent unless noted.
 | R4 **done 2026-09-24** | first block style variations the Tier-1 pages need (buttons, quote, a `si-` tile for the invitation) | New work; every page pattern reuses them | Low |
 | R5 **done 2026-09-24** | 5 — move the invitation's creator to `schiller-editorial`, same option key, same `wp_block`; plus the invitation's `si-` block style (night ground), deferred from R4 | First theme-held structure out; small | Medium (WPML) |
 | R6 **done 2026-09-24** | 12 — measure the formatter on a block-authored post; then skip or narrow it for block content, facade via `render_block` on `core/embed` | Must land before editors write new posts in blocks | Medium (live Articles) |
-| R7 | 1 — literal-value audit of view CSS; move literals into tokens | Makes the token rule true | Low |
+| R7 **done 2026-09-24** (colours, exact-token lengths) | 1 — literal-value audit of view CSS; move literals into tokens | Makes the token rule true | Low |
+| R7b | type and spacing onto Jasper's scales: **58 absolute font sizes** in the views — 14 distinct sizes between 9.5 and 17px, where Jasper has 3 steps — and **108 px spacings** (padding/gap/margin) | Consistency. It **changes how pages look**, so screenshots before/after per view and the user's approval first | Medium (visual) |
 | R8 | 4 — profile field registration and meta boxes to `schiller-editorial` (same keys); Pods + bindings where the field is plain | Largest theme-held structure; do after R2 and R5 have proven the path | Medium–high (editor UI, WPML) |
 | R9 | 13 — one-shot tools to `schiller-editorial/tools/` | Housekeeping | Low |
 | R10 | 7 — hero editor script to `@wordpress/scripts` | Only when the hero next needs real editor work | Medium (validation) |
@@ -265,3 +266,31 @@ Also: `make-pot.py` now scans `wp-plugins/schiller-editorial/inc` (same `si` dom
 Since R5 the invitation's five strings had been about to drop out of `si.pot`, and the
 block-style labels were never in it. 336 strings. Backup:
 `blocksy-child-before-r6bc-embeds-inline-20260924.tgz`.
+
+**R7 — 2026-09-24, done for colours and exact-token lengths (Jasper 1.0.2, Articles CSS
+1.0.3, si-hero-earth 0.3.4).** New `people/build/audit-literals.py` lists every literal in
+the 14 stylesheets that ship, by kind. After fixing the audit's own misreadings (@media
+text read as declarations, custom-property names read as colours, `border-radius` counted
+as a hairline), the baseline was **32 colours, 58 absolute font sizes, 308 lengths**.
+Converted, each to a token of the **identical value**:
+- **all 32 colours → 0.** `#fff` has two meanings: type on an accent fill →
+  `--si-on-accent` (= `--si-card`, Paper); type and hover fills on night and on photographs
+  → new `--si-on-night-hi: #FFFFFF`. The card-lift shadow used 3 times → `--si-shadow-lift`;
+  the photo text-shadow and the player backdrop → tokens; the caption scrim →
+  `color-mix(var(--si-night) 82%)`. In the hero: a `--si-hero-ink-hi` role.
+- **lengths with an exact token:** five `999px` → `--si-radius-round`, eight `2px` radii →
+  `--si-radius-1`, five 40px controls → `--si-control-height`.
+Verified by computed style on si-v4, every element of `/`, `/people/`, a profile,
+`/blog/`, an EN and a DE article, **18,040 elements**, with a second baseline run to
+separate noise (18 elements on the People pages): **0 differences** apart from the
+caption scrim's notation (`rgba(15,26,38,.82)` → `color(srgb …/.82)`, same colour) and one
+`<script>` present only on an article's first uncached render (R1 finding).
+Found and fixed on the way: the hero's editor CSS used `--si-gold-500/300` and
+`--si-navy-950`, pre-Jasper names that no longer existed, so its form-button mock and
+selection outline had no colour. They now use the hero's roles. This is editor-only and the
+one intended visual change.
+**Left, on purpose:** 58 font sizes and 108 px spacings are R7b, because snapping them
+onto the scales changes how pages look. 169 more px are geometry (icon sizes, offsets,
+transforms, max-widths) with no token to match. Backups:
+`blocksy-child-before-r7-literals-20260924.tgz`,
+`si-hero-earth-0.3.3-before-r7-literals-20260924.tgz`.

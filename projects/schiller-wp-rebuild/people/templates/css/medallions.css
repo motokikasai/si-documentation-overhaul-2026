@@ -21,16 +21,16 @@
 	text-align: center;
 }
 .gal-banner .si-eyebrow { color: var(--si-brass-on-night); }
-.gal-banner .si-display { color: #fff; max-width: 14ch; }
+.gal-banner .si-display { color: var(--si-on-night-hi); max-width: 14ch; }
 .gal-banner .si-display em { color: var(--si-on-night-2); }
 .gal-banner .si-lead { color: var(--si-on-night-2); max-width: 46ch; }
 .gal-banner__jump {
 	display: inline-flex; align-items: center; gap: .55em; margin-top: var(--si-space-2xs);
 	font-family: var(--si-font-sans); font-size: 14px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
 	color: var(--si-on-night); text-decoration: none;
-	padding: .65em 1.2em; border: 1px solid color-mix(in srgb, var(--si-on-night) 30%, transparent); border-radius: 999px;
+	padding: .65em 1.2em; border: 1px solid color-mix(in srgb, var(--si-on-night) 30%, transparent); border-radius: var(--si-radius-round);
 }
-.gal-banner__jump:hover { color: #fff; border-color: var(--si-brass-on-night); }
+.gal-banner__jump:hover { color: var(--si-on-night-hi); border-color: var(--si-brass-on-night); }
 .gal-banner__jump svg { transition: transform var(--si-dur-2) var(--si-ease); }
 .gal-banner__jump:hover svg { transform: translateY(2px); }
 
@@ -90,7 +90,7 @@
 .gal-plate__rank {
 	position: absolute; left: 10px; bottom: 8px; z-index: 2;
 	font-family: var(--si-font-serif); font-style: italic; font-size: 2.6rem; font-weight: 300; line-height: 1;
-	color: #fff; text-shadow: 0 1px 12px rgb(0 0 0 / .45);
+	color: var(--si-on-night-hi); text-shadow: var(--si-shadow-text-photo);
 }
 .gal-plate__name { font-size: var(--si-step-1); padding-inline: 7px; }
 .gal-plate__meta { padding-inline: 7px; margin-top: -.35rem; }

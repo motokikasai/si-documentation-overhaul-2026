@@ -28,17 +28,17 @@
   flex: 1;
   min-width: 0;
   padding: 0.65rem 1rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: color-mix(in srgb, var(--si-hero-ink-hi) 60%, transparent);
   font-family: var(--si-hero-font-text);
   font-size: 0.95rem;
   text-align: left;
 }
 .si-hero--editor .si-hero__form-button {
   flex: none;
-  border-radius: 999px;
+  border-radius: var(--si-radius-round, 999px);
   padding: 0.65rem 1.5rem;
-  background: var(--si-gold-500);
-  color: var(--si-navy-950);
+  background: var(--si-hero-accent);
+  color: var(--si-hero-field);
   font-family: var(--si-hero-font-text);
   font-weight: 600;
   font-size: 0.92rem;
@@ -49,9 +49,9 @@
   z-index: 3;
   margin: 0;
   padding: 0.6rem var(--si-pad-x);
-  background: rgba(6, 13, 31, 0.9);
-  border-top: 1px solid rgba(212, 169, 76, 0.35);
-  color: rgba(255, 255, 255, 0.72);
+  background: rgb(var(--si-hero-field-rgb) / 0.9);
+  border-top: 1px solid color-mix(in srgb, var(--si-hero-accent) 35%, transparent);
+  color: color-mix(in srgb, var(--si-hero-ink-hi) 72%, transparent);
   font-family: var(--si-hero-font-text);
   font-size: 0.75rem;
   text-align: center;
@@ -61,10 +61,10 @@
   margin: 0 0 0.8rem;
   font-size: 0.75rem;
   font-style: italic;
-  color: #757575;
+  color: var(--wp-components-color-gray-700, #757575);   /* WordPress's own help-text grey */
 }
 
 /* Block-level selection outlines are hard to see on a near-black hero. */
 .si-hero--editor .block-editor-block-list__block.is-selected::after {
-  outline-color: var(--si-gold-300);
+  outline-color: var(--si-hero-accent);
 }

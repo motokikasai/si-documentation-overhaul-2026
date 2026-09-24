@@ -73,6 +73,7 @@
   --si-hero-ground:   var(--si-hero-field);
   --si-hero-ground-2: var(--si-night-2, #162536);
   --si-hero-ink:      var(--si-on-night, #E6EBF0);
+  --si-hero-ink-hi:   var(--si-on-night-hi, #FFFFFF);   /* R7: the brightest type on the field */
   --si-hero-ink-2:    var(--si-on-night-2, #A9BCD0);
   --si-hero-accent:   var(--si-brass-on-night, #C9A866);
   --si-hero-brass:    var(--si-brass, #A08040);
@@ -280,7 +281,7 @@
   border: 1px solid var(--si-hero-hairline);
   border-radius: var(--si-radius-1, 2px);
   outline: none;
-  color: #fff;
+  color: var(--si-hero-ink-hi);
   font-family: var(--si-hero-font-text);
   font-size: 1rem; /* >=16px: stops iOS Safari zooming the page on focus */
   padding: 0 var(--si-space-s, 1rem);
@@ -315,7 +316,7 @@
   transition: background var(--si-dur-1, 160ms) var(--si-ease, ease);
 }
 .si-hero__form button:hover {
-  background: color-mix(in srgb, var(--si-hero-accent) 80%, #fff);
+  background: color-mix(in srgb, var(--si-hero-accent) 80%, var(--si-hero-ink-hi));
 }
 .si-hero__form-note {
   margin-top: var(--si-space-xs, 0.75rem);
@@ -735,7 +736,7 @@
 .si-hero__stage h1,
 .si-hero__stage h2,
 .si-hero__stage .si-hero__heading {
-  color: #fff;
+  color: var(--si-hero-ink-hi);
 }
 .si-hero__stage h1 em,
 .si-hero__stage h2 em,
@@ -753,7 +754,7 @@
   color: var(--si-hero-ink-2);
 }
 .si-hero .si-hero__form input {
-  color: #fff;
+  color: var(--si-hero-ink-hi);
   background: color-mix(in srgb, var(--si-hero-ink) 6%, transparent);
 }
 .si-hero .si-hero__form button,
@@ -779,7 +780,7 @@
 }
 .si-hero__button:hover,
 .si-hero__button:focus {
-  background: color-mix(in srgb, var(--si-hero-accent) 80%, #fff);
+  background: color-mix(in srgb, var(--si-hero-accent) 80%, var(--si-hero-ink-hi));
   color: var(--si-night, #0F1A26);
 }
 .si-hero__form:has(> .si-hero__button) {

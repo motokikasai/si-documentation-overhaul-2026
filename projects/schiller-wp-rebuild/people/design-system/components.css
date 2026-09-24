@@ -204,7 +204,7 @@ html:not(.js) .si-js-only { display: none !important; }
 }
 .si-chip:hover { border-color: var(--si-accent); color: var(--si-accent); }
 .si-chip[aria-pressed="true"], .si-chip[aria-checked="true"] {
-	background: var(--si-accent); border-color: var(--si-accent); color: #fff;
+	background: var(--si-accent); border-color: var(--si-accent); color: var(--si-on-accent);
 }
 .si-chip__count { font-variant-numeric: tabular-nums; opacity: .66; font-weight: 400; }
 
@@ -390,7 +390,7 @@ html:not(.js) .si-js-only { display: none !important; }
 @keyframes si-fade { from { opacity: 0; } }
 .si-sheet__close {
 	position: absolute; top: 14px; right: 14px; z-index: 2;
-	width: 40px; height: 40px; border-radius: 50%;
+	width: var(--si-control-height); height: var(--si-control-height); border-radius: 50%;
 	border: 1px solid var(--si-rule); background: var(--si-card); color: var(--si-ink);
 	display: grid; place-items: center; cursor: pointer;
 }

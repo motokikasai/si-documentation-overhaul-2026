@@ -135,6 +135,16 @@ note; with neither, no `.si-hero__cta` at all. si-v4 has neither set, so its
 act 4 is kicker, heading and lead until a newsletter endpoint exists — then
 it is one block setting. `tools/render-test.php` covers all three shapes.
 
+### 0.3.4 — no literal colours (2026-09-24)
+
+Refactor plan R7. `#fff` in the hero is now the role `--si-hero-ink-hi`
+(`var(--si-on-night-hi, #FFFFFF)`, with the literal kept as the fallback, so the hero still
+reads without Jasper). The editor stylesheet pointed at `--si-gold-500`, `--si-gold-300` and
+`--si-navy-950`, pre-Jasper names that no longer existed, so the editor's form-button mock
+and selection outline had no colour. They now use the hero's own roles (`--si-hero-accent`,
+`--si-hero-field`). That is the one intended visual change, and it is in the editor only.
+The front end's computed styles are unchanged.
+
 ### 0.3.3 — the homepage pattern's section is content-only (2026-09-24)
 
 Refactor plan R3. The "Four ideas, one method" Group in `patterns/homepage.php` carries
