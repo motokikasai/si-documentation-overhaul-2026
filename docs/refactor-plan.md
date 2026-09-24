@@ -64,8 +64,8 @@ Low risk and high reuse first; each item is independent unless noted.
 | R1 **done 2026-09-23** | 2 — `custom: false` for colours and font sizes in child `theme.json` | Every pattern after this relies on editors seeing presets only | Low |
 | R2 **done 2026-09-24** | 3 — create `schiller-editorial` (skeleton), copy `wpml-config.xml` into it, verify WPML reads it, **then** delete the theme copy | Home for all new work; unblocks R4–R7 | Medium (WPML) |
 | R3 **done 2026-09-24** | 6 — `contentOnly` Group around the homepage pattern | Tiny, and sets the pattern for all patterns | Low |
-| R4 | first block style variations the Tier-1 pages need (buttons, quote, a `si-` tile for the invitation) | New work; every page pattern reuses them | Low |
-| R5 | 5 — move the invitation's creator to `schiller-editorial`, same option key, same `wp_block` | First theme-held structure out; small | Medium (WPML) |
+| R4 **done 2026-09-24** | first block style variations the Tier-1 pages need (buttons, quote, a `si-` tile for the invitation) | New work; every page pattern reuses them | Low |
+| R5 | 5 — move the invitation's creator to `schiller-editorial`, same option key, same `wp_block`; plus the invitation's `si-` block style (night ground), deferred from R4 | First theme-held structure out; small | Medium (WPML) |
 | R6 | 12 — measure the formatter on a block-authored post; then skip or narrow it for block content, facade via `render_block` on `core/embed` | Must land before editors write new posts in blocks | Medium (live Articles) |
 | R7 | 1 — literal-value audit of view CSS; move literals into tokens | Makes the token rule true | Low |
 | R8 | 4 — profile field registration and meta boxes to `schiller-editorial` (same keys); Pods + bindings where the field is plain | Largest theme-held structure; do after R2 and R5 have proven the path | Medium–high (editor UI, WPML) |
@@ -150,3 +150,30 @@ Disabled; plus no sidebar, Content Area Style Wide, Vertical Spacing None). That
 ladder rung F1 — an editor setting, no code. `setup-homepage.php` sets it for the front
 page; the list is in the pattern's header. If editors keep forgetting it, rung F2 would be a
 Blocksy filter keyed on the page containing `si/hero-earth` — not built; ask first.
+
+**R4 — 2026-09-24, done (schiller-editorial 0.2.0).** Editor check passed: every style
+applies in the editor and matches the preview. One apparent fault — the Ghost label looked
+low — was only the empty button's "Add text…" placeholder: measured on the front end, the
+label's line box sits 9.5px/9.5px in a 40px button, exactly as in a filled Blocksy button,
+and typed text in the editor matched the filled button beside it.
+Five block style variations, chosen by measuring the 27 page drafts, not by taste:
+paragraph *Eyebrow* / *Eyebrow, ruled* / *Source*, quote *Jasper quote*, button *Ghost*
+(table in the plugin README). Left out: `.si-p-note` (0 drafts use it) and the invitation
+tile's style, which needs the Portrait's night ground and moves to R5.
+Compared with a new dev harness (`tools/compare.mjs`: the draft's CSS vs Blocksy's real CSS
+from si-v4 + `block-styles.css`, computed styles property by property): eyebrow, ruled
+eyebrow, source and quote are **identical** except `display: flex` for `inline-flex`
+(a paragraph block is a block). The ghost first came out 14.2px/40px/17px against the
+draft's 15px/44px/18px, because I had mapped the draft's literals to Jasper tokens. The
+diff showed that Jasper's button typography is already in Blocksy's settings
+(`apply-design-system.php` → `buttons`: sans 600, 15px, 0.02em; min-height 40px), so the
+ghost now sets only what makes it a ghost (border, transparent fill, accent, hover) and
+inherits the rest, exactly like the filled button beside it. Remaining differences, all
+Blocksy's button settings: letter-spacing 0.02em, padding 5px/20px, min-height 40px,
+radius 3px. Hover identical. The CSS has no literal except two 1px hairlines.
+Live: all nine R1 pages gain exactly one line (the stylesheet link) and lose none.
+Backup: `schiller-editorial-0.1.0-before-r4-block-styles-20260924.tgz`.
+
+Noticed, not changed: Blocksy's button radius is 3px while Jasper's `--si-radius-1` says
+2px ("fields, buttons — near-square"). It is a Blocksy setting that `apply-design-system.php`
+does not write; worth one line there if the 1px matters.

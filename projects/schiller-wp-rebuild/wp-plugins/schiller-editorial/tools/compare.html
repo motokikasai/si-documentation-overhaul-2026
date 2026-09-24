@@ -1,0 +1,90 @@
+<!doctype html>
+<!--
+  Block styles vs the drafts they come from — side by side, computed styles compared.
+  Dev only. Serve from projects/schiller-wp-rebuild/ (python3 articles/build/serve.py 8761)
+  with the si-v4 proxy running (node articles/build/local-proxy.mjs si-v4.local 8770),
+  then run tools/compare.mjs. Left frame: the draft's own stylesheets and markup. Right
+  frame: Jasper + Blocksy's REAL CSS from si-v4 + block-styles.css, with the markup the
+  core blocks render.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>schiller-editorial · block styles vs drafts</title>
+<style>
+	body { margin: 0; font: 14px system-ui, sans-serif; }
+	.cols { display: grid; grid-template-columns: 1fr 1fr; }
+	iframe { width: 100%; height: 560px; border: 0; border-right: 1px solid #ccc; }
+	h2 { margin: 8px 12px; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="cols">
+	<div><h2>Draft (pages-shared.css / components.css)</h2><iframe id="draft"></iframe></div>
+	<div><h2>Block style (block-styles.css under Blocksy)</h2><iframe id="block"></iframe></div>
+</div>
+<script>
+const WP = 'http://127.0.0.1:8770';
+const DS = '../../../people/design-system/';
+const head = (links) => `<meta charset="utf-8">${links.map((h) => `<link rel="stylesheet" href="${h}">`).join('')}
+<style>body{padding:24px 32px;background:var(--si-ground,#F6F6F3)} [data-k]{margin-block:0 28px}</style>`;
+
+const QUOTE = 'Without the development of all nations, there can be no lasting peace.';
+const CAP = 'From the report on week 167 · <a href="#">The International Peace Coalition</a>, 12 September 2026';
+
+const draft = `<!doctype html><html lang="en"><head><base href="${location.href}">${head([
+	DS + 'fonts.css', DS + 'tokens.css', DS + 'blocksy-shim.css', DS + 'components.css',
+	'../../../pages/templates/css/pages-shared.css',
+])}</head><body>
+<p class="si-eyebrow" data-k="eyebrow">Privacy · Impressum</p>
+<p class="si-eyebrow si-eyebrow--ruled" data-k="eyebrow-ruled">Join the movement</p>
+<p class="si-source" data-k="source">Source: <a href="#">Schiller Institute, founding statement, 1984</a></p>
+<figure class="si-p si-p-quote" data-k="quote"><blockquote data-k="quote-text">${QUOTE}</blockquote><figcaption data-k="quote-cite">${CAP}</figcaption></figure>
+<p><a class="si-btn-ghost" href="#" data-k="ghost">Read all the clauses</a></p>
+</body></html>`;
+
+const block = `<!doctype html><html lang="en"><head><base href="${location.href}">${head([
+	WP + '/wp-content/themes/blocksy/static/bundle/main.min.css',
+	WP + '/wp-content/uploads/blocksy/css/global.css',
+	DS + 'fonts.css', DS + 'tokens.css', DS + 'components.css',
+	'../assets/css/block-styles.css',
+])}</head><body><article><div class="entry-content is-layout-constrained">
+<p class="is-style-si-eyebrow" data-k="eyebrow">Privacy · Impressum</p>
+<p class="is-style-si-eyebrow-ruled" data-k="eyebrow-ruled">Join the movement</p>
+<p class="is-style-si-source" data-k="source">Source: <a href="#">Schiller Institute, founding statement, 1984</a></p>
+<blockquote class="wp-block-quote is-style-si-quote is-layout-flow wp-block-quote-is-layout-flow" data-k="quote"><p data-k="quote-text">${QUOTE}</p><cite data-k="quote-cite">${CAP}</cite></blockquote>
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex"><div class="wp-block-button is-style-si-ghost"><a class="wp-block-button__link wp-element-button" href="#" data-k="ghost">Read all the clauses</a></div></div>
+</div></article></body></html>`;
+
+document.getElementById('draft').srcdoc = draft;
+document.getElementById('block').srcdoc = block;
+
+const PROPS = ['display', 'font-family', 'font-size', 'font-weight', 'font-style', 'line-height',
+	'letter-spacing', 'text-transform', 'color', 'background-color', 'border-top-width',
+	'border-top-color', 'border-left-width', 'border-radius', 'padding-left', 'padding-top',
+	'min-height', 'margin-left', 'text-decoration-line'];
+
+window.siCompare = async () => {
+	const frames = ['draft', 'block'].map((id) => document.getElementById(id).contentWindow);
+	await Promise.all(frames.map((w) => w.document.fonts.ready));
+	const read = (w) => Object.fromEntries([...w.document.querySelectorAll('[data-k]')].map((el) => {
+		const cs = w.getComputedStyle(el);
+		const out = Object.fromEntries(PROPS.map((p) => [p, cs.getPropertyValue(p).replace(/,.*$/, '')]));
+		const before = w.getComputedStyle(el, '::before');
+		out['::before width'] = before.content === 'none' ? '-' : before.width;
+		out['::before bg'] = before.content === 'none' ? '-' : before.backgroundColor;
+		return [el.dataset.k, out];
+	}));
+	const [d, b] = frames.map(read);
+	const diffs = [];
+	for (const k of Object.keys(d)) {
+		for (const p of Object.keys(d[k])) {
+			if (!b[k]) { diffs.push({ k, p, draft: d[k][p], block: '(missing)' }); continue; }
+			if (d[k][p] !== b[k][p]) diffs.push({ k, p, draft: d[k][p], block: b[k][p] });
+		}
+	}
+	return { keys: Object.keys(d), diffs };
+};
+</script>
+</body>
+</html>

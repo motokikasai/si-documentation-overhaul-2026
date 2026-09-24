@@ -1,0 +1,99 @@
+/* ==========================================================================
+   schiller-editorial — block style variations (refactor plan R4)
+
+   The Tier-1 drafts' pattern kit (projects/schiller-wp-rebuild/pages/templates/css/
+   pages-shared.css, and Jasper's components.css), re-expressed as styles an editor picks
+   in the block sidebar. Each rule names the draft class it comes from. Nothing here is
+   new design; where a draft used a literal, the nearest Jasper token replaces it
+   (docs/block-conventions.md §2: literals live only in the token layer).
+
+   Depends on Jasper's tokens, which the child theme loads on every page and in the
+   editor (inc/jasper.php). Every selector is scoped to an .is-style-si-* class, so the
+   file can load everywhere without touching anything else.
+   ========================================================================== */
+
+/* ---- core/paragraph · Eyebrow  ←  .si-eyebrow (components.css) ----------
+   display: flex, not the component's inline-flex: a paragraph block is a block. */
+p.is-style-si-eyebrow,
+p.is-style-si-eyebrow-ruled {
+	display: flex;
+	align-items: center;
+	gap: .7em;
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n2);
+	font-weight: 600;
+	line-height: 1.3;
+	letter-spacing: var(--si-track-caps);
+	text-transform: uppercase;
+	color: var(--si-muted);
+}
+
+/* ---- core/paragraph · Eyebrow, ruled  ←  .si-eyebrow--ruled -------------
+   The brass rule: one per page (tokens.css). */
+p.is-style-si-eyebrow-ruled::before {
+	content: "";
+	flex: none;
+	width: 2.2em;
+	height: 1px;
+	background: var(--si-brass);
+}
+
+/* ---- core/paragraph · Source  ←  .si-source (pages-shared.css) ---------- */
+p.is-style-si-source {
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n1);
+	line-height: 1.45;
+	color: var(--si-muted);
+}
+p.is-style-si-source a {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+	text-underline-offset: .18em;
+}
+p.is-style-si-source a:hover {
+	color: var(--si-accent);
+}
+
+/* ---- core/quote · Quote  ←  .si-p-quote (pages-shared.css) --------------
+   Blocksy gives every blockquote a 4px accent border and inline padding (except its
+   own .is-style-plain); the draft's quote has neither. */
+.wp-block-quote.is-style-si-quote {
+	margin-inline: 0;
+	padding: 0;
+	border: 0;
+}
+.wp-block-quote.is-style-si-quote p {
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-2);
+	line-height: 1.35;
+	color: var(--si-ink);
+	text-wrap: pretty;
+}
+/* ←  .si-p-quote figcaption */
+.wp-block-quote.is-style-si-quote cite {
+	display: block;
+	margin-top: .8em;
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n1);
+	font-style: normal;
+	color: var(--si-muted);
+}
+
+/* ---- core/button · Ghost  ←  .si-btn-ghost (pages-shared.css) -----------
+   Only what makes it a ghost. Size and type are NOT set here: Jasper's button typography
+   already lives in Blocksy's settings (apply-design-system.php → `buttons`: sans 600,
+   15px, 0.02em; min-height 40px), so a ghost beside a filled button matches it exactly.
+   #fff → --si-card. */
+.wp-block-button.is-style-si-ghost > .wp-block-button__link {
+	border: 1px solid currentColor;
+	background: transparent;
+	color: var(--si-accent);
+	transition: background-color var(--si-dur-1) var(--si-ease), color var(--si-dur-1) var(--si-ease);
+}
+.wp-block-button.is-style-si-ghost > .wp-block-button__link:hover,
+.wp-block-button.is-style-si-ghost > .wp-block-button__link:focus-visible {
+	background: var(--si-accent);
+	border-color: var(--si-accent);
+	color: var(--si-card);
+}
