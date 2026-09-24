@@ -237,8 +237,12 @@ a.pa-next:hover { background: color-mix(in srgb, var(--si-on-night) 6%, transpar
 /* WordPress: the tile is the synced pattern "Profile page — invitation", so it holds
    whatever blocks editors put there. Style them here, scoped to the tile. */
 .pa-invite :is(h2, h3, h4) { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-2); font-weight: 400; line-height: 1.2; color: #fff; }
-.pa-invite p:not(.pa-next__kicker) { margin: 0; font-family: var(--si-font-sans); font-size: var(--si-step-n1); line-height: 1.5; color: var(--si-on-night-2); }
-.pa-invite p.pa-next__kicker { margin: 0; }
+/* The pattern's kicker: `pa-next__kicker` in a pattern made before R5, the plugin's Eyebrow
+   style after it. Jasper allows a scope to re-point its --si-* roles: here muted → on-night-2,
+   so the Eyebrow style reads on the night ground exactly like the old kicker. */
+.pa-invite { --si-muted: var(--si-on-night-2); }
+.pa-invite p:not(.pa-next__kicker, [class*="is-style-si-eyebrow"]) { margin: 0; font-family: var(--si-font-sans); font-size: var(--si-step-n1); line-height: 1.5; color: var(--si-on-night-2); }
+.pa-invite p:is(.pa-next__kicker, [class*="is-style-si-eyebrow"]) { margin: 0; }
 .pa-invite a:not(.wp-block-button__link):not(.pa-invite__next) { color: var(--si-on-night); }
 .pa-invite .wp-block-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 0; }
 .pa-invite .wp-block-button__link {

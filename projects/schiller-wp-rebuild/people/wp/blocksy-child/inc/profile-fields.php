@@ -1,7 +1,7 @@
 <?php
 /**
- * The profile page's own fields, the status box, and the invitation pattern — the
- * editor side of /people/{slug}/.
+ * The profile page's own fields and the status box — the editor side of /people/{slug}/.
+ * (The invitation pattern moved to the schiller-editorial plugin in R5.)
  *
  * Fields (post meta on si_person; WPML: see wpml-config.xml):
  *   si_descriptor      "Statesman & soldier"                     translate
@@ -268,58 +268,10 @@ function si_profile_status_box(WP_Post $post): void {
 }
 
 /* ==========================================================================
-   3 · The invitation: a synced pattern editors change without code
+   3 · The invitation — moved to the schiller-editorial plugin (refactor plan R5, 2026-09-24):
+   wp-plugins/schiller-editorial/inc/profile-invitation.php. The theme only displays it
+   (profile-single.php), and shows no tile rather than failing if the plugin is inactive.
    ========================================================================== */
-
-const SI_PROFILE_INVITE_OPTION = 'si_profile_invite_block';
-
-function si_profile_invite_default(): string {
-	return implode("\n\n", [
-		'<!-- wp:paragraph {"className":"pa-next__kicker"} --><p class="pa-next__kicker">' . esc_html__('Be in the room', 'si') . '</p><!-- /wp:paragraph -->',
-		'<!-- wp:heading {"level":3,"className":"pa-invite__title"} --><h3 class="wp-block-heading pa-invite__title">' . esc_html__('Get the invitation to the next conference', 'si') . '</h3><!-- /wp:heading -->',
-		'<!-- wp:paragraph --><p>' . esc_html__('Our conferences are open to the public, online and in the room.', 'si') . '</p><!-- /wp:paragraph -->',
-		'<!-- wp:buttons --><div class="wp-block-buttons"><!-- wp:button --><div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://schillerinstitute.nationbuilder.com/">' . esc_html__('Invite me', 'si') . '</a></div><!-- /wp:button --></div><!-- /wp:buttons -->',
-	]);
-}
-
-/** The pattern's ID, created once by an administrator's first admin page view. */
-function si_profile_invite_block_id(bool $create = false): int {
-	$id = (int) get_option(SI_PROFILE_INVITE_OPTION, 0);
-	if ($id && get_post_type($id) === 'wp_block') {
-		return $id;
-	}
-	if (!$create) {
-		return 0;
-	}
-	$id = (int) wp_insert_post([
-		'post_type' => 'wp_block', 'post_status' => 'publish',
-		'post_title' => __('Profile page — invitation', 'si'),
-		'post_content' => si_profile_invite_default(),
-	]);
-	if ($id) {
-		update_option(SI_PROFILE_INVITE_OPTION, $id, false);
-	}
-	return $id;
-}
-add_action('admin_init', static function () {
-	if (current_user_can('edit_theme_options')) {
-		si_profile_invite_block_id(true);
-	}
-});
-
-/** The invitation tile's content, in the current language. */
-function si_profile_invite_html(): string {
-	$id = si_profile_invite_block_id();
-	$content = si_profile_invite_default();
-	if ($id) {
-		$shown = (int) apply_filters('wpml_object_id', $id, 'wp_block', true);
-		$post = get_post($shown);
-		if ($post && $post->post_status === 'publish') {
-			$content = $post->post_content;
-		}
-	}
-	return do_blocks($content);
-}
 
 /* ==========================================================================
    4 · The profile guide (People → Profile guide)

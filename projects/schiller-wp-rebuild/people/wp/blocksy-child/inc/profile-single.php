@@ -38,7 +38,7 @@ add_filter('blocksy:single:canvas:custom-output', static function ($output) {
 	}
 	$data = si_profile_data(get_the_ID());
 	ob_start();
-	get_template_part('template-parts/people/profile', null, ['p' => $data, 'invite' => si_profile_invite_html()]);
+	get_template_part('template-parts/people/profile', null, ['p' => $data, 'invite' => function_exists('si_profile_invite_html') ? si_profile_invite_html() : '']);
 	return ob_get_clean();
 });
 

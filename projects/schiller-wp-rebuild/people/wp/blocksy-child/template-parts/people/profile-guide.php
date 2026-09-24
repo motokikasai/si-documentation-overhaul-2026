@@ -8,7 +8,7 @@
 
 defined('ABSPATH') || exit;
 
-$invite = si_profile_invite_block_id();
+$invite = function_exists('si_profile_invite_block_id') ? si_profile_invite_block_id() : 0;   // schiller-editorial
 $invite_edit = $invite ? admin_url('post.php?post=' . $invite . '&action=edit') : admin_url('edit.php?post_type=wp_block');
 $new_talk = admin_url('post-new.php?post_type=si_presentation');
 $people = admin_url('edit.php?post_type=si_person');

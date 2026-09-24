@@ -32,7 +32,7 @@ filter), **C1–C6** content ladder (style variation → block variation → pat
 | 2 | Child `theme.json` | type + spacing presets aliasing `--si-*`; no `custom: false` | child theme | T | stays | Low. Editor UI only; existing custom values still render |
 | 3 | Content-model WPML config | `wpml-config.xml`, ~50 fields, 7 types, 5 taxonomies | ~~child theme~~ → `schiller-editorial` (R2, done) | — | `schiller-editorial` root | **WPML**: a changed `translate`/`action` value re-classifies fields; a missing file un-declares them. Duplicate first, compare, then remove |
 | 4 | Profile fields (6 meta keys), meta boxes, status box, Profile guide | `register_post_meta` + custom meta-box PHP | **child theme** | C4 where possible (Pods fields + bindings); the JSON `si_quotes` stays custom (Pods free has no repeater — D2) | `schiller-editorial` | **Content structure in the theme.** Same keys, so no data moves; risk is double registration during the move and the WPML declarations (item 3) |
-| 5 | Profile invitation tile | synced pattern (`wp_block`) of core blocks, created on `admin_init`, ID in an option | creator in **child theme**; content in DB | C3 (synced pattern) — already there | creator → `schiller-editorial` | **WPML**: keep the same `wp_block` post and option key, or translations detach. Classes `pa-next__kicker`, `pa-invite__title` are saved in the block content: keep them styled; offer a `si-` block style for new copies |
+| 5 | Profile invitation tile | synced pattern (`wp_block`) of core blocks, created on `admin_init`, ID in an option | creator in **child theme**; content in DB | C3 (synced pattern) — already there | creator → `schiller-editorial` (R5, done) | **WPML**: keep the same `wp_block` post and option key, or translations detach. Classes `pa-next__kicker`, `pa-invite__title` are saved in the block content: keep them styled; offer a `si-` block style for new copies |
 | 6 | Homepage pattern | serialized blocks; not locked | `si-hero-earth/patterns/` | C3 | stays | Low. Adding the `contentOnly` Group affects new inserts only; the live homepage is not rewritten. Copy is mirrored in `hero-earth/edit.js` — change both |
 | 7 | `si/hero-earth`, `si/hero-act` | dynamic blocks, `block.json` + `render.php`; hand-written `window.wp` editor script | `si-hero-earth` | C6 (a real gap) | stays | **Validation**: `hero-earth` saves `InnerBlocks.Content`, `hero-act` saves `null` — a build migration must keep both byte-identical. Never rename attributes. **WPML**: the `<xpath>` entries match elements that are never saved (dynamic) — harmless, drop when touched |
 | 8 | `/people/` Register (+ Gallery, Chronicle shipped but not live) | PHP template parts + JSON payload + JS + CSS | child theme | F2 (canvas filter) — already there | stays | Low. Gallery/Chronicle assets ship unused; removing them is a separate, user-approved cleanup |
@@ -65,7 +65,7 @@ Low risk and high reuse first; each item is independent unless noted.
 | R2 **done 2026-09-24** | 3 — create `schiller-editorial` (skeleton), copy `wpml-config.xml` into it, verify WPML reads it, **then** delete the theme copy | Home for all new work; unblocks R4–R7 | Medium (WPML) |
 | R3 **done 2026-09-24** | 6 — `contentOnly` Group around the homepage pattern | Tiny, and sets the pattern for all patterns | Low |
 | R4 **done 2026-09-24** | first block style variations the Tier-1 pages need (buttons, quote, a `si-` tile for the invitation) | New work; every page pattern reuses them | Low |
-| R5 | 5 — move the invitation's creator to `schiller-editorial`, same option key, same `wp_block`; plus the invitation's `si-` block style (night ground), deferred from R4 | First theme-held structure out; small | Medium (WPML) |
+| R5 **done 2026-09-24** | 5 — move the invitation's creator to `schiller-editorial`, same option key, same `wp_block`; plus the invitation's `si-` block style (night ground), deferred from R4 | First theme-held structure out; small | Medium (WPML) |
 | R6 | 12 — measure the formatter on a block-authored post; then skip or narrow it for block content, facade via `render_block` on `core/embed` | Must land before editors write new posts in blocks | Medium (live Articles) |
 | R7 | 1 — literal-value audit of view CSS; move literals into tokens | Makes the token rule true | Low |
 | R8 | 4 — profile field registration and meta boxes to `schiller-editorial` (same keys); Pods + bindings where the field is plain | Largest theme-held structure; do after R2 and R5 have proven the path | Medium–high (editor UI, WPML) |
@@ -177,3 +177,30 @@ Backup: `schiller-editorial-0.1.0-before-r4-block-styles-20260924.tgz`.
 Noticed, not changed: Blocksy's button radius is 3px while Jasper's `--si-radius-1` says
 2px ("fields, buttons — near-square"). It is a Blocksy setting that `apply-design-system.php`
 does not write; worth one line there if the 1px matters.
+
+**R5 — 2026-09-24, done (schiller-editorial 0.3.0, Jasper 1.0.1).** The profile invitation's
+code — the option constant, the default content, the create-once function, its `admin_init`
+hook and the per-language renderer — moved from `blocksy-child/inc/profile-fields.php` §3 to
+`schiller-editorial/inc/profile-invitation.php`. The theme only displays it, behind
+`function_exists` guards (`profile-single.php`, `profile-guide.php`): no tile rather than a
+fatal error if the plugin is ever inactive.
+The plugin loads before the theme, so a function defined in both is a fatal "cannot
+redeclare". Three deploys, each checked on the EN and DE profile:
+A · theme copies wrapped in `if (!function_exists())` — byte-identical;
+B · plugin 0.3.0 defines them — identical but `?ver=`;
+C · theme copies removed, calls guarded — identical but `?ver=`.
+The stored identifiers are untouched. `tools/check-invitation.php` before/after:
+option → 122719, published, content md5 `49f7a471…`, WPML trid 161360 (en original), one
+copy; only the "defined in" lines moved from the theme to the plugin. The plugin's
+create-once hook ran on the admin views in between and found the existing pattern.
+New copies (production creates one at launch) use the Eyebrow style for the kicker. No
+night variant was needed: `.pa-invite { --si-muted: var(--si-on-night-2) }` re-points the
+role inside the tile, as Jasper allows. Checked on the live profile by adding an Eyebrow
+kicker next to the old one in the browser: identical in font, size, weight, tracking,
+case, colour and margins.
+Backups: `blocksy-child-before-r5-invitation-20260924.tgz`,
+`schiller-editorial-0.2.0-before-r5-invitation-20260924.tgz`.
+
+Found on the way: the invitation has **no German translation** on si-v4. `/de/` profiles
+show the English tile (WPML falls back to the original). It is a content task: translate
+the pattern in WPML. It needs no code.
