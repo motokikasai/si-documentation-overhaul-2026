@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WF1 · The Desk</title>
+<link rel="stylesheet" href="wire.css">
+</head>
+<body data-wf="desk">
+<main id="main" class="w-canvas"><div class="w-wrap has-notes">
+	<div class="w-stage">
+		<div class="w-hero-stub">↑ the shipped hero ends here</div>
+
+		<div class="row r-side">
+			<div>
+				<p class="txt txt--m" style="margin:0 0 10px"><span class="n">1</span>One line only — no second essay after the hero.</p>
+				<div class="bar bar--xl" style="width:78%"></div>
+				<div class="row r2" style="margin-top:14px;gap:10px">
+					<div class="field" style="height:48px">Search <span id="wf1-n" style="margin-left:6px"></span></div>
+					<button class="btn" style="height:48px">Search</button>
+				</div>
+				<p class="txt txt--m" style="margin:14px 0 6px"><span class="n">2</span>Four verbs, not four topics — what you can <i>do</i> here, before what we think.</p>
+				<div class="row r4" style="gap:10px">
+					<div class="box"><span class="lbl">Watch</span><span id="wf1-v"></span></div>
+					<div class="box"><span class="lbl">Read</span><span id="wf1-a"></span></div>
+					<div class="box"><span class="lbl">Attend</span><span id="wf1-c"></span></div>
+					<div class="box"><span class="lbl">Join</span><span class="txt txt--m">one open seat</span></div>
+				</div>
+			</div>
+			<div id="wf1-week"></div>
+		</div>
+
+		<div class="rule"></div>
+		<p class="txt txt--m" style="margin:0 0 10px"><span class="n">3</span>Ten subjects, each with a live count. Pick one and the shelf below fills — no page change, nothing hidden behind a narrative.</p>
+		<div class="row r4" id="wf1-topics" style="gap:10px"></div>
+		<div class="box box--quiet" id="wf1-shelf" style="margin-top:14px"></div>
+
+		<div class="w-fold"><span>≈ one screen</span></div>
+
+		<div class="row r-side">
+			<div class="box box--open">
+				<span class="lbl"><span class="n">4</span>The record lives on its own page</span>
+				<div class="bar bar--h" style="width:60%"></div>
+				<p class="txt txt--m">One sentence, then a link. Forecasts, proposals, outcomes and their sources move to <b>/record/</b>, where a sceptic can spend an hour if they want to.</p>
+				<div class="row r3" style="gap:10px;margin-top:10px">
+					<div class="box"><span class="lbl">Articles</span><span id="wf1-s1"></span></div>
+					<div class="box"><span class="lbl">Videos</span><span id="wf1-s2"></span></div>
+					<div class="box"><span class="lbl">People</span><span id="wf1-s3"></span></div>
+				</div>
+				<p class="txt txt--m" style="margin-top:10px">Since 1984 · the archive covers <span id="wf1-span"></span></p>
+			</div>
+			<div id="wf1-signup"></div>
+		</div>
+	</div>
+	<aside class="w-notes"></aside>
+</div></main>
+
+<script type="module">
+import { chrome, notes, get, auto, span, weekBox, signup, rows, nf, esc } from './wire.js';
+chrome({ n: 1, name: 'The Desk', idea: 'the front desk of a library that happens to be alive', screens: '≈ 2 screens',
+	ask: 'find what you came for in one move — and see the one thing that is open to anyone this week.' });
+const now = await get('now.json');
+document.getElementById('wf1-n').innerHTML = auto(nf(now.counts.articles) + ' articles', 'published post count');
+document.getElementById('wf1-v').innerHTML = auto(nf(now.counts.videos), 'si_video count');
+document.getElementById('wf1-a').innerHTML = auto(nf(now.counts.articles), 'post count');
+document.getElementById('wf1-c').innerHTML = auto(now.counts.conferences_listed, 'si_conference count');
+document.getElementById('wf1-s1').innerHTML = auto(nf(now.counts.articles), 'post count');
+document.getElementById('wf1-s2').innerHTML = auto(nf(now.counts.videos), 'si_video count');
+document.getElementById('wf1-s3').innerHTML = auto(nf(now.counts.people), 'si_person count');
+document.getElementById('wf1-span').innerHTML = auto(span(now.counts.first_year), 'earliest published date → today');
+document.getElementById('wf1-week').innerHTML = weekBox(now);
+document.getElementById('wf1-signup').innerHTML = signup();
+
+const tiles = document.getElementById('wf1-topics'), shelf = document.getElementById('wf1-shelf');
+tiles.innerHTML = now.topics.map((t, i) => `<button class="box" data-i="${i}" style="text-align:left;cursor:pointer;font:inherit">
+	<span class="lbl" style="margin:0">${esc(t.label)}</span><span class="val">${nf(t.n)}</span> <span class="chip chip--auto">auto</span></button>`).join('');
+function shelfFor(i) {
+	const t = now.topics[i];
+	tiles.querySelectorAll('button').forEach((b, j) => b.style.outline = i === j ? '2px solid var(--blue)' : '');
+	shelf.innerHTML = `<span class="lbl">Latest in ${esc(t.label)} — ${auto(nf(t.n), 'term count')} in all</span>${rows(now.latest, 3)}
+		<p class="txt txt--m" style="margin:10px 0 0">Everything in this subject →</p>`;
+}
+tiles.addEventListener('click', e => { const b = e.target.closest('button'); if (b) shelfFor(+b.dataset.i); });
+shelfFor(0);
+
+notes([
+	'<b>Orientation, not persuasion.</b> The hero has already made the argument; this page just opens the doors. Two screens, everything reachable without scrolling past an opinion.',
+	'<b>Four verbs, not four topics.</b> Watch / Read / Attend / Join answers "what can I do here" before "what do you think".',
+	'<b>The subject grid is the archive.</b> Ten closed-vocabulary topics with live counts; the shelf fills in place. A Query Loop per subject in production.',
+	'<b>The record moves out.</b> Home carries one sentence and a link; the said→followed evidence gets /record/ to itself.',
+	'<b>Every figure is a binding.</b> Counts come from the archive at render; the meeting time comes from the events source and falls back to the general form — try the switch in the header.',
+]);
+</script>
+</body>
+</html>

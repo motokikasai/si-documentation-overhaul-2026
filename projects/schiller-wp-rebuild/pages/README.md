@@ -237,6 +237,30 @@ flash. Fonts are self-hosted and preloaded, as before.
    only 24 people have both a portrait and a sourced title. Search now shows **only
    sourced titles**, because raw affiliation rows hold transcript text.
 
+## The URLs these pages will live at (decided 2026-09-24)
+
+A Page's URL comes from its slug and its parent chain; the page template is postmeta and
+has never been part of it. The full table is in `sessions/…/04-redirect-rules.md` §3b; in
+short:
+
+- **`/privacy-policy/` keeps its URL** and receives the real English text. It is linked
+  from the footer and from legal notices, so it must not move. Same for the Impressum.
+- **`/join/` is a new URL.** `/take-action/` (Luxembourgish placeholder + a dead form) and
+  `/sign-up/` (a dead `[vfb]` form) both 301 to it — rows added to
+  `incoming/redirect-patterns.csv`. They stay published until `/join/` exists: a 301 to a
+  404 is worse than a stale page.
+- **`/our-campaign/` and `/stop-green-fascism/` keep their URLs.** `/our-campaign/` is the
+  parent of six child pages, and page URLs are hierarchical — retiring the parent would
+  break every child address.
+- **`/sitemap/` keeps its URL** and becomes a real human index; `/wp-sitemap.xml` already
+  serves machines.
+- **~229 pages still store a template file from the old theme** (121 `template_fullwidth.php`,
+  64 a redundant `default`, the rest portfolio/contact/sitemap templates). Harmless —
+  WordPress falls back — but stale: `wp/tools/clear-stale-page-templates.php` clears them,
+  dry-run first, in Local's Site Shell. The REST listing shows only 8 of them because it
+  returns published, default-language pages only; the rest are translations, drafts and
+  private pages. Count rows in the database or the dump, never in `/wp-json/`.
+
 ## Verification
 
 `build/shoot.mjs` screenshots any draft at any size and scroll position, prints page and

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home below the hero — five wireframes</title>
+<link rel="stylesheet" href="wire.css">
+</head>
+<body>
+<header class="w-hd"><b>Home, below the hero · round 2</b><span class="w-idea">five shapes, grey boxes, ≈2 screens each</span>
+	<span class="w-meta"><a href="../index.html">← the finished drafts</a></span></header>
+<main id="main" class="ix">
+	<h1>Five ways the page could be shaped</h1>
+	<p>Round one was three arguments in one layout. These are five layouts, deliberately short: the hero has already
+	spent five screens persuading, so everything here orients instead. Grey on purpose — judge the shape, not the styling.
+	Open one and use the two switches in its header: <b>Notes</b> explains what you are looking at, and
+	<b>Schedule source: live / empty</b> shows what the page says when nothing is scheduled.</p>
+	<p><b>Every perishable value is chipped:</b> <span class="chip chip--auto">auto</span> computed at render from the
+	archive · <span class="chip chip--dated">as of …</span> carries the date it was true ·
+	<span class="chip chip--sched">scheduled</span> comes from the events source and has an empty state. Nothing on
+	these pages is a number somebody must retype.</p>
+	<div class="ix-grid" id="grid"></div>
+</main>
+<script type="module">
+const WF = [
+	['wf-1-desk', 'The Desk', 'The front desk of a library that happens to be alive: search, four verbs, ten subjects with live counts, and a shelf that fills in place.'],
+	['wf-2-broadsheet', 'The Broadsheet', 'A front page. One editor-chosen lead, a queried latest column, faces and the open meeting — all above the fold.'],
+	['wf-3-fork', 'The Fork', 'Two short paths instead of one averaged page: “I’m new” and “I’m checking your record”, opening in place, with the index always as a third way out.'],
+	['wf-4-voices', 'The Voices', 'People first. A wall of faces, one caption bar that fills as you move, and the conferences where they spoke.'],
+	['wf-5-instrument', 'The Instrument', 'The whole record as one control you play with in a single screen; the evidence lives on its own page.'],
+];
+document.getElementById('grid').innerHTML = WF.map(([f, t, d]) => `
+	<div class="ix-card">
+		<div class="ix-thumb"><iframe src="${f}.html" loading="lazy" title="${t}" scrolling="no"></iframe></div>
+		<h2>${t}</h2><p>${d}</p><a href="${f}.html">Open full size →</a>
+	</div>`).join('');
+</script>
+</body>
+</html>

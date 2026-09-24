@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WF2 · The Broadsheet</title>
+<link rel="stylesheet" href="wire.css">
+</head>
+<body data-wf="broadsheet">
+<main id="main" class="w-canvas"><div class="w-wrap has-notes">
+	<div class="w-stage">
+		<div class="w-hero-stub">↑ the shipped hero ends here</div>
+
+		<div class="row" style="grid-template-columns:auto auto;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:8px">
+			<span class="lbl" style="margin:0"><span class="n">1</span>Schiller Institute · since 1984 · archive <span id="wf2-span"></span></span>
+			<span class="txt txt--m" id="wf2-ear"></span>
+		</div>
+
+		<div class="row r-lead" style="margin-top:16px">
+			<div>
+				<span class="lbl"><span class="n">2</span>The lead — one story, chosen by an editor</span>
+				<div class="box box--img" style="min-height:190px"></div>
+				<div class="bar bar--xl" style="width:92%;margin-top:12px"></div>
+				<div class="bar bar--xl" style="width:64%"></div>
+				<div class="bars" style="margin-top:10px"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+			</div>
+			<div>
+				<span class="lbl"><span class="n">3</span>Latest — a Query Loop, never typed</span>
+				<div id="wf2-latest"></div>
+				<p class="txt txt--m" style="margin-top:8px">All articles →</p>
+			</div>
+			<div>
+				<div id="wf2-week"></div>
+				<div style="margin-top:14px"><span class="lbl"><span class="n">4</span>Who is in the room</span><div id="wf2-faces"></div>
+				<p class="txt txt--m" style="margin-top:8px" id="wf2-people"></p></div>
+			</div>
+		</div>
+
+		<div class="rule"></div>
+		<div class="row" id="wf2-sections" style="grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px"></div>
+
+		<div class="w-fold"><span>≈ one screen — everything above is the front page</span></div>
+
+		<div class="row r-side">
+			<div>
+				<span class="lbl"><span class="n">5</span>Two standing invitations, one line each</span>
+				<div class="row r2">
+					<div class="box"><span class="lbl">Sing</span><span class="txt txt--m">community choruses · five regions</span></div>
+					<div class="box"><span class="lbl">Read the record</span><span class="txt txt--m">forecasts, proposals, sources → /record/</span></div>
+				</div>
+				<div class="row r4" style="margin-top:12px">
+					<div class="box"><span class="lbl">Articles</span><span id="wf2-s1"></span></div>
+					<div class="box"><span class="lbl">Videos</span><span id="wf2-s2"></span></div>
+					<div class="box"><span class="lbl">Conferences</span><span id="wf2-s3"></span></div>
+					<div class="box"><span class="lbl">People</span><span id="wf2-s4"></span></div>
+				</div>
+			</div>
+			<div id="wf2-signup"></div>
+		</div>
+	</div>
+	<aside class="w-notes"></aside>
+</div></main>
+
+<script type="module">
+import { chrome, notes, get, auto, span, sched, weekBox, signup, rows, faces, nf, esc, nextWeekly, localTime } from './wire.js';
+chrome({ n: 2, name: 'The Broadsheet', idea: 'a front page: dense, current, everything above the fold', screens: '≈ 1.8 screens',
+	ask: 'read the room in ten seconds — what is happening now, who is in it, how to be in it.' });
+const now = await get('now.json');
+const fri = nextWeekly();
+document.getElementById('wf2-span').innerHTML = auto(span(now.counts.first_year), 'earliest published date → today');
+document.getElementById('wf2-ear').innerHTML = sched(`Next: <b>${fri ? localTime(fri) : 'Friday'}</b> your time`, 'Weekly — see the newsletter');
+document.getElementById('wf2-latest').innerHTML = rows(now.latest, 5);
+document.getElementById('wf2-week').innerHTML = weekBox(now, { compact: true });
+document.getElementById('wf2-faces').innerHTML = faces(8, '44px');
+document.getElementById('wf2-people').innerHTML = auto(nf(now.counts.people), 'si_person count') + ' people on record';
+document.getElementById('wf2-signup').innerHTML = signup('The week by email');
+for (const [id, v, what] of [['wf2-s1', now.counts.articles, 'post count'], ['wf2-s2', now.counts.videos, 'si_video count'], ['wf2-s3', now.counts.conferences_listed, 'si_conference count'], ['wf2-s4', now.counts.people, 'si_person count']])
+	document.getElementById(id).innerHTML = auto(nf(v), what);
+document.getElementById('wf2-sections').innerHTML = now.topics.map(t => `<a class="txt txt--m" href="#" style="text-decoration:none">${esc(t.label)} <span class="val">${nf(t.n)}</span></a>`).join('');
+
+notes([
+	'<b>A masthead, not a manifesto.</b> Name, founding year, the years the archive covers — computed, so nobody edits it in January.',
+	'<b>One editor-chosen lead.</b> The only place on the page where a human decides what matters this week; everything else is queried.',
+	'<b>Latest is a Query Loop.</b> Five rows, newest first. It cannot go stale and it needs no maintenance.',
+	'<b>Faces above the fold.</b> Eight portraits answer "who is in this movement" before any argument does.',
+	'<b>Standing invitations are one line each</b>, and the archive totals sit beneath them as evidence of scale rather than as a boast.',
+	'<b>The risk:</b> density reads as a newspaper, which is what the old site felt like. It only works if the typography is calm — the wireframe cannot show that.',
+]);
+</script>
+</body>
+</html>

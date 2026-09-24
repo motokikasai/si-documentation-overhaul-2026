@@ -135,3 +135,30 @@ content written from now on. (Corrected 2026-09-24: this said "the archive is cl
 | 10 | Stop and ask; no improvised code | Formatter and payload PHP exist | Rule governs new work; existing code refactored per the plan |
 | 11 | One extension ladder | "Blocksy filters before templates" | Two ladders: frame and content (§4) |
 | 12 | Patterns with content | "Never invent content" | Verified copy or empty placeholders only |
+
+## 9 · Living numbers and perishable facts (2026-09-24)
+
+A number typed into a page is a promise that somebody will come back and retype it. We
+do not make that promise. Anything on a public page that time can falsify is handled in
+one of three ways, and a design that fits none of them does not print the fact.
+
+| Kind | Examples | How it is carried |
+|---|---|---|
+| **Derived from the archive** | articles, videos, people, conferences, per-topic counts, "the archive begins in {first year}" | computed at render by `WP_Query` / `wp_count_posts` / `wp_count_terms` in a binding, a dynamic block or a pattern's server part; cached in a transient keyed by a `*_VERSION` constant and cleared on `save_post` / `deleted_post` |
+| **Derived from a date** | "since 1984", a span in years, "week {n}" of a series, "{n} consecutive weeks" | computed from the stored date (or from the count of published records in that series) — never written as a finished figure |
+| **Perishable, not derivable** | a schedule, a price, an office address, a named contact | comes from a source that can expire (an event record, an option) and **degrades to the general form** when that source is empty or stale: "weekly — the newsletter carries the day", not "every Friday at 11:00 ET" |
+
+Rules that follow:
+
+- **Spans are computed, never written.** "Since 1984" is safe; "42 years of work" and
+  "fourteen years of archive" are not — they are wrong within a year of being typed.
+- **A figure that cannot be computed carries its date**, in the same sentence or in the
+  source line: "167 consecutive weekly meetings, as of 14 August 2026".
+- **A recurring time is a claim about the future.** Print it only from a source the
+  organisers actually maintain, and design the empty state first: what the page says when
+  nothing is scheduled is part of the design, not an error case.
+- **Editors must not be asked to keep counts in step.** If a pattern's starter copy holds
+  a number, the number is a binding, not text — otherwise the pattern ships without it.
+- Applies to every surface: pages, patterns, block starter copy, meta descriptions,
+  headings, alt text and the German and other translations, where a stale figure is worse
+  because it is noticed later.

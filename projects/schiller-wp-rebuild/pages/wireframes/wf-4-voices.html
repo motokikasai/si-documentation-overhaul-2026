@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WF4 · The Voices</title>
+<link rel="stylesheet" href="wire.css">
+</head>
+<body data-wf="voices">
+<main id="main" class="w-canvas"><div class="w-wrap has-notes">
+	<div class="w-stage">
+		<div class="w-hero-stub">↑ the shipped hero ends here</div>
+
+		<div class="row r-side" style="align-items:end">
+			<div>
+				<div class="bar bar--xl" style="width:70%"></div>
+				<p class="txt txt--m" style="margin:10px 0 0"><span class="n">1</span>The only claim the page makes: <b>look who has taken this platform.</b> Everything else is a face and a fact.</p>
+			</div>
+			<p class="txt txt--m" style="margin:0" id="wf4-count"></p>
+		</div>
+
+		<div style="margin-top:16px"><span class="n">2</span><span class="lbl" style="display:inline">Hover or focus any face</span></div>
+		<div class="row" id="wf4-wall" style="grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:12px;margin-top:10px"></div>
+		<div class="box box--quiet" id="wf4-caption" style="margin-top:14px;min-height:74px"></div>
+
+		<div class="w-fold"><span>≈ one screen of faces</span></div>
+
+		<div class="row r-side">
+			<div>
+				<span class="lbl"><span class="n">4</span>Where they spoke</span>
+				<div class="row r3" id="wf4-confs" style="gap:10px"></div>
+				<p class="txt txt--m" style="margin-top:10px">All conferences → · the whole register of people →</p>
+			</div>
+			<div id="wf4-week"></div>
+		</div>
+		<div style="margin-top:16px" id="wf4-signup"></div>
+	</div>
+	<aside class="w-notes"></aside>
+</div></main>
+
+<script type="module">
+import { chrome, notes, get, auto, dated, weekBox, signup, nf, esc } from './wire.js';
+chrome({ n: 4, name: 'The Voices', idea: 'people first — the argument is who is in the room', screens: '≈ 2 screens',
+	ask: 'recognise someone, then take the seat that is open this week.' });
+const [now, V] = await Promise.all([get('now.json'), get('voices.json')]);
+document.getElementById('wf4-count').innerHTML = auto(nf(now.counts.people), 'si_person count') + ' people on record · ' + auto(V.voices.length, 'people with a sourced title AND a licensed portrait') + ' shown here';
+
+const wall = document.getElementById('wf4-wall'), cap = document.getElementById('wf4-caption');
+wall.innerHTML = V.voices.map((v, i) => `<button data-i="${i}" style="border:0;background:none;padding:0;cursor:pointer"><span class="face"></span></button>`).join('');
+function show(i) {
+	const v = V.voices[i];
+	wall.querySelectorAll('button').forEach((b, j) => b.firstElementChild.style.outline = i === j ? '2px solid var(--blue)' : '');
+	cap.innerHTML = `<span class="lbl" style="margin:0 0 4px">${esc(v.title)} <span class="chip chip--static">sourced title</span></span>
+		<p class="txt" style="margin:0"><b>${esc(v.name)}</b> · ${auto(v.n, 'count of archive records naming this person')} appearances in the archive</p>
+		<p class="txt txt--m" style="margin:6px 0 0">Their page · everything they said here →</p>`;
+}
+wall.addEventListener('pointerover', e => { const b = e.target.closest('button'); if (b) show(+b.dataset.i); });
+wall.addEventListener('focusin', e => { const b = e.target.closest('button'); if (b) show(+b.dataset.i); });
+show(0);
+
+document.getElementById('wf4-confs').innerHTML = now.conferences.slice(0, 3).map(c => `<div class="box"><span class="lbl">${esc((c.start || '').slice(0, 7))}</span><div class="bar bar--h" style="width:88%"></div><p class="txt txt--m" style="margin:6px 0 0">${esc(c.location || '')} · ${auto(c.videos ?? 0, 'videos attached to this conference')} videos</p></div>`).join('');
+document.getElementById('wf4-week').innerHTML = weekBox(now, { compact: true });
+document.getElementById('wf4-signup').innerHTML = signup('The week by email');
+
+notes([
+	'<b>No essay at all.</b> The page argues by exhibit: a wall of people who took this platform, each with the office they held.',
+	'<b>One caption bar, not 24 captions.</b> Hovering or tabbing a face fills it — the page stays quiet until you ask.',
+	'<b>It says what it can prove.</b> Only people with a sourced title and a licensed portrait appear, and the count of those is itself shown — the gap is the content backlog, in public.',
+	'<b>Conferences follow the faces</b>, because "where they spoke" is the next question a sceptic asks.',
+	'<b>The risk:</b> it depends entirely on the titles backlog. Today that is a small number of the people on record; if editors never fill the rest, the wall stays thin.',
+]);
+</script>
+</body>
+</html>

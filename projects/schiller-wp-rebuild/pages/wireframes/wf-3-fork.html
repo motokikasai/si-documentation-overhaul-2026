@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WF3 · The Fork</title>
+<link rel="stylesheet" href="wire.css">
+</head>
+<body data-wf="fork">
+<main id="main" class="w-canvas"><div class="w-wrap has-notes">
+	<div class="w-stage">
+		<div class="w-hero-stub">↑ the shipped hero ends here</div>
+
+		<div class="bar bar--xl" style="width:56%"></div>
+		<p class="txt txt--m" style="margin:10px 0 18px"><span class="n">1</span>One sentence, then the page stops talking and asks.</p>
+
+		<div class="row r2" id="wf3-doors"></div>
+
+		<p class="txt txt--m" style="margin:14px 0 0"><span class="n">3</span>Neither? <a href="wf-1-desk.html">Everything, as an index →</a> — the third door is always visible, so no one is trapped in a funnel.</p>
+
+		<div class="w-fold"><span>≈ one screen, whichever door is open</span></div>
+
+		<div class="row r-side">
+			<div id="wf3-week"></div>
+			<div id="wf3-signup"></div>
+		</div>
+		<div class="row r4" style="margin-top:16px" id="wf3-stats"></div>
+	</div>
+	<aside class="w-notes"></aside>
+</div></main>
+
+<script type="module">
+import { chrome, notes, get, auto, span, weekBox, signup, rows, nf, esc } from './wire.js';
+chrome({ n: 3, name: 'The Fork', idea: 'two short paths instead of one averaged page', screens: '≈ 2 screens',
+	ask: 'say which kind of visitor you are, and get a path of four steps — or refuse and take the index.' });
+const now = await get('now.json');
+
+const DOORS = [
+	{ k: 'new', t: 'I’m new to this', sub: 'Show me what you do and how to take part',
+	  steps: ['Watch one thing — 12 minutes', 'This Friday’s open meeting', 'Sing, or come to a conference', 'The week by email'] },
+	{ k: 'check', t: 'I’m checking your record', sub: 'Show me what you claimed and what followed',
+	  steps: ['The record: said → what followed → source', 'Who has spoken here, with their office', 'The archive, searchable in full text', 'Where we are wrong, and what is missing'] },
+];
+document.getElementById('wf3-doors').innerHTML = DOORS.map((d, i) => `
+	<button class="box" data-i="${i}" aria-expanded="false" style="text-align:left;cursor:pointer;font:inherit;padding:18px">
+		<span class="lbl" style="margin:0 0 6px"><span class="n">2</span>Door ${i + 1}</span>
+		<div class="bar bar--xl" style="width:${i ? 74 : 62}%"></div>
+		<p class="txt" style="margin:10px 0 0"><b>${esc(d.t)}</b></p>
+		<p class="txt txt--m" style="margin:2px 0 0">${esc(d.sub)}</p>
+		<div class="d-body" hidden style="margin-top:14px;border-top:1px solid var(--line);padding-top:12px">
+			${d.steps.map((s, j) => `<p class="txt" style="margin:0 0 8px"><span class="lbl" style="display:inline;margin:0">${j + 1}</span> ${esc(s)}</p>`).join('')}
+			<span class="btn" style="margin-top:6px">Start here</span>
+		</div>
+	</button>`).join('');
+document.getElementById('wf3-doors').addEventListener('click', e => {
+	const b = e.target.closest('button[data-i]'); if (!b) return;
+	const open = b.getAttribute('aria-expanded') === 'true';
+	b.setAttribute('aria-expanded', String(!open));
+	b.querySelector('.d-body').hidden = open;
+	b.style.outline = open ? '' : '2px solid var(--blue)';
+});
+document.getElementById('wf3-week').innerHTML = weekBox(now, { compact: true });
+document.getElementById('wf3-signup').innerHTML = signup('Whichever door you took');
+document.getElementById('wf3-stats').innerHTML = [['Articles', now.counts.articles, 'post count'], ['Videos', now.counts.videos, 'si_video count'], ['People', now.counts.people, 'si_person count'], ['Archive', span(now.counts.first_year), 'earliest date → today']]
+	.map(([l, v, w]) => `<div class="box"><span class="lbl">${l}</span>${auto(typeof v === 'number' ? nf(v) : v, w)}</div>`).join('');
+
+notes([
+	'<b>The page admits it has two audiences</b> instead of averaging them into one scroll. A recruit and a sceptic want opposite things in the first ten seconds.',
+	'<b>Doors open in place.</b> Both can be open at once, nothing is hidden, and neither choice is remembered or used to narrow what is shown later.',
+	'<b>A third way out is always visible</b> — the index. A fork that cannot be refused is a funnel.',
+	'<b>Below the fold is shared</b>: the open meeting, the one sign-up, the archive totals. Whichever door you took, the page ends in the same place.',
+	'<b>The risk:</b> asking people to classify themselves is friction, and some will resent it. It is the most testable of the five — two doors, two click-through rates.',
+]);
+</script>
+</body>
+</html>

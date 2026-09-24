@@ -143,6 +143,15 @@ Full detail, with the reasoning behind each resolution: @docs/block-conventions.
   quotations. A record with nothing in a field shows nothing in that slot. A pattern ships
   verified copy or an empty placeholder, never lorem ipsum. Every number printed in a doc
   must be reproducible from the dump or a reviewed CSV.
+- **No number is typed into content, and no schedule is written as if permanent.** Every
+  figure on a public page is either computed at render from the archive, or it carries the
+  date it was true ("167 meetings, as of 14 Aug 2026"). Spans are computed from a date, not
+  written out: "since 1984", never "42 years of"; "the archive begins in 2012", never
+  "fourteen years". Recurring events come from an events source that can end, and the page
+  degrades to the general form ("weekly — the newsletter carries the day") when that source
+  is empty or stale. If a number can be neither computed nor dated, it does not go on the
+  page. A design that needs a human to revisit it every year is a design fault, not an
+  editorial chore. See `docs/block-conventions.md` §9.
 - **Blank ≠ accept** in a review CSV. Only an explicit `accept` in `final_action` counts.
 - **Each draft version is a new direction**, not a refinement of the last, unless the user
   has chosen one — then refine that one and leave the others untouched.

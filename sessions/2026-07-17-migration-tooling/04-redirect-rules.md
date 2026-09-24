@@ -39,6 +39,56 @@ redirect source of truth; C14: rank by inlink count + a one-off free-tier backli
    `si:redirects --patterns=incoming/redirect-patterns.csv`.
 5. **DE per-talk pages** (R4.1): `/de/{slug}/` → `/de/media/{new-slug}/`.
 
+## 3b. Pages carrying a dead Vanguard template — decided 2026-09-24
+
+Found while drafting the Tier-1 pages. **A page template is postmeta, not a URL** —
+WordPress already falls back to the default, so clearing it moves nothing. Script:
+`projects/schiller-wp-rebuild/pages/wp/tools/clear-stale-page-templates.php` (dry run,
+then `apply`, in Local's Site Shell).
+
+**The count is ~229, not 8.** The first figure came from the REST listing, which returns
+only *published, default-language* pages; the database holds the translations, the drafts
+and the private pages too. Measured over the 2026-09-08 dump, every row is a `page`:
+
+| stored value | rows | kind |
+|---|---|---|
+| `template_fullwidth.php` | 121 | file gone with the old theme |
+| `default` | 64 | redundant — identical to no meta at all |
+| `template_portfolio4columns.php` | 18 | file gone |
+| `template_portfolio1column.php` | 12 | file gone |
+| `template_contact.php` | 8 | file gone |
+| `template_portfolio3columns.php` | 7 | file gone |
+| `template_sitemap.php` | 1 | file gone |
+
+**28 of the 229 rows are not pages** — 16 `si_conference`, 3 `si_statement`, 1
+`si_presentation` and 1 `post`, all carrying a redundant `default`. They are records the
+importer converted *from* pages, which brought the page's postmeta with them. Clearing it
+loses nothing: provenance lives in `_legacy_id`, `_legacy_url` and `_si_transformed`.
+
+**Method note:** a REST listing is language- and status-filtered. For any "how many rows
+carry X" question, count in the database or in the dump, never in `/wp-json/`.
+
+What happens to each URL, decided with the front-end work:
+
+| URL | Decision | Redirect |
+|---|---|---|
+| `/privacy-policy/` | **keep the URL**, publish the real English text into the same page (it is linked from the footer and from legal notices; the page must not move) | none |
+| `/our-campaign/` | **keep**, rebuild as the campaigns hub. Non-obvious reason: it is the parent of `/our-campaign/about-us/`, `/our-campaign/build-the-world-land-bridge/` and four more — page URLs are hierarchical, so retiring the parent breaks every child URL | none |
+| `/sitemap/` | **keep the URL**, rebuild as a real human site index (it is empty today; `/wp-sitemap.xml` serves machines, not readers) | none |
+| `/stop-green-fascism/` | **keep**, campaign hub with four children (a stray child already redirects to `/campaign/stop-green-fascism/`) | existing row |
+| `/take-action/` | **retire.** Luxembourgish placeholder text and a dead `[vfb]` form. Its intent — "how do I take part" — is the new `/join/` page | `→ /join/` added to `redirect-patterns.csv` |
+| `/sign-up/` *(not in the eight)* | same: a dead `[vfb id='4']` form with the same intent | `→ /join/` added |
+| `/sdi-30th-anniversary/`, `/new-york-conference-january-26-2013/`, `/international-conference-…/panel-2-…/` | leave to the conference map: if `conference-map.csv` promotes them, §3.3 emits the 301 to `/conferences/{slug}/`; if not, they stay as Pages | per §3.3 |
+
+Why `/take-action/` redirects rather than being reused in place: the canonical URL should
+say what the page is, and a 301 carries the inbound links to it. Reusing an old address
+for new content only wins when we do not want the clearer URL at all. Both rows are one
+line in `incoming/redirect-patterns.csv` and are reversible until the cutover.
+
+**Sequencing:** the two redirect rows only become live when `/join/` exists. Until then
+`/take-action/` and `/sign-up/` stay published, because a 301 to a 404 is worse than a
+stale page.
+
 ## 4. Open items for P5
 
 - `newparadigm.schillerinstitute.com` (V6): if the subdomain still resolves, keep it resolving with a wildcard 301 to the new site; else nothing to do.

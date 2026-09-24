@@ -1,0 +1,102 @@
+/* ==========================================================================
+   WIREFRAME KIT — Home below the hero, round 2 (2026-09-24)
+   Grey boxes on purpose: these are shapes to accept or throw away, not designs.
+   No Jasper, no brand colour, no finished copy. One blue is used, and only for
+   the apparatus: annotations, and the chips that mark a value as perishable.
+   Nothing here ships.
+   ========================================================================== */
+:root {
+	--ink: #232323; --mid: #6a6a68; --line: #c9c9c5; --fill: #e9e9e6; --fill2: #f3f3f0;
+	--paper: #fff; --blue: #2f6db5; --blue-bg: #eaf1fa;
+	--gap: 18px; --r: 3px;
+	--sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+	--mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: #f7f7f5; color: var(--ink); font: 15px/1.5 var(--sans); }
+a { color: var(--blue); }
+
+/* ---- the apparatus around a wireframe ----------------------------------- */
+.w-hd { position: sticky; top: 0; z-index: 30; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; padding: 12px 20px; background: #1d1d1b; color: #f2f2ef; }
+.w-hd b { font-size: 15px; }
+.w-hd .w-idea { color: #b9b9b3; font-size: 13.5px; }
+.w-hd .w-meta { margin-left: auto; display: flex; gap: 10px; align-items: center; font-size: 12.5px; color: #b9b9b3; }
+.w-hd button { font: 600 12px var(--sans); color: #1d1d1b; background: #f2f2ef; border: 0; border-radius: 999px; padding: 5px 11px; cursor: pointer; }
+.w-hd button[aria-pressed="true"] { background: var(--blue); color: #fff; }
+.w-hd a { color: #f2f2ef; font-size: 12.5px; }
+
+.w-ask { padding: 10px 20px; background: var(--blue-bg); border-bottom: 1px solid #cfe0f3; font-size: 13.5px; color: #1b3f6b; }
+.w-ask b { font-weight: 700; }
+
+.w-canvas { width: min(1180px, 100% - 40px); margin: 22px auto 60px; }
+.w-stage { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 26px clamp(16px, 3vw, 34px) 34px; }
+.w-hero-stub { display: flex; align-items: center; justify-content: center; height: 86px; margin-bottom: 22px; border: 1px dashed var(--line); border-radius: var(--r); background: repeating-linear-gradient(135deg, transparent 0 8px, #f0f0ed 8px 9px); color: var(--mid); font: 12px var(--mono); }
+.w-fold { position: relative; height: 0; margin: 30px 0; border-top: 1px dashed var(--blue); }
+.w-fold span { position: absolute; right: 0; top: -9px; background: var(--paper); padding: 0 8px; font: 11px var(--mono); color: var(--blue); }
+
+/* ---- the grey-box vocabulary --------------------------------------------- */
+.box { background: var(--fill); border: 1px solid var(--line); border-radius: var(--r); padding: 14px; }
+.box--quiet { background: var(--fill2); }
+.box--open { background: transparent; }
+.box--img { background: var(--fill); position: relative; min-height: 120px; }
+.box--img::after { content: ""; position: absolute; inset: 8px; background: linear-gradient(to top right, transparent calc(50% - 1px), var(--line) 50%, transparent calc(50% + 1px)), linear-gradient(to bottom right, transparent calc(50% - 1px), var(--line) 50%, transparent calc(50% + 1px)); }
+.lbl { display: block; font: 600 10.5px/1.4 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--mid); margin-bottom: 8px; }
+.bar { height: 9px; border-radius: 2px; background: var(--line); opacity: .75; margin: 7px 0; }
+.bar--h { height: 20px; opacity: .9; }
+.bar--xl { height: 34px; opacity: .9; }
+.bars > .bar:nth-child(2n) { width: 86%; }
+.bars > .bar:nth-child(3n) { width: 72%; }
+.txt { font-size: 14px; color: var(--ink); }
+.txt--m { color: var(--mid); font-size: 13px; }
+.rule { height: 1px; background: var(--line); margin: 16px 0; }
+.row { display: grid; gap: var(--gap); }
+.r2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.r3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.r4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.r-side { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+.r-lead { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr); }
+@media (max-width: 860px) { .r3, .r4, .r-side, .r-lead { grid-template-columns: 1fr; } }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 18px; border: 1.5px solid var(--ink); border-radius: var(--r); background: var(--ink); color: #fff; font: 600 13.5px var(--sans); cursor: pointer; }
+.btn--ghost { background: transparent; color: var(--ink); }
+.field { height: 40px; border: 1px solid var(--line); border-radius: var(--r); background: var(--paper); display: flex; align-items: center; padding: 0 12px; color: var(--mid); font-size: 13.5px; }
+.face { display: block; width: 100%; aspect-ratio: 1; border-radius: 50%; background: var(--fill); border: 1px solid var(--line); position: relative; }
+.face::after { content: ""; position: absolute; left: 50%; top: 52%; width: 44%; height: 44%; transform: translate(-50%, -30%); border-radius: 50% 50% 45% 45%; background: var(--line); opacity: .5; }
+
+/* ---- chips: what is perishable, and how it is carried -------------------- */
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 1px 7px; border-radius: 999px; font: 600 10.5px/1.6 var(--mono); white-space: nowrap; vertical-align: 1px; }
+.chip--auto { background: var(--blue-bg); color: var(--blue); border: 1px solid #cfe0f3; }
+.chip--auto::before { content: "⟲"; }
+.chip--dated { background: #fdf3e3; color: #8a6118; border: 1px solid #f0dfc0; }
+.chip--dated::before { content: "⌂"; }
+.chip--sched { background: #eef6ee; color: #2f6b3a; border: 1px solid #cfe5d2; }
+.chip--sched::before { content: "☰"; }
+.chip--static { background: var(--fill2); color: var(--mid); border: 1px solid var(--line); }
+.val { font-variant-numeric: tabular-nums; font-weight: 700; }
+[data-sched="empty"] .sched-on { display: none; }
+[data-sched="live"] .sched-off { display: none; }
+
+/* ---- annotations --------------------------------------------------------- */
+.w-wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; }
+@media (min-width: 1120px) { .w-wrap.has-notes { grid-template-columns: minmax(0, 1fr) 250px; } }
+.w-notes { font-size: 12.5px; color: #2a2a28; }
+.w-notes ol { margin: 0; padding-left: 20px; }
+.w-notes li { margin-bottom: 12px; }
+.w-notes li::marker { color: var(--blue); font-weight: 700; }
+.w-notes h3 { margin: 0 0 8px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--mid); }
+.n { display: inline-grid; place-items: center; width: 17px; height: 17px; border-radius: 50%; background: var(--blue); color: #fff; font: 700 10.5px var(--sans); vertical-align: 2px; margin-right: 5px; }
+body:not(.notes-on) .n { display: none; }
+body:not(.notes-on) .w-notes { display: none; }
+body:not(.notes-on) .w-wrap.has-notes { grid-template-columns: minmax(0, 1fr); }
+
+/* ---- index (the five side by side) --------------------------------------- */
+.ix { width: min(1400px, 100% - 40px); margin: 0 auto 60px; }
+.ix h1 { font-size: 22px; margin: 24px 0 6px; }
+.ix p { color: var(--mid); max-width: 70ch; }
+.ix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 20px; }
+.ix-card { border: 1px solid var(--line); border-radius: var(--r); background: var(--paper); overflow: hidden; display: flex; flex-direction: column; }
+.ix-thumb { height: 300px; overflow: hidden; border-bottom: 1px solid var(--line); background: #fff; }
+.ix-thumb iframe { width: 1280px; height: 1400px; border: 0; transform: scale(.235); transform-origin: 0 0; pointer-events: none; }
+.ix-card h2 { margin: 0; padding: 12px 14px 2px; font-size: 15px; }
+.ix-card p { margin: 0; padding: 0 14px 12px; font-size: 12.5px; }
+.ix-card a { display: block; padding: 10px 14px; border-top: 1px solid var(--line); font: 600 13px var(--sans); text-decoration: none; margin-top: auto; }
+.ix-card a:hover { background: var(--blue-bg); }

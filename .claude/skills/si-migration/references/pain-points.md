@@ -259,3 +259,28 @@ marks, do not strip non-ASCII.
 **Local + WSL.** WSL cannot reach Local's MySQL; WP-CLI runs in "Open Site Shell". HTTP works
 at the Windows default-route IP with a `Host:` header. A browser cannot send that header and
 `/etc/hosts` needs root, so use `articles/build/local-proxy.mjs`.
+
+## A REST listing is not a count (2026-09-24)
+
+`/wp-json/wp/v2/pages?per_page=100` answers with **published, default-language** rows, and
+silently caps at the page size. Counting `_wp_page_template` that way gave 8; the database
+holds 229 — the difference is WPML translations, drafts and private pages. The same trap
+applies to any "how many X are there" question answered from REST. Count in the dump
+(`tools/sqlstream.py`) or in the database, and treat a REST number as a sample.
+
+## Permalinks in WP-CLI come out in the wrong language (2026-09-24)
+
+WP-CLI has no language context, so `get_permalink()` on a translated post returns the
+**default-language** URL: the German contact page printed as `/contact-us-3/`. The
+`wpml_permalink` filter only prefixes the language (`/de/contact-us-3/`) — it does not swap
+in the translated slug. For a true URL, switch first and switch back:
+
+```php
+$cur = apply_filters( 'wpml_current_language', null );
+do_action( 'wpml_switch_language', $code );
+$url = get_permalink( $id );
+do_action( 'wpml_switch_language', $cur );
+```
+
+Any CLI script that prints, compares or builds redirects from permalinks must do this, or
+every one of the 103 German and 19 French pages is reported at the wrong address.

@@ -66,3 +66,8 @@ kicker's size — in the shipped hero it has always rendered at 17.28px against 
 own rule asks for, and nobody saw it because it still *looked* like a kicker. Write the
 container rule as `p:not(.si-hero__kicker)`, or give it no specificity with `:where(p)`. Same
 family as the reset trap above: measure `getComputedStyle` rather than trusting the sheet.
+
+**PHP swallows a multibyte character into the variable name.** `"$k×$n"` prints neither
+`$k` nor the ×: PHP allows bytes ≥ 0x80 in identifiers, so it reads the variable as `$k×`,
+finds nothing, and emits only `$n`. A grouped report lost all its labels this way
+(`page/publish ×5` came out as `5`). Use `$k . ' ×' . $n` or `"{$k}×{$n}"`.

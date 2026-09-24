@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WF5 · The Instrument</title>
+<link rel="stylesheet" href="wire.css">
+</head>
+<body data-wf="instrument">
+<main id="main" class="w-canvas"><div class="w-wrap has-notes">
+	<div class="w-stage">
+		<div class="w-hero-stub">↑ the shipped hero ends here</div>
+
+		<div class="bar bar--xl" style="width:52%"></div>
+		<p class="txt txt--m" style="margin:10px 0 16px"><span class="n">1</span>One object instead of twelve cards: the whole record compressed into something you play with, not scroll through.</p>
+
+		<div class="box box--open" style="padding:18px 16px 10px">
+			<div id="wf5-track" style="position:relative;height:64px">
+				<div style="position:absolute;left:0;right:0;top:30px;height:2px;background:var(--line)"></div>
+				<div id="wf5-marks"></div>
+			</div>
+			<input id="wf5-range" type="range" min="0" max="1" value="0" step="1" style="width:100%" aria-label="Move along the record">
+			<div class="row" style="grid-template-columns:auto auto;justify-content:space-between"><span class="txt txt--m" id="wf5-from"></span><span class="txt txt--m" id="wf5-to"></span></div>
+		</div>
+
+		<div class="row r-side" style="margin-top:16px">
+			<div class="box box--quiet" id="wf5-card" style="min-height:190px"></div>
+			<div class="box box--open">
+				<span class="lbl"><span class="n">3</span>Where the detail lives</span>
+				<p class="txt txt--m">Every entry links out to its source. The full apparatus — evidence grades, which originals are still missing, what we got wrong — is a page of its own: <b>/record/</b>.</p>
+				<span class="btn btn--ghost" style="margin-top:8px">Open the record</span>
+			</div>
+		</div>
+
+		<div class="w-fold"><span>≈ one screen — the record, played rather than read</span></div>
+
+		<div class="row r-side">
+			<div id="wf5-week"></div>
+			<div id="wf5-signup"></div>
+		</div>
+		<div class="row r4" style="margin-top:16px" id="wf5-doors"></div>
+	</div>
+	<aside class="w-notes"></aside>
+</div></main>
+
+<script type="module">
+import { chrome, notes, get, auto, span, weekBox, signup, nf, esc } from './wire.js';
+chrome({ n: 5, name: 'The Instrument', idea: 'the record as one thing you play with, in a single screen', screens: '≈ 2 screens',
+	ask: 'spend thirty seconds moving through the record, then take the open seat.' });
+const [now, R] = await Promise.all([get('now.json'), get('record.json')]);
+const marks = R.record.map(r => ({ y: r.year, label: r.label, said: r.said, then: r.followed, src: r.cite, grade: r.grade }));
+const y0 = marks[0].y, y1 = new Date().getFullYear();
+document.getElementById('wf5-from').innerHTML = auto(y0, 'earliest entry in the record');
+document.getElementById('wf5-to').innerHTML = auto(y1 + ' · today', 'now');
+const range = document.getElementById('wf5-range');
+range.max = String(marks.length - 1);
+document.getElementById('wf5-marks').innerHTML = marks.map((m, i) => {
+	const x = ((m.y - y0) / (y1 - y0) * 100).toFixed(1);
+	/* labels alternate above and below the track: several entries fall within a
+	   year or two of each other (1984/1987/1988, 2013/2014) and would collide */
+	const above = i % 2 === 0;
+	return `<button data-i="${i}" title="${esc(m.y)} · ${esc(m.label)}" style="position:absolute;left:${x}%;top:22px;transform:translateX(-50%);width:18px;height:18px;border-radius:50%;border:2px solid var(--line);background:#fff;cursor:pointer;padding:0"></button>
+		<span class="txt txt--m" style="position:absolute;left:${x}%;top:${above ? 0 : 46}px;transform:translateX(-50%);font-size:10.5px;background:#fff;padding:0 2px">${m.y}</span>`;
+}).join('');
+const card = document.getElementById('wf5-card');
+function show(i) {
+	const m = marks[i];
+	range.value = String(i);
+	document.querySelectorAll('#wf5-marks button').forEach((b, j) => { b.style.background = i === j ? 'var(--blue)' : '#fff'; b.style.borderColor = i === j ? 'var(--blue)' : 'var(--line)'; });
+	card.innerHTML = `<span class="lbl" style="margin:0 0 6px"><span class="n">2</span>${m.y} · ${esc(m.label)}</span>
+		<p class="txt" style="margin:0 0 8px"><b>Said</b> — ${esc(m.said)}</p>
+		${m.then ? `<p class="txt" style="margin:0 0 8px"><b>Then</b> — ${esc(m.then.date)} · ${esc(m.then.event)}</p>` : ''}
+		<p class="txt txt--m" style="margin:0">Source: ${esc(m.src.title)} <span class="chip chip--static">${m.grade === 'own' ? 'our own account' : 'reported by a third party'}</span></p>`;
+}
+range.addEventListener('input', () => show(+range.value));
+document.getElementById('wf5-marks').addEventListener('click', e => { const b = e.target.closest('button'); if (b) show(+b.dataset.i); });
+show(0);
+document.getElementById('wf5-week').innerHTML = weekBox(now, { compact: true });
+document.getElementById('wf5-signup').innerHTML = signup('The week by email');
+document.getElementById('wf5-doors').innerHTML = [['Watch', now.counts.videos, 'si_video count'], ['Read', now.counts.articles, 'post count'], ['Attend', now.counts.conferences_listed, 'si_conference count'], ['People', now.counts.people, 'si_person count']]
+	.map(([l, v, w]) => `<div class="box"><span class="lbl">${l}</span>${auto(nf(v), w)}</div>`).join('');
+
+notes([
+	'<b>One control replaces a timeline.</b> Twelve entries in a screen you can play with, rather than twelve screens you must scroll. Curiosity is the mechanism: people move a slider to see what happens.',
+	'<b>The card is the whole argument in three lines</b> — said, what followed, whose account it is — and it changes as you move. No drawer to open, no filter chips.',
+	'<b>Depth is a link, not a scroll.</b> /record/ holds the evidence grades, the missing originals, the sources in full.',
+	'<b>It must work without a mouse and without JS.</b> The range input is a real control (arrow keys work); with JS off it degrades to a list of the entries, which is the fallback to draw next.',
+	'<b>The risk:</b> a toy that hides its content. If the visitor does not touch it, the page said almost nothing — so the first mark must already be interesting, and the marks must be visibly clickable.',
+]);
+</script>
+</body>
+</html>
