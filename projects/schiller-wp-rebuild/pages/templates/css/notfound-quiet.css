@@ -1,0 +1,22 @@
+/* 404 · DRAFT B · "The Quiet Page" — the one dark field, spent on the whole page. */
+.nq-page { background: var(--si-night); }
+.nq { min-height: calc(100vh - var(--header-sticky-height)); display: grid; place-items: center; padding: var(--si-space-2xl) 16px; background: radial-gradient(90% 70% at 50% 0%, var(--si-night-2), var(--si-night)); }
+.nq-stage { display: grid; justify-items: center; gap: var(--si-space-m); max-width: 40rem; text-align: center; color: var(--si-on-night-2); }
+.nq-ring {
+	display: grid; place-items: center; width: 8.5rem; aspect-ratio: 1; border-radius: 50%;
+	border: 1.5px solid var(--si-brass-on-night); box-shadow: 0 0 0 10px transparent, 0 0 0 11px color-mix(in srgb, var(--si-brass-on-night) 35%, transparent);
+	animation: nq-breathe 6s var(--si-ease) infinite;
+}
+.nq-ring span { font: 300 2.2rem var(--si-font-serif); letter-spacing: .08em; color: #fff; }
+@keyframes nq-breathe { 50% { box-shadow: 0 0 0 16px transparent, 0 0 0 17px color-mix(in srgb, var(--si-brass-on-night) 18%, transparent); } }
+@media (prefers-reduced-motion: reduce) { .nq-ring { animation: none; } }
+.nq-lost { margin: 0; font: 600 var(--si-step-n2) var(--si-font-sans); letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-brass-on-night); }
+.nq-verse { margin: 0; font-family: var(--si-font-serif); font-style: italic; font-weight: 300; font-size: var(--si-step-3); line-height: 1.35; color: #fff; }
+.nq-cite { margin: -.4em 0 0; font: 13px var(--si-font-sans); }
+.nq-cite a { color: var(--si-on-night); }
+.nq-search { width: min(100%, 30rem); }
+.nq-search input { height: 50px !important; background: rgb(255 255 255 / .06) !important; border-color: rgb(255 255 255 / .18) !important; color: #fff !important; }
+.nq-search input::placeholder { color: var(--si-on-night-2); }
+.nq-doors { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.nq-doors a { padding: 8px 18px; border: 1px solid rgb(255 255 255 / .16); border-radius: 999px; font: 500 15px var(--si-font-sans); color: var(--si-on-night); text-decoration: none; transition: all var(--si-dur-1); }
+.nq-doors a:hover { background: var(--si-on-night); color: var(--si-night); }

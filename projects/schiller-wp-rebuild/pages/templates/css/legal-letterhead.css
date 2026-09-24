@@ -1,0 +1,28 @@
+/* LEGAL · DRAFT B · "The Letterhead" */
+.lh-page { background: var(--si-panel); }
+.lh { padding: var(--si-space-2xl) 0 var(--si-space-3xl); }
+.lh-wrap { max-width: 56rem; display: grid; gap: var(--si-space-2xl); }
+.lh-sheet { padding: var(--si-space-xl) clamp(20px, 5vw, 64px); background: var(--si-card); box-shadow: var(--si-shadow-2); border-top: 4px solid var(--si-accent); }
+.lh-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: var(--si-space-s); border-bottom: 1px solid var(--si-brass); }
+.lh-top img { height: 40px; width: auto; }
+.lh-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: var(--si-space-m) var(--si-space-l); margin-top: var(--si-space-l); }
+.lh-k { margin: 0 0 .3em; font: 600 11.5px var(--si-font-sans); letter-spacing: .1em; text-transform: uppercase; color: var(--si-muted); }
+.lh-v { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-0); line-height: 1.5; color: var(--si-ink); }
+.lh-full { margin-top: var(--si-space-l); border-top: 1px dashed var(--si-rule); }
+.lh-full summary { padding: .8em 0; cursor: pointer; font: 600 14px var(--si-font-sans); color: var(--si-accent); }
+.lh-full .si-prose { font-size: var(--si-step-n1); }
+.lh-title { margin: var(--si-space-s) 0 var(--si-space-m); font-family: var(--si-font-serif); font-size: var(--si-step-5); font-weight: 350; color: var(--si-ink); }
+.lh-notice { padding: var(--si-space-s) var(--si-space-m); background: var(--si-card); border-left: 3px solid var(--si-brass); font-family: var(--si-font-sans); font-size: var(--si-step-n1); }
+.lh-intro { margin-top: var(--si-space-m); font-size: var(--si-step-n1); }
+.lh-tools { display: flex; align-items: center; gap: 14px; margin: var(--si-space-l) 0 var(--si-space-s); font: 13px var(--si-font-sans); color: var(--si-muted); }
+.lh-tools .si-btn-ghost { min-height: 36px; font-size: 14px; }
+.lh-list { background: var(--si-card); box-shadow: var(--si-shadow-1); }
+.lh-q { border-bottom: 1px solid var(--si-rule); }
+.lh-q summary { display: grid; grid-template-columns: 2.4rem 1fr auto; gap: 8px; align-items: baseline; padding: 1em var(--si-space-m); cursor: pointer; list-style: none; font-family: var(--si-font-serif); font-size: var(--si-step-1); color: var(--si-ink); }
+.lh-q summary::-webkit-details-marker { display: none; }
+.lh-q summary span { font: 600 13px var(--si-font-sans); color: var(--si-brass); }
+.lh-q summary::after { content: "+"; font: 300 1.4em var(--si-font-sans); color: var(--si-muted); transition: rotate var(--si-dur-2); }
+.lh-q[open] summary::after { rotate: 45deg; }
+.lh-q[open] summary { color: var(--si-accent); }
+.lh-q > .si-prose { padding: 0 var(--si-space-m) var(--si-space-m) calc(var(--si-space-m) + 2.4rem + 8px); font-size: var(--si-step-n1); }
+@media (max-width: 599.98px) { .lh-q > .si-prose { padding-left: var(--si-space-m); } }

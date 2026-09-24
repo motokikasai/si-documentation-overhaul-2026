@@ -22,6 +22,7 @@ and the mistakes; this file is only the map, the environment and the conventions
 | `projects/schiller-wp-rebuild/articles/` | the Article drafts (`/blog/` and the single) and their kit |
 | `projects/schiller-wp-rebuild/conferences/` | the five `/conferences/{slug}/` drafts, their payload builder and four worked records |
 | `projects/schiller-wp-rebuild/videos/` | the five `/videos/{slug}/` drafts, the caption corpus, their payload builder and four worked records |
+| `projects/schiller-wp-rebuild/pages/` | the universal Page template + Tier-1 launch pages (Home below the hero, About, Contact, Donate, Join, Legal, 404, Search), 3 drafts each; a builder that verifies every quote verbatim; the launch-blocker findings (English privacy/Impressum missing, dead-list pages) |
 | `projects/schiller-wp-rebuild/wp-plugins/si-hero-earth/` | the homepage hero as two dynamic blocks + the homepage pattern |
 | `projects/schiller-wp-rebuild/wp-plugins/schiller-editorial/` | the site plugin: `wpml-config.xml` now; patterns, block styles, bindings next |
 | `projects/schiller-wp-rebuild/*.md` | the original specs: data model, migration outline, classification ruleset, backend runbook |

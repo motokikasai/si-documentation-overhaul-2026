@@ -1,0 +1,38 @@
+/* ABOUT · DRAFT C · "The Register" — a public register entry. */
+.ar-page { background: var(--si-ground); }
+.ar { padding: var(--si-space-2xl) 0 var(--si-space-3xl); }
+.ar-wrap { max-width: 64rem; }
+.ar-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--si-space-l); align-items: start; padding-bottom: var(--si-space-l); }
+.ar-title { margin: var(--si-space-s) 0 0; font-family: var(--si-font-serif); font-size: var(--si-step-5); font-weight: 350; line-height: 1.06; color: var(--si-ink); }
+.ar-title em { font-style: italic; font-weight: 300; color: var(--si-accent); }
+.ar-lead { margin: var(--si-space-s) 0 0; max-width: 52ch; font-size: var(--si-step-1); line-height: 1.5; }
+.ar-seal {
+	display: grid; place-items: center; align-content: center; width: 7.5rem; aspect-ratio: 1; border-radius: 50%;
+	border: 2px solid var(--si-brass); box-shadow: inset 0 0 0 6px var(--si-ground), inset 0 0 0 7px color-mix(in srgb, var(--si-brass) 60%, transparent);
+	color: var(--si-brass); transform: rotate(-8deg);
+}
+.ar-seal span { font-family: var(--si-font-serif); font-size: 2.2rem; font-style: italic; line-height: 1; }
+.ar-seal small { font-family: var(--si-font-sans); font-size: 11px; letter-spacing: .2em; }
+@media (max-width: 599.98px) { .ar-seal { display: none; } .ar-head { grid-template-columns: 1fr; } }
+
+.ar-sheet { margin: 0; background: var(--si-card); box-shadow: var(--si-shadow-2); border-top: 3px solid var(--si-ink); }
+.ar-row { display: grid; grid-template-columns: 15rem minmax(0, 1fr); border-bottom: 1px solid var(--si-rule); }
+.ar-row dt { display: flex; gap: .8em; padding: 16px 18px; background: color-mix(in srgb, var(--si-panel) 55%, var(--si-card)); font-family: var(--si-font-sans); font-size: 13.5px; font-weight: 600; color: var(--si-ink); border-right: 1px solid var(--si-rule); }
+.ar-no { font-family: var(--si-font-mono); font-size: 12px; font-weight: 400; color: var(--si-jasper-deep); }
+.ar-row dd { margin: 0; padding: 14px 20px; display: grid; grid-template-columns: minmax(0, 1fr) 14rem; gap: 6px 24px; align-items: start; }
+.ar-v { font-family: var(--si-font-serif); font-size: var(--si-step-0); line-height: 1.5; color: var(--si-ink); }
+.ar-v a { color: var(--si-accent); }
+.ar-alt { display: inline-block; margin-top: 3px; font-style: italic; color: var(--si-muted); font-size: .92em; }
+.ar-mono { font-family: var(--si-font-mono); font-size: .82em; color: var(--si-text); }
+.ar-s { font-family: var(--si-font-sans); font-size: 12px; line-height: 1.4; color: var(--si-muted); }
+.ar-s::before { content: "Source · "; font-weight: 600; letter-spacing: .04em; }
+.ar-s a { color: inherit; }
+.ar-person { display: inline-flex; align-items: center; gap: 10px; }
+.ar-person .si-medallion { --size: 40px; }
+@media (max-width: 799.98px) {
+	.ar-row { grid-template-columns: 1fr; }
+	.ar-row dt { border-right: 0; padding-bottom: 8px; }
+	.ar-row dd { grid-template-columns: 1fr; }
+}
+.ar-note { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: var(--si-space-l); padding: var(--si-space-m); border: 1px dashed var(--si-rule); }
+.ar-note p { margin: 0; flex: 1 1 22rem; }

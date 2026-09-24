@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>Contact — Schiller Institute</title>
+<meta name="description" content="Contact, draft C: the desk.">
+<!--
+	CONTACT · DRAFT C · "The Desk"
+	/contact/ — answers before the form: the questions the archive can answer itself, then a compact form, then the postal address.
+	Written by build/make-shells.py; the page is rendered by js/contact-desk.js from
+	data/*.json (every quotation verified against the dump). blocksy-shim.css
+	and proto.css stand in for Blocksy and do not ship.
+-->
+<link rel="preload" href="../../people/design-system/fonts/source-serif-4-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../people/design-system/fonts.css">
+<link rel="stylesheet" href="../../people/design-system/tokens.css">
+<link rel="stylesheet" href="../../people/design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../../people/design-system/components.css">
+<link rel="stylesheet" href="css/pages-shared.css">
+<link rel="stylesheet" href="css/home-shared.css">
+<link rel="stylesheet" href="css/contact-desk.css">
+<link rel="stylesheet" href="../../articles/templates/css/proto.css">
+<link rel="icon" href="../../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+</head>
+<body class="page cd-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<header id="header" class="ct-header">
+	<div class="ct-container">
+		<a class="site-logo" href="home-record.html"><img src="../../brand/assets/lockup/lockup-light@2x.png" alt="The International Schiller Institute" width="560" height="150"></a>
+		<nav aria-label="Primary"><ul>
+			<li><a href="../../articles/templates/articles-ledger.html">Articles</a></li><li><a href="#">Conferences</a></li><li><a href="../../people/templates/people-register.html">People</a></li><li><a href="#">Videos</a></li><li><a href="#">Culture</a></li><li><a href="about-founding.html">About</a></li>
+		</ul></nav>
+		<div class="header-cta"><a class="si-link is-secondary" href="join-ladder.html">Join</a><a class="ct-button" href="donate-facts.html">Donate</a></div>
+	</div>
+</header>
+<main id="main" class="site-main si-page cd" aria-busy="true">
+	<div class="pg-skeleton" aria-hidden="true"><div class="si-skeleton" style="height:40px;width:60%"></div><div class="si-skeleton" style="height:180px"></div></div>
+</main>
+<footer id="footer" class="ct-footer">
+	<div class="ct-container">
+		<img src="../../brand/assets/lockup/lockup-dark@2x.png" alt="The International Schiller Institute" width="560" height="150">
+		<p>Blocksy footer (stand-in) · <span class="proto-note">prototype — dashed panels are declared placeholders</span></p>
+	</div>
+</footer>
+<script type="module" src="js/contact-desk.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+/* JOIN · DRAFT A · "The Ladder" — five rungs between two brass rails. */
+.jl-page { background: var(--si-ground); }
+.jl { padding: var(--si-space-2xl) 0 var(--si-space-3xl); }
+.jl-title { margin: var(--si-space-s) 0 0; font-family: var(--si-font-serif); font-size: var(--si-step-5); font-weight: 340; line-height: 1.06; color: var(--si-ink); max-width: 20ch; }
+.jl-title em { font-style: italic; font-weight: 300; color: var(--si-accent); }
+.jl-lead { margin: var(--si-space-s) 0 0; font-size: var(--si-step-1); max-width: 48ch; }
+
+.jl-ladder { --rx: 5.5rem; position: relative; list-style: none; margin: var(--si-space-xl) 0 0; padding: 0 0 0 calc(var(--rx) + 3rem); display: grid; gap: var(--si-space-m); counter-reset: none; }
+@media (max-width: 689.98px) { .jl-ladder { --rx: 1.2rem; padding-left: 3.4rem; } }
+.jl-rails { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--rx) + 1.5rem); }
+.jl-rails span { position: absolute; top: -1rem; bottom: -1rem; width: 3px; border-radius: 2px; background: var(--si-rule); overflow: hidden; }
+.jl-rails span:first-child { left: 0; } .jl-rails span:last-child { left: var(--rx); }
+.jl-rails span::after {   /* the lit part grows from the ground up to the rung pointed at */
+	content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: calc(var(--lit) / 5 * 100%); background: var(--si-brass);
+	transition: height var(--si-dur-3) var(--si-ease);
+}
+.jl-rung { position: relative; }
+.jl-bar { position: absolute; left: calc(-1 * (var(--rx) + 3rem)); width: calc(var(--rx) + 3px); top: 50%; height: 3px; border-radius: 2px; background: var(--si-rule); transition: background-color var(--si-dur-2); }
+.jl-rung.is-lit .jl-bar { background: var(--si-brass); }
+.jl-card { display: grid; gap: .45em; justify-items: start; padding: var(--si-space-m) var(--si-space-l); background: var(--si-card); box-shadow: var(--si-shadow-1); border-left: 3px solid transparent; transition: border-color var(--si-dur-2), transform var(--si-dur-2) var(--si-ease); max-width: 44rem; }
+.jl-rung:hover .jl-card, .jl-rung:focus-within .jl-card { border-left-color: var(--si-brass); transform: translateX(4px); }
+.jl-card p { margin: 0; }
+.jl-cost { font: 700 var(--si-step-n2) var(--si-font-sans); letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-brass); }
+.jl-card h2 { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-3); font-weight: 400; color: var(--si-ink); }
+.jl-act { font-family: var(--si-font-sans); font-weight: 600; }
+.jl-card .hm-signup { margin-top: .3em; width: 100%; }

@@ -1,0 +1,52 @@
+/* CONTACT · DRAFT A · "The Letter" */
+.cl-page { background: var(--si-panel); }
+.cl { padding: var(--si-space-2xl) 0 var(--si-space-3xl); }
+.cl-intro { max-width: 46rem; }
+.cl-title { margin: var(--si-space-s) 0 0; font-family: var(--si-font-serif); font-size: var(--si-step-5); font-weight: 350; color: var(--si-ink); }
+.cl-lead { margin: var(--si-space-s) 0 0; font-size: var(--si-step-1); }
+.cl-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--si-space-xl); margin-top: var(--si-space-xl); align-items: start; }
+@media (min-width: 1000px) { .cl-grid { grid-template-columns: minmax(0, 44rem) 16rem; } }
+
+.cl-letter {
+	position: relative; padding: var(--si-space-xl) clamp(20px, 5vw, 64px) var(--si-space-2xl);
+	background: var(--si-card); box-shadow: var(--si-shadow-2);
+	background-image: linear-gradient(90deg, transparent calc(clamp(20px, 5vw, 64px) - 14px), color-mix(in srgb, var(--si-brass) 45%, transparent) calc(clamp(20px, 5vw, 64px) - 14px) calc(clamp(20px, 5vw, 64px) - 13px), transparent 0);
+	font-family: var(--si-font-serif); font-size: var(--si-step-1); line-height: 2.1em; color: var(--si-ink);
+	transition: transform var(--si-dur-3) var(--si-ease), box-shadow var(--si-dur-3) var(--si-ease);
+}
+.cl-letter p { margin: 0 0 1.05em; }
+.cl-letterhead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em; padding-bottom: .4em; border-bottom: 1px solid var(--si-brass); background: var(--si-card); line-height: 1.4; }
+.cl-letterhead img { height: 34px; width: auto; }
+.cl-letterhead span { font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); }
+.cl-to { font-style: italic; }
+.cl-f input, .cl-f select {
+	font: inherit; color: var(--si-accent); background: transparent; border: 0; border-bottom: 1.5px dashed var(--si-accent);
+	padding: 0 2px; margin: 0; height: 1.6em; line-height: 1.6em; max-width: 100%; border-radius: 0;
+}
+.cl-f select { -webkit-appearance: none; appearance: none; padding-right: 1.1em; cursor: pointer; max-width: min(100%, 30ch); text-overflow: ellipsis;
+	background: linear-gradient(45deg, transparent 50%, var(--si-accent) 50%) calc(100% - 6px) 55% / 5px 5px no-repeat, linear-gradient(135deg, var(--si-accent) 50%, transparent 50%) calc(100% - 2px) 55% / 5px 5px no-repeat; }
+.cl-f :is(input, select):focus { outline: none; border-bottom-style: solid; background: color-mix(in srgb, var(--si-accent) 6%, transparent); }
+.cl-f input::placeholder { color: color-mix(in srgb, var(--si-accent) 45%, transparent); font-style: italic; }
+.cl-body textarea { display: block; width: 100%; margin: 0 0 1.05em; padding: 0; border: 0; background: transparent; font: inherit; line-height: 2.1em; color: var(--si-ink); resize: vertical; }
+.cl-body textarea:focus { outline: none; }
+.cl-sign { font-style: italic; }
+.cl-sig { font-family: var(--si-font-serif); font-style: italic; font-size: 1.3em; color: var(--si-accent); }
+.cl-consent { display: flex; gap: .6em; align-items: baseline; font-family: var(--si-font-sans); font-size: 13.5px; line-height: 1.5; color: var(--si-muted); background: var(--si-card); }
+.cl-send { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 1em; line-height: 1.4; background: var(--si-card); }
+.cl-thanks { margin: 0 !important; font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-accent); }
+.cl-seal {
+	position: absolute; right: 32px; bottom: 28px; width: 76px; height: 76px; border-radius: 50%;
+	display: grid; place-items: center; background: radial-gradient(circle at 35% 30%, #c9a866, var(--si-brass) 60%, #7a602c);
+	box-shadow: 0 2px 8px rgb(0 0 0 / .3), inset 0 0 0 6px rgb(255 255 255 / .12);
+	font: italic 600 22px var(--si-font-serif); color: #fff8e6; transform: scale(0) rotate(-30deg); opacity: 0;
+	transition: transform var(--si-dur-3) cubic-bezier(.3, 1.4, .5, 1), opacity var(--si-dur-2);
+}
+.cl-letter.is-sealed .cl-seal { transform: scale(1) rotate(-12deg); opacity: 1; }
+.cl-letter.is-sealed { transform: translateY(-4px); }
+
+.cl-margin { display: grid; gap: .5em; position: sticky; top: calc(var(--header-sticky-height) + 24px); }
+.cl-margin p { margin: 0; }
+.cl-who { font-family: var(--si-font-serif); font-size: var(--si-step-2); color: var(--si-ink); }
+.cl-route { font-family: var(--si-font-sans); font-size: 13.5px; }
+.cl-addr { font-family: var(--si-font-serif); line-height: 1.5; }
+.cl-margin .si-rule { margin: .8em 0; }

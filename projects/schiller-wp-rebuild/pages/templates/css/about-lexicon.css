@@ -1,0 +1,47 @@
+/* ABOUT · DRAFT B · "The Lexicon" — a dictionary page for one word. */
+.al-page { background: var(--si-card); }
+.al { padding: var(--si-space-2xl) 0 var(--si-space-3xl); }
+.al-entry { max-width: 50rem; }
+.al-guide { display: flex; justify-content: space-between; gap: 1em; margin: 0 0 var(--si-space-l); padding-bottom: .6em; border-bottom: 3px double var(--si-ink); font-family: var(--si-font-sans); font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--si-muted); }
+.al-guide span:nth-child(2) { font-family: var(--si-font-serif); font-style: italic; text-transform: none; letter-spacing: 0; font-weight: 400; }
+@media (max-width: 599.98px) { .al-guide span:not(:nth-child(2)) { display: none; } }
+.al-word { margin: 0; font-family: var(--si-font-serif); font-optical-sizing: auto; font-size: var(--si-step-6); font-weight: 600; line-height: 1; letter-spacing: -0.01em; color: var(--si-ink); }
+.al-pron { margin: .6em 0 0; font-family: var(--si-font-serif); font-size: var(--si-step-1); color: var(--si-muted); }
+.al-pron i { color: var(--si-ink); margin: 0 .5em; }
+.al-since { font-family: var(--si-font-sans); font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; padding: 2px 8px; border: 1px solid var(--si-rule); border-radius: 999px; }
+
+.al-senses { margin: var(--si-space-xl) 0 0; padding: 0 0 0 2.2em; counter-reset: s; list-style: none; }
+.al-senses > li { position: relative; counter-increment: s; padding: 0 0 var(--si-space-l); }
+.al-senses > li::before { content: counter(s); position: absolute; left: -2.2em; top: -.05em; font-family: var(--si-font-serif); font-weight: 700; font-size: var(--si-step-2); color: var(--si-accent); }
+.al-senses p { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-1); line-height: 1.55; color: var(--si-ink); text-wrap: pretty; }
+.al-tag { font-family: var(--si-font-serif); font-style: italic; font-size: .82em; color: var(--si-muted); margin-right: .2em; }
+.al-tag::before { content: "("; } .al-tag::after { content: ")"; }
+.al-entry cite { display: block; margin-top: .5em; font-family: var(--si-font-sans); font-style: normal; font-size: var(--si-step-n1); color: var(--si-muted); }
+.al-entry cite a { color: inherit; }
+.al-entry cite a:hover { color: var(--si-accent); }
+.al-voices { list-style: none; margin: var(--si-space-s) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 10px 18px; }
+.al-voices a { display: grid; grid-template-columns: 36px 1fr; gap: 10px; align-items: center; color: inherit; text-decoration: none; }
+.al-voices .si-medallion { --size: 36px; }
+.al-voices span { font-family: var(--si-font-sans); font-size: 12.5px; line-height: 1.35; color: var(--si-muted); }
+.al-voices b { display: block; font-family: var(--si-font-serif); font-size: 15px; font-weight: 500; color: var(--si-ink); }
+
+.al-block { padding: var(--si-space-l) 0; border-top: 1px solid var(--si-rule); }
+.al-block h2 { margin: 0 0 .7em; font-family: var(--si-font-sans); font-size: var(--si-step-n2); font-weight: 700; letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-brass); }
+.al-block > p { margin: 0; font-size: var(--si-step-0); }
+.al-block blockquote { margin: .8em 0 0; padding-left: 1em; border-left: 2px solid var(--si-brass); font-style: italic; font-size: var(--si-step-1); line-height: 1.5; color: var(--si-ink); }
+.al-usage { margin: 1em 0 0 !important; font-style: italic; font-size: var(--si-step-1) !important; line-height: 1.5; color: var(--si-ink); }
+.al-usage:first-of-type { margin-top: 0 !important; }
+.al-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: var(--si-space-l); }
+.al-langs { margin: 0; }
+.al-langs div { display: grid; grid-template-columns: 5rem 1fr; padding: .35em 0; }
+.al-langs dt { font-family: var(--si-font-sans); font-size: 12.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--si-muted); }
+.al-langs dd { margin: 0; font-style: italic; }
+.al-see { list-style: none; margin: 0; padding: 0; }
+.al-see li { display: flex; justify-content: space-between; gap: 1em; padding: .35em 0; border-bottom: 1px dotted var(--si-rule); }
+.al-see a { color: var(--si-accent); text-decoration: none; font-variant: small-caps; letter-spacing: .03em; font-size: 1.05em; }
+.al-see a::before { content: "→ "; color: var(--si-brass); }
+.al-see span { font-family: var(--si-font-sans); font-size: 13px; color: var(--si-muted); font-variant-numeric: tabular-nums; }
+.al-foot { padding-top: var(--si-space-l); border-top: 3px double var(--si-ink); }
+.al-foot p { margin: 0; font-size: var(--si-step-1); }
+.al-foot a { color: var(--si-accent); font-weight: 600; }
+.al-word i { font-style: normal; font-weight: 300; color: var(--si-brass); margin: 0 .06em; }

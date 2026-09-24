@@ -1,0 +1,278 @@
+/* ==========================================================================
+   PAGES — shared layer for the Page template and the Tier-1 page drafts.
+   Loads after tokens.css + components.css. Three parts:
+
+   1. .si-prose        the reading container for ANY page body, including the
+                       legacy markup the importer writes (03-shortcode-conversion
+                       -table §5 — "the stylesheet the theme owes"): .si-col,
+                       .si-btn, .si-cta, .si-info-box, .si-wide-bar, .si-tabs,
+                       .si-toggle, .si-testimonial, .si-fn, .si-title-big …
+   2. .si-p-*          the pattern kit — what an editor inserts from the block
+                       inserter. Neutral here; each draft gives it a character.
+   3. prototype only   .pg-ph placeholders, the editor-view labels, dead-list
+                       slots. Marked PROTO; never shipped.
+
+   Every class is si-/pg- prefixed. Resets use :where() (gotchas.md).
+   ========================================================================== */
+
+/* ---- 1 · the prose container ------------------------------------------- */
+.si-prose {
+	--flow: 1.1em;
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-0);
+	line-height: var(--si-leading-body);
+	color: var(--si-text);
+	overflow-wrap: break-word;
+}
+.si-prose :where(p, ul, ol, figure, blockquote, table, details, aside, pre, hr, .si-col, .si-cta, .si-wide-bar, .si-tabs, .wp-block-image, .wp-block-embed, iframe) { margin: 0; }
+.si-prose { container-type: inline-size; }
+.si-prose > * + * { margin-top: var(--flow); }
+.si-prose > :where(h2, h3, h4) { margin-top: calc(var(--flow) * 2.2); }
+.si-prose > :where(h2, h3, h4) + * { margin-top: calc(var(--flow) * .6); }
+.si-prose > :first-child { margin-top: 0; }
+.si-prose :where(h1, h2, h3, h4, h5) {
+	font-family: var(--si-font-serif); color: var(--si-ink); text-wrap: balance;
+	font-weight: var(--si-weight-heading); line-height: var(--si-leading-heading); letter-spacing: 0;
+	text-align: start !important;         /* legacy inline center/left alignment dropped */
+}
+/* one heading scale for all pages: legacy pages misuse h1 inside bodies */
+.si-prose :where(h1, h2) { font-size: var(--si-step-3); }
+.si-prose :where(h3) { font-size: var(--si-step-2); }
+.si-prose :where(h4) { font-size: var(--si-step-1); }
+.si-prose :where(h5, h6) { font-size: var(--si-step-0); font-weight: 600; }
+.si-prose :where(h1, h2, h3, h4) :where(strong, b) { font-weight: inherit; }
+.si-prose :where(p:empty, p:has(> br:only-child)) { display: none; }   /* legacy spacer paragraphs */
+.si-prose :where(a:not(.si-btn):not(.ct-button)) {
+	color: var(--si-accent); text-decoration: underline; text-decoration-thickness: 1px;
+	text-underline-offset: .2em; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+.si-prose :where(a:not(.si-btn):not(.ct-button)):hover { text-decoration-color: currentColor; }
+.si-prose :where(ul, ol) { padding-left: 1.3em; }
+.si-prose :where(li + li) { margin-top: .35em; }
+.si-prose :where(img) { max-width: 100%; height: auto; }
+.si-prose :where(img[class*="align"], .alignleft, .alignright) { max-width: min(48%, 360px); }
+.si-prose :where(.alignleft) { float: left; margin: .3em 1.4em .8em 0; }
+.si-prose :where(.alignright) { float: right; margin: .3em 0 .8em 1.4em; }
+.si-prose :where(.aligncenter) { margin-inline: auto; display: block; }
+.si-prose :where(figure, .wp-caption) { max-width: 100% !important; }
+.si-prose :where(figcaption, .wp-caption-text, .wp-element-caption) {
+	margin-top: .55em; font-family: var(--si-font-sans); font-size: var(--si-step-n1); line-height: 1.45; color: var(--si-muted);
+}
+.si-prose :where(blockquote) {
+	padding-left: 1.2em; border-left: 2px solid var(--si-brass);
+	font-style: italic; color: var(--si-ink);
+}
+.si-prose :where(hr) { border: 0; border-top: 1px solid var(--si-rule); margin-block: calc(var(--flow) * 2); clear: both; }
+.si-prose :where(table) { width: 100%; border-collapse: collapse; font-size: var(--si-step-n1); font-family: var(--si-font-sans); }
+.si-prose :where(th, td) { padding: .55em .7em; border-bottom: 1px solid var(--si-rule); text-align: left; vertical-align: top; }
+.si-prose :where(iframe, video, embed) { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 16/9; border: 0; background: var(--si-night); }
+/* legacy inline styles that fight the layout: neutralised, content kept */
+.si-prose [style*="float"]:not(img) { float: none !important; }
+.si-prose [style*="line-height"] { line-height: inherit !important; }
+.si-prose [style*="margin"]:not(img) { margin-left: 0 !important; margin-right: 0 !important; }
+.si-prose [style*="font-size"] { font-size: inherit !important; }
+.si-prose [style*="color"]:not(img) { color: inherit !important; }
+.si-prose::after { content: ""; display: table; clear: both; }
+
+/* .si-title-big / .si-subtitle / .si-title-small — Vanguard headings */
+.si-prose .si-title-big { font-size: var(--si-step-4); font-weight: var(--si-weight-display); line-height: 1.12; }
+.si-prose .si-title-big strong { font-weight: 500; }
+.si-prose .si-subtitle { font-family: var(--si-font-sans); font-size: var(--si-step-n1); letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-muted); }
+.si-prose .si-title-small { font-size: var(--si-step-1); }
+
+/* .si-col — Vanguard columns. They sit side by side only when the CONTAINER is
+   wide enough (a container query, not a viewport one): the same legacy page
+   stacks in a 40rem reading column and pairs up in a wide layout. */
+.si-prose .si-col { min-width: 0; }
+.si-prose .si-col + .si-col { margin-top: var(--flow); }
+@container (min-width: 46rem) {
+	.si-prose :is(.si-col) { display: inline-block; vertical-align: top; box-sizing: border-box; padding-right: var(--si-space-m); }
+	.si-prose .si-col-1-2 { width: 50%; } .si-prose .si-col-1-3 { width: 33.33%; }
+	.si-prose .si-col-2-3 { width: 66.66%; } .si-prose .si-col-1-4 { width: 25%; }
+	.si-prose .si-col + .si-col { margin-top: 0; }
+}
+
+/* .si-btn — a legacy button becomes a Blocksy button */
+.si-prose .si-button { margin-top: calc(var(--flow) * 1.2); }
+.si-prose .si-btn {
+	display: inline-flex; align-items: center; gap: .5em; min-height: 44px; padding: 0 20px;
+	border-radius: var(--si-radius-1); background: var(--si-accent); color: #fff; text-decoration: none;
+	font-family: var(--si-font-sans); font-size: 15px; font-weight: 600; letter-spacing: .01em;
+	transition: background-color var(--si-dur-1) var(--si-ease);
+}
+.si-prose .si-btn:hover { background: var(--si-accent-deep); color: #fff; }
+
+/* .si-cta / .si-wide-bar — call-to-action bands */
+.si-prose .si-wide-bar { padding: var(--si-space-l) var(--si-space-m); background: var(--si-panel); }
+.si-prose .si-cta { display: grid; gap: .5em; padding: var(--si-space-l); border-top: 2px solid var(--si-brass); background: var(--si-card); box-shadow: var(--si-shadow-1); }
+.si-prose .si-cta h3 { margin: 0; font-size: var(--si-step-2); }
+.si-prose .si-cta p { margin: 0; }
+.si-prose .si-wide-bar .si-cta { background: transparent; box-shadow: none; padding: 0; border: 0; }
+
+/* .si-info-box — an aside */
+.si-prose .si-info-box { padding: var(--si-space-m) var(--si-space-l); background: var(--si-panel); border-left: 3px solid var(--si-accent); }
+.si-prose .si-info-box > * + * { margin-top: .7em; }
+.si-prose .si-info-box h4 { margin: 0; font-size: var(--si-step-1); }
+
+/* .si-testimonial */
+.si-prose .si-testimonial blockquote { border: 0; padding: 0; font-size: var(--si-step-1); }
+.si-prose .si-testimonial figcaption { font-style: normal; }
+
+/* .si-toggle / .si-tabs — disclosure (tabs degrade to stacked details, no JS) */
+.si-prose :is(.si-toggle, .si-tab) { border-top: 1px solid var(--si-rule); }
+.si-prose :is(.si-toggle, .si-tab):last-child { border-bottom: 1px solid var(--si-rule); }
+.si-prose .si-tab + .si-tab { margin-top: 0; }
+.si-prose :is(.si-toggle, .si-tab) > summary {
+	display: flex; justify-content: space-between; align-items: center; gap: 1em;
+	padding: .85em 0; cursor: pointer; list-style: none;
+	font-family: var(--si-font-sans); font-size: var(--si-step-0); font-weight: 600; color: var(--si-ink);
+}
+.si-prose :is(.si-toggle, .si-tab) > summary::-webkit-details-marker { display: none; }
+.si-prose :is(.si-toggle, .si-tab) > summary::after { content: "+"; font-weight: 300; font-size: 1.4em; line-height: 1; color: var(--si-muted); transition: rotate var(--si-dur-2) var(--si-ease); }
+.si-prose :is(.si-toggle, .si-tab)[open] > summary::after { rotate: 45deg; }
+.si-prose :is(.si-toggle, .si-tab)[open] { padding-bottom: 1em; }
+.si-prose .si-tab > h2:first-of-type { display: none; }   /* legacy repeats the tab title as a heading */
+/* enhanced tabs (pages-core.js turns .si-tabs into a real tablist when JS runs) */
+.si-prose .si-tabs.is-tabs { border: 0; }
+.si-prose .si-tabs__list { display: flex; flex-wrap: wrap; gap: 2px; border-bottom: 1px solid var(--si-rule); margin-bottom: 1em; }
+.si-prose .si-tabs__list button {
+	padding: .6em 1em; border: 0; background: none; cursor: pointer; margin-bottom: -1px;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); font-weight: 600; color: var(--si-muted);
+	border-bottom: 2px solid transparent;
+}
+.si-prose .si-tabs__list button[aria-selected="true"] { color: var(--si-ink); border-bottom-color: var(--si-accent); }
+.si-prose .si-tabs.is-tabs .si-tab { border: 0; }
+.si-prose .si-tabs.is-tabs .si-tab > summary { display: none; }
+
+/* .si-fn — footnote markers */
+.si-prose .si-fn a { text-decoration: none; font-family: var(--si-font-sans); font-size: .72em; }
+
+/* hand-pasted "alm-item" card lists (Ajax Load More output saved into pages) */
+.si-prose .alm-item { display: grid; grid-template-columns: 88px 1fr; gap: 0 1em; align-items: start; padding: 1em 0; border-top: 1px solid var(--si-rule); }
+.si-prose .alm-item + .alm-item { margin-top: 0; }
+.si-prose .alm-item > div { padding: 0 !important; margin: 0 !important; overflow: visible !important; }
+.si-prose .alm-item img { width: 88px; height: 88px; object-fit: cover; }
+.si-prose .alm-item :is(h3, h4) { margin: 0 0 .25em; font-size: var(--si-step-1); }
+.si-prose .alm-item h4 { font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); font-weight: 500; }
+.si-prose .alm-item p { margin: 0; font-size: var(--si-step-n1); }
+
+/* ---- 2 · the pattern kit ------------------------------------------------- */
+.si-p { position: relative; }
+.si-p-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--si-space-m); margin: 0; }
+.si-p-facts > div { display: grid; gap: .2em; }
+.si-p-facts dt { order: 2; font-family: var(--si-font-sans); font-size: var(--si-step-n1); line-height: 1.35; color: var(--si-muted); }
+.si-p-facts dd { order: 1; margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-4); font-weight: 300; line-height: 1; color: var(--si-ink); font-variant-numeric: lining-nums tabular-nums; }
+.si-p-quote { margin: 0; }
+.si-p-quote blockquote { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-2); line-height: 1.35; color: var(--si-ink); text-wrap: pretty; }
+.si-p-quote figcaption { margin-top: .8em; font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); }
+.si-p-query { display: grid; gap: var(--si-space-m); grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); list-style: none; padding: 0; margin: 0; }
+.si-p-query a { display: grid; gap: .4em; color: inherit; text-decoration: none; }
+.si-p-query img { width: 100%; aspect-ratio: 1.91/1; object-fit: cover; background: var(--si-panel); filter: var(--si-portrait-filter); transition: filter var(--si-dur-2) var(--si-ease); }
+.si-p-query a:hover img { filter: none; }
+.si-p-query time { font-family: var(--si-font-sans); font-size: var(--si-step-n2); letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-muted); }
+.si-p-query strong { font-family: var(--si-font-serif); font-weight: 500; font-size: var(--si-step-1); line-height: 1.25; color: var(--si-ink); }
+.si-p-query a:hover strong { color: var(--si-accent); }
+.si-p-cta { display: grid; gap: var(--si-space-s); }
+.si-p-cta h2 { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-3); font-weight: var(--si-weight-heading); color: inherit; }
+.si-p-cta p { margin: 0; max-width: 56ch; }
+.si-p-cta .si-p-actions { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+.si-p-note { padding: var(--si-space-s) var(--si-space-m); background: var(--si-panel); font-family: var(--si-font-sans); font-size: var(--si-step-n1); }
+
+/* buttons outside the prose */
+.si-btn-ghost {
+	display: inline-flex; align-items: center; gap: .5em; min-height: 44px; padding: 0 18px;
+	border: 1px solid currentColor; border-radius: var(--si-radius-1); background: transparent; color: var(--si-accent);
+	font-family: var(--si-font-sans); font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer;
+	transition: background-color var(--si-dur-1) var(--si-ease), color var(--si-dur-1) var(--si-ease);
+}
+.si-btn-ghost:hover { background: var(--si-accent); color: #fff; border-color: var(--si-accent); }
+.si-arrow::after { content: "→"; display: inline-block; margin-left: .35em; transition: translate var(--si-dur-1) var(--si-ease); }
+a:hover > .si-arrow::after, .si-arrow:hover::after { translate: 3px 0; }
+
+/* the source line: every quoted claim carries one */
+.si-source { font-family: var(--si-font-sans); font-size: var(--si-step-n1); line-height: 1.45; color: var(--si-muted); }
+.si-source a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 40%, transparent); text-underline-offset: .18em; }
+.si-source a:hover { color: var(--si-accent); }
+
+/* ---- 3 · PROTO: placeholders, editor view, dead lists -------------------- */
+/* A declared placeholder: the panel names what goes there in production. */
+.pg-ph {
+	position: relative; display: grid; place-items: center; min-height: 120px; padding: 18px;
+	background:
+		repeating-linear-gradient(135deg, transparent 0 7px, color-mix(in srgb, var(--si-jasper) 22%, transparent) 7px 8px),
+		var(--si-panel);
+	border: 1px dashed color-mix(in srgb, var(--si-jasper-deep) 55%, transparent);
+	color: var(--si-jasper-deep); text-align: center;
+	font-family: var(--si-font-mono); font-size: 12px; line-height: 1.5;
+}
+.pg-ph b { display: block; font-family: var(--si-font-sans); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 4px; }
+.pg-ph-inline { font-family: var(--si-font-mono); font-size: .8em; padding: 1px 6px; border: 1px dashed var(--si-jasper-deep); color: var(--si-jasper-deep); border-radius: 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.pg-flag { font-family: var(--si-font-mono); font-size: 11px; color: var(--si-jasper-deep); }
+
+.si-legacy-list {
+	display: grid; gap: 4px; padding: 16px 18px; margin-block: 1em;
+	border: 1px dashed var(--si-jasper-deep); background: color-mix(in srgb, var(--si-panel) 60%, transparent);
+	font-family: var(--si-font-sans); font-size: 13.5px; color: var(--si-jasper-deep);
+}
+.si-legacy-list::before { content: "Dead list · [" attr(data-token) "]"; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 11px; }
+.si-legacy-list::after { content: "The old theme filled this from a plugin that is gone. A visitor sees nothing here; the editor replaces it with the “Latest from the archive” pattern."; }
+[data-view="visitor"] .si-legacy-list { display: none; }
+
+/* editor view: every pattern shows its name, the way the block editor's list view would */
+[data-view="editor"] [data-pattern] { outline: 1px dashed color-mix(in srgb, var(--si-accent) 45%, transparent); outline-offset: 6px; }
+[data-view="editor"] [data-pattern]::before {
+	content: attr(data-pattern); position: absolute; top: -18px; left: -6px; z-index: 5;
+	padding: 1px 7px; background: var(--si-accent); color: #fff; border-radius: 2px;
+	font: 600 10.5px/1.6 var(--si-font-sans); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap;
+}
+[data-view="editor"] [data-slot]::after {
+	content: "↳ " attr(data-slot); display: block; margin-top: 4px;
+	font: 500 11px/1.4 var(--si-font-mono); color: var(--si-jasper-deep);
+}
+
+/* the review strip carries a Visitor/Editor switch on some families */
+.draft-strip .draft-view { display: inline-flex; margin-left: 6px; border: 1px solid var(--si-night-2); border-radius: 999px; overflow: hidden; }
+.draft-strip .draft-view button { border: 0; background: transparent; color: var(--si-on-night-2); padding: 5px 10px; font: 500 12px var(--si-font-sans); cursor: pointer; }
+.draft-strip .draft-view button[aria-pressed="true"] { background: var(--si-on-night); color: var(--si-night); }
+.draft-strip .draft-family { color: var(--si-brass-on-night); padding-right: 4px; }
+
+/* the stand-in for the shipped hero on Home drafts */
+.pg-hero-stub {
+	position: relative; min-height: 62vh; display: grid; align-content: end; padding: 12vh 0 9vh;
+	background: radial-gradient(120% 90% at 70% 110%, #1b3a5c 0, var(--si-night) 58%) , var(--si-night);
+	color: var(--si-on-night); overflow: hidden;
+}
+.pg-hero-stub::before {
+	content: ""; position: absolute; right: -12vw; bottom: -46vw; width: 78vw; aspect-ratio: 1; border-radius: 50%;
+	background: radial-gradient(circle at 38% 30%, #3e6f9c 0, #17324f 42%, #0b1520 70%);
+	box-shadow: 0 0 120px 10px rgb(80 140 200 / .18); opacity: .8;
+}
+.pg-hero-stub .ct-container { position: relative; }
+.pg-hero-stub .si-eyebrow { color: var(--si-brass-on-night); }
+.pg-hero-stub h2 { margin: .3em 0 .25em; font-family: var(--si-font-serif); font-size: var(--si-step-5); font-weight: 350; line-height: 1.05; color: #fff; max-width: 14ch; }
+.pg-hero-stub p { max-width: 46ch; color: var(--si-on-night-2); font-size: var(--si-step-1); margin: 0; }
+.pg-hero-stub .pg-flag { position: absolute; top: -8vh; left: 0; color: var(--si-on-night-2); }
+
+/* two-click video facade (house rule) */
+.si-embed { position: relative; aspect-ratio: 16/9; background: radial-gradient(120% 120% at 30% 20%, var(--si-night-2), var(--si-night)); color: var(--si-on-night); }
+.si-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.si-embed__play { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 6px; width: 100%; border: 0; background: none; color: inherit; cursor: pointer; font-family: var(--si-font-sans); }
+.si-embed__play svg { width: 64px; height: 64px; color: var(--si-brass-on-night); transition: transform var(--si-dur-2) var(--si-ease); }
+.si-embed__play span { font-size: var(--si-step-0); font-weight: 600; }
+.si-embed__play small { font-size: 12.5px; color: var(--si-on-night-2); }
+.si-embed__play:hover svg { transform: scale(1.06); }
+/* A draft renders from JSON, so <main> is empty for a moment after first paint,
+   and the page visibly assembles itself: the footer rides up under the header,
+   then drops when the content arrives. WordPress renders these pages in PHP,
+   so none of this exists there — it is a cost of the prototype only, and these
+   three rules keep it from distracting a reviewer:
+     1. <main> holds a screen's height while it is busy,
+     2. the footer waits (it has nothing to sit under yet),
+     3. the finished content fades in over 180ms instead of appearing mid-scroll.
+   Nothing here is in the child-theme kit. */
+#main[aria-busy="true"] { min-height: min(78vh, 760px); }
+#main[aria-busy="true"] ~ #footer { visibility: hidden; }
+#main:not([aria-busy]) { animation: pg-settle 180ms var(--si-ease) both; }
+@keyframes pg-settle { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { #main:not([aria-busy]) { animation: none; } }
+.pg-skeleton, .fo-skeleton { width: min(900px, 100% - 32px); margin: 64px auto; display: grid; gap: 18px; }

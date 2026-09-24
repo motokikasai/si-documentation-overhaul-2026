@@ -1,0 +1,45 @@
+/* JOIN · DRAFT C · "Your Part" */
+.jr-page { background: var(--si-ground); }
+.jr { padding: var(--si-space-2xl) 0 var(--si-space-3xl); }
+.jr-title { margin: var(--si-space-s) 0 0; font-family: var(--si-font-serif); font-size: var(--si-step-6); font-weight: 320; line-height: 1.04; color: var(--si-ink); }
+.jr-slot { font-style: italic; color: var(--si-accent); }
+.jr-slot.is-in { display: inline-block; animation: jr-in var(--si-dur-3) var(--si-ease); }
+@keyframes jr-in { from { opacity: 0; transform: translateY(.2em); } }
+/* the typing caret — only while the headline is cycling */
+.jr-slot.is-typing::after {
+	content: ""; display: inline-block; width: 2px; height: .82em; margin-left: .06em; vertical-align: -0.06em;
+	background: var(--si-brass); animation: jr-caret 1.06s steps(1, end) infinite;
+}
+@keyframes jr-caret { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
+.jr-lead { margin: var(--si-space-m) 0 0; max-width: 58ch; font-size: var(--si-step-1); font-style: italic; line-height: 1.5; }
+.jr-lead .si-source { font-style: normal; }
+.jr-roles { display: flex; flex-wrap: wrap; gap: 10px; margin-top: var(--si-space-l); }
+.jr-role {
+	padding: 12px 22px; border: 1px solid var(--si-rule); border-radius: 999px; background: var(--si-card); cursor: pointer;
+	font-family: var(--si-font-serif); font-size: var(--si-step-1); color: var(--si-ink); transition: all var(--si-dur-1) var(--si-ease);
+}
+.jr-role:hover { border-color: var(--si-accent); color: var(--si-accent); }
+/* every field is equal: one resting state, one chosen state, no role marked out */
+.jr-role[aria-checked="true"] { background: var(--si-ink); border-color: var(--si-ink); color: #fff; }
+.jr-hint { margin-top: var(--si-space-m); font-style: italic; color: var(--si-muted); }
+
+.jr-path { margin-top: var(--si-space-xl); }
+.jr-path ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0; counter-reset: none; position: relative; }
+/* the three cards are one row: the li stretches to the tallest, the card fills
+   its li, so the boxes line up however much text a step carries */
+.jr-path ol { align-items: stretch; }
+.jr-step { position: relative; display: flex; flex-direction: column; padding: 0 var(--si-space-m) 0 0; }
+.jr-step::after { content: ""; position: absolute; top: 22px; left: 52px; right: 0; height: 1px; background: var(--si-brass); }
+.jr-step:last-child::after { display: none; }
+.jr-n { position: relative; z-index: 1; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--si-card); border: 1.5px solid var(--si-brass); font: italic 500 18px var(--si-font-serif); color: var(--si-brass); }
+.jr-step a { flex: 1; display: grid; grid-template-rows: auto 1fr; gap: .3em; align-content: start; margin-top: var(--si-space-s); padding: var(--si-space-s) var(--si-space-m); background: var(--si-card); box-shadow: var(--si-shadow-1); color: inherit; text-decoration: none; min-height: 7rem; transition: transform var(--si-dur-2) var(--si-ease), box-shadow var(--si-dur-2); }
+.jr-step a:hover { transform: translateY(-3px); box-shadow: var(--si-shadow-2); }
+.jr-step b { font-family: var(--si-font-serif); font-size: var(--si-step-1); font-weight: 500; line-height: 1.25; color: var(--si-ink); }
+.jr-step a:hover b { color: var(--si-accent); }
+.jr-step small { font-family: var(--si-font-sans); font-size: 13px; color: var(--si-muted); }
+.jr-step.is-in { animation: jr-step var(--si-dur-3) var(--si-ease) both; animation-delay: calc(var(--i) * 90ms); }
+@keyframes jr-step { from { opacity: 0; transform: translateY(10px); } }
+@media (max-width: 689.98px) { .jr-step { padding: 0 0 var(--si-space-m); } .jr-step::after { display: none; } }
+.jr-then { margin-top: var(--si-space-l); padding: var(--si-space-m); border-top: 2px solid var(--si-ink); }
+.jr-then p { margin: 0 0 .6em; }
+@media (prefers-reduced-motion: reduce) { .jr-slot.is-in, .jr-step.is-in { animation: none; } }

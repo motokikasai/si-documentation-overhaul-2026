@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page drafts — Schiller Institute</title>
+<meta name="description" content="The universal Page template and the Tier-1 launch pages: three drafts each, on Jasper.">
+<link rel="stylesheet" href="../people/design-system/fonts.css">
+<link rel="stylesheet" href="../people/design-system/tokens.css">
+<link rel="stylesheet" href="../people/design-system/blocksy-shim.css">
+<link rel="stylesheet" href="../people/design-system/components.css">
+<link rel="icon" href="../brand/assets/favicon/favicon.svg" type="image/svg+xml">
+<style>
+	body { background: var(--si-ground); }
+	.ix { width: min(1100px, 100% - 32px); margin: 0 auto; padding: 64px 0 96px; }
+	.ix h1 { margin: .3em 0 0; font-family: var(--si-font-serif); font-size: var(--si-step-5); font-weight: 340; color: var(--si-ink); }
+	.ix > p { max-width: 62ch; font-size: var(--si-step-1); }
+	.ix-fam { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 8px 32px; padding: 26px 0; border-top: 1px solid var(--si-rule); }
+	.ix-fam h2 { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-2); font-weight: 450; color: var(--si-ink); }
+	.ix-fam h2 small { display: block; margin-top: 4px; font: 500 12.5px var(--si-font-sans); color: var(--si-muted); }
+	.ix-fam ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 10px; }
+	.ix-fam a { display: grid; gap: 4px; height: 100%; padding: 14px 16px; background: var(--si-card); box-shadow: var(--si-shadow-1); color: inherit; text-decoration: none; border-top: 2px solid transparent; transition: border-color .16s, transform .32s var(--si-ease); }
+	.ix-fam a:hover { border-top-color: var(--si-brass); transform: translateY(-2px); }
+	.ix-fam b { font-family: var(--si-font-serif); font-size: var(--si-step-1); font-weight: 500; color: var(--si-ink); }
+	.ix-fam b span { font: 600 12px var(--si-font-sans); color: var(--si-brass); margin-right: 6px; }
+	.ix-fam em { font-style: normal; font-size: 14.5px; line-height: 1.45; color: var(--si-text); }
+	@media (max-width: 760px) { .ix-fam { grid-template-columns: 1fr; } }
+	.ix-note { margin-top: 32px; padding: 16px 20px; background: var(--si-card); font: 14px/1.55 var(--si-font-sans); color: var(--si-muted); }
+</style>
+</head>
+<body>
+<main class="ix si-page">
+	<p class="si-eyebrow si-eyebrow--ruled">Schiller Institute · Jasper · drafts of 22 September 2026</p>
+	<h1>The Page template and the launch pages</h1>
+	<p>Three different directions for each page. Nothing is chosen yet. Everything quoted is checked word for word against the 2026-09-08 dump. Dashed panels are declared placeholders. <a class="si-link" href="README.md">README</a> covers what is real, what is owed, and what each draft is testing.</p>
+	<div id="fams"></div>
+	<p class="ix-note">Run: <code>cd projects/schiller-wp-rebuild &amp;&amp; python3 articles/build/serve.py 8761</code>, then open <code>/pages/</code>. Every draft has a review strip, bottom left, that switches between its three versions. The Page family also has a switcher of real legacy pages and a Visitor/Editor toggle that labels every pattern.</p>
+</main>
+<script>
+const F = [
+	['The universal Page', 'page.php · 216 legacy pages + every new one', [['A', 'page-folio', 'The Folio', 'One reading column on paper; its contents in the margin; child pages as numbered parts.'], ['B', 'page-pavilion', 'The Pavilion', 'A title band with the page’s particulars; each section a full-width room; a sticky chapter ribbon.'], ['C', 'page-codex', 'The Codex', 'A night rail about the page beside a limestone leaf of the page; § numbering and a reading line.']]],
+	['Home', 'below the shipped hero', [['A', 'home-record', 'The Record', 'A brass thread down a dated spine: said · then · the source · whether the original is online. Ends at the reader.'], ['B', 'home-questions', 'The Cross-Examination', 'The sceptic’s six questions, answered with evidence; a dumbbell of said→followed; 167 weeks as squares.'], ['C', 'home-corridor', 'The Corridor', 'The hero’s corridors become three rail lines down the page, converging on a departure board.']]],
+	['About', '/about/', [['A', 'about-founding', 'The Founding', 'From the founding sentence and the 1984 Declaration outward: namesake, founder, the work by subject.'], ['B', 'about-lexicon', 'The Lexicon', 'The Institute defined like a dictionary word, every sense cited.'], ['C', 'about-register', 'The Register', 'A public register entry: legal form, seat, funding, record — each field sourced, gaps declared.']]],
+	['Contact', '/contact/', [['A', 'contact-letter', 'The Letter', 'The form is a letter to complete; the margin says who will read it.'], ['B', 'contact-switchboard', 'The Switchboard', 'Pick why you are writing; get the one right channel.'], ['C', 'contact-desk', 'The Desk', 'Answers first, a filter that narrows them, a small form, the postal addresses.']]],
+	['Donate', '/donate/ · recurring-first', [['A', 'donate-facts', 'The Plain Facts', 'Four checkable facts, then one form — Wikipedia’s honest-facts finding.'], ['B', 'donate-purpose', 'What It Keeps Going', 'Choose the part of the work a gift keeps going; the button names it.'], ['C', 'donate-membership', 'Membership', 'Belonging, not a transaction: a membership card that fills in with your name.']]],
+	['Join', '/join/', [['A', 'join-ladder', 'The Ladder', 'Five rungs by what they cost you, between two brass rails.'], ['B', 'join-week', 'The Week', 'The week in your own time zone; Friday pinned, the rest honestly floating; a real .ics.'], ['C', 'join-roles', 'Your Part', '“I am a … scientist, singer, student” — each opens a three-step path of real pages.']]],
+	['Legal', '/privacy/ · /impressum/', [['A', 'legal-code', 'The Code', 'Numbered clauses, a sticky index, a slot beside each clause for an approved plain-language note.'], ['B', 'legal-letterhead', 'The Letterhead', 'The Impressum as letterhead; the privacy notice as disclosures.'], ['C', 'legal-layers', 'The Layers', 'A one-screen layered summary of every data use on the NEW site, and what today’s text fails to cover.']]],
+	['404', 'not found', [['A', 'notfound-suggest', 'Did You Mean', 'Reads the words in the missing address and finds the likeliest articles.'], ['B', 'notfound-quiet', 'The Quiet Page', 'One line of Schiller, a search field, four doors.'], ['C', 'notfound-drawer', 'The Archive Drawer', 'A cabinet of year drawers; the address’s own month opens itself.']]],
+	['Search', '/?s=', [['A', 'search-catalogue', 'The Catalogue', 'Results in drawers by kind, with facets for language, subject, year.'], ['B', 'search-concordance', 'The Concordance', 'Keyword in context, aligned on the word, with a histogram of when it was used.'], ['C', 'search-answer', 'The Answer First', 'The best person, conference, video and article first; then a year-ranged list.']]],
+];
+document.getElementById('fams').innerHTML = F.map(([h, s, ds]) => `<section class="ix-fam"><h2>${h}<small>${s}</small></h2><ol>${ds.map(([k, f, t, d]) => `<li><a href="templates/${f}.html"><b><span>${k}</span>${t}</b><em>${d}</em></a></li>`).join('')}</ol></section>`).join('');
+</script>
+</body>
+</html>

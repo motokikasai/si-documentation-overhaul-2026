@@ -1,0 +1,28 @@
+/* LEGAL · DRAFT C · "The Layers" */
+.ll-page { background: var(--si-ground); }
+.ll { padding: var(--si-space-2xl) 0 var(--si-space-3xl); }
+.ll-title { margin: var(--si-space-s) 0 0; font-family: var(--si-font-serif); font-size: var(--si-step-5); font-weight: 340; line-height: 1.06; color: var(--si-ink); }
+.ll-title em { font-style: italic; font-weight: 300; color: var(--si-accent); }
+.ll-lead { margin: var(--si-space-s) 0 0; font-size: var(--si-step-1); }
+.ll-layer1 { margin-top: var(--si-space-xl); padding: var(--si-space-m); background: var(--si-card); box-shadow: var(--si-shadow-2); overflow-x: auto; }
+.ll-table { width: 100%; min-width: 760px; border-collapse: collapse; font-family: var(--si-font-sans); font-size: 14px; }
+.ll-table th, .ll-table td { padding: 12px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--si-rule); }
+.ll-table thead th { font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--si-muted); border-bottom: 2px solid var(--si-ink); }
+.ll-table tbody th { font-family: var(--si-font-serif); font-size: 15.5px; font-weight: 500; color: var(--si-ink); }
+.ll-cov { display: flex; gap: 8px; align-items: baseline; }
+.ll-dot { flex: none; display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--si-accent); }
+.is-gap .ll-dot, .ll-dot--gap { background: transparent; border: 2px solid var(--si-brass); }
+.is-gap .ll-cov { color: var(--si-ink); font-weight: 600; }
+.ll-key { margin: var(--si-space-s) 0 0; font: 13px/1.5 var(--si-font-sans); color: var(--si-muted); }
+.ll-rights { margin-top: var(--si-space-m); padding-top: var(--si-space-s); border-top: 1px solid var(--si-rule); }
+.ll-rights h2 { margin: 0 0 .3em; font-family: var(--si-font-serif); font-size: var(--si-step-1); font-weight: 500; color: var(--si-ink); }
+.ll-rights p { margin: 0; }
+.ll-layer2 { margin-top: var(--si-space-2xl); max-width: 50rem; }
+.ll-l2head h2 { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-3); font-weight: 400; color: var(--si-ink); }
+.ll-l2head h2 span { margin-left: .6em; padding: 2px 10px; border-radius: 999px; background: var(--si-panel); font: 600 12px var(--si-font-sans); vertical-align: middle; }
+.ll-fold { margin-top: var(--si-space-m); border-top: 1px solid var(--si-ink); }
+.ll-fold details, .ll-imp { border-bottom: 1px solid var(--si-rule); }
+.ll-fold summary, .ll-imp summary { padding: .8em 0; cursor: pointer; font-family: var(--si-font-serif); font-size: var(--si-step-0); color: var(--si-ink); }
+.ll-fold summary:hover, .ll-imp summary:hover { color: var(--si-accent); }
+.ll-fold .si-prose, .ll-imp .si-prose { padding-bottom: 1em; font-size: var(--si-step-n1); }
+.ll-imp { margin-top: var(--si-space-l); border-top: 3px double var(--si-rule); }

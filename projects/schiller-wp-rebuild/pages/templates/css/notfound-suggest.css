@@ -1,0 +1,31 @@
+/* 404 · DRAFT A · "Did You Mean" */
+.na-page { background: var(--si-ground); }
+.na { padding: var(--si-space-2xl) 0 var(--si-space-3xl); }
+.na-wrap { max-width: 50rem; }
+.na-code { margin: 0; font: 600 var(--si-step-n2) var(--si-font-mono); letter-spacing: .1em; color: var(--si-brass); text-transform: uppercase; }
+.na-title { margin: .3em 0 0; font-family: var(--si-font-serif); font-size: var(--si-step-5); font-weight: 340; color: var(--si-ink); }
+.na-path { display: flex; flex-wrap: wrap; align-items: baseline; gap: .6em; margin: var(--si-space-s) 0 0; font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); }
+.na-path code { padding: 4px 10px; background: var(--si-card); border: 1px solid var(--si-rule); font: 13.5px var(--si-font-mono); color: var(--si-ink); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--si-brass) 70%, transparent); word-break: break-all; }
+.na-moved { margin: var(--si-space-s) 0 0; padding: 10px 14px; background: var(--si-card); border-left: 3px solid var(--si-accent); font-family: var(--si-font-sans); }
+.na-guess { margin-top: var(--si-space-xl); }
+.na-guess h2 { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-3); font-weight: 400; color: var(--si-ink); }
+.na-how { margin: .5em 0 0; font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); }
+.na-how b { color: var(--si-ink); font-weight: 600; }
+.na-list { list-style: none; margin: var(--si-space-m) 0 0; padding: 0; counter-reset: g; }
+.na-list li { counter-increment: g; border-top: 1px solid var(--si-rule); }
+.na-list a { position: relative; display: grid; gap: .2em; padding: 14px 0 14px 2.4rem; color: inherit; text-decoration: none; }
+.na-list a::before { content: counter(g); position: absolute; left: 0; top: 14px; font: italic 400 var(--si-step-1) var(--si-font-serif); color: var(--si-jasper-deep); }
+.na-list time { font: 12px var(--si-font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--si-muted); }
+.na-list strong { font-family: var(--si-font-serif); font-weight: 500; font-size: var(--si-step-1); line-height: 1.3; color: var(--si-ink); }
+.na-list span { font-size: var(--si-step-n1); color: var(--si-text); }
+.na-list .is-top a { padding: 18px 18px 18px 2.4rem; margin: 8px 0; background: var(--si-card); box-shadow: var(--si-shadow-1); }
+.na-list .is-top a::before { left: 12px; top: 18px; color: var(--si-brass); }
+.na-list .is-top strong { font-size: var(--si-step-2); }
+.na-list a:hover strong { color: var(--si-accent); }
+.na-list mark, .na-how mark { background: color-mix(in srgb, var(--si-brass) 22%, transparent); color: inherit; padding: 0 .1em; }
+.na-search { display: flex; gap: 8px; margin-top: var(--si-space-l); }
+.na-search .si-search { flex: 1; }
+.na-search input { height: 46px !important; }
+.na-search .ct-button { min-height: 46px; }
+.na-try { margin-top: var(--si-space-l); font-family: var(--si-font-sans); font-size: 12.5px; }
+.na-try a { color: var(--si-jasper-deep); }

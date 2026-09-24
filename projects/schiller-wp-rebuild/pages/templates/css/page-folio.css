@@ -1,0 +1,92 @@
+/* PAGE · DRAFT A · "The Folio" — a leaf of paper on limestone. */
+.fo-page { background: var(--si-ground); }
+.fo { padding-block: var(--si-space-xl) var(--si-space-3xl); }
+.fo-skeleton { width: min(760px, 100% - 32px); margin: 0 auto; display: grid; gap: 18px; }
+
+.fo-sheet {
+	--col: min(40rem, 100%);
+	width: min(1180px, 100% - 32px); margin-inline: auto;
+	background: var(--si-card);
+	box-shadow: 0 1px 0 var(--si-rule), 0 30px 60px -40px rgb(18 26 36 / .25);
+	padding: var(--si-space-2xl) clamp(20px, 6vw, 88px) var(--si-space-2xl);
+}
+
+/* ---- head: centred on the column, one brass rule ------------------------ */
+.fo-head { position: relative; max-width: var(--col); margin: 0 auto; text-align: left; }
+.fo-crumb { margin: 0 0 var(--si-space-s); }
+.fo-crumb a { color: inherit; text-decoration: none; }
+.fo-crumb a:hover { color: var(--si-accent); }
+.fo-title {
+	margin: 0; font-family: var(--si-font-serif); font-optical-sizing: auto;
+	font-size: var(--si-step-5); font-weight: var(--si-weight-display); line-height: 1.06;
+	letter-spacing: var(--si-track-display); color: var(--si-ink); text-wrap: balance;
+}
+.fo-standfirst { margin: var(--si-space-s) 0 0; font-size: var(--si-step-1); line-height: 1.5; color: var(--si-text); font-style: italic; }
+.fo-meta { margin: var(--si-space-s) 0 0; font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); }
+.fo-head::after { content: ""; display: block; width: 3.5rem; height: 1px; margin-top: var(--si-space-l); background: var(--si-brass); }
+
+.fo-plate { max-width: calc(var(--col) + 12rem); margin: var(--si-space-xl) auto 0; }
+.fo-plate img { width: 100%; height: auto; max-height: 70vh; object-fit: cover; }
+.fo-plate figcaption { margin-top: .6em; max-width: var(--col); margin-inline: auto; font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); }
+
+/* ---- body: column, and — when the page has sections — a margin ---------- */
+.fo-grid { display: grid; grid-template-columns: minmax(0, var(--col)); justify-content: center; margin-top: var(--si-space-xl); }
+.fo-toc { display: none; }
+@media (min-width: 1100px) {
+	.fo-grid.has-toc { grid-template-columns: 13rem minmax(0, var(--col)) 13rem; gap: 0 var(--si-space-xl); }
+	.fo-toc:not([hidden]) { display: block; grid-row: 1; grid-column: 1; }
+	.fo-grid.has-toc .fo-prose { grid-column: 2; }
+}
+@media (max-width: 1099.98px) {
+	/* on a narrow screen the contents become a quiet list above the text */
+	.fo-toc:not([hidden]) { display: block; margin-bottom: var(--si-space-l); padding: var(--si-space-s) 0; border-block: 1px solid var(--si-rule); }
+	.fo-toc:not([hidden]) ol { columns: 2 14rem; }
+}
+.fo-toc__label { margin: 0 0 .7em; font-family: var(--si-font-sans); font-size: var(--si-step-n2); font-weight: 600; letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-muted); }
+.fo-toc ol { list-style: none; padding: 0; margin: 0; position: sticky; top: calc(var(--header-sticky-height) + 24px); }
+.fo-toc li { break-inside: avoid; }
+.fo-toc a {
+	display: grid; grid-template-columns: 2.2em 1fr; gap: .2em; padding: .32em 0;
+	font-family: var(--si-font-sans); font-size: 13.5px; line-height: 1.35; color: var(--si-muted); text-decoration: none;
+	transition: color var(--si-dur-1) var(--si-ease);
+}
+.fo-toc li.lv-up a { grid-template-columns: 1fr; font-weight: 600; color: var(--si-ink); padding-bottom: .5em; }
+.fo-toc a:hover { color: var(--si-ink); }
+.fo-toc a[aria-current] { color: var(--si-accent); }
+.fo-toc a[aria-current] .fo-num { color: var(--si-brass); }
+.fo-num { font-family: var(--si-font-serif); font-style: italic; color: var(--si-jasper-deep); }
+
+/* numerals hang in the left margin of the column, beside their heading */
+.fo-prose > [data-num] { position: relative; }
+.fo-prose > [data-num]::before {
+	content: attr(data-num); position: absolute; right: calc(100% + 1.1rem); top: .15em;
+	font-family: var(--si-font-serif); font-style: italic; font-weight: 400; font-size: var(--si-step-0); color: var(--si-brass);
+}
+@media (max-width: 1099.98px) { .fo-prose > [data-num]::before { position: static; margin-right: .6em; } }
+
+.fo-prose { font-size: var(--si-step-0); }
+.fo-prose > h2 { padding-top: .2em; }
+.fo-initial::first-letter {
+	float: left; margin: .06em .1em 0 0;
+	font-family: var(--si-font-serif); font-size: 3.6em; line-height: .82; font-weight: 400; color: var(--si-accent);
+}
+
+/* patterns step out of the column where the column is not enough */
+.fo-prose > :is(.si-p-facts-wrap, .si-p-query, .si-wide-bar, .si-p-cta) { margin-inline: calc(min(6rem, (100vw - 100%) / 2 - 20px) * -1); }
+.fo-prose .si-p-facts-wrap { padding: var(--si-space-m) 0; border-block: 1px solid var(--si-rule); }
+.fo-prose .si-p-quote { padding-left: var(--si-space-m); border-left: 1px solid var(--si-brass); }
+.fo-prose .si-p-quote blockquote { font-style: italic; border: 0; padding: 0; }
+.fo-prose .si-p-cta { padding: var(--si-space-l); background: var(--si-ground); border-top: 1px solid var(--si-brass); }
+@media (max-width: 760px) { .fo-prose > :is(.si-p-facts-wrap, .si-p-query, .si-wide-bar, .si-p-cta) { margin-inline: 0; } }
+
+/* ---- foot: the child pages, numbered like a book's parts ---------------- */
+.fo-parts { max-width: var(--col); margin: var(--si-space-2xl) auto 0; padding-top: var(--si-space-l); border-top: 3px double var(--si-rule); }
+.fo-parts h2 { margin: 0 0 var(--si-space-s); }
+.fo-parts ol { list-style: none; padding: 0; margin: 0; }
+.fo-parts li + li { border-top: 1px solid var(--si-rule); }
+.fo-parts a { display: grid; grid-template-columns: 3rem 1fr auto; align-items: baseline; padding: .9em 0; text-decoration: none; color: var(--si-ink); font-size: var(--si-step-1); }
+.fo-parts a::after { content: "→"; color: var(--si-muted); transition: translate var(--si-dur-1) var(--si-ease); }
+.fo-parts a:hover { color: var(--si-accent); }
+.fo-parts a:hover::after { translate: 4px 0; color: var(--si-accent); }
+
+@media (max-width: 689.98px) { .fo-sheet { width: 100%; box-shadow: none; padding-inline: 16px; } .fo { padding-top: 0; } }

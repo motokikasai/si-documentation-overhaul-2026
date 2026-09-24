@@ -48,6 +48,16 @@ people-specific. `tokens.css` is the authority; read its header before changing 
 | `/conferences/{slug}/` | Proceedings · Marquee · Rostrum · Thread · Atrium | — | not yet ported |
 | `/videos/{slug}/` | Programme · Reading Desk · Echo · Constellation · Almanac | — | not yet ported |
 | `/conferences/` (archive) | Gallery · Firmament · Programme | — | `landing/` (pre-Jasper) |
+| any Page (`page.php`) | Folio · Pavilion · Codex | — | not yet ported |
+| Home, below the hero | Record · Cross-Examination · Corridor | — | not yet ported |
+| `/privacy/` + `/impressum/` | Code · Letterhead · Layers | **Code** | not yet ported |
+| `/join/` | Ladder · Week · Your Part | **Your Part** | not yet ported |
+| About · Contact · Donate · 404 · Search | 3 each (see `pages/README.md`) | — | not yet ported |
+
+`pages/README.md` is the one to read before touching any Page or Tier-1 draft. Every
+quote there comes from `pages/build/build-pages-data.py`, which fails if the words are not
+found verbatim in the cited record. `.si-prose` in `pages/templates/css/pages-shared.css`
+is the legacy-markup stylesheet that `03-shortcode-conversion-table.md §5` said the theme owes.
 
 `videos/README.md` is the one to read before touching a video page: the four shapes a
 video record comes in (only 207 of 1,212 have captions), the time bridge to the
