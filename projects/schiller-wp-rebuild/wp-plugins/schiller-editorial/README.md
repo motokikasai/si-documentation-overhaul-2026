@@ -107,6 +107,12 @@ from the Contact page (verbatim, page 895) with its Source, one Group **"Join ro
   were dropped, and the Friday step says "Weekly — the newsletter carries the day".
 - **Sign-up:** a link out to `https://schillerinstitute.nationbuilder.com/join`, the NationBuilder
   page the live site already sends `/sign-up/` to. The role is not passed to NationBuilder.
+- **Shipped 2026-09-25** as `/join/` (page 123267). The user confirmed the editor, the NationBuilder
+  link and the Friday wording ("stands for now; updated when the schedule changes").
+- The path is a row of cards when every step fits (a container query on the path, 46rem) and a
+  vertical rail otherwise. The card's white panel is drawn by its stretched link and lifts on
+  hover; the list item, which draws the number and the line, never moves, and numbers and lines
+  take no pointer events.
 - `tools/create-join-page.php [apply]` makes the English `/join/` from the pattern (report without
   `apply`); it never writes over an existing page.
 
