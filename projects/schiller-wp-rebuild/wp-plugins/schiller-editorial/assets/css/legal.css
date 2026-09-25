@@ -97,7 +97,7 @@
 
 /* "Document note": the translation note under the switch */
 .is-style-si-legal > p.is-style-si-doc-note {
-	margin: calc(-1 * var(--si-space-s)) 0 var(--si-space-l);
+	margin: 0 0 var(--si-space-l);   /* the badges above keep their own .8em below */
 	font-family: var(--si-font-sans);
 	font-size: var(--si-step-n2);
 	color: var(--si-muted);
