@@ -81,3 +81,11 @@ started (legal index, 2026-09-25). To keep something visible inside a scrolling 
 that panel's `scrollTop` yourself, and only when the value changes. **Headless Firefox did
 not reproduce the cancellation**, so a Playwright click test passed while a real browser
 failed. For scroll behaviour, a user's report outranks the headless check.
+
+**Playwright's own scroll-into-view is smooth, so a click can miss.** `page.click()` scrolls
+the target into view first, and the shim (like Blocksy) sets `scroll-behavior: smooth`
+globally — so the element is still moving when the click is dispatched and the handler never
+fires. Seen once in six runs on the video Programme's "Read the whole text" toggle, where the
+first press moves the button ~400px down. Fix: `scrollIntoView({behavior:'instant'})` yourself,
+wait for `scrollY` to hold still across two frames, then click (`clickStable()` in
+`videos/build/interact.mjs`). Same family as the `window.scrollTo` trap above.

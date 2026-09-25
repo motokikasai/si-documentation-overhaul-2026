@@ -20,6 +20,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..'))
 CORE = os.path.join(ROOT, 'templates/js/people-core.js')
 KIT = os.path.join(ROOT, 'wp/blocksy-child')
+# si.pot is the child theme's, not the /people/ kit's: every kit that ships PHP with
+# the `si` domain is scanned (the Articles packager copies this one file for all).
+KITS = [KIT] + [os.path.abspath(os.path.join(ROOT, '..', k, 'wp/blocksy-child'))
+                for k in ('articles', 'videos')]
 OUT_PHP = os.path.join(KIT, 'inc/people-i18n.php')
 OUT_POT = os.path.join(KIT, 'languages/si.pot')
 CATEGORIES = ['one', 'few', 'many', 'other']
@@ -113,12 +117,15 @@ def po_q(s):
 
 def write_pot():
     entries = {}
-    for dirpath, _, files in os.walk(KIT):
+    for kit in KITS:
+      if not os.path.isdir(kit):
+        continue
+      for dirpath, _, files in os.walk(kit):
         for f in sorted(files):
             if not f.endswith('.php'):
                 continue
             path = os.path.join(dirpath, f)
-            rel = os.path.relpath(path, KIT)
+            rel = os.path.relpath(path, os.path.abspath(os.path.join(ROOT, '..')))   # names the kit
             src = open(path, encoding='utf-8').read()
             # a translators comment belongs to the call on its last line or the next one
             notes = {}

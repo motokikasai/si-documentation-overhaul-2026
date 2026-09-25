@@ -46,13 +46,21 @@ people-specific. `tokens.css` is the authority; read its header before changing 
 | `/blog/{y}/{m}/{d}/{slug}/` | Leaf · Reading Room · Threshold | **Leaf** | `articles/wp/` |
 | `/blog/` | Ledger · Drift · Broadsheet | **Ledger** (titled *Articles*) | `articles/wp/` |
 | `/conferences/{slug}/` | Proceedings · Marquee · Rostrum · Thread · Atrium | — | not yet ported |
-| `/videos/{slug}/` | Programme · Reading Desk · Echo · Constellation · Almanac | — | not yet ported |
+| `/videos/{slug}/` | Programme · Reading Desk · Echo · Constellation · Almanac | **Programme** | `videos/wp/` (step 1 on si-v4 2026-09-25; no captions yet) |
 | `/conferences/` (archive) | Gallery · Firmament · Programme | — | `landing/` (pre-Jasper) |
 | any Page (`page.php`) | Folio · Pavilion · Codex | — | not yet ported |
-| Home, below the hero | Record · Cross-Examination · Corridor | — | not yet ported |
-| `/privacy/` + `/impressum/` | Code · Letterhead · Layers | **Code** | not yet ported |
+| Home, below the hero | round 1 (Record · Cross-Examination · Corridor) rejected; round 2 = five wireframes in `pages/wireframes/` | — | not yet ported |
+| `/privacy-policy/` + Impressum | Code · Letterhead · Layers | **Code**, on condition that any editor can edit the text as blocks | not yet ported |
 | `/join/` | Ladder · Week · Your Part | **Your Part** | not yet ported |
-| About · Contact · Donate · 404 · Search | 3 each (see `pages/README.md`) | — | not yet ported |
+| `/about/` | Founding · Lexicon · Register | **Founding** | not yet ported |
+| `/contact/` | Letter · Switchboard · Desk | — (Letter ruled out) | not yet ported |
+| `/donate/` | Plain Facts · What It Keeps Going · Membership | **What It Keeps Going** | not yet ported |
+| 404 | Did You Mean · Quiet Page · Archive Drawer | **Did You Mean** | not yet ported |
+| `/?s=` | Catalogue · Concordance · Answer First | **Catalogue** | not yet ported |
+
+The chosen Tier-1 drafts and how each one ports (pattern or view, rung, what is computed,
+what is still open) are in `pages/README.md` → **"Chosen directions — the port sheet"**.
+Read it before porting any of them.
 
 `pages/README.md` is the one to read before touching any Page or Tier-1 draft. Every
 quote there comes from `pages/build/build-pages-data.py`, which fails if the words are not
