@@ -61,7 +61,7 @@ Read `references/pain-points.md` for the full list with the evidence. The short 
    page in `page_for_posts`, which on live points at a leftover **Blocksy starter-site demo
    page** (id 14, slug `news`). `/blog/` — the permalink front and the target of three
    redirect rules — has returned **404** since the site was built. Fix:
-   `projects/schiller-wp-rebuild/articles/wp/tools/create-blog-page.php`.
+   `projects/schiller-wp-rebuild/wp-plugins/schiller-editorial/tools/create-blog-page.php`.
 6. **Legacy categories are unusable.** 200 of them, led by *General* (1,544), several named
    with bare numbers. Use `si_topic` instead.
 7. **Transient caches survive a deploy.** Every kit keys its cache on a `*_VERSION`

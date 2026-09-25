@@ -8,8 +8,8 @@
  * every language, and it ignores the rows entirely if the post type is not set
  * translatable. This tells you which of the two it is.
  *
- *   wp eval-file tools/post-languages.php                 # diagnose
- *   wp eval-file tools/post-languages.php repair <csv>    # restore from the dump's CSV
+ *   wp eval-file wp-content/plugins/schiller-editorial/tools/post-languages.php                 # diagnose
+ *   wp eval-file wp-content/plugins/schiller-editorial/tools/post-languages.php repair <csv>    # restore from the dump's CSV
  *
  * The repair reads `language,trid,source` per legacy post id, taken from the
  * 2026-09-08 dump's own wp_icl_translations (build/make-post-language-csv.py).
@@ -18,7 +18,7 @@
  * by giving the source-language row a fresh trid and hanging its translations
  * off that one, because the dump's trids belong to another database.
  *
- * @package blocksy-child
+ * @package schiller-editorial
  */
 
 defined('ABSPATH') || exit;
@@ -73,11 +73,11 @@ if ((int) $translatable !== 1) {
 	if ($missing > 0) {
 		printf("\n  Afterwards, %s post%s still have no language of their own; mop them up with\n",
 			number_format_i18n($missing), $missing === 1 ? '' : 's');
-		echo "    wp eval-file tools/post-languages.php repair tools/post-languages.csv\n";
+		echo "    wp eval-file wp-content/plugins/schiller-editorial/tools/post-languages.php repair wp-content/plugins/schiller-editorial/tools/post-languages.csv\n";
 	}
 } elseif ($missing > 0) {
 	printf("\n→ THE CAUSE: %s published posts have no language. Repair from the dump:\n", number_format_i18n($missing));
-	echo "  wp eval-file tools/post-languages.php repair tools/post-languages.csv\n";
+	echo "  wp eval-file wp-content/plugins/schiller-editorial/tools/post-languages.php repair wp-content/plugins/schiller-editorial/tools/post-languages.csv\n";
 	echo "  Then: wp transient delete --all\n";
 } else {
 	echo "\n→ languages present and `post` is translatable. Nothing to repair.\n";
@@ -87,7 +87,7 @@ if (!$repair) {
 	return;
 }
 if (!$csv || !is_readable($csv)) {
-	echo "\nrepair needs a readable CSV: repair tools/post-languages.csv\n";
+	echo "\nrepair needs a readable CSV: repair wp-content/plugins/schiller-editorial/tools/post-languages.csv\n";
 	return;
 }
 

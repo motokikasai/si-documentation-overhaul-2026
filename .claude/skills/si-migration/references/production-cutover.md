@@ -49,7 +49,7 @@ has been verified.
 
 Rehearsed on si-v4, 2026-09-20 — this one is invisible until you count rows.
 
-- [ ] `wp eval-file tools/post-languages.php` — it prints WPML's post-type
+- [ ] `wp eval-file wp-content/plugins/schiller-editorial/tools/post-languages.php` — it prints WPML's post-type
       setting *and* the per-language counts.
 - [ ] **WPML → Settings → Post Types Translation → Posts →
       "Translatable - only show translated items".** With it off (si-v4 had `0`)
@@ -60,14 +60,14 @@ Rehearsed on si-v4, 2026-09-20 — this one is invisible until you count rows.
 - [ ] Verify by counting: `/blog/`, `/de/blog/`, `/ru/blog/` must return
       *different* row counts that add up to the per-language totals.
 - [ ] Any post still without a language:
-      `wp eval-file tools/post-languages.php repair tools/post-languages.csv`.
+      `wp eval-file wp-content/plugins/schiller-editorial/tools/post-languages.php repair wp-content/plugins/schiller-editorial/tools/post-languages.csv`.
       The CSV carries each post's **real** language from the dump — do not use
       the persons repair script here, it defaults everything to the site
       language and would relabel 1,747 German articles as English.
 
 ## P2 · The Posts page (do this before the redirects)
 
-- [ ] `wp eval-file tools/create-blog-page.php` → report; then `apply`, then `apply de …`
+- [ ] `wp eval-file wp-content/plugins/schiller-editorial/tools/create-blog-page.php` → report; then `apply`, then `apply de …`
       for each language.
 - [ ] Arguments are **bare words**: `apply`, `all`, `slugs`. `wp eval-file`
       consumes anything starting with `--` as its own flag.

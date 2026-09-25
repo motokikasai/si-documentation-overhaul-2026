@@ -21,8 +21,7 @@ cp "$here"/wp/blocksy-child/inc/*.php "$dest/inc/"
 cp "$here"/wp/blocksy-child/template-parts/articles/*.php "$dest/template-parts/articles/"
 mkdir -p "$dest/languages"
 cp "$here"/wp/blocksy-child/languages/si.pot "$dest/languages/"   # covers BOTH kits
-cp "$here"/wp/tools/create-blog-page.php "$here"/wp/tools/post-languages.php "$dest/tools/"
-[ -f "$here/wp/tools/post-languages.csv" ] && cp "$here"/wp/tools/post-languages.csv "$dest/tools/"
+# create-blog-page.php and post-languages.php(+csv) ship in the schiller-editorial plugin since R9
 
 for f in article-shared article-leaf articles-shared articles-ledger; do
 	cp "$here/templates/css/$f.css" "$dest/assets/articles/css/"

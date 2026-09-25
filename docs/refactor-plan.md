@@ -70,7 +70,7 @@ Low risk and high reuse first; each item is independent unless noted.
 | R7 **done 2026-09-24** (colours, exact-token lengths) | 1 — literal-value audit of view CSS; move literals into tokens | Makes the token rule true | Low |
 | R7b **done 2026-09-24** (display sizes kept) | type and spacing onto Jasper's scales: **58 absolute font sizes** in the views — 14 distinct sizes between 9.5 and 17px, where Jasper has 3 steps — and **108 px spacings** (padding/gap/margin) | Consistency. It **changes how pages look**, so screenshots before/after per view and the user's approval first | Medium (visual) |
 | R8 **done 2026-09-24** | 4 — profile field registration and meta boxes to `schiller-editorial` (same keys); Pods + bindings where the field is plain | Largest theme-held structure; do after R2 and R5 have proven the path | Medium–high (editor UI, WPML) |
-| R9 | 13 — one-shot tools to `schiller-editorial/tools/` | Housekeeping | Low |
+| R9 **done 2026-09-25** | 13 — one-shot tools to `schiller-editorial/tools/` | Housekeeping | Low |
 | R10 | 7 — hero editor script to `@wordpress/scripts` | Only when the hero next needs real editor work | Medium (validation) |
 | R6b **done 2026-09-24** | Leaf: third-party `<iframe>`s lose their `src` and render as **empty boxes** — 64 in 56 posts (SoundCloud 33, Brevo/Sendinblue forms 25, Google Docs, Rumble, schillermeet) | Visible defect today; needs a decision — remove, or a two-click facade like YouTube's | Low (render only) |
 | R6c **done 2026-09-24** | Leaf: bold/italic left **open across a block's end** — 21 in 15 posts; the browser carries it forward (2 sampled pages: the footer ends up inside `<b>`) | Visible defect today | Low (render only) |
@@ -338,3 +338,22 @@ is a server-rendered view, not block content, so a binding has nothing to bind, 
 quotes need their own editor. Revisit if the profile is ever rebuilt from blocks.
 Backups: `schiller-editorial-0.3.0-before-r8-profile-fields-20260924.tgz`,
 `blocksy-child-before-r8-profile-fields-20260924.tgz`.
+
+**R9 — 2026-09-25, done.** The content tools moved from the theme's `tools/` to
+`schiller-editorial/tools/` (git renames): `create-blog-page.php`, `post-languages.php` +
+`post-languages.csv`, `import-photo-focus.php` + `photo-focus.csv`. None of them calls the
+theme. `import-photo-focus` finds its CSV through `__DIR__`, so it moved with it. The
+theme keeps its design tools, `apply-design-system.php` and `check-editor-presets.php`.
+Every path that named the old place was updated:
+- the scripts' own run instructions, including the repair command `post-languages.php`
+  prints;
+- both packagers, which no longer ship the moved tools into the theme;
+- `make-post-language-csv.py`, which now writes the CSV to the plugin;
+- the Articles and People READMEs and two theme comments;
+- the si-migration skill: SKILL.md, pain-points, and **production-cutover.md**, the
+  checklist the migration is run from.
+A final grep finds no stale path. Left alone on purpose: a comment in the mu-plugin
+`schiller-content-model-v3.php`, since editing it would change the checksum the replay
+checklist verifies. On si-v4 the files moved (theme `tools/` now holds only the two design
+tools) and `/blog/`, `/de/blog/`, an article and `/people/` answer 200. Backup:
+`blocksy-child-before-r9-tools-20260925.tgz`.

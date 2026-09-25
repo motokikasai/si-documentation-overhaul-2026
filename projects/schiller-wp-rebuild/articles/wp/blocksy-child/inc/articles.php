@@ -8,7 +8,7 @@
  *   articles-archive.php   /blog/ inside Blocksy's posts-listing canvas
  *
  * Nothing here runs until the page is an Article or the Posts page, and the
- * archive does nothing at all until tools/create-blog-page.php has been run.
+ * archive does nothing at all until schiller-editorial/tools/create-blog-page.php has been run.
  *
  * @package blocksy-child
  */

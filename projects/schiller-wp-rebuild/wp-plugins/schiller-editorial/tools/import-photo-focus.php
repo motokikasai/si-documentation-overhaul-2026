@@ -10,8 +10,8 @@
  * a value already set (an editor's correction wins). Default: report only.
  *
  * Run in Local → Open Site Shell, from the site root:
- *   wp eval-file wp-content/themes/blocksy-child/tools/import-photo-focus.php          # report
- *   wp eval-file wp-content/themes/blocksy-child/tools/import-photo-focus.php apply    # write
+ *   wp eval-file wp-content/plugins/schiller-editorial/tools/import-photo-focus.php          # report
+ *   wp eval-file wp-content/plugins/schiller-editorial/tools/import-photo-focus.php apply    # write
  */
 
 if (!defined('ABSPATH')) {

@@ -448,7 +448,7 @@ wp/blocksy-child/inc/articles.php          the one file functions.php requires
                     article-single.php     blocksy:single:canvas:custom-output
                     articles-archive.php   blocksy:posts-listing:canvas:custom-output
 wp/blocksy-child/template-parts/articles/  leaf.php · ledger.php
-wp/tools/create-blog-page.php              creates /blog/ and assigns page_for_posts
+schiller-editorial/tools/create-blog-page.php   creates /blog/ and assigns page_for_posts (moved from the theme, R9)
 build/package-wp.sh <blocksy-child>        assembles and deploys
 ```
 
@@ -500,7 +500,7 @@ Local's Open Site Shell — WSL cannot reach Local's MySQL.
 ```bash
 # in Local's "Open Site Shell", from the site root. Bare words, never --flags:
 # wp eval-file consumes anything starting with -- as its own parameter.
-T=wp-content/themes/blocksy-child/tools
+T=wp-content/plugins/schiller-editorial/tools   # since R9; before, the theme's tools/
 wp eval-file $T/create-blog-page.php                    # report
 wp eval-file $T/create-blog-page.php apply all          # create, every language
 wp eval-file $T/create-blog-page.php slugs              # repair the blog-2 slugs

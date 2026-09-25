@@ -14,11 +14,11 @@
  * One page fixes it. No article URL moves: the permalink structure already
  * starts with /blog/, so the index simply starts resolving.
  *
- *   wp eval-file tools/create-blog-page.php                    # report only
- *   wp eval-file tools/create-blog-page.php apply              # create and assign
- *   wp eval-file tools/create-blog-page.php apply de ru        # …and those translations
- *   wp eval-file tools/create-blog-page.php apply all         # …every active language
- *   wp eval-file tools/create-blog-page.php slugs             # repair `blog-2` slugs
+ *   wp eval-file wp-content/plugins/schiller-editorial/tools/create-blog-page.php                    # report only
+ *   wp eval-file wp-content/plugins/schiller-editorial/tools/create-blog-page.php apply              # create and assign
+ *   wp eval-file wp-content/plugins/schiller-editorial/tools/create-blog-page.php apply de ru        # …and those translations
+ *   wp eval-file wp-content/plugins/schiller-editorial/tools/create-blog-page.php apply all         # …every active language
+ *   wp eval-file wp-content/plugins/schiller-editorial/tools/create-blog-page.php slugs             # repair `blog-2` slugs
  *
  * The arguments are bare words on purpose: `wp eval-file` consumes anything
  * starting with `--` as a WP-CLI flag of its own, so `--all` never reaches the
@@ -26,7 +26,7 @@
  *
  * Run it in Local's "Open Site Shell" — WSL cannot reach Local's MySQL.
  *
- * @package blocksy-child
+ * @package schiller-editorial
  */
 
 defined('ABSPATH') || exit;

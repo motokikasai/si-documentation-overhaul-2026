@@ -11,7 +11,7 @@
  * https://schillerinstitute.com/blog/ returns 404 to this day even though the
  * permalink front is /blog/ and three redirect rules aim at it.
  *
- * `tools/create-blog-page.php` creates the page and sets the option. Until it
+ * `schiller-editorial/tools/create-blog-page.php` creates the page and sets the option. Until it
  * has been run, this file does nothing at all.
  *
  * Blocksy's index.php calls get_template_part('archive'), and

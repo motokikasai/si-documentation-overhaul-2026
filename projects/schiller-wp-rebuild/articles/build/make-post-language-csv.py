@@ -4,9 +4,9 @@ The language of every published article, taken from the 2026-09-08 dump's own
 wp_icl_translations — the only record of it that still exists once an import has
 created the posts without one.
 
-    python3 build/make-post-language-csv.py   ->  wp/tools/post-languages.csv
+    python3 build/make-post-language-csv.py   ->  wp-plugins/schiller-editorial/tools/post-languages.csv
 
-Feeds wp/tools/post-languages.php repair. The trid column is the dump's; the
+Feeds schiller-editorial/tools/post-languages.php repair. The trid column is the dump's; the
 repair script does not reuse those ids (they belong to another database), it
 only uses them to know which posts belong in one translation group.
 """
@@ -14,7 +14,7 @@ import csv, json, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE = os.path.join(HERE, '.cache', 'articles-full.json')
-OUT = os.path.join(HERE, '../wp/tools/post-languages.csv')
+OUT = os.path.join(HERE, '../../wp-plugins/schiller-editorial/tools/post-languages.csv')
 
 if not os.path.exists(CACHE):
     sys.exit('run build/extract-posts.py first')

@@ -78,7 +78,7 @@ permalink front *and* the redirect target of `^/blog/category/.*`, `^/(de/)?blog
 `^/recent-news/?$` — has returned **404** since the site was built. Native date archives
 (`/blog/2019/09/`) do work; author archives are off.
 Fix: create a page with slug `blog`, set it as the Posts page, retire page 14. No article URL
-moves. `projects/schiller-wp-rebuild/articles/wp/tools/create-blog-page.php` does it, and
+moves. `projects/schiller-wp-rebuild/wp-plugins/schiller-editorial/tools/create-blog-page.php` does it, and
 handles the WPML translation group (the option is translated, so `/de/blog/` needs its own
 page in the same `trid`).
 
@@ -95,7 +95,7 @@ lists the same rows — but the fixes are unrelated:
 2. **The rows are missing**, the `SI_WPML::active()` bug above.
 
 Diagnose both at once with
-`articles/wp/tools/post-languages.php`, which prints the setting *and* the
+`wp-plugins/schiller-editorial/tools/post-languages.php`, which prints the setting *and* the
 per-language counts. **Report the setting first**: a handful of language-less
 rows next to a post type WPML is not translating at all is a footnote, not the
 cause, and the first version of that script sent us to the wrong fix by checking
