@@ -1,0 +1,170 @@
+/* ==========================================================================
+   schiller-editorial — legal documents (Legal · draft A "The Code")
+
+   Ported from pages/templates/css/legal-code.css onto block styles. Sizes follow the R7b
+   rules (text onto --si-step-*, spacing onto --si-space-*); widths that are geometry
+   (the 17rem index, the 42rem measure, the 14rem margin note) stay as the draft set them.
+   Every selector hangs off an .is-style-si-* class or a class the render step adds.
+   ========================================================================== */
+
+/* the document: an index column beside the clauses, once there is room for one */
+.wp-block-group.is-style-si-legal {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	column-gap: var(--si-space-xl);
+	row-gap: 0;
+	grid-auto-flow: row dense;
+}
+.is-style-si-legal > h1 {
+	margin: 0 0 var(--si-space-s);
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-5);
+	font-weight: 350;
+	color: var(--si-ink);
+}
+.is-style-si-legal > * { grid-column: 1 / -1; }
+/* text that is not in a clause (the Impressum): the same measure and headings as a clause */
+.is-style-si-legal > :is(p, ul, ol, h2, h3, h4) { max-width: 42rem; margin-block: 0 .8em; font-size: var(--si-step-n1); }
+.is-style-si-legal > h2 {
+	margin: 1.6em 0 .6em;
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-2);
+	font-weight: 450;
+	color: var(--si-ink);
+}
+.is-style-si-legal > :is(h3, h4) { margin-top: 1.2em; font-family: var(--si-font-serif); font-size: var(--si-step-0); color: var(--si-ink); }
+
+/* the index (added at render; ≥3 numbered clauses) */
+.si-legal__index { display: none; }
+@media (min-width: 1100px) {
+	.wp-block-group.is-style-si-legal { grid-template-columns: 17rem minmax(0, 1fr); }
+	.is-style-si-legal > .is-style-si-clause { grid-column: 2; }
+	.si-legal__index {
+		display: block;
+		grid-column: 1;
+		grid-row-end: span 99;
+		align-self: start;
+		position: sticky;
+		top: calc(var(--header-sticky-height, 0px) + var(--si-space-s));
+		max-height: calc(100vh - var(--header-sticky-height, 0px) - var(--si-space-l));
+		overflow-y: auto;
+		scrollbar-width: thin;
+		margin-top: var(--si-space-l);
+	}
+}
+.si-legal__index ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--si-rule); }
+.si-legal__index a {
+	display: grid;
+	grid-template-columns: 2.4em 1fr;
+	gap: var(--si-space-3xs);
+	padding: var(--si-space-3xs) 0 var(--si-space-3xs) var(--si-space-xs);
+	margin-left: -1px;
+	border-left: 2px solid transparent;
+	font: var(--si-step-n2)/1.35 var(--si-font-sans);
+	color: var(--si-muted);
+	text-decoration: none;
+}
+.si-legal__index a span { color: var(--si-jasper-deep, var(--si-muted)); font-variant-numeric: tabular-nums; }
+.si-legal__index a:hover { color: var(--si-ink); }
+.si-legal__index a[aria-current] { color: var(--si-ink); border-left-color: var(--si-brass); }
+
+/* the language status (computed from WPML) */
+.si-legal__status {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--si-space-2xs) var(--si-space-xs);
+	margin: 0 0 var(--si-space-l);
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n2);
+}
+.si-legal__badge {
+	padding: var(--si-space-3xs) var(--si-space-2xs);
+	border-radius: var(--si-radius-round);
+	background: var(--si-panel);
+	font-weight: 600;
+	color: var(--si-ink);
+}
+.si-legal__badge--owed {
+	background: transparent;
+	border: 1px dashed var(--si-jasper-deep, var(--si-muted));
+	color: var(--si-jasper-deep, var(--si-muted));
+}
+
+/* the switch between the legal documents */
+.wp-block-buttons.is-style-si-doc-switch {
+	display: inline-flex;
+	gap: 0;
+	margin: 0 0 var(--si-space-s);
+	border: 1px solid var(--si-rule);
+	border-radius: var(--si-radius-1);
+	overflow: hidden;
+	justify-self: start;
+}
+.is-style-si-doc-switch .wp-block-button__link {
+	min-height: 0;
+	padding: var(--si-space-2xs) var(--si-space-s);
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	color: var(--si-muted);
+	font: 600 var(--si-step-n1) var(--si-font-sans);
+	text-decoration: none;
+}
+.is-style-si-doc-switch .wp-block-button + .wp-block-button .wp-block-button__link { border-left: 1px solid var(--si-rule); }
+.is-style-si-doc-switch .wp-block-button__link[aria-current] { background: var(--si-ink); color: var(--si-on-accent); }
+
+/* a clause */
+.wp-block-group.is-style-si-clause {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 0 var(--si-space-l);
+	padding: var(--si-space-l) 0;
+	border-top: 1px solid var(--si-rule);
+	scroll-margin-top: calc(var(--header-sticky-height, 0px) + var(--si-space-s));
+	font-size: var(--si-step-n1);
+}
+.is-style-si-clause > * { max-width: 42rem; margin-block: 0 .8em; }
+.is-style-si-clause > :last-child { margin-bottom: 0; }
+.is-style-si-clause > h2 {
+	margin: 0 0 .6em;
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-2);
+	font-weight: 450;
+	color: var(--si-ink);
+}
+.is-style-si-clause > h3, .is-style-si-clause > h4 {
+	margin-top: 1.2em;
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-0);
+	color: var(--si-ink);
+}
+.si-clause__n {
+	display: block;
+	margin-bottom: .3em;
+	font: 700 var(--si-step-n2) var(--si-font-sans);
+	letter-spacing: var(--si-track-caps);
+	color: var(--si-brass);
+}
+
+/* "In short": in the margin when there is one, above the text below that */
+p.is-style-si-in-short {
+	display: grid;
+	gap: var(--si-space-3xs);
+	align-self: start;
+	margin-bottom: 1em;
+	padding: var(--si-space-xs);
+	background: var(--si-panel);
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n2);
+}
+.si-in-short__label {
+	font-size: var(--si-step-n2);
+	letter-spacing: var(--si-track-caps);
+	text-transform: uppercase;
+	color: var(--si-muted);
+}
+@media (min-width: 1300px) {
+	.wp-block-group.is-style-si-clause { grid-template-columns: minmax(0, 42rem) 14rem; }
+	.is-style-si-clause > * { grid-column: 1; }
+	.is-style-si-clause > p.is-style-si-in-short { grid-column: 2; grid-row: 1 / span 3; }
+}

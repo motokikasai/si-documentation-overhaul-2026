@@ -41,6 +41,29 @@ style of its own (R5): its kicker uses **Eyebrow**, and the Portrait's `.pa-invi
 re-points Jasper's muted role to the night ground (`person-portrait.css`), which Jasper allows. The classes are saved into content: never
 rename one; add a new style and migrate instead.
 
+## Legal documents (Tier-1 Legal · "The Code", 0.5.x)
+
+The privacy notice and the Impressum are ordinary blocks, which was the condition for choosing
+this design: any editor can change the text in the block editor. `inc/legal.php` adds only
+vocabulary and render steps:
+
+| Editor picks | What it does |
+|---|---|
+| Group → **Legal document** | the page. At render it gets the **clause index** (≥3 numbered clauses; sticky, with a scroll-spy from `assets/js/legal-index.js`) and the **language status** |
+| Group → **Legal clause** | one clause: a Heading that *starts with its typed number* ("6. Abonnement …") plus ordinary blocks. The number shows as a small "§ 6" label and becomes the anchor `#k-6`. Numbers are typed, never generated, so cross-references ("see §6") never shift |
+| Paragraph → **In short** | the approved plain-language note, in the margin at ≥1300px; an empty one prints nothing |
+| Buttons → **Document switch** | the links between the legal pages; the current one is marked at render, and the status badges sit under it |
+| Patterns → Legal → **Legal clause** / **Legal document** | a new clause or a new legal page, placeholders only |
+
+**The language status is computed:** it lists the page's own language, the site default and any
+language with a version. A language is "in force" only when its version is itself a Legal
+document, so a published placeholder ("being updated") stays "owed".
+
+`tools/create-legal-pages.php` puts the German texts from page 1963 into these blocks, **word for
+word, checked on every run** (Impressum 137 words, Datenschutzerklärung 5,043 words in 16
+numbered clauses). The paragraphs before §1 go into a clause with no heading. `preview` makes two
+preview pages (`/de/si-preview-*`) and never touches 1963; `remove-preview` deletes them.
+
 ## Deploy to si-v4
 
 ```bash
@@ -63,6 +86,7 @@ Run in Local → Open Site Shell, from the site root (the shell is cmd — use `
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/create-blog-page.php [apply [all\|de …]\|slugs]` | creates `/blog/` in every language and sets `page_for_posts`; report only without `apply` (details: `articles/README.md`) |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/post-languages.php [repair <csv>]` | diagnoses WPML's post translation; `repair` restores each post's real language from the dump's CSV |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/import-photo-focus.php [apply]` | writes the portraits' face positions from `photo-focus.csv`; report only without `apply`, never overwrites an editor's value |
+| `wp eval-file wp-content/plugins/schiller-editorial/tools/create-legal-pages.php [preview\|remove-preview]` | the German legal texts from page 1963 as blocks, word for word (report without an argument) |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/check-profile-fields.php [label]` | read-only: every `si_person`'s six fields as counts and one fingerprint (unchanged fingerprint = no value changed), the people who have any, and which file registers the meta and hooks the box, the save and the guide. |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/check-invitation.php [label]` | read-only: the option → the invitation pattern (type, status, content hash), its WPML translations, how many copies exist (must be 1), and whether the theme or the plugin defines the functions. With a label, saves `backups/invitation-check-<label>.txt`. |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/check-wpml-config.php [label]` | read-only: for every type, taxonomy and field declared in `wpml-config.xml`, the mode WPML has stored and whether it is locked by a config file; the config files WPML would read. With a label, saves `backups/wpml-config-check-<label>.txt`. |

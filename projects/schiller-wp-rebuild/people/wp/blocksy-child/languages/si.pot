@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"POT-Creation-Date: 2026-09-24 21:30+0000\n"
+"POT-Creation-Date: 2026-09-25 07:53+0000\n"
 "X-Domain: si\n"
 
 #: inc/people-archive.php:108
@@ -1283,6 +1283,65 @@ msgstr ""
 
 #: schiller-editorial/inc/block-styles.php:37
 msgid "Ghost"
+msgstr ""
+
+#: schiller-editorial/inc/legal.php:34
+#: schiller-editorial/inc/legal.php:48
+msgid "Legal document"
+msgstr ""
+
+#: schiller-editorial/inc/legal.php:35
+#: schiller-editorial/inc/legal.php:41
+msgid "Legal clause"
+msgstr ""
+
+#: schiller-editorial/inc/legal.php:36
+#: schiller-editorial/inc/legal.php:193
+msgid "In short"
+msgstr ""
+
+#: schiller-editorial/inc/legal.php:37
+msgid "Document switch"
+msgstr ""
+
+#: schiller-editorial/inc/legal.php:39
+msgid "Legal"
+msgstr ""
+
+#: schiller-editorial/inc/legal.php:42
+msgid "A numbered clause: type its number at the start of the heading. The \"In short\" note is optional — leave it empty or delete it."
+msgstr ""
+
+#: schiller-editorial/inc/legal.php:49
+msgid "A legal page: its title, the switch to the other legal page, and one clause to start from. The index of clauses is built automatically."
+msgstr ""
+
+#: schiller-editorial/inc/legal.php:53
+msgid "Title of the document"
+msgstr ""
+
+#: schiller-editorial/inc/legal.php:62
+msgid "Number and title, e.g. 17. Title of the clause"
+msgstr ""
+
+#: schiller-editorial/inc/legal.php:63
+msgid "In short: the approved plain-language note (optional — leave empty or delete)"
+msgstr ""
+
+#: schiller-editorial/inc/legal.php:64
+msgid "The text of the clause"
+msgstr ""
+
+#: schiller-editorial/inc/legal.php:130
+msgid "Clauses"
+msgstr ""
+
+#: schiller-editorial/inc/legal.php:179
+msgid "in force"
+msgstr ""
+
+#: schiller-editorial/inc/legal.php:179
+msgid "owed"
 msgstr ""
 
 #: schiller-editorial/inc/profile-fields.php:57
