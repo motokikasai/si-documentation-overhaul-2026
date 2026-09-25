@@ -71,3 +71,13 @@ family as the reset trap above: measure `getComputedStyle` rather than trusting 
 `$k` nor the ×: PHP allows bytes ≥ 0x80 in identifiers, so it reads the variable as `$k×`,
 finds nothing, and emits only `$n`. A grouped report lost all its labels this way
 (`page/publish ×5` came out as `5`). Use `$k . ' ×' . $n` or `"{$k}×{$n}"`.
+
+**`scrollIntoView()` on a secondary element cancels the page's own smooth scroll.** The site
+has `scroll-behavior: smooth`. A scroll-spy that kept its marked link visible with
+`link.scrollIntoView({block:'nearest'})` also scrolled the page, since it moves every
+ancestor. Once it ran on every scroll frame, clicking an index link changed the address
+(`#k-8`) but the page only twitched: each call cancelled the smooth scroll the click had
+started (legal index, 2026-09-25). To keep something visible inside a scrolling panel, set
+that panel's `scrollTop` yourself, and only when the value changes. **Headless Firefox did
+not reproduce the cancellation**, so a Playwright click test passed while a real browser
+failed. For scroll behaviour, a user's report outranks the headless check.
