@@ -77,23 +77,30 @@
 	font-weight: 450;
 	color: var(--si-ink);
 }
+/* The path: numbered cards joined by one brass line.
+   Narrow (the default): a rail — numbers down the left, the line running from each number's
+   centre to the next, the cards beside them. Wide enough for every step on one row: the
+   numbers above the cards and the line across. The switch follows the width of the path
+   itself (a container query), not the screen. Lines run centre to centre UNDER the numbers,
+   whose fill hides the ends, so they meet a number exactly at any width. */
+.wp-block-group.is-style-si-join-role { container: si-join-path / inline-size; }
 .is-style-si-join-role > ol {
-	--si-join-n: 2.75rem;   /* the numbered medallion */
+	--si-join-n: 2.75rem;                 /* the numbered medallion */
+	--si-join-gap: var(--si-space-s);     /* between cards */
+	--si-join-off: var(--si-space-s);     /* between a number and its card */
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-	align-items: stretch;
-	gap: var(--si-space-m);
+	grid-template-columns: minmax(0, 1fr);
+	gap: var(--si-join-gap);
 	margin: 0;
 	padding: 0;
 	list-style: none;
 	counter-reset: si-join-step;
 }
-/* the card is the list item; its number sits above it */
+/* the card is the list item; its number sits beside it (rail) or above it (row) */
 .is-style-si-join-role > ol > li {
 	position: relative;
-	margin: calc(var(--si-join-n) + var(--si-space-s)) 0 0;
+	margin: 0 0 0 calc(var(--si-join-n) + var(--si-join-off));
 	padding: var(--si-space-s) var(--si-space-m);
-	min-height: 7rem;
 	background: var(--si-card);
 	box-shadow: var(--si-shadow-1);
 	counter-increment: si-join-step;
@@ -105,29 +112,55 @@
 .is-style-si-join-role > ol > li::before {
 	content: counter(si-join-step);
 	position: absolute;
-	top: calc(-1 * (var(--si-join-n) + var(--si-space-s)));
-	left: 0;
+	z-index: 1;                           /* above every line */
+	top: var(--si-space-xs);
+	left: calc(-1 * (var(--si-join-n) + var(--si-join-off)));
 	display: grid;
 	place-items: center;
+	box-sizing: border-box;
 	width: var(--si-join-n);
 	height: var(--si-join-n);
 	border: 2px solid var(--si-brass);
 	border-radius: var(--si-radius-round);
-	background: var(--si-card);
+	background: var(--si-ground);         /* the page's own ground, so the line stops at the ring */
 	font: italic 500 var(--si-step-1) var(--si-font-serif);
 	color: var(--si-brass);
+	transition: transform var(--si-dur-2) var(--si-ease);
 }
-/* the brass rule from one number to the next */
+/* the line from this number's centre to the next one's: down the rail */
 .is-style-si-join-role > ol > li::after {
 	content: "";
 	position: absolute;
-	top: calc(-1 * (var(--si-join-n) / 2 + var(--si-space-s)));
-	left: calc(var(--si-join-n) + var(--si-space-2xs));
-	right: calc(-1 * var(--si-space-m));
-	height: 1px;
+	top: calc(var(--si-space-xs) + var(--si-join-n) / 2);
+	bottom: calc(-1 * (var(--si-join-gap) + var(--si-space-xs) + var(--si-join-n) / 2));
+	left: calc(-1 * (var(--si-join-off) + var(--si-join-n) / 2) - 0.5px);
+	width: 1px;
 	background: var(--si-brass);
+	transition: transform var(--si-dur-2) var(--si-ease);
 }
 .is-style-si-join-role > ol > li:last-child::after { display: none; }
+
+/* every step fits on one row: numbers above, the line across */
+@container si-join-path (min-width: 46rem) {
+	.is-style-si-join-role > ol {
+		--si-join-gap: var(--si-space-m);
+		grid-template-columns: none;
+		grid-auto-flow: column;
+		grid-auto-columns: minmax(0, 1fr);
+	}
+	/* side by side, the cards share one height and a floor for it; in the rail each is its own height */
+	.is-style-si-join-role > ol > li { margin: calc(var(--si-join-n) + var(--si-join-off)) 0 0; min-height: 7rem; }
+	.is-style-si-join-role > ol > li::before { top: calc(-1 * (var(--si-join-n) + var(--si-join-off))); left: 0; }
+	.is-style-si-join-role > ol > li::after {
+		top: calc(-1 * (var(--si-join-off) + var(--si-join-n) / 2) - 0.5px);
+		bottom: auto;
+		left: calc(var(--si-join-n) / 2);
+		right: calc(-1 * (var(--si-join-gap) + var(--si-join-n) / 2));
+		width: auto;
+		height: 1px;
+	}
+}
+
 .is-style-si-join-role > ol > li > a:first-child {
 	display: block;
 	margin-bottom: .3em;
@@ -140,14 +173,15 @@
 }
 /* the whole card is the link */
 .is-style-si-join-role > ol > li > a:first-child::after { content: ""; position: absolute; inset: 0; }
+/* the card lifts; its number and line are drawn by the card, so they are moved back down by
+   the same amount on the same curve — they stay where they are */
 .is-style-si-join-role > ol > li:hover { transform: translateY(-3px); box-shadow: var(--si-shadow-2); }
+.is-style-si-join-role > ol > li:hover::before,
+.is-style-si-join-role > ol > li:hover::after { transform: translateY(3px); }
 .is-style-si-join-role > ol > li:hover > a:first-child { color: var(--si-accent); }
 .is-style-si-join-role > ol > li:focus-within { box-shadow: var(--si-focus-ring); }
 .is-style-si-join-role > ol > li > a:first-child:focus-visible { outline: none; }
 .si-join__count { font-variant-numeric: tabular-nums; }
-@media (max-width: 689.98px) {
-	.is-style-si-join-role > ol > li::after { display: none; }
-}
 
 /* the sign-up, for whoever the reader is */
 .wp-block-group.is-style-si-join-then {
