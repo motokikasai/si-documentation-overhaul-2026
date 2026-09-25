@@ -20,6 +20,7 @@
  *   wp eval-file wp-content/plugins/schiller-editorial/tools/create-legal-pages.php preview         # two preview pages
  *   wp eval-file wp-content/plugins/schiller-editorial/tools/create-legal-pages.php remove-preview  # delete them
  *   wp eval-file wp-content/plugins/schiller-editorial/tools/create-legal-pages.php publish         # the real pages
+ *   wp eval-file wp-content/plugins/schiller-editorial/tools/create-legal-pages.php translate-en    # the English translation
  * The preview pages are new pages (slugs si-preview-impressum, si-preview-datenschutz, German
  * in WPML); page 1963 is never touched by them.
  *
@@ -39,6 +40,17 @@
  * Page 1963's original text is saved once, to its meta `_si_legal_source`, and every run
  * converts from that copy — after the first publish the page itself holds only the Impressum.
  * WordPress keeps a revision too. Take `wp db export` first. The preview pages are deleted.
+ *
+ * translate-en (decided 2026-09-25): the English pages look exactly like the German ones and say
+ * what they are — a convenience translation, only the German text legally binding:
+ *   /privacy-policy/  page 47684, rewritten in place (its placeholder saved to `_si_legal_original`)
+ *   /legal-notice/    page 1958, the English Impressum draft, rewritten and published (same meta)
+ * The English comes from tools/legal-en.json: one entry per text element, each holding the German
+ * it was translated from. The German is converted exactly as publish converts it, and each
+ * element's text is swapped for its English. If one German element has changed since the
+ * translation, or the count differs, or a clause number differs, nothing is written.
+ * The Legal document group carries the class "si-translation", so the status says
+ * "English · translation", not "in force".
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -51,6 +63,8 @@ const SI_LEGAL_PRIVACY_DE_SLUG = 'datenschutz';
 const SI_LEGAL_IMPRESSUM_SLUG  = 'impressum';
 const SI_LEGAL_IMPRESSUM_EN_SLUG = 'legal-notice';   // the English Impressum's page, when it exists
 const SI_LEGAL_SPLIT  = '<h2>Datenschutzerklärung</h2>';
+const SI_LEGAL_EN_TITLES = array( 'privacy' => 'Privacy Policy', 'impressum' => 'Legal Notice' );
+const SI_LEGAL_EN_NOTE   = 'This English version is a translation for convenience; only the <a href="%s">German text</a> is legally binding.';
 
 /* ------------------------------------------------------------------ conversion */
 
@@ -113,8 +127,9 @@ function si_legal_block( string $tag, string $inner, array $items = array() ): s
 	}
 }
 
-function si_legal_group( string $style, string $inner ): string {
-	return '<!-- wp:group {"className":"is-style-' . $style . '"} --><div class="wp-block-group is-style-' . $style . '">' . $inner . '</div><!-- /wp:group -->';
+function si_legal_group( string $style, string $inner, string $extra = '' ): string {
+	$class = trim( 'is-style-' . $style . ' ' . $extra );
+	return '<!-- wp:group {"className":"' . $class . '"} --><div class="wp-block-group ' . $class . '">' . $inner . '</div><!-- /wp:group -->';
 }
 
 function si_legal_switch( array $links ): string {
@@ -126,10 +141,12 @@ function si_legal_switch( array $links ): string {
 }
 
 /**
+ * @param  array|null $tr  the units of tools/legal-en.json: each element's text is replaced by
+ *                         its English, after checking the German is the German it was made from
  * @return array{impressum: array, privacy: array} each with 'title', 'body' (block markup,
  *         without the title and switch), 'in' and 'out' word lists, and 'clauses'.
  */
-function si_legal_convert( string $html ): array {
+function si_legal_convert( string $html, ?array $tr = null ): array {
 	$cut = strpos( $html, SI_LEGAL_SPLIT );
 	if ( $cut === false ) {
 		throw new RuntimeException( 'The source no longer contains "' . SI_LEGAL_SPLIT . '".' );
@@ -138,11 +155,25 @@ function si_legal_convert( string $html ): array {
 		'impressum' => substr( $html, 0, $cut ),
 		'privacy'   => substr( $html, $cut + strlen( SI_LEGAL_SPLIT ) ),
 	);
+	$units = array();
+	foreach ( $tr ?? array() as $u ) {
+		$units[ $u['doc'] . '|' . $u['n'] ] = $u;
+	}
+	$en = static function ( string $key, string $de ) use ( &$units ): string {
+		$u = $units[ $key ] ?? null;
+		if ( ! $u || trim( $u['de'] ) !== trim( $de ) ) {
+			throw new RuntimeException( "legal-en.json is out of date at $key: the German there is no longer the page's German." );
+		}
+		unset( $units[ $key ] );
+		return $u['en'];
+	};
 	$out = array();
 	foreach ( $parts as $key => $part ) {
 		$blocks  = '';
 		$clauses = 0;
 		$clause  = null;   // open clause markup, privacy only
+		$n       = 0;      // the element's place, as legal-en.json counts it
+		$said    = array();   // the translated text, for the word-for-word check
 		foreach ( si_legal_elements( $part ) as $el ) {
 			[ $tag, $inner ] = $el;
 			$items = $el[2] ?? array();
@@ -150,6 +181,23 @@ function si_legal_convert( string $html ): array {
 			if ( $text === '' && ! $items ) {
 				continue;                                   // the empty <h3></h3>, empty paragraphs
 			}
+			if ( $tr !== null ) {
+				if ( $items ) {
+					foreach ( $items as $j => $it ) {
+						$items[ $j ] = $en( "$key|$n.$j", $it );
+					}
+					$said[] = implode( ' ', $items );
+				} else {
+					$de    = $inner;
+					$inner = $en( "$key|$n", $inner );
+					$said[] = $inner;
+					$num_de = si_legal_heading_number( $de );
+					if ( $num_de !== si_legal_heading_number( $inner ) ) {
+						throw new RuntimeException( "legal-en.json at $key|$n: the clause number is not the German's ($num_de)." );
+					}
+				}
+			}
+			++$n;
 			if ( $key === 'privacy' && $tag === 'h3' && preg_match( '/^\d{1,3}\./', $text ) ) {
 				if ( $clause !== null ) {
 					$blocks .= si_legal_group( 'si-clause', $clause );
@@ -171,18 +219,36 @@ function si_legal_convert( string $html ): array {
 		}
 		$out[ $key ] = array(
 			'body'    => $blocks,
-			'in'      => si_legal_words( $part ),
+			'in'      => si_legal_words( $tr !== null ? implode( ' ', $said ) : $part ),
 			'out'     => si_legal_words( $blocks ),
 			'clauses' => $clauses,
 		);
 	}
+	if ( $tr !== null && $units ) {
+		throw new RuntimeException( 'legal-en.json has ' . count( $units ) . ' entries the page no longer has, first ' . array_key_first( $units ) . '.' );
+	}
 	$out['impressum']['title'] = get_the_title( SI_LEGAL_SOURCE ) ?: 'Impressum';
 	$out['privacy']['title']   = 'Datenschutzerklärung';   // the source's own heading
+	if ( $tr !== null ) {
+		foreach ( SI_LEGAL_EN_TITLES as $key => $title ) {
+			$out[ $key ]['title'] = $title;
+		}
+	}
 	return $out;
 }
 
-function si_legal_page_content( array $doc, array $switch ): string {
-	return si_legal_group( 'si-legal', si_legal_block( 'h1', esc_html( $doc['title'] ) ) . si_legal_switch( $switch ) . $doc['body'] );
+/** "6. Newsletter" → "6"; '' for anything that is not a numbered heading. */
+function si_legal_heading_number( string $html ): string {
+	return preg_match( '/^(\d{1,3})\./', trim( wp_strip_all_tags( $html ) ), $m ) ? $m[1] : '';
+}
+
+/** @param string $note block markup placed under the switch (the translation note), or '' */
+function si_legal_page_content( array $doc, array $switch, string $extra = '', string $note = '' ): string {
+	return si_legal_group( 'si-legal', si_legal_block( 'h1', esc_html( $doc['title'] ) ) . si_legal_switch( $switch ) . $note . $doc['body'], $extra );
+}
+
+function si_legal_note_block( string $german_url ): string {
+	return '<!-- wp:paragraph {"className":"is-style-si-doc-note"} --><p class="is-style-si-doc-note">' . sprintf( SI_LEGAL_EN_NOTE, esc_url( $german_url ) ) . '</p><!-- /wp:paragraph -->';
 }
 
 /* ------------------------------------------------------------------ the run */
@@ -232,6 +298,66 @@ if ( $mode === 'remove-preview' ) {
 		}
 	}
 	WP_CLI::success( 'Preview pages removed. Page ' . SI_LEGAL_SOURCE . ' was never touched.' );
+	return;
+}
+if ( $mode === 'translate-en' || $mode === 'translate-en-report' ) {
+	$file = __DIR__ . '/legal-en.json';
+	$json = is_readable( $file ) ? json_decode( (string) file_get_contents( $file ), true ) : null;
+	if ( ! is_array( $json['units'] ?? null ) ) {
+		WP_CLI::error( "Cannot read $file." );
+	}
+	try {
+		$en_docs = si_legal_convert( $html, $json['units'] );
+	} catch ( RuntimeException $e ) {
+		WP_CLI::error( $e->getMessage() . ' Nothing written.' );
+	}
+	// the German pages, for the note's link: read while WPML is still in German
+	$de_privacy = (int) apply_filters( 'wpml_object_id', SI_LEGAL_PRIVACY_EN, 'page', false, 'de' );
+	$imp_tr     = (array) apply_filters( 'wpml_get_element_translations', null, apply_filters( 'wpml_element_trid', null, SI_LEGAL_SOURCE, 'post_page' ), 'post_page' );
+	$imp_en     = isset( $imp_tr['en'] ) ? (int) $imp_tr['en']->element_id : 0;
+	if ( ! $de_privacy || $de_privacy === SI_LEGAL_PRIVACY_EN || ! $imp_en ) {
+		WP_CLI::error( 'Run publish first: the German privacy notice and the English Impressum draft must both exist. Nothing written.' );
+	}
+	$german = array( 'privacy' => get_permalink( $de_privacy ), 'impressum' => get_permalink( SI_LEGAL_SOURCE ) );
+	do_action( 'wpml_switch_language', 'en' );
+	$pages = array( 'privacy' => SI_LEGAL_PRIVACY_EN, 'impressum' => $imp_en );
+	foreach ( $en_docs as $key => $d ) {
+		$same = $d['in'] === $d['out'];
+		WP_CLI::log( sprintf( '%-10s English: %d words in legal-en.json, %d converted — %s%s; page #%d (%s, %s)', $key, count( $d['in'] ), count( $d['out'] ),
+			$same ? 'identical' : 'DIFFERENT', $key === 'privacy' ? ', ' . $d['clauses'] . ' numbered clauses' : '', $pages[ $key ], get_post_status( $pages[ $key ] ), get_post_field( 'post_name', $pages[ $key ] ) ) );
+		if ( ! $same ) {
+			WP_CLI::error( 'The English did not convert word for word. Nothing written.' );
+		}
+	}
+	if ( $mode === 'translate-en-report' ) {
+		WP_CLI::success( 'Report only. Rerun with: translate-en' );
+		return;
+	}
+	kses_remove_filters();
+	foreach ( $pages as $key => $id ) {
+		if ( get_post_meta( $id, '_si_legal_original', true ) === '' ) {   // the text it had before, once
+			add_post_meta( $id, '_si_legal_original', wp_slash( (string) get_post_field( 'post_content', $id ) ), true );
+			WP_CLI::log( "saved page #$id's previous text to its meta _si_legal_original" );
+		}
+		$postarr = array( 'ID' => $id, 'post_title' => $en_docs[ $key ]['title'], 'post_status' => 'publish' );
+		if ( $key === 'impressum' ) {
+			$postarr['post_name'] = SI_LEGAL_IMPRESSUM_EN_SLUG;
+		}
+		wp_update_post( wp_slash( $postarr ) );
+	}
+	$switch = array( SI_LEGAL_EN_TITLES['privacy'] => get_permalink( $pages['privacy'] ), SI_LEGAL_EN_TITLES['impressum'] => get_permalink( $pages['impressum'] ) );
+	foreach ( $pages as $key => $id ) {
+		$note = si_legal_note_block( $german[ $key ] );
+		wp_update_post( wp_slash( array( 'ID' => $id, 'post_content' => si_legal_page_content( $en_docs[ $key ], $switch, 'si-translation', $note ) ) ) );
+		$meta = get_post_meta( $id, 'blocksy_post_meta_options', true );
+		$meta = is_array( $meta ) ? $meta : array();
+		update_post_meta( $id, 'blocksy_post_meta_options', array_merge( $meta, array( 'has_hero_section' => 'disabled', 'page_structure_type' => 'type-4' ) ) );
+		$saved = si_legal_words( get_post_field( 'post_content', $id ) );
+		$want  = array_merge( si_legal_words( esc_html( $en_docs[ $key ]['title'] ) ), array_merge( ...array_map( 'si_legal_words', array_keys( $switch ) ) ), si_legal_words( $note ), $en_docs[ $key ]['out'] );
+		WP_CLI::log( sprintf( '%-10s #%d %s — read back %s', $key, $id, get_permalink( $id ), $saved === $want ? 'word for word' : 'DIFFERENT' ) );
+	}
+	kses_init_filters();
+	WP_CLI::success( 'Published the English convenience translations. The German pages were not touched.' );
 	return;
 }
 if ( $mode === 'publish' ) {

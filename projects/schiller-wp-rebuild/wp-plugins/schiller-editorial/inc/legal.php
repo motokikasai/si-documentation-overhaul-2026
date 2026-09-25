@@ -17,6 +17,12 @@
  *                                                   clause; an empty one prints nothing
  *   Buttons "Document switch" (is-style-si-doc-switch) the links between Privacy and Impressum;
  *                                                   the current page is marked at render
+ *   Paragraph "Document note" (is-style-si-doc-note) a short note under the switch — on the English
+ *                                                   pages, that they are a convenience translation
+ *
+ * A Legal document group that also carries the class "si-translation" is a translation for
+ * convenience (the English pages, 2026-09-25): its language is listed as "translation", never
+ * "in force" — only the German text is legally binding.
  *
  * Clause numbers are TYPED in the heading and never generated: legal texts refer to their own
  * clauses ("see §6"), and a generated number would silently change every cross-reference when
@@ -35,6 +41,7 @@ add_action( 'init', static function () {
 	register_block_style( 'core/group', array( 'name' => 'si-clause', 'label' => __( 'Legal clause', 'si' ) ) );
 	register_block_style( 'core/paragraph', array( 'name' => 'si-in-short', 'label' => __( 'In short', 'si' ) ) );
 	register_block_style( 'core/buttons', array( 'name' => 'si-doc-switch', 'label' => __( 'Document switch', 'si' ) ) );
+	register_block_style( 'core/paragraph', array( 'name' => 'si-doc-note', 'label' => __( 'Document note', 'si' ) ) );
 
 	register_block_pattern_category( 'si-legal', array( 'label' => __( 'Legal', 'si' ) ) );
 	register_block_pattern( 'si/legal-clause', array(
@@ -148,7 +155,7 @@ add_filter( 'render_block_core/group', static function ( string $html, array $bl
 
 /**
  * The language status: "in force" where this page has a published Legal-document version in a
- * language, "owed" where it has none — computed, so no editor ever keeps a badge in sync. Only the
+ * language, "translation" where that version is marked as a convenience translation, "owed" where it has none — computed, so no editor ever keeps a badge in sync. Only the
  * languages a legal text owes are listed: the page's own, the site's default (English), and any
  * that already has a published version. Owing a legal page in all ten site languages is not a
  * requirement, and a row of "owed" badges would say it was.
@@ -166,17 +173,23 @@ function si_legal_status_html(): string {
 		$tid  = (int) apply_filters( 'wpml_object_id', $id, 'page', false, $code );
 		// "in force" = a published version that is itself a Legal document. A published
 		// placeholder ("our privacy policy is being updated") is not the text, so it stays owed.
-		$live = $tid && get_post_status( $tid ) === 'publish'
-			&& strpos( (string) get_post_field( 'post_content', $tid ), 'is-style-si-legal' ) !== false;
+		$text = $tid ? (string) get_post_field( 'post_content', $tid ) : '';
+		$live = $tid && get_post_status( $tid ) === 'publish' && strpos( $text, 'is-style-si-legal' ) !== false;
 		if ( ! $live && $code !== $own && $code !== $default ) {
 			continue;
 		}
+		$state = ! $live ? 'owed' : ( preg_match( '/is-style-si-legal[^"]*\bsi-translation\b/', $text ) ? 'translation' : 'in-force' );
+		$label = array(
+			'in-force'    => __( 'in force', 'si' ),
+			'translation' => __( 'translation', 'si' ),
+			'owed'        => __( 'owed', 'si' ),
+		)[ $state ];
 		$out[] = sprintf(
 			'<span class="si-legal__badge%s" lang="%s">%s · %s</span>',
-			$live ? '' : ' si-legal__badge--owed',
+			$state === 'in-force' ? '' : ' si-legal__badge--' . $state,
 			esc_attr( $code ),
 			esc_html( $lang['native_name'] ?? $code ),
-			$live ? esc_html__( 'in force', 'si' ) : esc_html__( 'owed', 'si' )
+			esc_html( $label )
 		);
 	}
 	return '<p class="si-legal__status">' . implode( '', $out ) . '</p>';

@@ -84,11 +84,25 @@
 	font-weight: 600;
 	color: var(--si-ink);
 }
+.si-legal__badge--translation {
+	background: transparent;
+	border: 1px solid var(--si-rule);
+	color: var(--si-muted);
+}
 .si-legal__badge--owed {
 	background: transparent;
 	border: 1px dashed var(--si-jasper-deep, var(--si-muted));
 	color: var(--si-jasper-deep, var(--si-muted));
 }
+
+/* "Document note": the translation note under the switch */
+.is-style-si-legal > p.is-style-si-doc-note {
+	margin: calc(-1 * var(--si-space-s)) 0 var(--si-space-l);
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n2);
+	color: var(--si-muted);
+}
+.is-style-si-doc-note a { color: inherit; }
 
 /* the switch between the legal documents */
 .wp-block-buttons.is-style-si-doc-switch {

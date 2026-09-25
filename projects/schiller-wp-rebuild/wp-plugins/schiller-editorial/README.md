@@ -74,6 +74,19 @@ address 301s to `/de/datenschutz/` (`sessions/…/incoming/redirect-patterns.csv
 switches WPML to German first: from WP-CLI, WPML's ID adjustment otherwise swaps page 1963 for its
 English draft (#1958) in `get_permalink()`.
 
+**The English pages (decided 2026-09-25)** look exactly like the German ones and are a
+**convenience translation**: only the German text is legally binding. `translate-en` writes them
+from `tools/legal-en.json` (one entry per text element, each keeping the German it was made from;
+machine-assisted, 128 elements) into `/privacy-policy/` (page 47684, whose placeholder is kept in
+its meta `_si_legal_original`) and `/legal-notice/` (page 1958, published; the same meta). The German
+is converted exactly as `publish` converts it and each element's text swapped for its English, so
+the clauses, blocks and numbers match. If any German element has changed since the translation,
+nothing is written: re-translate that entry first. The Legal document group also carries the class
+`si-translation`, so its status badge reads **English · translation**, never "in force", and a
+**Document note** paragraph (`is-style-si-doc-note`) under the switch says so and links the German.
+The Impressum's line naming who is responsible for the German-language part stays, translated,
+until the English part has a named responsible person of its own.
+
 ## Deploy to si-v4
 
 ```bash
@@ -96,7 +109,7 @@ Run in Local → Open Site Shell, from the site root (the shell is cmd — use `
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/create-blog-page.php [apply [all\|de …]\|slugs]` | creates `/blog/` in every language and sets `page_for_posts`; report only without `apply` (details: `articles/README.md`) |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/post-languages.php [repair <csv>]` | diagnoses WPML's post translation; `repair` restores each post's real language from the dump's CSV |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/import-photo-focus.php [apply]` | writes the portraits' face positions from `photo-focus.csv`; report only without `apply`, never overwrites an editor's value |
-| `wp eval-file wp-content/plugins/schiller-editorial/tools/create-legal-pages.php [preview\|remove-preview\|publish]` | the German legal texts from page 1963 as blocks, word for word (report without an argument); `publish` → `/de/datenschutz/` and page 1963. Take `wp db export` first |
+| `wp eval-file wp-content/plugins/schiller-editorial/tools/create-legal-pages.php [preview\|remove-preview\|publish\|translate-en-report\|translate-en]` | the German legal texts from page 1963 as blocks, word for word (report without an argument); `publish` → `/de/datenschutz/` and page 1963; `translate-en` → the English convenience translation in `/privacy-policy/` and `/legal-notice/` (`translate-en-report` checks it without writing). Take `wp db export` first |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/check-profile-fields.php [label]` | read-only: every `si_person`'s six fields as counts and one fingerprint (unchanged fingerprint = no value changed), the people who have any, and which file registers the meta and hooks the box, the save and the guide. |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/check-invitation.php [label]` | read-only: the option → the invitation pattern (type, status, content hash), its WPML translations, how many copies exist (must be 1), and whether the theme or the plugin defines the functions. With a label, saves `backups/invitation-check-<label>.txt`. |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/check-wpml-config.php [label]` | read-only: for every type, taxonomy and field declared in `wpml-config.xml`, the mode WPML has stored and whether it is locked by a config file; the config files WPML would read. With a label, saves `backups/wpml-config-check-<label>.txt`. |
