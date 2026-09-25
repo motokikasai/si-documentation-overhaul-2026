@@ -19,6 +19,10 @@
  * the field names into one row of choices and shows one path at a time. The words it types in
  * the headline are the fields' own headings, so a new field needs no code.
  *
+ * The page group has no "constrained" layout on purpose: that layout centres every child
+ * narrower than the content width with an !important margin, which pushed the 58ch lead
+ * quote to the middle (seen on si-v4 2026-09-25). Blocksy's page already sets the width.
+ *
  * Computed at render (docs/block-conventions.md §9 — no number is typed): a path step that
  * links to a topic archive (/topic/{slug}/) shows how many Articles that topic holds in the
  * page's language. Nothing else on the page is a number.
@@ -70,7 +74,7 @@ function si_join_markup(): string {
 		'Painter'     => array( $step( '/leonore-magazine-art-science-and-statecraft/', 'Leonore — Art, Science and Statecraft', 'The magazine' ), $topic( 'classical-culture', 'Classical culture' ), $write ),
 		'Student'     => array( $step( '/blog/2025/12/17/young-people-of-the-world-unite-international-online-youth-conference/', 'Young People of the World, Unite!', 'December 2025' ), $step( '/the-international-larouche-youth-movement-2/', 'The International LaRouche Youth Movement' ), $friday ),
 	);
-	$out = '<!-- wp:group {"templateLock":"contentOnly","className":"is-style-si-join","layout":{"type":"constrained"}} --><div class="wp-block-group is-style-si-join">'
+	$out = '<!-- wp:group {"templateLock":"contentOnly","className":"is-style-si-join"} --><div class="wp-block-group is-style-si-join">'
 		. '<!-- wp:paragraph {"className":"is-style-si-eyebrow-ruled"} --><p class="is-style-si-eyebrow-ruled">Join</p><!-- /wp:paragraph -->'
 		. '<!-- wp:heading {"level":1} --><h1 class="wp-block-heading">I am <em>a scientist</em></h1><!-- /wp:heading -->'
 		. '<!-- wp:paragraph --><p>“Whether Scientist, Engineer, Researcher, Philosopher, Singer, Actor or Painter – in whichever field you have gathered expertise…”</p><!-- /wp:paragraph -->'
