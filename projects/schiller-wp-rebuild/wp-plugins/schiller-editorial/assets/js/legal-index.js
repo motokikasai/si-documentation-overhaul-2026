@@ -11,9 +11,21 @@
 	if (!links.length || !('IntersectionObserver' in window)) return;
 	const target = (a) => document.getElementById(a.getAttribute('href').slice(1));
 	const seen = new Set();
+	/* Mark a link, and keep it in view inside the index column — by scrolling THAT column only.
+	   link.scrollIntoView() scrolls every ancestor, the page included, and a page scroll cancels
+	   the smooth scroll a click has just started: the address changed to #k-8 and the page only
+	   twitched (reported 2026-09-25, after 0.5.4 began calling it on every scroll frame). So the
+	   page is never scrolled here, and nothing happens unless the marked clause changes. */
+	const nav = document.querySelector('.si-legal__index');
+	let current = null;
 	const set = (link) => {
+		if (link === current) return;
+		current = link;
 		links.forEach((a) => a.toggleAttribute('aria-current', a === link));
-		if (link) link.scrollIntoView({ block: 'nearest' });
+		if (!link || !nav || nav.scrollHeight <= nav.clientHeight) return;
+		const top = link.offsetTop - nav.offsetTop, bottom = top + link.offsetHeight;
+		if (top < nav.scrollTop) nav.scrollTop = top;
+		else if (bottom > nav.scrollTop + nav.clientHeight) nav.scrollTop = bottom - nav.clientHeight;
 	};
 	const mark = () => {
 		const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
