@@ -66,6 +66,16 @@
    "at": [],
    "url": "/people/john-sigerson/",
    "role": null
+  },
+  {
+   "key": "wolfgang-amadeus-mozart",
+   "name": "Wolfgang Amadeus Mozart",
+   "photo": null,
+   "where": "body",
+   "evidence": "by Mozart",
+   "at": [],
+   "url": "/people/wolfgang-amadeus-mozart/",
+   "role": null
   }
  ],
  "people_how": "full name, or a surname no other of the 418 people shares preceded by a first name; matched in the title, body, YouTube description and captions",
@@ -780,7 +790,7 @@
   "description": false,
   "body_words": 142,
   "topics": 1,
-  "people": 1,
+  "people": 2,
   "translations": 0,
   "featured_image": true
  }

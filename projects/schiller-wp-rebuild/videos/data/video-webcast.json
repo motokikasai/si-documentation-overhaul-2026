@@ -3878,6 +3878,30 @@
    ],
    "url": "/people/harley-schlanger/",
    "role": null
+  },
+  {
+   "key": "theodore-postol",
+   "name": "Theodore Postol",
+   "photo": null,
+   "where": "captions",
+   "evidence": null,
+   "at": [
+    783
+   ],
+   "url": "/people/theodore-postol/",
+   "role": null
+  },
+  {
+   "key": "wolfgang-effenberger",
+   "name": "Wolfgang Effenberger",
+   "photo": null,
+   "where": "captions",
+   "evidence": null,
+   "at": [
+    767
+   ],
+   "url": "/people/wolfgang-effenberger/",
+   "role": null
   }
  ],
  "people_how": "full name, or a surname no other of the 418 people shares preceded by a first name; matched in the title, body, YouTube description and captions",
@@ -4404,7 +4428,7 @@
   "description": true,
   "body_words": 570,
   "topics": 0,
-  "people": 5,
+  "people": 7,
   "translations": 1,
   "featured_image": true
  }

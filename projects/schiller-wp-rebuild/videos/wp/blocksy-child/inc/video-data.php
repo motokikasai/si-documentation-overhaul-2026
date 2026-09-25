@@ -352,8 +352,14 @@ function si_video_translations(int $id): array {
 /* ---- people and places ----------------------------------------------------- */
 
 const SI_VIDEO_LINKWORDS = ['on', 'and', 'the', 'of', 'for', 'with', 'about', 'to', 'in'];
-// a surname in the person records that is also the name of something else here
-const SI_VIDEO_NOT_SURNAMES = ['schiller', 'larouche', 'beethoven', 'lincoln', 'hamilton', 'franklin'];
+/* A surname may not trigger a match when it is also an ordinary word: the rule reads it
+   after ANY word (automatic captions do not capitalise), so "the battle" would claim
+   Anastasia Battle and the German "diesen" would claim Glenn Diesen. Measured over the
+   4,140 published bodies as a plain lowercase word: battle 124x, diesen 1,137x,
+   soprano 18x, against vitrenko 7x — a real surname an editor once left uncapitalised,
+   which stays. The cut is 15. Re-measure with videos/build/build-video-data.py. */
+const SI_VIDEO_NOT_SURNAMES = ['schiller', 'larouche', 'beethoven', 'lincoln', 'hamilton', 'franklin',
+	'battle', 'diesen', 'soprano'];
 
 /**
  * The 418 reviewed person records, indexed for matching: full name, and — only

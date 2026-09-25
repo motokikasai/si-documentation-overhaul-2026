@@ -467,3 +467,41 @@ prototype shows 5 people where si-v4 shows 7; sync it when the wings are next to
 `<site>/si-captions/` to the videos that carry that id — for filling a few lab pages
 without clicking through the admin. Editors never use it. (Its own progress line formats
 the length with `i:s`, so an 82-minute tape prints as 22:36; the stored value is right.)
+
+## 15. Two small ones, 2026-09-25 (kit 0.4.1)
+
+**The host is a field, not word order.** `build/backfill-hosts.php` fills the content
+model's own `hosts` relationship for every Video whose **series names its host**:
+"Weekly Webcast with Helga Zepp-LaRouche" and "Harley Schlanger Daily Update" carry the
+name in their own titles, so the script reads it back against the reviewed person records
+and writes the relationship. A series naming no person — Daily Beethoven, IPC Weekly
+Meeting, Youth Class Series — is skipped, and so is "Fundamentals of LaRouche's
+Economics", where only a surname appears. **975 videos** (751 weekly + 224 Schlanger,
+both languages). Nothing is asserted that the record did not already say.
+
+Run it in the Site Shell, then flush: a meta write does not change `post_modified`, which
+is what the view-model transient is keyed on.
+
+```sh
+wp eval-file si-backfill-hosts.php dry     # a bare word: wp eval-file rejects unknown flags
+wp eval-file si-backfill-hosts.php
+wp transient delete --all
+```
+
+**The prototype and the kit now read a surname the same way** — case-insensitively, after
+any word, because automatic captions do not capitalise. Syncing them immediately produced
+a bad match: *"the battle"* claimed the person Anastasia Battle. So the exclusion is
+measured, not patched. Of the 266 unique surnames that can trigger the rule, four are also
+ordinary words in the archive's own prose, counted as plain lowercase words (not inside a
+slug) across all 4,140 published bodies:
+
+| word | lowercase uses | would have claimed |
+|---|---:|---|
+| diesen | 1,137 | Glenn Diesen — German for "this" |
+| battle | 124 | Anastasia Battle |
+| soprano | 18 | Feride Istogu Soprano |
+| vitrenko | 7 | Natalia Vitrenko |
+
+The first three are ordinary words and are excluded; the fourth is a real surname an
+editor once left uncapitalised, and stays. **The cut is 15**, in `NOT_SURNAMES` in both
+`build-video-data.py` and `video-data.php`. Re-measure by re-running the builder.

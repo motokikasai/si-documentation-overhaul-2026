@@ -227,8 +227,14 @@ def norm(s):
 
 
 LINKWORDS = {"on", "and", "the", "of", "for", "with", "about", "to", "in"}
-# words that are someone's surname in people.json and also the name of something else
-NOT_SURNAMES = {"schiller", "larouche", "beethoven", "lincoln", "hamilton", "franklin"}
+# A surname may not trigger a match when it is also an ordinary word: the rule below
+# reads it after ANY word, so "the battle" would claim Anastasia Battle and the German
+# "diesen" would claim Glenn Diesen. Measured over the 4,140 published bodies — a plain
+# lowercase word, not inside a slug or URL — an ordinary word appears often and an
+# editor's capitalisation slip rarely: battle 124×, diesen 1,137×, soprano 18×, against
+# vitrenko 7×, which is a real surname and stays. The cut is 15.
+NOT_SURNAMES = {"schiller", "larouche", "beethoven", "lincoln", "hamilton", "franklin",
+                "battle", "diesen", "soprano"}
 
 
 def people_matchers():
@@ -255,7 +261,10 @@ def people_matchers():
         rx = [re.compile(full, re.I)]
         last = parts[-1]
         if surname[last] == 1 and len(last) >= 6 and last not in NOT_SURNAMES:
-            rx.append(re.compile(r"\b[A-Z][a-z]+\.?\s+" + re.escape(p["name"].split()[-1]) + r"\b"))
+            # case-insensitive, after any word: automatic captions rarely capitalise a
+            # name, and requiring a capital loses real mentions — "from uh Medlock and
+            # postol", "W gang effenberger". The kit does the same (video-data.php).
+            rx.append(re.compile(r"\b[^\W\d_]{2,}\.?\s+" + re.escape(p["name"].split()[-1]) + r"\b", re.I))
         photo = p["photo"] if isinstance(p.get("photo"), dict) else None
         rules.append((p, rx, photo))
     return rules
