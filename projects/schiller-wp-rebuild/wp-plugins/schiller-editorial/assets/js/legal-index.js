@@ -5,7 +5,11 @@
  * A clause counts as "being read" when it crosses a band 20–40% down the screen. The last
  * clauses of a page can never reach that band — the page ends first — so at the bottom of the
  * page the last clause on screen is marked instead (seen 2026-09-25: clicking §16 left §15
- * marked). A scroll listener covers that case, where the observer reports no change. */
+ * marked). A scroll listener covers that case, where the observer reports no change.
+ * But on a tall screen the page can also end before a clicked §15 reaches the band, and the
+ * "last on screen" was then §16 (reported 2026-09-25). So a clause the reader has just picked in
+ * the index wins at the bottom while it is on screen; the reader's own scrolling (wheel, touch,
+ * keys) drops that pick. */
 (() => {
 	const links = [...document.querySelectorAll('.si-legal__index a[href^="#k-"]')];
 	if (!links.length || !('IntersectionObserver' in window)) return;
@@ -27,9 +31,19 @@
 		if (top < nav.scrollTop) nav.scrollTop = top;
 		else if (bottom > nav.scrollTop + nav.clientHeight) nav.scrollTop = bottom - nav.clientHeight;
 	};
+	let picked = null;   // the index link the reader just clicked
+	// at the bottom a click may not scroll at all (the clause is already on screen), so no
+	// scroll event would follow: mark on the click too
+	links.forEach((a) => a.addEventListener('click', () => { picked = a; requestAnimationFrame(mark); }));
+	['wheel', 'touchmove', 'keydown'].forEach((t) => window.addEventListener(t, () => { picked = null; }, { passive: true }));
 	const mark = () => {
 		const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
 		if (bottom) {
+			const p = picked && target(picked);
+			if (p) {
+				const r = p.getBoundingClientRect();
+				if (r.bottom > 0 && r.top < window.innerHeight) { set(picked); return; }
+			}
 			const onScreen = links.filter((a) => { const t = target(a); return t && t.getBoundingClientRect().top < window.innerHeight * 0.9; });
 			set(onScreen[onScreen.length - 1] || null);
 			return;
