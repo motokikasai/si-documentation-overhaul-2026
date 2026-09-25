@@ -6,14 +6,39 @@ import {
 	loadVideo, loadLand, esc, fmtDate, hms, human, plural, LANG, kindLabel, titleHTML, bodyHTML,
 	facadeHTML, mountTape, chaptersHTML, timebarHTML, mountTimebars, followChapters,
 	transcriptHTML, captionNote, mountTranscript, findInTranscript, peopleHTML, placesSVG,
-	placesListHTML, seriesNavHTML, translationsHTML, weekListHTML, relatedCardHTML, ctaHTML,
+	placesListHTML, weekListHTML, relatedCardHTML, ctaHTML,
 	recordHTML, reveal, settleImages, draftStrip, fail, wantedTime, weekday, seekHTML, handIsBusy,
 } from './video-core.js';
 
 const main = document.getElementById('main');
+/* Prototype-only review switches (they do not ship):
+     ?as=wp      dress the record as si-v4 holds it today — no chapters (they live in
+                 the YouTube description, which WordPress never received) and no
+                 captions, so no seconds beside a name and nothing for the timeline
+     ?stage=…    current | aside | capped — the three ways the stage can handle it  */
+const asWP = new URLSearchParams(location.search).get('as') === 'wp';
+
+/* What goes beside the tape. 1,187 of the 1,196 videos with a tape carry no chapter
+   timestamps, so the second column is a slot, not a chapter rail: it takes whatever
+   the record has. With neither, the tape is capped rather than left to fill the
+   viewport (1240 × 698px was three-quarters of the screen). */
+const stageMode = rec => rec.chapters.length ? 'rail'
+	: (rec.people.length || rec.places.length) ? 'aside' : 'solo';
+
+function dressAsWordPress(rec) {
+	rec.chapters = [];
+	rec.tx = null;
+	rec.terms = null;
+	rec.kin = null;
+	rec.duration = null;                       // the player reports it; the record does not
+	rec.people.forEach(p => { p.at = []; });
+	rec.places.forEach(p => { p.at = []; });
+	return rec;
+}
 
 try {
 	const rec = await loadVideo();
+	if (asWP) dressAsWordPress(rec);
 	const land = rec.places.length ? await loadLand() : null;
 	document.title = `${rec.title} — Schiller Institute`;
 	main.innerHTML = render(rec, land);
@@ -22,10 +47,22 @@ try {
 } catch (err) { fail(main, err); }
 draftStrip('video-programme.html');
 
+/** EN · DE — this page and its WPML twins. In WordPress: the same list WPML's
+ *  language switcher prints, styled here rather than replaced. */
+function langSwitch(rec) {
+	if (!rec.translations.length) return '';
+	const all = [{ lang: rec.lang, url: null }, ...rec.translations.filter(t => t.type === 'si_video')];
+	if (all.length < 2) return '';
+	return `<span class="pg-lang" role="group" aria-label="Language">${all.sort((a, b) => a.lang.localeCompare(b.lang)).map(t => t.url
+		? `<a class="pg-lang__b" href="${esc(t.url)}" hreflang="${esc(t.lang)}" lang="${esc(t.lang)}" title="${esc(LANG[t.lang])}">${esc(t.lang.toUpperCase())}</a>`
+		: `<span class="pg-lang__b is-on" aria-current="page" title="${esc(LANG[t.lang])}">${esc(t.lang.toUpperCase())}</span>`).join('')}</span>`;
+}
+
 function render(rec, land) {
 	const s = rec.series;
 	const at = wantedTime();
-	const hasSide = rec.chapters.length > 0;
+	const mode = stageMode(rec);
+	const hasSide = mode !== 'solo';
 	const marks = rec.people.flatMap(p => p.at.map(t => ({ t, cls: 'is-soft', title: `${p.name} · ${hms(t)}` })));
 	return `
 	<article class="pg">
@@ -33,31 +70,31 @@ function render(rec, land) {
 			<p class="si-eyebrow si-eyebrow--ruled"><span>${esc(kindLabel(rec))}${s ? ` · No. ${s.ep} of ${s.of}` : ''}</span></p>
 			${titleHTML(rec)}
 			<p class="si-vid-dateline">
-				<span><time datetime="${rec.date}">${weekday(rec.date)}, <b>${fmtDate(rec.date, 'en')}</b></time></span>
+				<span><time datetime="${rec.date}">${weekday(rec.date, rec.lang)}, <b>${fmtDate(rec.date, rec.lang)}</b></time></span>
 				${rec.duration ? `<span><b>${human(rec.duration)}</b></span>` : ''}
-				<span>${esc(LANG[rec.lang] || rec.lang)}</span>
-				${rec.translations.length ? `<span>also in ${rec.translations.map(t => `<a class="si-link" href="${esc(t.url)}" hreflang="${t.lang}">${esc(LANG[t.lang])}</a>`).join(', ')}</span>` : ''}
 				${rec.tx ? `<span>captions</span>` : ''}
+				${langSwitch(rec)}
 			</p>
 			${rec.topics.length ? `<ul class="si-vid-topics" role="list">${rec.topics.map(t => `<li><a href="/topics/${t.slug}/">${esc(t.label)}</a></li>`).join('')}</ul>` : ''}
 		</header>
 
-		<section class="si-wrap pg-stage ${hasSide ? 'has-side' : ''}" aria-label="The broadcast">
+		<section class="si-wrap pg-stage ${hasSide ? 'has-side' : ''}" data-stage="${mode}" aria-label="The broadcast">
 			<div class="pg-player">
 				${facadeHTML(rec, { start: at, note: at ? `from ${hms(at)}` : '' })}
 				${rec.yt ? `<p class="si-vid-privacy">Nothing loads from YouTube until you press play.</p>` : ''}
 			</div>
-			${hasSide ? `<nav class="pg-side" aria-label="Chapters">
+			${mode === 'aside' ? `<div class="pg-aside pg-aside--stage">${asideHTML(rec, land)}</div>` : ''}
+			${mode === 'rail' ? `<nav class="pg-side" aria-label="Chapters">
 				<p class="si-vid-h3"><span>Programme</span> <span class="pg-side__n">${plural(rec.chapters.length, 'chapter')}</span></p>
 				<div class="pg-side__scroll" data-scroll>${chaptersHTML(rec)}</div>
 			</nav>` : ''}
 			${rec.duration && (rec.chapters.length || marks.length) ? `<div class="pg-bar">${timebarHTML(rec, marks, { label: 'The tape, chapter by chapter' })}</div>` : ''}
 		</section>
 
-		<div class="si-wrap pg-body">
+		<div class="si-wrap pg-body ${mode === 'aside' ? 'is-single' : ''}">
 			<div class="pg-main">
 				${bodyHTML(rec) ? `<section class="pg-about si-reveal"><h2 class="si-vid-h3">About this broadcast</h2>${bodyHTML(rec)}
-					<button type="button" class="si-link pg-more si-js-only" hidden>Read the whole text</button></section>` : ''}
+					<button type="button" class="si-link pg-more si-js-only" aria-expanded="false" hidden>Read the whole text</button></section>` : ''}
 				${rec.tx ? `<section class="pg-read si-reveal" aria-labelledby="pg-read-h">
 					<div class="pg-read__head">
 						<h2 class="si-vid-h3" id="pg-read-h">Read along</h2>
@@ -76,27 +113,31 @@ function render(rec, land) {
 				</section>` : ''}
 			</div>
 
-			<aside class="pg-aside">
-				${rec.people.length ? `<section class="si-reveal"><h2 class="si-vid-h3">Named in this broadcast</h2>${peopleHTML(rec, { size: 56 })}</section>` : ''}
-				${rec.places.length ? `<section class="si-reveal"><h2 class="si-vid-h3">Places it speaks of</h2>
-					${placesSVG(rec, land, { w: 420, h: 190 })}
-					${placesListHTML(rec, { limit: 6 })}</section>` : ''}
-				${rec.terms?.length ? `<section class="si-reveal"><h2 class="si-vid-h3">Words it leaned on</h2>
-					<p class="si-vid-note">Used here far more than in the other ${rec.terms_how.match(/other (\d+)/)[1]} captioned broadcasts. Spelled as the captions spell them. Press one to find it.</p>
-					<ul class="pg-terms" role="list">${rec.terms.map(t => `<li><button type="button" class="si-chip" data-term="${esc(t.term)}">${esc(t.term)} <span class="si-chip__count">${t.n}</span></button></li>`).join('')}</ul>
-				</section>` : ''}
-			</aside>
+			${mode === 'aside' ? '' : `<aside class="pg-aside">${asideHTML(rec, land)}</aside>`}
 		</div>
 
 		${around(rec)}
 
-		${ctaHTML(rec) ? `<section class="si-vid-night pg-cta"><div class="si-wrap">${ctaHTML(rec)}</div></section>` : ''}
+		${ctaHTML(rec) ? `<section class="si-vid-night pg-cta"><div class="si-wrap">${ctaHTML(rec, { source: false })}</div></section>` : ''}
 
 		<section class="si-wrap si-vid-band pg-record" aria-labelledby="pg-rec-h">
-			<div class="si-vid-band__head"><h2 id="pg-rec-h">The record</h2><p>Where every line on this page comes from, and what the archive does not hold.</p></div>
-			${recordHTML(rec)}
+			<div class="pg-record__head"><p class="si-eyebrow si-eyebrow--ruled">The record</p><h2 class="si-display" id="pg-rec-h">The broadcast in figures</h2></div>
+			${recordHTML(rec, { compact: true })}
 		</section>
 	</article>`;
+}
+
+/** The column beside (or under) the tape: who it names, where it speaks of, and —
+ *  when there are captions — the words it leaned on. */
+function asideHTML(rec, land) {
+	return `${rec.people.length ? `<section class="si-reveal"><h2 class="si-vid-h3">Named in this broadcast</h2>${peopleHTML(rec, { size: 56, card: true })}</section>` : ''}
+		${rec.places.length ? `<section class="si-reveal pg-places"><h2 class="si-vid-h3">Places it speaks of</h2>
+			${placesSVG(rec, land, { w: 420, h: 190 })}
+			${placesListHTML(rec, { limit: 6 })}</section>` : ''}
+		${rec.terms?.length ? `<section class="si-reveal"><h2 class="si-vid-h3">Words it leaned on</h2>
+			<p class="si-vid-note">Used here far more than in the other ${rec.terms_how.match(/other (\d+)/)[1]} captioned broadcasts. Spelled as the captions spell them. Press one to find it.</p>
+			<ul class="pg-terms" role="list">${rec.terms.map(t => `<li><button type="button" class="si-chip" data-term="${esc(t.term)}">${esc(t.term)} <span class="si-chip__count">${t.n}</span></button></li>`).join('')}</ul>
+		</section>` : ''}`;
 }
 
 /** Everything the record can prove stands next to this broadcast. Each block
@@ -106,8 +147,7 @@ function around(rec) {
 	const left = [], right = [];
 	if (rec.series) blocks.push(`<section class="pg-around__series"><h3 class="si-vid-h3">${esc(rec.series.label)}</h3>
 		<p class="si-vid-note">${plural(rec.series.of, 'episode')} in ${esc(LANG[rec.lang])} since ${fmtDate(rec.series.first)} — this is No. ${rec.series.ep}.</p>
-		${seriesNavHTML(rec)}</section>`);
-	if (rec.translations.length) left.push(`<section><h3 class="si-vid-h3">In other languages</h3>${translationsHTML(rec)}</section>`);
+		${seriesPairHTML(rec)}</section>`);
 	if (rec.kin?.length) right.push(`<section class="pg-around__kin"><h3 class="si-vid-h3">Said elsewhere</h3>
 		<p class="si-vid-note">The captioned broadcasts that share the most of this one’s words.</p>
 		<ul class="pg-kin" role="list">${rec.kin.slice(0, 4).map(k => `<li>${relatedCardHTML(k, { note: k.terms.slice(0, 3).join(' · ') })}</li>`).join('')}</ul></section>`);
@@ -129,6 +169,7 @@ function around(rec) {
 function mount(rec) {
 	const tape = mountTape(main);
 	mountTimebars(main);
+	refineBar(rec);
 	followChapters(rec, main);
 	settleImages(main);
 	reveal(main);
@@ -155,7 +196,13 @@ function mount(rec) {
 	if (about && about.children.length > 4) {
 		about.classList.add('is-folded');
 		more.hidden = false;
-		more.addEventListener('click', () => { about.classList.remove('is-folded'); more.remove(); });
+		more.addEventListener('click', () => {
+			const open = about.classList.toggle('is-folded') === false;
+			more.textContent = open ? 'Show less' : 'Read the whole text';
+			more.setAttribute('aria-expanded', String(open));
+			// folding back up must not leave the reader stranded below the text
+			if (!open && about.getBoundingClientRect().top < 0) about.closest('.pg-about').scrollIntoView({ block: 'start', behavior: 'smooth' });
+		});
 	}
 
 	const box = main.querySelector('.pg-read__box');
@@ -184,4 +231,48 @@ function mount(rec) {
 		run(input.value);
 		if (!on) box.closest('.pg-read').scrollIntoView({ block: 'start', behavior: 'smooth' });
 	}));
+}
+
+/** The timeline's hover: a hairline and a label that say where a press would land —
+ *  "12:35 · Is there opposition among Germans" — and an inked fill for what has played. */
+function refineBar(rec) {
+	const bar = main.querySelector('.pg-bar .si-vid-bar'), track = bar?.querySelector('.si-vid-bar__track');
+	if (!track) return;
+	track.insertAdjacentHTML('afterbegin', '<span class="pg-bar__fill"></span>');
+	track.insertAdjacentHTML('beforeend', '<span class="pg-bar__ghost" aria-hidden="true"><span class="pg-bar__tip"></span></span>');
+	const ghost = track.querySelector('.pg-bar__ghost'), tip = ghost.firstElementChild;
+	const segs = [...track.querySelectorAll('.si-vid-bar__seg')];
+	track.addEventListener('mousemove', e => {
+		const r = track.getBoundingClientRect();
+		const x = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+		const t = x * rec.duration;
+		let ci = -1; rec.chapters.forEach((c, i) => { if (t >= c.t) ci = i; });
+		ghost.style.left = `${x * 100}%`;
+		tip.innerHTML = `<b>${hms(t)}</b>${ci >= 0 ? esc(rec.chapters[ci].title) : ''}`;
+		// keep the label inside the bar at both ends
+		const w = tip.offsetWidth, px = x * r.width;
+		tip.style.setProperty('--tx', `${px < w / 2 ? -px : px > r.width - w / 2 ? -(w - (r.width - px)) : -w / 2}px`);
+		segs.forEach((sg, i) => sg.classList.toggle('is-hover', i === ci));
+	});
+	track.addEventListener('mouseleave', () => segs.forEach(sg => sg.classList.remove('is-hover')));
+	document.addEventListener('si:time', e => bar.style.setProperty('--p', `${Math.min(100, e.detail.t / rec.duration * 100)}%`));
+}
+
+/** Previous · this one · next. The hairline between the two neighbours carries the
+ *  episode the reader is on, so the pair reads as a sequence at a glance. */
+function seriesPairHTML(rec) {
+	const s = rec.series;
+	/* No neighbour on that side: a quiet terminus rather than a line of text adrift in
+	   half the row — it says where the reader is and offers the way out to the series. */
+	const terminus = dir => `<div class="pg-pair__none pg-pair__${dir}">
+		<span class="pg-pair__none-l">${dir === 'prev' ? 'The first episode' : 'The latest episode'}</span>
+		<a class="si-link" href="/videos/?series=${esc(s.slug)}">All ${s.of} episodes</a>
+	</div>`;
+	const side = (v, dir) => v ? relatedCardHTML(v, { note: dir === 'prev' ? `← Previous episode · No. ${s.ep - 1}` : `Next episode · No. ${s.ep + 1} →`, lang: rec.lang })
+		.replace('class="si-vid-card"', `class="si-vid-card pg-pair__${dir}"`) : terminus(dir);
+	return `<nav class="pg-pair" aria-label="${esc(s.label)}: previous and next episode">
+		${side(s.prev, 'prev')}
+		<span class="pg-pair__here" aria-hidden="true"><span class="pg-pair__dot"><span>No.</span>${s.ep}</span></span>
+		${side(s.next, 'next')}
+	</nav>`;
 }

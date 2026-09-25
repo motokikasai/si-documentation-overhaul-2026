@@ -1,7 +1,7 @@
 {
  "key": "bare",
  "why": "shape d — the oldest kind: a title, a date, an embed and a line of text",
- "built": "2026-09-21",
+ "built": "2026-09-25",
  "id": 47718,
  "title": "Webcast: The Time Has Come to End the Russiagate Fraud!",
  "date": "2018-08-10",
@@ -11,6 +11,7 @@
  "legacy_url": "/blog/2018/08/10/webcast-the-time-has-come-to-end-the-russiagate-fraud/",
  "yt": "h-jP8RK6VgM",
  "duration": null,
+ "duration_source": null,
  "uploaded": null,
  "editor": "David Dobrodt",
  "series": {
@@ -43,6 +44,7 @@
  ],
  "description": "",
  "chapters": [],
+ "chapters_source": null,
  "channel": null,
  "translations": [],
  "people": [

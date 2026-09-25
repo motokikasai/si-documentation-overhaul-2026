@@ -83,7 +83,9 @@ TYPE_LABEL = {"post": "Article", "si_video": "Video", "si_statement": "Statement
               "si_coverage": "Press coverage", "si_presentation": "Presentation",
               "si_conference": "Conference", "si_document": "Document"}
 
-EMBED = re.compile(r"(?:youtube(?:-nocookie)?\.com/embed/|youtube\.com/watch\?v=|youtu\.be/)([\w-]{11})")
+# youtube.com/live/<id> is the shape a streamed dialogue keeps after the stream ends; it
+# arrived after the importer's regex was written and costs 24 records their player (2026-09-25).
+EMBED = re.compile(r"(?:youtube(?:-nocookie)?\.com/embed/|youtube\.com/(?:watch\?v=|live/|shorts/)|youtu\.be/)([\w-]{11})")
 IFRAME = re.compile(r"<iframe[^>]+youtube[^>]*>", re.I)
 
 
@@ -476,9 +478,47 @@ def clean_text(s):
     return re.sub(r"\s+", " ", s).strip()
 
 
-def body_paragraphs(html):
+# A chapter line as editors paste it from a YouTube description: "12:09 Question on …",
+# "1:02:15 – Closing", "(05:44) Wilkerson".
+CH_LINE = re.compile(r"^\s*[\(\[]?((?:\d{1,2}:)?\d{1,2}:\d{2})[\)\]]?\s*[-–—:·|]?\s*(\S.{1,140})$")
+
+
+def to_secs(ts):
+    parts = [int(x) for x in ts.split(":")]
+    return sum(v * 60 ** i for i, v in enumerate(reversed(parts)))
+
+
+def body_lines(html):
+    """The body as plain lines (a <br> or a paragraph end is a line end)."""
+    import html as H
+    h = re.sub(r"(?is)<iframe.*?</iframe>", "\n", html or "")
+    h = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", h)
+    h = re.sub(r"(?s)\[/?[a-z_]+[^\]]{0,300}\]", "\n", h)
+    h = re.sub(r"(?i)<br\s*/?>|</(p|div|h\d|li|blockquote)>", "\n", h)
+    h = H.unescape(re.sub(r"(?s)<[^>]+>", " ", h))
+    return [re.sub(r"[ \t\xa0]+", " ", l).strip() for l in h.split("\n")]
+
+
+def body_chapters(html, duration=None):
+    """Chapters from the post text — the no-API source. Three or more timestamp
+    lines in rising order count; anything else is a time mentioned in a sentence.
+    The titles are the editor's own words, never generated."""
+    rows = []
+    for line in body_lines(html):
+        m = CH_LINE.match(line)
+        if m and len(line) < 160:
+            rows.append((to_secs(m.group(1)), m.group(2).strip(), line))
+    if len(rows) < 3 or any(b[0] <= a[0] for a, b in zip(rows, rows[1:])):
+        return [], set()
+    out = [{"t": t, "end": (rows[i + 1][0] if i + 1 < len(rows) else (duration or t)), "title": title}
+           for i, (t, title, _) in enumerate(rows)]
+    return out, {line for *_, line in rows}
+
+
+def body_paragraphs(html, drop=frozenset()):
     """The post body as the editor wrote it, paragraph by paragraph, without the
-    embed and without shortcode furniture. Text only — no rewriting."""
+    embed and without shortcode furniture. Text only — no rewriting. Lines in
+    `drop` (the chapter lines, which the page sets as chapters) are left out."""
     h = re.sub(r"(?is)<iframe.*?</iframe>", "\n\n", html or "")
     h = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", h)
     h = re.sub(r"(?s)\[/?[a-z_]+[^\]]{0,300}\]", "\n\n", h)
@@ -489,6 +529,8 @@ def body_paragraphs(html):
     h = H.unescape(h)
     paras = []
     for p in re.split(r"\n\s*\n", h):
+        if drop:
+            p = "\n".join(l for l in p.split("\n") if re.sub(r"[ \t\xa0]+", " ", l).strip() not in drop)
         p = re.sub(r"\s+", " ", p).strip()
         p = re.sub(r"^https?://\S+$", "", p).strip()
         if len(p) > 1 and not re.fullmatch(r"https?://\S+", p):
@@ -648,21 +690,30 @@ def main():
         p, c = post_by[pid]
         v = by_id[pid]
         meta = meta_by[p["id"]]
-        chapters = real_chapters(meta)
+        # NO-API MODEL (decided 2026-09-22): nothing on a published page needs a live
+        # YouTube request. Chapters come from the post text; captions from a file the
+        # editor uploads. For the archive, the 2026-07 download stands in, once, as an
+        # import — it is never re-fetched.
         sents = words_by.get(p["id"], [])
-        body = body_paragraphs(p["html"])
+        duration = meta.get("duration") or (int(sents[-1]["t"]) + 8 if sents else None)
+        chapters, ch_lines = body_chapters(p["html"], duration)
+        ch_source = "post text" if chapters else None
+        if not chapters and real_chapters(meta):
+            chapters, ch_source = real_chapters(meta), "archive import (YouTube description, 2026-07)"
+        body = body_paragraphs(p["html"], ch_lines)
         rec = {
             "key": key, "why": why, "built": BUILT,
             "id": v["id"], "title": v["title"], "date": v["date"], "lang": v["lang"],
             "slug": p["slug"], "url": f"/videos/{p['slug']}/",
             "legacy_url": c["legacy_url"],
-            "yt": v["yt"], "duration": meta.get("duration"),
+            "yt": v["yt"], "duration": duration,
+            "duration_source": ("archive import" if meta.get("duration") else "caption file" if duration else None),
             "uploaded": (lambda d: f"{d[:4]}-{d[4:6]}-{d[6:]}" if d else None)(meta.get("upload_date")),
             "editor": p["author"] or None,
             "series": None, "topics": [{"slug": t, "label": TOPIC_LABELS[t]} for t in v["topics"]],
             "body": body,
             "description": clean_text(meta.get("description", "")) and meta.get("description"),
-            "chapters": chapters,
+            "chapters": chapters, "chapters_source": ch_source,
             "channel": meta.get("uploader_url") or meta.get("channel_url"),
         }
 
@@ -689,13 +740,16 @@ def main():
             if top and len(yr) >= 8 and top[1] / len(yr) >= 0.6:
                 rec["series"]["cadence"] = {"n": len(yr), "weekday": top[0], "k": top[1]}
 
-        # the invitation the Institute itself publishes with the live dialogue
+        # the invitation the Institute itself publishes with the live dialogue —
+        # read from the post text; the archive's YouTube description only as a fallback
         desc = meta.get("description") or ""
-        m = re.search(r"[^.\n]*Send your questions.*?\.(?=\s|$)", desc)
-        mail = re.search(r"[\w.+-]+@schillerinstitute\.org", desc)
-        if m and mail:
-            rec["invite"] = {"text": m.group(0).strip(), "email": mail.group(0),
-                             "how": "quoted from this video's own YouTube description"}
+        for src, text in (("the post text", " ".join(body)), ("the YouTube description (archive import)", desc)):
+            m = re.search(r"[^.\n]*Send your questions.*?\.(?=\s|$)", text)
+            mail = re.search(r"[\w.+-]+@schillerinstitute\.org", m.group(0) if m else "")
+            if m and mail:
+                rec["invite"] = {"text": m.group(0).strip(), "email": mail.group(0),
+                                 "how": f"quoted from {src}"}
+                break
 
         # translation: the same WPML group in another language
         sib = []

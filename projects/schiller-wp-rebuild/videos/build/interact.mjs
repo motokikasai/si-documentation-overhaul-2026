@@ -26,6 +26,23 @@ const ok = (name, cond, detail = '') => {
 	console.log(`  ${cond ? 'ok  ' : 'FAIL'} ${name}${!cond && detail ? ` — ${detail}` : ''}`);
 	if (!cond) fails.push(`${name}${detail ? ` — ${detail}` : ''}`);
 };
+/** The shim sets `scroll-behavior: smooth` globally (gotchas.md), so Playwright's own
+ *  scroll-into-view can still be animating when it dispatches a click — and the click
+ *  lands where the element no longer is. Wait for the page to stop moving first. */
+const settle = page => page.waitForFunction(() => new Promise(r => {
+	const y0 = scrollY;
+	requestAnimationFrame(() => requestAnimationFrame(() => r(scrollY === y0)));
+}), undefined, { timeout: 3000 }).catch(() => {});
+
+/** Playwright scrolls an element into view as part of click(), and that scroll is smooth
+ *  (see settle), so the target can still be moving when the click is dispatched — seen as a
+ *  click that never reaches the handler. Put it in view instantly, let the page stop, then click. */
+const clickStable = async (page, sel) => {
+	await page.$eval(sel, el => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
+	await settle(page);
+	await page.click(sel);
+};
+
 const load = async f => JSON.parse(await readFile(new URL(`../data/${f}`, import.meta.url), 'utf8'));
 const data = Object.fromEntries(await Promise.all(RECORDS.map(async r => [r, await load(`video-${r}.json`)])));
 const index = await load('videos.json');
@@ -75,8 +92,8 @@ for (const d of DRAFTS) for (const r of RECORDS) {
 	const mail = await page.$$eval('.si-vid-cta a[href^="mailto:"]', e => e.map(a => a.getAttribute('href')));
 	if (rec.invite) ok('the invitation is the one the description publishes', mail.length > 0 && mail.every(h => h.startsWith(`mailto:${rec.invite.email}`)), mail.join());
 	else ok('no invitation where the record carries none', mail.length === 0, mail.join());
-	const rows = await page.$$eval('.si-vid-record > div', e => e.length);
-	ok('the record colophon is present', rows >= 8, `${rows}`);
+	const rows = await page.$$eval('.si-vid-record > div, .si-vid-figures dt', e => e.length);
+	ok('the record colophon is present', rows >= (d === 'programme' ? 2 : 8), `${rows}`);
 
 	// the playhead, simulated — before any real player exists to report its own time
 	if (['programme', 'reading'].includes(d) && rec.transcript) {
@@ -100,6 +117,42 @@ for (const d of DRAFTS) for (const r of RECORDS) {
 	}
 
 	// draft-specific behaviour
+	if (d === 'programme') {
+		// Programme, 2026-09-22: EN · DE switch, compact record, collapsible text, card links
+		const twins = rec.translations.filter(t => t.type === 'si_video').length;
+		ok(`language switch: ${twins ? twins + 1 : 0} buttons, this language current`,
+			await page.$$eval('.pg-lang__b', e => e.length) === (twins ? twins + 1 : 0) &&
+			(!twins || await page.$eval('.pg-lang__b.is-on', e => e.textContent.trim()) === rec.lang.toUpperCase()));
+		const dts = await page.$$eval('.si-vid-figures dt', e => e.map(x => x.textContent));
+		ok('record: only Published · Series · Captions · Topics', dts.every(t => ['Published', 'Series', 'Captions', 'Topics'].includes(t)), dts.join());
+		ok('no source line under the quoted invitation', await page.$$eval('.si-vid-cta__quote footer', e => e.length) === 0);
+		ok('no “In other languages” block', !(await page.$$eval('.pg-around h3', e => e.map(x => x.textContent))).includes('In other languages'));
+		if (await page.$('.pg-more:not([hidden])')) {
+			// a playing tape scrolls the page to the spoken line; stop it moving under the clicks
+			await page.$eval('.pg-follow input', el => { el.checked = false; }).catch(() => {});   // only where there are captions
+			const folded = want => page.waitForFunction(
+				w => document.querySelector('.pg-about .si-vid-body').classList.contains('is-folded') === w,
+				want, { timeout: 3000 });
+			await clickStable(page, '.pg-more');
+			const open = await folded(false).then(() => true, () => false);
+			await clickStable(page, '.pg-more');
+			const shut = await folded(true).then(() => true, () => false);
+			ok('“Read the whole text” opens and “Show less” folds it back', open && shut, `open ${open}, folded back ${shut}`);
+		}
+		if (rec.people.length) {
+			const box = await page.$eval('.si-vid-person', e => { e.scrollIntoView({ block: 'center', behavior: 'instant' }); const r = e.getBoundingClientRect(); return [r.x + r.width - 12, r.y + 12]; });
+			await page.mouse.move(box[0], box[1]); await page.mouse.move(box[0] - 2, box[1] + 2);
+			await page.waitForTimeout(300);   // past the hover transition
+			const target = await page.evaluate(([x, y]) => document.elementFromPoint(x, y)?.closest('a')?.getAttribute('href'), box);
+			ok('the empty corner of a person card is the profile link', target === rec.people[0].url, `${target}`);
+			const bg = await page.$eval('.si-vid-person', e => getComputedStyle(e).backgroundColor);
+			ok('a hovered card turns white', bg === 'rgb(255, 255, 255)', bg);
+			if (rec.people[0].photo) {
+				const f = await page.$eval('.si-vid-person .si-medallion__img', e => getComputedStyle(e).filter);
+				ok('…and its portrait takes its colour', f === 'none', f);
+			}
+		}
+	}
 	if (d === 'programme' && rec.chapters.length) {
 		const i = Math.min(3, rec.chapters.length - 1);
 		await page.click(`.pg-side .si-vid-chapters__a[data-ch="${i}"]`);

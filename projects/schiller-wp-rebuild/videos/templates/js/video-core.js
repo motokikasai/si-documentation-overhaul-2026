@@ -65,7 +65,7 @@ const LOCALE = { en: 'en-GB', de: 'de-DE' };
 export const fmtDate = (iso, lang = 'en', o = { day: 'numeric', month: 'long', year: 'numeric' }) =>
 	new Intl.DateTimeFormat(LOCALE[lang] || 'en-GB', o).format(new Date(iso + 'T12:00:00'));
 export const fmtShort = (iso, lang = 'en') => fmtDate(iso, lang, { day: 'numeric', month: 'short', year: 'numeric' });
-export const weekday = iso => new Intl.DateTimeFormat('en-GB', { weekday: 'long' }).format(new Date(iso + 'T12:00:00'));
+export const weekday = (iso, lang = 'en') => new Intl.DateTimeFormat(LOCALE[lang] || 'en-GB', { weekday: 'long' }).format(new Date(iso + 'T12:00:00'));
 export function hms(sec) {
 	sec = Math.max(0, Math.round(sec || 0));
 	const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
@@ -377,8 +377,9 @@ export function personEvidence(p) {
 	if (p.evidence && p.evidence !== p.name) return `${w} as “${p.evidence}”`;
 	return w;
 }
-export function peopleHTML(rec, { size = 64, times = 6, cls = '' } = {}) {
+export function peopleHTML(rec, { size = 64, times = 6, cls = '', card = false } = {}) {
 	if (!rec.people.length) return '';
+	if (card) cls += ' is-cards';
 	return `<ul class="si-vid-people ${cls}" role="list">${rec.people.map(p => `
 		<li class="si-vid-person" data-person="${esc(p.key)}">
 			<a class="si-vid-person__face" href="${esc(p.url)}" tabindex="-1" aria-hidden="true">${portraitHTML(p, size)}</a>
@@ -472,7 +473,7 @@ export const typeRank = t => { const i = TYPE_ORDER.indexOf(t); return i < 0 ? 9
  * The weekday is measured from the series' own dates, and only stated when one
  * weekday carries most of the year. */
 export const CHANNEL = 'https://www.youtube.com/@SchillerInstitute';
-export function ctaHTML(rec, { cls = '' } = {}) {
+export function ctaHTML(rec, { cls = '', source = true } = {}) {
 	const s = rec.series;
 	if (rec.invite) {
 		const cad = s?.cadence;
@@ -480,7 +481,7 @@ export function ctaHTML(rec, { cls = '' } = {}) {
 			<p class="si-eyebrow si-vid-cta__eyebrow">The dialogue is live</p>
 			<h2 class="si-vid-cta__title">Bring your question to the next one.</h2>
 			<blockquote class="si-vid-cta__quote"><p>${esc(rec.invite.text)}</p>
-				<footer>— from this broadcast’s own description</footer></blockquote>
+				${source ? `<footer>— ${esc(rec.invite.how)}</footer>` : ''}</blockquote>
 			${cad ? `<p class="si-vid-cta__cad">In the twelve months to this broadcast the dialogue aired on a <b>${esc(cad.weekday)}</b> in ${cad.k} of ${cad.n} weeks.</p>` : ''}
 			<p class="si-vid-cta__acts">
 				<a class="ct-button" href="mailto:${esc(rec.invite.email)}?subject=${encodeURIComponent('Question for the dialogue')}">Send a question</a>
@@ -499,9 +500,19 @@ export function ctaHTML(rec, { cls = '' } = {}) {
 }
 
 /* ---- 9 · the record colophon ---------------------------------------------- */
-export function recordHTML(rec) {
+export function recordHTML(rec, { compact = false } = {}) {
 	const r = rec.record, rows = [];
 	const row = (k, v, missing = false) => rows.push(`<div class="${missing ? 'is-missing' : ''}"><dt>${esc(k)}</dt><dd>${v}</dd></div>`);
+	if (compact) {
+		// the conference page's "in figures" list: one dt/dd pair per row, no wrappers
+		const pairs = [];
+		pairs.push(['Published', `<time datetime="${rec.date}">${fmtDate(rec.date, rec.lang)}</time>`]);
+		if (rec.series) pairs.push(['Series', `${esc(rec.series.label)} — episode ${rec.series.ep} of ${rec.series.of}`]);
+		pairs.push(['Captions', rec.tx ? `automatic (YouTube), ${plural(rec.tx.words, 'word')}, not reviewed by an editor` : 'none on record']);
+		// si_topic, ticked by the editor when the video is published; nothing ticked, no row
+		if (rec.topics.length) pairs.push(['Topics', rec.topics.map(t => `<a class="si-link" href="/topics/${esc(t.slug)}/">${esc(t.label)}</a>`).join(', ')]);
+		return `<dl class="si-vid-figures">${pairs.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${v}</dd>`).join('')}</dl>`;
+	}
 	row('Published', `${fmtDate(rec.date, rec.lang)} on schillerinstitute.com`);
 	if (rec.uploaded) row('On YouTube', `uploaded ${fmtDate(rec.uploaded)}${rec.duration ? ` · ${hms(rec.duration)}` : ''}`);
 	else row('On YouTube', rec.yt ? 'the tape is embedded; its YouTube record was not in the 2026-07 audit' : 'no tape is embedded', true);

@@ -1,7 +1,7 @@
 {
  "key": "beethoven",
  "why": "shape c — Daily Beethoven: no captions, no YouTube metadata; the body names the works",
- "built": "2026-09-21",
+ "built": "2026-09-25",
  "id": 67963,
  "title": "Beethoven: Sparks of Joy",
  "date": "2021-02-04",
@@ -11,6 +11,7 @@
  "legacy_url": "/blog/2021/02/04/beethoven-sparks-of-joy-5/",
  "yt": "UmmHlTZBw1A",
  "duration": null,
+ "duration_source": null,
  "uploaded": null,
  "editor": "Mary Jane Freeman",
  "series": {
@@ -52,6 +53,7 @@
  ],
  "description": "",
  "chapters": [],
+ "chapters_source": null,
  "channel": null,
  "translations": [],
  "people": [

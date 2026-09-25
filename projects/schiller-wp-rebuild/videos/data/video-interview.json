@@ -1,7 +1,7 @@
 {
  "key": "interview",
  "why": "shape a — a guest in the dialogue: captions, 17 chapters, an 83-minute tape",
- "built": "2026-09-21",
+ "built": "2026-09-25",
  "id": 109661,
  "title": "Live: Defense Expert Ted Postol Warns: Trump's \"Golden Dome\" Poses an \"Enormous Danger\" (May 28, 11 am Eastern/ 5pm CET)",
  "date": "2025-05-27",
@@ -11,6 +11,7 @@
  "legacy_url": "/blog/2025/05/27/live-defense-expert-ted-postol-warns-trumps-golden-dome-poses-an-enormous-danger-may-28-11-am-eastern-5pm-cet/",
  "yt": "1bv1_H5Ba9I",
  "duration": 4965,
+ "duration_source": "archive import",
  "uploaded": "2025-05-29",
  "editor": "tobi",
  "series": {
@@ -139,6 +140,7 @@
    "title": "Satellites in orbit"
   }
  ],
+ "chapters_source": "archive import (YouTube description, 2026-07)",
  "channel": "https://www.youtube.com/@SchillerInstitute",
  "translations": [
   {
@@ -2696,7 +2698,7 @@
   {
    "term": "satellites",
    "n": 43,
-   "score": 156.2,
+   "score": 158.0,
    "at": [
     3038,
     3177,
@@ -2782,7 +2784,7 @@
   {
    "term": "orbit",
    "n": 32,
-   "score": 106.3,
+   "score": 107.7,
    "at": [
     3038,
     3177,
@@ -2879,7 +2881,7 @@
   {
    "term": "low earth",
    "n": 11,
-   "score": 86.8,
+   "score": 87.6,
    "at": [
     3780,
     4024,
@@ -2896,7 +2898,7 @@
   {
    "term": "interceptor",
    "n": 13,
-   "score": 64.1,
+   "score": 64.7,
    "at": [
     3049,
     3064,
@@ -2917,7 +2919,7 @@
   {
    "term": "political leadership",
    "n": 9,
-   "score": 58.8,
+   "score": 59.4,
    "at": [
     516,
     521,
@@ -2955,7 +2957,7 @@
   {
    "term": "launch",
    "n": 26,
-   "score": 55.6,
+   "score": 54.7,
    "at": [
     3288,
     3302,
@@ -2980,7 +2982,7 @@
     4295,
     4490
    ],
-   "docs": 23,
+   "docs": 25,
    "echoes": [
     {
      "id": 46294,
@@ -3183,6 +3185,16 @@
      "s": "any any longer or not much longer because the focus on the oranic technology uh and the ability to launch a large number of such missiles would make nuclear weapons obsolete uh"
     },
     {
+     "id": 106245,
+     "date": "2024-12-31",
+     "title": "2025: Nuclear Doom or New Paradigm with Ray McGovern and Helga Zepp-LaRouche",
+     "yt": "FftpT8GB-AE",
+     "slug": "2025-nuclear-doom-or-new-paradigm-with-ray-mcgovern-and-helga-zepp-larouche",
+     "n": 1,
+     "t": 1908,
+     "s": "we were threatened with a 10 12 minute uh time from launch to Target that would hit Washington our Naval bases on the East Coast and even deeper into the United States"
+    },
+    {
      "id": 109077,
      "date": "2025-04-29",
      "title": "Helga Zepp-LaRouche and Diane Sare: The Secret to a New Paradigm: A LaRouche-Hamilton Credit Policy, April 30, 11 am",
@@ -3211,13 +3223,23 @@
      "n": 1,
      "t": 1960,
      "s": "NATO where all the time launch on warning that is that the warning time would have been anywhere three, four, five, six minutes."
+    },
+    {
+     "id": 115215,
+     "date": "2026-03-10",
+     "title": "Live with Helga Zepp-LaRouche: To Achieve Peace, Think Like Cusa, March 11, 11am ET/4pm CET",
+     "yt": "MGbEIu_2dFU",
+     "slug": "live-with-helga-zepp-larouche-to-achieve-peace-think-like-cusa-march-11-11am-et-4pm-cet",
+     "n": 1,
+     "t": 1916,
+     "s": "They have shown the capability to launch missiles practically out of the sand, you know, which are not visible, but then all of a sudden there was a silo covered by sand."
     }
    ]
   },
   {
    "term": "nuclear forces",
    "n": 9,
-   "score": 49.9,
+   "score": 48.5,
    "at": [
     2828,
     2833,
@@ -3229,7 +3251,7 @@
     4744,
     4892
    ],
-   "docs": 5,
+   "docs": 6,
    "echoes": [
     {
      "id": 50707,
@@ -3272,6 +3294,16 @@
      "s": "the former Soviet Union uh part of the intermediate nuclear forces treaty where we got rid of entire categories of nuclear weapons the first time that we didn't just limit the growth"
     },
     {
+     "id": 106245,
+     "date": "2024-12-31",
+     "title": "2025: Nuclear Doom or New Paradigm with Ray McGovern and Helga Zepp-LaRouche",
+     "yt": "FftpT8GB-AE",
+     "slug": "2025-nuclear-doom-or-new-paradigm-with-ray-mcgovern-and-helga-zepp-larouche",
+     "n": 2,
+     "t": 2660,
+     "s": "Admirals saying Vladimir vladimirovich wasn't the ABM Treaty signed uh wasn't the intermediate nuclear forces treaty signed wasn't open"
+    },
+    {
      "id": 110158,
      "date": "2025-06-10",
      "title": "Live with Helga Zepp-LaRouche: To Defeat the British Empire, Study Lyndon LaRouche!, June 11, 11 am Eastern/ 5 pm CET",
@@ -3286,7 +3318,7 @@
   {
    "term": "golden dome",
    "n": 7,
-   "score": 45.7,
+   "score": 46.2,
    "at": [
     19,
     370,
@@ -3323,7 +3355,7 @@
   {
    "term": "icbm",
    "n": 9,
-   "score": 39.8,
+   "score": 40.2,
    "at": [
     3311,
     3359,
@@ -3352,7 +3384,7 @@
   {
    "term": "ukrainians",
    "n": 21,
-   "score": 34.4,
+   "score": 34.7,
    "at": [
     144,
     260,
@@ -3375,7 +3407,7 @@
     1859,
     2172
    ],
-   "docs": 39,
+   "docs": 40,
    "echoes": [
     {
      "id": 43193,
@@ -3658,6 +3690,16 @@
      "s": "the Americans to destroy Germany's economy first the sabotage of Nord stream then selling it and others it's fracking gas forcing it to send money and weapons and sanctions to murder ukrainians"
     },
     {
+     "id": 106245,
+     "date": "2024-12-31",
+     "title": "2025: Nuclear Doom or New Paradigm with Ray McGovern and Helga Zepp-LaRouche",
+     "yt": "FftpT8GB-AE",
+     "slug": "2025-nuclear-doom-or-new-paradigm-with-ray-mcgovern-and-helga-zepp-larouche",
+     "n": 1,
+     "t": 2837,
+     "s": "right to put offensive strike missiles including Hypersonic ones in Ukraine and we'll do it if the ukrainians ask us to we might be willing to talk about how many you know"
+    },
+    {
      "id": 106905,
      "date": "2025-02-11",
      "title": "Webcast: We Have The Solution: Build LaRouche's Oasis Plan",
@@ -3772,7 +3814,7 @@
   {
    "term": "anti-satellite threat",
    "n": 4,
-   "score": 31.6,
+   "score": 31.8,
    "at": [
     3950,
     3992,
@@ -3785,7 +3827,7 @@
   {
    "term": "geocynchronous",
    "n": 6,
-   "score": 29.6,
+   "score": 29.8,
    "at": [
     3832,
     3844,
@@ -3798,7 +3840,7 @@
    "echoes": []
   }
  ],
- "terms_how": "tf-idf of words and word-pairs against the other 206 English caption tracks in the archive; stop-words removed",
+ "terms_how": "tf-idf of words and word-pairs against the other 215 English caption tracks in the archive; stop-words removed",
  "people": [
   {
    "key": "helga-zepp-larouche",
@@ -4249,6 +4291,20 @@
    ]
   },
   {
+   "id": 106245,
+   "title": "2025: Nuclear Doom or New Paradigm with Ray McGovern and Helga Zepp-LaRouche",
+   "date": "2024-12-31",
+   "yt": "FftpT8GB-AE",
+   "slug": "2025-nuclear-doom-or-new-paradigm-with-ray-mcgovern-and-helga-zepp-larouche",
+   "series": "weekly-webcast-hzl",
+   "lang": "en",
+   "terms": [
+    "launch",
+    "nuclear forces",
+    "ukrainians"
+   ]
+  },
+  {
    "id": 50707,
    "title": "Webcast: Trump Dumps British Empire's Agenda of Permanent War, Provokes Hysteria",
    "date": "2018-12-27",
@@ -4319,19 +4375,6 @@
    "date": "2022-12-22",
    "yt": "CATGU1dQvPE",
    "slug": "webcast-reject-the-zelensky-hollywood-production-organize-support-for-peace-conference-proposed-by-pope-francis",
-   "series": "weekly-webcast-hzl",
-   "lang": "en",
-   "terms": [
-    "launch",
-    "ukrainians"
-   ]
-  },
-  {
-   "id": 94284,
-   "title": "Webcast: Who Authorized NATO and the EU to Organize a World War?",
-   "date": "2023-01-11",
-   "yt": "VfY5odWpofU",
-   "slug": "webcast-who-authorized-nato-and-the-eu-to-organize-a-world-war",
    "series": "weekly-webcast-hzl",
    "lang": "en",
    "terms": [

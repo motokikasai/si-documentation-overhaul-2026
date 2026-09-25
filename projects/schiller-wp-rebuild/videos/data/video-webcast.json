@@ -1,7 +1,7 @@
 {
  "key": "webcast",
  "why": "shape a — the weekly live dialogue: captions, 20 chapters, a long description",
- "built": "2026-09-21",
+ "built": "2026-09-25",
  "id": 104868,
  "title": "Webcast: Global War or Universal Peace -- Who Shall Decide?",
  "date": "2024-10-08",
@@ -11,6 +11,7 @@
  "legacy_url": "/blog/2024/10/08/webcast-global-war-or-universal-peace-who-shall-decide/",
  "yt": "Ua0C7_3pCdY",
  "duration": 2310,
+ "duration_source": "archive import",
  "uploaded": "2024-10-10",
  "editor": "tobi",
  "series": {
@@ -157,11 +158,12 @@
    "title": "Outro"
   }
  ],
+ "chapters_source": "archive import (YouTube description, 2026-07)",
  "channel": "https://www.youtube.com/@SchillerInstitute",
  "invite": {
   "text": "Send your questions, thoughts and reports to questions@schillerinstitute.org or ask them in the live stream.",
   "email": "questions@schillerinstitute.org",
-  "how": "quoted from this video's own YouTube description"
+  "how": "quoted from the post text"
  },
  "translations": [
   {
@@ -1031,7 +1033,7 @@
   {
    "term": "hurricane",
    "n": 6,
-   "score": 21.8,
+   "score": 22.1,
    "at": [
     68,
     1561,
@@ -1086,7 +1088,7 @@
   {
    "term": "israel",
    "n": 15,
-   "score": 17.3,
+   "score": 16.4,
    "at": [
     445,
     458,
@@ -1100,7 +1102,7 @@
     1108,
     1136
    ],
-   "docs": 64,
+   "docs": 71,
    "echoes": [
     {
      "id": 46623,
@@ -1613,6 +1615,16 @@
      "s": "This is a economic development plan not only for Israel and Palestine but for the entire region the entire Middle East which can you know basically be developed by desertification by you"
     },
     {
+     "id": 111200,
+     "date": "2025-07-29",
+     "title": "Live with Helga Zepp-LaRouche: Opposition to Genocide in Gaza Grows, Door Open for the Oasis Plan, July 30, 11 am EDT",
+     "yt": "Go74NE5PqnQ",
+     "slug": "live-with-helga-zepp-larouche-opposition-to-genocide-in-gaza-grows-door-open-for-the-oasis-plan-july-30-11-am-edt",
+     "n": 13,
+     "t": 128,
+     "s": "And um you know I mean in a certain there is a a shift going on for several days you know accumulating where now even NOS's from inside Israel are talking about"
+    },
+    {
      "id": 111399,
      "date": "2025-08-05",
      "title": "No More Hiroshimas or Nagasakis—Interview with Dr. Akiko Mikamo",
@@ -1693,6 +1705,16 @@
      "s": "When President Trump was in Israel, he asked the president of Israel, Herzog, to pardon Netanyahu, who's facing trial, is actually in trial on bribery and and corruption charges."
     },
     {
+     "id": 113871,
+     "date": "2025-12-30",
+     "title": "Live with Helga Zepp-LaRouche: On the Eve of a New Year, and a New World: Will Humanity prevail?, Dec. 31 2025, 11 am ET/ 5 pm CET",
+     "yt": "Nr_7e-1ffCc",
+     "slug": "live-with-helga-zepp-larouche-on-the-eve-of-a-new-year-and-a-new-world-will-humanity-prevail-dec-31-2025-11-am-et-5-pm-cet",
+     "n": 1,
+     "t": 844,
+     "s": "Number three, Israel and the United States attack Iran's nuclear"
+    },
+    {
      "id": 114472,
      "date": "2026-02-03",
      "title": "Live with Helga Zepp-LaRouche: Nuclear Doomsday Clock is Ticking, Feb 4 2026, 11am ET/5pm CET",
@@ -1703,6 +1725,36 @@
      "s": "That would mean they would hit Israel."
     },
     {
+     "id": 114842,
+     "date": "2026-02-17",
+     "title": "Live with Helga Zepp-LaRouche: Little Marco Threatens Europeans: We will Preserve the Empire, TOGETHER, Feb. 18, 11am ET/5pm CET",
+     "yt": "D8MOmeknhJg",
+     "slug": "live-with-helga-zepp-larouche-little-marco-threatens-europeans-we-will-preserve-the-empire-together-feb-18-11am-et-5pm-cet",
+     "n": 2,
+     "t": 669,
+     "s": "a recipe for Well, meanwhile, you mentioned it in your opening that talks are continuing on NATO's war in Ukraine and also the potential of a war between the United States, Israel,"
+    },
+    {
+     "id": 115076,
+     "date": "2026-03-03",
+     "title": "Live with Helga Zepp-LaRouche: Early End to an Endless War, March 4, 11am ET/5pm CET",
+     "yt": "6Op4C1eYEtY",
+     "slug": "live-with-helga-zepp-larouche-early-end-to-an-endless-war-march-4-11am-et-5pm-cet",
+     "n": 3,
+     "t": 329,
+     "s": "where the United States and Israel have started a process which I think is only to the um restraint and and would say seemingly limit- limitless patience of and China um that"
+    },
+    {
+     "id": 115215,
+     "date": "2026-03-10",
+     "title": "Live with Helga Zepp-LaRouche: To Achieve Peace, Think Like Cusa, March 11, 11am ET/4pm CET",
+     "yt": "MGbEIu_2dFU",
+     "slug": "live-with-helga-zepp-larouche-to-achieve-peace-think-like-cusa-march-11-11am-et-4pm-cet",
+     "n": 3,
+     "t": 614,
+     "s": "Which by the way was also supported by US Ambassador to Israel Huckabee."
+    },
+    {
      "id": 115482,
      "date": "2026-03-17",
      "title": "Live with Helga Zepp-LaRouche: \"Blessed are the Peacemakers\" -- Defend Christianity from the Armageddon Freaks, March 18, 11am ET/4pm CET",
@@ -1711,6 +1763,26 @@
      "n": 4,
      "t": 40,
      "s": "Now Helga, we're now in the third week of the US Israel unprovoked war against"
+    },
+    {
+     "id": 115574,
+     "date": "2026-03-24",
+     "title": "Live with Helga Zepp-LaRouche: End Geopolitics With LaRouche’s Oasis Plan, March 25, 12pm ET/5pm CET",
+     "yt": "GEMUT_j4HkE",
+     "slug": "live-with-helga-zepp-larouche-end-geopolitics-with-larouches-oasis-plan-march-25-11am-et-4pm-cet",
+     "n": 6,
+     "t": 198,
+     "s": "And then you the US and Israel attacked for the second time."
+    },
+    {
+     "id": 115702,
+     "date": "2026-03-31",
+     "title": "Live with Helga Zepp-LaRouche: Messianic Delusions and the End of History, April 1, 11am ET/5pm CET",
+     "yt": "JMCAD1rqJnE",
+     "slug": "live-with-helga-zepp-larouche-messianic-delusions-and-the-end-of-history-april-1-11am-et-5pm-cet",
+     "n": 1,
+     "t": 405,
+     "s": "It includes countries like Afghanistan Iraq, Syria Yemen, Lebanon, naturally Israel,"
     },
     {
      "id": 116725,
@@ -1747,7 +1819,7 @@
   {
    "term": "fallback plan",
    "n": 2,
-   "score": 15.8,
+   "score": 15.9,
    "at": [
     651
    ],
@@ -1757,12 +1829,12 @@
   {
    "term": "colonel wilkerson",
    "n": 2,
-   "score": 14.1,
+   "score": 13.2,
    "at": [
     344,
     359
    ],
-   "docs": 1,
+   "docs": 2,
    "echoes": [
     {
      "id": 102742,
@@ -1773,13 +1845,23 @@
      "n": 7,
      "t": 2970,
      "s": "agree with Colonel Wilkerson on this so much sir we have to find a way to make the American people afraid again that's a horrible thing to say but if the American"
+    },
+    {
+     "id": 106245,
+     "date": "2024-12-31",
+     "title": "2025: Nuclear Doom or New Paradigm with Ray McGovern and Helga Zepp-LaRouche",
+     "yt": "FftpT8GB-AE",
+     "slug": "2025-nuclear-doom-or-new-paradigm-with-ray-mcgovern-and-helga-zepp-larouche",
+     "n": 1,
+     "t": 6448,
+     "s": "crisis and while it's not reported by media uh you know Colonel Wilkerson also said it during our IPC meeting that all Empires that"
     }
    ]
   },
   {
    "term": "arab states",
    "n": 2,
-   "score": 13.1,
+   "score": 13.2,
    "at": [
     534
    ],
@@ -1810,14 +1892,14 @@
   {
    "term": "colony",
    "n": 4,
-   "score": 10.9,
+   "score": 10.6,
    "at": [
     1942,
     1956,
     2047,
     2087
    ],
-   "docs": 12,
+   "docs": 14,
    "echoes": [
     {
      "id": 51222,
@@ -1938,13 +2020,33 @@
      "n": 2,
      "t": 1937,
      "s": "American Revolution has been taken away by the Empire I mean this is the longstanding issue you know because when the British Empire lost their in their view most important col Colony"
+    },
+    {
+     "id": 111200,
+     "date": "2025-07-29",
+     "title": "Live with Helga Zepp-LaRouche: Opposition to Genocide in Gaza Grows, Door Open for the Oasis Plan, July 30, 11 am EDT",
+     "yt": "Go74NE5PqnQ",
+     "slug": "live-with-helga-zepp-larouche-opposition-to-genocide-in-gaza-grows-door-open-for-the-oasis-plan-july-30-11-am-edt",
+     "n": 2,
+     "t": 1635,
+     "s": "Because if you were a colony of the United States, we would now be, you know, in the camp of President Trump and and you know, follow him."
+    },
+    {
+     "id": 113871,
+     "date": "2025-12-30",
+     "title": "Live with Helga Zepp-LaRouche: On the Eve of a New Year, and a New World: Will Humanity prevail?, Dec. 31 2025, 11 am ET/ 5 pm CET",
+     "yt": "Nr_7e-1ffCc",
+     "slug": "live-with-helga-zepp-larouche-on-the-eve-of-a-new-year-and-a-new-world-will-humanity-prevail-dec-31-2025-11-am-et-5-pm-cet",
+     "n": 3,
+     "t": 228,
+     "s": "And you know people in Europe at least thought for a long time that Europe has become the colony of the United States."
     }
    ]
   },
   {
    "term": "turkey",
    "n": 7,
-   "score": 10.5,
+   "score": 10.3,
    "at": [
     386,
     2134,
@@ -1953,7 +2055,7 @@
     2174,
     2200
    ],
-   "docs": 45,
+   "docs": 48,
    "echoes": [
     {
      "id": 43193,
@@ -2346,6 +2448,16 @@
      "s": "care now about the Palestinians what what we have been talking about many times it will continue you know the slaughter of the Palestinians is ongoing um you know Turkey is now"
     },
     {
+     "id": 106245,
+     "date": "2024-12-31",
+     "title": "2025: Nuclear Doom or New Paradigm with Ray McGovern and Helga Zepp-LaRouche",
+     "yt": "FftpT8GB-AE",
+     "slug": "2025-nuclear-doom-or-new-paradigm-with-ray-mcgovern-and-helga-zepp-larouche",
+     "n": 1,
+     "t": 3444,
+     "s": "I was uh shunted off to his main person on Russia and Ukraine he since became ambassador to Turkey because he said what needed to be said uh I sat with him"
+    },
+    {
      "id": 107386,
      "date": "2025-03-04",
      "title": "Tectonic Shifts Open Door For LaRouche Program, Live with Helga Zepp-LaRouche, March 5, 11 am Estern",
@@ -2386,6 +2498,16 @@
      "s": "in the Middle East. You know, now Turkey and and and others are basically saying it's not just what's going on in Gaza and the West Bank, but they claim that Israel"
     },
     {
+     "id": 112701,
+     "date": "2025-10-29",
+     "title": "Live with Helga Zepp-LaRouche: Revival of Cusa Opens a New Vision for Peace",
+     "yt": "5DI1dx5n2A0",
+     "slug": "live-with-helga-zepp-larouche-revival-of-cusa-opens-a-new-vision-for-peace",
+     "n": 1,
+     "t": 2221,
+     "s": "Uh, there was an important tribunal right now in Turkey where we will for sure hear a report back."
+    },
+    {
      "id": 113227,
      "date": "2025-11-25",
      "title": "Live with Helga Zepp-LaRouche: The FDR-LaRouche Solution, Nov 26 2025, 11am ET/5pm CET",
@@ -2394,6 +2516,16 @@
      "n": 2,
      "t": 260,
      "s": "Um, and that there are now other countries like Turkey, like Barus uh [clears throat] and and others who who would be more welcomed as mediators in in such a conflict."
+    },
+    {
+     "id": 115702,
+     "date": "2026-03-31",
+     "title": "Live with Helga Zepp-LaRouche: Messianic Delusions and the End of History, April 1, 11am ET/5pm CET",
+     "yt": "JMCAD1rqJnE",
+     "slug": "live-with-helga-zepp-larouche-messianic-delusions-and-the-end-of-history-april-1-11am-et-5pm-cet",
+     "n": 2,
+     "t": 416,
+     "s": "And it reaches you know into Turkey and you know into into Africa"
     },
     {
      "id": 116725,
@@ -2410,7 +2542,7 @@
   {
    "term": "bricks",
    "n": 8,
-   "score": 10.3,
+   "score": 10.1,
    "at": [
     1411,
     1426,
@@ -2421,7 +2553,7 @@
     2190,
     2215
    ],
-   "docs": 56,
+   "docs": 60,
    "echoes": [
     {
      "id": 88904,
@@ -2804,6 +2936,16 @@
      "s": "will possibly change everything in the region and beyond that it seems to be a major setback for the bricks process and the Palestinian cause do you think the Israeli regime will"
     },
     {
+     "id": 106245,
+     "date": "2024-12-31",
+     "title": "2025: Nuclear Doom or New Paradigm with Ray McGovern and Helga Zepp-LaRouche",
+     "yt": "FftpT8GB-AE",
+     "slug": "2025-nuclear-doom-or-new-paradigm-with-ray-mcgovern-and-helga-zepp-larouche",
+     "n": 2,
+     "t": 4136,
+     "s": "and this is a blame uh that will not just seize or go away we are now at a historic change at a new era with the bricks Nations that are creating"
+    },
+    {
      "id": 106905,
      "date": "2025-02-11",
      "title": "Webcast: We Have The Solution: Build LaRouche's Oasis Plan",
@@ -2904,6 +3046,16 @@
      "s": "Nevertheless, it was clear to me that the conflict between NATO and the you know bricks and the global s countries cannot be remedied as long as you real remain in the"
     },
     {
+     "id": 111200,
+     "date": "2025-07-29",
+     "title": "Live with Helga Zepp-LaRouche: Opposition to Genocide in Gaza Grows, Door Open for the Oasis Plan, July 30, 11 am EDT",
+     "yt": "Go74NE5PqnQ",
+     "slug": "live-with-helga-zepp-larouche-opposition-to-genocide-in-gaza-grows-door-open-for-the-oasis-plan-july-30-11-am-edt",
+     "n": 1,
+     "t": 1798,
+     "s": "of Australia on the table seriously in the UN General Assembly and the bricks any kind of institution like that and uh know or the three initiatives of President Xiinping the global"
+    },
+    {
      "id": 111806,
      "date": "2025-08-26",
      "title": "Live with Diane Sare &amp; Helga Zepp-LaRouche: Who Is The Real Nord Stream Bomber?, Aug 27, 11 am EDT/ 5pm CET",
@@ -2954,6 +3106,16 @@
      "s": "namely you know that the countries of the global south really have entered a period of collaboration among themselves among the bricks among the SEO the Shanghai cooperation organization and similar organizations"
     },
     {
+     "id": 112701,
+     "date": "2025-10-29",
+     "title": "Live with Helga Zepp-LaRouche: Revival of Cusa Opens a New Vision for Peace",
+     "yt": "5DI1dx5n2A0",
+     "slug": "live-with-helga-zepp-larouche-revival-of-cusa-opens-a-new-vision-for-peace",
+     "n": 1,
+     "t": 1814,
+     "s": "Uh so what what I'm afraid of is that this uh effort against Venezuela against you know actually any any country which is uh you know proposing to work with the bricks"
+    },
+    {
      "id": 113484,
      "date": "2025-12-09",
      "title": "Live with Helga Zepp-LaRouche: Global Glass-Steagall, not Global NATO, Dec 10 2025, 11am ET/5pm CET",
@@ -2962,6 +3124,16 @@
      "n": 1,
      "t": 331,
      "s": "much against the interest of the global majority of countries that now you have the emergence of a new system with the bricks, the SEO"
+    },
+    {
+     "id": 113871,
+     "date": "2025-12-30",
+     "title": "Live with Helga Zepp-LaRouche: On the Eve of a New Year, and a New World: Will Humanity prevail?, Dec. 31 2025, 11 am ET/ 5 pm CET",
+     "yt": "Nr_7e-1ffCc",
+     "slug": "live-with-helga-zepp-larouche-on-the-eve-of-a-new-year-and-a-new-world-will-humanity-prevail-dec-31-2025-11-am-et-5-pm-cet",
+     "n": 1,
+     "t": 281,
+     "s": "This was very much demonstrated by a series of events of the bricks, but especially also the Shanghai Corporation Organization meeting end of August, beginning of September, uh, including the incredibly impressive"
     },
     {
      "id": 114472,
@@ -2988,7 +3160,7 @@
   {
    "term": "russian ambassador",
    "n": 2,
-   "score": 8.8,
+   "score": 8.9,
    "at": [
     1491,
     1517
@@ -3120,7 +3292,7 @@
   {
    "term": "trade war",
    "n": 2,
-   "score": 8.5,
+   "score": 8.7,
    "at": [
     1258
    ],
@@ -3261,13 +3433,13 @@
   {
    "term": "range missiles",
    "n": 2,
-   "score": 8.1,
+   "score": 7.9,
    "at": [
     293,
     882,
     898
    ],
-   "docs": 15,
+   "docs": 17,
    "echoes": [
     {
      "id": 99503,
@@ -3360,6 +3532,16 @@
      "s": "quite yet but you know very close because as you correctly say the pursuit of the present policies including you know the allowing of U us medium range missiles on German territory"
     },
     {
+     "id": 106245,
+     "date": "2024-12-31",
+     "title": "2025: Nuclear Doom or New Paradigm with Ray McGovern and Helga Zepp-LaRouche",
+     "yt": "FftpT8GB-AE",
+     "slug": "2025-nuclear-doom-or-new-paradigm-with-ray-mcgovern-and-helga-zepp-larouche",
+     "n": 1,
+     "t": 7077,
+     "s": "changed his mind now we have longer range missiles going into UK going into Russia proper from uh from Ukraine but things that are guided and could not be used without us"
+    },
+    {
      "id": 109661,
      "date": "2025-05-27",
      "title": "Live: Defense Expert Ted Postol Warns: Trump's \"Golden Dome\" Poses an \"Enormous Danger\" (May 28, 11 am Eastern/ 5pm CET)",
@@ -3400,6 +3582,16 @@
      "s": "And then naturally in the IPC meeting on Friday, we will discuss about what is the situation in Germany in particular with the planned deployment of US medium range missiles which are"
     },
     {
+     "id": 113871,
+     "date": "2025-12-30",
+     "title": "Live with Helga Zepp-LaRouche: On the Eve of a New Year, and a New World: Will Humanity prevail?, Dec. 31 2025, 11 am ET/ 5 pm CET",
+     "yt": "Nr_7e-1ffCc",
+     "slug": "live-with-helga-zepp-larouche-on-the-eve-of-a-new-year-and-a-new-world-will-humanity-prevail-dec-31-2025-11-am-et-5-pm-cet",
+     "n": 1,
+     "t": 1923,
+     "s": "Uh you know we are now in 26 the US will probably go to install the US medium range missiles in Germany."
+    },
+    {
      "id": 113956,
      "date": "2026-01-06",
      "title": "Live with Helga Zepp-LaRouche: International Law, or the Law of the Jungle?, Jan. 7 2026, 11 am ET/ 5 pm CET",
@@ -3422,104 +3614,94 @@
    ]
   },
   {
-   "term": "international community",
+   "term": "physical universe",
    "n": 2,
    "score": 7.7,
    "at": [
-    1190,
-    1206
+    1812,
+    1837
    ],
-   "docs": 17,
+   "docs": 18,
    "echoes": [
     {
-     "id": 46593,
-     "date": "2018-04-26",
-     "title": "Webcast: London-Based Empire Exposed — Door Open for Trans-Atlantic Economic Change",
-     "yt": "43_Z4iFcF3E",
-     "slug": "webcast-london-based-empire-exposed-door-open-for-trans-atlantic-economic-change",
+     "id": 47044,
+     "date": "2018-07-12",
+     "title": "Webcast: European Governments Face Existential Crisis, Will They Turn to the New Paradigm For Solutions?",
+     "yt": "XQJQwK368Tk",
+     "slug": "webcast-european-governments-face-existential-crisis-will-they-turn-to-the-new-paradigm-for-solutions",
      "n": 1,
-     "t": 161,
-     "s": "and actually you know it was the horrors of World War two which then caused the international community to establish the presently existing international law as it is reflected in the UN"
+     "t": 1773,
+     "s": "of such as joint space exploration finding out more about the uncovered secrets of our physical universe - you know basically start colonizing the moon by having joined Mars missions and other"
     },
     {
-     "id": 46623,
-     "date": "2018-05-03",
-     "title": "Webcast: The Empire Based in London Won't Give Up: They Must, and Can Be Defeated",
-     "yt": "-yNuoa6qyFk",
-     "slug": "webcast-the-empire-based-in-london-wont-give-up-they-must-and-can-be-defeated",
+     "id": 50707,
+     "date": "2018-12-27",
+     "title": "Webcast: Trump Dumps British Empire's Agenda of Permanent War, Provokes Hysteria",
+     "yt": "diS1xz6Kwhg",
+     "slug": "webcast-trump-dumps-british-empires-agenda-of-permanent-war-provokes-hysteria",
      "n": 1,
-     "t": 65,
-     "s": "Netanyahu of having committed a conscious thought and effort to you know we'll need to fool the international community by claiming that Iran would still be involved in a secret nuclear agreement"
+     "t": 1923,
+     "s": "principles which are in cohesion with the lawfulness of the physical universe because I think that the future order of humanity can only be successful if it adheres to to physical universal"
     },
     {
-     "id": 51470,
-     "date": "2019-01-27",
-     "title": "Webcast—The British Empire that Jailed LaRouche 30 Years Ago is Same Apparatus Assaulting the Trump Presidency Today!",
-     "yt": "7hIyzjtvPRA",
-     "slug": "webcast-the-british-empire-that-jailed-larouche-30-years-ago-is-same-apparatus-assaulting-the-trump-presidency-today",
-     "n": 1,
-     "t": 206,
-     "s": "the international community and I think this is really a very very dangerous development I mean it's also pretty transparent even the economic commentator in the official first channel of the German"
+     "id": 52327,
+     "date": "2019-03-01",
+     "title": "Webcast—Defeat the Murderous British Empire — Raise Mankind to a New Level of Creative Thinking",
+     "yt": "XgFOU7Kv1LQ",
+     "slug": "webcast-defeat-the-murderous-british-empire-raise-mankind-to-a-new-level-of-creative-thinking",
+     "n": 3,
+     "t": 1116,
+     "s": "to you know develop better knowledge about the laws of the physical Universe we are living in a Galaxy which is only one of two trillion galaxies about which we know really"
     },
     {
-     "id": 56267,
-     "date": "2019-11-17",
-     "title": "Conference: A Time of Strategic Upheaval — Will Europe Be Able to Help Shape the New Paradigm? — Panel 1",
-     "yt": "UsH88JoVX0U",
-     "slug": "conference-a-time-of-strategic-upheaval-will-europe-be-able-to-help-shape-the-new-paradigm",
+     "id": 55965,
+     "date": "2019-09-25",
+     "title": "Webcast: This is an Unbelievable Historic Moment—WE MUST CHANGE THE AGENDA COMPLETELY!",
+     "yt": "eUZ3pDSEgFw",
+     "slug": "webcast-this-is-an-unbelievable-historic-moment-we-must-change-the-agenda-completely",
      "n": 1,
-     "t": 5436,
-     "s": "part of the international community and this cannot continue forever now at last Europe is beginning to sound an alarm one year ago in October October 25th 2018 the European Parliament passed"
+     "t": 1370,
+     "s": "of what are the laws of the physical universe why we need for example international space cooperation to find out more about what the climate causes or climate change causes I actually"
     },
     {
-     "id": 56447,
-     "date": "2019-11-17",
-     "title": "Die Zukunft der Menschheit als kreative Gattung im Universum",
-     "yt": "UsH88JoVX0U",
-     "slug": "conference-a-time-of-strategic-upheaval-will-europe-be-able-to-help-shape-the-new-paradigm",
+     "id": 57582,
+     "date": "2020-01-22",
+     "title": "Webcast—Trump Counters Green Fascists at Davos with Renaissance Optimism",
+     "yt": "2hSmE829tP4",
+     "slug": "webcast-trump-counters-green-fascists-at-davos-with-renaissance-optimism",
      "n": 1,
-     "t": 5436,
-     "s": "part of the international community and this cannot continue forever now at last Europe is beginning to sound an alarm one year ago in October October 25th 2018 the European Parliament passed"
+     "t": 882,
+     "s": "was a cohesion between the ideas of the mind and what he would find in the physical universe so there is a coherence in all of these things and this is a"
     },
     {
-     "id": 56389,
-     "date": "2019-11-23",
-     "title": "Webcast—Exposed! Those Running Coup Against Trump Want War with Russia!",
-     "yt": "Mkn2GE72nMs",
-     "slug": "webcast-exposed-those-running-coup-against-trump-want-war-with-russia",
+     "id": 58303,
+     "date": "2020-04-01",
+     "title": "Webcast: Systems Are Manmade—You Can Change Them When One Breaks Down",
+     "yt": "RbBg0Secp6k",
+     "slug": "webcast-systems-are-manmade-you-can-change-them-when-one-breaks-down",
      "n": 1,
-     "t": 300,
-     "s": "biggest scandal in the history of the United States and this is clearly what said star and why the Democrats and you know the international community are so absolutely hysterical because if"
+     "t": 1332,
+     "s": "are not built in the physical universe they are man-made and you can change the system if the old system is not suitable for the common good of the people then it"
     },
     {
-     "id": 57759,
-     "date": "2020-02-05",
-     "title": "Webcast—Moment of Optimism for Humanity, As Old System Collapses",
-     "yt": "dZbbQT-m3Rw",
-     "slug": "webcast-moment-of-optimism-for-humanity-as-old-system-collapses",
-     "n": 2,
-     "t": 1129,
-     "s": "on the international community because the amount of money which was mentioned which is needed is really the you know the absolute peanuts namely seventy six million dollar would be needed and"
+     "id": 64833,
+     "date": "2020-12-02",
+     "title": "Webcast: Overturn the 2020 U.S. Election Theft, Then Go For Big Solutions",
+     "yt": "HPOmj2gYLiQ",
+     "slug": "webcast-overturn-the-2020-u-s-election-theft-then-go-for-big-solutions",
+     "n": 1,
+     "t": 1875,
+     "s": "about the physical universe about history poetry culture in general other cultures"
     },
     {
-     "id": 60041,
-     "date": "2020-06-17",
-     "title": "Webcast: \"Day of Action\" Brings Youth Into Mobilization for 1.5 Billion Jobs with the LaRouche Plan",
-     "yt": "G9QClnMsUMU",
-     "slug": "webcast-day-of-action-brings-youth-into-mobilization-for-1-5-billion-jobs-w-the-larouche-plan",
+     "id": 76048,
+     "date": "2021-06-30",
+     "title": "Webcast: Clarion Call from Schiller Institute Conference: Defeat the War Machine, Build a Political Order in the Interest of All",
+     "yt": "CpyX14MUoLU",
+     "slug": "webcast-clarion-call-from-schiller-institute-conference-defeat-the-war-machine-build-a-political-order-in-the-interest-of-all",
      "n": 1,
-     "t": 110,
-     "s": "around the idea that their respective governments must join the course to demand that the international community is getting into an emergency mode to build up a national health system in every"
-    },
-    {
-     "id": 82235,
-     "date": "2021-11-22",
-     "title": "Video – Global Leaders Discuss: Can a Strategic Crisis Between the Major Powers Be Avoided?",
-     "yt": "efw9yTulB4A",
-     "slug": "global-leaders-discuss-can-a-strategic-crisis-between-the-major-powers-be-avoided",
-     "n": 1,
-     "t": 383,
-     "s": "should be judged by the international community not by a self-righteous view there are many ways to realize democracy and there cannot be cookie cutter it is more practical to measure the"
+     "t": 1645,
+     "s": "because you know we have to put politics in cohesion with the actual laws of the physical universe or it will not function and you know it discussed among others by megan"
     },
     {
      "id": 82252,
@@ -3527,84 +3709,104 @@
      "title": "Video – Afghanistan: Fulcrum for a New Paradigm",
      "yt": "_-1N76f_iYU",
      "slug": "afghanistan-fulcrum-for-a-new-paradigm",
+     "n": 1,
+     "t": 1786,
+     "s": "way how he relates to to the physical universe at large and i think we have to have a return to these bitter physical ontological"
+    },
+    {
+     "id": 82364,
+     "date": "2021-11-24",
+     "title": "Video: The Art of Aesthetical Education",
+     "yt": "RuusNL-T_aY",
+     "slug": "video-the-art-of-aesthetical-education",
+     "n": 1,
+     "t": 317,
+     "s": "the physical universe at large and i think we have to have a return to these metaphysical ontological"
+    },
+    {
+     "id": 88904,
+     "date": "2022-06-30",
+     "title": "Webcast: Zepp-LaRouche Lays Out the Case for the New Bretton Woods",
+     "yt": "CZOSIONYBZQ",
+     "slug": "webcast-zepp-larouche-lays-out-the-case-for-the-new-bretton-woods",
+     "n": 1,
+     "t": 1392,
+     "s": "principles of the of the physical universe and if you translate these discoveries into scientific and technological progress it increases the productivity in the production process and that in turn gives you"
+    },
+    {
+     "id": 95311,
+     "date": "2023-02-15",
+     "title": "Webcast: With NATO In Disarray, Use Hersh Revelations to Build Movement for Durable Peace",
+     "yt": "ERXyVyOMgZ4",
+     "slug": "webcast-with-nato-in-disarray-use-hersh-revelations-to-build-movement-for-durable-peace",
+     "n": 1,
+     "t": 1545,
+     "s": "put the political economic and social order and cohesion with the laws of the physical Universe which is verifiable so it gives you a standard of of a port and then lastly"
+    },
+    {
+     "id": 96174,
+     "date": "2023-03-29",
+     "title": "Webcast: Rules-Based Order Spinning Out of Control!",
+     "yt": "B0f_15tKGbU",
+     "slug": "webcast-rules-based-order-spinning-out-of-control",
      "n": 3,
-     "t": 999,
-     "s": "even in the extreme situation in the for instance north korea and so on international community was able to organize when they got a big"
+     "t": 1892,
+     "s": "and the obvious uh area is the application of the lawfulness of the physical Universe because that is transparent that is uh knowable for"
     },
     {
-     "id": 87165,
-     "date": "2022-04-26",
-     "title": "Video: H.E. Ambassador Anatoly Antonov on Finding Solutions to Today's Crisis",
-     "yt": "U6cPUO5mIRo",
-     "slug": "video-h-e-ambassador-anatoly-antonov-on-finding-solutions-to-todays-crisis",
+     "id": 96594,
+     "date": "2023-04-25",
+     "title": "Let Your Voice Be Heard! Live discussion with Helga Zepp-LaRouche",
+     "yt": "WdFBn_2zIrQ",
+     "slug": "let-your-voice-be-heard-live-discussion-with-helga-zepp-larouche",
      "n": 1,
-     "t": 59,
-     "s": "outside can give us any solution neither united states nor russia you see that we are just a member of international community and it's very important for us to sit together and"
+     "t": 2411,
+     "s": "laws of the universe because that you know that human activity is a part of the physical universe that's what people sometimes"
     },
     {
-     "id": 96675,
-     "date": "2023-05-02",
-     "title": "There Must Be a Clear Voice to Counter the War Hawks: Discuss Helga Zepp-LaRouche",
-     "yt": "ZzCHkgfY7Ow",
-     "slug": "there-must-be-a-clear-voice-to-counter-the-war-hawks-discuss-helga-zepp-larouche",
+     "id": 103018,
+     "date": "2024-06-18",
+     "title": "Webcast:  To Address an Existential Crisis, Think Like LaRouche",
+     "yt": "ZZdAtjQHcEo",
+     "slug": "webcast-to-address-an-existential-crisis-think-like-larouche",
      "n": 1,
-     "t": 1539,
-     "s": "support military intervention and how might these motives impact African States and the broader International Community I think he's referring to Sudan I don't know that there was a decision to intervene"
+     "t": 1996,
+     "s": "I would almost say metaphysical basis something which is more founded in the lawfulness of the creation in the lawfulness of the physical universe so that it's anchored you know in in"
     },
     {
-     "id": 100200,
-     "date": "2023-12-26",
-     "title": "Webcast: A New Paradigm in the New Year",
-     "yt": "K-qNQiWnhx4",
-     "slug": "webcast-a-new-paradigm-in-the-new-year",
+     "id": 103773,
+     "date": "2024-08-06",
+     "title": "Webcast: World War Danger and Financial Collapse - Convene Council of Reason Now",
+     "yt": "T9PqVSJIae8",
+     "slug": "webcast-world-war-danger-and-financial-collapse-convene-council-of-reason-now",
      "n": 1,
-     "t": 811,
-     "s": "the leader of the pflp sadad and the Palestinian leader who's now in jail since 20 years Maran bouti who is recognized by the entire you know International Community but especially all"
+     "t": 2097,
+     "s": "but for throughout European history for 2,000 years or more there was the idea that natural law is something which exists in Creation in the physical universe that there are Eternal laws"
     },
     {
-     "id": 102742,
-     "date": "2024-06-07",
-     "title": "Emergency Press Conference: The Danger of Nuclear War Is Real, and Must Be Stopped",
-     "yt": "aOrmFJXyAVI",
-     "slug": "emergency-press-conference-the-danger-of-nuclear-war-is-real",
+     "id": 104388,
+     "date": "2024-09-10",
+     "title": "Webcast: Turning the \"Many\" into the \"One\" -- The Fight for a New Strategic Architecture",
+     "yt": "FSx8nrSZKe0",
+     "slug": "webcast-turning-the-many-into-the-one-the-fight-for-a-new-strategic-architecture",
      "n": 1,
-     "t": 5447,
-     "s": "concerning the International Community how people in different part of the world in sou America in Africa in Asia can contribute to fight that situation and little bit uh how the the"
+     "t": 540,
+     "s": "underpinning you know something which which situates these laws or these principles more in the you know I would say Eternal law of the physical universe and uh that obviously is something"
     },
     {
-     "id": 105671,
-     "date": "2024-12-03",
-     "title": "Webcast: Ignore the \"Experts\" -- Peace Is Good!",
-     "yt": "NAJYWwbHMBY",
-     "slug": "webcast-ignore-the-experts-peace-is-good",
-     "n": 1,
-     "t": 1689,
-     "s": "I don't see it and again on this question of of dialogue that you've been talking about we have from Professor lfi do you think it's possible that the International Community can"
-    },
-    {
-     "id": 109257,
-     "date": "2025-05-06",
-     "title": "Live with Helga Zepp-LaRouche: Three Dangerous Hot Spots, One Solution (May 7, 11 am Eastern/5pm CET",
-     "yt": "HdhCMnabID0",
-     "slug": "live-with-helga-zepp-larouche-three-dangerous-hot-spots-one-solution-may-7-11-am-eastern-5pm-cet",
-     "n": 1,
-     "t": 600,
-     "s": "It would stop. But if the United States does not stop it, it does not alleviate the rest of the international community of having a responsibility."
-    },
-    {
-     "id": 112092,
-     "date": "2025-09-09",
-     "title": "Live with Helga Zepp-LaRouche: The Imperial System is Crumbling, Macron is Down, Who is Next?, Sep 10, 11 am EDT/ 5pm CET",
-     "yt": "dElfug_-BcI",
-     "slug": "live-with-helga-zepp-larouche-the-imperial-system-is-crumbling-macron-is-down-who-is-next-sep-10-11-am-edt-5pm-cet",
-     "n": 1,
-     "t": 297,
-     "s": "So I think you know in my book um the international order is in jeopardy and uh does require an absolute urgent intervention by the international community because without international law you"
+     "id": 113484,
+     "date": "2025-12-09",
+     "title": "Live with Helga Zepp-LaRouche: Global Glass-Steagall, not Global NATO, Dec 10 2025, 11am ET/5pm CET",
+     "yt": "LW9i4jfg-wA",
+     "slug": "live-with-helga-zepp-larouche-global-glass-steagall-not-global-nato-dec-10-2025-11am-et-5pm-cet",
+     "n": 2,
+     "t": 1790,
+     "s": "conditions you know it doesn't have weight it has has no length it's it's immaterial nevertheless if it's an adequate idea it has profound changes in the physical universe of the sort"
     }
    ]
   }
  ],
- "terms_how": "tf-idf of words and word-pairs against the other 206 English caption tracks in the archive; stop-words removed",
+ "terms_how": "tf-idf of words and word-pairs against the other 215 English caption tracks in the archive; stop-words removed",
  "people": [
   {
    "key": "helga-zepp-larouche",
@@ -4087,8 +4289,7 @@
     "hurricane",
     "israel",
     "colonel wilkerson",
-    "bricks",
-    "international community"
+    "bricks"
    ]
   },
   {
@@ -4104,21 +4305,6 @@
     "colony",
     "bricks",
     "range missiles"
-   ]
-  },
-  {
-   "id": 100200,
-   "title": "Webcast: A New Paradigm in the New Year",
-   "date": "2023-12-26",
-   "yt": "K-qNQiWnhx4",
-   "slug": "webcast-a-new-paradigm-in-the-new-year",
-   "series": "weekly-webcast-hzl",
-   "lang": "en",
-   "terms": [
-    "israel",
-    "turkey",
-    "bricks",
-    "international community"
    ]
   },
   {
@@ -4152,6 +4338,36 @@
    ]
   },
   {
+   "id": 103773,
+   "title": "Webcast: World War Danger and Financial Collapse - Convene Council of Reason Now",
+   "date": "2024-08-06",
+   "yt": "T9PqVSJIae8",
+   "slug": "webcast-world-war-danger-and-financial-collapse-convene-council-of-reason-now",
+   "series": "weekly-webcast-hzl",
+   "lang": "en",
+   "terms": [
+    "israel",
+    "bricks",
+    "range missiles",
+    "physical universe"
+   ]
+  },
+  {
+   "id": 104388,
+   "title": "Webcast: Turning the \"Many\" into the \"One\" -- The Fight for a New Strategic Architecture",
+   "date": "2024-09-10",
+   "yt": "FSx8nrSZKe0",
+   "slug": "webcast-turning-the-many-into-the-one-the-fight-for-a-new-strategic-architecture",
+   "series": "weekly-webcast-hzl",
+   "lang": "en",
+   "terms": [
+    "israel",
+    "bricks",
+    "range missiles",
+    "physical universe"
+   ]
+  },
+  {
    "id": 105991,
    "title": "Webcast: Schiller Institute Conference Breaks Through the Fog of War",
    "date": "2024-12-10",
@@ -4167,32 +4383,18 @@
    ]
   },
   {
-   "id": 112092,
-   "title": "Live with Helga Zepp-LaRouche: The Imperial System is Crumbling, Macron is Down, Who is Next?, Sep 10, 11 am EDT/ 5pm CET",
-   "date": "2025-09-09",
-   "yt": "dElfug_-BcI",
-   "slug": "live-with-helga-zepp-larouche-the-imperial-system-is-crumbling-macron-is-down-who-is-next-sep-10-11-am-edt-5pm-cet",
+   "id": 113871,
+   "title": "Live with Helga Zepp-LaRouche: On the Eve of a New Year, and a New World: Will Humanity prevail?, Dec. 31 2025, 11 am ET/ 5 pm CET",
+   "date": "2025-12-30",
+   "yt": "Nr_7e-1ffCc",
+   "slug": "live-with-helga-zepp-larouche-on-the-eve-of-a-new-year-and-a-new-world-will-humanity-prevail-dec-31-2025-11-am-et-5-pm-cet",
    "series": "weekly-webcast-hzl",
    "lang": "en",
    "terms": [
     "israel",
-    "turkey",
+    "colony",
     "bricks",
-    "international community"
-   ]
-  },
-  {
-   "id": 56267,
-   "title": "Conference: A Time of Strategic Upheaval — Will Europe Be Able to Help Shape the New Paradigm? — Panel 1",
-   "date": "2019-11-17",
-   "yt": "UsH88JoVX0U",
-   "slug": "conference-a-time-of-strategic-upheaval-will-europe-be-able-to-help-shape-the-new-paradigm",
-   "series": "weekly-webcast-hzl",
-   "lang": "en",
-   "terms": [
-    "israel",
-    "turkey",
-    "international community"
+    "range missiles"
    ]
   }
  ],

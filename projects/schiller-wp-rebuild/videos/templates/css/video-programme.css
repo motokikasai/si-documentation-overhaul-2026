@@ -62,3 +62,189 @@
 @media (max-width: 560px) {
 	.pg-read__box { padding: var(--si-space-s); }
 }
+
+/* ---- 2026-09-22 refinements ---------------------------------------------- */
+/* the still in its own colour, untouched; only a thin shade at the foot keeps the running time legible */
+.pg .si-vid-embed__btn img { filter: none; }
+.pg .si-vid-embed__btn::after { background: linear-gradient(180deg, transparent 80%, rgb(8 14 22 / .45)); }
+.pg .si-vid-embed__btn:is(:hover, :focus-visible)::after { opacity: 1; }
+/* around this broadcast: the stills at half their colour, so a row of eight thumbnails does
+   not shout; the card under the pointer gets its full colour (colour as the reward, as for
+   portraits). The one full-colour image on the page stays the main video. */
+.pg-around .si-vid-card__still img { filter: saturate(.45) contrast(.96) brightness(1.02); transition: filter var(--si-dur-2) var(--si-ease); }
+.pg-around .si-vid-card__still::after { display: none; }
+.pg-around .si-vid-card:is(:hover, :focus-visible) .si-vid-card__still img { filter: none; }
+
+/* EN · DE */
+.si-vid-dateline > .pg-lang::before { content: none; }
+.pg-lang { display: inline-flex; gap: 2px; padding: 2px; margin-left: .2em; border-radius: var(--si-radius-1); background: var(--si-panel); }
+.pg-lang__b {
+	display: inline-grid; place-items: center; min-width: 2.4em; height: 24px; padding: 0 .5em;
+	border-radius: 1px; font-family: var(--si-font-sans); font-size: 12px; font-weight: 600; letter-spacing: .06em;
+	color: var(--si-muted); text-decoration: none;
+	transition: background var(--si-dur-1) var(--si-ease), color var(--si-dur-1) var(--si-ease);
+}
+a.pg-lang__b:hover { color: var(--si-ink); background: color-mix(in srgb, var(--si-card) 60%, transparent); }
+.pg-lang__b.is-on { background: var(--si-card); color: var(--si-ink); box-shadow: var(--si-shadow-1); }
+
+/* the whole person card is the link; the seconds sit above it and stay their own buttons */
+.si-vid-people.is-cards { gap: 2px; }
+.is-cards .si-vid-person {
+	position: relative; padding: var(--si-space-2xs) var(--si-space-xs); margin-inline: calc(-1 * var(--si-space-xs));
+	border-radius: var(--si-radius-1); transition: background var(--si-dur-1) var(--si-ease), box-shadow var(--si-dur-1) var(--si-ease);
+}
+.is-cards .si-vid-person:hover, .is-cards .si-vid-person:focus-within { background: var(--si-card); box-shadow: var(--si-shadow-1); }
+.is-cards .si-vid-person__name::after { content: ""; position: absolute; inset: 0; }
+.is-cards .si-vid-person__name:focus-visible { outline: none; }
+.is-cards .si-vid-person:has(.si-vid-person__name:focus-visible) { outline: 2px solid var(--si-accent); outline-offset: 2px; }
+.is-cards .si-vid-person__at { position: relative; z-index: 1; }
+.is-cards .si-vid-person:hover .si-vid-person__name { color: var(--si-accent); }
+
+/* the record — the same "in figures" list as the conference page */
+.pg-record__head { display: grid; gap: var(--si-space-2xs); margin-bottom: var(--si-space-l); }
+.pg-record__head .si-display { margin: 0; font-size: var(--si-step-5); }
+.si-vid-figures {
+	display: grid; grid-template-columns: minmax(0, 1fr); gap: .2em var(--si-space-m); margin: 0;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); max-width: 80ch;
+}
+@media (min-width: 620px) { .si-vid-figures { grid-template-columns: 12rem minmax(0, 1fr); } }
+.si-vid-figures dt { color: var(--si-muted); letter-spacing: var(--si-track-caps); text-transform: uppercase; font-size: var(--si-step-n2); padding-top: .55em; border-top: var(--si-hairline); }
+.si-vid-figures dd { margin: 0; color: var(--si-text); padding-top: .55em; border-top: var(--si-hairline); }
+@media (max-width: 619px) { .si-vid-figures dd { border-top: 0; padding-top: 0; padding-bottom: .5em; } }
+/* the portrait takes its colour when the card (not only the face) is under the pointer */
+.is-cards .si-vid-person:is(:hover, :focus-within) .si-medallion__img { filter: none; }
+.is-cards .si-vid-person:is(:hover, :focus-within) .si-medallion::after { opacity: 0; }
+
+/* ---- the main still: one smooth zoom, in and out -------------------------------------
+   The shared rule eases with a curve that is done almost at once and then crawls, and the
+   image leaves the compositor when the transition ends, so it re-rasterises with a visible
+   last jump. Kept on its own layer, on an even curve, it glides both ways. */
+.pg .si-vid-embed__btn img {
+	transform: translateZ(0) scale(1); will-change: transform; backface-visibility: hidden;
+	transition: transform 700ms cubic-bezier(.33, 0, .2, 1);
+}
+.pg .si-vid-embed__btn:is(:hover, :focus-visible) img { transform: translateZ(0) scale(1.02); }
+
+/* ---- the timeline under the tape -------------------------------------------------------
+   A hairline rail; the chapters as short rounded strokes with a breath between them; the
+   people named as small dots riding above; the elapsed part inked in; a brass bead for the
+   playhead. Hover shows where you are pointing — time and chapter — and nothing moves on
+   its own. */
+.pg-bar { margin-top: var(--si-space-2xs); }
+.pg-bar .si-vid-bar__track { height: 30px; background: none; }
+.pg-bar .si-vid-bar__track::before {                 /* the rail */
+	content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px;
+	background: var(--si-rule);
+}
+.pg-bar .si-vid-bar__seg {
+	top: 50%; height: 3px; margin-top: -1.5px; background: none; box-shadow: none;
+	transition: none;
+}
+.pg-bar .si-vid-bar__seg::before {                   /* the stroke, with a 2px breath each side */
+	content: ""; position: absolute; inset: 0 2px; border-radius: 3px;
+	background: color-mix(in srgb, var(--si-jasper) 55%, transparent);
+	transition: background var(--si-dur-2) var(--si-ease), inset var(--si-dur-2) var(--si-ease);
+}
+.pg-bar .si-vid-bar__seg.is-hover::before { inset: -1.5px 2px; background: var(--si-accent); }
+.pg-bar .si-vid-bar__seg.is-now::before { background: color-mix(in srgb, var(--si-accent) 70%, transparent); }
+.pg-bar .si-vid-bar__tick {                          /* a name spoken: a dot above the rail */
+	top: 3px; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%;
+	background: color-mix(in srgb, var(--si-accent) 45%, transparent);
+}
+.pg-bar .si-vid-bar__tick.is-brass { top: auto; bottom: 3px; background: var(--si-brass); width: 5px; height: 5px; margin-left: -2.5px; }
+.pg-bar__fill {                                     /* what has been played */
+	position: absolute; left: 0; top: 50%; height: 1px; width: var(--p, 0%);
+	background: var(--si-accent); pointer-events: none; transition: width 240ms linear;
+}
+.pg-bar .si-vid-bar__head {                          /* the playhead: a brass bead */
+	top: 50%; bottom: auto; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%;
+	background: var(--si-brass); box-shadow: 0 0 0 2px var(--si-ground);
+}
+.pg-bar__ghost {                                    /* where the pointer is */
+	position: absolute; top: 4px; bottom: 4px; width: 1px; margin-left: -.5px;
+	background: color-mix(in srgb, var(--si-ink) 35%, transparent);
+	opacity: 0; transition: opacity var(--si-dur-1) var(--si-ease); pointer-events: none;
+}
+.pg-bar .si-vid-bar__track:hover .pg-bar__ghost { opacity: 1; }
+.pg-bar__tip {
+	position: absolute; bottom: calc(100% + 6px); left: 0; translate: var(--tx, -50%) 0;
+	white-space: nowrap; padding: 3px 8px; border-radius: var(--si-radius-1);
+	background: var(--si-ink); color: var(--si-card);
+	font-family: var(--si-font-sans); font-size: 12px; line-height: 1.4;
+}
+.pg-bar__tip b { font-weight: 600; font-variant-numeric: tabular-nums; margin-right: .5em; color: #C9A866; }
+.pg-bar .si-vid-bar__scale { font-size: 11px; letter-spacing: .04em; }
+@media (prefers-reduced-motion: reduce) { .pg-bar__fill, .pg-bar .si-vid-bar__seg::before { transition: none; } }
+
+/* ---- previous · this one · next ---------------------------------------------------- */
+.pg-pair { display: grid; grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr); align-items: stretch; gap: var(--si-space-m); }
+.pg-pair__here { position: relative; display: grid; place-items: center; }
+.pg-pair__here::before {                               /* the hairline, fading at both ends */
+	content: ""; position: absolute; left: 50%; top: -6px; bottom: -6px; width: 1px;
+	background: linear-gradient(transparent, var(--si-rule) 25%, var(--si-rule) 75%, transparent);
+}
+.pg-pair__dot {
+	position: relative; display: grid; place-items: center; align-content: center;
+	width: 46px; height: 46px; border-radius: 50%;
+	background: var(--si-card); box-shadow: 0 0 0 1px var(--si-card), 0 0 0 2px var(--si-brass);
+	font-family: var(--si-font-serif); font-size: 16px; line-height: 1; color: var(--si-ink); font-variant-numeric: lining-nums;
+}
+.pg-pair__dot span { font-family: var(--si-font-sans); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--si-muted); margin-bottom: 2px; }
+.pg-pair .si-vid-card { align-self: center; }
+.si-vid-card.pg-pair__next { grid-template-columns: minmax(0, 1fr) 128px; text-align: right; }
+.si-vid-card.pg-pair__next .si-vid-card__still { order: 2; }
+.pg-pair .si-vid-card__note { letter-spacing: .1em; }
+/* the end of the series: a card-shaped hush, so the row still reads left-to-right */
+.pg-pair__none {
+	align-self: center; display: grid; gap: .3em; justify-items: center; align-content: center;
+	min-height: 72px; padding: var(--si-space-s);
+	background: color-mix(in srgb, var(--si-jasper) 7%, transparent);
+	text-align: center;
+}
+.pg-pair__none-l { font-family: var(--si-font-serif); font-style: italic; font-size: var(--si-step-1); color: var(--si-muted); line-height: 1.2; }
+.pg-pair__none .si-link { font-family: var(--si-font-sans); font-size: var(--si-step-n2); font-weight: 600; letter-spacing: .04em; }
+@media (max-width: 560px) {
+	.pg-pair { grid-template-columns: minmax(0, 1fr); gap: var(--si-space-s); }
+	.pg-pair__here { height: 46px; }
+	.pg-pair__here::before { left: 0; right: 0; top: 50%; bottom: auto; width: auto; height: 1px; background: linear-gradient(90deg, transparent, var(--si-rule) 20%, var(--si-rule) 80%, transparent); }
+	.si-vid-card.pg-pair__next { grid-template-columns: 110px minmax(0, 1fr); text-align: left; }
+	.si-vid-card.pg-pair__next .si-vid-card__still { order: 0; }
+}
+/* the figures list marks what the archive does not hold */
+.si-vid-figures .is-missing { font-family: var(--si-font-serif); font-style: italic; color: var(--si-muted); }
+
+/* ---- the stage's second column --------------------------------------------------------
+   Chapters when the post text publishes them; otherwise what the record does hold (the
+   names and the places); with neither, a capped tape rather than one that fills the
+   viewport. 1,187 of the 1,196 videos with a tape have no chapters, so "aside" is the
+   ordinary case and the rail is the rarity. */
+.pg-stage[data-stage="aside"] { grid-template-columns: minmax(0, 1.8fr) minmax(280px, 1fr); align-items: start; }
+.pg-aside--stage { display: grid; gap: var(--si-space-l); align-content: start; position: static; }
+.pg-aside--stage > section { display: grid; gap: var(--si-space-2xs); }
+.pg-aside--stage .si-vid-h3 { margin-top: 0; }
+.pg-stage[data-stage="solo"] .pg-player,
+.pg-stage[data-stage="solo"] .pg-bar { max-width: 900px; margin-inline: auto; width: 100%; }
+.pg-body.is-single { grid-template-columns: minmax(0, 1fr); }
+.pg-body.is-single .pg-main { max-width: var(--si-measure); }
+@media (max-width: 1000px) {
+	.pg-stage[data-stage="aside"] { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- the play button: one transform, one layer ----------------------------------------
+   Same hand-off as the still, and worse here: `backdrop-filter` puts the button on its own
+   layer only while something animates, so at the end of the transition it is rasterised
+   again and lands a fraction of a pixel off — read as the button "repositioning itself".
+   Centring with the same transform that carries the scale keeps it on one layer throughout,
+   and the curve matches the still's so the two move together. */
+.pg .si-vid-embed__play {
+	translate: none;
+	scale: none;
+	transform: translate3d(-50%, -50%, 0) scale(1);
+	will-change: transform;
+	backface-visibility: hidden;
+	transition: transform 700ms cubic-bezier(.33, 0, .2, 1), background var(--si-dur-2) var(--si-ease);
+}
+.pg .si-vid-embed__btn:is(:hover, :focus-visible) .si-vid-embed__play {
+	transform: translate3d(-50%, -50%, 0) scale(1.05);
+	scale: none;
+}
