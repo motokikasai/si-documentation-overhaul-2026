@@ -1,0 +1,181 @@
+/* ==========================================================================
+   schiller-editorial — Join · draft C "Your Part"
+
+   Ported from pages/templates/css/join-roles.css onto block styles and Jasper tokens (R7b:
+   text on --si-step-*, spacing on --si-space-*). The draft's cards were built by its own
+   script; here a path step is an ordinary list item — a link and, after it, an optional
+   note or a computed count — so the card, its number and the rule between cards are drawn
+   by the list item and its pseudo-elements, and the link is stretched over the whole card.
+
+   Two states:
+     no JS         every field is a heading with its path under it
+     .is-enhanced  the fields are one row of choices, and only the chosen path shows
+   ========================================================================== */
+
+.wp-block-group.is-style-si-join { padding-block: var(--si-space-2xl) var(--si-space-3xl); }
+
+/* the headline; the italic part is the slot */
+.is-style-si-join > h1 {
+	margin: var(--si-space-s) 0 0;
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-6);
+	font-weight: 320;
+	line-height: 1.04;
+	color: var(--si-ink);
+}
+.is-style-si-join > h1 em { color: var(--si-accent); }
+.si-join__slot.is-in { display: inline-block; animation: si-join-in var(--si-dur-3) var(--si-ease); }
+@keyframes si-join-in { from { opacity: 0; transform: translateY(.2em); } }
+/* the typing caret, only while the headline is cycling */
+.si-join__slot.is-typing::after {
+	content: "";
+	display: inline-block;
+	width: 2px;
+	height: .82em;
+	margin-left: .06em;
+	vertical-align: -0.06em;
+	background: var(--si-brass);
+	animation: si-join-caret 1.06s steps(1, end) infinite;
+}
+@keyframes si-join-caret { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
+
+/* the lead: the Institute's own call, and its source */
+.is-style-si-join > h1 + p {
+	margin: var(--si-space-m) 0 0;
+	max-width: 58ch;
+	font-size: var(--si-step-1);
+	font-style: italic;
+	line-height: 1.5;
+}
+.is-style-si-join > h1 + p + p.is-style-si-source { margin-top: var(--si-space-2xs); }
+
+/* the row of choices (built by join.js) */
+.si-join__roles { display: flex; flex-wrap: wrap; gap: var(--si-space-2xs); margin-top: var(--si-space-l); }
+.si-join__role {
+	padding: var(--si-space-xs) var(--si-space-m);
+	border: 1px solid var(--si-rule);
+	border-radius: var(--si-radius-round);
+	background: var(--si-card);
+	cursor: pointer;
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-1);
+	color: var(--si-ink);
+	transition: border-color var(--si-dur-1) var(--si-ease), color var(--si-dur-1) var(--si-ease), background var(--si-dur-1) var(--si-ease);
+}
+.si-join__role:hover { border-color: var(--si-accent); color: var(--si-accent); }
+.si-join__role:focus-visible { outline: none; box-shadow: var(--si-focus-ring); }
+/* every field is equal: one resting state, one chosen state, no field marked out */
+.si-join__role[aria-checked="true"] { background: var(--si-ink); border-color: var(--si-ink); color: var(--si-on-accent); }
+.is-style-si-join > p.si-js-only { margin-top: var(--si-space-m); font-style: italic; color: var(--si-muted); }
+
+/* a field and its path */
+.wp-block-group.is-style-si-join-role { margin-top: var(--si-space-xl); }
+.is-style-si-join-role > h2 {
+	margin: 0 0 var(--si-space-s);
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-2);
+	font-weight: 450;
+	color: var(--si-ink);
+}
+.is-style-si-join-role > ol {
+	--si-join-n: 2.75rem;   /* the numbered medallion */
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+	align-items: stretch;
+	gap: var(--si-space-m);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	counter-reset: si-join-step;
+}
+/* the card is the list item; its number sits above it */
+.is-style-si-join-role > ol > li {
+	position: relative;
+	margin: calc(var(--si-join-n) + var(--si-space-s)) 0 0;
+	padding: var(--si-space-s) var(--si-space-m);
+	min-height: 7rem;
+	background: var(--si-card);
+	box-shadow: var(--si-shadow-1);
+	counter-increment: si-join-step;
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n2);
+	color: var(--si-muted);
+	transition: transform var(--si-dur-2) var(--si-ease), box-shadow var(--si-dur-2);
+}
+.is-style-si-join-role > ol > li::before {
+	content: counter(si-join-step);
+	position: absolute;
+	top: calc(-1 * (var(--si-join-n) + var(--si-space-s)));
+	left: 0;
+	display: grid;
+	place-items: center;
+	width: var(--si-join-n);
+	height: var(--si-join-n);
+	border: 2px solid var(--si-brass);
+	border-radius: var(--si-radius-round);
+	background: var(--si-card);
+	font: italic 500 var(--si-step-1) var(--si-font-serif);
+	color: var(--si-brass);
+}
+/* the brass rule from one number to the next */
+.is-style-si-join-role > ol > li::after {
+	content: "";
+	position: absolute;
+	top: calc(-1 * (var(--si-join-n) / 2 + var(--si-space-s)));
+	left: calc(var(--si-join-n) + var(--si-space-2xs));
+	right: calc(-1 * var(--si-space-m));
+	height: 1px;
+	background: var(--si-brass);
+}
+.is-style-si-join-role > ol > li:last-child::after { display: none; }
+.is-style-si-join-role > ol > li > a:first-child {
+	display: block;
+	margin-bottom: .3em;
+	font-family: var(--si-font-serif);
+	font-size: var(--si-step-1);
+	font-weight: 500;
+	line-height: 1.25;
+	color: var(--si-ink);
+	text-decoration: none;
+}
+/* the whole card is the link */
+.is-style-si-join-role > ol > li > a:first-child::after { content: ""; position: absolute; inset: 0; }
+.is-style-si-join-role > ol > li:hover { transform: translateY(-3px); box-shadow: var(--si-shadow-2); }
+.is-style-si-join-role > ol > li:hover > a:first-child { color: var(--si-accent); }
+.is-style-si-join-role > ol > li:focus-within { box-shadow: var(--si-focus-ring); }
+.is-style-si-join-role > ol > li > a:first-child:focus-visible { outline: none; }
+.si-join__count { font-variant-numeric: tabular-nums; }
+@media (max-width: 689.98px) {
+	.is-style-si-join-role > ol > li::after { display: none; }
+}
+
+/* the sign-up, for whoever the reader is */
+.wp-block-group.is-style-si-join-then {
+	margin-top: var(--si-space-l);
+	padding: var(--si-space-m) 0 0;
+	border-top: 2px solid var(--si-ink);
+}
+.is-style-si-join-then > p { margin: 0 0 .6em; }
+
+/* ---- enhanced: one row of choices, one path at a time ------------------ */
+.is-style-si-join.is-enhanced > .is-style-si-join-role:not(.is-chosen),
+.is-style-si-join.is-enhanced:not(.has-choice) > .is-style-si-join-then,
+.is-style-si-join.is-enhanced.has-choice > p.si-js-only { display: none; }
+/* the chosen field's name is already in the headline and the row: keep it for screen readers only */
+.is-style-si-join.is-enhanced > .is-style-si-join-role > h2 {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+.is-style-si-join.is-enhanced > .is-style-si-join-role.is-chosen > ol > li { animation: si-join-step var(--si-dur-3) var(--si-ease) both; }
+.is-style-si-join.is-enhanced > .is-style-si-join-role.is-chosen > ol > li:nth-child(2) { animation-delay: 90ms; }
+.is-style-si-join.is-enhanced > .is-style-si-join-role.is-chosen > ol > li:nth-child(3) { animation-delay: 180ms; }
+@keyframes si-join-step { from { opacity: 0; transform: translateY(10px); } }
+
+@media (prefers-reduced-motion: reduce) {
+	.si-join__slot.is-in,
+	.is-style-si-join.is-enhanced > .is-style-si-join-role.is-chosen > ol > li { animation: none; }
+}

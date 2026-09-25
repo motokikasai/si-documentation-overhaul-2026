@@ -87,6 +87,29 @@ nothing is written: re-translate that entry first. The Legal document group also
 The Impressum's line naming who is responsible for the German-language part stays, translated,
 until the English part has a named responsible person of its own.
 
+## Join · Your Part (0.7.0, 2026-09-25)
+
+`inc/join.php` carries the Tier-1 Join page (draft C) as core blocks, pattern **`si/join-roles`**
+(category *Schiller pages*): a Group **"Join page"** (`is-style-si-join`, `templateLock:
+contentOnly`) holding the eyebrow, the headline `I am <em>a scientist</em>`, the Institute's call
+from the Contact page (verbatim, page 895) with its Source, one Group **"Join role"**
+(`is-style-si-join-role`) per field — a Heading and an ordered List of three links — a
+`si-js-only` hint, and a Group **"Join: then"** with the sign-up button.
+
+- **With JS off** every field and its path are on the page. `assets/js/join.js` turns the field
+  headings into a row of choices and shows one path at a time; it types the fields into the
+  headline's italic part, in the form the editor wrote there (`a scientist` → `an engineer`;
+  a German `Wissenschaftler` keeps its capital). A new field is one more "Join role" group —
+  no code.
+- **Computed:** a step that links to `/topic/{slug}/` shows the topic's published Articles in the
+  page's language (`WP_Query`, cached per language, cleared on save/delete/re-tag). No number
+  is typed anywhere on the page; the draft's "37 nations", "81 episodes" and "167 weeks running"
+  were dropped, and the Friday step says "Weekly — the newsletter carries the day".
+- **Sign-up:** a link out to `https://schillerinstitute.nationbuilder.com/join`, the NationBuilder
+  page the live site already sends `/sign-up/` to. The role is not passed to NationBuilder.
+- `tools/create-join-page.php [apply]` makes the English `/join/` from the pattern (report without
+  `apply`); it never writes over an existing page.
+
 ## Deploy to si-v4
 
 ```bash
@@ -110,6 +133,7 @@ Run in Local → Open Site Shell, from the site root (the shell is cmd — use `
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/post-languages.php [repair <csv>]` | diagnoses WPML's post translation; `repair` restores each post's real language from the dump's CSV |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/import-photo-focus.php [apply]` | writes the portraits' face positions from `photo-focus.csv`; report only without `apply`, never overwrites an editor's value |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/create-legal-pages.php [preview\|remove-preview\|publish\|translate-en-report\|translate-en]` | the German legal texts from page 1963 as blocks, word for word (report without an argument); `publish` → `/de/datenschutz/` and page 1963; `translate-en` → the English convenience translation in `/privacy-policy/` and `/legal-notice/` (`translate-en-report` checks it without writing). Take `wp db export` first |
+| `wp eval-file wp-content/plugins/schiller-editorial/tools/create-join-page.php [apply]` | makes the English `/join/` page from the pattern `si/join-roles` (report without `apply`); refuses if a page already holds `join` |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/check-profile-fields.php [label]` | read-only: every `si_person`'s six fields as counts and one fingerprint (unchanged fingerprint = no value changed), the people who have any, and which file registers the meta and hooks the box, the save and the guide. |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/check-invitation.php [label]` | read-only: the option → the invitation pattern (type, status, content hash), its WPML translations, how many copies exist (must be 1), and whether the theme or the plugin defines the functions. With a label, saves `backups/invitation-check-<label>.txt`. |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/check-wpml-config.php [label]` | read-only: for every type, taxonomy and field declared in `wpml-config.xml`, the mode WPML has stored and whether it is locked by a config file; the config files WPML would read. With a label, saves `backups/wpml-config-check-<label>.txt`. |
