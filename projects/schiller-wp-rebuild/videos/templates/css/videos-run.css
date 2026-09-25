@@ -1,0 +1,113 @@
+/* ==========================================================================
+   /videos/ draft B — the Run
+   --------------------------------------------------------------------------
+   Time-first. A year is a spine (the number, the count, a weight bar) and a
+   rail of twelve months whose heights are that year's own months. The page is
+   a chart before it is a list: 1 video in 2015, 386 in 2021, and the reader
+   can see the pandemic years without being told about them.
+   ========================================================================== */
+
+.vi-years { padding-bottom: var(--si-space-3xl); }
+
+/* ---- a year --------------------------------------------------------------- */
+.vi-year {
+	display: grid;
+	grid-template-columns: minmax(150px, 190px) minmax(0, 1fr);
+	grid-template-areas: "spine rail" "spine body";
+	gap: var(--si-space-2xs) var(--si-space-l);
+	padding-block: var(--si-space-l);
+	border-top: var(--si-hairline);
+}
+.vi-year:first-child { border-top: 0; }
+.vi-year.is-open { background: linear-gradient(to bottom, var(--si-card), transparent 40%); }
+
+.vi-year__spine { grid-area: spine; position: sticky; top: var(--si-space-3xl); align-self: start; display: grid; gap: var(--si-space-3xs); }
+.vi-year__no { display: grid; gap: .1em; justify-items: start; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
+.vi-year__digits {
+	font-family: var(--si-font-serif);
+	font-optical-sizing: auto;
+	font-size: var(--si-step-4);
+	font-weight: var(--si-weight-display);
+	line-height: 1;
+	letter-spacing: var(--si-track-display);
+	color: var(--si-ink);
+	transition: color var(--si-dur-1) var(--si-ease);
+}
+.vi-year__no:is(:hover, :focus-visible) .vi-year__digits { color: var(--si-accent); }
+.vi-year__count { font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); }
+.vi-year.is-open .vi-year__digits { color: var(--si-accent); }
+
+/* the year's share of the busiest year, as one quiet rule */
+.vi-year__weight { display: block; height: 3px; background: var(--si-rule); position: relative; }
+.vi-year__weight::before { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--w); background: var(--si-accent); }
+.vi-year.is-open .vi-year__weight::before { background: var(--si-brass); }
+
+/* ---- the months ----------------------------------------------------------- */
+.vi-rail {
+	grid-area: rail;
+	display: grid;
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+	gap: 3px;
+	align-items: end;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	height: 74px;
+}
+.vi-rail__cell { display: grid; grid-template-rows: minmax(0, 1fr) auto; align-items: end; gap: 2px; height: 100%; }
+.vi-rail__bar {
+	display: block;
+	width: 100%;
+	height: var(--h, 8%);
+	align-self: end;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	background: color-mix(in srgb, var(--si-accent) 30%, transparent);
+	transition: background var(--si-dur-1) var(--si-ease), height var(--si-dur-2) var(--si-ease);
+}
+.vi-rail__bar:is(:hover, :focus-visible) { background: var(--si-accent); }
+.vi-rail__bar.is-none { height: 2px; background: var(--si-rule); cursor: default; }
+.vi-rail__cell.is-on .vi-rail__bar { background: var(--si-brass); }
+.vi-rail__m { font-family: var(--si-font-sans); font-size: var(--si-step-n2); color: var(--si-muted); text-align: center; line-height: 1.4; }
+.vi-rail__cell.is-on .vi-rail__m { color: var(--si-ink); font-weight: 600; }
+
+/* ---- what a year shows ------------------------------------------------------ */
+.vi-year__body { grid-area: body; min-width: 0; }
+.vi-glance {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: var(--si-space-2xs) var(--si-space-s);
+	align-items: start;
+	padding-top: var(--si-space-xs);
+}
+.vi-glance .vi-more { grid-column: 1 / -1; justify-self: end; background: none; border: 0; padding: 0; cursor: pointer; }
+
+.vi-month { padding-top: var(--si-space-s); }
+.vi-month__h {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--si-space-s);
+	margin: 0 0 var(--si-space-3xs);
+	font-family: var(--si-font-sans);
+	font-size: var(--si-step-n1);
+	font-weight: 600;
+	letter-spacing: var(--si-track-caps);
+	text-transform: uppercase;
+	color: var(--si-ink);
+}
+.vi-month__n { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--si-muted); }
+.vi-month__all { margin: var(--si-space-s) 0 0; }
+.vi-month__all .vi-more { background: none; border: 0; padding: 0; cursor: pointer; }
+
+@media (max-width: 900px) {
+	.vi-year { grid-template-columns: minmax(0, 1fr); grid-template-areas: "spine" "rail" "body"; gap: var(--si-space-2xs); }
+	.vi-year__spine { position: static; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: var(--si-space-s); }
+	.vi-year__no { grid-template-columns: auto auto; align-items: baseline; gap: .5em; }
+	.vi-year__digits { font-size: var(--si-step-3); }
+	.vi-glance { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+	.vi-rail { height: 56px; }
+}

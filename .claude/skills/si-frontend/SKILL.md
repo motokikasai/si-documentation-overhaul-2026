@@ -47,6 +47,7 @@ people-specific. `tokens.css` is the authority; read its header before changing 
 | `/blog/` | Ledger · Drift · Broadsheet | **Ledger** (titled *Articles*) | `articles/wp/` |
 | `/conferences/{slug}/` | Proceedings · Marquee · Rostrum · Thread · Atrium | — | not yet ported |
 | `/videos/{slug}/` | Programme · Reading Desk · Echo · Constellation · Almanac | **Programme** | `videos/wp/` (step 1 on si-v4 2026-09-25; no captions yet) |
+| `/videos/` (archive) | Shelf · Run · Desk | — | drafts only (`videos/README.md` §17) |
 | `/conferences/` (archive) | Gallery · Firmament · Programme | — | `landing/` (pre-Jasper) |
 | any Page (`page.php`) | Folio · Pavilion · Codex | — | not yet ported |
 | Home, below the hero | round 1 (Record · Cross-Examination · Corridor) rejected; round 2 = five wireframes in `pages/wireframes/` | — | not yet ported |

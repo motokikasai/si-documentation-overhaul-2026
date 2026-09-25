@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.add('js')</script>
 <title>Video Drafts — Schiller Institute</title>
-<meta name="description" content="Five drafts of the individual video page, /videos/{slug}/, on the Jasper design system, each dressed with four real records from the archive.">
+<meta name="description" content="The drafts of the video wing: five of the individual page /videos/{slug}/ and three of the archive index /videos/, on the Jasper design system, dressed with real records.">
 <link rel="stylesheet" href="../people/design-system/fonts.css">
 <link rel="stylesheet" href="../people/design-system/tokens.css">
 <link rel="stylesheet" href="../people/design-system/blocksy-shim.css">
@@ -50,7 +50,7 @@
 			words were said.</p>
 		<dl class="si-figures">
 			<div class="si-figure"><dt>Videos after the reviewed classification</dt><dd class="si-tabular">1,212</dd></div>
-			<div class="si-figure"><dt>with English captions</dt><dd class="si-tabular">207</dd></div>
+			<div class="si-figure"><dt>with English captions</dt><dd class="si-tabular">216</dd></div>
 			<div class="si-figure"><dt>with published chapters</dt><dd class="si-tabular">159</dd></div>
 			<div class="si-figure"><dt>with an EN/DE twin in WPML</dt><dd class="si-tabular">571</dd></div>
 			<div class="si-figure"><dt>words of captions, searchable</dt><dd class="si-tabular">1.0 M</dd></div>
@@ -81,12 +81,35 @@
 	</section>
 
 	<section>
+		<p class="si-eyebrow si-eyebrow--ruled">/videos/ · the archive index · 2026-09-25</p>
+		<h2 class="si-display">Three ways into a thousand broadcasts</h2>
+		<p>The wing is 1,212 records, and 751 of them are one weekly dialogue: a flat reverse-chronological list is a thousand
+			near-identical rows. Each draft answers that shape differently. All three share one index layer
+			(<code>videos-core.js</code>), read the same <code>videos.json</code>, keep their filters in the address bar, and
+			page the long lists rather than asking YouTube for a thousand stills at once.</p>
+		<ul class="drafts" role="list">
+			<li><span class="letter">A</span><a class="title" href="templates/videos-shelf.html">The Shelf</a><span class="dial">series-first</span>
+				<p>A band per series — its span, its count, its latest six, and the door to the whole of it — plus one shelf for the
+					154 videos that belong to no series. Browsing never meets the thousand rows; opening a series gives every one of them.</p>
+				<span class="also"><a href="templates/videos-shelf.html?series=weekly-webcast-hzl">the weekly dialogue, all 751</a><a href="templates/videos-shelf.html?cc=1">only what can be read</a></span></li>
+			<li><span class="letter">B</span><a class="title" href="templates/videos-run.html">The Run</a><span class="dial">time-first</span>
+				<p>Eleven years as eleven rails, each a year and each cell a month drawn to its own count. The Institute’s output is
+					wildly uneven — 1 video in 2015, 386 in 2021 — and that unevenness is the page. Pick a year, or one month of it.</p>
+				<span class="also"><a href="templates/videos-run.html?year=2021">2021, the peak</a><a href="templates/videos-run.html?series=daily-beethoven">Daily Beethoven through the years</a></span></li>
+			<li><span class="letter">C</span><a class="title" href="templates/videos-desk.html">The Desk</a><span class="dial">search-first</span>
+				<p>The field is the page, and it searches what was <em>said</em>: 216 transcripts behind the stills. An answer is the
+					sentence and the second it was spoken at, linked to open the video already at that moment.</p>
+				<span class="also"><a href="templates/videos-desk.html?q=Glass-Steagall">“Glass-Steagall”</a><a href="templates/videos-desk.html?q=Ukraine">“Ukraine”</a><a href="templates/videos-desk.html?q=Beethoven">“Beethoven”</a></span></li>
+		</ul>
+	</section>
+
+	<section>
 		<p class="si-eyebrow si-eyebrow--ruled">The four worked records</p>
 		<h2 class="si-display">The shapes a video record comes in</h2>
 		<table class="t">
 			<thead><tr><th>Record</th><th>Shape</th><th>What it holds</th><th class="n">In the archive</th></tr></thead>
 			<tbody>
-				<tr><td>Weekly dialogue, 8 Oct 2024</td><td>a</td><td>captions (unpunctuated) · 20 chapters · long description · DE twin · an invitation to send questions</td><td class="n">207 captioned</td></tr>
+				<tr><td>Weekly dialogue, 8 Oct 2024</td><td>a</td><td>captions (unpunctuated) · 20 chapters · long description · DE twin · an invitation to send questions</td><td class="n">216 captioned</td></tr>
 				<tr><td>Ted Postol interview, 27 May 2025</td><td>a</td><td>punctuated captions · 17 chapters · 83 minutes · a guest on /people/</td><td class="n">20 punctuated</td></tr>
 				<tr><td>Daily Beethoven No. 31, 4 Feb 2021</td><td>c</td><td>no YouTube metadata · the body names composers and works · a title it shares, letter for letter, with 20 other episodes</td><td class="n">~870 body-only</td></tr>
 				<tr><td>Webcast No. 49, 10 Aug 2018</td><td>d</td><td>a title, a date, an embed and 21 words</td><td class="n">the older half</td></tr>

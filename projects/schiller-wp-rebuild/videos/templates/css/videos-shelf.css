@@ -1,0 +1,54 @@
+/* ==========================================================================
+   /videos/ draft A — the Shelf
+   --------------------------------------------------------------------------
+   Series-first. Each band is a series: its name, its span, its latest run of
+   six, and the door to the whole of it. Opening one band turns the page into
+   that series' list, so a reader who wants all 751 gets them and a reader who
+   is browsing never does. Only vi-/si- classes; nothing here redefines a token.
+   ========================================================================== */
+
+.vi-shelves { padding-bottom: var(--si-space-3xl); }
+
+/* the run of stills inside a band: a real row on a wide screen, a swipe on a
+   narrow one — no carousel buttons, no autoplay, nothing that moves by itself */
+.vi-run {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: minmax(0, 1fr);
+	gap: var(--si-space-s);
+}
+.vi-shelf[data-series=""] .vi-run {
+	grid-auto-flow: row;
+	grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+}
+
+@media (max-width: 900px) {
+	.vi-run {
+		grid-auto-columns: 62%;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-padding-inline: var(--si-gutter);
+		margin-inline: calc(-1 * var(--si-gutter));
+		padding-inline: var(--si-gutter);
+		padding-bottom: var(--si-space-2xs);
+		scrollbar-width: thin;
+	}
+	.vi-run > * { scroll-snap-align: start; }
+	.vi-shelf[data-series=""] .vi-run { grid-auto-flow: row; grid-auto-columns: auto; overflow: visible; margin-inline: 0; padding-inline: 0; }
+	.vi-shelf[data-series=""] .vi-run { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+}
+
+/* The band head reads as a shelf label: the series, then what is on it. */
+.vi-band__head h2 { max-width: 28ch; }
+.vi-more {
+	background: none;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+}
+
+/* The latest episode of a series is the one worth a larger still. */
+.vi-shelf[data-series]:not([data-series=""]) .vi-run > .vi-card:first-child .vi-card__title { font-size: var(--si-step-1); }
+
+/* An opened series: the list, and the way back. */
+.vi-shelves .vi-band .vi-rows { margin-top: var(--si-space-2xs); }

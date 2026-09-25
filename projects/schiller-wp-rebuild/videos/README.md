@@ -29,7 +29,7 @@ Measured over the 2026-09-08 dump and the reviewed `classification.csv` (effecti
 | published posts that become `si_video` | **1,212** | EN 805 · DE 407 |
 | …that embed a YouTube id | 1,170 | the first `<iframe>`; an id inside `<a>` is a citation |
 | …whose YouTube record is in the 2026-07 audit | 304 | description, duration, chapters |
-| …with English automatic captions on disk | **207** | `incoming/yt-dump/subs/`, word-timed |
+| …with English automatic captions on disk | **216** | `incoming/yt-dump/subs/`, word-timed (207 before `/live/` ids were matched) |
 | …of which punctuated | 20 | everything before 2025 is one unbroken lower-case stream |
 | …with chapters published in the description | 159 | three or more, "Untitled" ones dropped |
 | …with a reviewed topic | 350 | |
@@ -110,7 +110,7 @@ has just watched it is the likeliest person on the site to take part in the next
 ```
 videos.json        1,212 videos — the wing's index (a REST query in WP)               ~0.7 MB
 video-<key>.json   four worked records                                               5–180 KB
-corpus.json        207 caption tracks as sentences + seconds (lazy; a REST endpoint)  5.9 MB
+corpus.json        216 caption tracks as sentences + seconds (lazy; a REST endpoint)  6.2 MB
 land.json          dot-resolution land mask, from the si-hero-earth texture
 ```
 
@@ -120,7 +120,7 @@ Sources: `articles/build/.cache/articles-full.json` (the dump), `incoming/classi
 
 ### Findings worth carrying back to the migration
 
-- **The captions can fill `transcript` / `transcript_auto` on import.** 207 videos have them
+- **The captions can fill `transcript` / `transcript_auto` on import.** 216 videos have them
   on disk already; `parse_vtt()` here reads YouTube's rolling word-timed format correctly
   (only word-timed lines are new text).
 - **The editors pasted the YouTube description into the post body.** Showing both repeats
@@ -180,7 +180,7 @@ the chapter changes, and pauses for five seconds after any wheel, touch, key or 
   `corpus.json` becomes a REST search endpoint; `videos.json` a paged REST query for the
   Almanac's wall. The derived fields (terms, echoes, people-at-seconds, places) should be
   computed at import into post meta, not per request.
-- **Captions in German.** The 207 tracks are English; German broadcasts get the same
+- **Captions in German.** The 216 tracks are English; German broadcasts get the same
   treatment once German captions are fetched.
 - **`/videos/` archive and topic landing pages** — the links exist (`/videos/?series=`,
   `/topics/{slug}/`), the pages do not.
@@ -255,7 +255,7 @@ YouTube. The sources are:
 | On the page | Source for a new video | Source for the archive (one-time import) |
 |---|---|---|
 | chapters | timestamp lines in the post text (`body_chapters()`: ≥ 3, rising) | the 2026-07 download, where the text has none |
-| captions, read-along, people/places *with seconds*, words, "said elsewhere" | a caption file (.vtt/.srt) the editor downloads from YouTube Studio and uploads | the 207 files already in `incoming/yt-dump/subs/` |
+| captions, read-along, people/places *with seconds*, words, "said elsewhere" | a caption file (.vtt/.srt) the editor downloads from YouTube Studio and uploads | the 216 files already matched in `incoming/yt-dump/subs/` |
 | running time | the caption file's last cue (or the player, once pressed) | the 2026-07 download |
 | the "send your question" invitation | the post text | the post text, else the imported description |
 | everything else | WordPress: title, text, date, series, topics, WPML, person records | same |
@@ -505,3 +505,88 @@ slug) across all 4,140 published bodies:
 The first three are ordinary words and are excluded; the fourth is a real surname an
 editor once left uncapitalised, and stays. **The cut is 15**, in `NOT_SURNAMES` in both
 `build-video-data.py` and `video-data.php`. Re-measure by re-running the builder.
+
+## 17. `/videos/` — the archive index, three drafts (2026-09-25)
+
+The wing is **1,212 records and 751 of them are one weekly dialogue**; with the 224
+Schlanger updates that is 80% of the archive in two series. A flat reverse-chronological
+list — which is what the site has today — is a thousand near-identical rows. Each draft
+answers that shape a different way, and all three are built on one shared layer.
+
+| | Draft | The unit | The argument |
+|---|---|---|---|
+| A | **the Shelf** (`videos-shelf.html`) | the series | a band per series with its span, its count, its latest six and the door to all of it; one more shelf for the 154 videos in no series. Browsing never meets the thousand rows. |
+| B | **the Run** (`videos-run.html`) | the year | eleven rails, a cell per month drawn to its own count. The output is wildly uneven (1 video in 2015, 386 in 2021) and the unevenness *is* the page. |
+| C | **the Desk** (`videos-desk.html`) | the question | the field is the page, and it searches the 216 transcripts: an answer is the sentence and the second it was spoken, linked to open the video at that moment. |
+
+### The shared layer
+
+`templates/js/videos-core.js` + `templates/css/videos-index.css` carry everything the three
+have in common, so a choice between them is a choice of *structure*, not of plumbing:
+
+- `loadIndex()` / `loadCorpus()` — the index (0.7 MB) on load, the corpus (6.2 MB) only
+  when a draft asks for it. The Desk fetches it on the **first keystroke**, never at first
+  paint, and answers from the titles until it lands.
+- `facets()` — counts only what the record carries: reviewed series and topic terms, the
+  WPML language, whether a caption file is on record. No invented categories.
+- `readState()` / `writeState()` / `apply()` — one state object read from and written to the
+  address bar, so every filtered view is linkable and the back button works.
+- `paginate()` — an IntersectionObserver on a sentinel, 60 rows at a time. 1,212 cards would
+  otherwise be 1,212 requests to `i.ytimg.com`.
+- `cardHTML()` / `rowHTML()` / `marksHTML()` — the tonal still (colour is the reward for
+  attention), and the marks a record *earns*: `captions`, `N chapters`. Nothing else.
+
+### Measured while building these
+
+| | |
+|---|---:|
+| videos in the wing | 1,212 |
+| …in the weekly dialogue with Helga Zepp-LaRouche | 751 |
+| …in the Harley Schlanger update | 224 |
+| …Daily Beethoven / International Peace Coalition | 82 / 1 |
+| …in no series at all | 154 |
+| years covered | 2015–2026 |
+| the thinnest and the fattest year | 1 (2015) · 386 (2021) |
+| with a still | 1,196 |
+| with a reviewed topic | 350 |
+| with a transcript | 216 |
+
+### What each draft would cost to port
+
+All three are a `WP_Query` over `si_video` inside `blocksy:posts-listing:canvas:custom-output`
+— the same seam as `/blog/` — with the facets as query vars, so the server can render the
+first page and the module only enhance it. The Shelf needs one query per series (five) plus
+counts; the Run needs one `post_date` histogram (a single `GROUP BY YEAR(),MONTH()`), cached;
+the Desk needs the corpus as a **REST search endpoint**, because shipping 6.2 MB to the
+browser is a prototype convenience, not a plan. The Desk is therefore the most work and the
+only one that needs something new on the server.
+
+### Honesty about the transcripts
+
+The Desk says on the page that the tracks are YouTube's automatic ones, unedited — the
+wording is the machine's, not the speaker's. 996 of 1,212 broadcasts have no track at all,
+and a search that finds nothing says so rather than implying the archive is silent.
+
+## 16. Open work — the standing list (keep this current)
+
+Tick an item here when it lands, with its date, the way `docs/refactor-plan.md` does.
+Order is a recommendation, not a dependency: **the essentials below get done whichever
+order they are taken in**, and nothing may be dropped silently.
+
+| # | What | Why it matters | Where | Status |
+|---|---|---|---|---|
+| V1 | **`/videos/` archive** and the `si_series` archive | every "All 384 episodes" link and the site menu point at Blocksy's default listing today | §17 · three drafts | **drafts done 2026-09-25 — awaiting a choice** |
+| V2 | **German wording** for the kit's 58 strings (`si.pot` → `de_DE`) | a German page still reads "Published", "Series", "Programme" in English | the Institute's wording, not ours | open |
+| V3 | **The importer's `/live/` fix** — one line in `SI_Text::yt_id()` (`si-migrate.php`) + re-run the field pass over 24 records | those 24 videos ship with no player at all | migration side | open |
+| V4 | **"Said elsewhere"** — the archive-wide word index, built at import | the Programme's one section that the kit cannot render | kit + import | open |
+| V5 | **German captions** | the 216 tracks are English; a German broadcast has none | needs the files first | open |
+| V6 | **The `si_series` term names are English on German pages** ("Weekly Webcast with Helga Zepp-LaRouche" above German text) | WPML term translation, not the kit's to invent | WPML | open |
+| V7 | **Post-type labels** ("Press Coverage") untranslated in the fortnight list | WPML String Translation | WPML | open |
+| V8 | **The prototype/kit divergence check** — both now read a surname the same way; keep them that way when either changes | a rule that drifts silently is worse than no rule | both | watch |
+
+Two standing cautions, not tasks:
+
+- **Everything is si-v4 only.** Nothing here has been near production, and the caption
+  files on si-v4 are the lab's, not an editor's work.
+- **The lab staging** (`si-captions/`, `si-attach-captions.php`, `si-backfill-hosts.php`)
+  lives in the site root and should be deleted when no longer wanted.
