@@ -65,7 +65,9 @@ numbered clauses). The paragraphs before §1 go into a clause with no heading. `
 preview pages (`/de/si-preview-*`) and never touches 1963; `remove-preview` deletes them.
 `publish` (decided 2026-09-25) puts them where they live: the Datenschutzerklärung as the **WPML
 German translation of `/privacy-policy/` at `/de/datenschutz/`**, and the Impressum **in page 1963
-itself** (`/de/impressum-2/` keeps its address). Page 1963's original text is saved once to its meta
+itself**, at **`/de/impressum/`**: its old `-2` came from page 1958, an English Impressum draft holding
+`impressum` since 2013, which now takes `legal-notice` (the English page, owed); `/de/impressum-2/`
+301s to the new address. Page 1963's original text is saved once to its meta
 `_si_legal_source`, and every run converts from that copy. Why not `/de/privacy-policy/`: WPML on
 si-v4 does not route one page slug in two languages (tested — the German address 404'd), so that
 address 301s to `/de/datenschutz/` (`sessions/…/incoming/redirect-patterns.csv`). Why the tool

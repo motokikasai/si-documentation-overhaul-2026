@@ -30,7 +30,12 @@
  *                         languages (tested 2026-09-25, the German address 404'd), and German readers
  *                         expect "Datenschutz". /de/privacy-policy/ → /de/datenschutz/ is a 301 row in
  *                         sessions/…/incoming/redirect-patterns.csv.
- *   Impressum             page 1963 REWRITTEN IN PLACE: it keeps /de/impressum-2/ and every link
+ *   Impressum             page 1963 REWRITTEN IN PLACE, at /de/impressum/. Its old slug
+ *                         "impressum-2" was forced in 2013 by page 1958, an English Impressum that
+ *                         never left draft but held "impressum"; that draft now takes
+ *                         "legal-notice" (the future English page, owed), and 1963 takes
+ *                         "impressum". /de/impressum-2/ → /de/impressum/ is a 301 row in
+ *                         sessions/…/incoming/redirect-patterns.csv (decided 2026-09-25).
  * Page 1963's original text is saved once, to its meta `_si_legal_source`, and every run
  * converts from that copy — after the first publish the page itself holds only the Impressum.
  * WordPress keeps a revision too. Take `wp db export` first. The preview pages are deleted.
@@ -43,6 +48,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 const SI_LEGAL_SOURCE = 1963;
 const SI_LEGAL_PRIVACY_EN = 47684;   // the English /privacy-policy/ the German text translates
 const SI_LEGAL_PRIVACY_DE_SLUG = 'datenschutz';
+const SI_LEGAL_IMPRESSUM_SLUG  = 'impressum';
+const SI_LEGAL_IMPRESSUM_EN_SLUG = 'legal-notice';   // the English Impressum's page, when it exists
 const SI_LEGAL_SPLIT  = '<h2>Datenschutzerklärung</h2>';
 
 /* ------------------------------------------------------------------ conversion */
@@ -250,7 +257,18 @@ if ( $mode === 'publish' ) {
 		wp_update_post( array( 'ID' => $de_id, 'post_name' => SI_LEGAL_PRIVACY_DE_SLUG ) );
 	}
 	WP_CLI::log( 'slug: ' . get_post_field( 'post_name', $de_id ) );
-	// 2 · the Impressum: page 1963, rewritten in place (the switch needs both addresses first)
+	// 2 · the Impressum's address: free "impressum" from the English draft, then give it to 1963
+	$imp_tr = (array) apply_filters( 'wpml_get_element_translations', null, apply_filters( 'wpml_element_trid', null, SI_LEGAL_SOURCE, 'post_page' ), 'post_page' );
+	$imp_en = isset( $imp_tr['en'] ) ? (int) $imp_tr['en']->element_id : 0;
+	if ( $imp_en && get_post_field( 'post_name', $imp_en ) === SI_LEGAL_IMPRESSUM_SLUG ) {
+		wp_update_post( array( 'ID' => $imp_en, 'post_name' => SI_LEGAL_IMPRESSUM_EN_SLUG ) );
+		WP_CLI::log( "the English Impressum draft #$imp_en: slug " . get_post_field( 'post_name', $imp_en ) . ' (status ' . get_post_status( $imp_en ) . ', text untouched)' );
+	}
+	if ( get_post_field( 'post_name', SI_LEGAL_SOURCE ) !== SI_LEGAL_IMPRESSUM_SLUG ) {
+		wp_update_post( array( 'ID' => SI_LEGAL_SOURCE, 'post_name' => SI_LEGAL_IMPRESSUM_SLUG ) );
+	}
+	WP_CLI::log( 'the Impressum #' . SI_LEGAL_SOURCE . ': slug ' . get_post_field( 'post_name', SI_LEGAL_SOURCE ) );
+	// 3 · the Impressum's text: page 1963, rewritten in place (the switch needs both addresses first)
 	$switch = array( $docs['privacy']['title'] => get_permalink( $de_id ), $docs['impressum']['title'] => get_permalink( SI_LEGAL_SOURCE ) );
 	foreach ( array( 'privacy' => $de_id, 'impressum' => SI_LEGAL_SOURCE ) as $key => $id ) {
 		wp_update_post( wp_slash( array( 'ID' => $id, 'post_content' => si_legal_page_content( $docs[ $key ], $switch ) ) ) );
@@ -274,7 +292,7 @@ if ( $mode === 'publish' ) {
 if ( $mode !== 'preview' ) {
 	WP_CLI::log( 'publish would: write the German privacy notice as the translation of page ' . SI_LEGAL_PRIVACY_EN . ' (' . get_permalink( SI_LEGAL_PRIVACY_EN ) . ')'
 		. ' — ' . ( ( $d = (int) apply_filters( 'wpml_object_id', SI_LEGAL_PRIVACY_EN, 'page', false, 'de' ) ) && $d !== SI_LEGAL_PRIVACY_EN ? "updating the existing German page #$d" : 'as a new page' )
-		. '; rewrite page ' . SI_LEGAL_SOURCE . ' (' . get_permalink( SI_LEGAL_SOURCE ) . ') as the Impressum; delete the previews.' );
+		. '; rewrite page ' . SI_LEGAL_SOURCE . ' (' . get_permalink( SI_LEGAL_SOURCE ) . ') as the Impressum, at slug "' . SI_LEGAL_IMPRESSUM_SLUG . '" (its English draft taking "' . SI_LEGAL_IMPRESSUM_EN_SLUG . '"); delete the previews.' );
 	$imp = (array) apply_filters( 'wpml_get_element_translations', null, apply_filters( 'wpml_element_trid', null, SI_LEGAL_SOURCE, 'post_page' ), 'post_page' );
 	foreach ( $imp as $code => $t ) {
 		WP_CLI::log( sprintf( '  the Impressum in %s: #%d, %s', $code, $t->element_id, get_post_status( (int) $t->element_id ) ) );

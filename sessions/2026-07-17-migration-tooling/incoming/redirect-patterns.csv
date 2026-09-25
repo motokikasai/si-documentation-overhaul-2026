@@ -9,3 +9,4 @@ source,target,regex,code
 /take-action/,/join/,0,301
 /sign-up/,/join/,0,301
 /de/privacy-policy/,/de/datenschutz/,0,301
+/de/impressum-2/,/de/impressum/,0,301
