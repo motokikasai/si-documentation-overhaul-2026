@@ -78,6 +78,8 @@ What happens to each URL, decided with the front-end work:
 | `/stop-green-fascism/` | **keep**, campaign hub with four children (a stray child already redirects to `/campaign/stop-green-fascism/`) | existing row |
 | `/take-action/` | **retire.** Luxembourgish placeholder text and a dead `[vfb]` form. Its intent — "how do I take part" — is the new `/join/` page | `→ /join/` added to `redirect-patterns.csv` |
 | `/sign-up/` *(not in the eight)* | same: a dead `[vfb id='4']` form with the same intent | `→ /join/` added |
+| `/de/privacy-policy/` *(2026-09-25)* | the German privacy notice is the WPML German translation of `/privacy-policy/`, at **`/de/datenschutz/`** — built by `schiller-editorial/tools/create-legal-pages.php`. Not at `/de/privacy-policy/`: WPML on si-v4 does not route one page slug in two languages (tested: the German address 404'd while the English one kept working), and German readers expect *Datenschutz*. Today `/de/privacy-policy/` shows the English placeholder under `/de/` (WPML's fallback) | `→ /de/datenschutz/` added |
+| `/de/impressum-2/` *(2026-09-25)* | **keep**: page 1963 is rewritten in place as the Impressum (its second half, the privacy notice, moved to `/de/datenschutz/`) | none |
 | `/sdi-30th-anniversary/`, `/new-york-conference-january-26-2013/`, `/international-conference-…/panel-2-…/` | leave to the conference map: if `conference-map.csv` promotes them, §3.3 emits the 301 to `/conferences/{slug}/`; if not, they stay as Pages | per §3.3 |
 
 Why `/take-action/` redirects rather than being reused in place: the canonical URL should

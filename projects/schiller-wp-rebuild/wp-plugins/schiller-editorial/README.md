@@ -63,6 +63,14 @@ document, so a published placeholder ("being updated") stays "owed".
 word, checked on every run** (Impressum 137 words, Datenschutzerklärung 5,043 words in 16
 numbered clauses). The paragraphs before §1 go into a clause with no heading. `preview` makes two
 preview pages (`/de/si-preview-*`) and never touches 1963; `remove-preview` deletes them.
+`publish` (decided 2026-09-25) puts them where they live: the Datenschutzerklärung as the **WPML
+German translation of `/privacy-policy/` at `/de/datenschutz/`**, and the Impressum **in page 1963
+itself** (`/de/impressum-2/` keeps its address). Page 1963's original text is saved once to its meta
+`_si_legal_source`, and every run converts from that copy. Why not `/de/privacy-policy/`: WPML on
+si-v4 does not route one page slug in two languages (tested — the German address 404'd), so that
+address 301s to `/de/datenschutz/` (`sessions/…/incoming/redirect-patterns.csv`). Why the tool
+switches WPML to German first: from WP-CLI, WPML's ID adjustment otherwise swaps page 1963 for its
+English draft (#1958) in `get_permalink()`.
 
 ## Deploy to si-v4
 
@@ -86,7 +94,7 @@ Run in Local → Open Site Shell, from the site root (the shell is cmd — use `
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/create-blog-page.php [apply [all\|de …]\|slugs]` | creates `/blog/` in every language and sets `page_for_posts`; report only without `apply` (details: `articles/README.md`) |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/post-languages.php [repair <csv>]` | diagnoses WPML's post translation; `repair` restores each post's real language from the dump's CSV |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/import-photo-focus.php [apply]` | writes the portraits' face positions from `photo-focus.csv`; report only without `apply`, never overwrites an editor's value |
-| `wp eval-file wp-content/plugins/schiller-editorial/tools/create-legal-pages.php [preview\|remove-preview]` | the German legal texts from page 1963 as blocks, word for word (report without an argument) |
+| `wp eval-file wp-content/plugins/schiller-editorial/tools/create-legal-pages.php [preview\|remove-preview\|publish]` | the German legal texts from page 1963 as blocks, word for word (report without an argument); `publish` → `/de/datenschutz/` and page 1963. Take `wp db export` first |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/check-profile-fields.php [label]` | read-only: every `si_person`'s six fields as counts and one fingerprint (unchanged fingerprint = no value changed), the people who have any, and which file registers the meta and hooks the box, the save and the guide. |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/check-invitation.php [label]` | read-only: the option → the invitation pattern (type, status, content hash), its WPML translations, how many copies exist (must be 1), and whether the theme or the plugin defines the functions. With a label, saves `backups/invitation-check-<label>.txt`. |
 | `wp eval-file wp-content/plugins/schiller-editorial/tools/check-wpml-config.php [label]` | read-only: for every type, taxonomy and field declared in `wpml-config.xml`, the mode WPML has stored and whether it is locked by a config file; the config files WPML would read. With a label, saves `backups/wpml-config-check-<label>.txt`. |

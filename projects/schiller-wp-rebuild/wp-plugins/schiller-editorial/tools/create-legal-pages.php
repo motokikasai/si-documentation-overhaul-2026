@@ -19,15 +19,30 @@
  *   wp eval-file wp-content/plugins/schiller-editorial/tools/create-legal-pages.php                 # report
  *   wp eval-file wp-content/plugins/schiller-editorial/tools/create-legal-pages.php preview         # two preview pages
  *   wp eval-file wp-content/plugins/schiller-editorial/tools/create-legal-pages.php remove-preview  # delete them
+ *   wp eval-file wp-content/plugins/schiller-editorial/tools/create-legal-pages.php publish         # the real pages
  * The preview pages are new pages (slugs si-preview-impressum, si-preview-datenschutz, German
- * in WPML); page 1963 is never touched. Where the real pages go is decided separately.
+ * in WPML); page 1963 is never touched by them.
+ *
+ * publish (decided 2026-09-25):
+ *   Datenschutzerklärung  the German TRANSLATION of the English /privacy-policy/ (page 47684),
+ *                         linked in WPML — created, or updated if it exists — at /de/datenschutz/.
+ *                         Not /de/privacy-policy/: WPML on si-v4 does not route one page slug in two
+ *                         languages (tested 2026-09-25, the German address 404'd), and German readers
+ *                         expect "Datenschutz". /de/privacy-policy/ → /de/datenschutz/ is a 301 row in
+ *                         sessions/…/incoming/redirect-patterns.csv.
+ *   Impressum             page 1963 REWRITTEN IN PLACE: it keeps /de/impressum-2/ and every link
+ * Page 1963's original text is saved once, to its meta `_si_legal_source`, and every run
+ * converts from that copy — after the first publish the page itself holds only the Impressum.
+ * WordPress keeps a revision too. Take `wp db export` first. The preview pages are deleted.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit( "Run with: wp eval-file create-legal-pages.php [preview|remove-preview]\n" );
+	exit( "Run with: wp eval-file create-legal-pages.php [preview|remove-preview|publish]\n" );
 }
 
 const SI_LEGAL_SOURCE = 1963;
+const SI_LEGAL_PRIVACY_EN = 47684;   // the English /privacy-policy/ the German text translates
+const SI_LEGAL_PRIVACY_DE_SLUG = 'datenschutz';
 const SI_LEGAL_SPLIT  = '<h2>Datenschutzerklärung</h2>';
 
 /* ------------------------------------------------------------------ conversion */
@@ -166,11 +181,16 @@ function si_legal_page_content( array $doc, array $switch ): string {
 /* ------------------------------------------------------------------ the run */
 
 $mode = $args[0] ?? 'report';
+/* These are German pages. WP-CLI runs in the site's default language (English), and WPML's
+   "adjust IDs" then swaps page 1963 for its English counterpart (page 1958) in get_permalink()
+   and get_the_title() — the first report printed ?page_id=1958 as the Impressum's address. */
+do_action( 'wpml_switch_language', 'de' );
 $src  = get_post( SI_LEGAL_SOURCE );
 if ( ! $src ) {
 	WP_CLI::error( 'Source page ' . SI_LEGAL_SOURCE . ' not found.' );
 }
-$html = $src->post_content;
+$saved_source = (string) get_post_meta( SI_LEGAL_SOURCE, '_si_legal_source', true );
+$html = $saved_source !== '' ? $saved_source : $src->post_content;   // after publish, 1963 holds only the Impressum
 if ( strpos( $html, '<p' ) === false ) {
 	$html = wpautop( $html );   // a classic page stores its paragraphs as blank lines
 }
@@ -207,8 +227,59 @@ if ( $mode === 'remove-preview' ) {
 	WP_CLI::success( 'Preview pages removed. Page ' . SI_LEGAL_SOURCE . ' was never touched.' );
 	return;
 }
+if ( $mode === 'publish' ) {
+	$en = get_post( SI_LEGAL_PRIVACY_EN );
+	if ( ! $en || $en->post_type !== 'page' ) {
+		WP_CLI::error( 'The English /privacy-policy/ page ' . SI_LEGAL_PRIVACY_EN . ' was not found.' );
+	}
+	$trid  = (int) apply_filters( 'wpml_element_trid', null, SI_LEGAL_PRIVACY_EN, 'post_page' );
+	$de_id = (int) apply_filters( 'wpml_object_id', SI_LEGAL_PRIVACY_EN, 'page', false, 'de' );
+	if ( $saved_source === '' ) {
+		add_post_meta( SI_LEGAL_SOURCE, '_si_legal_source', wp_slash( $src->post_content ), true );
+		WP_CLI::log( 'saved page ' . SI_LEGAL_SOURCE . "'s original text to its meta _si_legal_source" );
+	}
+	kses_remove_filters();
+	// 1 · the German privacy notice, as the translation of /privacy-policy/
+	$postarr = array( 'post_type' => 'page', 'post_status' => 'publish', 'post_title' => $docs['privacy']['title'], 'post_name' => SI_LEGAL_PRIVACY_DE_SLUG, 'post_content' => '' );
+	if ( $de_id && $de_id !== SI_LEGAL_PRIVACY_EN ) {
+		$postarr['ID'] = $de_id;
+	}
+	$de_id = (int) wp_insert_post( wp_slash( $postarr ), true );
+	do_action( 'wpml_set_element_language_details', array( 'element_id' => $de_id, 'element_type' => 'post_page', 'trid' => $trid, 'language_code' => 'de', 'source_language_code' => 'en' ) );
+	if ( get_post_field( 'post_name', $de_id ) !== SI_LEGAL_PRIVACY_DE_SLUG ) {   // an earlier run's slug
+		wp_update_post( array( 'ID' => $de_id, 'post_name' => SI_LEGAL_PRIVACY_DE_SLUG ) );
+	}
+	WP_CLI::log( 'slug: ' . get_post_field( 'post_name', $de_id ) );
+	// 2 · the Impressum: page 1963, rewritten in place (the switch needs both addresses first)
+	$switch = array( $docs['privacy']['title'] => get_permalink( $de_id ), $docs['impressum']['title'] => get_permalink( SI_LEGAL_SOURCE ) );
+	foreach ( array( 'privacy' => $de_id, 'impressum' => SI_LEGAL_SOURCE ) as $key => $id ) {
+		wp_update_post( wp_slash( array( 'ID' => $id, 'post_content' => si_legal_page_content( $docs[ $key ], $switch ) ) ) );
+		$meta = get_post_meta( $id, 'blocksy_post_meta_options', true );
+		$meta = is_array( $meta ) ? $meta : array();
+		update_post_meta( $id, 'blocksy_post_meta_options', array_merge( $meta, array( 'has_hero_section' => 'disabled', 'page_structure_type' => 'type-4' ) ) );
+		$saved = si_legal_words( get_post_field( 'post_content', $id ) );
+		$want  = array_merge( si_legal_words( esc_html( $docs[ $key ]['title'] ) ), array_merge( ...array_map( 'si_legal_words', array_keys( $switch ) ) ), $docs[ $key ]['out'] );
+		WP_CLI::log( sprintf( '%-10s #%d %s — read back %s', $key, $id, get_permalink( $id ), $saved === $want ? 'word for word' : 'DIFFERENT' ) );
+	}
+	kses_init_filters();
+	foreach ( $slugs as $slug ) {
+		if ( $pid = $find( $slug ) ) {
+			wp_delete_post( $pid, true );
+			WP_CLI::log( "deleted the preview $slug (#$pid)" );
+		}
+	}
+	WP_CLI::success( 'Published: the German privacy notice as the translation of /privacy-policy/, and the Impressum in page ' . SI_LEGAL_SOURCE . '.' );
+	return;
+}
 if ( $mode !== 'preview' ) {
-	WP_CLI::success( 'Report only. Rerun with: preview' );
+	WP_CLI::log( 'publish would: write the German privacy notice as the translation of page ' . SI_LEGAL_PRIVACY_EN . ' (' . get_permalink( SI_LEGAL_PRIVACY_EN ) . ')'
+		. ' — ' . ( ( $d = (int) apply_filters( 'wpml_object_id', SI_LEGAL_PRIVACY_EN, 'page', false, 'de' ) ) && $d !== SI_LEGAL_PRIVACY_EN ? "updating the existing German page #$d" : 'as a new page' )
+		. '; rewrite page ' . SI_LEGAL_SOURCE . ' (' . get_permalink( SI_LEGAL_SOURCE ) . ') as the Impressum; delete the previews.' );
+	$imp = (array) apply_filters( 'wpml_get_element_translations', null, apply_filters( 'wpml_element_trid', null, SI_LEGAL_SOURCE, 'post_page' ), 'post_page' );
+	foreach ( $imp as $code => $t ) {
+		WP_CLI::log( sprintf( '  the Impressum in %s: #%d, %s', $code, $t->element_id, get_post_status( (int) $t->element_id ) ) );
+	}
+	WP_CLI::success( 'Report only. Rerun with: preview, or publish' );
 	return;
 }
 
