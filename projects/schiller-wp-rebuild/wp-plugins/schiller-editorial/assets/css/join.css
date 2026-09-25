@@ -100,14 +100,13 @@
 .is-style-si-join-role > ol > li {
 	position: relative;
 	margin: 0 0 0 calc(var(--si-join-n) + var(--si-join-off));
+	isolation: isolate;                   /* the panel (below) sits under the text, inside the card */
 	padding: var(--si-space-s) var(--si-space-m);
-	background: var(--si-card);
-	box-shadow: var(--si-shadow-1);
 	counter-increment: si-join-step;
 	font-family: var(--si-font-sans);
 	font-size: var(--si-step-n2);
 	color: var(--si-muted);
-	transition: transform var(--si-dur-2) var(--si-ease), box-shadow var(--si-dur-2);
+	transition: padding var(--si-dur-2) var(--si-ease);
 }
 .is-style-si-join-role > ol > li::before {
 	content: counter(si-join-step);
@@ -125,7 +124,7 @@
 	background: var(--si-ground);         /* the page's own ground, so the line stops at the ring */
 	font: italic 500 var(--si-step-1) var(--si-font-serif);
 	color: var(--si-brass);
-	transition: transform var(--si-dur-2) var(--si-ease);
+	pointer-events: none;                 /* a number is not part of the card */
 }
 /* the line from this number's centre to the next one's: down the rail */
 .is-style-si-join-role > ol > li::after {
@@ -136,7 +135,7 @@
 	left: calc(-1 * (var(--si-join-off) + var(--si-join-n) / 2) - 0.5px);
 	width: 1px;
 	background: var(--si-brass);
-	transition: transform var(--si-dur-2) var(--si-ease);
+	pointer-events: none;                 /* nor is a line */
 }
 .is-style-si-join-role > ol > li:last-child::after { display: none; }
 
@@ -171,16 +170,24 @@
 	color: var(--si-ink);
 	text-decoration: none;
 }
-/* the whole card is the link */
-.is-style-si-join-role > ol > li > a:first-child::after { content: ""; position: absolute; inset: 0; }
-/* the card lifts; its number and line are drawn by the card, so they are moved back down by
-   the same amount on the same curve — they stay where they are */
-.is-style-si-join-role > ol > li:hover { transform: translateY(-3px); box-shadow: var(--si-shadow-2); }
-.is-style-si-join-role > ol > li:hover::before,
-.is-style-si-join-role > ol > li:hover::after { transform: translateY(3px); }
+/* The white panel is drawn by the link, stretched over the whole card: so the whole card is
+   the link, and the card's hover lift moves only the panel and the text inside it. The list
+   item itself never moves — its number and line are drawn by it, so they never move either
+   (a transform on the item moved them; cancelling it on the pseudo-elements was not reliable). */
+.is-style-si-join-role > ol > li > a:first-child::after {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	inset: 0;
+	background: var(--si-card);
+	box-shadow: var(--si-shadow-1);
+	transition: top var(--si-dur-2) var(--si-ease), bottom var(--si-dur-2) var(--si-ease), box-shadow var(--si-dur-2);
+}
+.is-style-si-join-role > ol > li:hover { padding-block: calc(var(--si-space-s) - 3px) calc(var(--si-space-s) + 3px); }
+.is-style-si-join-role > ol > li:hover > a:first-child::after { top: -3px; bottom: 3px; box-shadow: var(--si-shadow-2); }
 .is-style-si-join-role > ol > li:hover > a:first-child { color: var(--si-accent); }
-.is-style-si-join-role > ol > li:focus-within { box-shadow: var(--si-focus-ring); }
 .is-style-si-join-role > ol > li > a:first-child:focus-visible { outline: none; }
+.is-style-si-join-role > ol > li > a:first-child:focus-visible::after { box-shadow: var(--si-focus-ring); }
 .si-join__count { font-variant-numeric: tabular-nums; }
 
 /* the sign-up, for whoever the reader is */

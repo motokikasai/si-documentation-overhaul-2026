@@ -3,7 +3,7 @@
  * Plugin Name:       Schiller Institute — Editorial Toolkit
  * Plugin URI:        https://schillerinstitute.com/
  * Description:       How editors write and present content: page patterns, block styles, field bindings, and the site's WPML translation settings. What the content is (types, taxonomies, fields) lives in the mu-plugin schiller-content-model-v3.
- * Version:           0.7.3
+ * Version:           0.7.4
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Author:            Schiller Institute site rebuild
@@ -30,7 +30,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SCHILLER_EDITORIAL_VERSION', '0.7.3' );
+define( 'SCHILLER_EDITORIAL_VERSION', '0.7.4' );
 define( 'SCHILLER_EDITORIAL_FILE', __FILE__ );
 
 require_once __DIR__ . '/inc/block-styles.php';
