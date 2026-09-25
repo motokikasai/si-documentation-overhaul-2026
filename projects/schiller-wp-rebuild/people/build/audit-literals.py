@@ -34,6 +34,7 @@ SHIPPED = [
     'people/templates/css/person-shared.css', 'people/templates/css/person-portrait.css',
     'articles/templates/css/article-shared.css', 'articles/templates/css/article-leaf.css',
     'articles/templates/css/articles-shared.css', 'articles/templates/css/articles-ledger.css',
+    'videos/templates/css/video-shared.css', 'videos/templates/css/video-programme.css',
     'wp-plugins/si-hero-earth/assets/css/si-hero.css',
     'wp-plugins/si-hero-earth/assets/css/si-hero-editor.css',
     'wp-plugins/schiller-editorial/assets/css/block-styles.css',

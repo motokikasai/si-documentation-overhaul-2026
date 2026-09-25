@@ -74,9 +74,9 @@
 .si-vid-topics a:hover { border-color: var(--si-accent); }
 
 /* ---- 3 · the facade ------------------------------------------------------- */
-.si-vid-embed { position: relative; aspect-ratio: 16 / 9; margin: 0; background: #0b121b; overflow: hidden; isolation: isolate; }
+.si-vid-embed { position: relative; aspect-ratio: 16 / 9; margin: 0; background: var(--si-night); overflow: hidden; isolation: isolate; }
 .si-vid-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.si-vid-embed__btn { position: absolute; inset: 0; display: block; color: #fff; text-decoration: none; }
+.si-vid-embed__btn { position: absolute; inset: 0; display: block; color: var(--si-on-night-hi); text-decoration: none; }
 .si-vid-embed__btn img {
 	width: 100%; height: 100%; object-fit: cover;
 	filter: grayscale(1) contrast(1.05) brightness(.82);
@@ -84,7 +84,7 @@
 }
 .si-vid-embed__btn::after {
 	content: ""; position: absolute; inset: 0;
-	background: linear-gradient(180deg, transparent 45%, rgb(8 14 22 / .7)), var(--si-portrait-tint);
+	background: linear-gradient(180deg, transparent 45%, color-mix(in srgb, var(--si-night) 70%, transparent)), var(--si-portrait-tint);
 	mix-blend-mode: normal; pointer-events: none;
 	transition: opacity var(--si-dur-3) var(--si-ease);
 }
@@ -94,23 +94,23 @@
 	position: absolute; left: 50%; top: 50%; z-index: 2;
 	width: clamp(64px, 8vw, 96px); aspect-ratio: 1; translate: -50% -50%;
 	display: grid; place-items: center; border-radius: 50%;
-	background: rgb(255 255 255 / .1); backdrop-filter: blur(6px);
-	box-shadow: inset 0 0 0 1px rgb(255 255 255 / .6), 0 0 0 7px rgb(255 255 255 / .08), 0 0 0 8px color-mix(in srgb, var(--si-brass) 70%, transparent);
+	background: color-mix(in srgb, var(--si-on-night-hi) 10%, transparent); backdrop-filter: blur(6px);
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--si-on-night-hi) 60%, transparent), 0 0 0 7px color-mix(in srgb, var(--si-on-night-hi) 8%, transparent), 0 0 0 8px color-mix(in srgb, var(--si-brass) 70%, transparent);
 	transition: background var(--si-dur-2) var(--si-ease), scale var(--si-dur-2) var(--si-ease);
 }
-.si-vid-embed__play svg { width: 30%; fill: #fff; margin-left: 8%; }
+.si-vid-embed__play svg { width: 30%; fill: var(--si-on-night-hi); margin-left: 8%; }
 .si-vid-embed__btn:hover .si-vid-embed__play { background: var(--si-accent-deep); scale: 1.04; }
 .si-vid-embed__dur, .si-vid-embed__note {
 	position: absolute; z-index: 2; bottom: 14px;
 	font-family: var(--si-font-sans); font-size: var(--si-step-n2); letter-spacing: .06em;
-	color: #fff; text-shadow: 0 1px 2px rgb(0 0 0 / .5);
+	color: var(--si-on-night-hi); text-shadow: var(--si-shadow-text-photo);
 }
 .si-vid-embed__dur { right: 16px; font-weight: 600; }
 .si-vid-embed__note { left: 16px; right: 90px; text-transform: uppercase; letter-spacing: var(--si-track-caps); opacity: .9; }
 .si-vid-privacy { margin: .6em 0 0; font-family: var(--si-font-sans); font-size: var(--si-step-n2); color: var(--si-muted); }
 
 /* ---- 4 · the time bar ----------------------------------------------------- */
-.si-vid-bar { display: grid; gap: 4px; user-select: none; }
+.si-vid-bar { display: grid; gap: var(--si-space-3xs); user-select: none; }
 .si-vid-bar__track {
 	position: relative; height: 22px; cursor: pointer;
 	background: linear-gradient(var(--si-rule), var(--si-rule)) 0 50% / 100% 1px no-repeat;
@@ -127,7 +127,7 @@
 .si-vid-bar__tick.is-soft { background: color-mix(in srgb, var(--si-accent) 40%, transparent); }
 .si-vid-bar__head { position: absolute; top: -2px; bottom: -2px; width: 2px; margin-left: -1px; background: var(--si-brass); left: 0; opacity: 0; transition: left 240ms linear; }
 .si-vid-bar.is-live .si-vid-bar__head { opacity: 1; }
-.si-vid-bar__scale { display: flex; justify-content: space-between; font-family: var(--si-font-sans); font-size: 11px; color: var(--si-muted); }
+.si-vid-bar__scale { display: flex; justify-content: space-between; font-family: var(--si-font-sans); font-size: var(--si-step-n2); color: var(--si-muted); }
 
 /* ---- 5 · chapters --------------------------------------------------------- */
 .si-vid-chapters { list-style: none; margin: 0; padding: 0; counter-reset: ch; }
@@ -174,7 +174,7 @@ mark.si-vid-hit { background: color-mix(in srgb, var(--si-brass) 45%, transparen
 	background: color-mix(in srgb, var(--si-accent) 8%, transparent);
 	transition: background var(--si-dur-1) var(--si-ease), color var(--si-dur-1) var(--si-ease);
 }
-.si-vid-seek:hover { background: var(--si-accent); color: #fff; }
+.si-vid-seek:hover { background: var(--si-accent); color: var(--si-on-accent); }
 .si-vid[data-ground="night"] .si-vid-seek:hover, .si-vid-night .si-vid-seek:hover { color: var(--si-night); }
 .si-vid-more { font-family: var(--si-font-sans); font-size: var(--si-step-n2); color: var(--si-muted); }
 
@@ -279,23 +279,7 @@ mark.si-vid-hit { background: color-mix(in srgb, var(--si-brass) 45%, transparen
 .si-vid-body :where(p):last-child { margin-bottom: 0; }
 .si-vid-body__src { font-family: var(--si-font-sans); font-size: var(--si-step-n2) !important; letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-muted); }
 
-/* ---- 14 · the review strip (prototype only) ------------------------------ */
-.si-draft-strip {
-	position: fixed; inset-block-end: 0; inset-inline: 0; z-index: 90;
-	display: flex; flex-wrap: wrap; align-items: center; gap: .1em .75em;
-	padding: .5em var(--si-space-s);
-	background: color-mix(in srgb, #0F1A26 94%, transparent);
-	color: #9FB3C7; font-family: var(--si-font-sans); font-size: var(--si-step-n2);
-	letter-spacing: .02em; backdrop-filter: blur(6px);
-}
-.si-draft-strip a { color: #D8E2EC; text-decoration: none; border-bottom: 1px solid transparent; }
-.si-draft-strip a:hover { border-bottom-color: currentColor; }
-.si-draft-strip b { color: #C9A866; font-weight: 600; }
-.si-draft-strip .sep { width: 1px; height: 1em; background: #35485E; }
-.si-vid .ct-footer { padding-bottom: 88px; }
-@media print { .si-draft-strip { display: none; } }
-
-/* ---- 15 · a toast for "copied" ------------------------------------------- */
+/* ---- 14 · a toast for "copied" ------------------------------------------- */
 .si-vid-toast {
 	position: fixed; left: 50%; bottom: 64px; z-index: 95; translate: -50% 12px; opacity: 0;
 	padding: .6em 1em; background: var(--si-ink); color: var(--si-card); border-radius: var(--si-radius-1);

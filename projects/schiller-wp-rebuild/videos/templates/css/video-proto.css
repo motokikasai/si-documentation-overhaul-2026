@@ -1,0 +1,23 @@
+/* ==========================================================================
+   PROTOTYPE ONLY — never enqueued in WordPress, never copied by package-wp.sh.
+   The strip that switches draft and record at the foot of every draft page is
+   review furniture: it has no place in the shipped stylesheet, and its colours
+   are deliberately outside Jasper's palette so it cannot be mistaken for the
+   design.
+   ========================================================================== */
+
+.si-draft-strip {
+	position: fixed; inset-block-end: 0; inset-inline: 0; z-index: 90;
+	display: flex; flex-wrap: wrap; align-items: center; gap: .1em .75em;
+	padding: .5em var(--si-space-s);
+	background: color-mix(in srgb, #0F1A26 94%, transparent);
+	color: #9FB3C7; font-family: var(--si-font-sans); font-size: var(--si-step-n2);
+	letter-spacing: .02em; backdrop-filter: blur(6px);
+}
+.si-draft-strip a { color: #D8E2EC; text-decoration: none; border-bottom: 1px solid transparent; }
+.si-draft-strip a:hover { border-bottom-color: currentColor; }
+.si-draft-strip b { color: #C9A866; font-weight: 600; }
+.si-draft-strip .sep { width: 1px; height: 1em; background: #35485E; }
+.si-vid .ct-footer { padding-bottom: 88px; }
+@media print { .si-draft-strip { display: none; } }
+

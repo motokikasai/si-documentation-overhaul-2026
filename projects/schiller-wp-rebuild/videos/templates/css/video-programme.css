@@ -8,7 +8,7 @@
 .pg-side { display: grid; grid-template-rows: auto minmax(0, 1fr); height: var(--h, auto); min-height: 0; }
 .pg-side .si-vid-h3 { display: flex; justify-content: space-between; gap: 1em; margin-bottom: .6em; }
 .pg-side__n { font-weight: 400; letter-spacing: .04em; text-transform: none; }
-.pg-side__scroll { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--si-rule) transparent; padding-left: 12px; margin-left: -12px; }
+.pg-side__scroll { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--si-rule) transparent; padding-left: var(--si-space-xs); margin-left: calc(-1 * var(--si-space-xs)); }
 .pg-bar { grid-column: 1 / -1; }
 
 .pg-body {
@@ -66,7 +66,7 @@
 /* ---- 2026-09-22 refinements ---------------------------------------------- */
 /* the still in its own colour, untouched; only a thin shade at the foot keeps the running time legible */
 .pg .si-vid-embed__btn img { filter: none; }
-.pg .si-vid-embed__btn::after { background: linear-gradient(180deg, transparent 80%, rgb(8 14 22 / .45)); }
+.pg .si-vid-embed__btn::after { background: linear-gradient(180deg, transparent 80%, color-mix(in srgb, var(--si-night) 45%, transparent)); }
 .pg .si-vid-embed__btn:is(:hover, :focus-visible)::after { opacity: 1; }
 /* around this broadcast: the stills at half their colour, so a row of eight thumbnails does
    not shout; the card under the pointer gets its full colour (colour as the reward, as for
@@ -80,7 +80,7 @@
 .pg-lang { display: inline-flex; gap: 2px; padding: 2px; margin-left: .2em; border-radius: var(--si-radius-1); background: var(--si-panel); }
 .pg-lang__b {
 	display: inline-grid; place-items: center; min-width: 2.4em; height: 24px; padding: 0 .5em;
-	border-radius: 1px; font-family: var(--si-font-sans); font-size: 12px; font-weight: 600; letter-spacing: .06em;
+	border-radius: 1px; font-family: var(--si-font-sans); font-size: var(--si-step-n2); font-weight: 600; letter-spacing: .06em;
 	color: var(--si-muted); text-decoration: none;
 	transition: background var(--si-dur-1) var(--si-ease), color var(--si-dur-1) var(--si-ease);
 }
@@ -168,12 +168,12 @@ a.pg-lang__b:hover { color: var(--si-ink); background: color-mix(in srgb, var(--
 .pg-bar .si-vid-bar__track:hover .pg-bar__ghost { opacity: 1; }
 .pg-bar__tip {
 	position: absolute; bottom: calc(100% + 6px); left: 0; translate: var(--tx, -50%) 0;
-	white-space: nowrap; padding: 3px 8px; border-radius: var(--si-radius-1);
+	white-space: nowrap; padding: 3px var(--si-space-2xs); border-radius: var(--si-radius-1);
 	background: var(--si-ink); color: var(--si-card);
-	font-family: var(--si-font-sans); font-size: 12px; line-height: 1.4;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n2); line-height: 1.4;
 }
-.pg-bar__tip b { font-weight: 600; font-variant-numeric: tabular-nums; margin-right: .5em; color: #C9A866; }
-.pg-bar .si-vid-bar__scale { font-size: 11px; letter-spacing: .04em; }
+.pg-bar__tip b { font-weight: 600; font-variant-numeric: tabular-nums; margin-right: .5em; color: var(--si-brass-on-night); }
+.pg-bar .si-vid-bar__scale { font-size: var(--si-step-n2); letter-spacing: .04em; }
 @media (prefers-reduced-motion: reduce) { .pg-bar__fill, .pg-bar .si-vid-bar__seg::before { transition: none; } }
 
 /* ---- previous · this one · next ---------------------------------------------------- */
@@ -187,9 +187,9 @@ a.pg-lang__b:hover { color: var(--si-ink); background: color-mix(in srgb, var(--
 	position: relative; display: grid; place-items: center; align-content: center;
 	width: 46px; height: 46px; border-radius: 50%;
 	background: var(--si-card); box-shadow: 0 0 0 1px var(--si-card), 0 0 0 2px var(--si-brass);
-	font-family: var(--si-font-serif); font-size: 16px; line-height: 1; color: var(--si-ink); font-variant-numeric: lining-nums;
+	font-family: var(--si-font-serif); font-size: var(--si-step-0); line-height: 1; color: var(--si-ink); font-variant-numeric: lining-nums;
 }
-.pg-pair__dot span { font-family: var(--si-font-sans); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--si-muted); margin-bottom: 2px; }
+.pg-pair__dot span { font-family: var(--si-font-sans); font-size: var(--si-step-n2); letter-spacing: .12em; text-transform: uppercase; color: var(--si-muted); margin-bottom: 2px; }
 .pg-pair .si-vid-card { align-self: center; }
 .si-vid-card.pg-pair__next { grid-template-columns: minmax(0, 1fr) 128px; text-align: right; }
 .si-vid-card.pg-pair__next .si-vid-card__still { order: 2; }

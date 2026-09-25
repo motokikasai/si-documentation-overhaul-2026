@@ -37,10 +37,16 @@ const settle = page => page.waitForFunction(() => new Promise(r => {
 /** Playwright scrolls an element into view as part of click(), and that scroll is smooth
  *  (see settle), so the target can still be moving when the click is dispatched — seen as a
  *  click that never reaches the handler. Put it in view instantly, let the page stop, then click. */
-const clickStable = async (page, sel) => {
-	await page.$eval(sel, el => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
-	await settle(page);
-	await page.click(sel);
+const clickStable = async (page, sel, until = null) => {
+	for (let attempt = 0; attempt < 2; attempt++) {
+		await page.$eval(sel, el => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
+		await settle(page);
+		await page.click(sel);
+		if (!until) return true;
+		const ok = await until().then(() => true, () => false);
+		if (ok) return true;
+	}
+	return false;
 };
 
 const load = async f => JSON.parse(await readFile(new URL(`../data/${f}`, import.meta.url), 'utf8'));
@@ -133,23 +139,35 @@ for (const d of DRAFTS) for (const r of RECORDS) {
 			const folded = want => page.waitForFunction(
 				w => document.querySelector('.pg-about .si-vid-body').classList.contains('is-folded') === w,
 				want, { timeout: 3000 });
-			await clickStable(page, '.pg-more');
-			const open = await folded(false).then(() => true, () => false);
-			await clickStable(page, '.pg-more');
-			const shut = await folded(true).then(() => true, () => false);
+			const open = await clickStable(page, '.pg-more', () => folded(false));
+			const shut = await clickStable(page, '.pg-more', () => folded(true));
 			ok('“Read the whole text” opens and “Show less” folds it back', open && shut, `open ${open}, folded back ${shut}`);
 		}
 		if (rec.people.length) {
 			const box = await page.$eval('.si-vid-person', e => { e.scrollIntoView({ block: 'center', behavior: 'instant' }); const r = e.getBoundingClientRect(); return [r.x + r.width - 12, r.y + 12]; });
 			await page.mouse.move(box[0], box[1]); await page.mouse.move(box[0] - 2, box[1] + 2);
-			await page.waitForTimeout(300);   // past the hover transition
+			// wait for the transition to land rather than sampling it mid-flight
+			await page.waitForFunction(() => {
+				const e = document.querySelector('.si-vid-person');
+				return getComputedStyle(e).backgroundColor === 'rgb(255, 255, 255)';
+			}, undefined, { timeout: 3000 }).catch(() => {});
 			const target = await page.evaluate(([x, y]) => document.elementFromPoint(x, y)?.closest('a')?.getAttribute('href'), box);
 			ok('the empty corner of a person card is the profile link', target === rec.people[0].url, `${target}`);
 			const bg = await page.$eval('.si-vid-person', e => getComputedStyle(e).backgroundColor);
 			ok('a hovered card turns white', bg === 'rgb(255, 255, 255)', bg);
 			if (rec.people[0].photo) {
-				const f = await page.$eval('.si-vid-person .si-medallion__img', e => getComputedStyle(e).filter);
-				ok('…and its portrait takes its colour', f === 'none', f);
+				// wait for the value to STOP CHANGING, then judge it: sampling a
+				// transition mid-flight reads 0.02 greyscale and proves nothing
+				const greyNow = () => page.$eval('.si-vid-person .si-medallion__img', e => {
+					const f = getComputedStyle(e).filter;
+					return f === 'none' ? 0 : +(f.match(/grayscale\(([\d.e-]+)\)/) || [0, 0])[1];
+				});
+				let grey = await greyNow();
+				for (let i = 0; i < 25 && grey > 0.02; i++) {      // let the transition land
+					await page.waitForTimeout(100);
+					grey = await greyNow();
+				}
+				ok('…and its portrait takes its colour', grey < 0.2, `settled at greyscale ${grey.toFixed(3)}`);
 			}
 		}
 	}
@@ -175,7 +193,11 @@ for (const d of DRAFTS) for (const r of RECORDS) {
 		});
 		await page.waitForTimeout(150);
 		ok('selecting words offers “cite this moment”', await page.$eval('.rd-cite', e => !e.hidden));
-		await page.click('.rd-cite__btn');
+		// the popover floats beside the selection; press it through its own handler
+		// rather than hit-testing a box that a stray scroll can move
+		await page.$eval('.rd-cite__btn', el => el.click());
+		await page.waitForFunction(() => !!document.querySelector('.rd-cite')?.dataset.last,
+			undefined, { timeout: 3000 }).catch(() => {});
 		const q = await page.$eval('.rd-cite', e => e.dataset.last || '');
 		const t12 = Math.floor(rec.transcript.sentences[12].t);
 		ok(`the citation carries the line's own second (?t=${t12})`, q.includes(`${rec.url}?t=${t12}`) && q.includes('automatic captions'), q.slice(0, 120));
