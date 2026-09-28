@@ -92,7 +92,13 @@ def main():
     orphaned.sort(key=lambda x: -x[1])
 
     # ---------------------------------------------------------- check 4 ---
-    unrecorded = [r for r in cand if r['tier'] in ('A', 'B') and not r['conference_key']]
+    # A row with a final_action already has its question answered, even if the
+    # machine-derived conference_key column was never refreshed to show it (the
+    # sweep only recomputes that column on its own rerun, not when a decision is
+    # applied) -- 15 rows here were all already correctly decided (video, bare
+    # conference, or a hand-found attach) and had nothing left to build.
+    unrecorded = [r for r in cand if r['tier'] in ('A', 'B') and not r['conference_key']
+                 and not (r.get('final_action') or '').strip()]
     unrecorded.sort(key=lambda r: (-int(r['yt_embeds']), r['date']))
 
     # -------------------------------------------------------------- print --
