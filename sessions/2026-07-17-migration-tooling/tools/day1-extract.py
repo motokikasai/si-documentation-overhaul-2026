@@ -42,7 +42,18 @@ interesting = re.compile(r'^(INSERT INTO|CREATE TABLE)\s+`?(wp_posts|wp_terms|wp
 def strip_tags(s):
     return re.sub(r'<[^>]+>', '', s).strip()
 
-with gzip.open(DUMP, 'rt', encoding='utf-8', errors='replace') as fh:
+def dump_open(path):
+    """The dump handed to this script has been gzipped and plain over the life of
+    this project (the current live dump, db/20260908-si-dump.sql, is plain UTF-8
+    text) -- detect by magic bytes rather than assume, so the same script works
+    on either without a flag."""
+    with open(path, 'rb') as probe:
+        magic = probe.read(2)
+    if magic == b'\x1f\x8b':
+        return gzip.open(path, 'rt', encoding='utf-8', errors='replace')
+    return open(path, 'rt', encoding='utf-8', errors='replace')
+
+with dump_open(DUMP) as fh:
     for stmt in statements(fh):
         m = interesting.match(stmt[:80])
         if not m:

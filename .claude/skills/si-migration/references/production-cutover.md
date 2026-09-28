@@ -149,11 +149,19 @@ that made 415 people invisible on si-v4.
   `conference-map.csv` grew from 55 rows to 75 — 20 real conferences that had no
   WordPress record anywhere are now recorded. Runbook and full history:
   `13-conference-post-review.md`. Two things this pass surfaced that are **not yet fixed**:
-  - **`classification.csv`'s snapshot ends 2026-06-25.** Two decided posts (a July 2026
-    youth conference) were not in the file at all and were added by hand from the sweep's
-    own data. There may be other posts published since late June missing the same way —
-    **regenerate `classification.csv` against a fresh dump before this goes to production**,
-    don't just trust it as of this commit.
+  - **Fixed, 2026-09-28: `classification.csv` was stale even against the dump already in
+    this repo** (`db/20260908-si-dump.sql`) — not just a future risk. `tools/
+    day1-classify-refresh.py` (new) safely adds posts a dump knows about that the file
+    doesn't, **without touching a single existing row** (byte-for-byte verified, not
+    assumed) and without reading or writing any other CSV. Run against the current dump:
+    **+63 posts**, dated up to 2026-08-20, previously invisible to every review pass.
+    0 removed. **Still open:** those 63 rows now need the same review the original 5,397
+    got — `day2-preflight.py` flags **5 with no `final_type`** and **9 WPML translation
+    pairs split across live types** (the English side auto-classified `si_video`/
+    `si_coverage`, several looking like the weekly "Live Dialogue with Helga Zepp-LaRouche"
+    series, while the German sibling defaulted to `post` — the R3 webcast/dialogue keyword
+    pattern likely doesn't match the German titles). Neither reviewed yet. Re-run this tool
+    whenever a genuinely newer dump is exported, including right before cutover.
   - **Posts 71344/71360 ("Catholic Cardinal in Syria...", 2021) were deliberately left
     `skip`, not attached anywhere.** Their single embedded video is filed in
     `video-segmentation.csv` under `2016-berlin-june-2016-creating` — a 2016 Berlin
