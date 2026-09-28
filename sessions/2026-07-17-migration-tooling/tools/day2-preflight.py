@@ -575,10 +575,15 @@ def check_conference_posts(path, class_path, confs, rev, quiet):
 
     # 2. attach:<key> must name a conference that exists
     if confs is not None:
+        # check_conference_map returns {'skipped': ..., 'keys': ...}, not a bare set —
+        # this was checking membership against that dict's own two keys ('skipped',
+        # 'keys') instead of the conference_key strings inside confs['keys'], so every
+        # attach: decision failed this check regardless of whether its key was real.
+        conf_keys = confs['keys'] if isinstance(confs, dict) else confs
         badkey = [f"{loc(line_of, i, r['legacy_id'])} {r['final_action']}"
                   for i, r in decided
                   if r['final_action'].startswith('attach:')
-                  and r['final_action'][7:].strip() not in confs]
+                  and r['final_action'][7:].strip() not in conf_keys]
         if badkey:
             rep.error(f"{len(badkey)} attach decision(s) naming a conference_key that is "
                       "not in conference-map.csv", badkey)

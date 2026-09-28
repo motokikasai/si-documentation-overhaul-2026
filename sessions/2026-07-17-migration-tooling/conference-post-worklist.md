@@ -18,7 +18,7 @@ Columns: **v** embedded videos (anchors excluded) · **p** panel/session heading
 
 529 further tier-D rows are already reclassified as something other than an Article (si_coverage 3, si_statement 2, si_video 524); they are in the CSV but not queued here.
 
-## Tier A — 40 rows
+## Tier A — 44 rows
 
 The reviewed `conference-map.csv` already names this post as the WordPress match for a conference — so a Conference record is coming either way. What is still open is what *this post* is: the event's own landing page, or a report about it. **The match itself is a fuzzy one** (the `conf_match_note` column carries the score conference-map recorded), and the rows with 0 videos are mostly reports. Judge every row.
 
@@ -51,21 +51,25 @@ The reviewed `conference-map.csv` already names this post as the WordPress match
 | 101802 | 2024-04-13 | en | 2 | 2 | 0 | 2/2 | Conference — The Oasis Plan: The LaRouche Solution for Peace Through Develop | post | `attach:2024-oasis-plan` |
 | 102742 | 2024-06-07 | en | 2 | 0 | 0 | 1/2 | Emergency Press Conference: The Danger of Nuclear War Is Real, and Must Be S | si_video | `attach:2024-press-danger-nuclear-real` |
 | 114754 | 2026-02-13 | en | 2 | 1 | 0 | 2/2 | Emergency Zoom Conference of the Movement of World Citizens | post | `attach:2026-march-world-citizens-emergency` |
+| 87891 | 2022-05-25 | en | 1 | 0 | 0 | 1/1 | Conference: US and European Military and Security Experts Warn: The Insanity | post | `attach:2022-may-security-architecture` |
 | 91927 | 2022-10-06 | en | 1 | 0 | 0 | 1/1 | Live event Friday, Oct. 7—Stop the War Before It Is Too Late; Eliminate the  | si_video | `attach:2022-latam-legislators-seminar` |
+| 92344 | 2022-10-25 | en | 1 | 0 | 0 | 1/1 | Conference: For World Peace — Stop the Danger of World War | post | `attach:2022-oct-second-seminar-elected-officials` |
 | 102777 | 2024-06-08 | de | 1 | 0 | 0 | 0/1 | Eil-Pressekonferenz: Die Gefahr eines Atomkrieges ist real und muss gestoppt | si_video | `attach:2024-press-danger-nuclear-real` |
 | 19579 | 2014-09-08 | de | 0 | 0 | 0 | 0/0 | Seidenstraßenkonferenz in Beijing: Helga Zepp-LaRouche spricht über Prinzipi | post | `attach:2015-neue-seidenstra-beginn-einer` |
 | 34132 | 2016-04-11 | de | 0 | 0 | 0 | 0/0 | Landbrücken-Konferenz des Schiller-Instituts in New York | post | `attach:2016-building-world-land-bridge` |
 | 63165 | 2020-10-13 | en | 0 | 0 | 0 | 0/0 | Conference: China and the West Face to Face: Rivalry or Cooperation -- Octob | post | `attach:2020-china-west` |
+| 73899 | 2021-05-08 | de | 0 | 0 | 0 | 0/0 | Konferenz: Der moralische Bankrott der transatlantischen Welt schreit nach e | post | `attach:2021-moral-collapse-transatlantic-world` |
 | 76466 | 2021-07-09 | en | 0 | 0 | 0 | 0/0 | LaRouche Legacy Foundation announces online seminar:   So, Are You Finally W | post | `attach:2021-larouche-legacy-economics-seminar` |
 | 85224 | 2022-02-23 | en | 0 | 0 | 0 | 0/0 | PETITION: Convoke an International Conference to Establish A New Security an | si_statement | `attach:2022-april-2022-establish-security` |
 | 85261 | 2022-02-24 | de | 0 | 0 | 0 | 0/0 | Petition: Für eine internationale Konferenz zur Schaffung einer neuen Sicher | si_statement | `attach:2022-april-2022-establish-security` |
 | 88412 | 2022-06-17 | en | 0 | 0 | 0 | 0/0 | Conference: There Can Be No Peace Without the Bankruptcy Reorganization of t | post | `attach:2022-there-peace-without-bankruptcy` |
 | 91162 | 2022-09-09 | en | 0 | 4 | 0 | 0/0 | Conference: Inspiring Humanity to Survive the Greatest Crisis in World Histo | post | `attach:2022-inspiring-humanity-survive-greatest` |
+| 92463 | 2022-11-01 | de | 0 | 2 | 0 | 0/0 | „Stoppt die Atomkriegsgefahr jetzt!“ - Drittes Seminar der politischen und s | post | `attach:2022-nov-third-seminar-elected-officials` |
 | 98310 | 2023-08-11 | en | 0 | 0 | 0 | 0/0 | Conference: Let us Join Hands with the Global Majority To Create a New Chapt | post | `attach:2023-join-hands-global-majority` |
 | 98417 | 2023-08-14 | de | 0 | 0 | 0 | 0/0 | Internationale Internetkonferenz des Schiller-Instituts : Laßt uns gemeinsam | post | `attach:2023-join-hands-global-majority` |
 | 102650 | 2024-05-29 | de | 0 | 0 | 0 | 0/0 | Stoppt das Töten in Gaza und baut die Region wieder auf | si_video | `attach:2024-copenhagen-oasis-seminar` |
 
-## Tier B — 115 rows
+## Tier B — 119 rows
 
 Strong — a multi-video record with programme structure, or it embeds a video the segmentation pass already files under a conference key.
 
@@ -82,6 +86,7 @@ Strong — a multi-video record with programme structure, or it embeds a video t
 | 58258 | 2020-03-29 | en | 4 | 6 | 0 | 4/4 | Conference: Mankind’s Existence Now Depends on the Establishment of a New Pa | post | `attach:2020-april-2020` |
 | 65170 | 2020-12-11 | de | 4 | 0 | 0 | 4/4 | Konferenz: "Die Welt nach den US-Wahlen- Eine Welt auf der Basis von Vernunf | post | `attach:2020-december-2020-world-after` |
 | 70091 | 2021-03-08 | de | 4 | 0 | 0 | 3/4 | Ab 15.00 Uhr live: Internetkonferenz des Schiller-Instituts | si_video | `attach:2021-march-world-crossroad-months` |
+| 74254 | 2021-05-14 | de | 4 | 0 | 0 | 4/4 | Videos - Sanktionen sind völkerrechtswidrig | post | `attach:2021-moral-collapse-transatlantic-world` |
 | 94700 | 2023-02-03 | de | 4 | 0 | 0 | 4/4 | Einladungen zur Schiller-Insitut Konferenz am 4. Februar - Unterstützung für | post | `attach:2023-february-reason-annihilation-humanity` |
 | 105267 | 2024-11-05 | de | 4 | 0 | 0 | 4/4 | Konferenz: Im Geiste Schillers und Beethovens: Alle Menschen werden Brüder! | post | `attach:2024-spirit-beethoven-become-brethren` |
 | 52052 | 2019-02-19 | en | 3 | 3 | 0 | 3/3 | Conference: Let Us Create a New, More Human Epoch for Mankind | post | `attach:2019-presidents-national-2019` |
@@ -165,6 +170,8 @@ Strong — a multi-video record with programme structure, or it embeds a video t
 | 87190 | 2022-04-26 | en | 1 | 0 | 0 | 1/1 | Video: End the West's Hypocrisy with the Spirit of the Treaty of Westphalia | si_video | `presentation` |
 | 87266 | 2022-04-29 | en | 1 | 0 | 0 | 1/1 | Video: The Peace of Westphalia to Escape the Thucydides Trap | si_video | `presentation` |
 | 87366 | 2022-05-02 | en | 1 | 0 | 0 | 1/1 | Video: Energy Security for Africa — Princy Mthombeni | si_video | `presentation` |
+| 87659 | 2022-05-17 | de | 1 | 0 | 0 | 1/1 | Konferenz - Amerikanische und europäische Militär- und Sicherheitsexperten w | post | `presentation` |
+| 87866 | 2022-05-24 | en | 1 | 0 | 0 | 1/1 | Conference: We Need a New Security And  Development Architecture for All Nat | post | `presentation` |
 | 88535 | 2022-06-21 | en | 1 | 0 | 0 | 1/1 | Video: Helga Zepp-LaRouche Keynote Address: “Let’s Win Mission Impossible or | si_video | `presentation` |
 | 88548 | 2022-06-21 | en | 1 | 0 | 0 | 1/1 | Video: Ukraine Has Lost the War: But Thermonuclear War Still Threatens | si_video | `presentation` |
 | 88554 | 2022-06-22 | en | 1 | 0 | 0 | 1/1 | Video: Food Producers Roundtable · Science and Culture to End Famine—Princip | si_video | `presentation` |
@@ -174,6 +181,7 @@ Strong — a multi-video record with programme structure, or it embeds a video t
 | 89379 | 2022-07-23 | en | 1 | 0 | 0 | 1/1 | Schiller Institute Special Presentation: Istanbul's Golden Opportunity —Repl | si_video | `presentation` |
 | 91238 | 2022-09-12 | en | 1 | 0 | 0 | 1/1 | Universal History Must Not End in a Tragedy — Helga Zepp-LaRouche Keynote ad | post | `presentation` |
 | 91350 | 2022-09-18 | de | 1 | 0 | 0 | 0/1 | Helga Zepp-LaRouche: „Die Weltgeschichte darf nicht in einer Tragödie enden“ | post | `presentation` |
+| 92217 | 2022-10-17 | de | 1 | 0 | 0 | 1/1 | Internationale Schiller-Institut Konferenz, 27. Oktober: Für den Weltfrieden | post | `presentation` |
 | 94429 | 2023-01-14 | en | 1 | 0 | 0 | 1/1 | Ray McGovern — Nevertheless, We Persist | post | `presentation` |
 | 94452 | 2023-01-15 | en | 1 | 0 | 0 | 1/1 | Dennis Speed — Freedom From Fear: Dr. Martin Luther King Confronts the Inter | post | `presentation` |
 | 94466 | 2023-01-15 | en | 1 | 0 | 0 | 1/1 | Helga Zepp-LaRouche — Why is Germany in the Grip of War-Mongers? | post | `presentation` |
@@ -187,7 +195,7 @@ Strong — a multi-video record with programme structure, or it embeds a video t
 | 42299 | 2017-10-17 | de | 0 | 0 | 0 | 0/0 | Helga Zepp-LaRouches wöchentlichen Webcast | si_video | `conference` |
 | 71360 | 2021-03-30 | de | 0 | 0 | 0 | 0/0 | Katholischer Kardinal in Syrien erklärt der Welt: 'Die Zeit läuft ab' für de | post | `presentation` |
 
-## Tier C — 25 rows
+## Tier C — 23 rows
 
 Probable — three or more embedded videos, or an event title plus body structure.
 
@@ -196,7 +204,6 @@ Probable — three or more embedded videos, or an event title plus body structur
 | 83568 | 2022-01-05 | en | 17 | 0 | 0 | 0/17 | Interviews | post | `—` |
 | 83697 | 2022-01-07 | de | 12 | 0 | 0 | 0/12 | Interviews | post | `—` |
 | 104575 | 2024-09-26 | de | 7 | 0 | 0 | 0/7 | Ein weiterer Schritt näher an der nuklearen Apokalypse: Deutschland braucht  | post | `—` |
-| 74254 | 2021-05-14 | de | 4 | 0 | 0 | 0/4 | Videos - Sanktionen sind völkerrechtswidrig | post | `—` |
 | 95663 | 2023-03-01 | de | 4 | 0 | 0 | 0/4 | Alle Sanktionen gegen Syrien müssen aufgehoben und die US-Besatzung beendet  | si_statement | `—` |
 | 116104 | 2026-04-20 | de | 4 | 0 | 0 | 0/4 | Das Ende der 500jährigen Kolonialepoche - für einen Dialog der Zivilisatione | post | `—` |
 | 32783 | 2015-12-07 | en | 3 | 0 | 0 | 0/3 | Helga Zepp-LaRouche Addresses Japanese Business Leaders on Urgent Need for W | post | `—` |
@@ -209,7 +216,6 @@ Probable — three or more embedded videos, or an event title plus body structur
 | 95348 | 2023-02-16 | en | 3 | 0 | 0 | 0/3 | The World Is Facing WW3, How Do We Save the World? — a Twitter Space with Ki | si_video | `—` |
 | 61853 | 2020-08-20 | en | 1 | 0 | 0 | 0/1 | Building a Worldwide “Chorus of Voices” for a Great Power Summit to Implemen | post | `—` |
 | 77697 | 2021-07-29 | en | 1 | 0 | 1 | 0/1 | Conference—Afghanistan: A Turning Point in History After the Failed Regime-C | post | `—` |
-| 92344 | 2022-10-25 | en | 1 | 0 | 0 | 0/1 | Conference: For World Peace — Stop the Danger of World War | post | `—` |
 | 97169 | 2023-06-09 | en | 1 | 0 | 0 | 0/1 | Conference: The World Needs JFK's Vision of Peace | post | `—` |
 | 97442 | 2023-07-11 | en | 1 | 1 | 0 | 0/1 | July 8-9 Schiller Institute European Conference Summary | post | `—` |
 | 99795 | 2023-11-20 | en | 1 | 0 | 0 | 0/1 | Emergency Forum: No More War Crimes! Economic Development, Not Depopulation! | si_video | `—` |
@@ -219,7 +225,7 @@ Probable — three or more embedded videos, or an event title plus body structur
 | 33639 | 2015-12-07 | de | 0 | 0 | 0 | 0/0 | Die Notwendigkeit von Großprojekten:  Die Neue Seidenstraße wird zur Weltlan | post | `—` |
 | 95632 | 2023-02-28 | en | 0 | 0 | 0 | 0/0 | Lift All Sanctions on Syria and End the U.S. Occupation | si_statement | `—` |
 
-## Tier D — 61 rows
+## Tier D — 55 rows
 
 Possible — programme structure or an event title, but thin body evidence. Most of these are reports *about* an event and should stay Articles; they are queued only because nothing else has reclassified them.
 
@@ -249,11 +255,7 @@ Possible — programme structure or an event title, but thin body evidence. Most
 | 83872 | 2022-01-13 | de | 1 | 0 | 0 | 0/1 | Internationales Seminar: Beendet das Morden in Afghanistan, 17. Januar 2022 | post | `—` |
 | 84610 | 2022-02-07 | de | 1 | 0 | 0 | 0/1 | Internetseminar, 10.2. 2022 - „Die humanitäre Krise in Afghanistan: Auf dem  | post | `—` |
 | 84586 | 2022-02-10 | en | 1 | 0 | 0 | 0/1 | Seminar: The Humanitarian Crisis in Afghanistan — Toward a Long-term Solutio | post | `—` |
-| 87659 | 2022-05-17 | de | 1 | 0 | 0 | 0/1 | Konferenz - Amerikanische und europäische Militär- und Sicherheitsexperten w | post | `—` |
-| 87866 | 2022-05-24 | en | 1 | 0 | 0 | 0/1 | Conference: We Need a New Security And  Development Architecture for All Nat | post | `—` |
-| 87891 | 2022-05-25 | en | 1 | 0 | 0 | 0/1 | Conference: US and European Military and Security Experts Warn: The Insanity | post | `—` |
 | 91496 | 2022-09-23 | en | 1 | 0 | 0 | 0/1 | Why is Ukraine's Center for Countering Disinformation Attacking Our Conferen | post | `—` |
-| 92217 | 2022-10-17 | de | 1 | 0 | 0 | 0/1 | Internationale Schiller-Institut Konferenz, 27. Oktober: Für den Weltfrieden | post | `—` |
 | 93570 | 2022-12-14 | en | 1 | 0 | 0 | 0/1 | Live event: Peace On Earth, Or Humanity’s Doom? The Case for Negotiations | post | `—` |
 | 93593 | 2022-12-15 | de | 1 | 0 | 0 | 0/1 | EIR-Symposium: Frieden auf Erden oder der Untergang der Menschheit? Warum ve | post | `—` |
 | 97114 | 2023-06-08 | en | 1 | 0 | 0 | 0/1 | International Forum: Risks of the West’s "China Strategy"? | post | `—` |
@@ -270,12 +272,10 @@ Possible — programme structure or an event title, but thin body evidence. Most
 | 47094 | 2018-06-18 | de | 0 | 0 | 0 | 0/0 | Geschichte wird jetzt in Asien geschrieben: EU-Gipfel muß dem Beispiel von S | post | `—` |
 | 70581 | 2021-03-19 | en | 0 | 4 | 0 | 0/0 | WORLD AT A CROSSROAD: Two Months into the New Administration | post | `—` |
 | 73868 | 2021-05-07 | en | 0 | 2 | 0 | 0/0 | Conference: The Moral Collapse of the Trans-Atlantic World Cries Out for a N | post | `—` |
-| 73899 | 2021-05-08 | de | 0 | 0 | 0 | 0/0 | Konferenz: Der moralische Bankrott der transatlantischen Welt schreit nach e | post | `—` |
 | 74208 | 2021-05-13 | en | 0 | 2 | 0 | 0/0 | SCHILLER INSTITUTE PRESS RELEASE | post | `—` |
 | 74216 | 2021-05-13 | de | 0 | 2 | 0 | 0/0 | SCHILLER-INSTITUT PRESSEMITTEILUNG | post | `—` |
 | 75575 | 2021-06-25 | en | 0 | 4 | 0 | 0/0 | Conference: For the Common Good of All People, Not Rules Benefiting the Few! | post | `—` |
 | 90795 | 2022-08-20 | de | 0 | 3 | 0 | 0/0 | Konferenz: Wie die Menschheit die größte Krise der Weltgeschichte überleben  | post | `—` |
-| 92463 | 2022-11-01 | de | 0 | 2 | 0 | 0/0 | „Stoppt die Atomkriegsgefahr jetzt!“ - Drittes Seminar der politischen und s | post | `—` |
 | 94537 | 2023-01-18 | de | 0 | 2 | 0 | 0/0 | Internetkonferenz: Das Zeitalter der Vernunft oder die Auslöschung der Mensc | post | `—` |
 | 95832 | 2023-03-09 | de | 0 | 4 | 0 | 0/0 | Ohne die Entwicklung aller Nationen kann es keinen dauerhaften Frieden auf d | post | `—` |
 | 98908 | 2023-09-08 | en | 0 | 2 | 0 | 0/0 | Conference: Let us Join Hands with the Global Majority To Create a New Chapt | post | `—` |
