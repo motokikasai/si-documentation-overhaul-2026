@@ -76,7 +76,7 @@ def main():
     # ---------------------------------------------------------- check 2 ---
     weak = []
     for c in confs:
-        if c['action'] == 'create_only':
+        if c['action'] == 'create_only' or c['final_action'] == 'skip':
             continue
         m = SCORE_RE.search(c['notes'] or '')
         if m and int(m.group(1)) <= 2:
