@@ -1,9 +1,15 @@
 # 13 · Conference posts — the review runbook
 
-**What this is for.** 207 published blog posts carry evidence that they are conference or
-event records, not articles. 155 of them would migrate as plain Articles today. This
-document is the whole procedure: how to review them without touching a CSV, how the
-decisions reach the migration, and the guardrail that stops the same gap reopening.
+**What this was for.** Published blog posts carrying evidence that they were conference or
+event records, not articles — as many as 155 of them heading to migrate as plain Articles.
+This document is the whole procedure: how they were reviewed without touching a CSV, how
+the decisions reached the migration, and the guardrail that stops the same gap reopening.
+
+**Status: done, 2026-09-28.** All 241 queued candidates decided and folded into
+`classification.csv`; `day2-preflight.py` is 0 error classes across all 5 files.
+`conference-map.csv` grew from 55 rows to 75 over the course of the review — 20 real
+conferences that had no WordPress record anywhere are now recorded. §6 has the final
+outcome and the two things this pass found that are **still open**.
 
 Written 2026-09-20 against the `db/20260908-si-dump.sql` dump.
 
@@ -348,3 +354,59 @@ A post can be the only surviving record of **more than one** event, and the matc
 pick whichever it half-recognised. When the amber `match score 1` chip is showing, read
 the body before trusting `conference_key` — and check whether the videos in the post are
 the same videos as in the playlist. Here they shared nothing at all.
+
+---
+
+## 6 · Outcome, 2026-09-28
+
+Every queued row was decided by hand (`attach` 94 · `presentation` 69 · `conference` 38 ·
+`skip` 27 · `video` 13) and folded into `classification.csv`, the file `si:transform`
+actually reads. `day2-preflight.py` reports 0 error classes across all 5 files for the
+first time in this project.
+
+Two things surfaced along the way that decisions couldn't close, because they're outside
+what this review touches. Both are carried into `references/production-cutover.md`'s
+*Known to still be open*:
+
+- **`classification.csv`'s snapshot ends 2026-06-25.** Two decided posts (a July 2026
+  youth conference, trid 161335) weren't in the file at all — added by hand from the
+  sweep's own data. If other posts were published between late June and whenever the
+  current `articles-full.json` cache was built, they're likely missing the same way.
+  **Regenerate `classification.csv` against a fresh dump before production**, rather than
+  trusting this session's copy.
+- **Posts `71344`/`71360`** ("Catholic Cardinal in Syria Tells World 'Time Is Running
+  Out'", 2021) were deliberately decided `skip`, not attached to a conference. Their one
+  embedded video is filed in `video-segmentation.csv` under `2016-berlin-june-2016-
+  creating`, with a note from an *earlier, already reviewer-approved* pass ("bad split:
+  colon was not a speaker/title separator — full video title restored") — predates this
+  review, not touched by it. `skip` sidesteps the question rather than trusting a link
+  that looks wrong on its face; someone should check whether that video is legitimately
+  reused footage or whether the `conference_key` on that row needs correcting.
+
+### What building 20 conferences from scratch, one at a time, actually taught
+
+- **A false match and a missing conference are the same failure wearing two faces.**
+  `conference-map.csv`'s original day-1 pass matched on title similarity alone; every
+  confirmed false match scored **1–2** in its own note, and every score **≥3** checked out
+  clean across the whole review — a cheap, reliable triage rule once you have ~15 confirmed
+  data points.
+- **A WPML sibling with weaker evidence is not weaker evidence of a different thing** — it's
+  usually the other half of the same event. `day3-conference-posts.py` now keeps a
+  translation pair together even when one side has zero video evidence of its own (§ the
+  trid-sibling pass, `git log` for `608aaf7`); but two cards still slipped past that
+  (`92344`, `70864`) because a *second* post about the same event, sharing no trid at all,
+  isn't caught by anything mechanical — only by reading the body and checking whether an
+  embedded video id is one you've already seen elsewhere.
+- **A recurring format is not a conference.** The weekly webcast series and the Beethoven
+  music-appreciation episodes both tripped the sweep's "multi-video + structure" heuristic
+  for the same reason a real conference does. The tell was in the text itself ("the
+  Schiller Institute inaugurated *a weekly webcast*" / "We have had *several episodes*"),
+  not in any structural signal — worth a keyword pass (`webcast`, `episode`, series
+  numbering) before the sweep tool trusts its own tier-B "conference" default.
+- **Folding decisions into the file the migration actually reads is where the real
+  validation lives.** The per-card review caught false matches and fragmentation; folding
+  into `classification.csv` at scale caught two WPML-split conflicts a card-by-card review
+  had already let through, 40 unreviewed `fable-day1` defaults masquerading as decisions,
+  a month-old blind spot in `classification.csv` itself, and a real bug in
+  `day2-preflight.py`'s own validation logic that had never been exercised at this volume
+  before. Do the fold before calling a review finished, not after.

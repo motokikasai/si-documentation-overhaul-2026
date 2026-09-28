@@ -143,29 +143,26 @@ that made 415 people invisible on si-v4.
 
 ## Known to still be open
 
-- **207 conference-post candidates are undecided** (`incoming/conference-post-candidates.csv`,
-  runbook `13-conference-post-review.md`). **155 of them would migrate as plain Articles** —
-  conference records with panel videos and printed speaker lists, filed next to opinion
-  pieces and off `/conferences/`. Cause: R4 only ever tested `post_type = page` OR
-  portfolio, so a conference published as a blog post matched no rule and fell to R9
-  default-keep (now **R4.2** in `03-classification-ruleset.md`). Preflight FILE 5 blocks
-  the run until they are decided; **do not clear the check by deciding them `skip` in
-  bulk.**
-- **28 of those posts are ones `conference-map.csv` itself names** as a conference's
-  WordPress match, and 24 are classified `post`/R9 today. The match is fuzzy — several
-  scored 1 — so each is a judgement, not an auto-accept.
-- **61 candidates have no conference record at all.** `conference-map.csv` holds 55
-  conferences and was built from YouTube **playlists**, so any event SI never playlisted
-  is missing from `/conferences/` entirely. 23 of the 61 are German — the DE side is the
-  least playlisted. Fix: add them to `conference-map.csv` with `wp_match_type=post`,
-  `wp_match_id=<legacy_id>`, `action=promote`.
-- **64 candidates embed videos `video-segmentation.csv` has never seen** (`seg_covered=0/n`).
-  Those recordings would exist nowhere but inside a post body — no Video, no Presentation,
-  nothing under the conference. The largest is post 58317 with 33 embeds. Feed their
-  `yt_embed_ids` into the segmentation pass before the import, or the recordings ship
-  undiscoverable.
-- **122 candidate rows have a WPML sibling that is not itself a candidate.** Same-trid rows
-  need one `final_type` (trap 2), so these are decided per `trid`, not per row.
+- **The conference-post review (R4.2) is DONE, 2026-09-28.** All 241 queued candidates in
+  `incoming/conference-post-candidates.csv` are decided and folded into
+  `classification.csv`; `day2-preflight.py` is 0 error classes across all 5 files.
+  `conference-map.csv` grew from 55 rows to 75 — 20 real conferences that had no
+  WordPress record anywhere are now recorded. Runbook and full history:
+  `13-conference-post-review.md`. Two things this pass surfaced that are **not yet fixed**:
+  - **`classification.csv`'s snapshot ends 2026-06-25.** Two decided posts (a July 2026
+    youth conference) were not in the file at all and were added by hand from the sweep's
+    own data. There may be other posts published since late June missing the same way —
+    **regenerate `classification.csv` against a fresh dump before this goes to production**,
+    don't just trust it as of this commit.
+  - **Posts 71344/71360 ("Catholic Cardinal in Syria...", 2021) were deliberately left
+    `skip`, not attached anywhere.** Their single embedded video is filed in
+    `video-segmentation.csv` under `2016-berlin-june-2016-creating` — a 2016 Berlin
+    conference — with a *pre-existing*, already reviewer-approved (`final_action=edit,
+    reviewer=mk`) note reading "bad split: colon was not a speaker/title separator — full
+    video title restored." That predates this review and was not touched. Worth a second
+    look: either the video is legitimately reused from that conference in an unrelated
+    2021 article (fine), or the `conference_key` on that segmentation row is simply wrong
+    and needs correcting before import.
 - The classification has not been applied to the 2025–2026 rows: 435 articles carry no
   topic. Nothing breaks — the templates print nothing where there is nothing — but the
   "Continue" block and the topic filter get better the moment it is done.
