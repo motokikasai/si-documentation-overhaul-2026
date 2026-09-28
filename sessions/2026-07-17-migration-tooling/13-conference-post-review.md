@@ -242,6 +242,32 @@ recorded in the CSV but not queued.
 
 ---
 
+## 4b · The risk scan — where to spend review effort
+
+`tools/day3-conference-risk-scan.py` generalizes the four real errors found reviewing
+cards #1-#5 by hand into four automated checks, run over all 179 decision groups at once.
+Run it after any batch of decisions (it reads the same files the sweep and applier do):
+
+```bash
+python3 tools/day3-conference-risk-scan.py
+```
+
+→ `conference-risk-scan.md`. As of 2026-09-28:
+
+| check | count | severity |
+|---|---|---|
+| Ambiguous match | 2 posts | **high** — a post claimed by 2+ still-live conference-map rows, nobody has picked a winner |
+| Weak match | 21 conferences | **high** — active match scoring ≤2, the exact shape of 3 confirmed false matches |
+| Orphaned recording | 100 rows / 278 videos | medium — embedded videos not in `video-segmentation.csv`, invisible after import |
+| Unrecorded event | 39 candidates | medium-high — strong evidence, matched to nothing at all |
+
+**Reading order this suggests:** the 21 weak-match tier-A cards first (`conference-map`'s
+own note admits low confidence — this is where cards #1-#3's real errors were), then the
+39 unrecorded-event candidates (each is a plausible new conference, the Essen/China-West
+pattern), then work through orphaned recordings as each conference is confirmed. The 2
+ambiguous-match posts (`34087`, `46936`) need a human decision among 2-4 live claimants
+before anything downstream can be trusted — flag, don't guess.
+
 ## 5 · Worked example — post 37397, and what a hard card looks like
 
 The first tier-A card turned out to be the messiest in the set. Recorded here because the

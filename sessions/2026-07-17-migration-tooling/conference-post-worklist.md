@@ -18,7 +18,7 @@ Columns: **v** embedded videos (anchors excluded) · **p** panel/session heading
 
 443 further tier-D rows are already reclassified as something other than an Article (si_coverage 2, si_statement 1, si_video 440); they are in the CSV but not queued here.
 
-## Tier A — 27 rows
+## Tier A — 26 rows
 
 The reviewed `conference-map.csv` already names this post as the WordPress match for a conference — so a Conference record is coming either way. What is still open is what *this post* is: the event's own landing page, or a report about it. **The match itself is a fuzzy one** (the `conf_match_note` column carries the score conference-map recorded), and the rows with 0 videos are mostly reports. Judge every row.
 
@@ -37,7 +37,6 @@ The reviewed `conference-map.csv` already names this post as the WordPress match
 | 93027 | 2022-11-21 | en | 2 | 2 | 0 | 1/2 | Conference: Stop the Danger of Nuclear War Now | post | `attach:2022-2022-stop-danger-nuclear` |
 | 94709 | 2023-02-03 | en | 2 | 2 | 0 | 2/2 | Conference: The Age of Reason or the Annihilation of Humanity? | post | `attach:2023-february-reason-annihilation-humanity` |
 | 102742 | 2024-06-07 | en | 2 | 0 | 0 | 1/2 | Emergency Press Conference: The Danger of Nuclear War Is Real, and Must Be S | si_video | `attach:2024-press-danger-nuclear-real` |
-| 46936 | 2018-07-03 | en | 1 | 0 | 0 | 1/1 | Schiller Institute Conference in Bad Soden: Panel 1 | post | `attach:2017-francais-soden` |
 | 92344 | 2022-10-25 | en | 1 | 0 | 0 | 0/1 | Conference: For World Peace — Stop the Danger of World War | post | `attach:2023-january-stop-nato-world` |
 | 19579 | 2014-09-08 | de | 0 | 0 | 0 | 0/0 | Seidenstraßenkonferenz in Beijing: Helga Zepp-LaRouche spricht über Prinzipi | post | `attach:2015-neue-seidenstra-beginn-einer` |
 | 34132 | 2016-04-11 | de | 0 | 0 | 0 | 0/0 | Landbrücken-Konferenz des Schiller-Instituts in New York | post | `attach:2016-york-september-2016-memorial` |
@@ -52,7 +51,7 @@ The reviewed `conference-map.csv` already names this post as the WordPress match
 | 98310 | 2023-08-11 | en | 0 | 0 | 0 | 0/0 | Conference: Let us Join Hands with the Global Majority To Create a New Chapt | post | `attach:2023-join-hands-global-majority` |
 | 105075 | 2024-10-23 | en | 0 | 0 | 0 | 0/0 | Helga Zepp-LaRouche Raises Nuclear War Danger at Berlin China-Europe Confere | si_coverage | `attach:2025-berlin-wolf-paradigm-relations` |
 
-## Tier B — 108 rows
+## Tier B — 109 rows
 
 Strong — a multi-video record with programme structure, or it embeds a video the segmentation pass already files under a conference key.
 
@@ -116,6 +115,7 @@ Strong — a multi-video record with programme structure, or it embeds a video t
 | 21824 | 2014-10-31 | en | 1 | 0 | 0 | 1/1 | Ray McGovern Arrested for Attempting to Attend Speech with Former CIA Direct | post | `presentation` |
 | 46466 | 2018-04-05 | en | 1 | 0 | 0 | 1/1 | A Dialogue of Three Presidencies: Bending the Arc of the Moral Universe Towa | post | `presentation` |
 | 46474 | 2018-04-05 | en | 1 | 0 | 0 | 1/1 | A Dialogue of Three Presidencies: Bending the Arc of the Moral Universe Towa | post | `presentation` |
+| 46936 | 2018-07-03 | en | 1 | 0 | 0 | 1/1 | Schiller Institute Conference in Bad Soden: Panel 1 | post | `presentation` |
 | 46948 | 2018-07-04 | en | 1 | 0 | 0 | 1/1 | Schiller Institute Conference in Bad Soden: Panel 2 | post | `presentation` |
 | 48513 | 2018-09-14 | en | 1 | 0 | 0 | 1/1 | Conference: Towards a Four Power Agreement For a 'New Paradigm' of Developme | post | `presentation` |
 | 48536 | 2018-09-15 | en | 1 | 0 | 0 | 1/1 | Conference: Towards a Four Power Agreement For a 'New Paradigm' of Developme | post | `presentation` |
