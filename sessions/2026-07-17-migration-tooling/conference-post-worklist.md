@@ -18,13 +18,13 @@ Columns: **v** embedded videos (anchors excluded) · **p** panel/session heading
 
 443 further tier-D rows are already reclassified as something other than an Article (si_coverage 2, si_statement 1, si_video 440); they are in the CSV but not queued here.
 
-## Tier A — 28 rows
+## Tier A — 27 rows
 
 The reviewed `conference-map.csv` already names this post as the WordPress match for a conference — so a Conference record is coming either way. What is still open is what *this post* is: the event's own landing page, or a report about it. **The match itself is a fuzzy one** (the `conf_match_note` column carries the score conference-map recorded), and the rows with 0 videos are mostly reports. Judge every row.
 
 | id | date | lang | v | p | sl | seg | title | now → | proposed |
 |---|---|---|---|---|---|---|---|---|---|
-| 37397 | 2016-10-27 | de | 11 | 0 | 0 | 0/11 | Erfolgreiche Konferenz des Schiller-Instituts in Lyon und Essen: Europa muß  | post | `attach:2016-lyon` |
+| 37397 | 2016-10-27 | de | 11 | 0 | 0 | 11/11 | Erfolgreiche Konferenz des Schiller-Instituts in Lyon und Essen: Europa muß  | post | `attach:2016-essen` |
 | 107277 | 2025-03-01 | en | 6 | 0 | 0 | 4/6 | Conference Invitation—A Beautiful Vision for Humanity in Times of Great Turb | post | `attach:2025-2025-memorial-weekend-beautiful` |
 | 97527 | 2023-07-20 | en | 5 | 8 | 14 | 0/5 | Conference: On the Verge of a New World War: European Nations Must Cooperate | post | `attach:2023-07-08-strasbourg-european-conference` |
 | 65126 | 2020-12-11 | en | 4 | 0 | 0 | 3/4 | Conference: The World after the U.S. Election Creating A World Based on Reas | post | `attach:2020-december-2020-world-after` |
@@ -37,7 +37,6 @@ The reviewed `conference-map.csv` already names this post as the WordPress match
 | 93027 | 2022-11-21 | en | 2 | 2 | 0 | 1/2 | Conference: Stop the Danger of Nuclear War Now | post | `attach:2022-2022-stop-danger-nuclear` |
 | 94709 | 2023-02-03 | en | 2 | 2 | 0 | 2/2 | Conference: The Age of Reason or the Annihilation of Humanity? | post | `attach:2023-february-reason-annihilation-humanity` |
 | 102742 | 2024-06-07 | en | 2 | 0 | 0 | 1/2 | Emergency Press Conference: The Danger of Nuclear War Is Real, and Must Be S | si_video | `attach:2024-press-danger-nuclear-real` |
-| 46466 | 2018-04-05 | en | 1 | 0 | 0 | 1/1 | A Dialogue of Three Presidencies: Bending the Arc of the Moral Universe Towa | post | `attach:2018-april-manhattan-dialogue-three` |
 | 46936 | 2018-07-03 | en | 1 | 0 | 0 | 1/1 | Schiller Institute Conference in Bad Soden: Panel 1 | post | `attach:2017-francais-soden` |
 | 92344 | 2022-10-25 | en | 1 | 0 | 0 | 0/1 | Conference: For World Peace — Stop the Danger of World War | post | `attach:2023-january-stop-nato-world` |
 | 19579 | 2014-09-08 | de | 0 | 0 | 0 | 0/0 | Seidenstraßenkonferenz in Beijing: Helga Zepp-LaRouche spricht über Prinzipi | post | `attach:2015-neue-seidenstra-beginn-einer` |
@@ -45,7 +44,7 @@ The reviewed `conference-map.csv` already names this post as the WordPress match
 | 47338 | 2018-07-15 | en | 0 | 0 | 0 | 0/0 | Helga Zepp-LaRouche Addresses Institut Mandela Conference in Paris | post | `attach:2017-paris-octobre-2017` |
 | 60668 | 2020-07-12 | en | 0 | 0 | 0 | 0/0 | Schiller Institute Representative Participates in Major China-Arab World Con | post | `attach:2021-march-world-crossroad-months` |
 | 62334 | 2020-09-10 | de | 0 | 0 | 0 | 0/0 | Internationale Pressemitteilung: Schiller-Institut hält bahnbrechende Konfer | si_statement | `attach:2019-presidents-national-2019` |
-| 63165 | 2020-10-13 | en | 0 | 0 | 0 | 0/0 | Conference: China and the West Face to Face: Rivalry or Cooperation -- Octob | post | `attach:2020-april-2020` |
+| 63165 | 2020-10-13 | en | 0 | 0 | 0 | 0/0 | Conference: China and the West Face to Face: Rivalry or Cooperation -- Octob | post | `attach:2020-china-west` |
 | 85224 | 2022-02-23 | en | 0 | 0 | 0 | 0/0 | PETITION: Convoke an International Conference to Establish A New Security an | si_statement | `attach:2022-april-2022-establish-security` |
 | 88412 | 2022-06-17 | en | 0 | 0 | 0 | 0/0 | Conference: There Can Be No Peace Without the Bankruptcy Reorganization of t | post | `attach:2022-there-peace-without-bankruptcy` |
 | 91162 | 2022-09-09 | en | 0 | 4 | 0 | 0/0 | Conference: Inspiring Humanity to Survive the Greatest Crisis in World Histo | post | `attach:2022-inspiring-humanity-survive-greatest` |
@@ -53,7 +52,7 @@ The reviewed `conference-map.csv` already names this post as the WordPress match
 | 98310 | 2023-08-11 | en | 0 | 0 | 0 | 0/0 | Conference: Let us Join Hands with the Global Majority To Create a New Chapt | post | `attach:2023-join-hands-global-majority` |
 | 105075 | 2024-10-23 | en | 0 | 0 | 0 | 0/0 | Helga Zepp-LaRouche Raises Nuclear War Danger at Berlin China-Europe Confere | si_coverage | `attach:2025-berlin-wolf-paradigm-relations` |
 
-## Tier B — 107 rows
+## Tier B — 108 rows
 
 Strong — a multi-video record with programme structure, or it embeds a video the segmentation pass already files under a conference key.
 
@@ -65,9 +64,9 @@ Strong — a multi-video record with programme structure, or it embeds a video t
 | 48943 | 2018-10-25 | de | 8 | 0 | 0 | 0/8 | Seminar in Berlin: „Felix Jemen“ statt Völkermord! | post | `conference` |
 | 55610 | 2019-09-04 | en | 8 | 0 | 0 | 0/8 | Schiller Institute Seminar: The Role of the Belt & Road in Peace and Stabili | post | `conference` |
 | 55839 | 2019-09-16 | de | 8 | 0 | 0 | 0/8 | Seminar: Ein rationaler Dialog über die außenpolitischen Absichten Chinas | post | `conference` |
-| 60226 | 2020-06-26 | de | 7 | 3 | 0 | 0/7 | 27. Juni Konferenz: Wird die Menschheit prosperieren oder untergehen? Die Zu | post | `conference` |
+| 60226 | 2020-06-26 | de | 7 | 3 | 0 | 6/7 | 27. Juni Konferenz: Wird die Menschheit prosperieren oder untergehen? Die Zu | post | `attach:2020-june-2020-humanity-prosper` |
 | 61731 | 2020-08-13 | de | 6 | 0 | 0 | 0/6 | Internet-Konferenz: Kriegstreiberei bis zum Armageddon oder ein neues Paradi | post | `conference` |
-| 63230 | 2020-10-13 | de | 6 | 0 | 0 | 0/6 | Internationale Konferenz des Schiller-Instituts am 21. Oktober: „China und d | post | `conference` |
+| 63230 | 2020-10-13 | de | 6 | 0 | 0 | 6/6 | Internationale Konferenz des Schiller-Instituts am 21. Oktober: „China und d | post | `attach:2020-china-west` |
 | 109312 | 2025-05-12 | de | 6 | 6 | 0 | 0/6 | Konferenzeinladung: „Eine schöne Vision für die Menschheit in Zeiten großer  | post | `conference` |
 | 112952 | 2025-11-07 | en | 6 | 6 | 0 | 0/6 | Live - Nov 8/9 international conference: The Emancipation of Africa and the  | post | `conference` |
 | 34159 | 2016-06-15 | en | 5 | 0 | 0 | 5/5 | Strategic Seminar | post | `attach:2016-francisco-june-2016-strategic` |
@@ -115,6 +114,7 @@ Strong — a multi-video record with programme structure, or it embeds a video t
 | 114754 | 2026-02-13 | en | 2 | 1 | 0 | 0/2 | Emergency Zoom Conference of the Movement of World Citizens | post | `conference` |
 | 116981 | 2026-06-09 | en | 2 | 0 | 0 | 0/2 | The Schiller Institute Releases Video Summaries of Historic Berlin Conferenc | post | `conference` |
 | 21824 | 2014-10-31 | en | 1 | 0 | 0 | 1/1 | Ray McGovern Arrested for Attempting to Attend Speech with Former CIA Direct | post | `presentation` |
+| 46466 | 2018-04-05 | en | 1 | 0 | 0 | 1/1 | A Dialogue of Three Presidencies: Bending the Arc of the Moral Universe Towa | post | `presentation` |
 | 46474 | 2018-04-05 | en | 1 | 0 | 0 | 1/1 | A Dialogue of Three Presidencies: Bending the Arc of the Moral Universe Towa | post | `presentation` |
 | 46948 | 2018-07-04 | en | 1 | 0 | 0 | 1/1 | Schiller Institute Conference in Bad Soden: Panel 2 | post | `presentation` |
 | 48513 | 2018-09-14 | en | 1 | 0 | 0 | 1/1 | Conference: Towards a Four Power Agreement For a 'New Paradigm' of Developme | post | `presentation` |

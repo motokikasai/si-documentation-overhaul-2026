@@ -162,7 +162,11 @@ def main():
     cls = {r['legacy_id']: r for r in csv.DictReader(open(os.path.join(INC, 'classification.csv')))}
     confmap = {}
     for r in csv.DictReader(open(os.path.join(INC, 'conference-map.csv'))):
-        if r['wp_match_type'] == 'post' and r['wp_match_id']:
+        # create_only means a reviewer already decided this post is NOT that
+        # conference's landing page (see 13-conference-post-review.md §5) — a stale
+        # match must not keep winning the tier/default-key computation below just
+        # because it still shares a wp_match_id with the post.
+        if r['wp_match_type'] == 'post' and r['wp_match_id'] and r['action'] != 'create_only':
             confmap.setdefault(r['wp_match_id'], []).append(r)
     seg, seg_kind = collections.defaultdict(set), {}
     for r in csv.DictReader(open(os.path.join(INC, 'video-segmentation.csv'))):
