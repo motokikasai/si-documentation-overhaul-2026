@@ -224,6 +224,50 @@ def main():
             'notes': '',
         })
 
+    # A WPML sibling of an already-tiered post can have zero independent evidence
+    # of its own (no video, no structure) and still deserve the SAME decision --
+    # it is the translation of a post that IS a conference record. Without this,
+    # fixing a false conference-map match on the weaker-evidence sibling makes it
+    # drop out of the review entirely, silently splitting a translation pair that
+    # trap 2 (01-csv-contracts.md) says must end on one type. Found by hand: post
+    # 34132 (de, 0 embeds) is trid-sibling of 34087 (en, 2016-building-world-land-
+    # bridge) and vanished the moment its OWN false match was corrected.
+    by_id = {str(p['id']): p for p in posts}
+    tiered_ids = {r['legacy_id'] for r in rows}
+    for trid, group in by_trid.items():
+        if not trid or len(group) < 2:
+            continue
+        ids = [str(x['id']) for x in group]
+        present = [i for i in ids if i in tiered_ids]
+        missing = [i for i in ids if i not in tiered_ids]
+        if not present or not missing:
+            continue
+        lead = next(r for r in rows if r['legacy_id'] == present[0])
+        for mid in missing:
+            mp = by_id[mid]
+            s = scan(mp)
+            c = cls.get(mid, {})
+            current = c.get('final_type') or (c.get('proposed_type') if c.get('needs_review') == '0' else '')
+            rows.append({
+                'legacy_id': mid, 'tier': lead['tier'], 'language': mp.get('lang') or '',
+                'trid': trid, 'date': (mp.get('date') or '')[:10], 'slug': mp.get('slug') or '',
+                'title': mp.get('title') or '', 'legacy_url': c.get('legacy_url', ''),
+                'current_rule': c.get('rule', ''), 'current_type': current or '(unreviewed)',
+                'yt_embeds': len(s['embeds']), 'yt_embed_ids': '|'.join(s['embeds']),
+                'yt_links': len(s['links']), 'panel_headings': '|'.join(s['panels'][:8]),
+                'agenda_headings': '|'.join(s['agenda'][:8]), 'speaker_lines': s['bullets'],
+                'title_event': int(s['title_event']), 'event_markers': '|'.join(s['markers'][:6]),
+                'conference_key': lead['conference_key'], 'conf_source': lead['conf_source'],
+                'conf_match_note': lead['conf_match_note'],
+                'seg_covered': '%d/%d' % (0, len(s['embeds'])), 'words': mp.get('words', ''),
+                'evidence': 'trid-sibling of %s, which has: %s' % (present[0], lead['evidence']),
+                'action_needed': '', 'needs_review': '1',
+                'proposed_action': lead['proposed_action'], 'final_action': '', 'reviewer': '',
+                'notes': '',
+            })
+            tiered_ids.add(mid)
+            counts[lead['tier']] += 1
+
     # A row needs a decision when it is still heading for the Articles stream,
     # or when the evidence is strong enough that its current destination is
     # itself worth challenging. Tier-D rows already reclassified as something
