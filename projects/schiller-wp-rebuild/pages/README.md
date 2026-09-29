@@ -233,6 +233,16 @@ own body, which stays blocks (new pages) or the importer's HTML (216 legacy page
   strip's *Featured* picker shows the others with a demo image (37645's own Schiller
   portrait) — prototype only.
 
+- **Surfaces, for a page with no Featured image** (added 2026-09-29, beside the three
+  motifs, same *Without an image* picker): **plaster** (a fresco's troweled intonaco),
+  **linen canvas** (uneven warp and weft over a mottled ground), **veined marble** (the
+  creases of a turbulence field, turned to the diagonal), **travertine** (elongated pores in
+  faint beds). Each is an SVG noise filter (`feTurbulence`) seeded from the page ID, so no
+  two pages share a surface and none is symmetrical; lit from the upper right; coloured only
+  through CSS (`flood-color` on `.tx-*` = jasper-deep, card, jasper); the whole band, lightest
+  under the title. **About 1–2 KB each**, whatever the band's size — against 268 KB for the
+  mosaic field.
+
 *Fix when porting:*
 1. **Split on the server**, in PHP with `WP_HTML_Tag_Processor` over the rendered body; the
    prototype splits in the browser, which a reader with JS off and a search engine never see.

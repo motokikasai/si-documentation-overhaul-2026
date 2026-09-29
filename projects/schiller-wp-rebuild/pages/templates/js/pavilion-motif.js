@@ -167,13 +167,90 @@ function mosaic(r) {
 	return out;
 }
 
+/* ---- surfaces --------------------------------------------------------------
+ * A texture is not drawn but grown: an SVG noise filter (feTurbulence) seeded
+ * from the page, shaped into a surface, and coloured through CSS
+ * (flood-color on .tx-* — the tokens decide every tone). Noise is never
+ * symmetrical and never repeats, a light from the upper right gives the relief
+ * one direction, and each weighs about a kilobyte whatever the band's size. */
+const lightFrom = '<feDistantLight azimuth="235" elevation="50"/>';
+/* relief → two alphas: what the light misses (shadow) and what it catches */
+const relief = (src, k, flat) => `
+	<feDiffuseLighting in="${src}" surfaceScale="${k}" diffuseConstant="1" lighting-color="white" result="lit">${lightFrom}</feDiffuseLighting>
+	<feColorMatrix in="lit" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -3.2 0 0 0 ${f(flat * 3.2)}" result="sh"/>
+	<feColorMatrix in="lit" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  3.2 0 0 0 ${f(-flat * 3.2)}" result="hi"/>`;
+const paint = (pairs) => pairs.map(([cls, a], i) =>
+	`<feFlood class="${cls}" result="c${i}"/><feComposite in="c${i}" in2="${a}" operator="in" result="p${i}"/>`).join('')
+	+ `<feMerge>${pairs.map((_, i) => `<feMergeNode in="p${i}"/>`).join('')}</feMerge>`;
+
+const SURFACES = {
+	/* intonaco: the last coat of a fresco wall, troweled, never quite flat */
+	plaster: sd => `
+	<feTurbulence type="fractalNoise" baseFrequency="0.009" numOctaves="5" seed="${sd}" result="n"/>
+	${relief('n', 3.4, 0.77)}
+	${paint([['tx-shade', 'sh'], ['tx-light', 'hi']])}`,
+
+	/* linen canvas: warp and weft, uneven threads and slubs, a primed ground */
+	canvas: sd => `
+	<feTurbulence type="turbulence" baseFrequency="0.62 0.018" numOctaves="2" seed="${sd}" result="warp"/>
+	<feTurbulence type="turbulence" baseFrequency="0.02 0.58" numOctaves="2" seed="${sd + 7}" result="weft"/>
+	<feComposite in="warp" in2="weft" operator="arithmetic" k2="0.5" k3="0.5" result="weave"/>
+	<feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="3" seed="${sd + 13}" result="mottle"/>
+	<feComposite in="weave" in2="mottle" operator="arithmetic" k1="1.1" k2="0.25" result="cloth"/>
+	<feColorMatrix in="cloth" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.5 0 0 0 -0.12" result="thread"/>
+	<feColorMatrix in="mottle" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -1.4 0 0 0 0.8" result="ground"/>
+	${paint([['tx-shade', 'thread'], ['tx-light', 'ground']])}`,
+
+	/* veined marble: veins are the creases of a turbulence field (where it
+	   folds back through zero), thin and branching; the slab is turned so
+	   they run on the diagonal, as a cut stone's do */
+	marble: sd => `
+	<feTurbulence type="turbulence" baseFrequency="0.0026 0.0075" numOctaves="5" seed="${sd}" result="t"/>
+	<feComponentTransfer in="t" result="v"><feFuncR type="table" tableValues="1 0.35 0.08 0 0 0 0 0 0 0 0 0 0 0 0 0"/></feComponentTransfer>
+	<feColorMatrix in="v" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1 0 0 0 0" result="vein"/>
+	<feTurbulence type="fractalNoise" baseFrequency="0.004 0.01" numOctaves="3" seed="${sd + 5}" result="n"/>
+	<feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.8 0 0 0 -0.72" result="cloud"/>
+	${paint([['tx-cloud', 'cloud'], ['tx-vein', 'vein']])}`,
+
+	/* travertine: the Roman building stone — pores drawn out along its beds */
+	travertine: sd => `
+	<feTurbulence type="fractalNoise" baseFrequency="0.007 0.11" numOctaves="4" seed="${sd}" result="n"/>
+	<feComponentTransfer in="n" result="pits">
+		<feFuncR type="linear" slope="3.6" intercept="-0.95"/>
+	</feComponentTransfer>
+	<feComponentTransfer in="pits" result="pits2"><feFuncR type="discrete" tableValues="1 0.3 0 0 0 0 0 0 0 0"/></feComponentTransfer>
+	<feColorMatrix in="pits2" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.6 0 0 0 0" result="pore"/>
+	<feTurbulence type="fractalNoise" baseFrequency="0.002 0.02" numOctaves="3" seed="${sd + 3}" result="beds"/>
+	<feColorMatrix in="beds" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  2 0 0 0 -0.78" result="bed"/>
+	${relief('n', 1.2, 0.77)}
+	${paint([['tx-cloud', 'bed'], ['tx-light', 'hi'], ['tx-shade', 'pore']])}`,
+};
+
+function surfaceSVG(kind, seed) {
+	const sd = seed % 997;
+	return `<svg class="pa-motif pa-tex pa-tex--${kind}" aria-hidden="true" focusable="false">`
+		+ `<filter id="pa-tex-${kind}" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">${SURFACES[kind](sd)}</filter>`
+		+ (kind === 'marble'
+			/* a larger slab, turned, so the diagonal still fills every corner */
+			? `<g transform="rotate(-24 640 160)"><rect x="-40%" y="-160%" width="180%" height="420%" filter="url(#pa-tex-${kind})"/></g>`
+			: `<rect width="100%" height="100%" filter="url(#pa-tex-${kind})"/>`)
+		+ '</svg>';
+}
+
 export const MOTIFS = [
 	['laurel-mosaic', 'Laurel in mosaic'],
 	['mosaic', 'Mosaic field'],
 	['sprig', 'Laurel sprig, fine line'],
+	['plaster', 'Texture: plaster'],
+	['canvas', 'Texture: linen canvas'],
+	['marble', 'Texture: veined marble'],
+	['travertine', 'Texture: travertine'],
 ];
+/* drawn across the whole band (outside the title grid), not as a figure */
+export const isField = kind => kind === 'mosaic' || kind in SURFACES;
 
 export function motifSVG(kind, seed) {
+	if (kind in SURFACES) return surfaceSVG(kind, seed);
 	const r = rng(seed);
 	const body = kind === 'mosaic' ? mosaic(r) : kind === 'sprig' ? sprig(r) : laurelMosaic(r);
 	/* the field is a texture and may be cropped; a laurel is a figure and is

@@ -3,7 +3,7 @@
  * then every top-level section becomes its own full-width room with its label
  * on the left wall. A chapter bar under the header tracks the rooms. */
 import { esc, nf, reveal, enhanceProse, headingsOf, spy, readMinutes, getJSON, draftStrip, pageOptions, pickPage, go } from './pages-core.js';
-import { motifSVG, seedOf, MOTIFS } from './pavilion-motif.js';
+import { motifSVG, seedOf, MOTIFS, isField } from './pavilion-motif.js';
 
 const DRAFTS = [['A', 'page-folio.html', 'The Folio'], ['B', 'page-pavilion.html', 'The Pavilion'], ['C', 'page-codex.html', 'The Codex']];
 const [legacy, facts] = await Promise.all([getJSON('legacy-pages.json'), getJSON('facts.json')]);
@@ -36,9 +36,9 @@ const motif = MOTIFS.some(([k]) => k === new URLSearchParams(location.search).ge
 main.innerHTML = `
 <header class="pa-band${photo ? ' has-photo' : ''}" data-pattern="Page header">
 	${photo ? `<figure class="pa-photo"><img src="${esc(photo.src)}" alt="${esc(photo.alt || '')}" decoding="async" fetchpriority="high"></figure>` : ''}
-	${!photo && motif === 'mosaic' ? motifSVG(motif, seedOf(p.id)) : ''}
+	${!photo && isField(motif) ? motifSVG(motif, seedOf(p.id)) : ''}
 	<div class="ct-container pa-band__grid${rows.length ? ' has-card' : ''}">
-		${!photo && motif !== 'mosaic' ? motifSVG(motif, seedOf(p.id)) : ''}
+		${!photo && !isField(motif) ? motifSVG(motif, seedOf(p.id)) : ''}
 		<div>
 			<p class="si-eyebrow si-eyebrow--ruled">${p.parent ? esc(p.parent.title) : esc(p.eyebrow || 'Schiller Institute')}</p>
 			<h1 class="pa-title">${esc(p.title)}</h1>
@@ -107,7 +107,7 @@ draftStrip({ family: 'Page', drafts: DRAFTS, current: 'page-pavilion.html', view
 	picker: { label: 'Showcase page', options: pageOptions(legacy), value: String(p.id), onChange: go } });
 
 /* review only: the band's picture and motif (kept in the URL, like the page) */
-for (const [param, label, options, value] of [['featured', 'Featured image', FEATURED, fq], ['motif', 'Title-band motif', MOTIFS, motif]]) {
+for (const [param, label, options, value] of [['featured', 'Featured image', FEATURED, fq], ['motif', 'Without an image', MOTIFS, motif]]) {
 	const sel = document.createElement('select');
 	sel.className = 'draft-pick'; sel.setAttribute('aria-label', label);
 	sel.innerHTML = options.map(([k, t]) => `<option value="${k}"${k === value ? ' selected' : ''}>${esc(t)}</option>`).join('');
