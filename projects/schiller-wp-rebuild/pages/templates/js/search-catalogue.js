@@ -1,4 +1,4 @@
-/* search-catalogue.js — Search, draft A "The Catalogue".
+/* search-catalogue.js — Search, draft A "The Catalogue".  ← chosen direction (port plan: pages/README.md, "Chosen directions")
  * Results sorted into drawers by kind — Articles, People, Conferences, Videos —
  * like a library catalogue. "All" shows the head of each drawer; picking a kind
  * shows the whole drawer with its facets (language, subject, year). */

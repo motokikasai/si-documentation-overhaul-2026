@@ -1,4 +1,4 @@
-/* about-founding.js — About, draft A "The Founding".
+/* about-founding.js — About, draft A "The Founding".  ← chosen direction (port plan: pages/README.md, "Chosen directions")
  * The institution told outward from its founding documents: the founding
  * sentence, the 1984 declaration (with the archive's own photograph of it), the
  * namesake, the founder, then what the archive actually writes about. */

@@ -1,4 +1,4 @@
-/* notfound-suggest.js — 404, draft A "Did You Mean".
+/* notfound-suggest.js — 404, draft A "Did You Mean".  ← chosen direction (port plan: pages/README.md, "Chosen directions")
  * The missing address is itself a query: its words (a slug, a year, a month)
  * are run against the archive, and the likeliest pages are offered. Known
  * moves (the reviewed redirect patterns) are named first. The prototype takes

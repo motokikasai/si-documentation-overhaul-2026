@@ -1,4 +1,4 @@
-/* join-roles.js — Join, draft C "Your Part".
+/* join-roles.js — Join, draft C "Your Part".  ← chosen direction (port plan: pages/README.md, "Chosen directions")
  * Start from who the reader is. The roles are the Institute's own words — the
  * contact page's call to "Scientist, Engineer, Researcher, Philosopher, Singer,
  * Actor or Painter" — plus the student the youth conference was for. Each role

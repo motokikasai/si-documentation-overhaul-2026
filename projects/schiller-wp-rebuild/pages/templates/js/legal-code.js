@@ -1,4 +1,4 @@
-/* legal-code.js — Legal, draft A "The Code".  ← chosen direction
+/* legal-code.js — Legal, draft A "The Code".  ← chosen direction (port plan: pages/README.md, "Chosen directions")
  * Numbered clauses, a sticky index, and beside each clause a slot for a
  * plain-language note. The notes are placeholders on purpose: a summary of a
  * legal text must be written and approved, not generated.

@@ -1,4 +1,4 @@
-/* donate-purpose.js — Donate, draft B "What It Keeps Going".
+/* donate-purpose.js — Donate, draft B "What It Keeps Going".  ← chosen direction (port plan: pages/README.md, "Chosen directions")
  * Outcome-framed giving: the reader picks the part of the work a gift keeps
  * going, each shown with its real, current numbers, and the button names it.
  * "Where most needed" is the default, so choosing is never a gate. */
