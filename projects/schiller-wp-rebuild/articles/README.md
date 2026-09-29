@@ -292,9 +292,10 @@ inspects with the pointer instead of scrolling past three thousand thumbnails.
 *Refined 2026-09-29.* A month head's number is how many articles that month holds
 in this language; while a search, topic or year is on it reads **"1 of 14"**
 (shown of held), so it never passes for the number of matches. The loupe shows
-the **whole picture**, fitted into its 3:2 frame rather than cropped, and the
+the **whole picture** at its own proportions (height `auto`: no crop, no grey
+band), and the
 teaser is plain text: an editor's excerpt can carry markup, and a pasted
-`<p>…</p>` used to print its tags there (SI_ARTICLES_VERSION 1.0.6,
+`<p>…</p>` used to print its tags there (SI_ARTICLES_VERSION 1.0.7,
 SI_ARTICLES_INDEX_VERSION 2).
 
 **B · The Drift** — the decade as one current down a spine, entries alternating
