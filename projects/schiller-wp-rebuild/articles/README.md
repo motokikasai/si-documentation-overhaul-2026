@@ -229,6 +229,14 @@ output hash, text-only hash, words, paragraphs, buttons, surplus `</div>`, empty
 bold/italic open across a block. **Bump `SI_ARTICLE_FORMAT_VERSION` with every rule change**
 — the first R6b deploy showed nothing because it was not bumped.
 
+**Figures and the video stand apart from the text (2026-09-29).** A picture or a
+video in the body now gets 1.8× the paragraph rhythm above and below, the same as
+a section rule. Until then `.ar-prose figure { margin: 0 }` sat under the
+`:where()` reset and, having specificity, beat `.ar-prose > * + *`: every figure
+and every YouTube facade was pegged to the line above it. The reset already
+zeroes figures; the extra rule is gone (`article-shared.css`, SI_ARTICLES_VERSION
+1.0.5).
+
 ### Footnotes
 
 Twelve articles carry a real note list with **69 notes between them**; the

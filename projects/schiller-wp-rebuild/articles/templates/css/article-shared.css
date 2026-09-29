@@ -144,7 +144,12 @@
 	content: ""; display: block; width: 3rem; height: 1px; margin: .9em auto; background: var(--si-brass);
 }
 
-.ar-prose figure { margin: 0; }
+/* A picture or a video stands apart from the text around it: more air than a
+   paragraph gets, the same as a section rule. No `.ar-prose figure { margin: 0 }`
+   here — the :where() reset above already zeroes it, and a reset with
+   specificity outranked `> * + *` and pegged every figure to the text above. */
+.ar-prose > figure { margin-block: calc(var(--ar-rhythm) * 1.8); }
+.ar-prose > figure:last-child { margin-bottom: 0; }
 .ar-prose img { max-width: 100%; height: auto; display: block; }
 .ar-prose figure img { width: 100%; background: var(--si-panel); }
 .ar-prose figcaption {
