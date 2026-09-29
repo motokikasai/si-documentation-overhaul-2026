@@ -110,6 +110,11 @@ PW=… node articles/build/shoot-wp.mjs
 ```
 
 - The packager refuses to ship a file that *loads* anything from the prototype layer.
+- **`functions.php` is shared by three kits.** People's packager writes the file; Articles
+  and Videos append one `require_once` line each. Until 2026-09-29 People's overwrote the
+  others' lines, and si-v4 served Blocksy's stock single and a stock `/blog/` for four days
+  unnoticed. It now carries them over. After any deploy, check that
+  `grep require_once functions.php` lists `articles.php` and `videos.php`.
 - **Fetch twice after a deploy.** Local's opcache revalidates PHP on a timer, so the first
   request after a copy can still run the old file (seen 2026-09-24: `?ver=` stayed at the
   old version on the first fetch, correct on the second).

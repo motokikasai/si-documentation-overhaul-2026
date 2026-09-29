@@ -3,14 +3,26 @@
 #   build/package-wp.sh <dest>          e.g. <dest> = .../wp-content/themes/blocksy-child
 # One source of truth: the CSS/JS the prototypes run IS what ships. Never copied:
 # design-system/blocksy-shim.css (Blocksy prints the real thing), templates/css/proto.css.
-# Leaves the destination's style.css and wpml-config.xml alone. Overwrites functions.php —
-# diff it first if the destination's has grown.
+# Leaves the destination's style.css and wpml-config.xml alone. Overwrites functions.php,
+# but carries over every other kit's `require_once … /inc/*.php` line: the Articles and
+# Videos packagers append theirs, and overwriting them once (2026-09-25) silently put
+# every article and /blog/ back on Blocksy's stock layout for four days.
 set -euo pipefail
 here="$(cd "$(dirname "$0")/.." && pwd)"
 dest="${1:?usage: package-wp.sh <blocksy-child dir>}"
 mkdir -p "$dest/assets/jasper/fonts" "$dest/assets/people/css" "$dest/assets/people/js" "$dest/tools"
 
+kept=""
+[ -f "$dest/functions.php" ] && kept="$(grep -E "^require_once __DIR__ \. '/inc/[^']+\.php';" "$dest/functions.php" || true)"
 cp "$here"/wp/blocksy-child/functions.php "$here"/wp/blocksy-child/theme.json "$dest/"
+while IFS= read -r line; do
+	[ -n "$line" ] || continue
+	inc="$(printf '%s' "$line" | grep -oE "/inc/[^']+\.php")"
+	if ! grep -qF "'$inc'" "$dest/functions.php"; then
+		printf "\n%s\n" "$line" >> "$dest/functions.php"
+		echo "kept another kit's line in functions.php: $inc"
+	fi
+done <<< "$kept"
 cp -r "$here"/wp/blocksy-child/inc "$here"/wp/blocksy-child/template-parts "$here"/wp/blocksy-child/languages "$dest/"
 cp "$here"/wp/tools/apply-design-system.php "$here"/wp/tools/check-editor-presets.php "$dest/tools/"
 
