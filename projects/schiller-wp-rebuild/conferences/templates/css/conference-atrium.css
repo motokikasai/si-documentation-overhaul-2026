@@ -9,13 +9,18 @@
 /* ---- 1 · hero ------------------------------------------------------------- */
 .at-hero { padding-block: var(--si-space-2xl) var(--si-space-l); }
 .at-hero__grid { display: grid; gap: var(--si-space-l); align-items: start; }
-@media (min-width: 900px) { .at-hero__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 30rem); gap: var(--si-space-xl); align-items: center; } }
+@media (min-width: 900px) { .at-hero__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 27rem); gap: var(--si-space-xl); align-items: center; } }
 .at-hero__text { display: grid; gap: var(--si-space-s); }
 .at-title { font-size: var(--si-step-5); margin: 0; max-width: 20ch; text-wrap: balance; }
 .at-title.is-long { font-size: var(--si-step-4); max-width: 26ch; }
 
+/* One grid, equal columns: the facts line up whether the record carries two
+   of them or four, and a value that wraps does not push the next one out of
+   its column (flex-wrap used to leave "Speakers" half a column adrift). */
 .at-facts {
-	display: flex; flex-wrap: wrap; gap: var(--si-space-s) var(--si-space-l);
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+	gap: var(--si-space-s);
 	margin: 0; padding-block: var(--si-space-xs);
 	border-block: var(--si-hairline);
 }
@@ -24,7 +29,12 @@
 	font-family: var(--si-font-sans); font-size: var(--si-step-n2);
 	letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-muted);
 }
-.at-facts dd { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-1); color: var(--si-ink); }
+.at-facts dd {
+	margin: 0; font-family: var(--si-font-serif); color: var(--si-ink);
+	/* one line per fact in a quarter of the column, at every width the hero has */
+	font-size: clamp(1.05rem, 0.96rem + 0.42vw, 1.32rem);
+	line-height: 1.25;
+}
 
 .at-hero__cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--si-space-s) var(--si-space-m); }
 /* the gathering: where the conference met and where its voices came from */

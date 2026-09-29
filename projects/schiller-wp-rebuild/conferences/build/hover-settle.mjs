@@ -38,9 +38,34 @@ for (const dsf of [1, 1.25, 1.5]) {
 		await p.mouse.move(bb.x + bb.width / 2, bb.y + bb.height / 2); await p.waitForTimeout(900);
 		await p.mouse.move(2, 2); await p.waitForTimeout(1500);
 		const after = await p.screenshot({ clip });
-		const same = before.equals(after);
+		/* Compare in the page itself: a strict buffer equality also trips on a
+		   single re-blended antialiased pixel, which is not movement. Count
+		   pixels that differ by more than a hair, and where they are. */
+		const d = await p.evaluate(async ([a, b]) => {
+			const load = src => new Promise(res => { const i = new Image(); i.onload = () => res(i); i.src = src; });
+			const [ia, ib] = await Promise.all([load(a), load(b)]);
+			const c = new OffscreenCanvas(ia.width, ia.height), x = c.getContext('2d', { willReadFrequently: true });
+			x.drawImage(ia, 0, 0); const A = x.getImageData(0, 0, c.width, c.height).data;
+			x.clearRect(0, 0, c.width, c.height); x.drawImage(ib, 0, 0);
+			const B = x.getImageData(0, 0, c.width, c.height).data;
+			let n = 0, max = 0, x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1;
+			for (let i = 0; i < A.length; i += 4) {
+				const dd = Math.max(Math.abs(A[i] - B[i]), Math.abs(A[i + 1] - B[i + 1]), Math.abs(A[i + 2] - B[i + 2]));
+				if (dd > max) max = dd;
+				if (dd > 12) {
+					n++;
+					const px = (i / 4) % c.width, py = Math.floor((i / 4) / c.width);
+					x0 = Math.min(x0, px); y0 = Math.min(y0, py); x1 = Math.max(x1, px); y1 = Math.max(y1, py);
+				}
+			}
+			return { n, max, box: x1 < 0 ? null : [x0, y0, x1 - x0 + 1, y1 - y0 + 1], w: c.width, h: c.height };
+		}, ['data:image/png;base64,' + before.toString('base64'), 'data:image/png;base64,' + after.toString('base64')]);
+		/* one stray pixel is antialiasing; a shift moves an edge, which is
+		   hundreds of pixels in a line */
+		const same = d.n <= 8;
 		if (!same) bad++;
-		console.log(`${same ? 'ok  ' : 'FAIL'} ${name.padEnd(15)} @${dsf}x — settles where it started`);
+		console.log(`${same ? 'ok  ' : 'FAIL'} ${name.padEnd(15)} @${dsf}x — settles where it started`
+			+ (d.n ? `  (${d.n}px differ, max Δ${d.max}, box ${JSON.stringify(d.box)} of ${d.w}×${d.h})` : ''));
 		await p.close();
 	}
 }

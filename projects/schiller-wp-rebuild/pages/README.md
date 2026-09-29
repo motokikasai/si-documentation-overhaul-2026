@@ -4,7 +4,9 @@ Built 2026-09-22. This covers the pages the MVP needs that were not yet designed
 **universal Page template** (`page.php`, which every legacy page and every new editor page
 goes through), then **Home below the hero, About, Contact, Donate, Join, Privacy +
 Impressum, 404 and Search**. There are **three drafts of each**, 27 in all. Each draft is
-a different direction, not a revision of another. None has been chosen.
+a different direction, not a revision of another. **Six families have a chosen draft**
+(2026-09-24); see *Chosen directions* just below. It is the first place to look before
+porting any of these pages.
 
 Articles, the `/blog/` index and People were already designed and shipped, so they are
 not redone here.
@@ -16,6 +18,198 @@ python3 pages/build/build-pages-data.py            # rebuild data/*.json (needs 
 python3 pages/build/make-shells.py                 # rewrite the HTML shells of the Tier-1 drafts
 PW=/home/motoki/.npm/_npx/e41f203b7505f1fb/node_modules node pages/build/shoot.mjs "home-record.html@1440x1000+600" …
 ```
+
+## Chosen directions — the port sheet (decided 2026-09-24)
+
+These are the **primary candidates**: the drafts the user picked to port into WordPress.
+The drafts not picked stay in `templates/` for reference and are not refined further. Each
+chosen draft's JS file opens with `← chosen direction`, so
+`grep -l "chosen direction" pages/templates/js/*.js` lists them all.
+
+| Family | Chosen | Draft files (`templates/…`) | URL | Section kind (`docs/block-conventions.md` §3) |
+|---|---|---|---|---|
+| **About** | **A · The Founding** | `about-founding.{html,css,js}` | `/about/` | editor-authored, plus two computed parts |
+| **Contact** | *undecided*: **B · Switchboard** or **C · Desk**. **A · The Letter is ruled out** | `contact-switchboard.*`, `contact-desk.*` | `/contact/` | editor-authored + a form |
+| **Donate** | **B · What It Keeps Going** | `donate-purpose.*` + `js/donate-shared.js` (gift form) | `/donate/` | editor-authored + the NationBuilder gift form |
+| **Join** | **C · Your Part** (chosen 2026-09-22) | `join-roles.*` | `/join/` (new; see *URLs* below) | editor-authored, JS enhancement |
+| **Legal** | **A · The Code** (chosen 2026-09-22), **on one condition**: any editor can update the text as ordinary blocks (see below) | `legal-code.*` + `js/legal-shared.js` | `/privacy-policy/`, the Impressum | editor-authored, plus a computed clause index |
+| **404** | **A · Did You Mean** | `notfound-suggest.*` + `js/search-core.js` (PROTO ranker) | any missing address | data-driven |
+| **Search** | **A · The Catalogue** | `search-catalogue.*` + `js/search-core.js` (PROTO ranker) | `/?s=` | data-driven |
+| **Home** (below the hero) | *undecided*. Round 1 (Record, Cross-Examination, Corridor) was rejected; round 2 is five wireframes in `wireframes/`, none chosen | — | `/` | editor-authored |
+| **Universal Page** | *undecided*: Folio, Pavilion, Codex | `page-{folio,pavilion,codex}.*` | every `page` | data-driven frame around editor/legacy bodies |
+
+All six chosen drafts share `css/pages-shared.css` (`.si-prose`, the `.si-p-*` pattern kit,
+the two-click facade) and the top half of `js/pages-core.js`. Donate and Join also use
+`css/home-shared.css` (`hm-kicker`, `hm-signup`, the gift form `dg-*`). Everything under
+`PROTO` in those files, and all of `search-core.js`, stays out of WordPress.
+
+### How each one ports
+
+The rules are the ones in `CLAUDE.md`: an editor-authored page becomes a pattern of core
+blocks in `schiller-editorial/patterns/`, and any new look becomes a block style. A
+data-driven view becomes server-rendered PHP behind a Blocksy canvas filter. **Every
+count is computed at render or carries its date** (§9 of the conventions). The prototypes
+break that rule in a few places, listed per page under *Fix when porting*: a figure typed
+into a draft goes into WordPress as a binding or with its date, or it is dropped.
+
+#### About · The Founding → pattern `si/about-founding`
+
+| Part in the draft | In WordPress |
+|---|---|
+| Header: eyebrow, h1, the founding sentence, its source | Paragraph (Eyebrow, ruled) · Heading · Paragraph · Paragraph (**Source**). Quote text from `facts.founding`, verified by the builder |
+| The Declaration: scan + h2 + quote + source + "Read the Declaration" | Media & Text (image from the library, `2016/11/declaration-inalienable_rights_of_man_0.png`) · Heading · Paragraph · Source · Button (**Ghost**) |
+| Namesake / founder cards | Columns of two Groups: Image · Heading · Quote (**Jasper quote**, the verse from `facts.noble_cause`) · Source. The founder's link goes to her `si_person` profile |
+| "{n} appearances in the archive" | **computed**: a binding on the person's appearance count, not text |
+| "{n} articles since {first_year}, in ten subjects" + the topic bars | **computed**: needs a server part that reads `wp_count_terms` / per-topic counts, cached per §9. This is the one real gap on the page; the options are a binding, a dynamic block or a pattern's server part. **Ask before building a block** |
+| The four doors (Join · People · Contact · Donate) | Columns/Buttons; "{n} people" is a binding |
+
+*Fix when porting:* "in ten subjects" is typed; compute it from the number of topics or
+drop it. The draft's links to other drafts (`join-ladder.html`, `contact-letter.html`,
+`donate-facts.html`) become the real `/join/`, `/contact/` and `/donate/`.
+
+#### Donate · What It Keeps Going → pattern `si/donate-purpose` + the gift form
+
+> **On hold (2026-09-25), two questions open.** What the live site uses: its "Donate" menu item
+> goes to NationBuilder, which has two pages, both in US dollars — `schillerinstitute.nationbuilder.com/membership`
+> (monthly, $5–$100, $25 preselected, the quarterly *Leonore* for recurring members) and `/donate`
+> (once, $25–$2,500 or other). Neither takes a purpose, so a gift **cannot be earmarked** today:
+> the draft's selectable purposes would suggest earmarking that does not exist. Open: (1) the
+> purposes — show them without selection, keep the choice and wait for per-purpose NB pages and an
+> earmarking policy, or drop them; (2) the gift section — two buttons out to NB (monthly first) or
+> the draft's own amount form (typed copies of NB's amounts). `/donate/` 404s on si-v4 today.
+
+| Part in the draft | In WordPress |
+|---|---|
+| Eyebrow + "What would you like to keep going?" | Paragraph (Eyebrow, ruled) + Heading |
+| Five purpose cards (Most needed · Friday coalition · Archive · Choruses · Conferences), "Most needed" pre-selected so that choosing is never a gate | the card text (title, one line, the button label it sets) is editor-written, so it is block content that WPML translates. The figure on each card is computed or dated (below) |
+| The gift form: Monthly first, three amounts + Other, the sum line, a button that names the purpose | the checkout is **NationBuilder** (`00-executive-summary.md`: recurring-first). How the form reaches NB (an embed, a link with the purpose as a tag or page, or an API) is **not decided. Stop and ask** before building it |
+| "Earmarked gifts go to the purpose chosen" | copy that stays a placeholder until the Institute confirms an earmarking policy |
+
+*Fix when porting:* "5 regions" (choruses) and "in four languages" are typed. Count the
+languages from the archive, and date or drop the regions. The Friday count
+(`now.counts.ipc_weeks`) cannot be computed, so it is printed with its date ("as of …").
+The conference count and "most recently {place}, {month}" come from a query. The amounts
+in `donate-shared.js` (`AMOUNTS`) are placeholders and are not shipped as they stand.
+
+#### Join · Your Part → pattern `si/join-roles`
+
+> **Shipped on si-v4 2026-09-25** (`schiller-editorial` 0.7.4; how it works:
+> `wp-plugins/schiller-editorial/README.md` → Join). English `/join/` (page 123267), made from the
+> pattern by `tools/create-join-page.php`. Confirmed by the user: the editor works (the fields are
+> the role headings), the NationBuilder sign-up (`schillerinstitute.nationbuilder.com/join`) works,
+> and the Friday step's "Weekly — the newsletter carries the day" stands for now, to be updated
+> when the coalition's schedule changes. The path is a row when every step fits and a vertical rail
+> otherwise; numbers and lines never move or take the hover. Dropped from the draft: "37 nations",
+> "81 episodes", "167 weeks running", "The 1984 founding film, as text", "A person reads it".
+> Not made: a German `/de/join/` (a WPML translation, when wanted).
+
+| Part in the draft | In WordPress |
+|---|---|
+| "I am a ___" with the typed, cycling word | a Heading; the typing is **JS enhancement only**. With JS off, or under `prefers-reduced-motion`, it reads "I am a scientist". Timings and the no-punctuation rule: *Join · Your Part* below |
+| The lead quote (`facts.contact_call`) + source | Paragraph + Source |
+| Eight roles, each with a three-step path of **real pages** | editor-written content. The natural shape is one Group per role (a Heading plus a List of three links), so the text stays in blocks and WPML translates it. With JS off every role and its path is visible; JS turns the headings into the radiogroup and reveals one path at a time. If core blocks cannot carry that, it is the next rung (a block variation or a small block with InnerBlocks). **Ask first** |
+| "Then, whoever you are": the sign-up form | the NationBuilder sign-up, with the role sent as an NB tag (placeholder in the draft). Same open question as Donate |
+
+*Fix when porting:* the "{n} articles" on a topic step is computed. "{n} weeks running" is
+dated. "37 nations" (the youth conference) is typed: source it from the conference record,
+or drop it. The path links that point at drafts (`join-week.html`,
+`contact-letter.html`, `search-concordance.html`) become real URLs. `join-week` was not
+chosen, so the Friday step links to the Peace Coalition's own page.
+
+#### Legal · The Code → the privacy and Impressum pages, as ordinary blocks
+
+> **Shipped on si-v4 2026-09-25** (`schiller-editorial` 0.6.4; how it works:
+> `wp-plugins/schiller-editorial/README.md` → Legal). German, in force: `/de/datenschutz/`
+> (the WPML translation of `/privacy-policy/`) and `/de/impressum/` (page 1963, rewritten in
+> place). English, a **convenience translation** badged "English · translation", with a note
+> that only the German is binding: `/privacy-policy/` and `/legal-notice/`. Redirects
+> `/de/privacy-policy/` and `/de/impressum-2/` are rows in `redirect-patterns.csv`. The Editor
+> acceptance test passed (anchors survive an edit), and the scroll-spy was confirmed by the user.
+> Still owed: a counsel-reviewed English if it is ever to be binding; an English line for who
+> is responsible for the English-language part; the "In short" notes (none are approved yet);
+> menus and footer links to the new addresses (not checked).
+
+**The condition for this choice: any editor can update the text through the block
+editor, with no code, no JSON and no developer.** The port meets it like this:
+
+| Part in the draft | In WordPress | What an editor does |
+|---|---|---|
+| Each numbered clause (`§ n` + title + text) | a Group with a new block style **"Legal clause"** (`is-style-si-clause`), holding a Heading (`6. Abonnement unseres Newsletters`, number typed as the legal text has it) and ordinary Paragraph/List/Heading blocks | edits text in place; adds a paragraph or a list; inserts a new clause from the unsynced pattern **"Legal clause"** |
+| "In short", the plain-language note beside each clause | a Paragraph with a block style **"In short"** (`is-style-si-in-short`) as the clause's first block. CSS puts it in the margin at ≥1300px and above the text below that | writes the approved note, or leaves the block out. **A clause with no note shows no slot**, because the dashed placeholder is PROTO only |
+| The sticky clause index with scroll-spy | **built at render** from the clause headings (`render_block` + `WP_HTML_Tag_Processor`, rung 5: it adds an `id` to each clause heading and prints the list). JS only adds the scroll-spy | nothing. A new or renamed clause appears in the index automatically |
+| Privacy ⇄ Impressum switch | two separate Pages, joined by two plain links. The in-place `pushState` swap existed only because the drafts render from JSON, and it does not ship | nothing |
+| "Deutsch · in force / English · owed" badges | **computed** from WPML: whether this page has a published translation in each language. An editor never has to keep a badge in sync | publishes the translation, and the badge changes by itself |
+| `lang="de"` on the clauses | the German page is the German translation in WPML, so the language comes from WPML | nothing |
+
+Why the clause numbers stay typed in the heading and are not generated: legal texts refer
+to their own clauses ("see §6"). If the numbers were generated, inserting a clause would
+silently change every cross-reference. The draft's index already reads the number out of
+the heading text (`clauses()` in `legal-shared.js`), and the render-side index does the
+same.
+
+Content on si-v4 today: both German texts sit in **one** classic-HTML page, 1963
+(`/de/impressum-2/`). The Impressum ends at `<h2>Datenschutzerklärung</h2>` and 16 numbered
+`h3` clauses follow. Porting it means re-authoring it once as blocks, split into two
+pages. That is new editor content, not a conversion of the archive, which stays
+unconverted. *(Before the port.)* The English texts did not exist (Findings 1 and 2); since
+2026-09-25 they are a convenience translation of the German — see the box above.
+
+**Acceptance test for the condition:** a user with the **Editor** role, in EN and DE, can
+change a clause's wording, add a paragraph, insert a new clause, and add or remove an
+"In short" note. The index follows, the Code Editor opens without "unexpected content",
+and no one touches a file.
+
+#### 404 · Did You Mean → `blocksy:404:custom-output`
+
+Blocksy 2.1.56's `404.php` has the filter `blocksy:404:custom-output` (since 2.1.47);
+returning a string replaces its 404 markup. That is rung 2 of the frame ladder, so no
+template is overridden. Checked in `themes/blocksy/404.php` on si-v4 2026-09-24.
+
+| Part in the draft | In WordPress |
+|---|---|
+| "404 · not found", the title, "You asked for `/…`" | PHP, from `$_SERVER['REQUEST_URI']` (escaped). The draft's `?path=` is a prototype device |
+| "Recent news is now Articles" (the known moves) | from the reviewed redirect patterns (`incoming/redirect-patterns.csv`, `04-redirect-rules.md`), not a hand list. A move that is known should already redirect, so this line only catches what the redirect table misses |
+| "Were you looking for…?" top five | the words and `/yyyy/mm/` read from the address, run through **the same search backend as Search** (SearchWP per the runbook), server-side. WordPress core's `redirect_guess_404_permalink` runs before this and may already have redirected |
+| The search form, pre-filled with the words | a plain `GET` form to `/?s=` |
+
+Editor copy on the page (title, the explanatory sentence) is `si` text-domain strings,
+translated through WPML String Translation. The "try another address" strip is PROTO.
+
+#### Search · The Catalogue → `blocksy:posts-listing:canvas:custom-output` when `is_search()`
+
+Blocksy has no `search.php`. Search falls through `index.php` to `archive.php`, whose
+template part opens with `blocksy:posts-listing:canvas:custom-output`, the same filter the
+shipped `/blog/` Ledger uses. So Search is a data-driven view in the child theme.
+
+| Part in the draft | In WordPress |
+|---|---|
+| Kind tabs: All · Articles · People · Conferences · Videos, with counts | one query per kind (`post`, `si_person`, the conference and video types). The tabs are links (`?s=…&kind=…`) and JS only upgrades them |
+| "All": the first three of each drawer + "All n …" | server-rendered |
+| Facets on Articles: language, subject, year (chips with counts) | query args (`?lang=&topic=&year=`) from the taxonomies and WPML language. FacetWP only if SearchWP alone cannot count them (runbook G5) |
+| Highlighted terms (`<mark>`) | server-side highlighting of the query words (word start, accent-folded, as `search-core.js` does) |
+| "Showing 30 of n", then pagination | real pagination, which the draft only marks as owed |
+
+Findings 8 and 9 apply: search must index **body text** ("Krafft Ehricke" is in 17 bodies
+and 0 titles), and people show only **sourced** titles. Conference and video results link to
+`#` in the draft because those singles were not built yet; in WordPress they link to
+`/conferences/{slug}/` and `/videos/{slug}/`.
+
+### Open decisions, in one place
+
+1. **Contact**: B · Switchboard or C · Desk (A is out).
+2. **Home below the hero**: one of the five round-2 wireframes, then a Jasper draft of it.
+3. **The universal Page**: Folio, Pavilion or Codex.
+4. ~~**NationBuilder**~~ **decided 2026-09-25: link out.** Our page shows the choice (purpose,
+   role) and a button that opens the matching NationBuilder page with it passed along. Nothing
+   from NB loads on our site (no consent needed, no API key), as the profile invitation already does.
+5. **About's topic counts** and **Join's role paths**: which rung, if core blocks and
+   bindings are not enough. Ask before writing a block.
+6. **Search backend decided 2026-09-25: benchmark first.** About 30 real queries with expected
+   results, run on si-v4 against WordPress search and Relevanssi (and SearchWP with a trial
+   licence), before Search or 404 is ported. Native search does not see Pods fields
+   (biographies, video abstracts and transcripts).
+7. The copy the Institute has to supply: English privacy text, English Impressum and the
+   person responsible for it, gift amounts, the earmarking policy.
 
 ## The one rule: nothing invented
 
@@ -146,13 +340,13 @@ every gift form defaults to Monthly.
 
 | Family | A | B | C |
 |---|---|---|---|
-| **About** | *The Founding*: from the founding sentence and the Declaration (the archive's own scan of it) out to namesake, founder, and the work by subject | *The Lexicon*: the Institute defined like a dictionary word, numbered senses, each cited; etymology = Schiller; usage = 1988 and *Die Künstler* | *The Register*: a public register entry for the reader who checks first; each field sourced, gaps declared |
-| **Contact** | *The Letter*: the form is a letter with blanks; the margin shows who reads it; sending "seals" it | *The Switchboard*: pick a reason, get the one right channel (a tablist) | *The Desk*: answers first, filtered as you type; the form lights up when nothing matches |
-| **Donate** | *The Plain Facts*: four checkable facts, then one form (Wikipedia) | *What It Keeps Going*: outcome framing; the button names the chosen purpose | *Membership*: belonging; a card that fills in with your name; German terms exactly as published |
+| **About** | ✅ **chosen** — *The Founding*: from the founding sentence and the Declaration (the archive's own scan of it) out to namesake, founder, and the work by subject | *The Lexicon*: the Institute defined like a dictionary word, numbered senses, each cited; etymology = Schiller; usage = 1988 and *Die Künstler* | *The Register*: a public register entry for the reader who checks first; each field sourced, gaps declared |
+| **Contact** | ✗ *ruled out* — *The Letter*: the form is a letter with blanks; the margin shows who reads it; sending "seals" it | *The Switchboard*: pick a reason, get the one right channel (a tablist) | *The Desk*: answers first, filtered as you type; the form lights up when nothing matches |
+| **Donate** | *The Plain Facts*: four checkable facts, then one form (Wikipedia) | ✅ **chosen** — *What It Keeps Going*: outcome framing; the button names the chosen purpose | *Membership*: belonging; a card that fills in with your name; German terms exactly as published |
 | **Join** | *The Ladder*: five rungs by cost, rails light up to the rung you point at | *The Week*: the week in your own zone; only Friday is pinned, because it is the only fixed slot; the rest float, labelled as such; a real `.ics` | ✅ **chosen** — *Your Part*: "I am a … scientist, singer, student", using the contact page's own list of fields; three real pages per role |
 | **Legal** | ✅ **chosen** — *The Code*: numbered clauses, sticky index, a slot beside each clause for an **approved** plain-language note | *The Letterhead*: the Impressum as letterhead; privacy as disclosures | *The Layers*: a one-screen layered summary of every data use on the NEW site, and whether today's text covers it |
-| **404** | *Did You Mean*: reads the words and date in the missing address and searches the archive (`?path=` to try any) | *The Quiet Page*: one line of Schiller, search, four doors | *The Archive Drawer*: year drawers sized by output; the address's own month opens itself |
-| **Search** | *The Catalogue*: drawers by kind, facets for language, subject, year | *The Concordance*: keyword in context aligned on the word, plus a histogram of when it was used; full text for four worked queries | *The Answer First*: the best person, conference, video and article, then a list with a two-handled year range |
+| **404** | ✅ **chosen** — *Did You Mean*: reads the words and date in the missing address and searches the archive (`?path=` to try any) | *The Quiet Page*: one line of Schiller, search, four doors | *The Archive Drawer*: year drawers sized by output; the address's own month opens itself |
+| **Search** | ✅ **chosen** — *The Catalogue*: drawers by kind, facets for language, subject, year | *The Concordance*: keyword in context aligned on the word, plus a histogram of when it was used; full text for four worked queries | *The Answer First*: the best person, conference, video and article, then a list with a two-handled year range |
 
 ### Legal · The Code (chosen 2026-09-22)
 
@@ -273,8 +467,8 @@ or a dash.
 
 ## Not yet done
 
-- No draft is ported to the child theme. Once one is chosen per family, the next step is
-  WordPress blocks: the pattern kit as registered block patterns, the Page drafts as
-  `page.php` + Blocksy hooks, and the Home sections as a block-pattern page like the
-  hero's `patterns/homepage.php`.
+- No draft is ported yet. The six chosen ones have a port plan in *Chosen directions*
+  above: the editor-authored ones become patterns and block styles in `schiller-editorial`,
+  and 404 and Search become child-theme views behind Blocksy's canvas filters. The Page
+  template, Contact and Home wait on their choice (*Open decisions*).
 - `interact.mjs`-style behaviour tests (as the articles drafts have) are not written yet.

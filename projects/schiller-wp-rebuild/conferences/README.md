@@ -325,3 +325,9 @@ other four drafts are left as they are. The first round of review changed:
   for pages restored from the back/forward cache). A drag now redraws directly, so the
   globe answers the pointer even while the loop is paused. `interact.mjs` covers all
   three: it rests while hidden, turns again on return, and follows a paused drag.
+- **The hero's facts are one grid**, equal columns at every width (4 across on a desktop,
+  2 × 2 on a phone), so "Speakers" cannot drift half a column out of line the way it did
+  under flex-wrap. A long value wraps inside its own column; the columns stay aligned.
+  `hover-settle.mjs` now measures how *much* a hovered element shifts rather than
+  demanding byte-identical screenshots — one re-blended antialiased pixel is not movement,
+  and a real shift moves an edge, which is hundreds of pixels in a line.

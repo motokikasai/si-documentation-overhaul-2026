@@ -50,7 +50,17 @@ the interface between the two is **`01-csv-contracts.md`**; Day-1 outputs land i
 | `decisions-*.txt` | The full fable-day1 judgment audit trail (replayable via `tools/day1-apply-review.py`) |
 | `yt-dump/` | **COMPLETE**: 74 playlists, 1,145 video metadata JSONs, 568+ caption files (gitignored bulk). The 2026-07-17 429-throttling was ridden out overnight by `tools/polite-fetch.sh` (1 req/15s + backoff). **Backed up 2026-07-18** as `schiller-yt-dump-2026-07-18.tar.gz` (56 MB, 1,793 files verified; created in the user's Documents, destined for the backup drive) — restore by extracting as `incoming/yt-dump/`; never refetch |
 
-Offline Day-1 toolchain (all in `tools/`): `day1-extract.py` (dump → items.jsonl signals) · `day1-classify.py` (R-rules + category map + queues) · `day1-apply-review.py` (decision merge) · `day1-persons.py` · `day1-erab.py` · `day1-yt.py` (stages B+C) · `day1-scan.php` (stage D, reuses the unit-tested SI_Parse) · `polite-fetch.sh`.
+Offline Day-1 toolchain (all in `tools/`): `day1-extract.py` (dump → items.jsonl signals;
+now detects gzip vs plain by magic bytes rather than assuming — the live dump is plain
+text) · `day1-classify.py` (R-rules + category map + queues — **regenerates from scratch
+and wipes every `final_*` column**, never point it at the live `classification.csv`
+directly) · `day1-classify-refresh.py` (2026-09-28, **the safe way to catch up
+`classification.csv` to a newer dump** — extracts + classifies into a scratch dir, then
+adds only the `legacy_id`s missing from the live file, every existing row byte-verified
+unchanged; touches nothing but `classification.csv`) · `day1-apply-review.py` (decision
+merge, for rows already in the file) · `day1-persons.py` · `day1-erab.py` · `day1-yt.py`
+(stages B+C) · `day1-scan.php` (stage D, reuses the unit-tested SI_Parse) ·
+`polite-fetch.sh`.
 
 ### Day-3: the People pass (`si_person` content quality)
 

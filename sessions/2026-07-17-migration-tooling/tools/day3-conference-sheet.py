@@ -78,7 +78,7 @@ def main():
                                    kv[1][0]['date']))
 
     cards = []
-    for gkey, items in order:
+    for idx, (gkey, items) in enumerate(order, 1):
         first = items[0]
         tier = first['tier']
         gid = 'g-' + gkey
@@ -146,8 +146,8 @@ def main():
     </select></div>
 </div>''')
 
-        cards.append(f'''<article class="card t{tier}" id="{esc(gid)}" data-tier="{tier}" data-proposal="{esc(proposal)}">
-  <header><span class="tier">tier {tier}</span>
+        cards.append(f'''<article class="card t{tier}" id="{esc(gid)}" data-tier="{tier}" data-proposal="{esc(proposal)}" data-num="{idx}">
+  <header><span class="num">#{idx}</span><span class="tier">tier {tier}</span>
     <h2>{esc(first['title'][:90])}</h2>
     <span class="n">{len(items)} row{'s' if len(items) > 1 else ''}{' · trid ' + esc(first['trid']) if first['trid'] else ''}</span>
     <div class="acts">{opts}</div></header>
@@ -176,6 +176,9 @@ def main():
  .card.tC {{ border-left-color:var(--warn) }} .card.tD {{ border-left-color:var(--line) }}
  .card header {{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:6px }}
  .card h2 {{ font-size:15px; margin:0; font-weight:600 }}
+ .num {{ font:12px ui-monospace,monospace; font-weight:700; color:var(--fg);
+          background:#2c343d; border-radius:6px; padding:2px 8px; min-width:2.2em;
+          text-align:center }}
  .tier {{ font:11px ui-monospace,monospace; color:var(--dim); border:1px solid var(--line);
           border-radius:999px; padding:2px 8px }}
  .n {{ color:var(--dim); font-size:12px }}
@@ -195,6 +198,8 @@ def main():
  .keyrow {{ display:flex; gap:8px; align-items:center; margin-bottom:8px }}
  select {{ background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:5px;
            font:12px ui-monospace,monospace; padding:4px 6px; max-width:420px }}
+ input#jump {{ background:var(--bg); color:var(--fg); border:1px solid var(--line);
+   border-radius:6px; padding:5px 8px; font:12px inherit }}
  .row {{ border-top:1px solid var(--line); padding:8px 0 4px; display:grid; gap:4px }}
  .meta {{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:12px }}
  .meta code {{ color:var(--acc) }}
@@ -232,7 +237,9 @@ def main():
   <button data-accept="C">tier C</button>
   <button data-accept="*">every tier</button>
   <span class="dim">· then correct what is wrong.</span>
-  <button id="clear" style="margin-left:auto">Clear all</button>
+  <span class="dim" style="margin-left:auto">Jump to card</span>
+  <input id="jump" type="number" min="1" placeholder="#" style="width:4.5em">
+  <button id="clear">Clear all</button>
 </div>
 <div class="legend">
   One card = one WPML translation group; setting the card decides every row in it, and a row
@@ -289,6 +296,11 @@ def main():
    document.querySelectorAll('select[data-id]').forEach(s => {{ s.value = ''; }});
    refresh();
  }};
+ document.getElementById('jump').addEventListener('keydown', e => {{
+   if (e.key !== 'Enter') return;
+   const card = document.querySelector('.card[data-num="' + e.target.value + '"]');
+   if (card) card.scrollIntoView({{behavior: 'smooth', block: 'start'}});
+ }});
  document.addEventListener('change', refresh);
  document.getElementById('copy').onclick = () => {{ out.select(); document.execCommand('copy'); }};
  document.getElementById('dl').onclick = () => {{

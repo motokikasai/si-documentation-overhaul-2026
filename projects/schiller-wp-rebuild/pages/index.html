@@ -25,6 +25,10 @@
 	.ix-fam b span { font: 600 12px var(--si-font-sans); color: var(--si-brass); margin-right: 6px; }
 	.ix-fam em { font-style: normal; font-size: 14.5px; line-height: 1.45; color: var(--si-text); }
 	@media (max-width: 760px) { .ix-fam { grid-template-columns: 1fr; } }
+	.ix-fam a.is-chosen { border-top-color: var(--si-brass); }
+	.ix-fam a.is-out { opacity: .55; }
+	.ix-st { justify-self: start; padding: 1px 8px; border-radius: 999px; font: 600 11px var(--si-font-sans); letter-spacing: .08em; text-transform: uppercase; background: var(--si-ink); color: var(--si-on-accent, #fff); }
+	.is-out .ix-st { background: transparent; border: 1px dashed var(--si-muted); color: var(--si-muted); }
 	.ix-note { margin-top: 32px; padding: 16px 20px; background: var(--si-card); font: 14px/1.55 var(--si-font-sans); color: var(--si-muted); }
 </style>
 </head>
@@ -32,11 +36,13 @@
 <main class="ix si-page">
 	<p class="si-eyebrow si-eyebrow--ruled">Schiller Institute · Jasper · drafts of 22 September 2026</p>
 	<h1>The Page template and the launch pages</h1>
-	<p>Three different directions for each page. Nothing is chosen yet. Everything quoted is checked word for word against the 2026-09-08 dump. Dashed panels are declared placeholders. <a class="si-link" href="README.md">README</a> covers what is real, what is owed, and what each draft is testing.</p>
+	<p>Three different directions for each page. <b>Chosen (2026-09-24):</b> About A, Donate B, Join C, Legal A, 404 A, Search A. Contact A is ruled out; Contact, Home and the universal Page are still open. The port plan for each is in the README, under “Chosen directions”. Everything quoted is checked word for word against the 2026-09-08 dump. Dashed panels are declared placeholders. <a class="si-link" href="README.md">README</a> covers what is real, what is owed, and what each draft is testing.</p>
 	<div id="fams"></div>
 	<p class="ix-note">Run: <code>cd projects/schiller-wp-rebuild &amp;&amp; python3 articles/build/serve.py 8761</code>, then open <code>/pages/</code>. Every draft has a review strip, bottom left, that switches between its three versions. The Page family also has a switcher of real legacy pages and a Visitor/Editor toggle that labels every pattern.</p>
 </main>
 <script>
+/* decisions: pages/README.md → "Chosen directions" */
+const ST = { 'about-founding': 'chosen', 'donate-purpose': 'chosen', 'join-roles': 'chosen', 'legal-code': 'chosen', 'notfound-suggest': 'chosen', 'search-catalogue': 'chosen', 'contact-letter': 'out', 'home-record': 'out', 'home-questions': 'out', 'home-corridor': 'out' };  // Home round 1 rejected → wireframes/ (round 2)
 const F = [
 	['The universal Page', 'page.php · 216 legacy pages + every new one', [['A', 'page-folio', 'The Folio', 'One reading column on paper; its contents in the margin; child pages as numbered parts.'], ['B', 'page-pavilion', 'The Pavilion', 'A title band with the page’s particulars; each section a full-width room; a sticky chapter ribbon.'], ['C', 'page-codex', 'The Codex', 'A night rail about the page beside a limestone leaf of the page; § numbering and a reading line.']]],
 	['Home', 'below the shipped hero', [['A', 'home-record', 'The Record', 'A brass thread down a dated spine: said · then · the source · whether the original is online. Ends at the reader.'], ['B', 'home-questions', 'The Cross-Examination', 'The sceptic’s six questions, answered with evidence; a dumbbell of said→followed; 167 weeks as squares.'], ['C', 'home-corridor', 'The Corridor', 'The hero’s corridors become three rail lines down the page, converging on a departure board.']]],
@@ -48,7 +54,7 @@ const F = [
 	['404', 'not found', [['A', 'notfound-suggest', 'Did You Mean', 'Reads the words in the missing address and finds the likeliest articles.'], ['B', 'notfound-quiet', 'The Quiet Page', 'One line of Schiller, a search field, four doors.'], ['C', 'notfound-drawer', 'The Archive Drawer', 'A cabinet of year drawers; the address’s own month opens itself.']]],
 	['Search', '/?s=', [['A', 'search-catalogue', 'The Catalogue', 'Results in drawers by kind, with facets for language, subject, year.'], ['B', 'search-concordance', 'The Concordance', 'Keyword in context, aligned on the word, with a histogram of when it was used.'], ['C', 'search-answer', 'The Answer First', 'The best person, conference, video and article first; then a year-ranged list.']]],
 ];
-document.getElementById('fams').innerHTML = F.map(([h, s, ds]) => `<section class="ix-fam"><h2>${h}<small>${s}</small></h2><ol>${ds.map(([k, f, t, d]) => `<li><a href="templates/${f}.html"><b><span>${k}</span>${t}</b><em>${d}</em></a></li>`).join('')}</ol></section>`).join('');
+document.getElementById('fams').innerHTML = F.map(([h, s, ds]) => `<section class="ix-fam"><h2>${h}<small>${s}</small></h2><ol>${ds.map(([k, f, t, d]) => `<li><a href="templates/${f}.html"${ST[f] ? ` class="is-${ST[f]}"` : ''}>${ST[f] ? `<span class="ix-st">${ST[f] === 'chosen' ? 'Chosen' : 'Ruled out'}</span>` : ''}<b><span>${k}</span>${t}</b><em>${d}</em></a></li>`).join('')}</ol></section>`).join('');
 </script>
 </body>
 </html>
