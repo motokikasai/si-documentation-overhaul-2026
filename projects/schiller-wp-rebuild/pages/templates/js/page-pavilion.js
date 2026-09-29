@@ -18,15 +18,27 @@ if (p.parent) rows.push(['Part of', `<a href="${esc(p.parent.url)}">${esc(p.pare
 if (p.children.length) rows.push(['Pages', `${p.children.length}`]);
 if (p.words >= 600) rows.push(['Reading', `${readMinutes(p.words)} min`]);
 
+/* The band's picture. A page's own Featured image (the core field every Page
+   has) takes the band's right side, tonal and fading into the ground; without
+   one, the motif is drawn instead. For review, ?featured= shows a page with the
+   demo image (the Institute's Schiller portrait, 37645's own featured image)
+   where it has none: demo = own, else the demo; own = own only; none = motif. */
+const FEATURED = [['demo', 'Featured: own, else demo'], ['own', 'Featured: own only'], ['none', 'Featured: none']];
+const DEMO_IMAGE = legacy.pages.find(x => x.id === 37645)?.featured || null;
+const fq = FEATURED.some(([k]) => k === new URLSearchParams(location.search).get('featured'))
+	? new URLSearchParams(location.search).get('featured') : 'demo';
+const photo = fq === 'none' ? null : (p.featured || (fq === 'demo' ? DEMO_IMAGE : null));
+
 /* the band's motif: three candidates under review, ?motif= picks one */
 const motif = MOTIFS.some(([k]) => k === new URLSearchParams(location.search).get('motif'))
 	? new URLSearchParams(location.search).get('motif') : MOTIFS[0][0];
 
 main.innerHTML = `
-<header class="pa-band" data-pattern="Page header">
-	${motif === 'mosaic' ? motifSVG(motif, seedOf(p.id)) : ''}
+<header class="pa-band${photo ? ' has-photo' : ''}" data-pattern="Page header">
+	${photo ? `<figure class="pa-photo"><img src="${esc(photo.src)}" alt="${esc(photo.alt || '')}" decoding="async" fetchpriority="high"></figure>` : ''}
+	${!photo && motif === 'mosaic' ? motifSVG(motif, seedOf(p.id)) : ''}
 	<div class="ct-container pa-band__grid${rows.length ? ' has-card' : ''}">
-		${motif !== 'mosaic' ? motifSVG(motif, seedOf(p.id)) : ''}
+		${!photo && motif !== 'mosaic' ? motifSVG(motif, seedOf(p.id)) : ''}
 		<div>
 			<p class="si-eyebrow si-eyebrow--ruled">${p.parent ? esc(p.parent.title) : esc(p.eyebrow || 'Schiller Institute')}</p>
 			<h1 class="pa-title">${esc(p.title)}</h1>
@@ -34,9 +46,9 @@ main.innerHTML = `
 		</div>
 		${rows.length ? `<dl class="pa-card">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>` : ''}
 	</div>
+	${photo?.caption ? `<p class="ct-container pa-photo__cap">${esc(photo.caption)}</p>` : ''}
 	${p.children.length ? `<nav class="ct-container pa-parts" aria-label="Parts of this page"><span>In this section</span>${p.children.map(c => `<a href="${esc(c.url)}">${esc(c.title.replace(/^.*?>\s*/, ''))}</a>`).join('')}</nav>` : ''}
 </header>
-${p.featured ? `<figure class="pa-plate"><img src="${esc(p.featured.src)}" alt="${esc(p.featured.alt)}">${p.featured.caption ? `<figcaption class="ct-container">${esc(p.featured.caption)}</figcaption>` : ''}</figure>` : ''}
 <nav class="pa-chapters" aria-label="Sections" hidden><div class="ct-container"><ol></ol></div></nav>
 <div class="pa-body si-prose">${p.html || '<p class="si-empty">This page has no content yet.</p>'}</div>`;
 main.removeAttribute('aria-busy');
@@ -94,11 +106,11 @@ reveal(main);
 draftStrip({ family: 'Page', drafts: DRAFTS, current: 'page-pavilion.html', view: true,
 	picker: { label: 'Showcase page', options: pageOptions(legacy), value: String(p.id), onChange: go } });
 
-/* review only: switch the band's motif (kept in the URL, like the page) */
-{
+/* review only: the band's picture and motif (kept in the URL, like the page) */
+for (const [param, label, options, value] of [['featured', 'Featured image', FEATURED, fq], ['motif', 'Title-band motif', MOTIFS, motif]]) {
 	const sel = document.createElement('select');
-	sel.className = 'draft-pick'; sel.setAttribute('aria-label', 'Title-band motif');
-	sel.innerHTML = MOTIFS.map(([k, t]) => `<option value="${k}"${k === motif ? ' selected' : ''}>${esc(t)}</option>`).join('');
-	sel.addEventListener('change', () => { const u = new URL(location.href); u.searchParams.set('motif', sel.value); location.href = u; });
+	sel.className = 'draft-pick'; sel.setAttribute('aria-label', label);
+	sel.innerHTML = options.map(([k, t]) => `<option value="${k}"${k === value ? ' selected' : ''}>${esc(t)}</option>`).join('');
+	sel.addEventListener('change', () => { const u = new URL(location.href); u.searchParams.set(param, sel.value); location.href = u; });
 	document.querySelector('.draft-strip')?.appendChild(sel);
 }

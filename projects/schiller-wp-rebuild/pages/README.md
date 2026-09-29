@@ -219,6 +219,20 @@ own body, which stays blocks (new pages) or the importer's HTML (216 legacy page
   band's height, between the title and the card; the field is a texture and may be cropped.
   On a phone they drop to 55% and the field keeps to the top right corner.
 
+- **The Featured image** (the core field every Page has, in the editor's sidebar) goes
+  into the band, decided 2026-09-29: bled off the right edge at the band's full height,
+  greyscale under the jasper tint like every Jasper photograph, at 58% over the mist ground
+  so a dark painting and a bright photograph settle to the same range, fading toward the
+  title; the card rests on it. The area is wide enough (74% of the band, up to 62rem) that
+  the picture's middle falls between title and card, and the frame favours the upper third
+  (`object-position: 50% 35%`), since core has no focal-point field. On a phone it becomes
+  a strip across the top, fading down into the title. A caption from the media library, if
+  there is one, prints small under the band's text; none is ever written for it. With a
+  Featured image the motif is not drawn; without one it is. The separate full-width plate
+  under the band is gone. Of the 16 sample pages only 3 have a Featured image; the review
+  strip's *Featured* picker shows the others with a demo image (37645's own Schiller
+  portrait) — prototype only.
+
 *Fix when porting:*
 1. **Split on the server**, in PHP with `WP_HTML_Tag_Processor` over the rendered body; the
    prototype splits in the browser, which a reader with JS off and a search engine never see.
@@ -227,7 +241,11 @@ own body, which stays blocks (new pages) or the importer's HTML (216 legacy page
    (`templateLock: contentOnly`), so a page built from patterns would come out as one room.
 3. **Measure before shipping the rule**: over the 216 legacy pages, how many get 0, 1–2 and
    3+ sections (many use bold paragraphs as headings, which do not split).
-4. **The motif in PHP**: `motifSVG()` is a pure function of (kind, seed) with a portable
+4. **The Featured image in PHP**: `wp_get_attachment_image($id, 'full', false, ['class' =>
+   …, 'fetchpriority' => 'high', 'loading' => false, 'sizes' => '(min-width: 690px) 74vw, 100vw'])`
+   so WordPress's own srcset serves a fitting size; it is the page's largest paint, so it is
+   never lazy-loaded.
+5. **The motif in PHP**: `motifSVG()` is a pure function of (kind, seed) with a portable
    generator (mulberry32 + FNV-1a), written to be translated line for line. Cache the SVG in
    a transient keyed by page ID and a version constant. **Weight, measured 2026-09-29 on
    45811:** the mosaic field is ~2,500 shapes, **268 KB** of inline markup (39 KB gzipped); the mosaic laurel
