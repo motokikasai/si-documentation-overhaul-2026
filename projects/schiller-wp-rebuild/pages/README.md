@@ -226,6 +226,19 @@ own body, which stays blocks (new pages) or the importer's HTML (216 legacy page
   mask — full at the right edge, 80% at 28%, 30% at 58%, clear from 86% — so the band is
   darkest at the right and lighter, then transparent, toward the title, as the Featured
   image fades.
+- **Or the Earth from space** (added 2026-09-29, same picker): four views rendered by
+  `build/make-earth-bands.py` from the NASA maps the homepage hero already ships (Blue Marble,
+  the cloud layer, Black Marble 2016 — public domain, credited in `homepage-draft/README.md`):
+  **the horizon** (Europe along the curve, the Mediterranean and Sahara nearer), **a globe
+  rising** (Africa and Europe, lit from the left), **night lights** (Spain, Italy and North
+  Africa by their cities), **the whole planet** (a small Blue Marble between title and card).
+  An orthographic projection of the maps onto a lit sphere with a thin atmosphere; every pixel
+  of the planet is a map pixel, lit, nothing painted in. On a transparent ground at the band's
+  own proportions (1600 × 320), 14–25 KB each as WebP, in `templates/img/band-earth-*.webp`.
+  Shown with the Featured image's treatment (greyscale, 62%, fading toward the title), with
+  a stronger jasper tint masked to the planet's own shape so the empty band stays clean
+  mist. A url() inside a custom property resolves against the stylesheet, not the page:
+  the mask's URL is passed absolute.
 - **The Featured image** (the core field every Page has, in the editor's sidebar) goes
   into the band, decided 2026-09-29: bled off the right edge at the band's full height,
   greyscale under the jasper tint like every Jasper photograph, at 58% over the mist ground

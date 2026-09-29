@@ -29,14 +29,22 @@ const fq = FEATURED.some(([k]) => k === new URLSearchParams(location.search).get
 	? new URLSearchParams(location.search).get('featured') : 'demo';
 const photo = fq === 'none' ? null : (p.featured || (fq === 'demo' ? DEMO_IMAGE : null));
 
-/* the band's surface when there is no image: candidates under review, ?motif= picks one */
-const motif = MOTIFS.some(([k]) => k === new URLSearchParams(location.search).get('motif'))
+/* The band when there is no image: a grown surface, or the Earth from space
+   (views rendered by build/make-earth-bands.py from the hero's NASA maps).
+   Candidates under review, ?motif= picks one. */
+const EARTH = [['earth-limb', 'Earth: the horizon'], ['earth-disc', 'Earth: a globe rising'], ['earth-night', 'Earth: night lights'], ['earth-whole', 'Earth: the whole planet']];
+const BAND = [...MOTIFS, ...EARTH];
+const motif = BAND.some(([k]) => k === new URLSearchParams(location.search).get('motif'))
 	? new URLSearchParams(location.search).get('motif') : MOTIFS[0][0];
+/* absolute, because a url() inside a custom property resolves against the
+   stylesheet that uses it, not against this page */
+const earth = !photo && motif.startsWith('earth-') ? `img/band-${motif}.webp` : null;
 
 main.innerHTML = `
-<header class="pa-band${photo ? ' has-photo' : ''}" data-pattern="Page header">
+<header class="pa-band${photo || earth ? ' has-photo' : ''}" data-pattern="Page header">
 	${photo ? `<figure class="pa-photo"><img src="${esc(photo.src)}" alt="${esc(photo.alt || '')}" decoding="async" fetchpriority="high"></figure>` : ''}
-	${!photo ? motifSVG(motif, seedOf(p.id)) : ''}
+	${earth ? `<figure class="pa-photo pa-photo--earth" style="--shape: url('${new URL(earth, location.href).href}')"><img src="${earth}" alt="" decoding="async"></figure>` : ''}
+	${!photo && !earth ? motifSVG(motif, seedOf(p.id)) : ''}
 	<div class="ct-container pa-band__grid">
 		<div>
 			<p class="si-eyebrow si-eyebrow--ruled">${p.parent ? esc(p.parent.title) : esc(p.eyebrow || 'Schiller Institute')}</p>
@@ -106,7 +114,7 @@ draftStrip({ family: 'Page', drafts: DRAFTS, current: 'page-pavilion.html', view
 	picker: { label: 'Showcase page', options: pageOptions(legacy), value: String(p.id), onChange: go } });
 
 /* review only: the band's picture and motif (kept in the URL, like the page) */
-for (const [param, label, options, value] of [['featured', 'Featured image', FEATURED, fq], ['motif', 'Without an image', MOTIFS, motif]]) {
+for (const [param, label, options, value] of [['featured', 'Featured image', FEATURED, fq], ['motif', 'Without an image', BAND, motif]]) {
 	const sel = document.createElement('select');
 	sel.className = 'draft-pick'; sel.setAttribute('aria-label', label);
 	sel.innerHTML = options.map(([k, t]) => `<option value="${k}"${k === value ? ' selected' : ''}>${esc(t)}</option>`).join('');
