@@ -63,6 +63,15 @@ function draw() {
 	if (state.sort === 'longest') {
 		list.innerHTML = `<ul class="lg-group">${rows.map(rowHTML).join('')}</ul>`;
 	} else {
+		/* A month's number is how many articles it holds in this language; with a
+		   search, topic or year on, it says how many of those are shown ("1 of 14"),
+		   as the WordPress Ledger does. */
+		const whole = new Map();
+		for (const it of data.items) {
+			if (!state.lang || it.l === state.lang) whole.set(it.mo, (whole.get(it.mo) || 0) + 1);
+		}
+		const monthN = g => g.items.length === whole.get(g.mo)
+			? n(g.items.length) : `${n(g.items.length)} of ${n(whole.get(g.mo))}`;
 		const groups = [];
 		let cur = null;
 		for (const it of rows) {
@@ -71,7 +80,7 @@ function draw() {
 		}
 		list.innerHTML = groups.map(g => `
 			<li>
-				<h2 class="lg-month"><span>${esc(fmtMonth(g.mo, state.lang || 'en'))}</span><i>${n(g.items.length)}</i></h2>
+				<h2 class="lg-month"><span>${esc(fmtMonth(g.mo, state.lang || 'en'))}</span><i>${monthN(g)}</i></h2>
 				<ul class="lg-group">${g.items.map(rowHTML).join('')}</ul>
 			</li>`).join('');
 	}

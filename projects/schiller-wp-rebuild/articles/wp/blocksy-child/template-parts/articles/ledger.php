@@ -87,7 +87,7 @@ $fold = static function (string $s): string {
 </div>
 
 <div class="ct-container lg-body">
-	<ol class="lg-list" data-list>
+	<ol class="lg-list" data-list data-of="<?php /* translators: 1: articles shown, 2: all of them */ echo esc_attr(__('%1$s of %2$s', 'si')); ?>">
 		<?php
 		$month = null;
 		$open = false;
@@ -104,7 +104,7 @@ $fold = static function (string $s): string {
 				<li data-month="<?php echo esc_attr($month); ?>">
 					<h2 class="lg-month">
 						<span><?php echo esc_html(wp_date('F Y', $row['date']->getTimestamp())); ?></span>
-						<i><?php echo esc_html(number_format_i18n($count)); ?></i>
+						<i data-n="<?php echo esc_attr($count); ?>"><?php echo esc_html(number_format_i18n($count)); ?></i>
 					</h2>
 					<ul class="lg-group">
 			<?php endif; ?>

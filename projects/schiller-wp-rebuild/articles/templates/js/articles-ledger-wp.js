@@ -44,13 +44,24 @@ if (bar && list) {
 			row.hidden = !ok;
 			if (ok) shown++;
 		}
+		/* A month's number is how many articles it holds. While a filter is on,
+		   it says how many of those are shown — "1 of 14" — so it never reads
+		   as the number of matches when it is not. */
+		const of = (a, b) => (list.dataset.of || '%1$s of %2$s')
+			.replace('%1$s', a.toLocaleString()).replace('%2$s', b.toLocaleString());
 		for (const month of months) {
-			month.hidden = !month.querySelector('.lg-row:not([hidden])');
+			const visible = month.querySelectorAll('.lg-row:not([hidden])').length;
+			month.hidden = !visible;
+			const n = month.querySelector('.lg-month i[data-n]');
+			if (n) {
+				const all = Number(n.dataset.n);
+				n.textContent = visible === all ? all.toLocaleString() : of(visible, all);
+			}
 		}
 		if (countEl) {
 			countEl.innerHTML = shown === total
 				? `<b>${total.toLocaleString()}</b> ${countEl.dataset.word || 'articles'}`
-				: `<b>${shown.toLocaleString()}</b> of ${total.toLocaleString()}`;
+				: of(shown, total).replace(shown.toLocaleString(), `<b>${shown.toLocaleString()}</b>`);
 		}
 		const dirty = !!(get('q') || topic || year);
 		bar.querySelector('[data-reset]').hidden = !dirty;

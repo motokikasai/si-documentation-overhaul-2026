@@ -237,9 +237,27 @@ console.log('\nCOLLECTION A — The Ledger');
 	const found = (await page.$$('.lg-row')).length;
 	ok('ledger: search narrows the index', found > 0 && found < en, `${found} rows`);
 	ok('ledger: the search is in the URL, so a view can be shared', page.url().includes('q=Beethoven'));
+	{	/* a filtered month says "x of y": y is what the month holds, x what is shown */
+		const heads = await page.$$eval('.lg-list > li', lis => lis.map(li => ({
+			mo: li.querySelector('.lg-group .lg-row') && li.querySelector('.lg-month i').textContent,
+			shown: li.querySelectorAll('.lg-row').length })));
+		const wholeOf = mo => index.items.filter(i => i.l === 'en' && i.d.slice(0, 7) === mo).length;
+		const months = await page.$$eval('.lg-list > li', lis => lis.map(li => li.querySelector('.lg-row a')?.getAttribute('href')));
+		const bad = [];
+		for (const [k, h] of heads.entries()) {
+			const m = months[k] && months[k].match(/\/(\d{4})\/(\d{2})\//);
+			if (!m) continue;
+			const all = wholeOf(`${m[1]}-${m[2]}`);
+			const want = h.shown === all ? all.toLocaleString('en-GB') : `${h.shown.toLocaleString('en-GB')} of ${all.toLocaleString('en-GB')}`;
+			if (h.mo !== want) bad.push(`${m[1]}-${m[2]}: "${h.mo}" ≠ "${want}"`);
+		}
+		ok('ledger: a filtered month reads "shown of all"', !bad.length && heads.some(h => / of /.test(h.mo || '')), bad.slice(0, 3).join('; '));
+	}
 	await page.click('[data-reset]');
 	await page.waitForTimeout(300);
 	eq('ledger: clear puts them all back', (await page.$$('.lg-row')).length, en);
+	ok('ledger: … and every month its plain number again',
+		(await page.$$eval('.lg-month i', is => is.filter(i => / of /.test(i.textContent)).length)) === 0);
 	await page.selectOption('[data-set="topic"]', 'classical-culture');
 	await page.waitForTimeout(300);
 	const topicRows = (await page.$$('.lg-row')).length;

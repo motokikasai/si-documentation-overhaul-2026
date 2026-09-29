@@ -105,6 +105,9 @@
    takes its own colours only when the pointer reaches it — colour stays the
    reward for attention, one step further in. */
 .lg-loupe .arc-thumb { aspect-ratio: 3 / 2; }
+/* the whole picture, fitted rather than cropped: the loupe is where a reader
+   looks at it. The frame keeps its 3:2 so the panel does not jump between rows. */
+.lg-loupe .arc-thumb img { object-fit: contain; }
 .lg-loupe .arc-thumb img { transition: opacity var(--si-dur-2) var(--si-ease), filter var(--si-dur-3) var(--si-ease); }
 .lg-loupe .arc-thumb::after { transition: opacity var(--si-dur-3) var(--si-ease); }
 .lg-loupe .arc-thumb:hover img { filter: none; }

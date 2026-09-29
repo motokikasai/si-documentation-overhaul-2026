@@ -28,7 +28,7 @@
 
 defined('ABSPATH') || exit;
 
-const SI_ARTICLES_INDEX_VERSION = 1;
+const SI_ARTICLES_INDEX_VERSION = 2;   // 2: excerpt teasers stripped of markup
 
 function si_articles_is_index(): bool {
 	return is_home() && !is_front_page() && !is_paged();
@@ -85,9 +85,9 @@ function si_articles_rows(): array {
 /** The excerpt an editor wrote, else the opening of the body. Only 71 of the
  *  4,140 legacy posts have an excerpt, so the fallback is the normal case. */
 function si_articles_teaser(WP_Post $post, int $length = 200): string {
-	$text = has_excerpt($post)
-		? $post->post_excerpt
-		: strip_shortcodes(wp_strip_all_tags($post->post_content));
+	/* both sides stripped: an excerpt can hold markup too (a pasted <p>…</p>
+	   printed its tags on the loupe) */
+	$text = wp_strip_all_tags(strip_shortcodes(has_excerpt($post) ? $post->post_excerpt : $post->post_content));
 	$text = trim(preg_replace('/\s+/u', ' ', html_entity_decode($text, ENT_QUOTES, 'UTF-8')));
 	// a body that opens with its own byline should not open the teaser with it
 	$text = preg_replace('/^(?:by|von|par)\s+[^.\n]{3,60}?(?=\s+\p{Lu})/iu', '', $text);
