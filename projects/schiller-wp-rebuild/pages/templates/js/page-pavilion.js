@@ -3,7 +3,7 @@
  * then every top-level section becomes its own full-width room with its label
  * on the left wall. A chapter bar under the header tracks the rooms. */
 import { esc, nf, reveal, enhanceProse, headingsOf, spy, readMinutes, getJSON, draftStrip, pageOptions, pickPage, go } from './pages-core.js';
-import { motifSVG, seedOf, MOTIFS, isField } from './pavilion-motif.js';
+import { motifSVG, seedOf, MOTIFS } from './pavilion-motif.js';
 
 const DRAFTS = [['A', 'page-folio.html', 'The Folio'], ['B', 'page-pavilion.html', 'The Pavilion'], ['C', 'page-codex.html', 'The Codex']];
 const [legacy, facts] = await Promise.all([getJSON('legacy-pages.json'), getJSON('facts.json')]);
@@ -20,25 +20,24 @@ if (p.words >= 600) rows.push(['Reading', `${readMinutes(p.words)} min`]);
 
 /* The band's picture. A page's own Featured image (the core field every Page
    has) takes the band's right side, tonal and fading into the ground; without
-   one, the motif is drawn instead. For review, ?featured= shows a page with the
+   one, a surface is grown instead. For review, ?featured= shows a page with the
    demo image (the Institute's Schiller portrait, 37645's own featured image)
-   where it has none: demo = own, else the demo; own = own only; none = motif. */
+   where it has none: demo = own, else the demo; own = own only; none = surface. */
 const FEATURED = [['demo', 'Featured: own, else demo'], ['own', 'Featured: own only'], ['none', 'Featured: none']];
 const DEMO_IMAGE = legacy.pages.find(x => x.id === 37645)?.featured || null;
 const fq = FEATURED.some(([k]) => k === new URLSearchParams(location.search).get('featured'))
 	? new URLSearchParams(location.search).get('featured') : 'demo';
 const photo = fq === 'none' ? null : (p.featured || (fq === 'demo' ? DEMO_IMAGE : null));
 
-/* the band's motif: three candidates under review, ?motif= picks one */
+/* the band's surface when there is no image: candidates under review, ?motif= picks one */
 const motif = MOTIFS.some(([k]) => k === new URLSearchParams(location.search).get('motif'))
 	? new URLSearchParams(location.search).get('motif') : MOTIFS[0][0];
 
 main.innerHTML = `
 <header class="pa-band${photo ? ' has-photo' : ''}" data-pattern="Page header">
 	${photo ? `<figure class="pa-photo"><img src="${esc(photo.src)}" alt="${esc(photo.alt || '')}" decoding="async" fetchpriority="high"></figure>` : ''}
-	${!photo && isField(motif) ? motifSVG(motif, seedOf(p.id)) : ''}
-	<div class="ct-container pa-band__grid${rows.length ? ' has-card' : ''}">
-		${!photo && !isField(motif) ? motifSVG(motif, seedOf(p.id)) : ''}
+	${!photo ? motifSVG(motif, seedOf(p.id)) : ''}
+	<div class="ct-container pa-band__grid">
 		<div>
 			<p class="si-eyebrow si-eyebrow--ruled">${p.parent ? esc(p.parent.title) : esc(p.eyebrow || 'Schiller Institute')}</p>
 			<h1 class="pa-title">${esc(p.title)}</h1>

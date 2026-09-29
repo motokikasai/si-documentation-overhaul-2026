@@ -36,7 +36,7 @@ chosen draft's JS file opens with `← chosen direction`, so
 | **404** | **A · Did You Mean** | `notfound-suggest.*` + `js/search-core.js` (PROTO ranker) | any missing address | data-driven |
 | **Search** | **A · The Catalogue** | `search-catalogue.*` + `js/search-core.js` (PROTO ranker) | `/?s=` | data-driven |
 | **Home** (below the hero) | *undecided*. Round 1 (Record, Cross-Examination, Corridor) was rejected; round 2 is five wireframes in `wireframes/`, none chosen | — | `/` | editor-authored |
-| **Universal Page** | **B · The Pavilion** (chosen 2026-09-29; band motif still open) | `page-pavilion.*` + `js/pavilion-motif.js` | every `page` | data-driven frame around editor/legacy bodies |
+| **Universal Page** | **B · The Pavilion** (chosen 2026-09-29; band surface still open) | `page-pavilion.*` + `js/pavilion-motif.js` | every `page` | data-driven frame around editor/legacy bodies |
 
 All six chosen drafts share `css/pages-shared.css` (`.si-prose`, the `.si-p-*` pattern kit,
 the two-click facade) and the top half of `js/pages-core.js`. Donate and Join also use
@@ -209,16 +209,23 @@ own body, which stays blocks (new pages) or the importer's HTML (216 legacy page
   **Reading** (minutes, from 600 words). Each row only when it has a value; no card when none
   has. No section count: the ribbon right below already shows the sections. "Rooms" is gone
   from everything a reader sees.
-- **The band's motif** replaces the jasper roundel (read as an unexplained circle). Three
-  candidates in `js/pavilion-motif.js`, switched by the review strip's *Motif* picker
-  (`?motif=`): **laurel in mosaic** (a sprig set in tesserae, outlined by one pale course),
-  **mosaic field** (tesserae in rings, bled off the right edge under the card), **laurel
-  sprig, fine line**. All three: inline SVG, aria-hidden, no motion, tones from Jasper tokens
-  only (jasper, jasper-deep, card, rule), drawn from a seed of the page ID, so each page has
-  its own variation and no editor chooses anything. The laurels are shown whole, at the
-  band's height, between the title and the card; the field is a texture and may be cropped.
-  On a phone they drop to 55% and the field keeps to the top right corner.
-
+- **The band without a Featured image: a surface** (decided 2026-09-29, replacing the jasper
+  roundel, which read as an unexplained circle; the laurel and mosaic motifs tried the same
+  day were removed at the user's request, as were four coarser textures — see git history).
+  Candidates in `js/pavilion-motif.js`, switched by the review strip's *Without an image*
+  picker (`?motif=`): **cold-press paper** (a watercolour sheet's tooth and its pulp),
+  **fibre paper** (kozo: pulp fibres caught in the sheet), **craquelure** (an old painting's
+  varnish cracks, a coarse net and a finer one inside it), **watered silk** (two thread sets,
+  each bent by its own slow current, interfering), **engraving** (burin lines swelling with an
+  underlying tone), **Calacatta marble** (fine diagonal veins and hairlines). Each is built
+  from several scales at low contrast, so it is calm at a glance and has something to find
+  on a second one. Each is an SVG noise filter seeded from the page ID (never symmetrical, no
+  two pages alike), coloured only through CSS (`flood-color` / `fill` on `.tx-*`: jasper,
+  jasper-deep, card), 1–2 KB whatever the band's size.
+  **The fade**, as the user asked: under the grain a jasper wash, and over both an alpha
+  mask — full at the right edge, 80% at 28%, 30% at 58%, clear from 86% — so the band is
+  darkest at the right and lighter, then transparent, toward the title, as the Featured
+  image fades.
 - **The Featured image** (the core field every Page has, in the editor's sidebar) goes
   into the band, decided 2026-09-29: bled off the right edge at the band's full height,
   greyscale under the jasper tint like every Jasper photograph, at 58% over the mist ground
@@ -228,20 +235,10 @@ own body, which stays blocks (new pages) or the importer's HTML (216 legacy page
   (`object-position: 50% 35%`), since core has no focal-point field. On a phone it becomes
   a strip across the top, fading down into the title. A caption from the media library, if
   there is one, prints small under the band's text; none is ever written for it. With a
-  Featured image the motif is not drawn; without one it is. The separate full-width plate
+  Featured image no surface is drawn; without one it is. The separate full-width plate
   under the band is gone. Of the 16 sample pages only 3 have a Featured image; the review
   strip's *Featured* picker shows the others with a demo image (37645's own Schiller
   portrait) — prototype only.
-
-- **Surfaces, for a page with no Featured image** (added 2026-09-29, beside the three
-  motifs, same *Without an image* picker): **plaster** (a fresco's troweled intonaco),
-  **linen canvas** (uneven warp and weft over a mottled ground), **veined marble** (the
-  creases of a turbulence field, turned to the diagonal), **travertine** (elongated pores in
-  faint beds). Each is an SVG noise filter (`feTurbulence`) seeded from the page ID, so no
-  two pages share a surface and none is symmetrical; lit from the upper right; coloured only
-  through CSS (`flood-color` on `.tx-*` = jasper-deep, card, jasper); the whole band, lightest
-  under the title. **About 1–2 KB each**, whatever the band's size — against 268 KB for the
-  mosaic field.
 
 *Fix when porting:*
 1. **Split on the server**, in PHP with `WP_HTML_Tag_Processor` over the rendered body; the
@@ -255,20 +252,15 @@ own body, which stays blocks (new pages) or the importer's HTML (216 legacy page
    …, 'fetchpriority' => 'high', 'loading' => false, 'sizes' => '(min-width: 690px) 74vw, 100vw'])`
    so WordPress's own srcset serves a fitting size; it is the page's largest paint, so it is
    never lazy-loaded.
-5. **The motif in PHP**: `motifSVG()` is a pure function of (kind, seed) with a portable
-   generator (mulberry32 + FNV-1a), written to be translated line for line. Cache the SVG in
-   a transient keyed by page ID and a version constant. **Weight, measured 2026-09-29 on
-   45811:** the mosaic field is ~2,500 shapes, **268 KB** of inline markup (39 KB gzipped); the mosaic laurel
-   ~770 shapes, 82 KB; the sprig 15 shapes, 4 KB. The field is too heavy to inline on every
-   page: if it is chosen, it ships as a cached `.svg` file per seed (or a handful of seeds
-   reused), referenced from the band, not inlined.
+5. **The surface in PHP**: `motifSVG()` is a pure function of (kind, seed): an FNV-1a hash
+   of the page ID and a filter string, translated line for line. No caching needed at 1–2 KB.
 
 ### Open decisions, in one place
 
 1. **Contact**: B · Switchboard or C · Desk (A is out).
 2. **Home below the hero**: one of the five round-2 wireframes, then a Jasper draft of it.
-3. ~~**The universal Page**~~ **decided 2026-09-29: the Pavilion.** Still open: which title-band
-   motif (laurel in mosaic, mosaic field, fine-line laurel sprig); see its port sheet below.
+3. ~~**The universal Page**~~ **decided 2026-09-29: the Pavilion.** Still open: which surface
+   the band gets when a page has no Featured image; see its port sheet below.
 4. ~~**NationBuilder**~~ **decided 2026-09-25: link out.** Our page shows the choice (purpose,
    role) and a button that opens the matching NationBuilder page with it passed along. Nothing
    from NB loads on our site (no consent needed, no API key), as the profile invitation already does.
