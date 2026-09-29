@@ -287,8 +287,13 @@ console.log('\nCOLLECTION C — The Broadsheet');
 	ok('broadsheet: the masthead names the edition', (await page.textContent('[data-edition]')).includes('No. ' + months.length.toLocaleString('en-GB')));
 	eq('broadsheet: the lead is the month\'s longest piece', (await page.textContent('.bs-lead .t')).trim(), longest.t);
 	ok('broadsheet: the second tier is at most three', (await page.$$('.bs-tier article')).length <= 3);
-	ok('broadsheet: the columns are ruled, not boxed',
-		await page.$eval('.bs-columns', el => getComputedStyle(el).columnRuleStyle === 'solid'));
+	/* a month of four or fewer is all lead and tier: no columns is the right page */
+	if (inLatest.length > 4) {
+		ok('broadsheet: the columns are ruled, not boxed',
+			await page.$eval('.bs-columns', el => getComputedStyle(el).columnRuleStyle === 'solid'));
+	} else {
+		ok('broadsheet: a month of ' + inLatest.length + ' is lead and tier, no columns', !(await page.$('.bs-columns')));
+	}
 	eq('broadsheet: every month of the archive is a back issue',
 		(await page.$$('.bs-month:not(:disabled)')).length, months.length);
 	await page.click('[data-step="-1"]');
@@ -313,7 +318,7 @@ for (const [name, path, sel] of [
 	['threshold', 'article-threshold.html', '.th-prose'],
 	['ledger', 'articles-ledger.html', '.lg-list'],
 	['drift', 'articles-drift.html', '.dr-entries'],
-	['broadsheet', 'articles-broadsheet.html', '.bs-columns'],
+	['broadsheet', 'articles-broadsheet.html', '.bs-lead'],   // every edition has a lead; columns only past four pieces
 ]) {
 	const page = await open(path, { width: 390, height: 900 });
 	const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);

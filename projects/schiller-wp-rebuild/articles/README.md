@@ -9,8 +9,8 @@ Built 2026-09-20, next to the `/people/` drafts, on the same design system
 | **B** | [The Reading Room](templates/article-room.html) | [The Drift](templates/articles-drift.html) |
 | **C** | [The Threshold](templates/article-threshold.html) | [The Broadsheet](templates/articles-broadsheet.html) |
 
-Start at [`index.html`](index.html). All six run on the real corpus: **2,463
-articles, 2012–2026**, built from the 2026-09-08 live dump joined to the
+Start at [`index.html`](index.html). All six run on the real corpus: **2,384
+articles, 2012–2026** (data refreshed 2026-09-29), built from the 2026-09-08 live dump joined to the
 reviewed `classification.csv` and the accepted rows of `post-byline.csv`.
 
 ---
@@ -351,15 +351,21 @@ build/audit-featured-images.py  # which featured images are missing from the liv
 `data/reading.json` holds six full articles for the single drafts, chosen to
 cover the corpus's range: an 8,600-word feature with a two-person byline and
 eleven headings, a 1,300-word recent piece, a 7,300-word interview, a 317-word
-news short, a German article, and an image-led appeal with neither byline nor
-topic — which is what most 2026 rows actually look like.
+news short, a German article, and one whose picture carries a real CC caption (82526).
+A seventh, the image-led 2026 appeal to Pope Leo XIV (119275), dropped out in
+the 2026-09-29 refresh: the classification now proposes it as a Statement
+(rule-proposed, not yet reviewed), and the build skips a showcase that is no
+longer an Article.
 
-**What is in, and what is out.** 4,140 published posts in the dump; **1,677 are
-promoted** to another type by the reviewed classification (1,212 `si_video`, 233
-`si_coverage`, 198 `si_statement`, 27 `si_presentation`, 6 `si_document`,
-1 `si_conference`); **2,463 remain Articles**. Of those: 1,295 English,
-1,130 German, 36 Russian, 2 Chinese; 2,369 have a featured image; 2,028 carry a
-reviewed topic; **90 carry a reviewed byline**.
+**What is in, and what is out** (classification.csv as of 2026-09-29, after the
+conference review). 4,140 published posts in the dump; **1,756 are promoted** to
+another type (1,179 `si_video`, 234 `si_coverage`, 202 `si_statement`,
+96 `si_presentation`, 39 `si_conference`, 6 `si_document`); **2,384 remain
+Articles**. Of those: 1,239 English, 1,107 German, 36 Russian, 2 Chinese;
+2,290 have a featured image; 1,972 carry a reviewed topic; **90 carry a
+reviewed byline**. si-v4 still holds the **2,463** of the 2026-09-20 import, the
+classification before the conference review; the net difference of 79
+closes when the importer is next run.
 
 A row's effective type is `final_type` **if the reviewer set one, otherwise
 `proposed_type`** — `final_type` is the override, not the decision. Reading a
@@ -440,7 +446,7 @@ only on hover or focus.
 
 ```bash
 cd projects/schiller-wp-rebuild && python3 articles/build/serve.py 8761
-PW=<playwright node_modules> node articles/build/interact.mjs   # 97 checks
+PW=<playwright node_modules> node articles/build/interact.mjs   # 98 checks
 PW=<playwright node_modules> node articles/build/shoot.mjs      # screenshots → build/out/
 ```
 
@@ -457,7 +463,9 @@ counts against the index, stations against the article's headings, the lead
 against the month's longest piece, the two-click rule against the network, the
 remembered settings across a reload, and no horizontal scroll at 390px.
 
-Last run: **97 passed, 0 failed** (2026-09-20).
+Last run: **98 passed, 0 failed** (2026-09-29, on the refreshed data). The
+Reading Room's night-ground check failed on two of three runs that day and
+passed on the third: it is timing-sensitive, not broken.
 
 ## 6. The WordPress kit (deployed to si-v4, 2026-09-20)
 

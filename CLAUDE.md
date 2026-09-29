@@ -77,12 +77,15 @@ relevant numbered doc or the project README, not only into a commit message.
 
 ## Numbers worth not re-deriving
 
-From the 2026-09-08 dump: **4,140 published posts** (→ **2,463 stay Articles**; 1,677 become videos,
-statements or press coverage under the reviewed classification), **418 people**,
-~67k attachments. Languages on articles: EN 1,295 · DE 1,130 · RU 36 · ZH 2. Of the
-articles: 2,369 have a featured image, 2,028 a reviewed topic, **90** a reviewed byline,
-**71 of 4,140 have an excerpt**, 1,417 embed a YouTube video, 510 featured images carry a
-usable caption. Publishing is very uneven: 1 article in 2012, 718 in 2021.
+From the 2026-09-08 dump: **4,140 published posts** (→ **2,384 stay Articles** under
+`classification.csv` as of 2026-09-29; 1,756 become videos, statements, presentations,
+conferences or press coverage), **418 people**, ~67k attachments. si-v4 still holds the
+**2,463** Articles of its 2026-09-20 import, from before the conference review.
+Languages on articles: EN 1,239 · DE 1,107 · RU 36 · ZH 2. Of the articles: 2,290 have a
+featured image, 1,972 a reviewed topic, **90** a reviewed byline, **51 an excerpt, 41 of
+which only repeat the body** (71 of all 4,140 posts have one). Counted over the 2,463 on
+2026-09-20: 1,417 embed a YouTube video, 510 featured images carry a usable caption.
+Publishing is very uneven: 1 article in 2012, 704 in 2021.
 
 ## Block & theme conventions
 
