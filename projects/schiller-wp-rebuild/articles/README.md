@@ -559,6 +559,17 @@ header Local needs and `/etc/hosts` wants root) and run `build/shoot-wp.mjs`.
 
 ## 7. Not done here
 
+- **Before launch: the first `/blog/` view after any save is slow.** Measured on
+  si-v4, 2026-09-29: `/blog/` is 1,294 rows, 1.6 MB of HTML (~320 KB gzipped),
+  1.4 s warm; `/de/blog/` 1,130 rows, 1.4 MB (~280 KB), **7.8 s** when its cache
+  had to be rebuilt. `si_articles_rows()` is cached per language, and
+  `save_post_post` / `deleted_post` retire *every* language's copy, so on the
+  live site the first visitor to each language after each edit pays the full
+  rebuild. Two fixes, either enough: rebuild the rows in the background after a
+  save (a single scheduled event per save, per language), or let the production
+  host's page cache serve `/blog/`. The page weight itself is fine today; it
+  grows by about 1.2 KB of HTML per article, so measure it again rather than
+  assume.
 - The Reading Room and the Threshold are prototypes only; the kit ships the Leaf.
 - The reading settings (draft B) are `localStorage`, so they are per-browser.
 - Nothing here is translated yet: the strings use `__()` with the `si` text
