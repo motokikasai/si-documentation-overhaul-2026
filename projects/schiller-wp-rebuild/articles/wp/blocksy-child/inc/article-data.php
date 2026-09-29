@@ -18,7 +18,7 @@
 
 defined('ABSPATH') || exit;
 
-const SI_ARTICLE_DATA_VERSION = 1;
+const SI_ARTICLE_DATA_VERSION = 2;   // 2: an excerpt that repeats the body's opening is not the standfirst
 
 function si_article_data(int $post_id): array {
 	$post = get_post($post_id);
@@ -42,9 +42,11 @@ function si_article_data(int $post_id): array {
 		'sections' => $fmt['sections'],
 		'minutes'  => $fmt['minutes'],
 		'words'    => $fmt['words'],
-		/* The excerpt an editor wrote wins; otherwise the heading the formatter
-		   lifted off the top of the body was acting as the subtitle. */
-		'standfirst' => has_excerpt($post) ? get_the_excerpt($post) : ($fmt['deck'] ?: ''),
+		/* The excerpt an editor wrote wins, unless it only repeats the opening
+		   of the body; otherwise the heading the formatter lifted off the top of
+		   the body was acting as the subtitle. */
+		'standfirst' => has_excerpt($post) && !si_article_excerpt_repeats_body($post)
+			? get_the_excerpt($post) : ($fmt['deck'] ?: ''),
 		'image'    => $thumb ? [
 			'id'   => $thumb,
 			'line' => SI_Article_Format::image_line($thumb),
@@ -55,6 +57,34 @@ function si_article_data(int $post_id): array {
 		'translations' => si_article_translations($post_id),
 		'related'  => si_article_related($post_id),
 	];
+}
+
+/**
+ * Is the excerpt just the body's own opening, printed a second time?
+ *
+ * Since late June 2026 almost every new post is saved with an excerpt of about
+ * 45–55 words cut from its first paragraph. In the 2026-09-08 dump that is 41 of
+ * the 51 Articles with an excerpt (39 word for word from the first word, 2 from
+ * a sentence a little further in); the other 10 are text of their own.
+ * Measured by build/audit-excerpts.py, which uses the same test.
+ *
+ * Compared as words: tags, shortcodes, entities, punctuation, case and a
+ * trailing "…" / "[…]" do not count. A repeat is the excerpt found whole within
+ * the body's first (excerpt length + 60) words.
+ */
+function si_article_excerpt_repeats_body(WP_Post $post): bool {
+	$words = static function (string $s): array {
+		$s = html_entity_decode(wp_strip_all_tags(strip_shortcodes($s)), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+		$s = preg_replace('/(?:\[\s*(?:…|\.\.\.)\s*\]|…|\.\.\.)\s*$/u', '', trim($s));
+		$s = preg_replace('/[^\p{L}\p{N}]+/u', ' ', mb_strtolower($s));
+		return preg_split('/\s+/u', trim($s), -1, PREG_SPLIT_NO_EMPTY) ?: [];
+	};
+	$excerpt = $words($post->post_excerpt);
+	if (!$excerpt) {
+		return false;
+	}
+	$head = array_slice($words($post->post_content), 0, count($excerpt) + 60);
+	return str_contains(' ' . implode(' ', $head) . ' ', ' ' . implode(' ', $excerpt) . ' ');
 }
 
 /** The reviewed `written_by` edge: a Person (which is what makes the name a

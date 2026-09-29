@@ -300,7 +300,9 @@ def main():
             'rg': k['regions'], 'cp': k['campaigns'],
             'byline': ({'name': by['name'], 'people': by['people'],
                         'lifted': info['byline_lifted']} if by else None),
-            'excerpt': title_clean(a['excerpt']) or None,
+            # an excerpt that only repeats the opening is not a standfirst
+            'excerpt': (None if clean.excerpt_repeats_body(a['excerpt'], a['html'])
+                        else title_clean(a['excerpt']) or None),
             # the opening heading, lifted out of the prose where it was acting
             # as a subtitle rather than as a section break (329 articles)
             'deck': info['deck'],

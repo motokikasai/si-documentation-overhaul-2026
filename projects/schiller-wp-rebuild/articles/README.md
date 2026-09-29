@@ -169,6 +169,7 @@ they publish something next week.
 | Topic / Region / Campaign | the `si_topic` / `si_region` / `si_campaign` terms | **No — the editor ticks them** from the closed vocabulary (the taxonomies are registered hierarchical precisely so Gutenberg shows a checkbox list and nobody can invent a term). |
 | Language, "also in Deutsch" | WPML | **Yes**, once the post has a language and a translation group. |
 | Teaser on the listing | `post_excerpt` when it is set, otherwise the opening of the body, cut at a word boundary | **Yes**, as a fallback. A written excerpt always wins. |
+| Standfirst (the italic line under the title) | `post_excerpt` when it is set **and is not just the body's own opening**; otherwise the heading the formatter lifted off the top of the body (the *deck*); otherwise nothing | Only when an editor writes an excerpt of its own. An excerpt that repeats the first paragraph is ignored here (2026-09-29, finding 7), so pasting the opening into the Excerpt box does no harm, and does nothing. |
 
 For the 2,463 legacy articles those two editor-set fields were not typed by
 anyone: the byline was proposed by the detector in `day3-post-bylines.py` and
@@ -402,7 +403,8 @@ only on hover or focus.
    the review has not reached them, mostly the 2025–2026 rows.
 3. **Only 71 of 4,140 posts have an excerpt.** Every standfirst and teaser in
    these drafts is the opening of the body, cut at a word boundary. If the
-   collection page is to read well, excerpts are an editorial job.
+   collection page is to read well, excerpts are an editorial job. (Of the 51
+   Articles among them, 41 only repeat the body: finding 7.)
 4. **The `wp_author` field is useless** (a handful of staff accounts), as the
    byline work already found. The reviewed `written_by` edge covers 90 articles;
    the other 3,532 show no byline rather than a wrong one.
@@ -413,6 +415,24 @@ only on hover or focus.
    157 in 2026. A design that assumes a steady cadence (a paginated feed of
    twelve cards) misrepresents it; the Drift and the Broadsheet are both built
    from that fact.
+7. **Most excerpts only repeat the body** (measured 2026-09-29, 2026-09-08 dump,
+   `build/audit-excerpts.py`). Of the 2,384 Articles in the current
+   `classification.csv`, 51 have an excerpt, and **41 of those are the body's
+   own opening** — 39 word for word from the first word, 2 from a sentence a
+   little further in — so the Leaf printed the first paragraph twice. The
+   pattern is recent: 5 before 2026, then 35 of 44 between 2026-06-23 and
+   2026-08-20, almost every new EN and DE post, each 43–57 words long — the
+   length of WordPress's automatic excerpt (55 words), apparently saved into
+   the field on the live site. What does the saving (a plugin, an editor's
+   habit) is not established. The 10 real ones are text of their own, 7 of
+   them the German *Internationale Friedenskoalition* meeting notices.
+   **Rule, in `si_article_excerpt_repeats_body()` (article-data.php) and its
+   Python twin `clean.excerpt_repeats_body()`:** compare as words, ignoring
+   tags, shortcodes, entities, punctuation, case and a trailing "…"/"[…]"; an
+   excerpt found whole within the body's first (its length + 60) words is not
+   a standfirst. Deployed to si-v4 the same day; 119273 and 119260 lost the
+   repeat, 119882, 119541 and 119269 kept their own. The listing's teaser is
+   unchanged: there a repeat and the fallback are the same words anyway.
 
 ---
 

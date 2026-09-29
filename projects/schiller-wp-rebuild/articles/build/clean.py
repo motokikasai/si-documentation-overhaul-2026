@@ -516,3 +516,24 @@ def add_heading_ids(s):
         return '<%s%s>%s</%s>' % (level, attrs_out if have else attrs_out, m.group(3), level)
 
     return HEAD.sub(_h, s), sections
+
+
+# An excerpt that only repeats the body's opening is not a standfirst (article-data.php).
+def _words(s):
+    """The PHP closure in si_article_excerpt_repeats_body(), step for step."""
+    s = re.sub(r'(?s)\[[^\]]{0,80}\]', ' ', s)          # strip_shortcodes
+    s = re.sub(r'(?is)<(script|style)[^>]*>.*?</\1>', ' ', s)
+    s = re.sub(r'(?s)<[^>]+>', ' ', s)                   # wp_strip_all_tags
+    s = _html.unescape(s).strip()
+    s = re.sub(r'(?:\[\s*(?:…|\.\.\.)\s*\]|…|\.\.\.)\s*$', '', s)
+    s = re.sub(r'[\W_]+', ' ', s.lower())                # [^\p{L}\p{N}]+
+    return s.split()
+
+
+def excerpt_repeats_body(excerpt, body):
+    """si_article_excerpt_repeats_body() — None when there is no excerpt."""
+    e = _words(excerpt)
+    if not e:
+        return None
+    head = _words(body)[:len(e) + 60]
+    return (' ' + ' '.join(e) + ' ') in (' ' + ' '.join(head) + ' ')
