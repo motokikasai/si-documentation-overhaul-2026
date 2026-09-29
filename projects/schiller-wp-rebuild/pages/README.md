@@ -36,7 +36,7 @@ chosen draft's JS file opens with `← chosen direction`, so
 | **404** | **A · Did You Mean** | `notfound-suggest.*` + `js/search-core.js` (PROTO ranker) | any missing address | data-driven |
 | **Search** | **A · The Catalogue** | `search-catalogue.*` + `js/search-core.js` (PROTO ranker) | `/?s=` | data-driven |
 | **Home** (below the hero) | *undecided*. Round 1 (Record, Cross-Examination, Corridor) was rejected; round 2 is five wireframes in `wireframes/`, none chosen | — | `/` | editor-authored |
-| **Universal Page** | *undecided*: Folio, Pavilion, Codex | `page-{folio,pavilion,codex}.*` | every `page` | data-driven frame around editor/legacy bodies |
+| **Universal Page** | **B · The Pavilion** (chosen 2026-09-29; band motif still open) | `page-pavilion.*` + `js/pavilion-motif.js` | every `page` | data-driven frame around editor/legacy bodies |
 
 All six chosen drafts share `css/pages-shared.css` (`.si-prose`, the `.si-p-*` pattern kit,
 the two-click facade) and the top half of `js/pages-core.js`. Donate and Join also use
@@ -194,11 +194,53 @@ and 0 titles), and people show only **sourced** titles. Conference and video res
 `#` in the draft because those singles were not built yet; in WordPress they link to
 `/conferences/{slug}/` and `/videos/{slug}/`.
 
+#### Page · The Pavilion → `blocksy:single:canvas:custom-output` when `is_page()`
+
+Chosen 2026-09-29. A data-driven frame (band, card, chapter ribbon, rooms) around the page's
+own body, which stays blocks (new pages) or the importer's HTML (216 legacy pages).
+
+- **Sections are automatic.** The page is split at its own headings: at H2 when it has at
+  least two top-level H2s, otherwise at H3. Content before the first heading is an unlabelled
+  opening room. Headings inside tabs, call-to-action and info boxes and old card lists do not
+  split; nor does one over 140 characters. Numbers and anchors are generated; an anchor the
+  editor set in the Heading block wins. The chapter ribbon appears at three sections or more.
+  Editors do nothing but use real Heading blocks.
+- **The card** (decided 2026-09-29): **Part of** (the parent page), **Pages** (child pages),
+  **Reading** (minutes, from 600 words). Each row only when it has a value; no card when none
+  has. No section count: the ribbon right below already shows the sections. "Rooms" is gone
+  from everything a reader sees.
+- **The band's motif** replaces the jasper roundel (read as an unexplained circle). Three
+  candidates in `js/pavilion-motif.js`, switched by the review strip's *Motif* picker
+  (`?motif=`): **laurel in mosaic** (a sprig set in tesserae, outlined by one pale course),
+  **mosaic field** (tesserae in rings, bled off the right edge under the card), **laurel
+  sprig, fine line**. All three: inline SVG, aria-hidden, no motion, tones from Jasper tokens
+  only (jasper, jasper-deep, card, rule), drawn from a seed of the page ID, so each page has
+  its own variation and no editor chooses anything. The laurels are shown whole, at the
+  band's height, between the title and the card; the field is a texture and may be cropped.
+  On a phone they drop to 55% and the field keeps to the top right corner.
+
+*Fix when porting:*
+1. **Split on the server**, in PHP with `WP_HTML_Tag_Processor` over the rendered body; the
+   prototype splits in the browser, which a reader with JS off and a search engine never see.
+2. **Look one level into top-level Groups.** The prototype only counts headings that are
+   direct children of the body; editor patterns are wrapped in a Group
+   (`templateLock: contentOnly`), so a page built from patterns would come out as one room.
+3. **Measure before shipping the rule**: over the 216 legacy pages, how many get 0, 1–2 and
+   3+ sections (many use bold paragraphs as headings, which do not split).
+4. **The motif in PHP**: `motifSVG()` is a pure function of (kind, seed) with a portable
+   generator (mulberry32 + FNV-1a), written to be translated line for line. Cache the SVG in
+   a transient keyed by page ID and a version constant. **Weight, measured 2026-09-29 on
+   45811:** the mosaic field is ~2,500 shapes, **268 KB** of inline markup (39 KB gzipped); the mosaic laurel
+   ~770 shapes, 82 KB; the sprig 15 shapes, 4 KB. The field is too heavy to inline on every
+   page: if it is chosen, it ships as a cached `.svg` file per seed (or a handful of seeds
+   reused), referenced from the band, not inlined.
+
 ### Open decisions, in one place
 
 1. **Contact**: B · Switchboard or C · Desk (A is out).
 2. **Home below the hero**: one of the five round-2 wireframes, then a Jasper draft of it.
-3. **The universal Page**: Folio, Pavilion or Codex.
+3. ~~**The universal Page**~~ **decided 2026-09-29: the Pavilion.** Still open: which title-band
+   motif (laurel in mosaic, mosaic field, fine-line laurel sprig); see its port sheet below.
 4. ~~**NationBuilder**~~ **decided 2026-09-25: link out.** Our page shows the choice (purpose,
    role) and a button that opens the matching NationBuilder page with it passed along. Nothing
    from NB loads on our site (no consent needed, no API key), as the profile invitation already does.

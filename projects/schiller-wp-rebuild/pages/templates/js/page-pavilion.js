@@ -3,6 +3,7 @@
  * then every top-level section becomes its own full-width room with its label
  * on the left wall. A chapter bar under the header tracks the rooms. */
 import { esc, nf, reveal, enhanceProse, headingsOf, spy, readMinutes, getJSON, draftStrip, pageOptions, pickPage, go } from './pages-core.js';
+import { motifSVG, seedOf, MOTIFS } from './pavilion-motif.js';
 
 const DRAFTS = [['A', 'page-folio.html', 'The Folio'], ['B', 'page-pavilion.html', 'The Pavilion'], ['C', 'page-codex.html', 'The Codex']];
 const [legacy, facts] = await Promise.all([getJSON('legacy-pages.json'), getJSON('facts.json')]);
@@ -10,21 +11,28 @@ const p = pickPage(legacy, facts);
 const main = document.getElementById('main');
 document.title = `${p.title} — Schiller Institute`;
 
-/* the particulars card: only rows that have a value */
+/* the particulars card: only rows that have a value. No section count — the
+   chapter ribbon right below already shows the sections (decided 2026-09-29). */
 const rows = [];
-if (p.parent) rows.push(['Section', `<a href="${esc(p.parent.url)}">${esc(p.parent.title)}</a>`]);
-if (p.children.length) rows.push(['Parts', `${p.children.length}`]);
+if (p.parent) rows.push(['Part of', `<a href="${esc(p.parent.url)}">${esc(p.parent.title)}</a>`]);
+if (p.children.length) rows.push(['Pages', `${p.children.length}`]);
 if (p.words >= 600) rows.push(['Reading', `${readMinutes(p.words)} min`]);
+
+/* the band's motif: three candidates under review, ?motif= picks one */
+const motif = MOTIFS.some(([k]) => k === new URLSearchParams(location.search).get('motif'))
+	? new URLSearchParams(location.search).get('motif') : MOTIFS[0][0];
 
 main.innerHTML = `
 <header class="pa-band" data-pattern="Page header">
-	<div class="ct-container pa-band__grid">
+	${motif === 'mosaic' ? motifSVG(motif, seedOf(p.id)) : ''}
+	<div class="ct-container pa-band__grid${rows.length ? ' has-card' : ''}">
+		${motif !== 'mosaic' ? motifSVG(motif, seedOf(p.id)) : ''}
 		<div>
 			<p class="si-eyebrow si-eyebrow--ruled">${p.parent ? esc(p.parent.title) : esc(p.eyebrow || 'Schiller Institute')}</p>
 			<h1 class="pa-title">${esc(p.title)}</h1>
 			${p.standfirst ? `<p class="pa-standfirst">${esc(p.standfirst)}</p>` : ''}
 		</div>
-		${rows.length ? `<dl class="pa-card">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}<div class="pa-card__rooms" hidden><dt>Rooms</dt><dd></dd></div></dl>` : ''}
+		${rows.length ? `<dl class="pa-card">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>` : ''}
 	</div>
 	${p.children.length ? `<nav class="ct-container pa-parts" aria-label="Parts of this page"><span>In this section</span>${p.children.map(c => `<a href="${esc(c.url)}">${esc(c.title.replace(/^.*?>\s*/, ''))}</a>`).join('')}</nav>` : ''}
 </header>
@@ -78,8 +86,6 @@ if (marks.length >= 3) {
 	const bar = main.querySelector('.pa-chapters');
 	bar.querySelector('ol').innerHTML = marks.map((m, i) => `<li><a href="#${m.id}"><span>${String(i + 1).padStart(2, '0')}</span>${esc(m.text)}</a></li>`).join('');
 	bar.hidden = false;
-	const card = main.querySelector('.pa-card__rooms');
-	if (card) { card.hidden = false; card.querySelector('dd').textContent = marks.length; }
 	const links = [...bar.querySelectorAll('a')];
 	spy(marks, links, cur => links.find(a => a.hash === '#' + cur.id)?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }));
 }
@@ -87,3 +93,12 @@ if (marks.length >= 3) {
 reveal(main);
 draftStrip({ family: 'Page', drafts: DRAFTS, current: 'page-pavilion.html', view: true,
 	picker: { label: 'Showcase page', options: pageOptions(legacy), value: String(p.id), onChange: go } });
+
+/* review only: switch the band's motif (kept in the URL, like the page) */
+{
+	const sel = document.createElement('select');
+	sel.className = 'draft-pick'; sel.setAttribute('aria-label', 'Title-band motif');
+	sel.innerHTML = MOTIFS.map(([k, t]) => `<option value="${k}"${k === motif ? ' selected' : ''}>${esc(t)}</option>`).join('');
+	sel.addEventListener('change', () => { const u = new URL(location.href); u.searchParams.set('motif', sel.value); location.href = u; });
+	document.querySelector('.draft-strip')?.appendChild(sel);
+}
