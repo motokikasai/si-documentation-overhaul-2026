@@ -38,6 +38,10 @@ SHIPPED = [
     'wp-plugins/si-hero-earth/assets/css/si-hero.css',
     'wp-plugins/si-hero-earth/assets/css/si-hero-editor.css',
     'wp-plugins/schiller-editorial/assets/css/block-styles.css',
+    # a file that ships only up to a marker is listed as 'path::marker'; its packager cuts
+    # at the same marker (pages/build/package-wp.sh), so what is audited is what ships
+    'pages/templates/css/pages-shared.css::/* ---- 3 · PROTO',
+    'pages/templates/css/page-pavilion.css',
 ]
 TOKEN_LAYER = ['people/design-system/tokens.css', 'people/design-system/fonts.css']
 
@@ -83,7 +87,11 @@ def blank_fallbacks(value):
 
 
 def audit(path):
-    css = strip_comments(open(os.path.join(REBUILD, path), encoding='utf-8').read())
+    path, _, marker = path.partition('::')
+    css = open(os.path.join(REBUILD, path), encoding='utf-8').read()
+    if marker:
+        css = css[:css.index(marker)]
+    css = strip_comments(css)
     findings, allowed = [], collections.Counter()
     # walk declarations with their line numbers and whether they sit in an @media/@container
     for m in re.finditer(r'@(?:media|container)([^{]*)\{', css):

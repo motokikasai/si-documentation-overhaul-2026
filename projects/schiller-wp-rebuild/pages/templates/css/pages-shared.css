@@ -95,12 +95,12 @@
 /* .si-btn — a legacy button becomes a Blocksy button */
 .si-prose .si-button { margin-top: calc(var(--flow) * 1.2); }
 .si-prose .si-btn {
-	display: inline-flex; align-items: center; gap: .5em; min-height: 44px; padding: 0 20px;
-	border-radius: var(--si-radius-1); background: var(--si-accent); color: #fff; text-decoration: none;
-	font-family: var(--si-font-sans); font-size: 15px; font-weight: 600; letter-spacing: .01em;
+	display: inline-flex; align-items: center; gap: .5em; min-height: 44px; padding: 0 var(--si-space-s);
+	border-radius: var(--si-radius-1); background: var(--si-accent); color: var(--si-on-accent); text-decoration: none;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); font-weight: 600; letter-spacing: .01em;
 	transition: background-color var(--si-dur-1) var(--si-ease);
 }
-.si-prose .si-btn:hover { background: var(--si-accent-deep); color: #fff; }
+.si-prose .si-btn:hover { background: var(--si-accent-deep); color: var(--si-on-accent); }
 
 /* .si-cta / .si-wide-bar — call-to-action bands */
 .si-prose .si-wide-bar { padding: var(--si-space-l) var(--si-space-m); background: var(--si-panel); }
@@ -175,17 +175,17 @@
 .si-p-cta { display: grid; gap: var(--si-space-s); }
 .si-p-cta h2 { margin: 0; font-family: var(--si-font-serif); font-size: var(--si-step-3); font-weight: var(--si-weight-heading); color: inherit; }
 .si-p-cta p { margin: 0; max-width: 56ch; }
-.si-p-cta .si-p-actions { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+.si-p-cta .si-p-actions { display: flex; flex-wrap: wrap; gap: var(--si-space-xs) var(--si-space-s); align-items: center; }
 .si-p-note { padding: var(--si-space-s) var(--si-space-m); background: var(--si-panel); font-family: var(--si-font-sans); font-size: var(--si-step-n1); }
 
 /* buttons outside the prose */
 .si-btn-ghost {
-	display: inline-flex; align-items: center; gap: .5em; min-height: 44px; padding: 0 18px;
+	display: inline-flex; align-items: center; gap: .5em; min-height: 44px; padding: 0 var(--si-space-s);
 	border: 1px solid currentColor; border-radius: var(--si-radius-1); background: transparent; color: var(--si-accent);
-	font-family: var(--si-font-sans); font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); font-weight: 600; text-decoration: none; cursor: pointer;
 	transition: background-color var(--si-dur-1) var(--si-ease), color var(--si-dur-1) var(--si-ease);
 }
-.si-btn-ghost:hover { background: var(--si-accent); color: #fff; border-color: var(--si-accent); }
+.si-btn-ghost:hover { background: var(--si-accent); color: var(--si-on-accent); border-color: var(--si-accent); }
 .si-arrow::after { content: "→"; display: inline-block; margin-left: .35em; transition: translate var(--si-dur-1) var(--si-ease); }
 a:hover > .si-arrow::after, .si-arrow:hover::after { translate: 3px 0; }
 

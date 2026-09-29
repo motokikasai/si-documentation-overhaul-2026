@@ -49,7 +49,7 @@ people-specific. `tokens.css` is the authority; read its header before changing 
 | `/videos/{slug}/` | Programme · Reading Desk · Echo · Constellation · Almanac | **Programme** | `videos/wp/` (step 1 on si-v4 2026-09-25; no captions yet) |
 | `/videos/` (archive) | Shelf · Run · Desk | — | drafts only (`videos/README.md` §17) |
 | `/conferences/` (archive) | Gallery · Firmament · Programme | — | `landing/` (pre-Jasper) |
-| any Page (`page.php`) | Folio · Pavilion · Codex | — | not yet ported |
+| any Page (`page.php`) | Folio · Pavilion · Codex | **Pavilion** (band default: the Earth, "a globe rising") | `pages/wp/` (live on si-v4 2026-09-29; Legal and Join keep their own layouts) |
 | Home, below the hero | round 1 (Record · Cross-Examination · Corridor) rejected; round 2 = five wireframes in `pages/wireframes/` | — | not yet ported |
 | `/privacy-policy/` + Impressum | Code · Letterhead · Layers | **Code**, on condition that any editor can edit the text as blocks | not yet ported |
 | `/join/` | Ladder · Week · Your Part | **Your Part** | not yet ported |
@@ -110,11 +110,11 @@ PW=… node articles/build/shoot-wp.mjs
 ```
 
 - The packager refuses to ship a file that *loads* anything from the prototype layer.
-- **`functions.php` is shared by three kits.** People's packager writes the file; Articles
-  and Videos append one `require_once` line each. Until 2026-09-29 People's overwrote the
+- **`functions.php` is shared by four kits.** People's packager writes the file; Articles,
+  Videos and Pages append one `require_once` line each. Until 2026-09-29 People's overwrote the
   others' lines, and si-v4 served Blocksy's stock single and a stock `/blog/` for four days
   unnoticed. It now carries them over. After any deploy, check that
-  `grep require_once functions.php` lists `articles.php` and `videos.php`.
+  `grep require_once functions.php` lists `articles.php`, `videos.php` and `pages.php`.
 - **Fetch twice after a deploy.** Local's opcache revalidates PHP on a timer, so the first
   request after a copy can still run the old file (seen 2026-09-24: `?ver=` stayed at the
   old version on the first fetch, correct on the second).

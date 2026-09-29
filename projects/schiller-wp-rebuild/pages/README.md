@@ -196,7 +196,11 @@ and 0 titles), and people show only **sourced** titles. Conference and video res
 
 #### Page · The Pavilion → `blocksy:single:canvas:custom-output` when `is_page()`
 
-Chosen 2026-09-29. A data-driven frame (band, card, chapter ribbon, rooms) around the page's
+Chosen 2026-09-29. **Ported and live on si-v4 the same day** (kit: `pages/wp/blocksy-child/`,
+`pages/build/package-wp.sh`, SI_PAGES_VERSION 1.0.1). **The band's default is the Earth,
+"a globe rising"** (`band-earth-disc.webp`, decided by the user 2026-09-29); a page's own
+Featured image overrides it. The surfaces and the other Earth views stay in the prototype's
+picker only. A data-driven frame (band, card, chapter ribbon, rooms) around the page's
 own body, which stays blocks (new pages) or the importer's HTML (216 legacy pages).
 
 - **Sections are automatic.** The page is split at its own headings: at H2 when it has at
@@ -253,7 +257,42 @@ own body, which stays blocks (new pages) or the importer's HTML (216 legacy page
   strip's *Featured* picker shows the others with a demo image (37645's own Schiller
   portrait) — prototype only.
 
-*Fix when porting:*
+**How the port works** (2026-09-29):
+- `inc/page-pavilion.php`: `si_pavilion_applies()` = a singular Page, not the front page, no
+  password, and not a page whose body is **a complete layout of its own** — a Group styled
+  `is-style-si-legal` or `is-style-si-join` (list: filter `si_pavilion_own_layouts`). Those
+  Tier-1 designs carry their own header; framed, the title printed twice and Join showed two
+  brass rules. Every future Tier-1 pattern with its own header goes on that list.
+- The split uses **core's HTML5 parser** (`WP_HTML_Processor`, WordPress 7.1.2): pass one counts
+  top-level H2/H3 (breadcrumbs HTML › BODY › H*), pass two reads each heading's text, gives it
+  an id (an editor's HTML anchor wins) and a `data-si-room` mark, and the string is cut before
+  each mark. A body that is one plain Group (a pattern's wrapper) is looked into once. Markup
+  the parser does not support leaves the page as one section — never a broken one.
+- **Not cached, on purpose**: blocks inside a page compute at render (legal status, Join's
+  topic counts); a cached body would freeze them.
+- Child-page chips drop a repeated parent prefix ("Stop Green Fascism > Articles" → "Articles").
+- `pages-prose.css` is `pages-shared.css` cut at its PROTO marker, the same marker
+  `people/build/audit-literals.py` now audits up to (`path::marker`); both shipped sheets have
+  **0 colour and 0 font-size findings** (R7/R7b), the remaining lengths are drawn geometry.
+- `page-pavilion-wp.js` only marks the section being read in the ribbon.
+
+**Verified on si-v4, 2026-09-29:** every published page in every language — **229 of 229
+return 200 with no PHP error, warning or notice**; 214 render as the Pavilion, 32 with the
+ribbon; the 15 others are the front page, the `/blog/` page per language, the four legal
+pages, Join, and `/choruses/` and `/coverage/` (pages whose slug a post-type archive owns).
+"Who is Schiller?" gets the prototype's six sections; 37645 its own Schiller portrait; no page
+scrolls sideways at 390px. Measured on the 2026-09-08 dump beforehand: of 268 published pages,
+**60 have 3+ sections** (the ribbon), 43 have 1–2, 165 none (one column under the band).
+
+**Still open:**
+1. **Legacy YouTube iframes still load on sight** (45811 has one): the two-click facade the
+   Article formatter applies (`SI_Article_Format::video`) is not yet applied to pages. It
+   belongs in a `render_block` / `the_content` filter shared by both kits.
+2. **The labels are English on every language** until a translator fills `si.pot` (now
+   398 entries, the Pavilion's included) and the `.mo` files exist.
+3. **The eyebrow** is the parent's title or the site name; an editor cannot set it.
+
+*Fixed in the port (kept for the record):*
 1. **Split on the server**, in PHP with `WP_HTML_Tag_Processor` over the rendered body; the
    prototype splits in the browser, which a reader with JS off and a search engine never see.
 2. **Look one level into top-level Groups.** The prototype only counts headings that are

@@ -35,7 +35,7 @@ const photo = fq === 'none' ? null : (p.featured || (fq === 'demo' ? DEMO_IMAGE 
 const EARTH = [['earth-limb', 'Earth: the horizon'], ['earth-disc', 'Earth: a globe rising'], ['earth-night', 'Earth: night lights'], ['earth-whole', 'Earth: the whole planet']];
 const BAND = [...MOTIFS, ...EARTH];
 const motif = BAND.some(([k]) => k === new URLSearchParams(location.search).get('motif'))
-	? new URLSearchParams(location.search).get('motif') : MOTIFS[0][0];
+	? new URLSearchParams(location.search).get('motif') : 'earth-disc';   // the default, decided 2026-09-29 and ported
 /* absolute, because a url() inside a custom property resolves against the
    stylesheet that uses it, not against this page */
 const earth = !photo && motif.startsWith('earth-') ? `img/band-${motif}.webp` : null;

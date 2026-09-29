@@ -77,21 +77,21 @@
 .pa-card dt { color: var(--si-muted); }
 .pa-card dd { margin: 0; color: var(--si-ink); font-weight: 600; text-align: right; }
 .pa-card a { color: var(--si-accent); text-decoration: none; }
-.pa-parts { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: var(--si-space-l); }
-.pa-parts span { font-family: var(--si-font-sans); font-size: var(--si-step-n2); font-weight: 600; letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-muted); margin-right: 8px; }
-.pa-parts a { padding: 7px 14px; border: 1px solid var(--si-rule); border-radius: 999px; background: var(--si-card); font-family: var(--si-font-sans); font-size: var(--si-step-n1); font-weight: 500; color: var(--si-ink); text-decoration: none; }
+.pa-parts { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: var(--si-space-2xs); margin-top: var(--si-space-l); }
+.pa-parts span { font-family: var(--si-font-sans); font-size: var(--si-step-n2); font-weight: 600; letter-spacing: var(--si-track-caps); text-transform: uppercase; color: var(--si-muted); margin-right: var(--si-space-2xs); }
+.pa-parts a { padding: var(--si-space-2xs) var(--si-space-xs); border: 1px solid var(--si-rule); border-radius: var(--si-radius-round); background: var(--si-card); font-family: var(--si-font-sans); font-size: var(--si-step-n1); font-weight: 500; color: var(--si-ink); text-decoration: none; }
 .pa-parts a:hover { border-color: var(--si-accent); color: var(--si-accent); }
 
 
 /* ---- the chapter bar: a sticky ribbon of rooms -------------------------- */
-.pa-chapters { position: sticky; top: var(--header-sticky-height); z-index: 20; background: color-mix(in srgb, var(--si-card) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--si-rule); }
-.pa-chapters ol { display: flex; gap: 4px; margin: 0; padding: 0; list-style: none; overflow-x: auto; scrollbar-width: none; }
+.pa-chapters { position: sticky; top: var(--header-sticky-height, 0px); z-index: 20; background: color-mix(in srgb, var(--si-card) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--si-rule); }
+.pa-chapters ol { display: flex; gap: var(--si-space-3xs); margin: 0; padding: 0; list-style: none; overflow-x: auto; scrollbar-width: none; }
 .pa-chapters a {
-	display: flex; align-items: baseline; gap: .5em; padding: 14px 12px 12px; white-space: nowrap;
-	font-family: var(--si-font-sans); font-size: 14px; color: var(--si-muted); text-decoration: none;
+	display: flex; align-items: baseline; gap: .5em; padding: var(--si-space-xs) var(--si-space-xs) calc(var(--si-space-xs) - 2px); white-space: nowrap;
+	font-family: var(--si-font-sans); font-size: var(--si-step-n1); color: var(--si-muted); text-decoration: none;
 	border-bottom: 2px solid transparent; transition: color var(--si-dur-1) var(--si-ease), border-color var(--si-dur-2) var(--si-ease);
 }
-.pa-chapters a span { font-size: 11px; color: var(--si-jasper-deep); font-variant-numeric: tabular-nums; }
+.pa-chapters a span { font-size: var(--si-step-n2); color: var(--si-jasper-deep); font-variant-numeric: tabular-nums; }
 .pa-chapters a:hover { color: var(--si-ink); }
 .pa-chapters a[aria-current] { color: var(--si-ink); border-bottom-color: var(--si-brass); }
 
@@ -102,13 +102,13 @@
 .pa-room__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--si-space-s) var(--si-space-2xl); }
 @media (min-width: 980px) {
 	.pa-room__grid { grid-template-columns: 17rem minmax(0, 44rem); }
-	.pa-room__label { position: sticky; top: calc(var(--header-sticky-height) + 72px); align-self: start; }
+	.pa-room__label { position: sticky; top: calc(var(--header-sticky-height, 0px) + var(--si-space-2xl)); align-self: start; }
 	.pa-body.is-single .pa-room__grid { grid-template-columns: minmax(0, 44rem); justify-content: center; }
 }
 .pa-room.is-vestibule .pa-room__label:empty { display: none; }
 @media (min-width: 980px) { .pa-room.is-vestibule .pa-room__label:empty { display: block; } }
 .pa-room__label :is(h2, h3) { margin: .15em 0 0 !important; font-size: var(--si-step-2) !important; line-height: 1.2; font-weight: 400; }
-.pa-room__n { display: block; font-family: var(--si-font-sans); font-size: 12px; letter-spacing: .1em; color: var(--si-brass); }
+.pa-room__n { display: block; font-family: var(--si-font-sans); font-size: var(--si-step-n2); letter-spacing: .1em; color: var(--si-brass); }
 .pa-room__n::after { content: ""; display: block; width: 2rem; height: 1px; margin-top: .6em; background: var(--si-brass); }
 .pa-room__content { font-size: var(--si-step-0); }
 
